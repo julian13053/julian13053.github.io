@@ -29,6 +29,7 @@ title: Startseite
             </a>
             <div class="flex gap-6 font-semibold text-gray-600 text-lg">
                 <a href="index.html" class="text-blue-600 border-b-2 border-blue-600 pb-1 no-underline">Startseite</a>
+                <a href="ueber-mich.html" class="hover:text-blue-600 hover:border-b-2 hover:border-blue-600 pb-1 transition-all no-underline">Über mich</a>
                 <a href="blog.html" class="hover:text-blue-600 hover:border-b-2 hover:border-blue-600 pb-1 transition-all no-underline">Blog</a>
                 <a href="kontakt.html" class="hover:text-blue-600 hover:border-b-2 hover:border-blue-600 pb-1 transition-all no-underline">Kontakt</a>
             </div>
@@ -46,9 +47,14 @@ title: Startseite
                 <p class="text-lg md:text-xl text-blue-100 max-w-xl mb-8 leading-relaxed">
                     Willkommen auf meiner Website! Hier erfährst du mehr über meine Arbeit, mein Branding und kannst meine neuesten Artikel lesen.
                 </p>
-                <a href="blog.html" class="bg-cyan-400 text-blue-950 font-black px-8 py-4 rounded-xl shadow-lg hover:bg-cyan-300 transform hover:-translate-y-1 transition-all duration-300 inline-block no-underline">
-                    Direkt zum Blog →
-                </a>
+                <div class="flex flex-col sm:flex-row gap-4 justify-center md:justify-start">
+                    <a href="blog.html" class="bg-cyan-400 text-blue-950 font-black px-8 py-4 rounded-xl shadow-lg hover:bg-cyan-300 transform hover:-translate-y-1 transition-all duration-300 inline-block no-underline text-center">
+                        Zum Blog →
+                    </a>
+                    <a href="ueber-mich.html" class="bg-white/10 border border-white/20 text-white font-bold px-8 py-4 rounded-xl hover:bg-white/20 transform hover:-translate-y-1 transition-all duration-300 inline-block no-underline text-center">
+                        Mehr über mich 👤
+                    </a>
+                </div>
             </div>
             <div class="md:col-span-5 flex justify-center">
                 <div class="relative group">
@@ -61,18 +67,21 @@ title: Startseite
 
     <main class="max-w-6xl mx-auto px-6 py-20 flex-grow w-full">
         
-        <!-- ÜBER MICH SEKTION -->
+        <!-- TEASER: ÜBER MICH -->
         <div class="mb-24 bg-white border border-gray-100 p-8 md:p-12 rounded-3xl shadow-xs">
             <div class="max-w-3xl mx-auto text-center">
-                <h2 class="text-3xl font-black text-gray-950 tracking-tight mb-4">👤 Über mich</h2>
-                <p class="text-gray-600 text-lg leading-relaxed">
-                    Hi, ich bin Julian. Ich liebe es, kreative Ideen zu entwickeln, Strukturen aufzubauen und Content zu teilen. Auf dieser Seite halte ich meine Projekte fest und schreibe im Blog über alles, was mich bewegt und inspiriert. Schön, dass du hier bist!
+                <h2 class="text-3xl font-black text-gray-950 tracking-tight mb-4">👤 Wer ist Julian?</h2>
+                <p class="text-gray-600 text-lg leading-relaxed mb-6">
+                    Ich liebe es, kreative Ideen zu entwickeln, Strukturen aufzubauen und Content zu teilen. Auf dieser Seite halte ich meine Projekte fest und schreibe im Blog über alles, was mich bewegt und inspiriert.
                 </p>
+                <a href="ueber-mich.html" class="text-blue-600 font-bold hover:text-blue-800 transition-colors no-underline">
+                    Die ganze Geschichte & meine Brandings lesen →
+                </a>
             </div>
         </div>
         
         <!-- NEUESTE ARTIKEL -->
-        <div class="mb-24">
+        <div class="mb-12">
             <div class="flex flex-col md:flex-row justify-between items-baseline mb-10 gap-4">
                 <div>
                     <h2 class="text-4xl font-black text-gray-950 tracking-tight">📰 Neueste Artikel</h2>
@@ -89,7 +98,6 @@ title: Startseite
                     <div>
                         <div class="flex justify-between items-center mb-3">
                             <span class="text-xs bg-blue-600 text-white px-2.5 py-1 rounded-md font-bold uppercase">{{ post.date | date: "%d.%m.%Y" }}</span>
-                            <!-- Automatisierte Lesedauer -->
                             {% assign words = post.content | strip_html | number_of_words %}
                             {% assign read_time = words | divided_by: 180 | plus: 1 %}
                             <span class="text-xs text-gray-400 font-semibold">📖 {{ read_time }} Min.</span>
@@ -97,7 +105,6 @@ title: Startseite
                         
                         <h3 class="text-xl font-black text-gray-950 mt-1 mb-2 line-clamp-2">{{ post.title }}</h3>
                         
-                        <!-- Kategorie-Tag falls vergeben -->
                         {% if post.category %}
                         <span class="inline-block bg-gray-100 text-gray-600 text-[11px] font-bold px-2 py-0.5 rounded-md mb-3"># {{ post.category }}</span>
                         {% endif %}
@@ -115,56 +122,17 @@ title: Startseite
                 {% endfor %}
             </div>
         </div>
-
-        <!-- BRANDINGS -->
-        <div class="border-t border-gray-200 pt-16">
-            <div class="text-center md:text-left mb-8">
-                <h2 class="text-4xl font-black text-gray-950 tracking-tight">Eigene Brandings</h2>
-                <p class="text-blue-600 font-extrabold text-xl mt-3 tracking-wide">Klarer Fokus. &nbsp;&bull;&nbsp; Punktgenau verbunden.</p>
-            </div>
-            
-            <div class="max-w-4xl bg-gray-100/60 border-l-4 border-blue-600 p-6 rounded-r-2xl mb-12">
-                <p class="text-gray-700 italic text-lg leading-relaxed">
-                    „Als ich das erstellt habe, war mir echt wichtig, dass sofort klar ist: Hier verbinden sich klare Strukturen mit kreativer Freiheit. Es geht nicht nur um ein Bild, sondern um den Moment, in dem eine Idee Gestalt annimmt. Für mich ist das JMF-Scribble der Anfang jeder kreativen Schöpfung und das Blue Vision Auge der Fokus, den man braucht, um etwas Neues in die Welt zu bringen.“
-                </p>
-            </div>
-
-            <div class="grid md:grid-cols-2 gap-8">
-                <div class="bg-white border border-gray-100 p-8 rounded-3xl shadow-xs hover:shadow-xl hover:scale-102 transition-all duration-300 flex flex-col justify-between group">
-                    <div>
-                        <div class="w-full bg-white border border-gray-200 rounded-2xl p-6 flex justify-center mb-6 shadow-xs transition-colors group-hover:border-blue-200">
-                            <img src="jmf-logo.jpg" alt="JMF Scribble" class="w-full max-w-[320px] h-64 object-contain">
-                        </div>
-                        <h3 class="text-2xl font-black text-gray-950 mb-3">JMF-Scribble</h3>
-                        <p class="text-gray-600 leading-relaxed text-sm md:text-base">
-                            Das Logo basiert auf meinen Initialen und ist in einem klaren, geometrischen Anthrazit-Grau gehalten. Der lebendige blaue Akzent im Hintergrund, der an eine schnelle Skizze oder einen Pinselstrich erinnert, steht für Kreativität, frische Ideen und die nötige Portion „Scribble“ vor jedem großen Entwurf. Es symbolisiert die Balance zwischen Struktur und kreativer Energie.
-                        </p>
-                    </div>
-                </div>
-
-                <div class="bg-white border border-gray-100 p-8 rounded-3xl shadow-xs hover:shadow-xl hover:scale-102 transition-all duration-300 flex flex-col justify-between group">
-                    <div>
-                        <div class="w-full bg-white border border-gray-200 rounded-2xl p-6 flex justify-center mb-6 shadow-xs transition-colors group-hover:border-blue-200">
-                            <img src="auge-logo.jpg" alt="Blue Vision" class="w-full max-w-[320px] h-64 object-contain">
-                        </div>
-                        <h3 class="text-2xl font-black text-gray-950 mb-3">Blue Vision</h3>
-                        <p class="text-gray-600 leading-relaxed text-sm md:text-base">
-                            Das Logo zeigt ein stilisiertes, waches Auge, das von einem kräftigen, leuchtenden Blau umrandet ist. Der grafische, fast handgezeichnete Stil der Wimpern verleiht ihm eine besondere Note. Es steht für die Fähigkeit, das Wesentliche klar zu erkennen, Visionen zu haben, Achtsamkeit zu zeigen und über den Tellerrand hinauszuschauen. Das Auge symbolisiert Erkenntnis und den unermüdlichen Willen, die eigenen Ziele nicht aus den Augen zu verlieren.
-                        </p>
-                    </div>
-                </div>
-            </div>
-        </div>
     </main>
 
     <!-- FOOTER -->
-    <footer class="bg-white border-t border-gray-100 py-8 px-6 mt-12 text-center text-gray-500 font-medium">
+    <footer class="bg-white border-t border-gray-100 py-8 px-6 text-center text-gray-500 font-medium">
         <div class="max-w-6xl mx-auto flex flex-col sm:flex-row justify-between items-center gap-4">
             <p>&copy; 2026 M-Fleger. Alle Rechte vorbehalten.</p>
             <div class="flex gap-6">
                 <a href="index.html" class="hover:text-blue-600 transition-colors no-underline">Startseite</a>
-                <a href="blog.html" class="hover:text-blue-600 transition-colors">Blog</a>
-                <a href="kontakt.html" class="hover:text-blue-600 transition-colors">Kontakt</a>
+                <a href="ueber-mich.html" class="hover:text-blue-600 transition-colors no-underline">Über mich</a>
+                <a href="blog.html" class="hover:text-blue-600 transition-colors no-underline">Blog</a>
+                <a href="kontakt.html" class="hover:text-blue-600 transition-colors no-underline">Kontakt</a>
             </div>
         </div>
     </footer>
