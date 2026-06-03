@@ -1,7 +1,7 @@
 ---
 layout: post
-title: "Mein allererster Blogpost!"
-date: 2026-06-03
+title: "Sportfest 2026 – Zwei Tage voller Bewegung"
+Kategorie: Projekte
 ---
 
 Hallo Welt! Das ist der allererste Artikel auf meinem neuen, kostenlosen Blog. 
