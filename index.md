@@ -11,7 +11,6 @@ title: Startseite
     <!-- Tailwind CSS laden -->
     <script src="https://cdn.jsdelivr.net/npm/@tailwindcss/browser@4"></script>
     <style>
-        /* 2026er CSS-Animation für ein sanftes Einblenden beim Start */
         @keyframes fadeInUp {
             from { opacity: 0; transform: translateY(20px); }
             to { opacity: 1; transform: translateY(0); }
@@ -26,20 +25,21 @@ title: Startseite
     <!-- NAVIGATION -->
     <nav class="bg-white border-b border-gray-100 sticky top-0 z-50 shadow-xs">
         <div class="max-w-6xl mx-auto px-6 py-4 flex justify-between items-center">
-            <div class="flex items-center gap-3">
-                <!-- Dein Auge-Logo im Menü -->
-                <img src="auge-logo.jpg" alt="M-Fleger Logo" class="w-10 h-10 rounded-lg object-cover">
-                <span class="text-2xl font-black tracking-tight text-blue-600">M-Fleger</span>
+            <div class="flex items-center gap-4">
+                <!-- Auge-Logo vergrößert (von w-10/h-10 auf w-16/h-16) -->
+                <img src="auge-logo.jpg" alt="M-Fleger Logo" class="w-16 h-16 rounded-xl object-cover shadow-xs">
+                <span class="text-3xl font-black tracking-tight text-blue-600">M-Fleger</span>
             </div>
             <div class="flex gap-6 font-semibold text-gray-600">
-                <a href="/" class="text-blue-600">Startseite</a>
-                <a href="/blog/" class="hover:text-blue-600 transition-colors">Blog</a>
-                <a href="/kontakt/" class="hover:text-blue-600 transition-colors">Kontakt</a>
+                <a href="index.html" class="text-blue-600">Startseite</a>
+                <!-- Link zum Blog repariert -->
+                <a href="blog.html" class="hover:text-blue-600 transition-colors">Blog</a>
+                <a href="kontakt.html" class="hover:text-blue-600 transition-colors">Kontakt</a>
             </div>
         </div>
     </nav>
 
-    <!-- HERO SEKTION (Mit Animation und deinem Bild) -->
+    <!-- HERO SEKTION -->
     <header class="bg-gradient-to-br from-blue-800 to-indigo-900 text-white py-16 md:py-24 px-6 overflow-hidden">
         <div class="max-w-6xl mx-auto grid md:grid-cols-12 gap-12 items-center animate-fade-in">
             
@@ -52,12 +52,13 @@ title: Startseite
                 <p class="text-lg md:text-xl text-blue-100 max-w-xl mb-8 leading-relaxed">
                     Willkommen auf meiner Website! Hier erfährst du mehr über meine Arbeit, mein Branding und kannst meine neuesten Artikel lesen.
                 </p>
-                <a href="/blog/" class="bg-cyan-400 text-blue-950 font-black px-8 py-4 rounded-xl shadow-lg hover:bg-cyan-300 transform hover:-translate-y-0.5 transition inline-block">
+                <!-- Button-Link zum Blog repariert -->
+                <a href="blog.html" class="bg-cyan-400 text-blue-950 font-black px-8 py-4 rounded-xl shadow-lg hover:bg-cyan-300 transform hover:-translate-y-0.5 transition inline-block">
                     Direkt zum Blog →
                 </a>
             </div>
 
-            <!-- Rechte Bild-Spalte (Dein Foto) -->
+            <!-- Rechte Bild-Spalte -->
             <div class="md:col-span-5 flex justify-center">
                 <div class="relative">
                     <div class="absolute inset-0 bg-cyan-400 rounded-3xl transform rotate-3 scale-102 opacity-30"></div>
@@ -68,15 +69,16 @@ title: Startseite
         </div>
     </header>
 
-    <!-- KACHELN (Jetzt mit den passenden Logos) -->
+    <!-- KACHELN -->
     <main class="max-w-6xl mx-auto px-6 py-20">
         <div class="grid md:grid-cols-2 gap-8">
             
             <!-- Linke Kachel (JMF-Scribble) -->
             <div class="bg-white border border-gray-100 p-8 rounded-2xl shadow-xs hover:shadow-xl transition-all duration-300 flex flex-col justify-between">
                 <div>
-                    <div class="bg-black p-4 inline-block rounded-xl mb-6">
-                        <img src="jmf-logo.jpg" alt="JMF Scribble" class="h-16 w-16 object-contain">
+                    <!-- Logo-Box deutlich vergrößert (h-32 statt h-16) -->
+                    <div class="bg-black p-4 inline-block rounded-2xl mb-6">
+                        <img src="jmf-logo.jpg" alt="JMF Scribble" class="h-32 w-32 object-contain">
                     </div>
                     <h2 class="text-2xl font-black text-gray-900 mb-4">JMF-Scribble</h2>
                     <p class="text-gray-600 leading-relaxed">
@@ -88,8 +90,9 @@ title: Startseite
             <!-- Rechte Kachel (Blue Vision) -->
             <div class="bg-white border border-gray-100 p-8 rounded-2xl shadow-xs hover:shadow-xl transition-all duration-300 flex flex-col justify-between">
                 <div>
-                    <div class="bg-black p-4 inline-block rounded-xl mb-6">
-                        <img src="auge-logo.jpg" alt="Blue Vision" class="h-16 w-16 object-contain">
+                    <!-- Logo-Box deutlich vergrößert (h-32 statt h-16) -->
+                    <div class="bg-black p-4 inline-block rounded-2xl mb-6">
+                        <img src="auge-logo.jpg" alt="Blue Vision" class="h-32 w-32 object-contain">
                     </div>
                     <h2 class="text-2xl font-black text-gray-900 mb-4">Blue Vision</h2>
                     <p class="text-gray-600 leading-relaxed">
