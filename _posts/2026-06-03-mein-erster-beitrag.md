@@ -1,12 +1,17 @@
 ---
+
 layout: post
-title: "Sportfest 2026 – Zwei Tage voller Bewegung"
----
+title: "Mein erster Artikel"
+----------------------------
 
-Hallo Welt! Das ist der allererste Artikel auf meinem neuen, kostenlosen Blog. 
+Du liest jetzt gerade meinen ersten Artikel…
 
-### Das hier ist eine Überschrift
-Hier kann ich ganz normal schreiben. Ich kann Wörter **fett drucken** oder eine Liste erstellen:
+Irgendwie fühlt sich das noch ein bisschen komisch an, aber auch ziemlich cool. Das hier ist der Start von etwas Neuem für mich.
 
-* Mein erstes Thema
-* Mein zweites Thema
+Ich versuche natürlich jeden Tag einen Artikel zu posten oder wenigstens einen in der Woche. Mal schauen, wie gut ich das wirklich durchziehe 😄
+
+Hier soll einfach alles rein, was mir so einfällt – Gedanken, Ideen, Projekte oder auch einfach Sachen aus dem Alltag. Kein Stress, kein Perfektsein, einfach schreiben.
+
+Und genau das ist auch der Plan: einfach anfangen und dann nach und nach besser werden.
+
+Mal sehen, wohin das Ganze führt.
