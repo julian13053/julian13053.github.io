@@ -44,7 +44,7 @@ permalink: /impressum.html
 
             <h2 class="text-xl font-bold text-gray-950 mt-6 mb-2">Kontakt</h2>
             <p class="text-gray-600 leading-relaxed">
-                E-Mail: kontakt@m-fleger.de
+                E-Mail: julian(at)m-fleger.de
             </p>
 
             <h2 class="text-xl font-bold text-gray-950 mt-6 mb-2">Redaktionell verantwortlich</h2>
