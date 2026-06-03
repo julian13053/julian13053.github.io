@@ -26,13 +26,12 @@ title: Startseite
     <nav class="bg-white border-b border-gray-100 sticky top-0 z-50 shadow-xs">
         <div class="max-w-6xl mx-auto px-6 py-4 flex justify-between items-center">
             <div class="flex items-center gap-4">
-                <!-- Auge-Logo vergrößert (von w-10/h-10 auf w-16/h-16) -->
-                <img src="auge-logo.jpg" alt="M-Fleger Logo" class="w-16 h-16 rounded-xl object-cover shadow-xs">
-                <span class="text-3xl font-black tracking-tight text-blue-600">M-Fleger</span>
+                <!-- Oben das Auge-Logo nochmals deutlich vergrößert (w-24 h-24 statt w-16 h-16) -->
+                <img src="auge-logo.jpg" alt="M-Fleger Logo" class="w-24 h-24 rounded-2xl object-cover shadow-md">
+                <span class="text-4xl font-black tracking-tight text-blue-600">M-Fleger</span>
             </div>
-            <div class="flex gap-6 font-semibold text-gray-600">
+            <div class="flex gap-6 font-semibold text-gray-600 text-lg">
                 <a href="index.html" class="text-blue-600">Startseite</a>
-                <!-- Link zum Blog repariert -->
                 <a href="blog.html" class="hover:text-blue-600 transition-colors">Blog</a>
                 <a href="kontakt.html" class="hover:text-blue-600 transition-colors">Kontakt</a>
             </div>
@@ -52,7 +51,6 @@ title: Startseite
                 <p class="text-lg md:text-xl text-blue-100 max-w-xl mb-8 leading-relaxed">
                     Willkommen auf meiner Website! Hier erfährst du mehr über meine Arbeit, mein Branding und kannst meine neuesten Artikel lesen.
                 </p>
-                <!-- Button-Link zum Blog repariert -->
                 <a href="blog.html" class="bg-cyan-400 text-blue-950 font-black px-8 py-4 rounded-xl shadow-lg hover:bg-cyan-300 transform hover:-translate-y-0.5 transition inline-block">
                     Direkt zum Blog →
                 </a>
@@ -69,33 +67,33 @@ title: Startseite
         </div>
     </header>
 
-    <!-- KACHELN -->
+    <!-- KACHELN (Jetzt im stylischen Dark-Mode, damit die Logos perfekt verschmelzen) -->
     <main class="max-w-6xl mx-auto px-6 py-20">
         <div class="grid md:grid-cols-2 gap-8">
             
             <!-- Linke Kachel (JMF-Scribble) -->
-            <div class="bg-white border border-gray-100 p-8 rounded-2xl shadow-xs hover:shadow-xl transition-all duration-300 flex flex-col justify-between">
+            <div class="bg-black text-white p-8 rounded-3xl shadow-xl border border-gray-850 flex flex-col justify-between transition-all duration-300 hover:scale-102">
                 <div>
-                    <!-- Logo-Box deutlich vergrößert (h-32 statt h-16) -->
-                    <div class="bg-black p-4 inline-block rounded-2xl mb-6">
-                        <img src="jmf-logo.jpg" alt="JMF Scribble" class="h-32 w-32 object-contain">
+                    <!-- Das Logo füllt jetzt die gesamte Breite aus und verschmilzt mit dem schwarzen Hintergrund -->
+                    <div class="w-full flex justify-center mb-6">
+                        <img src="jmf-logo.jpg" alt="JMF Scribble" class="w-full max-w-[280px] h-64 object-contain">
                     </div>
-                    <h2 class="text-2xl font-black text-gray-900 mb-4">JMF-Scribble</h2>
-                    <p class="text-gray-600 leading-relaxed">
+                    <h2 class="text-3xl font-black text-white mb-4">JMF-Scribble</h2>
+                    <p class="text-gray-400 leading-relaxed">
                         Das Logo basiert auf meinen Initialen und ist in einem klaren, geometrischen Anthrazit-Grau gehalten. Der lebendige blaue Akzent im Hintergrund erinnert an eine schnelle Skizze.
                     </p>
                 </div>
             </div>
 
             <!-- Rechte Kachel (Blue Vision) -->
-            <div class="bg-white border border-gray-100 p-8 rounded-2xl shadow-xs hover:shadow-xl transition-all duration-300 flex flex-col justify-between">
+            <div class="bg-black text-white p-8 rounded-3xl shadow-xl border border-gray-850 flex flex-col justify-between transition-all duration-300 hover:scale-102">
                 <div>
-                    <!-- Logo-Box deutlich vergrößert (h-32 statt h-16) -->
-                    <div class="bg-black p-4 inline-block rounded-2xl mb-6">
-                        <img src="auge-logo.jpg" alt="Blue Vision" class="h-32 w-32 object-contain">
+                    <!-- Das Logo füllt jetzt die gesamte Breite aus und verschmilzt mit dem schwarzen Hintergrund -->
+                    <div class="w-full flex justify-center mb-6">
+                        <img src="auge-logo.jpg" alt="Blue Vision" class="w-full max-w-[280px] h-64 object-contain">
                     </div>
-                    <h2 class="text-2xl font-black text-gray-900 mb-4">Blue Vision</h2>
-                    <p class="text-gray-600 leading-relaxed">
+                    <h2 class="text-3xl font-black text-white mb-4">Blue Vision</h2>
+                    <p class="text-gray-600 leading-relaxed text-gray-400">
                         Das Logo zeigt ein stilisiertes, waches Auge, das von einem kräftigen, leuchtenden Blau umrandet ist. Es symbolisiert die Fähigkeit, Visionen zu haben und über den Tellerrand hinauszuschauen.
                     </p>
                 </div>
