@@ -1,7 +1,6 @@
 ---
 layout: post
 title: "Sportfest 2026 – Zwei Tage voller Bewegung"
-Kategorie: Projekte
 ---
 
 Hallo Welt! Das ist der allererste Artikel auf meinem neuen, kostenlosen Blog. 
