@@ -18,12 +18,14 @@ permalink: /impressum.html
                 <img src="auge-logo.jpg" alt="M-Fleger Logo" class="w-16 h-14 md:w-24 md:h-20 rounded-xl md:rounded-2xl object-contain">
                 <span class="text-2xl md:text-3xl font-black tracking-tight text-blue-600">M-Fleger</span>
             </a>
-            <div class="flex flex-wrap justify-center gap-x-5 gap-y-2 font-semibold text-gray-600 text-base md:text-lg">
-                <a href="index.html" class="hover:text-blue-600 hover:border-b-2 hover:border-blue-600 pb-1 no-underline">Startseite</a>
-                <a href="ueber-mich.html" class="hover:text-blue-600 hover:border-b-2 hover:border-blue-600 pb-1 no-underline">Über mich</a>
-                <a href="blog.html" class="hover:text-blue-600 hover:border-b-2 hover:border-blue-600 pb-1 no-underline">Blog</a>
-                <a href="kontakt.html" class="hover:text-blue-600 hover:border-b-2 hover:border-blue-600 pb-1 no-underline">Kontakt</a>
-            </div>
+           <div class="flex flex-wrap justify-center gap-4">
+    <a href="index.html" class="hover:text-blue-600 transition-colors no-underline">Startseite</a>
+    <a href="ueber-mich.html" class="hover:text-blue-600 transition-colors no-underline">Über mich</a>
+    <a href="blog.html" class="hover:text-blue-600 transition-colors no-underline">Blog</a>
+    <a href="kontakt.html" class="hover:text-blue-600 transition-colors no-underline">Kontakt</a>
+    <a href="impressum.html" class="hover:text-blue-600 transition-colors no-underline">Impressum</a>
+    <a href="datenschutz.html" class="hover:text-blue-600 transition-colors no-underline">Datenschutz</a>
+</div>
         </div>
     </nav>
 
