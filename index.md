@@ -20,6 +20,7 @@ title: Startseite
 </head>
 <body class="bg-gray-50 text-gray-900 font-sans antialiased flex flex-col min-h-screen">
 
+    <!-- NAVIGATION -->
     <nav class="bg-white/80 backdrop-blur-md border-b border-gray-100 sticky top-0 z-50 shadow-xs">
         <div class="max-w-6xl mx-auto px-6 py-4 flex justify-between items-center">
             <a href="index.html" class="flex items-center gap-4 group no-underline text-current">
@@ -34,6 +35,7 @@ title: Startseite
         </div>
     </nav>
 
+    <!-- HERO SEKTION -->
     <header class="bg-gradient-to-br from-blue-800 via-blue-900 to-indigo-950 text-white py-20 px-6 overflow-hidden">
         <div class="max-w-6xl mx-auto grid md:grid-cols-12 gap-12 items-center animate-fade-in">
             
@@ -60,8 +62,10 @@ title: Startseite
         </div>
     </header>
 
+    <!-- INHALT -->
     <main class="max-w-6xl mx-auto px-6 py-20 flex-grow w-full">
         
+        <!-- SEKTION 1: NEUESTER BLOGPOST -->
         <div class="mb-24">
             <div class="flex flex-col md:flex-row justify-between items-baseline mb-10 gap-4">
                 <div>
@@ -92,13 +96,22 @@ title: Startseite
             {% endif %}
         </div>
 
+        <!-- SEKTION 2: MEINE LOGOS -->
         <div class="border-t border-gray-200 pt-16">
-            <div class="text-center md:text-left mb-12">
+            <div class="text-center md:text-left mb-8">
                 <h2 class="text-4xl font-black text-gray-950 tracking-tight">Eigene Brandings</h2>
-                <p class="text-gray-500 text-lg mt-2">Kreative Identitäten und visuelle Konzepte.</p>
+                <p class="text-blue-600 font-extrabold text-xl mt-3 tracking-wide">Klarer Fokus. &nbsp;&bull;&nbsp; Punktgenau verbunden.</p>
+            </div>
+            
+            <!-- Dein persönlicher Einleitungstext schön hervorgehoben -->
+            <div class="max-w-4xl bg-gray-100/60 border-l-4 border-blue-600 p-6 rounded-r-2xl mb-12">
+                <p class="text-gray-700 italic text-lg leading-relaxed">
+                    „Als ich das erstellt habe, war mir echt wichtig, dass sofort klar ist: Hier verbinden sich klare Strukturen mit kreativer Freiheit. Es geht nicht nur um ein Bild, sondern um den Moment, in dem eine eine Idee Gestalt annimmt. Für mich ist das JMF-Scribble der Anfang jeder kreativen Schöpfung und das Blue Vision Auge der Fokus, den man braucht, um etwas Neues in die Welt zu bringen.“
+                </p>
             </div>
 
             <div class="grid md:grid-cols-2 gap-8">
+                <!-- JMF Scribble Kachel -->
                 <div class="bg-white border border-gray-100 p-8 rounded-3xl shadow-xs hover:shadow-xl transition-all duration-300 flex flex-col justify-between group">
                     <div>
                         <div class="w-full bg-white border border-gray-200 rounded-2xl p-6 flex justify-center mb-6 shadow-xs transition-colors group-hover:border-blue-200">
@@ -106,11 +119,12 @@ title: Startseite
                         </div>
                         <h3 class="text-2xl font-black text-gray-950 mb-3">JMF-Scribble</h3>
                         <p class="text-gray-600 leading-relaxed">
-                            Das Logo basiert auf meinen Initialen und ist in einem klaren, geometrischen Anthrazit-Grau gehalten. Der lebendige blaue Akzent im Hintergrund erinnert an eine schnelle Skizze.
+                            Das Logo basiert auf meinen Initialen und ist in einem klaren, geometrischen Anthrazit-Grau gehalten. Der lebendige blaue Akzent im Hintergrund, der an eine schnelle Skizze oder einen Pinselstrich erinnert, steht für Kreativität, frische Ideen und die nötige Portion „Scribble“ vor jedem großen Entwurf. Es symbolisiert die Balance zwischen Struktur und kreativer Energie.
                         </p>
                     </div>
                 </div>
 
+                <!-- Blue Vision Kachel -->
                 <div class="bg-white border border-gray-100 p-8 rounded-3xl shadow-xs hover:shadow-xl transition-all duration-300 flex flex-col justify-between group">
                     <div>
                         <div class="w-full bg-white border border-gray-200 rounded-2xl p-6 flex justify-center mb-6 shadow-xs transition-colors group-hover:border-blue-200">
@@ -118,7 +132,7 @@ title: Startseite
                         </div>
                         <h3 class="text-2xl font-black text-gray-950 mb-3">Blue Vision</h3>
                         <p class="text-gray-600 leading-relaxed">
-                            Das Logo zeigt ein stilisiertes, waches Auge, das von einem kräftigen, leuchtenden Blau umrandet ist. Es symbolisiert die Fähigkeit, Visionen zu haben und über den Tellerrand hinauszuschauen.
+                            Das Logo zeigt ein stilisiertes, waches Auge, das von einem kräftigen, leuchtenden Blau umrandet ist. Der grafische, fast handgezeichnete Stil der Wimpern verleiht ihm eine besondere Note. Es steht für die Fähigkeit, das Wesentliche klar zu erkennen, Visionen zu haben, Achtsamkeit zu zeigen und über den Tellerrand hinauszuschauen. Das Auge symbolisiert Erkenntnis und den unermüdlichen Willen, die eigenen Ziele nicht aus den Augen zu verlieren.
                         </p>
                     </div>
                 </div>
@@ -127,6 +141,7 @@ title: Startseite
 
     </main>
 
+    <!-- FOOTER -->
     <footer class="bg-white border-t border-gray-100 py-8 px-6 mt-12 text-center text-gray-500 font-medium">
         <div class="max-w-6xl mx-auto flex flex-col sm:flex-row justify-between items-center gap-4">
             <p>&copy; 2026 M-Fleger. Alle Rechte vorbehalten.</p>
