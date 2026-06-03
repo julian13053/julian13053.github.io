@@ -1,8 +1,7 @@
 ---
-
 layout: post
 title: "Mein erster Artikel"
-----------------------------
+---
 
 Du liest jetzt gerade meinen ersten Artikel…
 
