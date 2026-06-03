@@ -53,12 +53,12 @@ title: Über mich
             <div class="text-center md:text-left mb-8">
                 <h2 class="text-4xl font-black text-gray-950 tracking-tight flex items-center justify-center md:justify-start gap-3">
                     Eigene Brandings 
-                    <img src="image_d8e99d.png" alt="Auge Fokus Icon" class="w-8 h-8 object-contain">
+                    <img src="fokus.png" alt="Auge Fokus Icon" class="w-8 h-8 object-contain">
                 </h2>
             </div>
 
             <div class="grid md:grid-cols-2 gap-8 mb-16">
-                <!-- JMF Scribble -->
+                <!-- JMF Scribble Kachel -->
                 <div class="bg-white border border-gray-100 p-8 rounded-3xl shadow-xs hover:shadow-xl hover:scale-105 transition-all duration-300 flex flex-col justify-between group">
                     <div>
                         <div class="w-full bg-white border border-gray-200 rounded-2xl p-6 flex justify-center mb-6 shadow-xs transition-colors group-hover:border-blue-200">
@@ -71,7 +71,7 @@ title: Über mich
                     </div>
                 </div>
 
-                <!-- Blue Vision -->
+                <!-- Blue Vision Kachel -->
                 <div class="bg-white border border-gray-100 p-8 rounded-3xl shadow-xs hover:shadow-xl hover:scale-105 transition-all duration-300 flex flex-col justify-between group">
                     <div>
                         <div class="w-full bg-white border border-gray-200 rounded-2xl p-6 flex justify-center mb-6 shadow-xs transition-colors group-hover:border-blue-200">
@@ -87,9 +87,11 @@ title: Über mich
 
             <!-- VISUELLER SLOGAN & TEXTBEREICH -->
             <div class="grid md:grid-cols-12 gap-8 items-center bg-gray-100/60 p-8 rounded-3xl border border-gray-200/50">
+                <!-- Links: Die Kamera-Illustration -->
                 <div class="md:col-span-4 flex justify-center">
                     <img src="image_d8f8c4.png" alt="Kamera Illustration" class="w-56 h-auto object-contain mix-blend-multiply">
                 </div>
+                <!-- Rechts: Slogan & Dein Statement -->
                 <div class="md:col-span-8 space-y-4">
                     <div class="border-b border-gray-300 pb-2">
                         <h3 class="text-3xl md:text-4xl font-black text-blue-900 tracking-tight leading-tight">
@@ -102,6 +104,7 @@ title: Über mich
                 </div>
             </div>
         </div>
+
     </main>
 
     <!-- FOOTER -->
