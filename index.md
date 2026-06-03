@@ -119,6 +119,6 @@ title: Startseite
             </div>
         </div>
     </footer>
-
+{% include cookie-banner.html %}
 </body>
 </html>
