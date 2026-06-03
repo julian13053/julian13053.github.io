@@ -11,6 +11,12 @@ layout: null
     <script src="https://cdn.jsdelivr.net/npm/@tailwindcss/browser@4"></script>
     
     <style>
+        /* ZWINGT den Blogtext zu perfekter Lesbarkeit (Sattes Dunkelgrau) */
+        .blog-text, .blog-text p, .blog-text span {
+            color: #1f2937 !important; /* Ein kräftiges, dunkles Gray-800 */
+            opacity: 1 !important;
+        }
+
         /* Standardmäßig sind die reinen Druck-Elemente auf der Webseite unsichtbar */
         .print-header {
             display: none;
@@ -18,12 +24,11 @@ layout: null
 
         /* Perfekter Ausdruck für Papier / PDF */
         @media print {
-            /* Menü, Footer, Buttons, Cookie-Banner und Zurück-Link auf Papier verstecken */
             nav, footer, .no-print, #cookie-banner, .fixed {
                 display: none !important;
             }
 
-            /* Die neue Druck-Kopfzeile auf Papier einblenden (Jetzt seitenvertauscht!) */
+            /* Kopfzeile auf Papier einblenden */
             .print-header {
                 display: flex !important;
                 justify-content: space-between;
@@ -37,15 +42,20 @@ layout: null
             .print-header-left {
                 font-size: 14px;
                 font-weight: 700;
-                color: #1d4ed8; /* M-Fleger Blau */
+                color: #1d4ed8;
             }
             .print-header-right {
                 font-size: 14px;
                 font-weight: 600;
-                color: #374151; /* Dunkelgrau */
+                color: #374151;
             }
 
-            /* TINTENSPAR-MODUS: Macht den blauen Header beim Drucken weiß mit dunkler Schrift */
+            /* TEXTBEREICH FÜR DEN DRUCK OPTIMIEREN (Tiefschwarz auf Papier) */
+            .blog-text, .blog-text p {
+                color: #000000 !important;
+            }
+
+            /* TINTENSPAR-MODUS: Blauer Header wird beim Drucken weiß mit dunkler Schrift */
             header.bg-gradient-to-r {
                 background: white !important;
                 color: black !important;
@@ -61,7 +71,6 @@ layout: null
                 color: #4b5563 !important;
             }
 
-            /* Hintergrund und Karte für den Druck anpassen */
             body {
                 background-color: white !important;
             }
@@ -79,7 +88,7 @@ layout: null
 </head>
 <body class="bg-gray-50 text-gray-900 font-sans antialiased flex flex-col min-h-screen">
 
-    <!-- KOPFZEILE FÜR DEN DRUCK (Links: M-Fleger | Rechts: m-fleger.de) -->
+    <!-- KOPFZEILE FÜR DEN DRUCK -->
     <div class="print-header max-w-4xl mx-auto w-full px-4">
         <span class="print-header-left">M-Fleger</span>
         <span class="print-header-right">m-fleger.de</span>
@@ -101,7 +110,7 @@ layout: null
         </div>
     </nav>
 
-    <!-- BLAUER HEADER BEREICH (Wird beim Drucken automatisch weiß & sparsam) -->
+    <!-- BLAUER HEADER BEREICH -->
     <header class="bg-gradient-to-r from-blue-900 via-indigo-900 to-blue-950 text-white text-center py-16 px-4">
         <div class="max-w-4xl mx-auto flex flex-col items-center">
             <h1 class="text-3xl md:text-5xl font-black tracking-tight drop-shadow-md mb-4">
@@ -119,11 +128,12 @@ layout: null
     <!-- INHALT -->
     <main class="max-w-4xl mx-auto px-4 py-12 flex-grow w-full -mt-10">
         <article class="bg-white border border-gray-100 p-8 md:p-12 rounded-3xl shadow-sm">
-            <div class="prose max-w-none text-gray-800 leading-relaxed space-y-6 text-base md:text-lg">
+            <!-- blog-text Klasse sorgt jetzt für die kräftige Schriftfarbe -->
+            <div class="blog-text prose max-w-none leading-relaxed space-y-6 text-base md:text-lg">
                 {{ content }}
             </div>
             
-            <!-- AUTOREN-ZEILE (Direkt unter dem Text, sowohl im Web als auch beim Drucken sichtbar) -->
+            <!-- AUTOREN-ZEILE -->
             <div class="mt-6 text-sm text-gray-500 font-medium">
                 Text von Julian Fleger
             </div>
@@ -144,7 +154,7 @@ layout: null
         </article>
     </main>
 
-    <!-- FOOTER (Auf Webseite sichtbar) -->
+    <!-- FOOTER -->
     <footer class="bg-white border-t border-gray-100 py-8 px-4 text-center text-gray-500 font-medium no-print">
         <div class="max-w-6xl mx-auto flex flex-col md:flex-row justify-between items-center gap-4">
             <p>&copy; 2026 M-Fleger. Alle Rechte vorbehalten.</p>
