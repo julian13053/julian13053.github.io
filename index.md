@@ -20,23 +20,20 @@ title: Startseite
 </head>
 <body class="bg-gray-50 text-gray-900 font-sans antialiased flex flex-col min-h-screen">
 
-    <!-- NAVIGATION -->
     <nav class="bg-white/80 backdrop-blur-md border-b border-gray-100 sticky top-0 z-50 shadow-xs">
         <div class="max-w-6xl mx-auto px-6 py-4 flex justify-between items-center">
-            <!-- Das Logo bringt dich jetzt per Klick auf die Startseite -->
-            <a href="index.html" class="flex items-center gap-4 group">
+            <a href="index.html" class="flex items-center gap-4 group no-underline text-current">
                 <img src="auge-logo.jpg" alt="M-Fleger Logo" class="w-24 h-20 rounded-2xl object-contain transition-transform duration-300 group-hover:scale-105">
                 <span class="text-3xl font-black tracking-tight text-blue-600">M-Fleger</span>
             </a>
             <div class="flex gap-6 font-semibold text-gray-600 text-lg">
-                <a href="index.html" class="text-blue-600 border-b-2 border-blue-600 pb-1">Startseite</a>
-                <a href="blog.html" class="hover:text-blue-600 hover:border-b-2 hover:border-blue-600 pb-1 transition-all">Blog</a>
-                <a href="kontakt.html" class="hover:text-blue-600 hover:border-b-2 hover:border-blue-600 pb-1 transition-all">Kontakt</a>
+                <a href="index.html" class="text-blue-600 border-b-2 border-blue-600 pb-1 no-underline">Startseite</a>
+                <a href="blog.html" class="hover:text-blue-600 hover:border-b-2 hover:border-blue-600 pb-1 transition-all no-underline">Blog</a>
+                <a href="kontakt.html" class="hover:text-blue-600 hover:border-b-2 hover:border-blue-600 pb-1 transition-all no-underline">Kontakt</a>
             </div>
         </div>
     </nav>
 
-    <!-- HERO SEKTION -->
     <header class="bg-gradient-to-br from-blue-800 via-blue-900 to-indigo-950 text-white py-20 px-6 overflow-hidden">
         <div class="max-w-6xl mx-auto grid md:grid-cols-12 gap-12 items-center animate-fade-in">
             
@@ -48,7 +45,7 @@ title: Startseite
                 <p class="text-lg md:text-xl text-blue-100 max-w-xl mb-8 leading-relaxed">
                     Willkommen auf meiner Website! Hier erfährst du mehr über meine Arbeit, mein Branding und kannst meine neuesten Artikel lesen.
                 </p>
-                <a href="blog.html" class="bg-cyan-400 text-blue-950 font-black px-8 py-4 rounded-xl shadow-lg hover:bg-cyan-300 transform hover:-translate-y-0.5 transition-all inline-block">
+                <a href="blog.html" class="bg-cyan-400 text-blue-950 font-black px-8 py-4 rounded-xl shadow-lg hover:bg-cyan-300 transform hover:-translate-y-0.5 transition-all inline-block no-underline">
                     Direkt zum Blog →
                 </a>
             </div>
@@ -63,17 +60,15 @@ title: Startseite
         </div>
     </header>
 
-    <!-- INHALT -->
     <main class="max-w-6xl mx-auto px-6 py-20 flex-grow w-full">
         
-        <!-- SEKTION 1: NEUESTER BLOGPOST (Jetzt ganz oben auf der Startseite) -->
         <div class="mb-24">
             <div class="flex flex-col md:flex-row justify-between items-baseline mb-10 gap-4">
                 <div>
                     <h2 class="text-4xl font-black text-gray-950 tracking-tight">Aktuellster Artikel</h2>
                     <p class="text-gray-500 text-lg mt-2">Frisch aus dem Gedankenkarussell gegriffen.</p>
                 </div>
-                <a href="blog.html" class="text-blue-600 font-bold hover:text-blue-800 transition-colors flex items-center gap-1 group">
+                <a href="blog.html" class="text-blue-600 font-bold hover:text-blue-800 transition-colors flex items-center gap-1 group no-underline">
                     Alle Artikel ansehen <span class="transform group-hover:translate-x-1 transition-transform">→</span>
                 </a>
             </div>
@@ -82,11 +77,10 @@ title: Startseite
             {% if latest_post %}
             <div class="bg-gradient-to-r from-blue-50 to-indigo-50 border border-blue-100/50 p-8 md:p-10 rounded-3xl shadow-xs flex flex-col md:flex-row gap-8 items-start hover:shadow-md transition-all">
                 <div class="flex-grow">
-                    <!-- Deutsches Datumsformat -->
                     <span class="text-sm bg-blue-600 text-white px-3 py-1 rounded-md font-bold tracking-wide uppercase">{{ latest_post.date | date: "%d.%m.%Y" }}</span>
                     <h3 class="text-3xl font-black text-gray-950 mt-4 mb-3">{{ latest_post.title }}</h3>
                     <p class="text-gray-600 text-lg mb-6 leading-relaxed">{{ latest_post.excerpt | strip_html | truncatewords: 35 }}</p>
-                    <a href="{{ latest_post.url | relative_url }}" class="bg-white border border-gray-200 text-gray-900 font-bold px-6 py-3 rounded-xl shadow-xs hover:bg-gray-50 hover:border-gray-300 transition inline-block">
+                    <a href="{{ latest_post.url | relative_url }}" class="bg-white border border-gray-200 text-gray-900 font-bold px-6 py-3 rounded-xl shadow-xs hover:bg-gray-50 hover:border-gray-300 transition inline-block no-underline">
                         Artikel lesen →
                     </a>
                 </div>
@@ -98,7 +92,6 @@ title: Startseite
             {% endif %}
         </div>
 
-        <!-- SEKTION 2: MEINE LOGOS -->
         <div class="border-t border-gray-200 pt-16">
             <div class="text-center md:text-left mb-12">
                 <h2 class="text-4xl font-black text-gray-950 tracking-tight">Eigene Brandings</h2>
@@ -106,7 +99,6 @@ title: Startseite
             </div>
 
             <div class="grid md:grid-cols-2 gap-8">
-                <!-- Kachel: JMF-Scribble -->
                 <div class="bg-white border border-gray-100 p-8 rounded-3xl shadow-xs hover:shadow-xl transition-all duration-300 flex flex-col justify-between group">
                     <div>
                         <div class="w-full bg-white border border-gray-200 rounded-2xl p-6 flex justify-center mb-6 shadow-xs transition-colors group-hover:border-blue-200">
@@ -119,7 +111,6 @@ title: Startseite
                     </div>
                 </div>
 
-                <!-- Kachel: Blue Vision -->
                 <div class="bg-white border border-gray-100 p-8 rounded-3xl shadow-xs hover:shadow-xl transition-all duration-300 flex flex-col justify-between group">
                     <div>
                         <div class="w-full bg-white border border-gray-200 rounded-2xl p-6 flex justify-center mb-6 shadow-xs transition-colors group-hover:border-blue-200">
@@ -136,14 +127,13 @@ title: Startseite
 
     </main>
 
-    <!-- FOOTER -->
     <footer class="bg-white border-t border-gray-100 py-8 px-6 mt-12 text-center text-gray-500 font-medium">
         <div class="max-w-6xl mx-auto flex flex-col sm:flex-row justify-between items-center gap-4">
             <p>&copy; 2026 M-Fleger. Alle Rechte vorbehalten.</p>
             <div class="flex gap-6">
-                <a href="index.html" class="hover:text-blue-600 transition-colors">Startseite</a>
+                <a href="index.html" class="hover:text-blue-600 transition-colors no-underline">Startseite</a>
                 <a href="blog.html" class="hover:text-blue-600 transition-colors">Blog</a>
-                <a href="kontakt.html" class="hover:text-blue-600 transition-colors">Contact</a>
+                <a href="kontakt.html" class="hover:text-blue-600 transition-colors">Kontakt</a>
             </div>
         </div>
     </footer>
