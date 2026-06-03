@@ -13,15 +13,15 @@ title: Blog
 
     <nav class="bg-white border-b border-gray-100 sticky top-0 z-50 shadow-xs">
         <div class="max-w-6xl mx-auto px-6 py-4 flex justify-between items-center">
-            <a href="{{ '/' | relative_url }}" class="flex items-center gap-4 group no-underline text-current">
+            <a href="index.html" class="flex items-center gap-4 group no-underline text-current">
                 <img src="auge-logo.jpg" alt="M-Fleger Logo" class="w-24 h-20 rounded-2xl object-contain transition-transform duration-300 group-hover:scale-105">
                 <span class="text-3xl font-black tracking-tight text-blue-600">M-Fleger</span>
             </a>
             <div class="flex gap-6 font-semibold text-gray-600 text-lg">
-                <a href="{{ '/' | relative_url }}" class="hover:text-blue-600 hover:border-b-2 hover:border-blue-600 pb-1 transition-all no-underline">Startseite</a>
-                <a href="{{ '/ueber-mich.html' | relative_url }}" class="hover:text-blue-600 hover:border-b-2 hover:border-blue-600 pb-1 transition-all no-underline">Über mich</a>
-                <a href="{{ '/blog.html' | relative_url }}" class="text-blue-600 border-b-2 border-blue-600 pb-1 no-underline">Blog</a>
-                <a href="{{ '/kontakt.html' | relative_url }}" class="hover:text-blue-600 hover:border-b-2 hover:border-blue-600 pb-1 transition-all no-underline">Kontakt</a>
+                <a href="index.html" class="hover:text-blue-600 hover:border-b-2 hover:border-blue-600 pb-1 transition-all no-underline">Startseite</a>
+                <a href="ueber-mich.html" class="hover:text-blue-600 hover:border-b-2 hover:border-blue-600 pb-1 transition-all no-underline">Über mich</a>
+                <a href="blog.html" class="text-blue-600 border-b-2 border-blue-600 pb-1 no-underline">Blog</a>
+                <a href="kontakt.html" class="hover:text-blue-600 hover:border-b-2 hover:border-blue-600 pb-1 transition-all no-underline">Kontakt</a>
             </div>
         </div>
     </nav>
@@ -74,10 +74,10 @@ title: Blog
         <div class="max-w-6xl mx-auto flex flex-col sm:flex-row justify-between items-center gap-4">
             <p>&copy; 2026 M-Fleger. Alle Rechte vorbehalten.</p>
             <div class="flex gap-6">
-                <a href="{{ '/' | relative_url }}" class="hover:text-blue-600 transition-colors no-underline">Startseite</a>
-                <a href="{{ '/ueber-mich.html' | relative_url }}" class="hover:text-blue-600 transition-colors no-underline">Über mich</a>
-                <a href="{{ '/blog.html' | relative_url }}" class="hover:text-blue-600 transition-colors no-underline">Blog</a>
-                <a href="{{ '/kontakt.html' | relative_url }}" class="hover:text-blue-600 transition-colors no-underline">Kontakt</a>
+                <a href="index.html" class="hover:text-blue-600 transition-colors no-underline">Startseite</a>
+                <a href="ueber-mich.html" class="hover:text-blue-600 transition-colors no-underline">Über mich</a>
+                <a href="blog.html" class="hover:text-blue-600 transition-colors no-underline">Blog</a>
+                <a href="kontakt.html" class="hover:text-blue-600 transition-colors no-underline">Kontakt</a>
             </div>
         </div>
     </footer>
