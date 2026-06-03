@@ -108,7 +108,7 @@ title: Startseite
         </div>
     </main>
 
-    <footer class="bg-white border-t border-gray-100 py-8 px-4 text-center text-gray-500 font-medium">
+  <footer class="bg-white border-t border-gray-100 py-8 px-4 text-center text-gray-500 font-medium">
         <div class="max-w-6xl mx-auto flex flex-col md:flex-row justify-between items-center gap-4">
             <p>&copy; 2026 M-Fleger. Alle Rechte vorbehalten.</p>
             <div class="flex flex-wrap justify-center gap-4">
@@ -116,6 +116,8 @@ title: Startseite
                 <a href="ueber-mich.html" class="hover:text-blue-600 transition-colors no-underline">Über mich</a>
                 <a href="blog.html" class="hover:text-blue-600 transition-colors no-underline">Blog</a>
                 <a href="kontakt.html" class="hover:text-blue-600 transition-colors no-underline">Kontakt</a>
+                <a href="impressum.html" class="hover:text-blue-600 transition-colors no-underline">Impressum</a>
+                <a href="datenschutz.html" class="hover:text-blue-600 transition-colors no-underline">Datenschutz</a>
             </div>
         </div>
     </footer>
