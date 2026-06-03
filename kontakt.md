@@ -1,6 +1,6 @@
 ---
 layout: null
-title: Contact
+title: Kontakt
 ---
 <html lang="de">
 <head>
@@ -11,59 +11,63 @@ title: Contact
 </head>
 <body class="bg-gray-50 text-gray-900 font-sans antialiased flex flex-col min-h-screen">
 
-    <!-- NAVIGATION -->
+    <!-- NAVIGATION (Mobil optimiert) -->
     <nav class="bg-white border-b border-gray-100 sticky top-0 z-50 shadow-xs">
-        <div class="max-w-6xl mx-auto px-6 py-4 flex justify-between items-center">
-            <a href="{{ '/' | relative_url }}" class="flex items-center gap-4 group no-underline text-current">
-                <img src="auge-logo.jpg" alt="M-Fleger Logo" class="w-24 h-20 rounded-2xl object-contain transition-transform duration-300 group-hover:scale-105">
-                <span class="text-3xl font-black tracking-tight text-blue-600">M-Fleger</span>
+        <div class="max-w-6xl mx-auto px-4 py-4 flex flex-col md:flex-row justify-between items-center gap-4">
+            <!-- Logo-Bereich -->
+            <a href="index.html" class="flex items-center gap-3 group no-underline text-current">
+                <img src="auge-logo.jpg" alt="M-Fleger Logo" class="w-16 h-14 md:w-24 md:h-20 rounded-xl md:rounded-2xl object-contain transition-transform duration-300 group-hover:scale-105">
+                <span class="text-2xl md:text-3xl font-black tracking-tight text-blue-600">M-Fleger</span>
             </a>
-            <div class="flex gap-6 font-semibold text-gray-600 text-lg">
-                <a href="{{ '/' | relative_url }}" class="hover:text-blue-600 hover:border-b-2 hover:border-blue-600 pb-1 transition-all no-underline">Startseite</a>
-                <a href="{{ '/ueber-mich.html' | relative_url }}" class="hover:text-blue-600 hover:border-b-2 hover:border-blue-600 pb-1 transition-all no-underline">Über mich</a>
-                <a href="{{ '/blog.html' | relative_url }}" class="hover:text-blue-600 hover:border-b-2 hover:border-blue-600 pb-1 transition-all no-underline">Blog</a>
-                <a href="{{ '/kontakt.html' | relative_url }}" class="hover:text-blue-600 hover:border-b-2 hover:border-blue-600 pb-1 transition-all no-underline">Kontakt</a>
+            <!-- Links-Bereich -->
+            <div class="flex flex-wrap justify-center gap-x-5 gap-y-2 font-semibold text-gray-600 text-base md:text-lg">
+                <a href="index.html" class="hover:text-blue-600 hover:border-b-2 hover:border-blue-600 pb-1 transition-all no-underline">Startseite</a>
+                <a href="ueber-mich.html" class="hover:text-blue-600 hover:border-b-2 hover:border-blue-600 pb-1 transition-all no-underline">Über mich</a>
+                <a href="blog.html" class="hover:text-blue-600 hover:border-b-2 hover:border-blue-600 pb-1 transition-all no-underline">Blog</a>
+                <a href="kontakt.html" class="text-blue-600 border-b-2 border-blue-600 pb-1 no-underline">Kontakt</a>
             </div>
         </div>
     </nav>
 
-    <header class="bg-gradient-to-br from-blue-800 via-blue-900 to-indigo-950 text-white py-16 px-6 text-center">
+    <!-- HEADER -->
+    <header class="bg-gradient-to-br from-[#1d4ed8] via-[#1e3a8a] to-[#312e81] text-white py-12 md:py-16 px-4 text-center">
         <div class="max-w-4xl mx-auto">
-            <h1 class="text-4xl md:text-5xl font-black tracking-tight mb-4">Lass uns connecten!</h1>
-            <p class="text-lg text-blue-100 max-w-lg mx-auto">Du hast Fragen oder möchtest mich erreichen? Melde dich unkompliziert per E-Mail oder Social Media.</p>
+            <h1 class="text-3xl md:text-5xl font-black tracking-tight mb-4">Lass uns connecten!</h1>
+            <p class="text-base md:text-lg text-blue-100 max-w-xl mx-auto">Du hast Fragen oder möchtest mich erreichen? Melde dich unkompliziert per E-Mail oder Social Media.</p>
         </div>
     </header>
 
-    <main class="max-w-2xl mx-auto px-6 py-16 flex-grow w-full">
-        <div class="bg-white border border-gray-100 p-8 md:p-10 rounded-3xl shadow-sm space-y-6">
-            <h2 class="text-3xl font-black text-gray-950 mb-2 text-center md:text-left">Direktkontakt</h2>
-            <p class="text-gray-500 mb-8 text-center md:text-left">Hier findest du meine offiziellen Erreichbarkeiten:</p>
+    <!-- MAIN CONTENT -->
+    <main class="max-w-3xl mx-auto px-4 py-10 md:py-16 flex-grow w-full">
+        <div class="bg-white border border-gray-100 p-6 md:p-12 rounded-2xl md:rounded-3xl shadow-xs text-center">
+            <h2 class="text-2xl md:text-3xl font-black text-gray-950 tracking-tight mb-2">Direktkontakt</h2>
+            <p class="text-gray-500 font-medium text-sm md:text-base mb-8">Hier findest du meine offiziellen Erreichbarkeiten:</p>
 
-            <div class="grid gap-4">
-                <div class="flex items-center gap-5 bg-gray-50 p-5 rounded-2xl border border-gray-100 shadow-xs">
-                    <div class="bg-blue-600 text-white w-12 h-12 flex items-center justify-center rounded-xl font-bold text-xl">@</div>
-                    <div>
-                        <p class="text-xs text-gray-400 font-bold uppercase tracking-wider">E-Mail</p>
-                        <a href="mailto:julian@fleger.de" class="text-gray-900 font-extrabold text-xl hover:text-blue-600 transition-colors no-underline">julian@fleger.de</a>
-                    </div>
-                </div>
+            <div class="space-y-4 max-w-md mx-auto">
+                <!-- E-Mail Button -->
+                <a href="mailto:julianfleger11@gmail.com" class="flex items-center justify-center gap-3 bg-blue-600 text-white font-bold p-4 rounded-xl shadow-xs hover:bg-blue-700 transition-all text-base md:text-lg no-underline w-full">
+                    📧 julianfleger11@gmail.com
+                </a>
 
-                <div class="flex items-center gap-5 bg-gray-50 p-5 rounded-2xl border border-gray-100 shadow-xs">
-                    <div class="bg-yellow-400 text-black w-12 h-12 flex items-center justify-center rounded-xl font-bold text-xl">👻</div>
-                    <div>
-                        <p class="text-xs text-gray-400 font-bold uppercase tracking-wider">Snapchat</p>
-                        <p class="text-gray-900 font-extrabold text-xl">zfd.julian</p>
-                    </div>
-                </div>
+                <!-- Instagram Button -->
+                <a href="https://instagram.com/j_f_0305" target="_blank" class="flex items-center justify-center gap-3 bg-gradient-to-r from-purple-600 via-pink-500 to-yellow-500 text-white font-bold p-4 rounded-xl shadow-xs hover:opacity-90 transition-all text-base md:text-lg no-underline w-full">
+                    📸 @j_f_0305
+                </a>
+            </div>
+
+            <div class="mt-12 border-t border-gray-100 pt-8">
+                <p class="text-gray-400 text-xs md:text-sm">Ich versuche in der Regel innerhalb von 24 Stunden zu antworten. Freue mich auf deine Nachricht!</p>
             </div>
         </div>
     </main>
 
-    <footer class="bg-white border-t border-gray-100 py-8 px-6 text-center text-gray-500 font-medium">
-        <div class="max-w-6xl mx-auto flex flex-col sm:flex-row justify-between items-center gap-4">
+    <!-- FOOTER -->
+    <footer class="bg-white border-t border-gray-100 py-8 px-4 text-center text-gray-500 font-medium mt-auto">
+        <div class="max-w-6xl mx-auto flex flex-col md:flex-row justify-between items-center gap-4">
             <p>&copy; 2026 M-Fleger. Alle Rechte vorbehalten.</p>
-            <div class="flex gap-6">
+            <div class="flex flex-wrap justify-center gap-4">
                 <a href="index.html" class="hover:text-blue-600 transition-colors no-underline">Startseite</a>
+                <a href="ueber-mich.html" class="hover:text-blue-600 transition-colors no-underline">Über mich</a>
                 <a href="blog.html" class="hover:text-blue-600 transition-colors no-underline">Blog</a>
                 <a href="kontakt.html" class="hover:text-blue-600 transition-colors no-underline">Kontakt</a>
             </div>
