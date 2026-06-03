@@ -3,62 +3,68 @@ layout: default
 ---
 
 <style>
-    /* Versteckt Menü, Footer, Buttons und Cookie-Banner NUR beim echten Drucken */
+    /* Styling für den perfekten Ausdruck */
     @media print {
-        nav, footer, .no-print, #cookie-banner, .fixed, a[href*="blog.html"], header {
+        /* NUR das Menü, das Cookie-Banner und den Zurück-Link verstecken wir, damit es ordentlich aussieht */
+        nav, footer, .no-print, #cookie-banner, .fixed {
             display: none !important;
         }
+        
+        /* ZWINGT den Browser, die blauen Hintergrundfarben und Verläufe mitzudrucken! */
+        body, html, header, div, main, article {
+            -webkit-print-color-adjust: exact !important;
+            print-color-adjust: exact !important;
+            color-adjust: exact !important;
+        }
+
+        /* Sorgt dafür, dass das Layout auf dem Papier gut sitzt */
         body {
-            background: white !important;
-            color: black !important;
+            background-color: #f9fafb !important; /* Das helle Grau im Hintergrund */
         }
         main {
-            padding: 0 !important;
-            margin: 0 !important;
-            max-width: 100% !important;
-        }
-        article {
-            border: none !important;
-            box-shadow: none !important;
-            padding: 0 !important;
+            margin-top: -2.5rem !important;
         }
     }
 </style>
 
-<!-- HEADER BEREICH (Blauer Hintergrund mit Titel) -->
-<header class="bg-gradient-to-r from-blue-900 via-indigo-900 to-blue-950 text-white text-center py-16 px-4">
-    <div class="max-w-4xl mx-auto flex flex-col items-center gap-3">
-        <span class="bg-blue-500/30 text-blue-300 font-bold text-xs px-3 py-1 rounded-full border border-blue-400/20 shadow-xs flex items-center gap-1.5">
-            📅 {{ page.date | date: "%d.%m.%Y" }}
-        </span>
-        <h1 class="text-3xl md:text-5xl font-black tracking-tight mt-2 drop-shadow-md">
-            {{ page.title }}
-        </h1>
-        <span class="text-sm text-gray-300/90 font-medium mt-1 flex items-center gap-1.5">
-            📖 Schnellleser: ca. 1 Min. Lesezeit
-        </span>
-    </div>
-</header>
+<div class="bg-gray-50 min-h-screen flex flex-col font-sans antialiased">
+    
+    <!-- HEADER BEREICH (Bleibt jetzt beim Drucken sichtbar!) -->
+    <header class="bg-gradient-to-r from-blue-900 via-indigo-900 to-blue-950 text-white text-center py-16 px-4">
+        <div class="max-w-4xl mx-auto flex flex-col items-center gap-3">
+            <span class="bg-blue-500/30 text-blue-300 font-bold text-xs px-3 py-1 rounded-full border border-blue-400/20 shadow-xs flex items-center gap-1.5">
+                📅 {{ page.date | date: "%d.%m.%Y" }}
+            </span>
+            <h1 class="text-3xl md:text-5xl font-black tracking-tight mt-2 drop-shadow-md">
+                {{ page.title }}
+            </h1>
+            <span class="text-sm text-gray-300/90 font-medium mt-1 flex items-center gap-1.5">
+                📖 Schnellleser: ca. 1 Min. Lesezeit
+            </span>
+        </div>
+    </header>
 
-<!-- HAUPTINHALT -->
-<main class="max-w-4xl mx-auto px-4 py-12 flex-grow w-full -mt-10">
-    <article class="bg-white border border-gray-100 p-6 md:p-12 rounded-2xl md:rounded-3xl shadow-xs">
-        <div class="prose max-w-none text-gray-800">
-            {{ content }}
+    <!-- HAUPTINHALT (Die weiße Karte) -->
+    <main class="max-w-4xl mx-auto px-4 py-12 flex-grow w-full -mt-10">
+        <article class="bg-white border border-gray-100 p-8 md:p-12 rounded-3xl shadow-sm">
+            <div class="prose max-w-none text-gray-800 leading-relaxed space-y-6 text-base md:text-lg">
+                {{ content }}
+            </div>
             
             <!-- SCHÖNER DRUCKER-BUTTON -->
             <div class="mt-8 pt-6 border-t border-gray-100 flex justify-start no-print">
-                <button onclick="window.print()" class="flex items-center gap-2 bg-gray-100 hover:bg-gray-200 text-gray-700 font-bold text-sm px-4 py-2 rounded-xl transition-all cursor-pointer border border-gray-200 shadow-xs">
+                <button onclick="window.print()" class="flex items-center gap-2 bg-gray-100 hover:bg-gray-200 text-gray-700 font-bold text-sm px-5 py-2.5 rounded-xl transition-all cursor-pointer border border-gray-200 shadow-xs active:scale-95">
                     <span>🖨️</span> Artikel ausdrucken / als PDF speichern
                 </button>
             </div>
-        </div>
-        
-        <!-- ZURÜCK ZUR ÜBERSICHT -->
-        <div class="mt-12 pt-8 border-t border-gray-100 flex justify-center no-print">
-            <a href="{{ 'blog.html' | relative_url }}" class="bg-gray-100 text-gray-700 font-bold px-6 py-3 rounded-xl hover:bg-gray-200 transition-all no-underline">
-                &larr; Zurück zur Blog-Übersicht
-            </a>
-        </div>
-    </article>
-</main>
+            
+            <!-- ZURÜCK ZUR ÜBERSICHT -->
+            <div class="mt-8 pt-6 border-t border-gray-100 flex justify-center no-print">
+                <a href="{{ 'blog.html' | relative_url }}" class="inline-flex items-center gap-2 text-sm font-bold text-blue-600 hover:text-blue-800 transition-colors no-underline">
+                    &larr; Zurück zur Blog-Übersicht
+                </a>
+            </div>
+        </article>
+    </main>
+
+</div>
