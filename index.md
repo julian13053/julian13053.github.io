@@ -35,10 +35,9 @@ title: Startseite
         </div>
     </nav>
 
-    <!-- HERO SEKTION (Mit edlem, dunklem Farbverlauf) -->
+    <!-- HERO SEKTION -->
     <header class="bg-gradient-to-br from-[#1d4ed8] via-[#1e3a8a] to-[#312e81] text-white py-24 px-6 overflow-hidden">
         <div class="max-w-6xl mx-auto grid md:grid-cols-12 gap-12 items-center animate-fade-in">
-            
             <div class="md:col-span-7 text-center md:text-left">
                 <span class="bg-cyan-400/20 text-cyan-300 border border-cyan-400/30 font-extrabold px-4 py-1.5 rounded-full text-xs uppercase tracking-wider">Design & Development</span>
                 <h1 class="text-5xl md:text-6xl font-black tracking-tight mt-5 mb-6 leading-tight">
@@ -51,22 +50,18 @@ title: Startseite
                     Direkt zum Blog →
                 </a>
             </div>
-
-            <!-- Dein Bild (Um ca. 15% vergrößert für mehr Persönlichkeit) -->
             <div class="md:col-span-5 flex justify-center">
                 <div class="relative group">
                     <div class="absolute inset-0 bg-cyan-400 rounded-3xl transform rotate-3 scale-105 opacity-20 blur-xs transition-transform duration-300 group-hover:rotate-1"></div>
                     <img src="ich.jpeg" alt="Julian Fleger" class="relative w-80 h-104 md:w-96 md:h-112 object-cover rounded-3xl shadow-2xl border-4 border-white/10 transition-transform duration-300 group-hover:scale-102">
                 </div>
             </div>
-
         </div>
     </header>
 
-    <!-- INHALT -->
     <main class="max-w-6xl mx-auto px-6 py-20 flex-grow w-full">
         
-        <!-- NEU: ÜBER MICH SEKTION -->
+        <!-- ÜBER MICH SEKTION -->
         <div class="mb-24 bg-white border border-gray-100 p-8 md:p-12 rounded-3xl shadow-xs">
             <div class="max-w-3xl mx-auto text-center">
                 <h2 class="text-3xl font-black text-gray-950 tracking-tight mb-4">👤 Über mich</h2>
@@ -76,7 +71,7 @@ title: Startseite
             </div>
         </div>
         
-        <!-- SEKTION 1: DIE 3 NEUESTEN BLOGPOSTS (Lebendiges Layout) -->
+        <!-- NEUESTE ARTIKEL -->
         <div class="mb-24">
             <div class="flex flex-col md:flex-row justify-between items-baseline mb-10 gap-4">
                 <div>
@@ -88,14 +83,25 @@ title: Startseite
                 </a>
             </div>
 
-            <!-- Grid für bis zu 3 Karten mit modernem Hover-Effekt -->
             <div class="grid md:grid-cols-3 gap-8">
                 {% for post in site.posts limit:3 %}
                 <div class="bg-white border border-gray-100 p-6 rounded-2xl shadow-xs flex flex-col justify-between hover:shadow-md hover:scale-102 transition-all duration-300">
                     <div>
-                        <!-- Erzwingt deutsches Zahlenformat -->
-                        <span class="text-xs bg-blue-600 text-white px-2.5 py-1 rounded-md font-bold tracking-wide uppercase">{{ post.date | date: "%d.%m.%Y" }}</span>
-                        <h3 class="text-xl font-black text-gray-950 mt-3 mb-2 line-clamp-2">{{ post.title }}</h3>
+                        <div class="flex justify-between items-center mb-3">
+                            <span class="text-xs bg-blue-600 text-white px-2.5 py-1 rounded-md font-bold uppercase">{{ post.date | date: "%d.%m.%Y" }}</span>
+                            <!-- Automatisierte Lesedauer -->
+                            {% assign words = post.content | strip_html | number_of_words %}
+                            {% assign read_time = words | divided_by: 180 | plus: 1 %}
+                            <span class="text-xs text-gray-400 font-semibold">📖 {{ read_time }} Min.</span>
+                        </div>
+                        
+                        <h3 class="text-xl font-black text-gray-950 mt-1 mb-2 line-clamp-2">{{ post.title }}</h3>
+                        
+                        <!-- Kategorie-Tag falls vergeben -->
+                        {% if post.category %}
+                        <span class="inline-block bg-gray-100 text-gray-600 text-[11px] font-bold px-2 py-0.5 rounded-md mb-3"># {{ post.category }}</span>
+                        {% endif %}
+
                         <p class="text-gray-600 text-sm mb-4 line-clamp-3">{{ post.excerpt | strip_html }}</p>
                     </div>
                     <a href="{{ post.url | relative_url }}" class="text-blue-600 font-bold text-sm hover:text-blue-800 no-underline inline-block mt-2">
@@ -110,14 +116,13 @@ title: Startseite
             </div>
         </div>
 
-        <!-- SEKTION 2: MEINE LOGOS -->
+        <!-- BRANDINGS -->
         <div class="border-t border-gray-200 pt-16">
             <div class="text-center md:text-left mb-8">
                 <h2 class="text-4xl font-black text-gray-950 tracking-tight">Eigene Brandings</h2>
                 <p class="text-blue-600 font-extrabold text-xl mt-3 tracking-wide">Klarer Fokus. &nbsp;&bull;&nbsp; Punktgenau verbunden.</p>
             </div>
             
-            <!-- Dein neuer Einleitungstext -->
             <div class="max-w-4xl bg-gray-100/60 border-l-4 border-blue-600 p-6 rounded-r-2xl mb-12">
                 <p class="text-gray-700 italic text-lg leading-relaxed">
                     „Als ich das erstellt habe, war mir echt wichtig, dass sofort klar ist: Hier verbinden sich klare Strukturen mit kreativer Freiheit. Es geht nicht nur um ein Bild, sondern um den Moment, in dem eine Idee Gestalt annimmt. Für mich ist das JMF-Scribble der Anfang jeder kreativen Schöpfung und das Blue Vision Auge der Fokus, den man braucht, um etwas Neues in die Welt zu bringen.“
@@ -125,7 +130,6 @@ title: Startseite
             </div>
 
             <div class="grid md:grid-cols-2 gap-8">
-                <!-- JMF Scribble Kachel -->
                 <div class="bg-white border border-gray-100 p-8 rounded-3xl shadow-xs hover:shadow-xl hover:scale-102 transition-all duration-300 flex flex-col justify-between group">
                     <div>
                         <div class="w-full bg-white border border-gray-200 rounded-2xl p-6 flex justify-center mb-6 shadow-xs transition-colors group-hover:border-blue-200">
@@ -138,7 +142,6 @@ title: Startseite
                     </div>
                 </div>
 
-                <!-- Blue Vision Kachel -->
                 <div class="bg-white border border-gray-100 p-8 rounded-3xl shadow-xs hover:shadow-xl hover:scale-102 transition-all duration-300 flex flex-col justify-between group">
                     <div>
                         <div class="w-full bg-white border border-gray-200 rounded-2xl p-6 flex justify-center mb-6 shadow-xs transition-colors group-hover:border-blue-200">
@@ -152,7 +155,6 @@ title: Startseite
                 </div>
             </div>
         </div>
-
     </main>
 
     <!-- FOOTER -->
