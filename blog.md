@@ -107,6 +107,6 @@ title: Blog
             }
         }
     </script>
-
+{% include cookie-banner.html %}
 </body>
 </html>
