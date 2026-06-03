@@ -49,7 +49,7 @@ title: Kontakt
                 </a>
 
                 <!-- Instagram Button -->
-                <a href="https://instagram.com/j_f_0305" target="_blank" class="flex flex-col items-center justify-center bg-gradient-to-r from-purple-600 via-pink-500 to-yellow-500 text-white font-bold p-4 rounded-xl shadow-xs hover:opacity-90 transition-all no-underline w-full">
+                <a href="https://www.instagram.com/zfd.julian_official" target="_blank" class="flex flex-col items-center justify-center bg-gradient-to-r from-purple-600 via-pink-500 to-yellow-500 text-white font-bold p-4 rounded-xl shadow-xs hover:opacity-90 transition-all no-underline w-full">
                     <span class="text-xs uppercase tracking-wider opacity-75 mb-0.5">Auf Instagram folgen</span>
                     <span class="text-base md:text-lg">@j_f_0305</span>
                 </a>
