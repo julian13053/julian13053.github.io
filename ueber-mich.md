@@ -106,6 +106,6 @@ title: Über mich
             </div>
         </div>
     </footer>
-
+{% include cookie-banner.html %}
 </body>
 </html>
