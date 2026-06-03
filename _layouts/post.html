@@ -11,9 +11,9 @@ layout: null
     <script src="https://cdn.jsdelivr.net/npm/@tailwindcss/browser@4"></script>
     
     <style>
-        /* ZWINGT den Blogtext zu perfekter Lesbarkeit (Sattes Dunkelgrau) */
+        /* Zwingt den Blogtext auf dem Bildschirm zu perfekter Lesbarkeit */
         .blog-text, .blog-text p, .blog-text span {
-            color: #1f2937 !important; /* Ein kräftiges, dunkles Gray-800 */
+            color: #1f2937 !important; 
             opacity: 1 !important;
         }
 
@@ -36,7 +36,7 @@ layout: null
                 width: 100%;
                 padding-bottom: 8px;
                 border-bottom: 1px solid #d1d5db;
-                margin-bottom: 20px;
+                margin-bottom: 25px;
                 font-family: sans-serif;
             }
             .print-header-left {
@@ -50,25 +50,37 @@ layout: null
                 color: #374151;
             }
 
-            /* TEXTBEREICH FÜR DEN DRUCK OPTIMIEREN (Tiefschwarz auf Papier) */
+            /* TEXTBEREICH FÜR DEN DRUCK OPTIMIEREN */
             .blog-text, .blog-text p {
                 color: #000000 !important;
             }
 
-            /* TINTENSPAR-MODUS: Blauer Header wird beim Drucken weiß mit dunkler Schrift */
+            .author-note {
+                color: #374151 !important;
+                margin-top: 24px !important;
+                font-weight: 600 !important;
+            }
+
+            /* REPARATUR FÜR DEN TITEL BEIM DRUCKEN (Jetzt tiefschwarz und deutlich sichtbar!) */
             header.bg-gradient-to-r {
                 background: white !important;
-                color: black !important;
+                background-image: none !important;
+                color: #000000 !important;
                 padding-top: 10px !important;
-                padding-bottom: 10px !important;
+                padding-bottom: 15px !important;
                 border-bottom: 1px solid #e5e7eb;
             }
             header h1 {
-                color: #0f172a !important;
-                font-size: 24px !important;
+                color: #0f172a !important; /* Kräftiges Dunkelblau/Schwarz */
+                font-size: 26px !important;
+                font-weight: 800 !important;
             }
-            header span, header div {
-                color: #4b5563 !important;
+            header span {
+                color: #4b5563 !important; /* Gut lesbares Grau für Datum & Lesezeit */
+                font-weight: 600 !important;
+            }
+            header div.border-b {
+                border-color: #e5e7eb !important; /* Dünne graue Trennlinie beim Drucken */
             }
 
             body {
@@ -128,13 +140,12 @@ layout: null
     <!-- INHALT -->
     <main class="max-w-4xl mx-auto px-4 py-12 flex-grow w-full -mt-10">
         <article class="bg-white border border-gray-100 p-8 md:p-12 rounded-3xl shadow-sm">
-            <!-- blog-text Klasse sorgt jetzt für die kräftige Schriftfarbe -->
             <div class="blog-text prose max-w-none leading-relaxed space-y-6 text-base md:text-lg">
                 {{ content }}
             </div>
             
             <!-- AUTOREN-ZEILE -->
-            <div class="mt-6 text-sm text-gray-500 font-medium">
+            <div class="author-note mt-6 text-sm text-gray-500 font-medium">
                 Text von Julian Fleger
             </div>
             
