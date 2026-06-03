@@ -1,70 +1,142 @@
 ---
-layout: default
+layout: null
 ---
-
-<style>
-    /* Styling für den perfekten Ausdruck */
-    @media print {
-        /* NUR das Menü, das Cookie-Banner und den Zurück-Link verstecken wir, damit es ordentlich aussieht */
-        nav, footer, .no-print, #cookie-banner, .fixed {
-            display: none !important;
-        }
-        
-        /* ZWINGT den Browser, die blauen Hintergrundfarben und Verläufe mitzudrucken! */
-        body, html, header, div, main, article {
-            -webkit-print-color-adjust: exact !important;
-            print-color-adjust: exact !important;
-            color-adjust: exact !important;
-        }
-
-        /* Sorgt dafür, dass das Layout auf dem Papier gut sitzt */
-        body {
-            background-color: #f9fafb !important; /* Das helle Grau im Hintergrund */
-        }
-        main {
-            margin-top: -2.5rem !important;
-        }
-    }
-</style>
-
-<div class="bg-gray-50 min-h-screen flex flex-col font-sans antialiased">
+<!DOCTYPE html>
+<html lang="de">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>{{ page.title }} - M-Fleger</title>
+    <!-- Lädt Tailwind CSS für das moderne Design -->
+    <script src="https://cdn.jsdelivr.net/npm/@tailwindcss/browser@4"></script>
     
-    <!-- HEADER BEREICH (Bleibt jetzt beim Drucken sichtbar!) -->
+    <style>
+        /* Standardmäßig ist die extra Druck-Kopfzeile am Bildschirm unsichtbar */
+        .print-header {
+            display: none;
+        }
+
+        /* Perfekter Ausdruck für Papier / PDF */
+        @media print {
+            /* Menü, Footer, Buttons und Cookie-Banner beim Drucken verstecken */
+            nav, footer, .no-print, #cookie-banner, .fixed {
+                display: none !important;
+            }
+
+            /* Die neue Druck-Kopfzeile NUR beim Drucken einblenden */
+            .print-header {
+                display: flex !important;
+                justify-between: space-between;
+                align-items: center;
+                width: 100%;
+                padding-bottom: 12px;
+                border-bottom: 2px solid #e5e7eb;
+                margin-bottom: 20px;
+                font-family: sans-serif;
+            }
+            .print-header-left {
+                font-size: 14px;
+                font-weight: 600;
+                color: #4b5563;
+            }
+            .print-header-right {
+                font-size: 16px;
+                font-weight: 800;
+                color: #2563eb;
+            }
+
+            body, html, header, div, main, article, span, h1 {
+                -webkit-print-color-adjust: exact !important;
+                print-color-adjust: exact !important;
+                color-adjust: exact !important;
+            }
+            body {
+                background-color: #f9fafb !important;
+            }
+            main {
+                margin-top: -2.5rem !important;
+                padding: 0 !important;
+            }
+        }
+    </style>
+</head>
+<body class="bg-gray-50 text-gray-900 font-sans antialiased flex flex-col min-h-screen">
+
+    <!-- EXTRA KOPFZEILE FÜR DEN DRUCK (Unsichtbar auf der Website, sichtbar auf Papier) -->
+    <div class="print-header max-w-4xl mx-auto px-4">
+        <span class="print-header-left">m-fleger.de</span>
+        <span class="print-header-right">M-Fleger</span>
+    </div>
+
+    <!-- MENÜ (Wird beim Drucken ausgeblendet) -->
+    <nav class="bg-white border-b border-gray-100 sticky top-0 z-50 shadow-xs no-print">
+        <div class="max-w-6xl mx-auto px-4 py-4 flex flex-col md:flex-row justify-between items-center gap-4">
+            <a href="index.html" class="flex items-center gap-3 group no-underline text-current">
+                <img src="auge-logo.jpg" alt="M-Fleger Logo" class="w-16 h-14 md:w-24 md:h-20 rounded-xl md:rounded-2xl object-contain">
+                <span class="text-2xl md:text-3xl font-black tracking-tight text-blue-600">M-Fleger</span>
+            </a>
+            <div class="flex flex-wrap justify-center gap-x-5 gap-y-2 font-semibold text-gray-600 text-base md:text-lg">
+                <a href="index.html" class="hover:text-blue-600 hover:border-b-2 hover:border-blue-600 pb-1 no-underline">Startseite</a>
+                <a href="ueber-mich.html" class="hover:text-blue-600 hover:border-b-2 hover:border-blue-600 pb-1 no-underline">Über mich</a>
+                <a href="blog.html" class="text-blue-600 border-b-2 border-blue-600 pb-1 no-underline">Blog</a>
+                <a href="kontakt.html" class="hover:text-blue-600 hover:border-b-2 hover:border-blue-600 pb-1 no-underline">Kontakt</a>
+            </div>
+        </div>
+    </nav>
+
+    <!-- BLAUER HEADER BEREICH -->
     <header class="bg-gradient-to-r from-blue-900 via-indigo-900 to-blue-950 text-white text-center py-16 px-4">
-        <div class="max-w-4xl mx-auto flex flex-col items-center gap-3">
-            <span class="bg-blue-500/30 text-blue-300 font-bold text-xs px-3 py-1 rounded-full border border-blue-400/20 shadow-xs flex items-center gap-1.5">
-                📅 {{ page.date | date: "%d.%m.%Y" }}
-            </span>
-            <h1 class="text-3xl md:text-5xl font-black tracking-tight mt-2 drop-shadow-md">
+        <div class="max-w-4xl mx-auto flex flex-col items-center">
+            <h1 class="text-3xl md:text-5xl font-black tracking-tight drop-shadow-md mb-4">
                 {{ page.title }}
             </h1>
-            <span class="text-sm text-gray-300/90 font-medium mt-1 flex items-center gap-1.5">
-                📖 Schnellleser: ca. 1 Min. Lesezeit
-            </span>
+            
+            <div class="flex flex-col items-center gap-1 text-xs md:text-sm text-gray-300/90 font-medium w-full max-w-xs">
+                <span>Datum: {{ page.date | date: "%d.%m.%Y" }}</span>
+                <span>Schnellleser: ca. 1 Min. Lesezeit</span>
+                <div class="w-full border-b border-white/20 mt-3"></div>
+            </div>
         </div>
     </header>
 
-    <!-- HAUPTINHALT (Die weiße Karte) -->
+    <!-- INHALT (Die weiße Karte) -->
     <main class="max-w-4xl mx-auto px-4 py-12 flex-grow w-full -mt-10">
         <article class="bg-white border border-gray-100 p-8 md:p-12 rounded-3xl shadow-sm">
             <div class="prose max-w-none text-gray-800 leading-relaxed space-y-6 text-base md:text-lg">
                 {{ content }}
             </div>
             
-            <!-- SCHÖNER DRUCKER-BUTTON -->
+            <!-- DRUCKER-BUTTON (Ohne Emoji) -->
             <div class="mt-8 pt-6 border-t border-gray-100 flex justify-start no-print">
-                <button onclick="window.print()" class="flex items-center gap-2 bg-gray-100 hover:bg-gray-200 text-gray-700 font-bold text-sm px-5 py-2.5 rounded-xl transition-all cursor-pointer border border-gray-200 shadow-xs active:scale-95">
-                    <span>🖨️</span> Artikel ausdrucken / als PDF speichern
+                <button onclick="window.print()" class="bg-gray-100 hover:bg-gray-200 text-gray-700 font-bold text-sm px-5 py-2.5 rounded-xl transition-all cursor-pointer border border-gray-200 shadow-xs active:scale-95">
+                    Artikel ausdrucken / als PDF speichern
                 </button>
             </div>
             
-            <!-- ZURÜCK ZUR ÜBERSICHT -->
+            <!-- ZURÜCK LINK -->
             <div class="mt-8 pt-6 border-t border-gray-100 flex justify-center no-print">
-                <a href="{{ 'blog.html' | relative_url }}" class="inline-flex items-center gap-2 text-sm font-bold text-blue-600 hover:text-blue-800 transition-colors no-underline">
+                <a href="blog.html" class="inline-flex items-center gap-2 text-sm font-bold text-blue-600 hover:text-blue-800 transition-colors no-underline">
                     &larr; Zurück zur Blog-Übersicht
                 </a>
             </div>
         </article>
     </main>
 
-</div>
+    <!-- FOOTER -->
+    <footer class="bg-white border-t border-gray-100 py-8 px-4 text-center text-gray-500 font-medium no-print">
+        <div class="max-w-6xl mx-auto flex flex-col md:flex-row justify-between items-center gap-4">
+            <p>&copy; 2026 M-Fleger. Alle Rechte vorbehalten.</p>
+            <div class="flex flex-wrap justify-center gap-4">
+                <a href="index.html" class="hover:text-blue-600 transition-colors no-underline">Startseite</a>
+                <a href="ueber-mich.html" class="hover:text-blue-600 transition-colors no-underline">Über mich</a>
+                <a href="blog.html" class="hover:text-blue-600 transition-colors no-underline">Blog</a>
+                <a href="kontakt.html" class="hover:text-blue-600 transition-colors no-underline">Kontakt</a>
+                <a href="impressum.html" class="hover:text-blue-600 transition-colors no-underline">Impressum</a>
+                <a href="datenschutz.html" class="hover:text-blue-600 transition-colors no-underline">Datenschutz</a>
+            </div>
+        </div>
+    </footer>
+
+    {% include cookie-banner.html %}
+</body>
+</html>
