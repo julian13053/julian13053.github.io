@@ -65,7 +65,15 @@
     <main class="max-w-3xl mx-auto px-4 py-10 md:py-16 flex-grow w-full">
         <article class="bg-white border border-gray-100 p-6 md:p-12 rounded-2xl md:rounded-3xl shadow-xs">
             <div class="prose max-w-none text-gray-800">
-                {{ content }}
+        {{ content }}
+        
+        <!-- DRUCKEN BUTTON -->
+        <div class="mt-8 pt-6 border-t border-gray-100 flex justify-start no-print">
+            <button onclick="window.print()" class="flex items-center gap-2 bg-gray-100 hover:bg-gray-200 text-gray-700 font-bold text-sm px-4 py-2 rounded-xl transition-all cursor-pointer">
+                <span>🖨️</span> Artikel ausdrucken / als PDF speichern
+            </button>
+        </div>
+    </div>
             </div>
             <div class="mt-12 pt-8 border-t border-gray-100 flex justify-center">
                 <a href="{{ 'blog.html' | relative_url }}" class="bg-gray-100 text-gray-700 font-bold px-6 py-3 rounded-xl hover:bg-gray-200 transition-all no-underline text-sm flex items-center gap-2">
