@@ -7,6 +7,17 @@ title: Startseite
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>M-Fleger | Portfolio & Blog</title>
+    
+    <!-- 1. Das Favicon (Logo im Browser-Tab) -->
+    <link rel="icon" type="image/jpeg" href="auge-logo.jpg">
+
+    <!-- 2. Open Graph / WhatsApp-Vorschau für die Startseite -->
+    <meta property="og:type" content="website">
+    <meta property="og:title" content="M-Fleger | Portfolio & Blog">
+    <meta property="og:description" content="Willkommen auf M-Fleger. Entdecke meine Projekte, kreativen Ideen und neuesten Blogartikel!">
+    <meta property="og:image" content="https://julian13053.github.io/auge-logo.jpg">
+    <meta property="og:url" content="https://julian13053.github.io/index.html">
+
     <script src="https://cdn.jsdelivr.net/npm/@tailwindcss/browser@4"></script>
     <style>
         @keyframes fadeInUp {
@@ -104,7 +115,7 @@ title: Startseite
                 <a href="index.html" class="hover:text-blue-600 transition-colors no-underline">Startseite</a>
                 <a href="ueber-mich.html" class="hover:text-blue-600 transition-colors no-underline">Über mich</a>
                 <a href="blog.html" class="hover:text-blue-600 transition-colors no-underline">Blog</a>
-                <a href="kontakt.html" class="hover:text-blue-600 transition-colors no-underline">Contact</a>
+                <a href="kontakt.html" class="hover:text-blue-600 transition-colors no-underline">Kontakt</a>
             </div>
         </div>
     </footer>
