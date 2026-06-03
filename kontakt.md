@@ -73,6 +73,6 @@ title: Kontakt
             </div>
         </div>
     </footer>
-
+{% include cookie-banner.html %}
 </body>
 </html>
