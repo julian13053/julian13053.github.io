@@ -35,8 +35,8 @@ title: Startseite
         </div>
     </nav>
 
-    <!-- HERO SEKTION -->
-    <header class="bg-gradient-to-br from-blue-800 via-blue-900 to-indigo-950 text-white py-20 px-6 overflow-hidden">
+    <!-- HERO SEKTION (Mit edlem, dunklem Farbverlauf) -->
+    <header class="bg-gradient-to-br from-[#1d4ed8] via-[#1e3a8a] to-[#312e81] text-white py-24 px-6 overflow-hidden">
         <div class="max-w-6xl mx-auto grid md:grid-cols-12 gap-12 items-center animate-fade-in">
             
             <div class="md:col-span-7 text-center md:text-left">
@@ -47,15 +47,16 @@ title: Startseite
                 <p class="text-lg md:text-xl text-blue-100 max-w-xl mb-8 leading-relaxed">
                     Willkommen auf meiner Website! Hier erfährst du mehr über meine Arbeit, mein Branding und kannst meine neuesten Artikel lesen.
                 </p>
-                <a href="blog.html" class="bg-cyan-400 text-blue-950 font-black px-8 py-4 rounded-xl shadow-lg hover:bg-cyan-300 transform hover:-translate-y-0.5 transition-all inline-block no-underline">
+                <a href="blog.html" class="bg-cyan-400 text-blue-950 font-black px-8 py-4 rounded-xl shadow-lg hover:bg-cyan-300 transform hover:-translate-y-1 transition-all duration-300 inline-block no-underline">
                     Direkt zum Blog →
                 </a>
             </div>
 
+            <!-- Dein Bild (Um ca. 15% vergrößert für mehr Persönlichkeit) -->
             <div class="md:col-span-5 flex justify-center">
-                <div class="relative">
-                    <div class="absolute inset-0 bg-cyan-400 rounded-3xl transform rotate-3 scale-102 opacity-20 blur-xs"></div>
-                    <img src="ich.jpeg" alt="Julian Fleger" class="relative w-72 h-96 md:w-80 md:h-104 object-cover rounded-3xl shadow-2xl border-4 border-white/10">
+                <div class="relative group">
+                    <div class="absolute inset-0 bg-cyan-400 rounded-3xl transform rotate-3 scale-105 opacity-20 blur-xs transition-transform duration-300 group-hover:rotate-1"></div>
+                    <img src="ich.jpeg" alt="Julian Fleger" class="relative w-80 h-104 md:w-96 md:h-112 object-cover rounded-3xl shadow-2xl border-4 border-white/10 transition-transform duration-300 group-hover:scale-102">
                 </div>
             </div>
 
@@ -65,11 +66,21 @@ title: Startseite
     <!-- INHALT -->
     <main class="max-w-6xl mx-auto px-6 py-20 flex-grow w-full">
         
-        <!-- SEKTION 1: NEUESTER BLOGPOST -->
+        <!-- NEU: ÜBER MICH SEKTION -->
+        <div class="mb-24 bg-white border border-gray-100 p-8 md:p-12 rounded-3xl shadow-xs">
+            <div class="max-w-3xl mx-auto text-center">
+                <h2 class="text-3xl font-black text-gray-950 tracking-tight mb-4">👤 Über mich</h2>
+                <p class="text-gray-600 text-lg leading-relaxed">
+                    Hi, ich bin Julian. Ich liebe es, kreative Ideen zu entwickeln, Strukturen aufzubauen und Content zu teilen. Auf dieser Seite halte ich meine Projekte fest und schreibe im Blog über alles, was mich bewegt und inspiriert. Schön, dass du hier bist!
+                </p>
+            </div>
+        </div>
+        
+        <!-- SEKTION 1: DIE 3 NEUESTEN BLOGPOSTS (Lebendiges Layout) -->
         <div class="mb-24">
             <div class="flex flex-col md:flex-row justify-between items-baseline mb-10 gap-4">
                 <div>
-                    <h2 class="text-4xl font-black text-gray-950 tracking-tight">Aktuellster Artikel</h2>
+                    <h2 class="text-4xl font-black text-gray-950 tracking-tight">📰 Neueste Artikel</h2>
                     <p class="text-gray-500 text-lg mt-2">Frisch aus dem Gedankenkarussell gegriffen.</p>
                 </div>
                 <a href="blog.html" class="text-blue-600 font-bold hover:text-blue-800 transition-colors flex items-center gap-1 group no-underline">
@@ -77,23 +88,26 @@ title: Startseite
                 </a>
             </div>
 
-            {% assign latest_post = site.posts.first %}
-            {% if latest_post %}
-            <div class="bg-gradient-to-r from-blue-50 to-indigo-50 border border-blue-100/50 p-8 md:p-10 rounded-3xl shadow-xs flex flex-col md:flex-row gap-8 items-start hover:shadow-md transition-all">
-                <div class="flex-grow">
-                    <span class="text-sm bg-blue-600 text-white px-3 py-1 rounded-md font-bold tracking-wide uppercase">{{ latest_post.date | date: "%d.%m.%Y" }}</span>
-                    <h3 class="text-3xl font-black text-gray-950 mt-4 mb-3">{{ latest_post.title }}</h3>
-                    <p class="text-gray-600 text-lg mb-6 leading-relaxed">{{ latest_post.excerpt | strip_html | truncatewords: 35 }}</p>
-                    <a href="{{ latest_post.url | relative_url }}" class="bg-white border border-gray-200 text-gray-900 font-bold px-6 py-3 rounded-xl shadow-xs hover:bg-gray-50 hover:border-gray-300 transition inline-block no-underline">
+            <!-- Grid für bis zu 3 Karten mit modernem Hover-Effekt -->
+            <div class="grid md:grid-cols-3 gap-8">
+                {% for post in site.posts limit:3 %}
+                <div class="bg-white border border-gray-100 p-6 rounded-2xl shadow-xs flex flex-col justify-between hover:shadow-md hover:scale-102 transition-all duration-300">
+                    <div>
+                        <!-- Erzwingt deutsches Zahlenformat -->
+                        <span class="text-xs bg-blue-600 text-white px-2.5 py-1 rounded-md font-bold tracking-wide uppercase">{{ post.date | date: "%d.%m.%Y" }}</span>
+                        <h3 class="text-xl font-black text-gray-950 mt-3 mb-2 line-clamp-2">{{ post.title }}</h3>
+                        <p class="text-gray-600 text-sm mb-4 line-clamp-3">{{ post.excerpt | strip_html }}</p>
+                    </div>
+                    <a href="{{ post.url | relative_url }}" class="text-blue-600 font-bold text-sm hover:text-blue-800 no-underline inline-block mt-2">
                         Artikel lesen →
                     </a>
                 </div>
+                {% else %}
+                <div class="col-span-3 text-center py-12 bg-gray-100 rounded-2xl">
+                    <p class="text-gray-500 text-lg font-medium">Bisher wurden noch keine Blog-Artikel veröffentlicht.</p>
+                </div>
+                {% endfor %}
             </div>
-            {% else %}
-            <div class="text-center py-12 bg-gray-100 rounded-2xl">
-                <p class="text-gray-500 text-lg font-medium">Bisher wurden noch keine Blog-Artikel veröffentlicht.</p>
-            </div>
-            {% endif %}
         </div>
 
         <!-- SEKTION 2: MEINE LOGOS -->
@@ -103,35 +117,35 @@ title: Startseite
                 <p class="text-blue-600 font-extrabold text-xl mt-3 tracking-wide">Klarer Fokus. &nbsp;&bull;&nbsp; Punktgenau verbunden.</p>
             </div>
             
-            <!-- Dein persönlicher Einleitungstext schön hervorgehoben -->
+            <!-- Dein neuer Einleitungstext -->
             <div class="max-w-4xl bg-gray-100/60 border-l-4 border-blue-600 p-6 rounded-r-2xl mb-12">
                 <p class="text-gray-700 italic text-lg leading-relaxed">
-                    „Als ich das erstellt habe, war mir echt wichtig, dass sofort klar ist: Hier verbinden sich klare Strukturen mit kreativer Freiheit. Es geht nicht nur um ein Bild, sondern um den Moment, in dem eine eine Idee Gestalt annimmt. Für mich ist das JMF-Scribble der Anfang jeder kreativen Schöpfung und das Blue Vision Auge der Fokus, den man braucht, um etwas Neues in die Welt zu bringen.“
+                    „Als ich das erstellt habe, war mir echt wichtig, dass sofort klar ist: Hier verbinden sich klare Strukturen mit kreativer Freiheit. Es geht nicht nur um ein Bild, sondern um den Moment, in dem eine Idee Gestalt annimmt. Für mich ist das JMF-Scribble der Anfang jeder kreativen Schöpfung und das Blue Vision Auge der Fokus, den man braucht, um etwas Neues in die Welt zu bringen.“
                 </p>
             </div>
 
             <div class="grid md:grid-cols-2 gap-8">
                 <!-- JMF Scribble Kachel -->
-                <div class="bg-white border border-gray-100 p-8 rounded-3xl shadow-xs hover:shadow-xl transition-all duration-300 flex flex-col justify-between group">
+                <div class="bg-white border border-gray-100 p-8 rounded-3xl shadow-xs hover:shadow-xl hover:scale-102 transition-all duration-300 flex flex-col justify-between group">
                     <div>
                         <div class="w-full bg-white border border-gray-200 rounded-2xl p-6 flex justify-center mb-6 shadow-xs transition-colors group-hover:border-blue-200">
                             <img src="jmf-logo.jpg" alt="JMF Scribble" class="w-full max-w-[320px] h-64 object-contain">
                         </div>
                         <h3 class="text-2xl font-black text-gray-950 mb-3">JMF-Scribble</h3>
-                        <p class="text-gray-600 leading-relaxed">
+                        <p class="text-gray-600 leading-relaxed text-sm md:text-base">
                             Das Logo basiert auf meinen Initialen und ist in einem klaren, geometrischen Anthrazit-Grau gehalten. Der lebendige blaue Akzent im Hintergrund, der an eine schnelle Skizze oder einen Pinselstrich erinnert, steht für Kreativität, frische Ideen und die nötige Portion „Scribble“ vor jedem großen Entwurf. Es symbolisiert die Balance zwischen Struktur und kreativer Energie.
                         </p>
                     </div>
                 </div>
 
                 <!-- Blue Vision Kachel -->
-                <div class="bg-white border border-gray-100 p-8 rounded-3xl shadow-xs hover:shadow-xl transition-all duration-300 flex flex-col justify-between group">
+                <div class="bg-white border border-gray-100 p-8 rounded-3xl shadow-xs hover:shadow-xl hover:scale-102 transition-all duration-300 flex flex-col justify-between group">
                     <div>
                         <div class="w-full bg-white border border-gray-200 rounded-2xl p-6 flex justify-center mb-6 shadow-xs transition-colors group-hover:border-blue-200">
                             <img src="auge-logo.jpg" alt="Blue Vision" class="w-full max-w-[320px] h-64 object-contain">
                         </div>
                         <h3 class="text-2xl font-black text-gray-950 mb-3">Blue Vision</h3>
-                        <p class="text-gray-600 leading-relaxed">
+                        <p class="text-gray-600 leading-relaxed text-sm md:text-base">
                             Das Logo zeigt ein stilisiertes, waches Auge, das von einem kräftigen, leuchtenden Blau umrandet ist. Der grafische, fast handgezeichnete Stil der Wimpern verleiht ihm eine besondere Note. Es steht für die Fähigkeit, das Wesentliche klar zu erkennen, Visionen zu haben, Achtsamkeit zu zeigen und über den Tellerrand hinauszuschauen. Das Auge symbolisiert Erkenntnis und den unermüdlichen Willen, die eigenen Ziele nicht aus den Augen zu verlieren.
                         </p>
                     </div>
