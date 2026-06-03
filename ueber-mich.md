@@ -103,6 +103,8 @@ title: Über mich
                 <a href="ueber-mich.html" class="hover:text-blue-600 transition-colors no-underline">Über mich</a>
                 <a href="blog.html" class="hover:text-blue-600 transition-colors no-underline">Blog</a>
                 <a href="kontakt.html" class="hover:text-blue-600 transition-colors no-underline">Kontakt</a>
+                <a href="impressum.html" class="hover:text-blue-600 transition-colors no-underline">Impressum</a>
+                <a href="datenschutz.html" class="hover:text-blue-600 transition-colors no-underline">Datenschutz</a>
             </div>
         </div>
     </footer>
