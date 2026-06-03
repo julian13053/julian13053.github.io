@@ -11,15 +11,13 @@ title: Kontakt
 </head>
 <body class="bg-gray-50 text-gray-900 font-sans antialiased flex flex-col min-h-screen">
 
-    <!-- NAVIGATION (Mobil optimiert) -->
+    <!-- NAVIGATION -->
     <nav class="bg-white border-b border-gray-100 sticky top-0 z-50 shadow-xs">
         <div class="max-w-6xl mx-auto px-4 py-4 flex flex-col md:flex-row justify-between items-center gap-4">
-            <!-- Logo-Bereich -->
             <a href="index.html" class="flex items-center gap-3 group no-underline text-current">
                 <img src="auge-logo.jpg" alt="M-Fleger Logo" class="w-16 h-14 md:w-24 md:h-20 rounded-xl md:rounded-2xl object-contain transition-transform duration-300 group-hover:scale-105">
                 <span class="text-2xl md:text-3xl font-black tracking-tight text-blue-600">M-Fleger</span>
             </a>
-            <!-- Links-Bereich -->
             <div class="flex flex-wrap justify-center gap-x-5 gap-y-2 font-semibold text-gray-600 text-base md:text-lg">
                 <a href="index.html" class="hover:text-blue-600 hover:border-b-2 hover:border-blue-600 pb-1 transition-all no-underline">Startseite</a>
                 <a href="ueber-mich.html" class="hover:text-blue-600 hover:border-b-2 hover:border-blue-600 pb-1 transition-all no-underline">Über mich</a>
@@ -44,14 +42,16 @@ title: Kontakt
             <p class="text-gray-500 font-medium text-sm md:text-base mb-8">Hier findest du meine offiziellen Erreichbarkeiten:</p>
 
             <div class="space-y-4 max-w-md mx-auto">
-                <!-- E-Mail Button -->
-                <a href="mailto:julianfleger11@gmail.com" class="flex items-center justify-center gap-3 bg-blue-600 text-white font-bold p-4 rounded-xl shadow-xs hover:bg-blue-700 transition-all text-base md:text-lg no-underline w-full">
-                    📧 julianfleger11@gmail.com
+                <!-- E-Mail Button - Jetzt mit julian(at)m-fleger.de geschützt gegen Bots -->
+                <a href="mailto:julian@m-fleger.de" class="flex flex-col items-center justify-center bg-blue-600 text-white font-bold p-4 rounded-xl shadow-xs hover:bg-blue-700 transition-all no-underline w-full">
+                    <span class="text-xs uppercase tracking-wider opacity-75 mb-0.5">E-Mail schreiben</span>
+                    <span class="text-base md:text-lg tracking-wide">julian(at)m-fleger.de</span>
                 </a>
 
                 <!-- Instagram Button -->
-                <a href="https://instagram.com/j_f_0305" target="_blank" class="flex items-center justify-center gap-3 bg-gradient-to-r from-purple-600 via-pink-500 to-yellow-500 text-white font-bold p-4 rounded-xl shadow-xs hover:opacity-90 transition-all text-base md:text-lg no-underline w-full">
-                    📸 @j_f_0305
+                <a href="https://instagram.com/j_f_0305" target="_blank" class="flex flex-col items-center justify-center bg-gradient-to-r from-purple-600 via-pink-500 to-yellow-500 text-white font-bold p-4 rounded-xl shadow-xs hover:opacity-90 transition-all no-underline w-full">
+                    <span class="text-xs uppercase tracking-wider opacity-75 mb-0.5">Auf Instagram folgen</span>
+                    <span class="text-base md:text-lg">@j_f_0305</span>
                 </a>
             </div>
 
