@@ -46,7 +46,7 @@ permalink: /datenschutz.html
                 Julian Fleger<br>
                 Rüdickenstr. 30<br>
                 13053 Berlin<br>
-                E-Mail: julian@m-fleger.de
+                E-Mail: julian(at)m-fleger.de
             </p>
 
             <h2 class="text-xl font-bold text-gray-950 mt-6 mb-2">3. Hosting durch GitHub Pages</h2>
