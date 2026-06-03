@@ -7,6 +7,7 @@ title: Startseite
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>M-Fleger</title>
+    <!-- Tailwind CSS laden -->
     <script src="https://cdn.jsdelivr.net/npm/@tailwindcss/browser@4"></script>
     <style>
         @keyframes fadeInUp {
@@ -29,9 +30,10 @@ title: Startseite
                 <span class="text-4xl font-black tracking-tight text-blue-600">M-Fleger</span>
             </div>
             <div class="flex gap-6 font-semibold text-gray-600 text-lg">
-                <a href="{{ site.baseurl }}/" class="text-blue-600">Startseite</a>
-                <a href="{{ site.baseurl }}/blog" class="hover:text-blue-600 transition-colors">Blog</a>
-                <a href="{{ site.baseurl }}/kontakt" class="hover:text-blue-600 transition-colors">Kontakt</a>
+                <!-- Direkte, feste Links ohne fehleranfälligen Code -->
+                <a href="index.html" class="text-blue-600">Startseite</a>
+                <a href="blog.html" class="hover:text-blue-600 transition-colors">Blog</a>
+                <a href="kontakt.html" class="hover:text-blue-600 transition-colors">Kontakt</a>
             </div>
         </div>
     </nav>
@@ -48,7 +50,8 @@ title: Startseite
                 <p class="text-lg md:text-xl text-blue-100 max-w-xl mb-8 leading-relaxed">
                     Willkommen auf meiner Website! Hier erfährst du mehr über meine Arbeit, mein Branding und kannst meine neuesten Artikel lesen.
                 </p>
-                <a href="{{ site.baseurl }}/blog" class="bg-cyan-400 text-blue-950 font-black px-8 py-4 rounded-xl shadow-lg hover:bg-cyan-300 transform hover:-translate-y-0.5 transition inline-block">
+                <!-- Auch hier der direkte Link zum Blog -->
+                <a href="blog.html" class="bg-cyan-400 text-blue-950 font-black px-8 py-4 rounded-xl shadow-lg hover:bg-cyan-300 transform hover:-translate-y-0.5 transition inline-block">
                     Direkt zum Blog →
                 </a>
             </div>
@@ -70,8 +73,8 @@ title: Startseite
             <!-- Linke Kachel (JMF-Scribble) -->
             <div class="bg-white border border-gray-100 p-8 rounded-3xl shadow-md hover:shadow-xl transition-all duration-300 flex flex-col justify-between">
                 <div>
-                    <!-- Weißes Riesen-Podest für das Logo -->
-                    <div class="w-full bg-white border border-gray-100 rounded-2xl p-6 flex justify-center mb-6 shadow-xs">
+                    <!-- Weißes Podest für das Logo mit sichtbarem Rand -->
+                    <div class="w-full bg-white border border-gray-200 rounded-2xl p-6 flex justify-center mb-6 shadow-xs">
                         <img src="jmf-logo.jpg" alt="JMF Scribble" class="w-full max-w-[320px] h-64 object-contain">
                     </div>
                     <h2 class="text-3xl font-black text-gray-950 mb-4">JMF-Scribble</h2>
@@ -84,8 +87,8 @@ title: Startseite
             <!-- Rechte Kachel (Blue Vision) -->
             <div class="bg-white border border-gray-100 p-8 rounded-3xl shadow-md hover:shadow-xl transition-all duration-300 flex flex-col justify-between">
                 <div>
-                    <!-- Weißes Riesen-Podest für das Logo -->
-                    <div class="w-full bg-white border border-gray-100 rounded-2xl p-6 flex justify-center mb-6 shadow-xs">
+                    <!-- Weißes Podest für das Logo mit sichtbarem Rand -->
+                    <div class="w-full bg-white border border-gray-200 rounded-2xl p-6 flex justify-center mb-6 shadow-xs">
                         <img src="auge-logo.jpg" alt="Blue Vision" class="w-full max-w-[320px] h-64 object-contain">
                     </div>
                     <h2 class="text-3xl font-black text-gray-950 mb-4">Blue Vision</h2>
