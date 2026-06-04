@@ -13,18 +13,7 @@ title: Kontakt
 
     <!-- NAVIGATION -->
     <nav class="bg-white border-b border-gray-100 sticky top-0 z-50 shadow-xs">
-        <div class="max-w-6xl mx-auto px-4 py-4 flex flex-col md:flex-row justify-between items-center gap-4">
-            <a href="index.html" class="flex items-center gap-3 group no-underline text-current">
-                <img src="auge-logo.jpg" alt="M-Fleger Logo" class="w-16 h-14 md:w-24 md:h-20 rounded-xl md:rounded-2xl object-contain transition-transform duration-300 group-hover:scale-105">
-                <span class="text-2xl md:text-3xl font-black tracking-tight text-blue-600">M-Fleger</span>
-            </a>
-            <div class="flex flex-wrap justify-center gap-x-5 gap-y-2 font-semibold text-gray-600 text-base md:text-lg">
-                <a href="index.html" class="hover:text-blue-600 hover:border-b-2 hover:border-blue-600 pb-1 transition-all no-underline">Startseite</a>
-                <a href="ueber-mich.html" class="hover:text-blue-600 hover:border-b-2 hover:border-blue-600 pb-1 transition-all no-underline">Über mich</a>
-                <a href="blog.html" class="hover:text-blue-600 hover:border-b-2 hover:border-blue-600 pb-1 transition-all no-underline">Blog</a>
-                <a href="kontakt.html" class="text-blue-600 border-b-2 border-blue-600 pb-1 no-underline">Kontakt</a>
-            </div>
-        </div>
+        {% include navigation.html %}
     </nav>
 
     <!-- HEADER -->
@@ -42,7 +31,7 @@ title: Kontakt
             <p class="text-gray-500 font-medium text-sm md:text-base mb-8">Hier findest du meine offiziellen Erreichbarkeiten:</p>
 
             <div class="space-y-4 max-w-md mx-auto">
-                <!-- E-Mail Button - Jetzt mit julian(at)m-fleger.de geschützt gegen Bots -->
+                <!-- E-Mail Button -->
                 <a href="mailto:julian@m-fleger.de" class="flex flex-col items-center justify-center bg-blue-600 text-white font-bold p-4 rounded-xl shadow-xs hover:bg-blue-700 transition-all no-underline w-full">
                     <span class="text-xs uppercase tracking-wider opacity-75 mb-0.5">E-Mail schreiben</span>
                     <span class="text-base md:text-lg tracking-wide">julian(at)m-fleger.de</span>
@@ -62,19 +51,8 @@ title: Kontakt
     </main>
 
     <!-- FOOTER -->
-  <footer class="bg-white border-t border-gray-100 py-8 px-4 text-center text-gray-500 font-medium">
-        <div class="max-w-6xl mx-auto flex flex-col md:flex-row justify-between items-center gap-4">
-            <p>&copy; 2026 M-Fleger. Alle Rechte vorbehalten.</p>
-            <div class="flex flex-wrap justify-center gap-4">
-                <a href="index.html" class="hover:text-blue-600 transition-colors no-underline">Startseite</a>
-                <a href="ueber-mich.html" class="hover:text-blue-600 transition-colors no-underline">Über mich</a>
-                <a href="blog.html" class="hover:text-blue-600 transition-colors no-underline">Blog</a>
-                <a href="kontakt.html" class="hover:text-blue-600 transition-colors no-underline">Kontakt</a>
-                <a href="impressum.html" class="hover:text-blue-600 transition-colors no-underline">Impressum</a>
-                <a href="datenschutz.html" class="hover:text-blue-600 transition-colors no-underline">Datenschutz</a>
-            </div>
-        </div>
-    </footer>
-{% include cookie-banner.html %}
+    {% include footer.html %}
+
+    {% include cookie-banner.html %}
 </body>
 </html>
