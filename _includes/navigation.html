@@ -24,9 +24,9 @@
 </div>
 
 <script>
-    // ⚠️ HIER DEINE ECHTEN DATEN AUS SUPABASE EINTRAGEN:
-    const SUPABASE_URL = "DEINE_SUPABASE_URL_HIER";
-    const SUPABASE_ANON_KEY = "DEIN_SUPABASE_ANON_KEY_HIER";
+    // Deine echten Supabase Projektdaten
+    const SUPABASE_URL = "https://xxuanzhrrpwurkyjfjky.supabase.co";
+    const SUPABASE_ANON_KEY = "sb_publishable_WdzN1r5HkdnqrfIN2phV1g_-GdLlknq";
 
     // Supabase Client initialisieren
     const supabase = supabase.createClient(SUPABASE_URL, SUPABASE_ANON_KEY);
@@ -37,7 +37,6 @@
         const authSection = document.getElementById('auth-nav-section');
 
         if (user) {
-            // Wenn der Nutzer eingeloggt ist, wird der Login-Button durch den Logout-Bereich ersetzt
             authSection.innerHTML = `
                 <div class="flex items-center gap-3 text-sm">
                     <span class="text-gray-500 hidden lg:inline font-medium">Hallo, ${user.email}</span>
@@ -51,7 +50,7 @@
 
     // Logout Funktion
     async function logout() {
-        await supabase.signOut();
+        await supabase.auth.signOut();
         window.location.reload();
     }
 
