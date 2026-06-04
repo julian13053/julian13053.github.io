@@ -1,106 +1,87 @@
 ---
 layout: null
-title: Startseite
+title: "Startseite"
 ---
 <html lang="de">
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>M-Fleger | Portfolio & Blog</title>
-    
-    <!-- 1. Das Favicon (Logo im Browser-Tab) -->
-    <link rel="icon" type="image/jpeg" href="auge-logo.jpg">
-
-    <!-- 2. Open Graph / WhatsApp-Vorschau für die Startseite -->
-    <meta property="og:type" content="website">
-    <meta property="og:title" content="M-Fleger | Portfolio & Blog">
-    <meta property="og:description" content="Willkommen auf M-Fleger. Entdecke meine Projekte, kreativen Ideen und neuesten Blogartikel!">
-    <meta property="og:image" content="https://julian13053.github.io/auge-logo.jpg">
-    <meta property="og:url" content="https://julian13053.github.io/index.html">
-
+    <title>M-Fleger - Startseite</title>
     <script src="https://cdn.jsdelivr.net/npm/@tailwindcss/browser@4"></script>
-    <style>
-        @keyframes fadeInUp {
-            from { opacity: 0; transform: translateY(20px); }
-            to { opacity: 1; transform: translateY(0); }
-        }
-        .animate-fade-in {
-            animation: fadeInUp 0.8s ease-out forwards;
-        }
-    </style>
+    <link class="rounded-xl" rel="icon" type="image/jpeg" href="/auge-logo.jpg">
 </head>
 <body class="bg-gray-50 text-gray-900 font-sans antialiased flex flex-col min-h-screen">
 
-    <!-- MENÜ -->
+    <!-- NAVIGATION -->
     <nav class="bg-white border-b border-gray-100 sticky top-0 z-50 shadow-xs">
-        {% include navigation.html %}
+        <div class="max-w-6xl mx-auto px-4 py-4 flex flex-col md:flex-row justify-between items-center gap-4">
+            <a href="/index.html" class="flex items-center gap-3 group no-underline text-current">
+                <img src="/auge-logo.jpg" alt="M-Fleger Logo" class="w-16 h-14 md:w-24 md:h-20 rounded-xl md:rounded-2xl object-contain transition-transform duration-300 group-hover:scale-105">
+                <span class="text-2xl md:text-3xl font-black tracking-tight text-blue-600">M-Fleger</span>
+            </a>
+            <div class="flex flex-wrap justify-center gap-x-5 gap-y-2 font-semibold text-gray-600 text-base md:text-lg">
+                <a href="/index.html" class="text-blue-600 border-b-2 border-blue-600 pb-1 transition-all no-underline">Startseite</a>
+                <a href="/ueber-mich.html" class="hover:text-blue-600 hover:border-b-2 hover:border-blue-600 pb-1 transition-all no-underline">Über mich</a>
+                <a href="/blog.html" class="hover:text-blue-600 hover:border-b-2 hover:border-blue-600 pb-1 transition-all no-underline">Blog</a>
+                <a href="/spenden.html" class="hover:text-blue-600 hover:border-b-2 hover:border-blue-600 pb-1 transition-all no-underline">Spenden</a>
+                <a href="/kontakt.html" class="hover:text-blue-600 hover:border-b-2 hover:border-blue-600 pb-1 transition-all no-underline">Kontakt</a>
+            </div>
+        </div>
     </nav>
 
-    <header class="bg-gradient-to-br from-[#1d4ed8] via-[#1e3a8a] to-[#312e81] text-white py-16 md:py-24 px-4 md:px-6 overflow-hidden">
-        <div class="max-w-6xl mx-auto grid md:grid-cols-12 gap-12 items-center animate-fade-in">
-            <div class="md:col-span-7 text-center md:text-left">
-                <span class="bg-cyan-400/20 text-cyan-300 border border-cyan-400/30 font-extrabold px-4 py-1.5 rounded-full text-xs uppercase tracking-wider">Design & Development</span>
-                <h1 class="text-4xl md:text-6xl font-black tracking-tight mt-5 mb-6 leading-tight">
-                    Julian Fleger.<br><span class="text-cyan-300">Punktgenau verbunden.</span>
+    <!-- HERO BANNER -->
+    <section class="bg-gradient-to-br from-[#1d4ed8] via-[#1e3a8a] to-[#312e81] text-white py-16 px-4 md:px-12 w-full">
+        <div class="max-w-6xl mx-auto flex flex-col md:flex-row items-center justify-between gap-12">
+            <!-- Text Links -->
+            <div class="max-w-xl text-center md:text-left">
+                <span class="bg-cyan-400 text-[#1e3a8a] font-bold tracking-wider uppercase text-xs px-3 py-1 rounded-md inline-block mb-4">Portfolio & Blog</span>
+                <h1 class="text-4xl md:text-6xl font-black tracking-tight leading-none mb-6 text-white">
+                    Julian Fleger.<br><span class="text-cyan-400">Punktgenau<br>verbunden.</span>
                 </h1>
-                <p class="text-base md:text-xl text-blue-100 max-w-xl mb-8 leading-relaxed">
-                    Ich teile hier meine Projekte, Gedanken und kreativen Ideas. Außerdem findest du Einblicke in meine Brandings, meine Arbeit und neue Blogartikel.
+                <p class="text-lg md:text-xl font-medium text-blue-100 leading-relaxed mb-8">
+                    Willkommen auf meiner Website! Hier erfährst du mehr über meine Arbeit, mein Branding und kannst meine neuesten Artikel lesen.
                 </p>
-                <a href="blog.html" class="bg-cyan-400 text-blue-950 font-black px-8 py-4 rounded-xl shadow-lg hover:bg-cyan-300 transform hover:-translate-y-1 transition-all duration-300 inline-block no-underline w-full md:w-auto text-center">
+                <!-- Button ohne Verlinkung -->
+                <span class="inline-block bg-cyan-400 text-[#1e3a8a] font-bold px-6 py-3 rounded-xl shadow-md cursor-default select-none">
                     Direkt zum Blog →
-                </a>
+                </span>
             </div>
-            <div class="md:col-span-5 flex justify-center">
-                <div class="relative group">
-                    <div class="absolute inset-0 bg-cyan-400 rounded-3xl transform rotate-3 scale-105 opacity-20 blur-xs transition-transform duration-300 group-hover:rotate-1"></div>
-                    <img src="ich.jpeg" alt="Julian Fleger" class="relative w-72 h-80 md:w-96 md:h-[28rem] object-cover rounded-3xl shadow-2xl border-4 border-white/10 transition-transform duration-300 group-hover:scale-105">
-                </div>
+            <!-- Bild Rechts (15% größer) -->
+            <div class="relative shrink-0 p-3 bg-blue-500/20 rounded-3xl border border-white/10 shadow-2xl max-w-md w-full md:w-auto">
+                <img src="/ich.jpeg" alt="Julian Fleger" class="w-full md:w-92 h-auto rounded-2xl object-cover">
             </div>
         </div>
-    </header>
+    </section>
 
-    <main class="max-w-6xl mx-auto px-4 md:px-6 py-12 md:py-20 flex-grow w-full">
-        <div class="mb-12">
-            <div class="flex flex-col md:flex-row justify-between items-center md:items-baseline mb-10 gap-4 text-center md:text-left">
-                <div>
-                    <h2 class="text-3xl md:text-4xl font-black text-gray-950 tracking-tight">📰 Neueste Artikel</h2>
-                    <p class="text-gray-500 text-base md:text-lg mt-2">Frisch aus dem Gedankenkarussell gegriffen.</p>
-                </div>
-                <a href="blog.html" class="text-blue-600 font-bold hover:text-blue-800 transition-colors flex items-center gap-1 group no-underline">
-                    Alle Artikel ansehen <span class="transform group-hover:translate-x-1 transition-transform">→</span>
-                </a>
-            </div>
-
-            <div class="grid grid-cols-1 md:grid-cols-3 gap-6 md:gap-8">
-                {% for post in site.posts limit:3 %}
-                <div class="bg-white border border-gray-100 p-6 rounded-2xl shadow-xs flex flex-col justify-between hover:shadow-md hover:scale-105 transition-all duration-300">
-                    <div>
-                        <div class="flex justify-between items-center mb-3">
-                            <span class="text-xs bg-blue-600 text-white px-2.5 py-1 rounded-md font-bold uppercase">{{ post.date | date: "%d.%m.%Y" }}</span>
-                            {% assign words = post.content | strip_html | number_of_words %}
-                            {% assign read_time = words | divided_by: 180 | plus: 1 %}
-                            <span class="text-xs text-gray-400 font-semibold">📖 {{ read_time }} Min.</span>
-                        </div>
-                        
-                        <h3 class="text-xl font-black text-gray-950 mt-1 mb-2 line-clamp-2">{{ post.title }}</h3>
-                        <p class="text-gray-600 text-sm mb-4 line-clamp-3">{{ post.excerpt | strip_html }}</p>
-                    </div>
-                    <a href="{{ post.url | relative_url }}" class="text-blue-600 font-bold text-sm hover:text-blue-800 no-underline inline-block mt-2">
-                        Artikel lesen →
+    <!-- MAIN CONTENT AREA -->
+    <main class="flex-grow max-w-4xl w-full mx-auto px-4 py-12">
+        
+        <!-- BLOGPOSTS -->
+        <div class="space-y-6">
+            <h2 class="text-3xl font-black text-gray-950 tracking-tight border-b border-gray-100 pb-2 mb-4">✍️ Neueste Blogposts</h2>
+            
+            {% for post in site.posts %}
+                <article class="bg-white border border-gray-100 p-6 rounded-2xl shadow-xs hover:shadow-md transition-all mb-4">
+                    <span class="text-sm font-bold text-blue-600 block mb-1">{{ post.date | date: "%d.%m.%Y" }}</span>
+                    <h3 class="text-xl font-black text-gray-950 mb-2">
+                        <a href="{{ post.url }}" class="hover:text-blue-600 transition-colors no-underline text-gray-950">{{ post.title }}</a>
+                    </h3>
+                    <p class="text-gray-500 font-medium text-sm leading-relaxed mb-4">
+                        {{ post.excerpt | strip_html | truncatewords: 30 }}
+                    </p>
+                    <a href="{{ post.url }}" class="inline-flex items-center gap-1 text-sm font-bold text-blue-600 hover:text-blue-700 no-underline">
+                        Weiterlesen →
                     </a>
-                </div>
-                {% else %}
-                <div class="col-span-1 md:col-span-3 text-center py-12 bg-gray-100 rounded-2xl">
-                    <p class="text-gray-500 text-lg font-medium">Bisher wurden noch keine Blog-Artikel veröffentlicht.</p>
-                </div>
-                {% endfor %}
-            </div>
+                </article>
+            {% endfor %}
         </div>
+
     </main>
 
     <!-- FOOTER -->
-    {% include footer.html %}
+    <footer class="bg-white border-t border-gray-100 py-8 px-4 text-center text-gray-500 font-medium mt-auto">
+        <p>&copy; 2026 M-Fleger. Alle Rechte vorbehalten.</p>
+    </footer>
 
-    {% include cookie-banner.html %}
 </body>
 </html>
