@@ -1,13 +1,60 @@
+<script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script>
+
 <div class="max-w-6xl mx-auto px-4 py-4 flex flex-col md:flex-row justify-between items-center gap-4">
     <a href="/index.html" class="flex items-center gap-3 group no-underline text-current">
         <img src="/auge-logo.jpg" alt="M-Fleger Logo" class="w-16 h-14 md:w-24 md:h-20 rounded-xl md:rounded-2xl object-contain transition-transform duration-300 group-hover:scale-105">
         <span class="text-2xl md:text-3xl font-black tracking-tight text-blue-600">M-Fleger</span>
     </a>
-    <div class="flex flex-wrap justify-center gap-x-5 gap-y-2 font-semibold text-gray-600 text-base md:text-lg">
-        <a href="/index.html" class="hover:text-blue-600 hover:border-b-2 hover:border-blue-600 pb-1 transition-all no-underline">Startseite</a>
-        <a href="/ueber-mich.html" class="hover:text-blue-600 hover:border-b-2 hover:border-blue-600 pb-1 transition-all no-underline">Über mich</a>
-        <a href="/blog.html" class="hover:text-blue-600 hover:border-b-2 hover:border-blue-600 pb-1 transition-all no-underline">Blog</a>
-        <a href="/spenden.html" class="hover:text-blue-600 hover:border-b-2 hover:border-blue-600 pb-1 transition-all no-underline">Spenden</a>
-        <a href="/kontakt.html" class="hover:text-blue-600 hover:border-b-2 hover:border-blue-600 pb-1 transition-all no-underline">Kontakt</a>
+    
+    <div class="flex flex-wrap justify-center items-center gap-x-5 gap-y-2 font-semibold text-gray-600 text-base md:text-lg">
+        <a href="/index.html" class="hover:text-blue-600 pb-1 transition-all no-underline">Startseite</a>
+        <a href="/ueber-mich.html" class="hover:text-blue-600 pb-1 transition-all no-underline">Über mich</a>
+        <a href="/blog.html" class="hover:text-blue-600 pb-1 transition-all no-underline">Blog</a>
+        <a href="/spenden.html" class="hover:text-blue-600 pb-1 transition-all no-underline">Spenden</a>
+        <a href="/kontakt.html" class="hover:text-blue-600 pb-1 transition-all no-underline">Kontakt</a>
+        
+        <span class="hidden md:inline text-gray-200">|</span>
+
+        <div id="auth-nav-section" class="flex items-center">
+            <a href="/login.html" class="bg-blue-600 text-white font-bold px-4 py-2 rounded-xl text-sm shadow-xs hover:bg-blue-700 transition-all no-underline">
+                🔑 Login
+            </a>
+        </div>
     </div>
 </div>
+
+<script>
+    // ⚠️ HIER DEINE ECHTEN DATEN AUS SUPABASE EINTRAGEN:
+    const SUPABASE_URL = "DEINE_SUPABASE_URL_HIER";
+    const SUPABASE_ANON_KEY = "DEIN_SUPABASE_ANON_KEY_HIER";
+
+    // Supabase Client initialisieren
+    const supabase = supabase.createClient(SUPABASE_URL, SUPABASE_ANON_KEY);
+
+    // Prüfen, ob ein Benutzer eingeloggt ist und das Menü dynamisch anpassen
+    async function checkUser() {
+        const { data: { user } } = await supabase.auth.getUser();
+        const authSection = document.getElementById('auth-nav-section');
+
+        if (user) {
+            // Wenn der Nutzer eingeloggt ist, wird der Login-Button durch den Logout-Bereich ersetzt
+            authSection.innerHTML = `
+                <div class="flex items-center gap-3 text-sm">
+                    <span class="text-gray-500 hidden lg:inline font-medium">Hallo, ${user.email}</span>
+                    <button onclick="logout()" class="bg-gray-100 hover:bg-gray-200 text-gray-700 font-bold px-3 py-1.5 rounded-xl transition-all cursor-pointer">
+                        Abmelden
+                    </button>
+                </div>
+            `;
+        }
+    }
+
+    // Logout Funktion
+    async function logout() {
+        await supabase.signOut();
+        window.location.reload();
+    }
+
+    // Beim Laden der Seite direkt prüfen
+    document.addEventListener("DOMContentLoaded", checkUser);
+</script>
