@@ -22,8 +22,8 @@ title: Login
         <div class="bg-white border border-gray-100 p-8 rounded-3xl shadow-xl max-w-md w-full">
             
             <div class="text-center mb-8">
-                <h1 id="auth-title" class="text-3xl font-black text-gray-950 tracking-tight">Anmelden / Registrieren</h1>
-                <p id="auth-subtitle" class="text-gray-500 text-sm mt-2">Gib deine E-Mail ein, um dich passwortlos einzuloggen oder ein Konto zu erstellen.</p>
+                <h1 id="auth-title" class="text-3xl font-black text-gray-950 tracking-tight">Willkommen zurück</h1>
+                <p id="auth-subtitle" class="text-gray-500 text-sm mt-2">Melde dich an, um Artikel zu favorisieren.</p>
             </div>
 
             <!-- E-Mail Formular -->
@@ -32,17 +32,24 @@ title: Login
                     <label class="block text-xs font-bold text-gray-500 uppercase tracking-wider mb-1">E-Mail-Adresse</label>
                     <input type="email" id="email" placeholder="deine@email.de" class="w-full bg-gray-50 border border-gray-200 p-3 rounded-xl focus:outline-hidden focus:border-blue-500 font-medium">
                 </div>
+                <div>
+                    <label class="block text-xs font-bold text-gray-500 uppercase tracking-wider mb-1">Passwort</label>
+                    <input type="password" id="password" placeholder="••••••••" class="w-full bg-gray-50 border border-gray-200 p-3 rounded-xl focus:outline-hidden focus:border-blue-500 font-medium">
+                </div>
 
                 <div id="error-msg" class="text-red-600 text-xs font-semibold hidden"></div>
                 <div id="success-msg" class="text-green-600 text-xs font-semibold hidden"></div>
 
-                <button onclick="loginWithMagicLink()" id="submit-btn" class="w-full bg-blue-600 hover:bg-blue-700 text-white font-bold py-3 px-4 rounded-xl shadow-md transition-all flex items-center justify-center gap-2 cursor-pointer">
-                    ✨ Login-Link per E-Mail senden
+                <button onclick="handleAuth()" id="submit-btn" class="w-full bg-blue-600 hover:bg-blue-700 text-white font-bold py-3 px-4 rounded-xl shadow-md transition-all cursor-pointer">
+                    Einloggen
                 </button>
             </div>
 
-            <div class="text-center mt-6 border-t border-gray-100 pt-4 text-xs text-gray-400 font-medium">
-                Sicher und passwortlos über Supabase geschützt.
+            <!-- Switcher zwischen Login und Registrierung -->
+            <div class="text-center mt-6">
+                <button onclick="toggleAuthMode()" id="toggle-link" class="text-xs font-bold text-blue-600 hover:underline cursor-pointer">
+                    Noch kein Konto? Jetzt registrieren
+                </button>
             </div>
 
         </div>
@@ -52,47 +59,72 @@ title: Login
     {% include footer.html %}
 
     <script>
-        // Deine echten Supabase Projektdaten
         const LOGIN_SUPABASE_URL = "https://xxuanzhrrpwurkyjfjky.supabase.co";
         const LOGIN_SUPABASE_ANON_KEY = "sb_publishable_WdzN1r5HkdnqrfIN2phV1g_-GdLlknq";
         
         const supabaseClient = supabase.createClient(LOGIN_SUPABASE_URL, LOGIN_SUPABASE_ANON_KEY);
         
-        async function loginWithMagicLink() {
+        let isSignUpMode = false;
+
+        function toggleAuthMode() {
+            isSignUpMode = !isSignUpMode;
+            const title = document.getElementById('auth-title');
+            const subtitle = document.getElementById('auth-subtitle');
+            const btn = document.getElementById('submit-btn');
+            const link = document.getElementById('toggle-link');
+            
+            errorMsg = document.getElementById('error-msg').classList.add('hidden');
+            successMsg = document.getElementById('success-msg').classList.add('hidden');
+            
+            if (isSignUpMode) {
+                title.innerText = "Konto erstellen";
+                subtitle.innerText = "Gib eine E-Mail und ein Passwort ein, um dich zu registrieren.";
+                btn.innerText = "Registrieren";
+                link.innerText = "Bereits ein Konto? Hier anmelden";
+            } else {
+                title.innerText = "Willkommen zurück";
+                subtitle.innerText = "Melde dich an, um Artikel zu favorisieren.";
+                btn.innerText = "Einloggen";
+                link.innerText = "Noch kein Konto? Jetzt registrieren";
+            }
+        }
+
+        async function handleAuth() {
             const email = document.getElementById('email').value;
+            const password = document.getElementById('password').value;
             const errorMsg = document.getElementById('error-msg');
             const successMsg = document.getElementById('success-msg');
-            const btn = document.getElementById('submit-btn');
 
             errorMsg.classList.add('hidden');
             successMsg.classList.add('hidden');
 
-            if (!email) {
-                errorMsg.innerText = "Bitte gib eine E-Mail-Adresse ein.";
+            if (!email || !password) {
+                errorMsg.innerText = "Bitte fülle alle Felder aus.";
                 errorMsg.classList.remove('hidden');
                 return;
             }
 
-            btn.disabled = true;
-            btn.innerText = "Wird gesendet...";
-
-            const { data, error } = await supabaseClient.auth.signInWithOtp({
-                email: email,
-                options: {
-                    // Leitet den Nutzer nach dem Klick in der E-Mail zurück zu deiner Startseite
-                    emailRedirectTo: window.location.origin + '/index.html',
+            if (isSignUpMode) {
+                // REGISTRIERUNG
+                const { data, error } = await supabaseClient.auth.signUp({ email, password });
+                if (error) {
+                    errorMsg.innerText = error.message;
+                    errorMsg.classList.remove('hidden');
+                } else {
+                    successMsg.innerText = "Konto erfolgreich erstellt! Du kannst dich jetzt direkt einloggen.";
+                    successMsg.classList.remove('hidden');
+                    // Schalte Modus zurück auf Login
+                    toggleAuthMode();
                 }
-            });
-
-            if (error) {
-                errorMsg.innerText = "Fehler: " + error.message;
-                errorMsg.classList.remove('hidden');
-                btn.disabled = false;
-                btn.innerText = "✨ Login-Link per E-Mail senden";
             } else {
-                successMsg.innerText = "Post ist da! Wir haben dir einen magischen Login-Link geschickt. Klicke einfach darauf, um dich einzuloggen.";
-                successMsg.classList.remove('hidden');
-                btn.innerText = "E-Mail verschickt! 👍";
+                // LOGIN
+                const { data, error } = await supabaseClient.auth.signInWithPassword({ email, password });
+                if (error) {
+                    errorMsg.innerText = "Login fehlgeschlagen: " + error.message;
+                    errorMsg.classList.remove('hidden');
+                } else {
+                    window.location.href = "/index.html";
+                }
             }
         }
     </script>
