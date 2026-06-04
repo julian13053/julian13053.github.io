@@ -1,106 +1,73 @@
 ---
-layout: null
-title: Startseite
+layout: default
+title: "Startseite"
 ---
-<html lang="de">
-<head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>M-Fleger | Portfolio & Blog</title>
+
+<!-- 1. HERO / LEITBILD BEREICH -->
+<div class="bg-gradient-to-br from-[#1d4ed8] via-[#1e3a8a] to-[#312e81] text-white py-16 px-4 rounded-3xl my-8 shadow-xl">
+    <div class="max-w-4xl mx-auto text-center">
+        <span class="bg-blue-500/30 text-blue-200 font-bold tracking-wider uppercase text-xs px-3 py-1 rounded-full inline-block mb-4">🎯 Mein Leitbild</span>
+        <h1 class="text-4xl md:text-5xl font-black tracking-tight mb-6">Willkommen bei M-Fleger</h1>
+        <p class="text-lg md:text-xl font-medium text-blue-100 max-w-2xl mx-auto leading-relaxed mb-8">
+            Diese Website ist mehr als nur ein Blog. Sie ist eine Plattform für ehrlichen Austausch, kreative Entfaltung und den Fokus auf Werte, die im Leben wirklich zählen: **Kinderrechte, Respekt, Mitbestimmung, Offenheit und Ehrlichkeit**.
+        </p>
+        <div class="flex flex-wrap justify-center gap-3 font-semibold text-sm">
+            <span class="bg-white/10 px-4 py-2 rounded-xl backdrop-blur-xs">🤝 Respekt</span>
+            <span class="bg-white/10 px-4 py-2 rounded-xl backdrop-blur-xs">📢 Mitbestimmung</span>
+            <span class="bg-white/10 px-4 py-2 rounded-xl backdrop-blur-xs">❤️ Kinderrechte</span>
+            <span class="bg-white/10 px-4 py-2 rounded-xl backdrop-blur-xs">✨ Offenheit & Ehrlichkeit</span>
+        </div>
+    </div>
+</div>
+
+<div class="max-w-6xl mx-auto px-4 py-8 grid grid-cols-1 lg:grid-cols-3 gap-8">
     
-    <!-- 1. Das Favicon (Logo im Browser-Tab) -->
-    <link rel="icon" type="image/jpeg" href="auge-logo.jpg">
-
-    <!-- 2. Open Graph / WhatsApp-Vorschau für die Startseite -->
-    <meta property="og:type" content="website">
-    <meta property="og:title" content="M-Fleger | Portfolio & Blog">
-    <meta property="og:description" content="Willkommen auf M-Fleger. Entdecke meine Projekte, kreativen Ideen und neuesten Blogartikel!">
-    <meta property="og:image" content="https://julian13053.github.io/auge-logo.jpg">
-    <meta property="og:url" content="https://julian13053.github.io/index.html">
-
-    <script src="https://cdn.jsdelivr.net/npm/@tailwindcss/browser@4"></script>
-    <style>
-        @keyframes fadeInUp {
-            from { opacity: 0; transform: translateY(20px); }
-            to { opacity: 1; transform: translateY(0); }
-        }
-        .animate-fade-in {
-            animation: fadeInUp 0.8s ease-out forwards;
-        }
-    </style>
-</head>
-<body class="bg-gray-50 text-gray-900 font-sans antialiased flex flex-col min-h-screen">
-
-    <!-- MENÜ -->
-    <nav class="bg-white border-b border-gray-100 sticky top-0 z-50 shadow-xs">
-        {% include navigation.html %}
-    </nav>
-
-    <header class="bg-gradient-to-br from-[#1d4ed8] via-[#1e3a8a] to-[#312e81] text-white py-16 md:py-24 px-4 md:px-6 overflow-hidden">
-        <div class="max-w-6xl mx-auto grid md:grid-cols-12 gap-12 items-center animate-fade-in">
-            <div class="md:col-span-7 text-center md:text-left">
-                <span class="bg-cyan-400/20 text-cyan-300 border border-cyan-400/30 font-extrabold px-4 py-1.5 rounded-full text-xs uppercase tracking-wider">Design & Development</span>
-                <h1 class="text-4xl md:text-6xl font-black tracking-tight mt-5 mb-6 leading-tight">
-                    Julian Fleger.<br><span class="text-cyan-300">Punktgenau verbunden.</span>
-                </h1>
-                <p class="text-base md:text-xl text-blue-100 max-w-xl mb-8 leading-relaxed">
-                    Ich teile hier meine Projekte, Gedanken und kreativen Ideas. Außerdem findest du Einblicke in meine Brandings, meine Arbeit und neue Blogartikel.
+    <!-- 2. BLOGPOSTS (LINKS, 2 SPALTEN BREIT) -->
+    <div class="lg:col-span-2 space-y-6">
+        <h2 class="text-2xl font-black text-gray-950 tracking-tight border-b border-gray-100 pb-2 mb-4">✍️ Neueste Blogposts</h2>
+        
+        {% for post in site.posts %}
+            <article class="bg-white border border-gray-100 p-6 rounded-2xl shadow-xs hover:shadow-md transition-all">
+                <span class="text-sm font-bold text-blue-600 block mb-1">{{ post.date | date: "%d.%m.%Y" }}</span>
+                <h3 class="text-xl font-black text-gray-950 mb-2">
+                    <a href="{{ post.url }}" class="hover:text-blue-600 transition-colors no-underline">{{ post.title }}</a>
+                </h3>
+                <p class="text-gray-500 font-medium text-sm leading-relaxed mb-4">
+                    {{ post.excerpt | strip_html | truncatewords: 30 }}
                 </p>
-                <a href="blog.html" class="bg-cyan-400 text-blue-950 font-black px-8 py-4 rounded-xl shadow-lg hover:bg-cyan-300 transform hover:-translate-y-1 transition-all duration-300 inline-block no-underline w-full md:w-auto text-center">
-                    Direkt zum Blog →
+                <a href="{{ post.url }}" class="inline-flex items-center gap-1 text-sm font-bold text-blue-600 hover:text-blue-700 no-underline">
+                    Weiterlesen →
                 </a>
+            </article>
+        {% endfor %}
+    </div>
+
+    <!-- 3. SIDEBAR: TERMINE & AKTUELLES (RECHTS, 1 SPALTE BREIT) -->
+    <div class="space-y-6">
+        <h2 class="text-2xl font-black text-gray-950 tracking-tight border-b border-gray-100 pb-2 mb-4">📅 Termine & Status</h2>
+        
+        <!-- Urlaubs- / Infobox -->
+        <div class="bg-amber-50 border border-amber-200/60 p-6 rounded-2xl shadow-xs">
+            <div class="flex items-center gap-2 text-amber-800 font-bold mb-3">
+                <span class="text-xl">☀️</span>
+                <h3>Aktueller Status / Urlaub</h3>
             </div>
-            <div class="md:col-span-5 flex justify-center">
-                <div class="relative group">
-                    <div class="absolute inset-0 bg-cyan-400 rounded-3xl transform rotate-3 scale-105 opacity-20 blur-xs transition-transform duration-300 group-hover:rotate-1"></div>
-                    <img src="ich.jpeg" alt="Julian Fleger" class="relative w-72 h-80 md:w-96 md:h-[28rem] object-cover rounded-3xl shadow-2xl border-4 border-white/10 transition-transform duration-300 group-hover:scale-105">
-                </div>
+            <p class="text-amber-900/80 font-medium text-sm leading-relaxed mb-4">
+                Hier halte ich dich über meine kommenden Urlaubszeiten oder Termine auf dem Laufenden, an denen es eventuell etwas ruhiger auf dem Blog wird.
+            </p>
+            <div class="bg-white/80 border border-amber-200 p-3 rounded-xl text-xs font-semibold text-amber-900">
+                📌 **Nächster Urlaub:** Noch keine Termine geplant – Täglich neue Posts!
             </div>
         </div>
-    </header>
 
-    <main class="max-w-6xl mx-auto px-4 md:px-6 py-12 md:py-20 flex-grow w-full">
-        <div class="mb-12">
-            <div class="flex flex-col md:flex-row justify-between items-center md:items-baseline mb-10 gap-4 text-center md:text-left">
-                <div>
-                    <h2 class="text-3xl md:text-4xl font-black text-gray-950 tracking-tight">📰 Neueste Artikel</h2>
-                    <p class="text-gray-500 text-base md:text-lg mt-2">Frisch aus dem Gedankenkarussell gegriffen.</p>
-                </div>
-                <a href="blog.html" class="text-blue-600 font-bold hover:text-blue-800 transition-colors flex items-center gap-1 group no-underline">
-                    Alle Artikel ansehen <span class="transform group-hover:translate-x-1 transition-transform">→</span>
-                </a>
-            </div>
-
-            <div class="grid grid-cols-1 md:grid-cols-3 gap-6 md:gap-8">
-                {% for post in site.posts limit:3 %}
-                <div class="bg-white border border-gray-100 p-6 rounded-2xl shadow-xs flex flex-col justify-between hover:shadow-md hover:scale-105 transition-all duration-300">
-                    <div>
-                        <div class="flex justify-between items-center mb-3">
-                            <span class="text-xs bg-blue-600 text-white px-2.5 py-1 rounded-md font-bold uppercase">{{ post.date | date: "%d.%m.%Y" }}</span>
-                            {% assign words = post.content | strip_html | number_of_words %}
-                            {% assign read_time = words | divided_by: 180 | plus: 1 %}
-                            <span class="text-xs text-gray-400 font-semibold">📖 {{ read_time }} Min.</span>
-                        </div>
-                        
-                        <h3 class="text-xl font-black text-gray-950 mt-1 mb-2 line-clamp-2">{{ post.title }}</h3>
-                        <p class="text-gray-600 text-sm mb-4 line-clamp-3">{{ post.excerpt | strip_html }}</p>
-                    </div>
-                    <a href="{{ post.url | relative_url }}" class="text-blue-600 font-bold text-sm hover:text-blue-800 no-underline inline-block mt-2">
-                        Artikel lesen →
-                    </a>
-                </div>
-                {% else %}
-                <div class="col-span-1 md:col-span-3 text-center py-12 bg-gray-100 rounded-2xl">
-                    <p class="text-gray-500 text-lg font-medium">Bisher wurden noch keine Blog-Artikel veröffentlicht.</p>
-                </div>
-                {% endfor %}
-            </div>
+        <!-- Kurze Info zur Spendenseite -->
+        <div class="bg-gray-50 border border-gray-100 p-6 rounded-2xl shadow-xs">
+            <h3 class="font-bold text-gray-950 mb-2">❤️ Herzenssache</h3>
+            <p class="text-gray-500 font-medium text-xs leading-relaxed mb-3">
+                Meine neue Spendenseite für Kinder in Not ist ab jetzt online. Jeder Blick darauf hilft!
+            </p>
+            <a href="/spenden.html" class="text-xs font-bold text-blue-600 hover:underline no-underline">Zur Spendenseite →</a>
         </div>
-    </main>
+    </div>
 
-    <!-- FOOTER -->
-    {% include footer.html %}
-
-    {% include cookie-banner.html %}
-</body>
-</html>
+</div>
