@@ -3,7 +3,6 @@ layout: default
 title: "Startseite"
 ---
 
-<!-- 1. HERO / LEITBILD BEREICH -->
 <div class="bg-gradient-to-br from-[#1d4ed8] via-[#1e3a8a] to-[#312e81] text-white py-16 px-4 rounded-3xl my-8 shadow-xl">
     <div class="max-w-4xl mx-auto text-center">
         <span class="bg-blue-500/30 text-blue-200 font-bold tracking-wider uppercase text-xs px-3 py-1 rounded-full inline-block mb-4">🎯 Mein Leitbild</span>
@@ -22,7 +21,6 @@ title: "Startseite"
 
 <div class="max-w-6xl mx-auto px-4 py-8 grid grid-cols-1 lg:grid-cols-3 gap-8">
     
-    <!-- 2. BLOGPOSTS (LINKS, 2 SPALTEN BREIT) -->
     <div class="lg:col-span-2 space-y-6">
         <h2 class="text-2xl font-black text-gray-950 tracking-tight border-b border-gray-100 pb-2 mb-4">✍️ Neueste Blogposts</h2>
         
@@ -42,25 +40,22 @@ title: "Startseite"
         {% endfor %}
     </div>
 
-    <!-- 3. SIDEBAR: TERMINE & AKTUELLES (RECHTS, 1 SPALTE BREIT) -->
     <div class="space-y-6">
         <h2 class="text-2xl font-black text-gray-950 tracking-tight border-b border-gray-100 pb-2 mb-4">📅 Termine & Status</h2>
         
-        <!-- Urlaubs- / Infobox -->
         <div class="bg-amber-50 border border-amber-200/60 p-6 rounded-2xl shadow-xs">
             <div class="flex items-center gap-2 text-amber-800 font-bold mb-3">
                 <span class="text-xl">☀️</span>
                 <h3>Aktueller Status / Urlaub</h3>
             </div>
             <p class="text-amber-900/80 font-medium text-sm leading-relaxed mb-4">
-                Hier halte ich dich über meine kommenden Urlaubszeiten oder Termine auf dem Laufenden, an denen es eventuell etwas ruhiger auf dem Blog wird.
+                Hier halte ich dich über meine kommenden Urlaubszeiten oder Termine auf dem Laufenden, an denen es etwas ruhiger auf dem Blog wird.
             </p>
             <div class="bg-white/80 border border-amber-200 p-3 rounded-xl text-xs font-semibold text-amber-900">
-                📌 **Nächster Urlaub:** Noch keine Termine geplant – Täglich neue Posts!
+                📌 **Nächster Urlaub:**<br> Vom 23.07.2026 bis 26.07.2026 🌊
             </div>
         </div>
 
-        <!-- Kurze Info zur Spendenseite -->
         <div class="bg-gray-50 border border-gray-100 p-6 rounded-2xl shadow-xs">
             <h3 class="font-bold text-gray-950 mb-2">❤️ Herzenssache</h3>
             <p class="text-gray-500 font-medium text-xs leading-relaxed mb-3">
