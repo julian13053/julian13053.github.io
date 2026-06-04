@@ -1,7 +1,7 @@
 ---
 layout: post
 title: "Tag 2: Diese Website ist erst der Anfang!"
-date: 2026-06-04 16:15:00 +0200
+date: 2026-06-04 12:00:00 +0200
 excerpt: "Gestern der Start, heute der Ausblick. Warum diese Website ab jetzt regelmäßig neue Updates bekommt und wie du mir mit deinem Feedback dabei helfen kannst."
 ---
 
