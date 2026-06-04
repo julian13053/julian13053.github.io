@@ -41,7 +41,6 @@ title: Startseite
                 <p class="text-base md:text-xl text-blue-100 max-w-xl mb-8 leading-relaxed">
                     Ich teile hier meine Projekte, Gedanken und kreativen Ideas. Außerdem findest du Einblicke in meine Brandings, meine Arbeit und neue Blogartikel.
                 </p>
-                <!-- ABGEÄNDERT: Button ist kein Link mehr, sondern ein reiner Text-Block -->
                 <span class="bg-cyan-400 text-blue-950 font-black px-8 py-4 rounded-xl shadow-lg inline-block w-full md:w-auto text-center cursor-default select-none">
                     Direkt zum Blog →
                 </span>
@@ -50,14 +49,47 @@ title: Startseite
             <div class="md:col-span-5 flex justify-center">
                 <div class="relative group">
                     <div class="absolute inset-0 bg-cyan-400 rounded-3xl transform rotate-3 scale-105 opacity-20 blur-xs transition-transform duration-300 group-hover:rotate-1"></div>
-                    <!-- ABGEÄNDERT: Bildgröße auf der Desktop-Ansicht um ca. 15% erhöht (w-96 zu w-[26rem] und h-[28rem] zu h-[32rem]) -->
                     <img src="ich.jpeg" alt="Julian Fleger" class="relative w-72 h-80 md:w-[26rem] md:h-[32rem] object-cover rounded-3xl shadow-2xl border-4 border-white/10 transition-transform duration-300 group-hover:scale-105">
                 </div>
             </div>
         </div>
     </header>
 
-    <main class="max-w-6xl mx-auto px-4 md:px-6 py-12 md:py-20 flex-grow w-full">
+    <!-- AUTOMATISCHE STATISTIK-KARTEN -->
+    <section class="max-w-6xl w-full mx-auto px-4 md:px-6 pt-12">
+        <div class="grid grid-cols-1 sm:grid-cols-2 gap-6">
+            
+            <!-- Karte 1: Artikel-Anzahl -->
+            <div class="bg-white border border-gray-100 p-6 rounded-2xl shadow-xs flex items-center gap-4 hover:shadow-md transition-all">
+                <div class="bg-blue-50 text-blue-600 text-3xl p-4 rounded-xl">
+                    📰
+                </div>
+                <div>
+                    <span class="block text-2xl md:text-3xl font-black text-gray-950">{{ site.posts.size }}</span>
+                    <span class="text-sm font-bold text-gray-500 uppercase tracking-wider">Artikel veröffentlicht</span>
+                </div>
+            </div>
+
+            <!-- Karte 2: Gesamte Wörter (berechnet Jekyll live!) -->
+            {% assign total_words = 0 %}
+            {% for post in site.posts %}
+                {% assign words = post.content | strip_html | number_of_words %}
+                {% assign total_words = total_words | plus: words %}
+            {% endfor %}
+            <div class="bg-white border border-gray-100 p-6 rounded-2xl shadow-xs flex items-center gap-4 hover:shadow-md transition-all">
+                <div class="bg-cyan-50 text-cyan-600 text-3xl p-4 rounded-xl">
+                    ✍️
+                </div>
+                <div>
+                    <span class="block text-2xl md:text-3xl font-black text-gray-950">{{ total_words }}</span>
+                    <span class="text-sm font-bold text-gray-500 uppercase tracking-wider">Wörter geschrieben</span>
+                </div>
+            </div>
+
+        </div>
+    </section>
+
+    <main class="max-w-6xl mx-auto px-4 md:px-6 py-12 md:py-16 flex-grow w-full">
         <div class="mb-12">
             <div class="flex flex-col md:flex-row justify-between items-center md:items-baseline mb-10 gap-4 text-center md:text-left">
                 <div>
