@@ -1,0 +1,148 @@
+---
+layout: null
+---
+<!DOCTYPE html>
+<html lang="de">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Spenden - M-Fleger</title>
+    <!-- Lädt Tailwind CSS -->
+    <script src="https://cdn.jsdelivr.net/npm/@tailwindcss/browser@4"></script>
+</head>
+<body class="bg-gray-50 text-gray-900 font-sans antialiased flex flex-col min-h-screen">
+
+    <!-- MENÜ -->
+    <nav class="bg-white border-b border-gray-100 sticky top-0 z-50 shadow-xs">
+        <div class="max-w-6xl mx-auto px-4 py-4 flex flex-col md:flex-row justify-between items-center gap-4">
+            <a href="/index.html" class="flex items-center gap-3 group no-underline text-current">
+                <img src="/auge-logo.jpg" alt="M-Fleger Logo" class="w-16 h-14 md:w-24 md:h-20 rounded-xl md:rounded-2xl object-contain">
+                <span class="text-2xl md:text-3xl font-black tracking-tight text-blue-600">M-Fleger</span>
+            </a>
+            <div class="flex flex-wrap justify-center gap-x-5 gap-y-2 font-semibold text-gray-600 text-base md:text-lg">
+                <a href="/index.html" class="hover:text-blue-600 hover:border-b-2 hover:border-blue-600 pb-1 no-underline">Startseite</a>
+                <a href="/ueber-mich.html" class="hover:text-blue-600 hover:border-b-2 hover:border-blue-600 pb-1 no-underline">Über mich</a>
+                <a href="/blog.html" class="hover:text-blue-600 hover:border-b-2 hover:border-blue-600 pb-1 no-underline">Blog</a>
+                <a href="/kontakt.html" class="hover:text-blue-600 hover:border-b-2 hover:border-blue-600 pb-1 no-underline">Kontakt</a>
+            </div>
+        </div>
+    </nav>
+
+    <!-- BLAUER HEADER BEREICH -->
+    <header class="bg-gradient-to-r from-blue-900 via-indigo-900 to-blue-950 text-white text-center py-16 px-4">
+        <div class="max-w-4xl mx-auto flex flex-col items-center">
+            <h1 class="text-3xl md:text-5xl font-black tracking-tight drop-shadow-md mb-4">
+                Wähle deine Spendenart
+            </h1>
+            <div class="flex flex-col items-center gap-1 text-xs md:text-sm text-gray-300/90 font-medium w-full max-w-xs">
+                <span>Unterstützung für Kinder in Not</span>
+                <div class="w-full border-b border-white/20 mt-3"></div>
+            </div>
+        </div>
+    </header>
+
+    <!-- INHALT (In der originalen weißen Artikel-Karte) -->
+    <main class="max-w-4xl mx-auto px-4 py-12 flex-grow w-full -mt-10">
+        <article class="bg-white border border-gray-100 p-8 md:p-12 rounded-3xl shadow-sm space-y-10">
+            
+            <!-- EINLEITUNGSTEXT -->
+            <p class="text-gray-600 text-base md:text-lg leading-relaxed border-b border-gray-100 pb-6">
+                Kinder brauchen unseren Schutz und eine sichere Zukunft. Hier findest du eine Auswahl an Organisationen und Stiftungen, die sich direkt für Kinder in schwierigen Lebenslagen einsetzen. Mit einem Klick auf den jeweiligen Button wirst du direkt zur offiziellen Spendenseite weitergeleitet.
+            </p>
+
+            <!-- ANBIETER 1: SOS KINDERDORF BERLIN -->
+            <div class="flex flex-col md:flex-row items-start md:items-center justify-between gap-6">
+                <div class="space-y-3 flex-1">
+                    <div class="h-12 flex items-center">
+                        <img src="/SOS Kinderdörfer transparentes logo.png" alt="SOS Kinderdörfer Logo" class="h-full object-contain">
+                    </div>
+                    <h2 class="text-xl md:text-2xl font-bold text-gray-900">SOS-Kinderdorf Berlin</h2>
+                    <p class="text-gray-600 text-base leading-relaxed">
+                        Unterstützt direkt die Arbeit im Kinderdorf Berlin. Es bietet Kindern, die nicht bei ihren leiblichen Eltern aufwachsen können, ein liebevolles und sicheres Zuhause sowie wichtige Betreuungsangebote.
+                    </p>
+                    <div class="pt-2">
+                        <a href="https://www.sos-kinderdorf.de/kinderdorf-berlin/spenden" target="_blank" rel="noopener noreferrer" class="inline-block bg-blue-600 hover:bg-blue-700 text-white font-bold text-sm px-5 py-2.5 rounded-xl transition-all shadow-xs active:scale-95 no-underline">
+                            Zu SOS-Kinderdorf Berlin &rarr;
+                        </a>
+                    </div>
+                </div>
+            </div>
+
+            <hr class="border-gray-100">
+
+            <!-- ANBIETER 2: SAVE THE CHILDREN -->
+            <div class="flex flex-col md:flex-row items-start md:items-center justify-between gap-6">
+                <div class="space-y-3 flex-1">
+                    <div class="h-12 flex items-center">
+                        <img src="/Save the Childrean transparentes logo.png" alt="Save the Children Logo" class="h-full object-contain">
+                    </div>
+                    <h2 class="text-xl md:text-2xl font-bold text-gray-900">Save the Children</h2>
+                    <p class="text-gray-600 text-base leading-relaxed">
+                        Die weltweit größte unabhängige Organisation für Kinderrechte. Sie leistet Soforthilfe in Krisengebieten, schützt Kinder vor Gewalt und Ausbeutung und sorgt für Bildung.
+                    </p>
+                    <div class="pt-2">
+                        <a href="https://www.savethechildren.de/" target="_blank" rel="noopener noreferrer" class="inline-block bg-blue-600 hover:bg-blue-700 text-white font-bold text-sm px-5 py-2.5 rounded-xl transition-all shadow-xs active:scale-95 no-underline">
+                            Zu Save the Children &rarr;
+                        </a>
+                    </div>
+                </div>
+            </div>
+
+            <hr class="border-gray-100">
+
+            <!-- ANBIETER 3: ZUKUNFT FÜR DICH E.V. (PROJEKT BERLIN) -->
+            <div class="flex flex-col md:flex-row items-start md:items-center justify-between gap-6">
+                <div class="space-y-3 flex-1">
+                    <div class="h-12 flex items-center">
+                        <img src="/Zukunft für Dich transparentes logo.png" alt="Zukunft für Dich Logo" class="h-full object-contain">
+                    </div>
+                    <h2 class="text-xl md:text-2xl font-bold text-gray-900">Zukunft für DICH e.V. (Förderprojekt Berlin)</h2>
+                    <p class="text-gray-600 text-base leading-relaxed">
+                        Spezielle Projektförderung für benachteiligte Kinder im Raum Berlin. Die Spenden über dieses Konto fließen direkt in regionale Berliner Hilfsmaßnahmen und Betreuungsangebote.
+                    </p>
+                    <div class="pt-2">
+                        <a href="https://www.glaube-liebe-hoffnung-stiftung.de/spenden/" target="_blank" rel="noopener noreferrer" class="inline-block bg-blue-600 hover:bg-blue-700 text-white font-bold text-sm px-5 py-2.5 rounded-xl transition-all shadow-xs active:scale-95 no-underline">
+                            Spenden über Zukunft für DICH &rarr;
+                        </a>
+                    </div>
+                </div>
+            </div>
+
+            <hr class="border-gray-100">
+
+            <!-- ANBIETER 4: GLAUBE LIEBE HOFFNUNG STIFTUNG -->
+            <div class="flex flex-col md:flex-row items-start md:items-center justify-between gap-6">
+                <div class="space-y-3 flex-1">
+                    <div class="h-12 flex items-center">
+                        <img src="/glaube liebe hoffnung stiftung transparent logo.png" alt="Glaube Liebe Hoffnung Stiftung Logo" class="h-full object-contain">
+                    </div>
+                    <h2 class="text-xl md:text-2xl font-bold text-gray-900">Glaube-Liebe-Hoffnung Stiftung</h2>
+                    <p class="text-gray-600 text-base leading-relaxed">
+                        Unterstützt nachhaltig heilpädagogische Kinder-Wohngruppen, Jugendhilfe-Zentren und Schutzräume. Hier hast du auch die Möglichkeit, der Stiftung Kapital langfristig zuzustiften.
+                    </p>
+                    <div class="pt-2">
+                        <a href="https://www.glaube-liebe-hoffnung-stiftung.de/spenden/" target="_blank" rel="noopener noreferrer" class="inline-block bg-blue-600 hover:bg-blue-700 text-white font-bold text-sm px-5 py-2.5 rounded-xl transition-all shadow-xs active:scale-95 no-underline">
+                            Zur Stiftung spenden / zustiften &rarr;
+                        </a>
+                    </div>
+                </div>
+            </div>
+
+        </article>
+    </main>
+
+    <!-- FOOTER -->
+    <footer class="bg-white border-t border-gray-100 py-8 px-4 text-center text-gray-500 font-medium">
+        <div class="max-w-6xl mx-auto flex flex-col md:flex-row justify-between items-center gap-4">
+            <p>&copy; 2026 M-Fleger. Alle Rechte vorbehalten.</p>
+            <div class="flex flex-wrap justify-center gap-4">
+                <a href="/index.html" class="hover:text-blue-600 transition-colors no-underline">Startseite</a>
+                <a href="/ueber-mich.html" class="hover:text-blue-600 transition-colors no-underline">Über mich</a>
+                <a href="/blog.html" class="hover:text-blue-600 transition-colors no-underline">Blog</a>
+                <a href="/kontakt.html" class="hover:text-blue-600 transition-colors no-underline">Kontakt</a>
+            </div>
+        </div>
+    </footer>
+
+</body>
+</html>
