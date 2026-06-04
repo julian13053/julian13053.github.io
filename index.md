@@ -7,9 +7,7 @@ title: Startseite
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>M-Fleger | Portfolio & Blog</title>
-    <!-- 1. Das Favicon (Logo im Browser-Tab) -->
     <link rel="icon" type="image/jpeg" href="auge-logo.jpg">
-    <!-- 2. Open Graph / WhatsApp-Vorschau für die Startseite -->
     <meta property="og:type" content="website">
     <meta property="og:title" content="M-Fleger | Portfolio & Blog">
     <meta property="og:description" content="Willkommen auf M-Fleger. Entdecke meine Projekte, kreativen Ideen und neuesten Blogartikel!">
@@ -26,7 +24,6 @@ title: Startseite
 </head>
 <body class="bg-gray-50 text-gray-900 font-sans antialiased flex flex-col min-h-screen">
 
-    <!-- MENÜ -->
     <nav class="bg-white border-b border-gray-100 sticky top-0 z-50 shadow-xs">
         {% include navigation.html %}
     </nav>
@@ -55,41 +52,7 @@ title: Startseite
         </div>
     </header>
 
-    <!-- AUTOMATISCHE STATISTIK-KARTEN -->
-    <section class="max-w-6xl w-full mx-auto px-4 md:px-6 pt-12">
-        <div class="grid grid-cols-1 sm:grid-cols-2 gap-6">
-            
-            <!-- Karte 1: Artikel-Anzahl -->
-            <div class="bg-white border border-gray-100 p-6 rounded-2xl shadow-xs flex items-center gap-4 hover:shadow-md transition-all">
-                <div class="bg-blue-50 text-blue-600 text-3xl p-4 rounded-xl">
-                    📰
-                </div>
-                <div>
-                    <span class="block text-2xl md:text-3xl font-black text-gray-950">{{ site.posts.size }}</span>
-                    <span class="text-sm font-bold text-gray-500 uppercase tracking-wider">Artikel veröffentlicht</span>
-                </div>
-            </div>
-
-            <!-- Karte 2: Gesamte Wörter (berechnet Jekyll live!) -->
-            {% assign total_words = 0 %}
-            {% for post in site.posts %}
-                {% assign words = post.content | strip_html | number_of_words %}
-                {% assign total_words = total_words | plus: words %}
-            {% endfor %}
-            <div class="bg-white border border-gray-100 p-6 rounded-2xl shadow-xs flex items-center gap-4 hover:shadow-md transition-all">
-                <div class="bg-cyan-50 text-cyan-600 text-3xl p-4 rounded-xl">
-                    ✍️
-                </div>
-                <div>
-                    <span class="block text-2xl md:text-3xl font-black text-gray-950">{{ total_words }}</span>
-                    <span class="text-sm font-bold text-gray-500 uppercase tracking-wider">Wörter geschrieben</span>
-                </div>
-            </div>
-
-        </div>
-    </section>
-
-    <main class="max-w-6xl mx-auto px-4 md:px-6 py-12 md:py-16 flex-grow w-full">
+    <main class="max-w-6xl mx-auto px-4 md:px-6 pt-12 md:pt-20 flex-grow w-full">
         <div class="mb-12">
             <div class="flex flex-col md:flex-row justify-between items-center md:items-baseline mb-10 gap-4 text-center md:text-left">
                 <div>
@@ -101,7 +64,7 @@ title: Startseite
                 </a>
             </div>
 
-            <div class="grid grid-cols-1 md:grid-cols-3 gap-6 md:gap-8">
+            <div class="grid grid-cols-1 md:grid-cols-3 gap-6 md:gap-8 mb-16">
                 {% for post in site.posts limit:3 %}
                 <div class="bg-white border border-gray-100 p-6 rounded-2xl shadow-xs flex flex-col justify-between hover:shadow-md hover:scale-105 transition-all duration-300">
                     <div>
@@ -125,9 +88,39 @@ title: Startseite
                 {% endfor %}
             </div>
         </div>
+
+        <hr class="border-gray-200/60 my-12">
+
+        <div class="grid grid-cols-1 sm:grid-cols-2 gap-6 mb-12">
+            
+            <div class="bg-white border border-gray-100 p-6 rounded-2xl shadow-xs flex items-center gap-4 hover:shadow-md transition-all">
+                <div class="bg-blue-50 text-blue-600 text-3xl p-4 rounded-xl">
+                    📰
+                </div>
+                <div>
+                    <span class="block text-2xl md:text-3xl font-black text-gray-950">{{ site.posts.size }}</span>
+                    <span class="text-sm font-bold text-gray-500 uppercase tracking-wider">Artikel veröffentlicht</span>
+                </div>
+            </div>
+
+            {% assign total_words = 0 %}
+            {% for post in site.posts %}
+                {% assign words = post.content | strip_html | number_of_words %}
+                {% assign total_words = total_words | plus: words %}
+            {% endfor %}
+            <div class="bg-white border border-gray-100 p-6 rounded-2xl shadow-xs flex items-center gap-4 hover:shadow-md transition-all">
+                <div class="bg-cyan-50 text-cyan-600 text-3xl p-4 rounded-xl">
+                    ✍️
+                </div>
+                <div>
+                    <span class="block text-2xl md:text-3xl font-black text-gray-950">{{ total_words }}</span>
+                    <span class="text-sm font-bold text-gray-500 uppercase tracking-wider">Wörter geschrieben</span>
+                </div>
+            </div>
+
+        </div>
     </main>
 
-    <!-- FOOTER -->
     {% include footer.html %}
     {% include cookie-banner.html %}
 
