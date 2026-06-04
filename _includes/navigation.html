@@ -1,14 +1,11 @@
-<!-- Supabase JavaScript Library laden -->
 <script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script>
 
 <div class="max-w-6xl mx-auto px-4 py-4 flex flex-col md:flex-row justify-between items-center gap-4">
-    <!-- Logo -->
     <a href="/index.html" class="flex items-center gap-3 group no-underline text-current">
         <img src="/auge-logo.jpg" alt="M-Fleger Logo" class="w-16 h-14 md:w-24 md:h-20 rounded-xl md:rounded-2xl object-contain transition-transform duration-300 group-hover:scale-105">
         <span class="text-2xl md:text-3xl font-black tracking-tight text-blue-600">M-Fleger</span>
     </a>
     
-    <!-- Menülinks -->
     <div class="flex flex-wrap justify-center items-center gap-x-5 gap-y-2 font-semibold text-gray-600 text-base md:text-lg">
         <a href="/index.html" class="hover:text-blue-600 pb-1 transition-all no-underline">Startseite</a>
         <a href="/ueber-mich.html" class="hover:text-blue-600 pb-1 transition-all no-underline">Über mich</a>
@@ -18,7 +15,6 @@
         
         <span class="hidden md:inline text-gray-200">|</span>
 
-        <!-- DYNAMISCHER LOGIN / PROFIL BEREICH -->
         <div id="auth-nav-section" class="flex items-center">
             <a href="/login.html" class="bg-blue-600 text-white font-bold px-4 py-2 rounded-xl text-sm shadow-xs hover:bg-blue-700 transition-all no-underline">
                 🔑 Login
@@ -28,13 +24,15 @@
 </div>
 
 <script>
-    const SUPABASE_URL = "https://xxuanzhrrpwurkyjfjky.supabase.co";
-    const SUPABASE_ANON_KEY = "sb_publishable_WdzN1r5HkdnqrfIN2phV1g_-GdLlknq";
+    // Projektdaten bleiben gleich
+    const SUPABASE_URL_NAV = "https://xxuanzhrrpwurkyjfjky.supabase.co";
+    const SUPABASE_ANON_KEY_NAV = "sb_publishable_WdzN1r5HkdnqrfIN2phV1g_-GdLlknq";
 
-    const supabase = supabase.createClient(SUPABASE_URL, SUPABASE_ANON_KEY);
+    // Name geändert zu supabaseClientNav, um Konflikte zu vermeiden!
+    const supabaseClientNav = supabase.createClient(SUPABASE_URL_NAV, SUPABASE_ANON_KEY_NAV);
 
     async function checkUser() {
-        const { data: { user } } = await supabase.auth.getUser();
+        const { data: { user } } = await supabaseClientNav.auth.getUser();
         const authSection = document.getElementById('auth-nav-section');
 
         if (user && authSection) {
@@ -43,7 +41,7 @@
                     <a href="/profil.html" class="text-gray-700 hover:text-blue-600 font-bold transition-all no-underline flex items-center gap-1">
                         👤 <span class="max-w-[150px] truncate">${user.email}</span>
                     </a>
-                    <button onclick="logout()" class="bg-gray-100 hover:bg-gray-200 text-gray-700 font-bold px-3 py-1.5 rounded-xl transition-all cursor-pointer border-0">
+                    <button onclick="logoutNav()" class="bg-gray-100 hover:bg-gray-200 text-gray-700 font-bold px-3 py-1.5 rounded-xl transition-all cursor-pointer border-0">
                         Abmelden
                     </button>
                 </div>
@@ -51,8 +49,8 @@
         }
     }
 
-    async function logout() {
-        await supabase.auth.signOut();
+    async function logoutNav() {
+        await supabaseClientNav.auth.signOut();
         window.location.reload();
     }
 
