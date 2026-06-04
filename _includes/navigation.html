@@ -28,20 +28,16 @@
 </div>
 
 <script>
-    // Deine echten Supabase Projektdaten
     const SUPABASE_URL = "https://xxuanzhrrpwurkyjfjky.supabase.co";
     const SUPABASE_ANON_KEY = "sb_publishable_WdzN1r5HkdnqrfIN2phV1g_-GdLlknq";
 
-    // Supabase Client initialisieren
     const supabase = supabase.createClient(SUPABASE_URL, SUPABASE_ANON_KEY);
 
-    // Prüfen, ob ein Benutzer eingeloggt ist und das Menü dynamisch anpassen
     async function checkUser() {
         const { data: { user } } = await supabase.auth.getUser();
         const authSection = document.getElementById('auth-nav-section');
 
         if (user && authSection) {
-            // Wenn eingeloggt: E-Mail verlinkt zur profil.html + Abmelden Button
             authSection.innerHTML = `
                 <div class="flex items-center gap-3 text-sm">
                     <a href="/profil.html" class="text-gray-700 hover:text-blue-600 font-bold transition-all no-underline flex items-center gap-1">
@@ -55,12 +51,10 @@
         }
     }
 
-    // Logout Funktion
     async function logout() {
         await supabase.auth.signOut();
         window.location.reload();
     }
 
-    // Beim Laden der Seite direkt prüfen
     document.addEventListener("DOMContentLoaded", checkUser);
 </script>
