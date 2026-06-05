@@ -64,4 +64,122 @@ title: Blog
             {% endfor %}
         </div>
 
-        <p id="noResultsMessage" class="text-gray-500 text-center py
+        <p id="noResultsMessage" class="text-gray-500 text-center py-12 text-lg hidden">Keine passenden Artikel gefunden.</p>
+
+    </main>
+
+    {% include footer.html %}
+
+    <script>
+        // --- 1. SUPABASE INITIALISIERUNG (VOLLSTÄNDIGER KEY INJEKTIERT) ---
+        const SUPABASE_URL = "https://xxuanzhrrpwurkyjfjky.supabase.co";
+        const SUPABASE_ANON_KEY = "sb_publishable_WdzN1r5HkdnqrfIN2phV1g_-GdLlknq"; 
+        
+        const supabase = supabase.createClient(SUPABASE_URL, SUPABASE_ANON_KEY);
+
+        // --- 2. BEREITS BESTEHENDE FAVORITEN ROT FÄRBEN ---
+        async function checkFavoritesOnLoad() {
+            const { data: { user } } = await supabase.auth.getUser();
+
+            if (user) {
+                const { data: favoriten, error } = await supabase
+                    .from('favoriten')
+                    .select('blog_id')
+                    .eq('user_id', user.id);
+
+                if (!error && favoriten) {
+                    const favIds = new Set(favoriten.map(f => f.blog_id.toString()));
+                    
+                    const cards = document.getElementsByClassName('blog-card');
+                    for (let card of cards) {
+                        const postId = card.getAttribute('data-post-id');
+                        if (favIds.has(postId)) {
+                            const btn = card.querySelector('.fav-btn');
+                            if (btn) {
+                                btn.innerHTML = "❤️ Favorisiert";
+                                btn.classList.remove('bg-white', 'text-gray-900', 'border-gray-200');
+                                btn.classList.add('bg-red-500', 'text-white', 'border-red-500');
+                            }
+                        }
+                    }
+                }
+            }
+        }
+
+        // --- 3. FAVORIT UMSCHALTEN BEIM KLICKEN ---
+        async function favoritUmschalten(blogId, button) {
+            const { data: { user } } = await supabase.auth.getUser();
+
+            // FALL 1: NUTZER IST NICHT ANGEMELDET
+            if (!user) {
+                alert("Wenn du diesen Artikel favorisieren möchtest, dann musst du dich erst anmelden!");
+                return; 
+            }
+
+            // FALL 2: NUTZER IST ANGEMELDET
+            const { data: existiert } = await supabase
+                .from('favoriten')
+                .select('*')
+                .eq('user_id', user.id)
+                .eq('blog_id', blogId);
+
+            if (existiert && existiert.length > 0) {
+                // Bereits favorisiert -> Also jetzt löschen
+                const { error } = await supabase
+                    .from('favoriten')
+                    .delete()
+                    .eq('user_id', user.id)
+                    .eq('blog_id', blogId);
+
+                if (!error) {
+                    button.innerHTML = "⭐ Favorit";
+                    button.classList.remove('bg-red-500', 'text-white', 'border-red-500');
+                    button.classList.add('bg-white', 'text-gray-900', 'border-gray-200');
+                }
+            } else {
+                // Noch kein Favorit -> Jetzt hinzufügen
+                const { error } = await supabase
+                    .from('favoriten')
+                    .insert([{ user_id: user.id, blog_id: blogId }]);
+
+                if (!error) {
+                    button.innerHTML = "❤️ Favorisiert";
+                    button.classList.remove('bg-white', 'text-gray-900', 'border-gray-200');
+                    button.classList.add('bg-red-500', 'text-white', 'border-red-500');
+                    
+                    alert("Dieser Artikel wurde favorisiert! Du findest diesen Artikel in deinem Profil unter Favoriten.");
+                }
+            }
+        }
+
+        // --- 4. LIVE-SUCHE SCRIPT ---
+        function filterBlogPosts() {
+            const input = document.getElementById('blogSearch');
+            const filter = input.value.toLowerCase();
+            const cards = document.getElementsByClassName('blog-card');
+            let hasResults = false;
+
+            for (let i = 0; i < cards.length; i++) {
+                const title = cards[i].querySelector('.post-title').innerText.toLowerCase();
+                if (title.includes(filter)) {
+                    cards[i].style.display = "flex";
+                    hasResults = true;
+                } else {
+                    cards[i].style.display = "none";
+                }
+            }
+
+            const noResults = document.getElementById('noResultsMessage');
+            if (hasResults) {
+                noResults.classList.add('hidden');
+            } else {
+                noResults.classList.remove('hidden');
+            }
+        }
+
+        document.addEventListener("DOMContentLoaded", checkFavoritesOnLoad);
+    </script>
+
+    {% include cookie-banner.html %}
+</body>
+</html>
