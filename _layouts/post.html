@@ -7,8 +7,8 @@ layout: null
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>{{ page.title }} - M-Fleger</title>
-    <!-- Lädt Tailwind CSS -->
     <script src="https://cdn.jsdelivr.net/npm/@tailwindcss/browser@4"></script>
+    <script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script>
     
     <style>
         /* Zwingt den Blogtext auf dem Bildschirm zu perfekter Lesbarkeit */
@@ -100,13 +100,11 @@ layout: null
 </head>
 <body class="bg-gray-50 text-gray-900 font-sans antialiased flex flex-col min-h-screen">
 
-    <!-- KOPFZEILE FÜR DEN DRUCK -->
     <div class="print-header max-w-4xl mx-auto w-full px-4">
         <span class="print-header-left">M-Fleger</span>
         <span class="print-header-right">m-fleger.de</span>
     </div>
 
-    <!-- MENÜ -->
     <nav class="bg-white border-b border-gray-100 sticky top-0 z-50 shadow-xs no-print">
         <div class="max-w-6xl mx-auto px-4 py-4 flex flex-col md:flex-row justify-between items-center gap-4">
             <a href="/index.html" class="flex items-center gap-3 group no-underline text-current">
@@ -122,7 +120,6 @@ layout: null
         </div>
     </nav>
 
-    <!-- BLAUER HEADER BEREICH -->
     <header class="bg-gradient-to-r from-blue-900 via-indigo-900 to-blue-950 text-white text-center py-16 px-4">
         <div class="max-w-4xl mx-auto flex flex-col items-center">
             <h1 class="text-3xl md:text-5xl font-black tracking-tight drop-shadow-md mb-4">
@@ -137,26 +134,27 @@ layout: null
         </div>
     </header>
 
-    <!-- INHALT -->
+    {% assign numeric_id = page.date | date: "%Y%m%d%H%M" %}
     <main class="max-w-4xl mx-auto px-4 py-12 flex-grow w-full -mt-10">
-        <article class="bg-white border border-gray-100 p-8 md:p-12 rounded-3xl shadow-sm">
+        <article class="bg-white border border-gray-100 p-8 md:p-12 rounded-3xl shadow-sm" data-post-id="{{ numeric_id }}">
             <div class="blog-text prose max-w-none leading-relaxed space-y-6 text-base md:text-lg">
                 {{ content }}
             </div>
             
-            <!-- AUTOREN-ZEILE -->
             <div class="author-note mt-6 text-sm text-gray-500 font-medium">
                 Text von Julian Fleger
             </div>
             
-            <!-- DRUCKER-BUTTON -->
-            <div class="mt-6 pt-6 border-t border-gray-100 flex justify-start no-print">
+            <div class="mt-6 pt-6 border-t border-gray-100 flex flex-wrap gap-3 justify-start no-print">
                 <button onclick="window.print()" class="bg-gray-100 hover:bg-gray-200 text-gray-700 font-bold text-sm px-5 py-2.5 rounded-xl transition-all cursor-pointer border border-gray-200 shadow-xs active:scale-95">
                     Artikel ausdrucken / als PDF speichern
                 </button>
+                
+                <button onclick="favoritUmschalten('{{ numeric_id }}', this)" class="fav-btn bg-white hover:bg-gray-50 text-gray-900 font-bold text-sm px-5 py-2.5 rounded-xl transition-all cursor-pointer border border-gray-200 shadow-xs active:scale-95">
+                    ⭐ Favorit
+                </button>
             </div>
             
-            <!-- ZURÜCK LINK -->
             <div class="mt-8 pt-6 border-t border-gray-100 flex justify-center no-print">
                 <a href="/blog.html" class="inline-flex items-center gap-2 text-sm font-bold text-blue-600 hover:text-blue-800 transition-colors no-underline">
                     &larr; Zurück zur Blog-Übersicht
@@ -165,7 +163,6 @@ layout: null
         </article>
     </main>
 
-    <!-- FOOTER -->
     <footer class="bg-white border-t border-gray-100 py-8 px-4 text-center text-gray-500 font-medium no-print">
         <div class="max-w-6xl mx-auto flex flex-col md:flex-row justify-between items-center gap-4">
             <p>&copy; 2026 M-Fleger. Alle Rechte vorbehalten.</p>
@@ -181,5 +178,87 @@ layout: null
     </footer>
 
     {% include cookie-banner.html %}
+
+    <script>
+        const SUPABASE_URL = "https://xxuanzhrrpwurkyjfjky.supabase.co";
+        const SUPABASE_ANON_KEY = "sb_publishable_WdzN1r5HkdnqrfIN2phV1g_-GdLlknq"; 
+        const supabaseClient = supabase.createClient(SUPABASE_URL, SUPABASE_ANON_KEY);
+
+        async function checkFavoritesOnLoad() {
+            try {
+                const { data: { user } } = await supabaseClient.auth.getUser();
+                if (user) {
+                    const { data: favoriten, error } = await supabaseClient
+                        .from('favoriten')
+                        .select('blog_id')
+                        .eq('user_id', user.id);
+
+                    if (!error && favoriten) {
+                        const favIds = new Set(favoriten.map(f => f.blog_id.toString()));
+                        const article = document.querySelector('article[data-post-id]');
+                        if (article) {
+                            const postId = article.getAttribute('data-post-id');
+                            if (favIds.has(postId)) {
+                                const btn = article.querySelector('.fav-btn');
+                                if (btn) {
+                                    btn.innerHTML = "❤️ Favorisiert";
+                                    btn.classList.remove('bg-white', 'text-gray-900', 'border-gray-200');
+                                    btn.classList.add('bg-red-500', 'text-white', 'border-red-500');
+                                }
+                            }
+                        }
+                    }
+                }
+            } catch (err) { console.error(err); }
+        }
+
+        async function favoritUmschalten(blogId, button) {
+            try {
+                const { data: { user } } = await supabaseClient.auth.getUser();
+
+                if (!user) {
+                    window.location.href = "/anmeldung-erforderlich.html";
+                    return; 
+                }
+
+                const { data: existiert } = await supabaseClient
+                    .from('favoriten')
+                    .select('*')
+                    .eq('user_id', user.id)
+                    .eq('blog_id', blogId);
+
+                if (existiert && existiert.length > 0) {
+                    const { error } = await supabaseClient
+                        .from('favoriten')
+                        .delete()
+                        .eq('user_id', user.id)
+                        .eq('blog_id', blogId);
+
+                    if (!error) {
+                        button.innerHTML = "⭐ Favorit";
+                        button.classList.remove('bg-red-500', 'text-white', 'border-red-500');
+                        button.classList.add('bg-white', 'text-gray-900', 'border-gray-200');
+                    } else {
+                        alert("Löschen fehlgeschlagen: " + error.message);
+                    }
+                } else {
+                    const { error } = await supabaseClient
+                        .from('favoriten')
+                        .insert([{ user_id: user.id, blog_id: blogId }]);
+
+                    if (!error) {
+                        button.innerHTML = "❤️ Favorisiert";
+                        button.classList.remove('bg-white', 'text-gray-900', 'border-gray-200');
+                        button.classList.add('bg-red-500', 'text-white', 'border-red-500');
+                        alert("Dieser Artikel wurde favorisiert! Du findest diesen Artikel in deinem Profil unter Favoriten.");
+                    } else {
+                        alert("Speichern fehlgeschlagen (Bitte RLS Regeln prüfen!): " + error.message);
+                    }
+                }
+            } catch (err) { alert("Fehler: " + err.message); }
+        }
+
+        document.addEventListener("DOMContentLoaded", checkFavoritesOnLoad);
+    </script>
 </body>
 </html>
