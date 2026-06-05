@@ -31,4 +31,159 @@ title: Blog
             </div>
         </div>
 
-        <div class="grid grid-cols-
+        <div class="grid grid-cols-1 md:grid-cols-3 gap-6 md:gap-8" id="blogGrid">
+            {% for post in site.posts %}
+            {% assign numeric_id = post.date | date: "%Y%m%d%H%M" %}
+            <div class="blog-card bg-white border border-gray-100 p-6 rounded-2xl shadow-xs flex flex-col justify-between hover:shadow-md hover:scale-105 transition-all duration-300" data-post-id="{{ numeric_id }}">
+                <div>
+                    <div class="flex justify-between items-center mb-3">
+                        <span class="text-xs bg-blue-600 text-white px-2.5 py-1 rounded-md font-bold uppercase">{{ post.date | date: "%d.%m.%Y" }}</span>
+                        {% assign words = post.content | strip_html | number_of_words %}
+                        {% assign read_time = words | divided_by: 180 | plus: 1 %}
+                        <span class="text-xs text-gray-400 font-semibold">📖 {{ read_time }} Min.</span>
+                    </div>
+                    
+                    <h2 class="post-title text-xl font-black text-gray-950 mt-1 mb-3 line-clamp-2">{{ post.title }}</h2>
+                    <p class="text-gray-600 text-sm mb-4 line-clamp-4">{{ post.excerpt | strip_html }}</p>
+                </div>
+                
+                <div class="flex justify-between items-center mt-2">
+                    <a href="{{ post.url | relative_url }}" class="text-blue-600 font-bold text-sm hover:text-blue-800 no-underline inline-block">
+                        Artikel lesen →
+                    </a>
+                    
+                    <button onclick="favoritUmschalten('{{ numeric_id }}', this)" class="fav-btn text-sm font-bold px-3 py-1.5 rounded-full border border-gray-200 bg-white hover:bg-gray-50 transition-all cursor-pointer">
+                        ⭐ Favorit
+                    </button>
+                </div>
+            </div>
+            {% else %}
+            <div class="col-span-1 md:col-span-3 text-center py-12 bg-gray-100 rounded-2xl">
+                <p class="text-gray-500 text-lg font-medium">Bisher wurden noch keine Artikel veröffentlicht.</p>
+            </div>
+            {% endfor %}
+        </div>
+
+        <p id="noResultsMessage" class="text-gray-500 text-center py-12 text-lg hidden">Keine passenden Artikel gefunden.</p>
+
+    </main>
+
+    {% include footer.html %}
+
+    <script>
+        // --- 1. SUPABASE INITIALISIERUNG ---
+        const SUPABASE_URL = "https://xxuanzhrrpwurkyjfjky.supabase.co";
+        const SUPABASE_ANON_KEY = "sb_publishable_WdzN1r5HkdnqrfIN2phV1g_-GdLlknq"; 
+        
+        const supabase = supabase.createClient(SUPABASE_URL, SUPABASE_ANON_KEY);
+
+        // --- 2. BEREITS BESTEHENDE FAVORITEN ROT FÄRBEN ---
+        async function checkFavoritesOnLoad() {
+            const { data: { user } } = await supabase.auth.getUser();
+
+            // Nur wenn jemand eingeloggt ist, holen wir die alten Favoriten
+            if (user) {
+                const { data: favoriten, error } = await supabase
+                    .from('favoriten')
+                    .select('blog_id')
+                    .eq('user_id', user.id);
+
+                if (!error && favoriten) {
+                    const favIds = new Set(favoriten.map(f => f.blog_id.toString()));
+                    
+                    // Alle Karten durchgehen und rot färben, falls sie in der DB liegen
+                    const cards = document.getElementsByClassName('blog-card');
+                    for (let card of cards) {
+                        const postId = card.getAttribute('data-post-id');
+                        if (favIds.has(postId)) {
+                            const btn = card.querySelector('.fav-btn');
+                            if (btn) {
+                                btn.innerHTML = "❤️ Favorisiert";
+                                btn.classList.remove('bg-white', 'text-gray-900', 'border-gray-200');
+                                btn.classList.add('bg-red-500', 'text-white', 'border-red-500');
+                            }
+                        }
+                    }
+                }
+            }
+        }
+
+        // --- 3. FAVORIT UMSCHALTEN BEIM KLICKEN ---
+        async function favoritUmschalten(blogId, button) {
+            const { data: { user } } = await supabase.auth.getUser();
+
+            // FALL 1: NUTZER IST NICHT ANGEMELDET
+            if (!user) {
+                alert("Wenn du diesen Artikel favorisieren möchtest, dann musst du dich erst anmelden!");
+                return; 
+            }
+
+            // FALL 2: NUTZER IST ANGEMELDET
+            const { data: existiert } = await supabase
+                .from('favoriten')
+                .select('*')
+                .eq('user_id', user.id)
+                .eq('blog_id', blogId);
+
+            if (existiert && existiert.length > 0) {
+                // Bereits favorisiert -> Also jetzt löschen
+                const { error } = await supabase
+                    .from('favoriten')
+                    .delete()
+                    .eq('user_id', user.id)
+                    .eq('blog_id', blogId);
+
+                if (!error) {
+                    button.innerHTML = "⭐ Favorit";
+                    button.classList.remove('bg-red-500', 'text-white', 'border-red-500');
+                    button.classList.add('bg-white', 'text-gray-900', 'border-gray-200');
+                }
+            } else {
+                // Noch kein Favorit -> Jetzt hinzufügen
+                const { error } = await supabase
+                    .from('favoriten')
+                    .insert([{ user_id: user.id, blog_id: blogId }]);
+
+                if (!error) {
+                    button.innerHTML = "❤️ Favorisiert";
+                    button.classList.remove('bg-white', 'text-gray-900', 'border-gray-200');
+                    button.classList.add('bg-red-500', 'text-white', 'border-red-500');
+                    
+                    // Deine Wunschnachricht ausgeben
+                    alert("Dieser Artikel wurde favorisiert! Du findest diesen Artikel in deinem Profil unter Favoriten.");
+                }
+            }
+        }
+
+        // --- 4. LIVE-SUCHE SCRIPT ---
+        function filterBlogPosts() {
+            const input = document.getElementById('blogSearch');
+            const filter = input.value.toLowerCase();
+            const cards = document.getElementsByClassName('blog-card');
+            let hasResults = false;
+
+            for (let i = 0; i < cards.length; i++) {
+                const title = cards[i].querySelector('.post-title').innerText.toLowerCase();
+                if (title.includes(filter)) {
+                    cards[i].style.display = "flex";
+                    hasResults = true;
+                } else {
+                    cards[i].style.display = "none";
+                }
+            }
+
+            const noResults = document.getElementById('noResultsMessage');
+            if (hasResults) {
+                noResults.classList.add('hidden');
+            } else {
+                noResults.classList.remove('hidden');
+            }
+        }
+
+        // Wenn die Seite lädt, prüfen wir direkt die Favoriten im Hintergrund
+        document.addEventListener("DOMContentLoaded", checkFavoritesOnLoad);
+    </script>
+
+    {% include cookie-banner.html %}
+</body>
+</html>
