@@ -153,11 +153,6 @@ layout: null
             <div class="mt-6 pt-6 border-t border-gray-100 flex justify-start no-print">
                 <button onclick="window.print()" class="bg-gray-100 hover:bg-gray-200 text-gray-700 font-bold text-sm px-5 py-2.5 rounded-xl transition-all cursor-pointer border border-gray-200 shadow-xs active:scale-95">
                     Artikel ausdrucken / als PDF speichern
-
-                    {% assign numeric_id = page.date | date: "%Y%m%d%H%M" %}
-<button onclick="favoritUmschalten('{{ numeric_id }}', this)" class="fav-btn text-sm font-bold px-4 py-2 rounded-xl border border-gray-200 bg-white hover:bg-gray-50 transition-all cursor-pointer ml-2">
-    ⭐ Als Favorit speichern
-</button>
                 </button>
             </div>
             
