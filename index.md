@@ -6,13 +6,22 @@ title: Startseite
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>M-Fleger | Portfolio & Blog</title>
-    <link rel="icon" type="image/jpeg" href="auge-logo.jpg">
+    
+    <!-- Standard SEO Tags -->
+    <title>M-Fleger | Portfolio & Blog von Julian Fleger</title>
+    <meta name="description" content="Willkommen auf M-Fleger. Entdecke die kreativen Projekte, Brandings und neuesten Blogartikel von Julian Fleger. Punktgenau verbunden.">
+    <meta name="keywords" content="Julian Fleger, M-Fleger, Portfolio, Blog, Design, Development, Branding, Projekte">
+    <meta name="robots" content="index, follow">
+    <link rel="canonical" href="https://julian13053.github.io/index.html">
+
+    <!-- Open Graph / Facebook -->
     <meta property="og:type" content="website">
-    <meta property="og:title" content="M-Fleger | Portfolio & Blog">
+    <meta property="og:title" content="M-Fleger | Portfolio & Blog von Julian Fleger">
     <meta property="og:description" content="Willkommen auf M-Fleger. Entdecke meine Projekte, kreativen Ideen und neuesten Blogartikel!">
     <meta property="og:image" content="https://julian13053.github.io/auge-logo.jpg">
     <meta property="og:url" content="https://julian13053.github.io/index.html">
+    
+    <link rel="icon" type="image/jpeg" href="auge-logo.jpg">
     <script src="https://cdn.jsdelivr.net/npm/@tailwindcss/browser@4"></script>
     <script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script>
     <style>
@@ -25,6 +34,7 @@ title: Startseite
 </head>
 <body class="bg-gray-50 text-gray-900 font-sans antialiased flex flex-col min-h-screen relative">
 
+    <!-- DYNAMISCHES BANNER (TOAST) -->
     <div id="custom-banner" class="fixed top-24 right-4 z-50 transform translate-x-full opacity-0 transition-all duration-300 ease-out max-w-sm w-full bg-white border shadow-xl rounded-2xl p-4 flex items-start gap-3">
         <span id="banner-icon" class="text-xl"></span>
         <div class="flex-grow">
