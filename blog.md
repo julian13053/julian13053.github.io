@@ -73,7 +73,6 @@ title: Blog
     <script>
         const SUPABASE_URL = "https://xxuanzhrrpwurkyjfjky.supabase.co";
         const SUPABASE_ANON_KEY = "sb_publishable_WdzN1r5HkdnqrfIN2phV1g_-GdLlknq"; 
-        
         const supabaseClient = supabase.createClient(SUPABASE_URL, SUPABASE_ANON_KEY);
 
         async function checkFavoritesOnLoad() {
@@ -101,9 +100,7 @@ title: Blog
                         }
                     }
                 }
-            } catch (err) {
-                console.error(err);
-            }
+            } catch (err) { console.error(err); }
         }
 
         async function favoritUmschalten(blogId, button) {
@@ -111,7 +108,7 @@ title: Blog
                 const { data: { user } } = await supabaseClient.auth.getUser();
 
                 if (!user) {
-                    alert("Wenn du diesen Artikel favorisieren möchtest, dann musst du dich erst anmelden!");
+                    window.location.href = "/anmeldung-erforderlich.html";
                     return; 
                 }
 
@@ -132,6 +129,8 @@ title: Blog
                         button.innerHTML = "⭐ Favorit";
                         button.classList.remove('bg-red-500', 'text-white', 'border-red-500');
                         button.classList.add('bg-white', 'text-gray-900', 'border-gray-200');
+                    } else {
+                        alert("Löschen fehlgeschlagen: " + error.message);
                     }
                 } else {
                     const { error } = await supabaseClient
@@ -143,11 +142,11 @@ title: Blog
                         button.classList.remove('bg-white', 'text-gray-900', 'border-gray-200');
                         button.classList.add('bg-red-500', 'text-white', 'border-red-500');
                         alert("Dieser Artikel wurde favorisiert! Du findest diesen Artikel in deinem Profil unter Favoriten.");
+                    } else {
+                        alert("Speichern fehlgeschlagen (Bitte RLS Regeln prüfen!): " + error.message);
                     }
                 }
-            } catch (err) {
-                console.error(err);
-            }
+            } catch (err) { alert("Fehler: " + err.message); }
         }
 
         function filterBlogPosts() {
