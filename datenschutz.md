@@ -45,9 +45,10 @@ title: Datenschutz
                 <p class="text-gray-600 leading-relaxed">
                     Die verantwortliche Stelle für die Datenverarbeitung auf dieser Website ist:<br><br>
                     <strong>Julian Fleger</strong><br>
-                    [Deine Adresse]<br>
-                    [Deine E-Mail-Adresse]<br>
-                    [Deine Telefonnummer (optional)]
+                    Rüdickenstr. 30<br>
+                    13053 Berlin<br><br>
+                    <strong>Kontakt:</strong><br>
+                    E-Mail: julian@m-fleger.de
                 </p>
             </section>
 
