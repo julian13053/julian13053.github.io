@@ -10,7 +10,15 @@ title: Blog
     <script src="https://cdn.jsdelivr.net/npm/@tailwindcss/browser@4"></script>
     <script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script>
 </head>
-<body class="bg-gray-50 text-gray-900 font-sans antialiased flex flex-col min-h-screen">
+<body class="bg-gray-50 text-gray-900 font-sans antialiased flex flex-col min-h-screen relative">
+
+    <div id="custom-banner" class="fixed top-24 right-4 z-50 transform translate-x-full opacity-0 transition-all duration-300 ease-out max-w-sm w-full bg-white border shadow-xl rounded-2xl p-4 flex items-start gap-3">
+        <span id="banner-icon" class="text-xl"></span>
+        <div class="flex-grow">
+            <h4 id="banner-title" class="font-bold text-sm text-gray-900"></h4>
+            <p id="banner-message" class="text-xs text-gray-600 mt-0.5"></p>
+        </div>
+    </div>
 
     <nav class="bg-white border-b border-gray-100 sticky top-0 z-50 shadow-xs">
         {% include navigation.html %}
@@ -75,6 +83,32 @@ title: Blog
         const SUPABASE_ANON_KEY = "sb_publishable_WdzN1r5HkdnqrfIN2phV1g_-GdLlknq"; 
         const supabaseClient = supabase.createClient(SUPABASE_URL, SUPABASE_ANON_KEY);
 
+        function zeigeBanner(type, title, message) {
+            const banner = document.getElementById('custom-banner');
+            const icon = document.getElementById('banner-icon');
+            const titleEl = document.getElementById('banner-title');
+            const msgEl = document.getElementById('banner-message');
+
+            if(type === 'success') {
+                banner.className = "fixed top-24 right-4 z-50 transform transition-all duration-300 ease-out max-w-sm w-full bg-white border border-green-200 shadow-xl rounded-2xl p-4 flex items-start gap-3 text-green-800";
+                icon.innerText = "❤️";
+            } else if(type === 'info') {
+                banner.className = "fixed top-24 right-4 z-50 transform transition-all duration-300 ease-out max-w-sm w-full bg-white border border-blue-200 shadow-xl rounded-2xl p-4 flex items-start gap-3 text-blue-800";
+                icon.innerText = "ℹ️";
+            } else {
+                banner.className = "fixed top-24 right-4 z-50 transform transition-all duration-300 ease-out max-w-sm w-full bg-white border border-red-200 shadow-xl rounded-2xl p-4 flex items-start gap-3 text-red-800";
+                icon.innerText = "❌";
+            }
+
+            titleEl.innerText = title;
+            msgEl.innerText = message;
+            banner.classList.remove('translate-x-full', 'opacity-0');
+            
+            setTimeout(() => {
+                banner.classList.add('translate-x-full', 'opacity-0');
+            }, 4000);
+        }
+
         async function checkFavoritesOnLoad() {
             try {
                 const { data: { user } } = await supabaseClient.auth.getUser();
@@ -129,8 +163,9 @@ title: Blog
                         button.innerHTML = "⭐ Favorit";
                         button.classList.remove('bg-red-500', 'text-white', 'border-red-500');
                         button.classList.add('bg-white', 'text-gray-900', 'border-gray-200');
+                        zeigeBanner('info', 'Entfernt', 'Der Artikel wurde aus deinen Favoriten gelöscht.');
                     } else {
-                        alert("Löschen fehlgeschlagen: " + error.message);
+                        zeigeBanner('error', 'Löschen fehlgeschlagen', error.message);
                     }
                 } else {
                     const { error } = await supabaseClient
@@ -141,12 +176,12 @@ title: Blog
                         button.innerHTML = "❤️ Favorisiert";
                         button.classList.remove('bg-white', 'text-gray-900', 'border-gray-200');
                         button.classList.add('bg-red-500', 'text-white', 'border-red-500');
-                        alert("Dieser Artikel wurde favorisiert! Du findest diesen Artikel in deinem Profil unter Favoriten.");
+                        zeigeBanner('success', 'Favorisiert!', 'Gespeichert. Du findest den Artikel in deinem Profil unter Favoriten.');
                     } else {
-                        alert("Speichern fehlgeschlagen (Bitte RLS Regeln prüfen!): " + error.message);
+                        zeigeBanner('error', 'Speichern fehlgeschlagen', error.message);
                     }
                 }
-            } catch (err) { alert("Fehler: " + err.message); }
+            } catch (err) { zeigeBanner('error', 'Fehler', err.message); }
         }
 
         function filterBlogPosts() {
