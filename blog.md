@@ -7,14 +7,12 @@ title: Blog
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     
-    <!-- Standard SEO Tags -->
     <title>Blog - M-Fleger | Alle Blogartikel & Gedanken</title>
     <meta name="description" content="Stöbere durch den offiziellen M-Fleger Blog. Hier findest du alle Artikel, kreative Ideen und Gedanken von Julian Fleger punktgenau festgehalten.">
     <meta name="keywords" content="Julian Fleger, M-Fleger Blog, Blogartikel, Gedanken, Ideen, Texte lesen">
     <meta name="robots" content="index, follow">
     <link rel="canonical" href="https://julian13053.github.io/blog.html">
 
-    <!-- Open Graph / Facebook -->
     <meta property="og:type" content="website">
     <meta property="og:title" content="Blog - M-Fleger | Alle Blogartikel & Gedanken">
     <meta property="og:description" content="Stöbere durch den offiziellen M-Fleger Blog. Gedanken, Projekte und creative Ideen punktgenau festgehalten.">
@@ -26,7 +24,6 @@ title: Blog
 </head>
 <body class="bg-gray-50 text-gray-900 font-sans antialiased flex flex-col min-h-screen relative">
 
-    <!-- DYNAMISCHES BANNER (TOAST) -->
     <div id="custom-banner" class="fixed top-24 right-4 z-50 transform translate-x-full opacity-0 transition-all duration-300 ease-out max-w-sm w-full bg-white border shadow-xl rounded-2xl p-4 flex items-start gap-3">
         <span id="banner-icon" class="text-xl"></span>
         <div class="flex-grow">
@@ -70,14 +67,22 @@ title: Blog
                     <p class="text-gray-600 text-sm mb-4 line-clamp-4">{{ post.excerpt | strip_html }}</p>
                 </div>
                 
-                <div class="flex justify-between items-center mt-2">
-                    <a href="{{ post.url | relative_url }}" class="text-blue-600 font-bold text-sm hover:text-blue-800 no-underline inline-block">
-                        Artikel lesen →
-                    </a>
+                <div class="flex flex-col gap-3 mt-2">
+                    <div class="flex justify-between items-center">
+                        <a href="{{ post.url | relative_url }}" class="text-blue-600 font-bold text-sm hover:text-blue-800 no-underline inline-block">
+                            Artikel lesen →
+                        </a>
+                        
+                        <button onclick="likeUmschalten('{{ numeric_id }}', this)" class="like-btn text-xs font-bold px-3 py-1.5 rounded-full border border-gray-200 bg-white hover:bg-gray-50 transition-all cursor-pointer flex items-center gap-1">
+                            🤍 <span class="like-counter">0</span> Likes
+                        </button>
+                    </div>
                     
-                    <button onclick="favoritUmschalten('{{ numeric_id }}', this)" class="fav-btn text-sm font-bold px-3 py-1.5 rounded-full border border-gray-200 bg-white hover:bg-gray-50 transition-all cursor-pointer">
-                        ⭐ Favorit
-                    </button>
+                    <div class="flex justify-end">
+                        <button onclick="favoritUmschalten('{{ numeric_id }}', this)" class="fav-btn text-xs font-bold px-3 py-1.5 rounded-full border border-gray-200 bg-white hover:bg-gray-50 transition-all cursor-pointer w-full md:w-auto text-center">
+                            ⭐ Favorit
+                        </button>
+                    </div>
                 </div>
             </div>
             {% else %}
@@ -124,16 +129,35 @@ title: Blog
             }, 4000);
         }
 
-        async function checkFavoritesOnLoad() {
+        async function datenLaden() {
             try {
+                // 1. Alle Likes zählen und auf den Cards anzeigen
+                const { data: alleLikes, error: likeError } = await supabaseClient
+                    .from('likes')
+                    .select('blog_id');
+
+                if (!likeError && alleLikes) {
+                    const likeCounts = {};
+                    alleLikes.forEach(l => {
+                        likeCounts[l.blog_id] = (likeCounts[l.blog_id] || 0) + 1;
+                    });
+
+                    const cards = document.getElementsByClassName('blog-card');
+                    for (let card of cards) {
+                        const postId = card.getAttribute('data-post-id');
+                        const counter = card.querySelector('.like-counter');
+                        if (counter) {
+                            counter.innerText = likeCounts[postId] || 0;
+                        }
+                    }
+                }
+
+                // 2. Nutzer-spezifische Daten laden (wenn eingeloggt)
                 const { data: { user } } = await supabaseClient.auth.getUser();
                 if (user) {
-                    const { data: favoriten, error } = await supabaseClient
-                        .from('favoriten')
-                        .select('blog_id')
-                        .eq('user_id', user.id);
-
-                    if (!error && favoriten) {
+                    // Favoriten prüfen
+                    const { data: favoriten } = await supabaseClient.from('favoriten').select('blog_id').eq('user_id', user.id);
+                    if (favoriten) {
                         const favIds = new Set(favoriten.map(f => f.blog_id.toString()));
                         const cards = document.getElementsByClassName('blog-card');
                         for (let card of cards) {
@@ -148,6 +172,24 @@ title: Blog
                             }
                         }
                     }
+
+                    // Eigene Likes prüfen
+                    const { data: meineLikes } = await supabaseClient.from('likes').select('blog_id').eq('user_id', user.id);
+                    if (meineLikes) {
+                        const likedIds = new Set(meineLikes.map(l => l.blog_id.toString()));
+                        const cards = document.getElementsByClassName('blog-card');
+                        for (let card of cards) {
+                            const postId = card.getAttribute('data-post-id');
+                            if (likedIds.has(postId)) {
+                                const btn = card.querySelector('.like-btn');
+                                if (btn) {
+                                    btn.innerHTML = `💖 <span class="like-counter">${btn.querySelector('.like-counter').innerText}</span> Likes`;
+                                    btn.classList.remove('bg-white', 'text-gray-900', 'border-gray-200');
+                                    btn.classList.add('bg-pink-500', 'text-white', 'border-pink-500');
+                                }
+                            }
+                        }
+                    }
                 }
             } catch (err) { console.error(err); }
         }
@@ -155,45 +197,57 @@ title: Blog
         async function favoritUmschalten(blogId, button) {
             try {
                 const { data: { user } } = await supabaseClient.auth.getUser();
+                if (!user) { window.location.href = "/anmeldung-erforderlich.html"; return; }
 
-                if (!user) {
-                    window.location.href = "/anmeldung-erforderlich.html";
-                    return; 
-                }
-
-                const { data: existiert } = await supabaseClient
-                    .from('favoriten')
-                    .select('*')
-                    .eq('user_id', user.id)
-                    .eq('blog_id', blogId);
+                const { data: existiert } = await supabaseClient.from('favoriten').select('*').eq('user_id', user.id).eq('blog_id', blogId);
 
                 if (existiert && existiert.length > 0) {
-                    const { error } = await supabaseClient
-                        .from('favoriten')
-                        .delete()
-                        .eq('user_id', user.id)
-                        .eq('blog_id', blogId);
-
+                    const { error } = await supabaseClient.from('favoriten').delete().eq('user_id', user.id).eq('blog_id', blogId);
                     if (!error) {
                         button.innerHTML = "⭐ Favorit";
                         button.classList.remove('bg-red-500', 'text-white', 'border-red-500');
                         button.classList.add('bg-white', 'text-gray-900', 'border-gray-200');
                         zeigeBanner('info', 'Entfernt', 'Der Artikel wurde aus deinen Favoriten gelöscht.');
-                    } else {
-                        zeigeBanner('error', 'Löschen fehlgeschlagen', error.message);
                     }
                 } else {
-                    const { error } = await supabaseClient
-                        .from('favoriten')
-                        .insert([{ user_id: user.id, blog_id: blogId }]);
-
+                    const { error } = await supabaseClient.from('favoriten').insert([{ user_id: user.id, blog_id: blogId }]);
                     if (!error) {
                         button.innerHTML = "❤️ Favorisiert";
                         button.classList.remove('bg-white', 'text-gray-900', 'border-gray-200');
                         button.classList.add('bg-red-500', 'text-white', 'border-red-500');
-                        zeigeBanner('success', 'Favorisiert!', 'Gespeichert. Du findest den Artikel in deinem Profil unter Favoriten.');
-                    } else {
-                        zeigeBanner('error', 'Speichern fehlgeschlagen', error.message);
+                        zeigeBanner('success', 'Favorisiert!', 'Gespeichert in deinem Profil unter Favoriten.');
+                    }
+                }
+            } catch (err) { zeigeBanner('error', 'Fehler', err.message); }
+        }
+
+        async function likeUmschalten(blogId, button) {
+            try {
+                const { data: { user } } = await supabaseClient.auth.getUser();
+                if (!user) { window.location.href = "/anmeldung-erforderlich.html"; return; }
+
+                const counterEl = button.querySelector('.like-counter');
+                let aktuellerStand = parseInt(counterEl.innerText);
+
+                const { data: existiert } = await supabaseClient.from('likes').select('*').eq('user_id', user.id).eq('blog_id', blogId);
+
+                if (existiert && existiert.length > 0) {
+                    const { error } = await supabaseClient.from('likes').delete().eq('user_id', user.id).eq('blog_id', blogId);
+                    if (!error) {
+                        counterEl.innerText = aktuellerStand - 1;
+                        button.innerHTML = `🤍 <span class="like-counter">${counterEl.innerText}</span> Likes`;
+                        button.classList.remove('bg-pink-500', 'text-white', 'border-pink-500');
+                        button.classList.add('bg-white', 'text-gray-900', 'border-gray-200');
+                        zeigeBanner('info', 'Like entfernt', 'Schade, dir gefällt dieser Beitrag nicht mehr.');
+                    }
+                } else {
+                    const { error } = await supabaseClient.from('likes').insert([{ user_id: user.id, blog_id: blogId }]);
+                    if (!error) {
+                        counterEl.innerText = aktuellerStand + 1;
+                        button.innerHTML = `💖 <span class="like-counter">${counterEl.innerText}</span> Likes`;
+                        button.classList.remove('bg-white', 'text-gray-900', 'border-gray-200');
+                        button.classList.add('bg-pink-500', 'text-white', 'border-pink-500');
+                        zeigeBanner('success', 'Geliked!', 'Danke für dein Feedback zu diesem Beitrag!');
                     }
                 }
             } catch (err) { zeigeBanner('error', 'Fehler', err.message); }
@@ -216,14 +270,10 @@ title: Blog
             }
 
             const noResults = document.getElementById('noResultsMessage');
-            if (hasResults) {
-                noResults.classList.add('hidden');
-            } else {
-                noResults.classList.remove('hidden');
-            }
+            if (hasResults) { noResults.classList.add('hidden'); } else { noResults.classList.remove('hidden'); }
         }
 
-        document.addEventListener("DOMContentLoaded", checkFavoritesOnLoad);
+        document.addEventListener("DOMContentLoaded", datenLaden);
     </script>
 
     {% include cookie-banner.html %}
