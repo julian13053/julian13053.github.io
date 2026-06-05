@@ -11,94 +11,38 @@ layout: null
     <script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script>
     
     <style>
-        /* Zwingt den Blogtext auf dem Bildschirm zu perfekter Lesbarkeit */
         .blog-text, .blog-text p, .blog-text span {
             color: #1f2937 !important; 
             opacity: 1 !important;
         }
-
-        /* Standardmäßig sind die reinen Druck-Elemente auf der Webseite unsichtbar */
-        .print-header {
-            display: none;
-        }
-
-        /* Perfekter Ausdruck für Papier / PDF */
+        .print-header { display: none; }
         @media print {
-            nav, footer, .no-print, #cookie-banner, .fixed {
-                display: none !important;
-            }
-
-            /* Kopfzeile auf Papier einblenden */
-            .print-header {
-                display: flex !important;
-                justify-content: space-between;
-                align-items: center;
-                width: 100%;
-                padding-bottom: 8px;
-                border-bottom: 1px solid #d1d5db;
-                margin-bottom: 25px;
-                font-family: sans-serif;
-            }
-            .print-header-left {
-                font-size: 14px;
-                font-weight: 700;
-                color: #1d4ed8;
-            }
-            .print-header-right {
-                font-size: 14px;
-                font-weight: 600;
-                color: #374151;
-            }
-
-            /* TEXTBEREICH FÜR DEN DRUCK OPTIMIEREN */
-            .blog-text, .blog-text p {
-                color: #000000 !important;
-            }
-
-            .author-note {
-                color: #374151 !important;
-                margin-top: 24px !important;
-                font-weight: 600 !important;
-            }
-
-            /* REPARATUR FÜR DEN TITEL BEIM DRUCKEN (Jetzt tiefschwarz und deutlich sichtbar!) */
-            header.bg-gradient-to-r {
-                background: white !important;
-                background-image: none !important;
-                color: #000000 !important;
-                padding-top: 10px !important;
-                padding-bottom: 15px !important;
-                border-bottom: 1px solid #e5e7eb;
-            }
-            header h1 {
-                color: #0f172a !important; /* Kräftiges Dunkelblau/Schwarz */
-                font-size: 26px !important;
-                font-weight: 800 !important;
-            }
-            header span {
-                color: #4b5563 !important; /* Gut lesbares Grau für Datum & Lesezeit */
-                font-weight: 600 !important;
-            }
-            header div.border-b {
-                border-color: #e5e7eb !important; /* Dünne graue Trennlinie beim Drucken */
-            }
-
-            body {
-                background-color: white !important;
-            }
-            main {
-                margin-top: 0 !important;
-                padding: 0 !important;
-            }
-            article {
-                border: none !important;
-                box-shadow: none !important;
-                padding: 0 !important;
-            }
+            nav, footer, .no-print, #cookie-banner, .fixed { display: none !important; }
+            .print-header { display: flex !important; justify-content: space-between; align-items: center; width: 100%; padding-bottom: 8px; border-bottom: 1px solid #d1d5db; margin-bottom: 25px; font-family: sans-serif; }
+            .print-header-left { font-size: 14px; font-weight: 700; color: #1d4ed8; }
+            .print-header-right { font-size: 14px; font-weight: 600; color: #374151; }
+            .blog-text, .blog-text p { color: #000000 !important; }
+            .author-note { color: #374151 !important; margin-top: 24px !important; font-weight: 600 !important; }
+            header.bg-gradient-to-r { background: white !important; background-image: none !important; color: #000000 !important; padding-top: 10px !important; padding-bottom: 15px !important; border-bottom: 1px solid #e5e7eb; }
+            header h1 { color: #0f172a !important; font-size: 26px !important; font-weight: 800 !important; }
+            header span { color: #4b5563 !important; font-weight: 600 !important; }
+            header div.border-b { border-color: #e5e7eb !important; }
+            body { background-color: white !important; }
+            main { margin-top: 0 !important; padding: 0 !important; }
+            article { border: none !important; box-shadow: none !important; padding: 0 !important; }
         }
     </style>
 </head>
-<body class="bg-gray-50 text-gray-900 font-sans antialiased flex flex-col min-h-screen">
+<body class="bg-gray-50 text-gray-900 font-sans antialiased flex flex-col min-h-screen relative">
+
+    <!-- DYNAMISCHES BANNER (TOAST) -->
+    <div id="custom-banner" class="fixed top-24 right-4 z-50 transform translate-x-full opacity-0 transition-all duration-300 ease-out max-w-sm w-full bg-white border shadow-xl rounded-2xl p-4 flex items-start gap-3">
+        <span id="banner-icon" class="text-xl"></span>
+        <div class="flex-grow">
+            <h4 id="banner-title" class="font-bold text-sm text-gray-900"></h4>
+            <p id="banner-message" class="text-xs text-gray-600 mt-0.5"></p>
+        </div>
+    </div>
 
     <div class="print-header max-w-4xl mx-auto w-full px-4">
         <span class="print-header-left">M-Fleger</span>
@@ -116,7 +60,6 @@ layout: null
                 <a href="/ueber-mich.html" class="hover:text-blue-600 hover:border-b-2 hover:border-blue-600 pb-1 no-underline">Über mich</a>
                 <a href="/blog.html" class="text-blue-600 border-b-2 border-blue-600 pb-1 no-underline">Blog</a>
                 <a href="/kontakt.html" class="hover:text-blue-600 hover:border-b-2 hover:border-blue-600 pb-1 no-underline">Kontakt</a>
-                <!-- NEU: Link zur Profilseite -->
                 <a href="/profil.html" class="hover:text-blue-600 hover:border-b-2 hover:border-blue-600 pb-1 no-underline">👤 Mein Profil</a>
             </div>
         </div>
@@ -127,7 +70,6 @@ layout: null
             <h1 class="text-3xl md:text-5xl font-black tracking-tight drop-shadow-md mb-4">
                 {{ page.title }}
             </h1>
-            
             <div class="flex flex-col items-center gap-1 text-xs md:text-sm text-gray-300/90 font-medium w-full max-w-xs">
                 <span>Datum: {{ page.date | date: "%d.%m.%Y" }}</span>
                 <span>Schnellleser: ca. 1 Min. Lesezeit</span>
@@ -186,6 +128,32 @@ layout: null
         const SUPABASE_ANON_KEY = "sb_publishable_WdzN1r5HkdnqrfIN2phV1g_-GdLlknq"; 
         const supabaseClient = supabase.createClient(SUPABASE_URL, SUPABASE_ANON_KEY);
 
+        function zeigeBanner(type, title, message) {
+            const banner = document.getElementById('custom-banner');
+            const icon = document.getElementById('banner-icon');
+            const titleEl = document.getElementById('banner-title');
+            const msgEl = document.getElementById('banner-message');
+
+            if(type === 'success') {
+                banner.className = "fixed top-24 right-4 z-50 transform transition-all duration-300 ease-out max-w-sm w-full bg-white border border-green-200 shadow-xl rounded-2xl p-4 flex items-start gap-3 text-green-800";
+                icon.innerText = "❤️";
+            } else if(type === 'info') {
+                banner.className = "fixed top-24 right-4 z-50 transform transition-all duration-300 ease-out max-w-sm w-full bg-white border border-blue-200 shadow-xl rounded-2xl p-4 flex items-start gap-3 text-blue-800";
+                icon.innerText = "ℹ️";
+            } else {
+                banner.className = "fixed top-24 right-4 z-50 transform transition-all duration-300 ease-out max-w-sm w-full bg-white border border-red-200 shadow-xl rounded-2xl p-4 flex items-start gap-3 text-red-800";
+                icon.innerText = "❌";
+            }
+
+            titleEl.innerText = title;
+            msgEl.innerText = message;
+            banner.classList.remove('translate-x-full', 'opacity-0');
+            
+            setTimeout(() => {
+                banner.classList.add('translate-x-full', 'opacity-0');
+            }, 4000);
+        }
+
         async function checkFavoritesOnLoad() {
             try {
                 const { data: { user } } = await supabaseClient.auth.getUser();
@@ -240,8 +208,9 @@ layout: null
                         button.innerHTML = "⭐ Favorit";
                         button.classList.remove('bg-red-500', 'text-white', 'border-red-500');
                         button.classList.add('bg-white', 'text-gray-900', 'border-gray-200');
+                        zeigeBanner('info', 'Entfernt', 'Der Artikel wurde aus deinen Favoriten gelöscht.');
                     } else {
-                        alert("Löschen fehlgeschlagen: " + error.message);
+                        zeigeBanner('error', 'Fehler', error.message);
                     }
                 } else {
                     const { error } = await supabaseClient
@@ -252,12 +221,12 @@ layout: null
                         button.innerHTML = "❤️ Favorisiert";
                         button.classList.remove('bg-white', 'text-gray-900', 'border-gray-200');
                         button.classList.add('bg-red-500', 'text-white', 'border-red-500');
-                        alert("Dieser Artikel wurde favorisiert! Du findest diesen Artikel in deinem Profil unter Favoriten.");
+                        zeigeBanner('success', 'Favorisiert!', 'Gespeichert. Du findest den Artikel in deinem Profil.');
                     } else {
-                        alert("Speichern fehlgeschlagen (Bitte RLS Regeln prüfen!): " + error.message);
+                        zeigeBanner('error', 'Fehler beim Speichern', error.message);
                     }
                 }
-            } catch (err) { alert("Fehler: " + err.message); }
+            } catch (err) { zeigeBanner('error', 'Fehler', err.message); }
         }
 
         document.addEventListener("DOMContentLoaded", checkFavoritesOnLoad);
