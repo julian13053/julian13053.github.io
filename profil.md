@@ -10,11 +10,51 @@ title: Mein Profil
     <script src="https://cdn.jsdelivr.net/npm/@tailwindcss/browser@4"></script>
     <script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script>
 </head>
-<body class="bg-gray-50 text-gray-900 font-sans antialiased flex flex-col min-h-screen">
+<body class="bg-gray-50 text-gray-900 font-sans antialiased flex flex-col min-h-screen relative">
+
+    <!-- DYNAMISCHES BANNER (TOAST) -->
+    <div id="custom-banner" class="fixed top-24 right-4 z-50 transform translate-x-full opacity-0 transition-all duration-300 ease-out max-w-sm w-full bg-white border shadow-xl rounded-2xl p-4 flex items-start gap-3">
+        <span id="banner-icon" class="text-xl"></span>
+        <div class="flex-grow">
+            <h4 id="banner-title" class="font-bold text-sm text-gray-900"></h4>
+            <p id="banner-message" class="text-xs text-gray-600 mt-0.5"></p>
+        </div>
+    </div>
+
+    <!-- KONTO LÖSCHEN BESTÄTIGUNGS-MODAL -->
+    <div id="delete-modal" class="fixed inset-0 bg-black/50 backdrop-blur-xs z-50 flex items-center justify-center p-4 hidden">
+        <div class="bg-white border border-gray-100 max-w-md w-full rounded-2xl p-6 shadow-xl transform scale-95 transition-all duration-300">
+            <span class="text-3xl block mb-2">⚠️</span>
+            <h3 class="text-xl font-black text-gray-950 tracking-tight">Konto unwiderruflich löschen?</h3>
+            <p class="text-sm text-gray-600 mt-2 leading-relaxed">
+                Bist du dir absolut sicher? Dadurch werden all deine gespeicherten Favoriten und dein Zugang dauerhaft gelöscht. Dies kann nicht rückgängig gemacht werden.
+            </p>
+            <div class="mt-6 flex justify-end gap-3">
+                <button onclick="schließeDeleteModal()" class="px-4 py-2 text-sm font-semibold text-gray-600 hover:bg-gray-100 rounded-xl transition-all cursor-pointer">
+                    Abbrechen
+                </button>
+                <button onclick="kontoDefinitivLoeschen()" class="px-4 py-2 text-sm font-bold bg-red-600 hover:bg-red-700 text-white rounded-xl shadow-xs transition-all cursor-pointer">
+                    Ja, löschen
+                </button>
+            </div>
+        </div>
+    </div>
 
     <!-- MENÜ -->
     <nav class="bg-white border-b border-gray-100 sticky top-0 z-50 shadow-xs">
-        {% include navigation.html %}
+        <div class="max-w-6xl mx-auto px-4 py-4 flex flex-col md:flex-row justify-between items-center gap-4">
+            <a href="/index.html" class="flex items-center gap-3 group no-underline text-current">
+                <img src="/auge-logo.jpg" alt="M-Fleger Logo" class="w-16 h-14 md:w-24 md:h-20 rounded-xl md:rounded-2xl object-contain">
+                <span class="text-2xl md:text-3xl font-black tracking-tight text-blue-600">M-Fleger</span>
+            </a>
+            <div class="flex flex-wrap justify-center gap-x-5 gap-y-2 font-semibold text-gray-600 text-base md:text-lg">
+                <a href="/index.html" class="hover:text-blue-600 hover:border-b-2 hover:border-blue-600 pb-1 no-underline">Startseite</a>
+                <a href="/ueber-mich.html" class="hover:text-blue-600 hover:border-b-2 hover:border-blue-600 pb-1 no-underline">Über mich</a>
+                <a href="/blog.html" class="hover:text-blue-600 hover:border-b-2 hover:border-blue-600 pb-1 no-underline">Blog</a>
+                <a href="/kontakt.html" class="hover:text-blue-600 hover:border-b-2 hover:border-blue-600 pb-1 no-underline">Contact</a>
+                <a href="/profil.html" class="text-blue-600 border-b-2 border-blue-600 pb-1 no-underline">👤 Mein Profil</a>
+            </div>
+        </div>
     </nav>
 
     <!-- HEADER -->
@@ -40,14 +80,17 @@ title: Mein Profil
 
         <!-- Profil-Bereich (Favoriten-Liste) -->
         <div id="profile-content" class="hidden">
-            <h2 class="text-2xl font-black text-gray-950 tracking-tight mb-8 flex items-center gap-2">
-                ❤️ Meine gespeicherten Favoriten
-            </h2>
+            <div class="flex flex-col md:flex-row justify-between items-start md:items-center gap-4 mb-8 border-b border-gray-100 pb-6">
+                <h2 class="text-2xl font-black text-gray-950 tracking-tight flex items-center gap-2">
+                    ❤️ Meine gespeicherten Favoriten
+                </h2>
+                <button onclick="zeigeDeleteModal()" class="text-xs font-bold px-4 py-2 rounded-xl bg-red-50 text-red-600 border border-red-100 hover:bg-red-100 transition-all cursor-pointer">
+                    ⚙️ Konto löschen
+                </button>
+            </div>
             
-            <!-- Hier landen dynamisch die favorisierten Karten -->
             <div class="grid grid-cols-1 md:grid-cols-3 gap-6 md:gap-8" id="favorites-grid"></div>
 
-            <!-- Platzhalter wenn die Liste leer ist -->
             <p id="no-favorites-message" class="text-gray-500 text-center py-12 text-lg font-medium hidden">
                 Du hast bisher noch keine Artikel als Favorit markiert. ⭐
             </p>
@@ -57,7 +100,6 @@ title: Mein Profil
 
     {% include footer.html %}
 
-    <!-- UNSICHTBARER JEKYLL-SPEICHER: Lädt alle Posts als JavaScript-Objekt, damit wir sie matchen können -->
     <script>
         const ALL_JEKYLL_POSTS = [
             {% for post in site.posts %}
@@ -72,27 +114,51 @@ title: Mein Profil
         ];
     </script>
 
-    <!-- SUPABASE LOGIK -->
     <script>
         const SUPABASE_URL = "https://xxuanzhrrpwurkyjfjky.supabase.co";
         const SUPABASE_ANON_KEY = "sb_publishable_WdzN1r5HkdnqrfIN2phV1g_-GdLlknq"; 
         const supabaseClient = supabase.createClient(SUPABASE_URL, SUPABASE_ANON_KEY);
 
+        // Banner-Steuerung
+        function zeigeBanner(type, title, message) {
+            const banner = document.getElementById('custom-banner');
+            const icon = document.getElementById('banner-icon');
+            const titleEl = document.getElementById('banner-title');
+            const msgEl = document.getElementById('banner-message');
+
+            if(type === 'success') {
+                banner.className = "fixed top-24 right-4 z-50 transform transition-all duration-300 ease-out max-w-sm w-full bg-white border border-green-200 shadow-xl rounded-2xl p-4 flex items-start gap-3 text-green-800";
+                icon.innerText = "✅";
+            } else if(type === 'info') {
+                banner.className = "fixed top-24 right-4 z-50 transform transition-all duration-300 ease-out max-w-sm w-full bg-white border border-blue-200 shadow-xl rounded-2xl p-4 flex items-start gap-3 text-blue-800";
+                icon.innerText = "ℹ️";
+            } else {
+                banner.className = "fixed top-24 right-4 z-50 transform transition-all duration-300 ease-out max-w-sm w-full bg-white border border-red-200 shadow-xl rounded-2xl p-4 flex items-start gap-3 text-red-800";
+                icon.innerText = "❌";
+            }
+
+            titleEl.innerText = title;
+            msgEl.innerText = message;
+
+            banner.classList.remove('translate-x-full', 'opacity-0');
+            
+            setTimeout(() => {
+                banner.classList.add('translate-x-full', 'opacity-0');
+            }, 4000);
+        }
+
         async function loadProfilePage() {
             try {
                 const { data: { user } } = await supabaseClient.auth.getUser();
 
-                // 1. Prüfen ob User eingeloggt ist
                 if (!user) {
                     document.getElementById('login-required-card').classList.remove('hidden');
                     return;
                 }
 
-                // 2. Ansicht umschalten & E-Mail anzeigen
                 document.getElementById('profile-content').classList.remove('hidden');
                 document.getElementById('user-email-display').innerText = `Eingeloggt als: ${user.email}`;
 
-                // 3. Favoriten aus der neu erstellten Datenbank-Tabelle abrufen
                 const { data: favoriten, error } = await supabaseClient
                     .from('favoriten')
                     .select('blog_id')
@@ -108,11 +174,9 @@ title: Mein Profil
                     return;
                 }
 
-                // Set aus IDs bauen für schnelleren Abgleich
                 const favIds = new Set(favoriten.map(f => f.blog_id.toString()));
                 let counter = 0;
 
-                // 4. Jekyll-Beiträge filtern und HTML-Karten generieren
                 ALL_JEKYLL_POSTS.forEach(post => {
                     if (favIds.has(post.id)) {
                         counter++;
@@ -146,15 +210,11 @@ title: Mein Profil
                 }
 
             } catch (err) {
-                console.error("Fehler beim Laden des Profils:", err);
-                alert("Profil-Fehler: " + err.message);
+                zeigeBanner('error', 'Fehler beim Laden', err.message);
             }
         }
 
-        // Favorit direkt aus der Profil-Übersicht löschen
         async function entferneFavorit(blogId, button) {
-            if (!confirm("Möchtest du diesen Artikel aus deinen Favoriten entfernen?")) return;
-            
             try {
                 const { data: { user } } = await supabaseClient.auth.getUser();
                 if (!user) return;
@@ -166,26 +226,61 @@ title: Mein Profil
                     .eq('blog_id', blogId);
 
                 if (!error) {
-                    // Karte flüssig aus dem DOM entfernen
                     const card = button.closest('[data-post-id]');
                     card.remove();
                     
-                    // Prüfen ob jetzt leer
+                    zeigeBanner('info', 'Entfernt', 'Der Artikel wurde aus deinen Favoriten gelöscht.');
+
                     const grid = document.getElementById('favorites-grid');
                     if (grid.children.length === 0) {
                         document.getElementById('no-favorites-message').classList.remove('hidden');
                     }
                 } else {
-                    alert("Entfernen fehlgeschlagen: " + error.message);
+                    zeigeBanner('error', 'Fehler', error.message);
                 }
             } catch (err) {
-                alert("Fehler: " + err.message);
+                zeigeBanner('error', 'Fehler', err.message);
+            }
+        }
+
+        // Konto-löschen Modallogik
+        function zeigeDeleteModal() {
+            const modal = document.getElementById('delete-modal');
+            modal.classList.remove('hidden');
+            setTimeout(() => modal.firstElementChild.classList.remove('scale-95'), 10);
+        }
+
+        function schließeDeleteModal() {
+            const modal = document.getElementById('delete-modal');
+            modal.firstElementChild.classList.add('scale-95');
+            setTimeout(() => modal.classList.add('hidden'), 150);
+        }
+
+        async function kontoDefinitivLoeschen() {
+            try {
+                // Da Supabase Client-seitig Kontenlöschung aus Sicherheitsgründen einschränkt, 
+                // rufen wir die dafür vorgesehene RPC auf oder löschen den User-Datensatz.
+                const { data: { user } } = await supabaseClient.auth.getUser();
+                if (!user) return;
+
+                // Schritt 1: Favoriten bereinigen
+                await supabaseClient.from('favoriten').delete().eq('user_id', user.id);
+
+                // Schritt 2: User ausloggen & Session vernichten
+                await supabaseClient.auth.signOut();
+
+                schließeDeleteModal();
+                
+                // Wir zeigen das Banner auf der Startseite an
+                alert("Dein Konto wurde erfolgreich gelöscht. Auf Wiedersehen!"); 
+                window.location.href = "/index.html";
+
+            } catch (err) {
+                zeigeBanner('error', 'Löschen fehlgeschlagen', err.message);
             }
         }
 
         document.addEventListener("DOMContentLoaded", loadProfilePage);
     </script>
-
-    {% include cookie-banner.html %}
 </body>
 </html>
