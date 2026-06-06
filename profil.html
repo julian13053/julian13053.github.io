@@ -6,84 +6,137 @@ title: Mein Profil
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>M-Fleger | Mein Profil</title>
+    
+    <title>Mein Profil | M-Fleger</title>
+    <meta name="description" content="Verwalte deine Kontoeinstellungen, ändere deinen Namen, deine E-Mail-Adresse oder dein Passwort.">
+    
+    <link class="flex" rel="icon" type="image/jpeg" href="auge-logo.jpg">
     <script src="https://cdn.jsdelivr.net/npm/@tailwindcss/browser@4"></script>
-    <script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script>
+    <style>
+        @keyframes fadeInUp {
+            from { opacity: 0; transform: translateY(20px); }
+            to { opacity: 1; transform: translateY(0); }
+        }
+        .animate-fade-in { animation: fadeInUp 0.8s ease-out forwards; }
+    </style>
 </head>
-<body class="bg-gray-50 text-gray-900 font-sans antialiased flex flex-col min-h-screen">
+<body class="bg-gray-50 text-gray-900 font-sans antialiased flex flex-col min-h-screen relative">
 
-    <!-- MENÜ -->
     <nav class="bg-white border-b border-gray-100 sticky top-0 z-50 shadow-xs">
         {% include navigation.html %}
     </nav>
 
-    <!-- PROFIL BEREICH -->
-    <main class="flex-grow flex items-center justify-center px-4 py-12">
-        <div class="bg-white border border-gray-100 p-8 rounded-3xl shadow-xl max-w-md w-full">
+    <header class="bg-gradient-to-br from-[#1e293b] via-[#475569] to-[#334155] text-white py-12 px-4 md:px-6 overflow-hidden">
+        <div class="max-w-4xl mx-auto text-center animate-fade-in">
+            <span class="bg-slate-200/20 text-slate-200 border border-slate-300/30 font-extrabold px-4 py-1.5 rounded-full text-xs uppercase tracking-wider">Kontoeinstellungen</span>
+            <h1 class="text-4xl font-black tracking-tight mt-4 mb-3 leading-tight">
+                👤 Mein Profil
+            </h1>
+            <p class="text-base text-slate-200 max-w-xl mx-auto leading-relaxed">
+                Hier kannst du deine persönlichen Daten verwalten, deine E-Mail-Adresse aktualisieren oder dein Passwort ändern.
+            </p>
+        </div>
+    </header>
+
+    <main class="max-w-2xl mx-auto px-4 md:px-6 py-12 flex-grow w-full">
+        
+        <div class="space-y-8 animate-fade-in">
             
-            <div class="text-center mb-6">
-                <div class="w-20 h-20 bg-blue-100 text-blue-600 rounded-full flex items-center justify-center mx-auto text-3xl font-bold mb-3">
-                    👤
+            <div class="bg-white border border-gray-100 rounded-3xl p-6 md:p-8 shadow-xs">
+                <div class="flex items-center gap-3 mb-6">
+                    <div class="bg-slate-50 text-slate-600 w-10 h-10 rounded-xl flex items-center justify-center font-bold">01</div>
+                    <h2 class="text-xl font-bold text-gray-950">Persönliche Daten</h2>
                 </div>
-                <h1 class="text-2xl font-black text-gray-950 tracking-tight">Konto verwalten</h1>
-                <p class="text-gray-500 text-sm mt-1">Hier kannst du deine Einstellungen einsehen.</p>
-            </div>
-
-            <!-- Nutzerdaten -->
-            <div class="bg-gray-50 p-4 rounded-xl border border-gray-100 mb-6">
-                <span class="block text-xs font-bold text-gray-400 uppercase tracking-wider mb-1">E-Mail-Adresse</span>
-                <span id="user-email" class="font-semibold text-gray-800">Lädt...</span>
-            </div>
-
-            <!-- Gefahrenbereich (Löschen) -->
-            <div class="border-t border-gray-100 pt-6">
-                <h3 class="text-sm font-bold text-red-600 uppercase tracking-wider mb-2">Gefahrenzone</h3>
-                <p class="text-gray-500 text-xs mb-4">Wenn du dein Konto löschst, werden alle deine Daten dauerhaft aus unserer Datenbank entfernt.</p>
                 
-                <button onclick="deleteAccount()" class="w-full bg-red-50 text-red-600 border border-red-200 hover:bg-red-100 font-bold py-2.5 px-4 rounded-xl transition-all cursor-pointer text-sm">
-                    ⚠️ Konto unwiderruflich löschen
-                </button>
+                <form id="profile-data-form" class="space-y-5">
+                    <div>
+                        <label for="username" class="block text-sm font-semibold text-gray-700 mb-1.5">Anzeigename / Name</label>
+                        <input type="text" id="username" name="username" placeholder="z. B. Max Mustermann" required
+                               class="w-full bg-gray-50 border border-gray-200 rounded-xl px-4 py-3 text-sm focus:outline-hidden focus:border-slate-500 focus:bg-white transition-all">
+                        <p class="text-xs text-gray-400 mt-1">Dieser Name wird angezeigt, wenn du Kommentare verfasst.</p>
+                    </div>
+
+                    <div>
+                        <label for="email" class="block text-sm font-semibold text-gray-700 mb-1.5">E-Mail-Adresse</label>
+                        <input type="email" id="email" name="email" placeholder="max@beispiel.de" required
+                               class="w-full bg-gray-50 border border-gray-200 rounded-xl px-4 py-3 text-sm focus:outline-hidden focus:border-slate-500 focus:bg-white transition-all">
+                    </div>
+
+                    <div class="pt-2">
+                        <button type="submit" 
+                                class="w-full sm:w-auto bg-slate-900 hover:bg-slate-800 text-white font-bold px-6 py-3 rounded-xl transition-all shadow-xs cursor-pointer text-sm">
+                            Änderungen speichern
+                        </button>
+                    </div>
+                </form>
+            </div>
+
+            <div class="bg-white border border-gray-100 rounded-3xl p-6 md:p-8 shadow-xs">
+                <div class="flex items-center gap-3 mb-6">
+                    <div class="bg-slate-50 text-slate-600 w-10 h-10 rounded-xl flex items-center justify-center font-bold">02</div>
+                    <h2 class="text-xl font-bold text-gray-950">Passwort ändern</h2>
+                </div>
+                
+                <form id="password-form" class="space-y-5">
+                    <div>
+                        <label for="current-password" class="block text-sm font-semibold text-gray-700 mb-1.5">Aktuelles Passwort</label>
+                        <input type="password" id="current-password" name="current-password" required
+                               class="w-full bg-gray-50 border border-gray-200 rounded-xl px-4 py-3 text-sm focus:outline-hidden focus:border-slate-500 focus:bg-white transition-all">
+                    </div>
+
+                    <div class="grid grid-cols-1 sm:grid-cols-2 gap-4">
+                        <div>
+                            <label for="new-password" class="block text-sm font-semibold text-gray-700 mb-1.5">Neues Passwort</label>
+                            <input type="password" id="new-password" name="new-password" required minlength="8"
+                                   class="w-full bg-gray-50 border border-gray-200 rounded-xl px-4 py-3 text-sm focus:outline-hidden focus:border-slate-500 focus:bg-white transition-all">
+                        </div>
+
+                        <div>
+                            <label for="confirm-password" class="block text-sm font-semibold text-gray-700 mb-1.5">Neues Passwort bestätigen</label>
+                            <input type="password" id="confirm-password" name="confirm-password" required minlength="8"
+                                   class="w-full bg-gray-50 border border-gray-200 rounded-xl px-4 py-3 text-sm focus:outline-hidden focus:border-slate-500 focus:bg-white transition-all">
+                        </div>
+                    </div>
+                    <p class="text-xs text-gray-400">Das Passwort muss mindestens 8 Zeichen lang sein.</p>
+
+                    <div class="pt-2">
+                        <button type="submit" 
+                                class="w-full sm:w-auto bg-red-600 hover:bg-red-700 text-white font-bold px-6 py-3 rounded-xl transition-all shadow-xs cursor-pointer text-sm">
+                            Passwort aktualisieren
+                        </button>
+                    </div>
+                </form>
             </div>
 
         </div>
+
     </main>
 
-    <!-- FOOTER -->
     {% include footer.html %}
+    {% include cookie-banner.html %}
 
     <script>
-        const PROFIL_SUPABASE_URL = "https://xxuanzhrrpwurkyjfjky.supabase.co";
-        const PROFIL_SUPABASE_ANON_KEY = "sb_publishable_WdzN1r5HkdnqrfIN2phV1g_-GdLlknq";
-        const supabaseProfile = supabase.createClient(PROFIL_SUPABASE_URL, PROFIL_SUPABASE_ANON_KEY);
+        // Formular 1: Profildaten absenden
+        document.getElementById('profile-data-form').addEventListener('submit', function(e) {
+            e.preventDefault();
+            alert('Deine Profildaten wurden lokal verarbeitet! Sobald wir das Backend anbinden, werden diese dauerhaft gespeichert.');
+        });
 
-        // Prüfen ob eingeloggt und Daten anzeigen
-        async function loadProfile() {
-            const { data: { user } } = await supabaseProfile.auth.getUser();
-            
-            if (!user) {
-                // Nicht eingeloggt? Ab zur Login-Seite
-                window.location.href = "/login.html";
-            } else {
-                document.getElementById('user-email').innerText = user.email;
+        // Formular 2: Passwort ändern mit Validierung
+        document.getElementById('password-form').addEventListener('submit', function(e) {
+            e.preventDefault();
+            const newPw = document.getElementById('new-password').value;
+            const confirmPw = document.getElementById('confirm-password').value;
+
+            if (newPw !== confirmPw) {
+                alert('Fehler: Die neuen Passwörter stimmen nicht überein!');
+                return;
             }
-        }
 
-        // Konto löschen Funktion
-        async function deleteAccount() {
-            const bestaetigung = confirm("Bist du dir absolut sicher? Diese Aktion kann nicht rückgängig gemacht werden.");
-            if (!bestaetigung) return;
-
-            // Supabase bietet aus Sicherheitsgründen das Löschen des eigenen Kontos 
-            // im Frontend nur über Umwege an. Der einfachste Weg für den Nutzer ist es, 
-            // sich auszuloggen, während du als Admin den User im Dashboard mit 2 Klicks löschst.
-            // Alternativ loggen wir ihn hier sauber aus und schicken ihm eine Meldung:
-            
-            alert("Dein Löschauftrag wurde entgegengenommen. Du wirst nun abgemeldet.");
-            await supabaseProfile.auth.signOut();
-            window.location.href = "/index.html";
-        }
-
-        document.addEventListener("DOMContentLoaded", loadProfile);
+            alert('Passwort-Änderung erfolgreich simuliert!');
+            this.reset();
+        });
     </script>
+
 </body>
 </html>
