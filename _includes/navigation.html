@@ -19,23 +19,27 @@
                 </svg>
             </button>
             
-            <div class="absolute left-1/2 md:left-0 transform -translate-x-1/2 md:translate-x-0 mt-2 w-56 bg-white border border-gray-100 rounded-2xl shadow-xl opacity-0 pointer-events-none group-hover:opacity-100 group-hover:pointer-events-auto transition-all duration-200 z-50 py-2" id="dropdown-menu">
-                <a href="/unsere-rechte.html" class="flex items-center gap-2 px-4 py-2.5 text-sm text-gray-700 hover:bg-blue-50 hover:text-blue-600 font-bold transition-all no-underline">
-                    🌍 Übersicht (Hub)
-                </a>
-                <div class="border-b border-gray-100 my-1"></div>
-                <a href="/kinderrechte.html" class="flex items-center gap-2 px-4 py-2.5 text-sm text-gray-600 hover:bg-blue-50 hover:text-blue-600 transition-all no-underline">
-                    🎒 Kinderrechte
-                </a>
-                <a href="/menschenrechte.html" class="flex items-center gap-2 px-4 py-2.5 text-sm text-gray-600 hover:bg-blue-50 hover:text-blue-600 transition-all no-underline">
-                    ⚖️ Menschenrechte
-                </a>
-                <a href="/digitalrechte.html" class="flex items-center gap-2 px-4 py-2.5 text-sm text-gray-600 hover:bg-blue-50 hover:text-blue-600 transition-all no-underline">
-                    📱 Digitalrechte
-                </a>
-                <a href="/umweltrechte.html" class="flex items-center gap-2 px-4 py-2.5 text-sm text-gray-600 hover:bg-blue-50 hover:text-blue-600 transition-all no-underline">
-                    🌱 Umweltrechte
-                </a>
+            <div class="absolute left-1/2 md:left-0 transform -translate-x-1/2 md:translate-x-0 pt-2 w-56 opacity-0 pointer-events-none group-hover:opacity-100 group-hover:pointer-events-auto transition-all duration-200 z-50" id="dropdown-menu">
+                
+                <div class="bg-white border border-gray-100 rounded-2xl shadow-xl py-2">
+                    <a href="/unsere-rechte.html" class="flex items-center gap-2 px-4 py-2.5 text-sm text-gray-700 hover:bg-blue-50 hover:text-blue-600 font-bold transition-all no-underline">
+                        🌍 Übersicht (Hub)
+                    </a>
+                    <div class="border-b border-gray-100 my-1"></div>
+                    <a href="/kinderrechte.html" class="flex items-center gap-2 px-4 py-2.5 text-sm text-gray-600 hover:bg-blue-50 hover:text-blue-600 transition-all no-underline">
+                        🎒 Kinderrechte
+                    </a>
+                    <a href="/menschenrechte.html" class="flex items-center gap-2 px-4 py-2.5 text-sm text-gray-600 hover:bg-blue-50 hover:text-blue-600 transition-all no-underline">
+                        ⚖️ Menschenrechte
+                    </a>
+                    <a href="/digitalrechte.html" class="flex items-center gap-2 px-4 py-2.5 text-sm text-gray-600 hover:bg-blue-50 hover:text-blue-600 transition-all no-underline">
+                        📱 Digitalrechte
+                    </a>
+                    <a href="/umweltrechte.html" class="flex items-center gap-2 px-4 py-2.5 text-sm text-gray-600 hover:bg-blue-50 hover:text-blue-600 transition-all no-underline">
+                        🌱 Umweltrechte
+                    </a>
+                </div>
+
             </div>
         </div>
 
@@ -66,7 +70,7 @@
         menu.classList.toggle('pointer-events-none');
     }
 
-    // Dropdown schießen, wenn man irgendwo anders hinklickt
+    // Dropdown schließen, wenn man irgendwo anders hinklickt
     document.addEventListener('click', function() {
         const menu = document.getElementById('dropdown-menu');
         if (menu && !menu.classList.contains('opacity-0')) {
