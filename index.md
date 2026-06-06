@@ -138,11 +138,11 @@ title: Startseite
                     <span class="text-blue-600 group-hover:text-white font-bold text-sm mt-4 inline-block">Mehr erfahren →</span>
                 </a>
 
-                <a href="erwachsenenrechte.html" class="group border border-gray-100 p-6 rounded-2xl bg-gray-50 hover:bg-blue-600 hover:text-white transition-all duration-300 no-underline flex flex-col justify-between shadow-xs hover:shadow-md hover:scale-102">
+                <a href="menschenrechte.html" class="group border border-gray-100 p-6 rounded-2xl bg-gray-50 hover:bg-blue-600 hover:text-white transition-all duration-300 no-underline flex flex-col justify-between shadow-xs hover:shadow-md hover:scale-102">
                     <div>
                         <span class="text-3xl block mb-3">⚖️</span>
-                        <h3 class="text-xl font-black text-gray-950 group-hover:text-white transition-colors">Allgemeine Rechte</h3>
-                        <p class="text-gray-500 group-hover:text-blue-100 text-sm mt-2 leading-relaxed">Meinungsfreiheit, Gleichberechtination und Würde. Die Säulen unserer Gesellschaft.</p>
+                        <h3 class="text-xl font-black text-gray-950 group-hover:text-white transition-colors">Menschenrechte</h3>
+                        <p class="text-gray-500 group-hover:text-blue-100 text-sm mt-2 leading-relaxed">Meinungsfreiheit, Gleichberechtigung und Würde. Die Säulen unserer Gesellschaft.</p>
                     </div>
                     <span class="text-blue-600 group-hover:text-white font-bold text-sm mt-4 inline-block">Mehr erfahren →</span>
                 </a>
@@ -158,7 +158,7 @@ title: Startseite
             </div>
             
             <div class="text-center mt-8">
-                <a href="menschenrechte.html" class="inline-block bg-blue-600 hover:bg-blue-700 text-white font-black px-6 py-3 rounded-xl shadow-md no-underline transition-all">
+                <a href="unsere-rechte.html" class="inline-block bg-blue-600 hover:bg-blue-700 text-white font-black px-6 py-3 rounded-xl shadow-md no-underline transition-all">
                     Zum gesamten Rechte-Hub
                 </a>
             </div>
