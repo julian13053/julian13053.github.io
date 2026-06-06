@@ -1,1 +1,97 @@
+---
+layout: null
+title: Klima- & Umweltrechte
+---
+<html lang="de">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    
+    <title>Umweltrechte | M-Fleger</title>
+    <meta name="description" content="Das Recht auf eine intakte Natur. Erfahre alles über das Menschenrecht auf eine saubere Umwelt und den Schutz nachfolgender Generationen.">
+    
+    <link class="flex" rel="icon" type="image/jpeg" href="auge-logo.jpg">
+    <script src="https://cdn.jsdelivr.net/npm/@tailwindcss/browser@4"></script>
+    <style>
+        @keyframes fadeInUp {
+            from { opacity: 0; transform: translateY(20px); }
+            to { opacity: 1; transform: translateY(0); }
+        }
+        .animate-fade-in { animation: fadeInUp 0.8s ease-out forwards; }
+    </style>
+</head>
+<body class="bg-gray-50 text-gray-900 font-sans antialiased flex flex-col min-h-screen relative">
 
+    <nav class="bg-white border-b border-gray-100 sticky top-0 z-50 shadow-xs">
+        {% include navigation.html %}
+    </nav>
+
+    <header class="bg-gradient-to-br from-[#047857] via-[#10b981] to-[#065f46] text-white py-16 px-4 md:px-6 overflow-hidden">
+        <div class="max-w-4xl mx-auto text-center animate-fade-in">
+            <span class="bg-emerald-200/20 text-emerald-200 border border-emerald-300/30 font-extrabold px-4 py-1.5 rounded-full text-xs uppercase tracking-wider">Anerkanntes UN-Menschenrecht</span>
+            <h1 class="text-4xl md:text-5xl font-black tracking-tight mt-5 mb-6 leading-tight">
+                🌱 Umweltrechte.<br><span class="text-emerald-200">Schutz für unsere Zukunft.</span>
+            </h1>
+            <p class="text-base md:text-lg text-emerald-50 max-w-2xl mx-auto leading-relaxed">
+                Ohne eine gesunde Erde gibt es kein gesundes Leben. Das Recht auf saubere Luft, reines Trinkwasser und ein stabiles Klima ist die Grundvoraussetzung für alle anderen Rechte.
+            </p>
+        </div>
+    </header>
+
+    <main class="max-w-6xl mx-auto px-4 md:px-6 py-12 md:py-16 flex-grow w-full">
+        
+        <div class="max-w-3xl mx-auto text-center mb-16">
+            <h2 class="text-3xl font-black text-gray-950 tracking-tight">Klimaschutz ist ein Grundrecht</h2>
+            <p class="text-gray-600 text-base mt-3 leading-relaxed">
+                Die Generalversammlung der Vereinten Nationen hat offiziell erklärt: Jeder Mensch hat das universelle Recht auf eine saubere, gesunde und nachhaltige Umwelt. Staaten sind gesetzlich dazu verpflichtet, unsere Lebensgrundlagen aktiv zu schützen.
+            </p>
+        </div>
+
+        <div class="grid grid-cols-1 md:grid-cols-3 gap-8 mb-16">
+            
+            <div class="bg-white border border-gray-100 rounded-3xl p-6 shadow-xs border-t-4 border-t-emerald-600">
+                <span class="text-3xl block mb-4">⏳</span>
+                <h3 class="text-xl font-bold text-gray-950 mb-2">Generationen-Schutz</h3>
+                <p class="text-gray-600 text-sm leading-relaxed">
+                    Die heutige Politik darf nicht die Freiheit zukünftiger Generationen zerstören. Das Bundesverfassungsgericht hat bestätigt: Klimaschutz sichert die Freiheitsrechte der Jugend von morgen.
+                </p>
+            </div>
+
+            <div class="bg-white border border-gray-100 rounded-3xl p-6 shadow-xs border-t-4 border-t-emerald-600">
+                <span class="text-3xl block mb-4">💧</span>
+                <h3 class="text-xl font-bold text-gray-950 mb-2">Saubere Ressourcen</h3>
+                <p class="text-gray-600 text-sm leading-relaxed">
+                    Das Recht auf schadstofffreie Luft und unverschmutztes Wasser. Industrie und Wirtschaft dürfen Profite nicht auf Kosten der Gesundheit von Mensch und Natur machen.
+                </p>
+            </div>
+
+            <div class="bg-white border border-gray-100 rounded-3xl p-6 shadow-xs border-t-4 border-t-emerald-600">
+                <span class="text-3xl block mb-4">📣</span>
+                <h3 class="text-xl font-bold text-gray-950 mb-2">Aarhus-Konvention</h3>
+                <p class="text-gray-600 text-sm leading-relaxed">
+                    Bürger haben das Recht auf freien Zugang zu Umweltinformationen und müssen bei großen Bau- oder Industrieprojekten, die die Natur betreffen, mitentscheiden dürfen.
+                </p>
+            </div>
+
+        </div>
+
+        <section class="bg-emerald-50 border border-emerald-100 rounded-3xl p-8 max-w-3xl mx-auto text-center mb-12">
+            <h3 class="text-xl font-bold text-emerald-950">🌍 Warum uns das alle angeht</h3>
+            <p class="text-emerald-900 text-sm md:text-base mt-2 leading-relaxed">
+                Umweltrechte schlagen die Brücke zwischen Menschenrechten und Naturschutz. Wenn Lebensräume durch den Klimawandel unbewohnbar werden, verletzen Staaten damit automatisch das Recht auf Leben und körperliche Unversehrtheit ihrer Bürger.
+            </p>
+        </section>
+
+        <div class="text-center mt-16 pt-8 border-t border-gray-200">
+            <a href="unsere-rechte.html" class="inline-block bg-gray-900 hover:bg-gray-800 text-white font-bold px-6 py-3 rounded-xl transition-all no-underline shadow-xs">
+                ← Zurück zur Rechte-Übersicht
+            </a>
+        </div>
+
+    </main>
+
+    {% include footer.html %}
+    {% include cookie-banner.html %}
+
+</body>
+</html>
