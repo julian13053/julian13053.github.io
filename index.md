@@ -1,329 +1,46 @@
----
-layout: null
-title: Startseite
----
-<html lang="de">
-<head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    
-    <!-- Standard SEO Tags -->
-    <title>M-Fleger | Portfolio & Blog von Julian Fleger</title>
-    <meta name="description" content="Willkommen auf M-Fleger. Entdecke die kreativen Projekte, Brandings und neuesten Blogartikel von Julian Fleger. Punktgenau verbunden.">
-    <meta name="keywords" content="Julian Fleger, M-Fleger, Portfolio, Blog, Design, Development, Branding, Projekte">
-    <meta name="robots" content="index, follow">
-    <link rel="canonical" href="https://julian13053.github.io/index.html">
-
-    <!-- Open Graph / Facebook -->
-    <meta property="og:type" content="website">
-    <meta property="og:title" content="M-Fleger | Portfolio & Blog von Julian Fleger">
-    <meta property="og:description" content="Willkommen auf M-Fleger. Entdecke meine Projekte, kreativen Ideen und neuesten Blogartikel!">
-    <meta property="og:image" content="https://julian13053.github.io/auge-logo.jpg">
-    <meta property="og:url" content="https://julian13053.github.io/index.html">
-    
-    <link class="flex" rel="icon" type="image/jpeg" href="auge-logo.jpg">
-    <script src="https://cdn.jsdelivr.net/npm/@tailwindcss/browser@4"></script>
-    <script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script>
-    <style>
-        @keyframes fadeInUp {
-            from { opacity: 0; transform: translateY(20px); }
-            to { opacity: 1; transform: translateY(0); }
-        }
-        .animate-fade-in { animation: fadeInUp 0.8s ease-out forwards; }
-    </style>
-</head>
-<body class="bg-gray-50 text-gray-900 font-sans antialiased flex flex-col min-h-screen relative">
-
-    <!-- DYNAMISCHES BANNER (TOAST) -->
-    <div id="custom-banner" class="fixed top-24 right-4 z-50 transform translate-x-full opacity-0 transition-all duration-300 ease-out max-w-sm w-full bg-white border shadow-xl rounded-2xl p-4 flex items-start gap-3">
-        <span id="banner-icon" class="text-xl"></span>
-        <div class="flex-grow">
-            <h4 id="banner-title" class="font-bold text-sm text-gray-900"></h4>
-            <p id="banner-message" class="text-xs text-gray-600 mt-0.5"></p>
-        </div>
+<!-- NEUE SEKTION: MENSCHENRECHTE TEASER -->
+<section class="my-16 bg-white border border-gray-100 p-8 md:p-12 rounded-3xl shadow-xs">
+    <div class="max-w-3xl mx-auto text-center mb-10">
+        <span class="bg-blue-100 text-blue-700 font-extrabold px-4 py-1.5 rounded-full text-xs uppercase tracking-wider">Neu auf M-Fleger</span>
+        <h2 class="text-3xl md:text-4xl font-black text-gray-950 tracking-tight mt-3">🌍 Das große Rechte-Hub</h2>
+        <p class="text-gray-500 text-base md:text-lg mt-2">Rechte gehen uns alle an – egal wie alt wir sind. Entdecke unser neues Portal, das Rechte für jeden verständlich erklärt.</p>
     </div>
 
-    <nav class="bg-white border-b border-gray-100 sticky top-0 z-50 shadow-xs">
-        {% include navigation.html %}
-    </nav>
-
-    <header class="bg-gradient-to-br from-[#1d4ed8] via-[#1e3a8a] to-[#312e81] text-white py-16 md:py-24 px-4 md:px-6 overflow-hidden">
-        <div class="max-w-6xl mx-auto grid md:grid-cols-12 gap-12 items-center animate-fade-in">
-            <div class="md:col-span-7 text-center md:text-left">
-                <span class="bg-cyan-400/20 text-cyan-300 border border-cyan-400/30 font-extrabold px-4 py-1.5 rounded-full text-xs uppercase tracking-wider">Design & Development</span>
-                <h1 class="text-4xl md:text-6xl font-black tracking-tight mt-5 mb-6 leading-tight">
-                    Julian Fleger.<br><span class="text-cyan-300">Punktgenau verbunden.</span>
-                </h1>
-                <p class="text-base md:text-xl text-blue-100 max-w-xl mb-8 leading-relaxed">
-                    Ich teile hier meine Projekte, Gedanken und kreativen Ideas. Außerdem findest du Einblicke in meine Brandings, meine Arbeit und neue Blogartikel.
-                </p>
-                <span class="bg-cyan-400 text-blue-950 font-black px-8 py-4 rounded-xl shadow-lg inline-block w-full md:w-auto text-center cursor-default select-none">
-                    Direkt zum Blog →
-                </span>
+    <div class="grid grid-cols-1 md:grid-cols-3 gap-6">
+        <!-- Karte 1: Kinderrechte -->
+        <a href="kinderrechte.html" class="group border border-gray-100 p-6 rounded-2xl bg-gray-50 hover:bg-blue-600 hover:text-white transition-all duration-300 no-underline flex flex-col justify-between shadow-xs hover:shadow-md hover:scale-102">
+            <div>
+                <span class="text-3xl block mb-3">🎒</span>
+                <h3 class="text-xl font-black text-gray-950 group-hover:text-white transition-colors">Kinderrechte</h3>
+                <p class="text-gray-500 group-hover:text-blue-100 text-sm mt-2 leading-relaxed">Schutz, Bildung und Freizeit. Auf Augenhöhe und einfach erklärt für Kinder und Eltern.</p>
             </div>
-            
-            <div class="md:col-span-5 flex justify-center">
-                <div class="relative group">
-                    <div class="absolute inset-0 bg-cyan-400 rounded-3xl transform rotate-3 scale-105 opacity-20 blur-xs transition-transform duration-300 group-hover:rotate-1"></div>
-                    <img src="ich.jpeg" alt="Julian Fleger" class="relative w-72 h-80 md:w-[26rem] md:h-[32rem] object-cover rounded-3xl shadow-2xl border-4 border-white/10 transition-transform duration-300 group-hover:scale-105">
-                </div>
+            <span class="text-blue-600 group-hover:text-white font-bold text-sm mt-4 inline-block">Mehr erfahren →</span>
+        </a>
+
+        <!-- Karte 2: Allgemeine Menschenrechte -->
+        <a href="erwachsenenrechte.html" class="group border border-gray-100 p-6 rounded-2xl bg-gray-50 hover:bg-blue-600 hover:text-white transition-all duration-300 no-underline flex flex-col justify-between shadow-xs hover:shadow-md hover:scale-102">
+            <div>
+                <span class="text-3xl block mb-3">⚖️</span>
+                <h3 class="text-xl font-black text-gray-950 group-hover:text-white transition-colors">Allgemeine Rechte</h3>
+                <p class="text-gray-500 group-hover:text-blue-100 text-sm mt-2 leading-relaxed">Meinungsfreiheit, Gleichberechtigung und Würde. Die Säulen unserer Gesellschaft.</p>
             </div>
-        </div>
-    </header>
+            <span class="text-blue-600 group-hover:text-white font-bold text-sm mt-4 inline-block">Mehr erfahren →</span>
+        </a>
 
-    <main class="max-w-6xl mx-auto px-4 md:px-6 pt-12 md:pt-20 flex-grow w-full">
-        <div class="mb-12">
-            <div class="flex flex-col md:flex-row justify-between items-center md:items-baseline mb-10 gap-4 text-center md:text-left">
-                <div>
-                    <h2 class="text-3xl md:text-4xl font-black text-gray-950 tracking-tight">📰 Neueste Artikel</h2>
-                    <p class="text-gray-500 text-base md:text-lg mt-2">Frisch aus dem Gedankenkarussell gegriffen.</p>
-                </div>
-                <a href="blog.html" class="text-blue-600 font-bold hover:text-blue-800 transition-colors flex items-center gap-1 group no-underline">
-                    Alle Artikel ansehen <span class="transform group-hover:translate-x-1 transition-transform">→</span>
-                </a>
+        <!-- Karte 3: Digitalrechte -->
+        <a href="digitalrechte.html" class="group border border-gray-100 p-6 rounded-2xl bg-gray-50 hover:bg-blue-600 hover:text-white transition-all duration-300 no-underline flex flex-col justify-between shadow-xs hover:shadow-md hover:scale-102">
+            <div>
+                <span class="text-3xl block mb-3">📱</span>
+                <h3 class="text-xl font-black text-gray-950 group-hover:text-white transition-colors">Digitalrechte</h3>
+                <p class="text-gray-500 group-hover:text-blue-100 text-sm mt-2 leading-relaxed">Deine Rechte im Netz. Von Datenschutz bis zum Schutz vor Cybermobbing.</p>
             </div>
-
-            <div class="grid grid-cols-1 md:grid-cols-3 gap-6 md:gap-8 mb-16">
-                {% for post in site.posts limit:3 %}
-                {% assign numeric_id = post.date | date: "%Y%m%d%H%M" %}
-                <div class="blog-card bg-white border border-gray-100 p-6 rounded-2xl shadow-xs flex flex-col justify-between hover:shadow-md hover:scale-105 transition-all duration-300" data-post-id="{{ numeric_id }}">
-                    <div>
-                        <div class="flex justify-between items-center mb-3">
-                            <span class="text-xs bg-blue-600 text-white px-2.5 py-1 rounded-md font-bold uppercase">{{ post.date | date: "%d.%m.%Y" }}</span>
-                            {% assign words = post.content | strip_html | number_of_words %}
-                            {% assign read_time = words | divided_by: 180 | plus: 1 %}
-                            <span class="text-xs text-gray-400 font-semibold">📖 {{ read_time }} Min.</span>
-                        </div>
-                        <h3 class="text-xl font-black text-gray-950 mt-1 mb-2 line-clamp-2">{{ post.title }}</h3>
-                        <p class="text-gray-600 text-sm mb-4 line-clamp-3">{{ post.excerpt | strip_html }}</p>
-                    </div>
-                    
-                    <div class="flex flex-col gap-3 mt-2">
-                        <div class="flex justify-between items-center">
-                            <a href="{{ post.url | relative_url }}" class="text-blue-600 font-bold text-sm hover:text-blue-800 no-underline inline-block">
-                                Artikel lesen →
-                            </a>
-                            
-                            <!-- NEU: LIKE BUTTON MIT ZÄHLER -->
-                            <button onclick="likeUmschalten('{{ numeric_id }}', this)" class="like-btn text-xs font-bold px-3 py-1.5 rounded-full border border-gray-200 bg-white hover:bg-gray-50 transition-all cursor-pointer flex items-center gap-1">
-                                🤍 <span class="like-counter">0</span> Likes
-                            </button>
-                        </div>
-                        
-                        <div class="flex justify-end">
-                            <button onclick="favoritUmschalten('{{ numeric_id }}', this)" class="fav-btn text-xs font-bold px-3 py-1.5 rounded-full border border-gray-200 bg-white hover:bg-gray-50 transition-all cursor-pointer w-full md:w-auto text-center">
-                                ⭐ Favorit
-                            </button>
-                        </div>
-                    </div>
-                </div>
-                {% else %}
-                <div class="col-span-1 md:col-span-3 text-center py-12 bg-gray-100 rounded-2xl">
-                    <p class="text-gray-500 text-lg font-medium">Bisher wurden noch keine Blog-Artikel veröffentlicht.</p>
-                </div>
-                {% endfor %}
-            </div>
-        </div>
-
-        <hr class="border-gray-200/60 my-12">
-
-        <div class="grid grid-cols-1 sm:grid-cols-2 gap-6 mb-12">
-            
-            <div class="bg-white border border-gray-100 p-6 rounded-2xl shadow-xs flex items-center gap-4 hover:shadow-md transition-all">
-                <div class="bg-blue-50 text-blue-600 text-3xl p-4 rounded-xl">
-                    📰
-                </div>
-                <div>
-                    <span class="block text-2xl md:text-3xl font-black text-gray-950">{{ site.posts.size }}</span>
-                    <span class="text-sm font-bold text-gray-500 uppercase tracking-wider">Artikel veröffentlicht</span>
-                </div>
-            </div>
-
-            {% assign total_words = 0 %}
-            {% for post in site.posts %}
-                {% assign words = post.content | strip_html | number_of_words %}
-                {% assign total_words = total_words | plus: words %}
-            {% endfor %}
-            <div class="bg-white border border-gray-100 p-6 rounded-2xl shadow-xs flex items-center gap-4 hover:shadow-md transition-all">
-                <div class="bg-cyan-50 text-cyan-600 text-3xl p-4 rounded-xl">
-                    ✍️
-                </div>
-                <div>
-                    <span class="block text-2xl md:text-3xl font-black text-gray-950">{{ total_words }}</span>
-                    <span class="text-sm font-bold text-gray-500 uppercase tracking-wider">Wörter geschrieben</span>
-                </div>
-            </div>
-
-        </div>
-    </main>
-
-    {% include footer.html %}
-    {% include cookie-banner.html %}
-
-    <script>
-        const SUPABASE_URL = "https://xxuanzhrrpwurkyjfjky.supabase.co";
-        const SUPABASE_ANON_KEY = "sb_publishable_WdzN1r5HkdnqrfIN2phV1g_-GdLlknq"; 
-        const supabaseClient = supabase.createClient(SUPABASE_URL, SUPABASE_ANON_KEY);
-
-        function zeigeBanner(type, title, message) {
-            const banner = document.getElementById('custom-banner');
-            const icon = document.getElementById('banner-icon');
-            const titleEl = document.getElementById('banner-title');
-            const msgEl = document.getElementById('banner-message');
-
-            if(type === 'success') {
-                banner.className = "fixed top-24 right-4 z-50 transform transition-all duration-300 ease-out max-w-sm w-full bg-white border border-green-200 shadow-xl rounded-2xl p-4 flex items-start gap-3 text-green-800";
-                icon.innerText = "❤️";
-            } else if(type === 'info') {
-                banner.className = "fixed top-24 right-4 z-50 transform transition-all duration-300 ease-out max-w-sm w-full bg-white border border-blue-200 shadow-xl rounded-2xl p-4 flex items-start gap-3 text-blue-800";
-                icon.innerText = "ℹ️";
-            } else {
-                banner.className = "fixed top-24 right-4 z-50 transform transition-all duration-300 ease-out max-w-sm w-full bg-white border border-red-200 shadow-xl rounded-2xl p-4 flex items-start gap-3 text-red-800";
-                icon.innerText = "❌";
-            }
-
-            titleEl.innerText = title;
-            msgEl.innerText = message;
-            banner.classList.remove('translate-x-full', 'opacity-0');
-            
-            setTimeout(() => {
-                banner.classList.add('translate-x-full', 'opacity-0');
-            }, 4000);
-        }
-
-        async function datenLaden() {
-            try {
-                // 1. Alle Likes zählen und auf den Cards anzeigen (für alle sichtbar)
-                const { data: alleLikes, error: likeError } = await supabaseClient
-                    .from('likes')
-                    .select('blog_id');
-
-                if (!likeError && alleLikes) {
-                    const likeCounts = {};
-                    alleLikes.forEach(l => {
-                        likeCounts[l.blog_id] = (likeCounts[l.blog_id] || 0) + 1;
-                    });
-
-                    const cards = document.getElementsByClassName('blog-card');
-                    for (let card of cards) {
-                        const postId = card.getAttribute('data-post-id');
-                        const counter = card.querySelector('.like-counter');
-                        if (counter) {
-                            counter.innerText = likeCounts[postId] || 0;
-                        }
-                    }
-                }
-
-                // 2. Nutzer-spezifische Daten laden (wenn eingeloggt)
-                const { data: { user } } = await supabaseClient.auth.getUser();
-                if (user) {
-                    // Favoriten prüfen
-                    const { data: favoriten } = await supabaseClient
-                        .from('favoriten')
-                        .select('blog_id')
-                        .eq('user_id', user.id);
-
-                    if (favoriten) {
-                        const favIds = new Set(favoriten.map(f => f.blog_id.toString()));
-                        const cards = document.getElementsByClassName('blog-card');
-                        for (let card of cards) {
-                            const postId = card.getAttribute('data-post-id');
-                            if (favIds.has(postId)) {
-                                const btn = card.querySelector('.fav-btn');
-                                if (btn) {
-                                    btn.innerHTML = "❤️ Favorisiert";
-                                    btn.classList.remove('bg-white', 'text-gray-900', 'border-gray-200');
-                                    btn.classList.add('bg-red-500', 'text-white', 'border-red-500');
-                                }
-                            }
-                        }
-                    }
-
-                    // Eigene Likes prüfen
-                    const { data: meineLikes } = await supabaseClient
-                        .from('likes')
-                        .select('blog_id')
-                        .eq('user_id', user.id);
-
-                    if (meineLikes) {
-                        const likedIds = new Set(meineLikes.map(l => l.blog_id.toString()));
-                        const cards = document.getElementsByClassName('blog-card');
-                        for (let card of cards) {
-                            const postId = card.getAttribute('data-post-id');
-                            if (likedIds.has(postId)) {
-                                const btn = card.querySelector('.like-btn');
-                                if (btn) {
-                                    btn.innerHTML = `💖 <span class="like-counter">${btn.querySelector('.like-counter').innerText}</span> Likes`;
-                                    btn.classList.remove('bg-white', 'text-gray-900', 'border-gray-200');
-                                    btn.classList.add('bg-pink-500', 'text-white', 'border-pink-500');
-                                }
-                            }
-                        }
-                    }
-                }
-            } catch (err) { console.error(err); }
-        }
-
-        async function favoritUmschalten(blogId, button) {
-            try {
-                const { data: { user } } = await supabaseClient.auth.getUser();
-                if (!user) { window.location.href = "/anmeldung-erforderlich.html"; return; }
-
-                const { data: existiert } = await supabaseClient.from('favoriten').select('*').eq('user_id', user.id).eq('blog_id', blogId);
-
-                if (existiert && existiert.length > 0) {
-                    const { error } = await supabaseClient.from('favoriten').delete().eq('user_id', user.id).eq('blog_id', blogId);
-                    if (!error) {
-                        button.innerHTML = "⭐ Favorit";
-                        button.classList.remove('bg-red-500', 'text-white', 'border-red-500');
-                        button.classList.add('bg-white', 'text-gray-900', 'border-gray-200');
-                        zeigeBanner('info', 'Entfernt', 'Der Artikel wurde aus deinen Favoriten gelöscht.');
-                    }
-                } else {
-                    const { error } = await supabaseClient.from('favoriten').insert([{ user_id: user.id, blog_id: blogId }]);
-                    if (!error) {
-                        button.innerHTML = "❤️ Favorisiert";
-                        button.classList.remove('bg-white', 'text-gray-900', 'border-gray-200');
-                        button.classList.add('bg-red-500', 'text-white', 'border-red-500');
-                        zeigeBanner('success', 'Favorisiert!', 'Gespeichert in deinem Profil unter Favoriten.');
-                    }
-                }
-            } catch (err) { zeigeBanner('error', 'Fehler', err.message); }
-        }
-
-        async function likeUmschalten(blogId, button) {
-            try {
-                const { data: { user } } = await supabaseClient.auth.getUser();
-                if (!user) { window.location.href = "/anmeldung-erforderlich.html"; return; }
-
-                const counterEl = button.querySelector('.like-counter');
-                let aktuellerStand = parseInt(counterEl.innerText);
-
-                const { data: existiert } = await supabaseClient.from('likes').select('*').eq('user_id', user.id).eq('blog_id', blogId);
-
-                if (existiert && existiert.length > 0) {
-                    const { error } = await supabaseClient.from('likes').delete().eq('user_id', user.id).eq('blog_id', blogId);
-                    if (!error) {
-                        counterEl.innerText = aktuellerStand - 1;
-                        button.innerHTML = `🤍 <span class="like-counter">${counterEl.innerText}</span> Likes`;
-                        button.classList.remove('bg-pink-500', 'text-white', 'border-pink-500');
-                        button.classList.add('bg-white', 'text-gray-900', 'border-gray-200');
-                        zeigeBanner('info', 'Like entfernt', 'Schade, dir gefällt dieser Beitrag nicht mehr.');
-                    }
-                } else {
-                    const { error } = await supabaseClient.from('likes').insert([{ user_id: user.id, blog_id: blogId }]);
-                    if (!error) {
-                        counterEl.innerText = aktuellerStand + 1;
-                        button.innerHTML = `💖 <span class="like-counter">${counterEl.innerText}</span> Likes`;
-                        button.classList.remove('bg-white', 'text-gray-900', 'border-gray-200');
-                        button.classList.add('bg-pink-500', 'text-white', 'border-pink-500');
-                        zeigeBanner('success', 'Geliked!', 'Danke für dein Feedback zu diesem Beitrag!');
-                    }
-                }
-            } catch (err) { zeigeBanner('error', 'Fehler', err.message); }
-        }
-
-        document.addEventListener("DOMContentLoaded", datenLaden);
-    </script>
-</body>
-</html>
+            <span class="text-blue-600 group-hover:text-white font-bold text-sm mt-4 inline-block">Mehr erfahren →</span>
+        </a>
+    </div>
+    
+    <div class="text-center mt-8">
+        <a href="menschenrechte.html" class="inline-block bg-blue-600 hover:bg-blue-700 text-white font-black px-6 py-3 rounded-xl shadow-md no-underline transition-all">
+            Zum gesamten Rechte-Hub
+        </a>
+    </div>
+</section>
