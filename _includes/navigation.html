@@ -10,6 +10,35 @@
         <a href="/index.html" class="hover:text-blue-600 pb-1 transition-all no-underline">Startseite</a>
         <a href="/ueber-mich.html" class="hover:text-blue-600 pb-1 transition-all no-underline">Über mich</a>
         <a href="/blog.html" class="hover:text-blue-600 pb-1 transition-all no-underline">Blog</a>
+        
+        <div class="relative group" id="rights-dropdown">
+            <button onclick="toggleDropdown(event)" class="hover:text-blue-600 pb-1 transition-all no-underline font-semibold text-gray-600 text-base md:text-lg flex items-center gap-1 bg-transparent border-0 cursor-pointer">
+                Unsere Rechte
+                <svg class="w-4 h-4 transform transition-transform duration-200 group-hover:rotate-180" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2.5" d="M19 9l-7 7-7-7"></path>
+                </svg>
+            </button>
+            
+            <div class="absolute left-1/2 md:left-0 transform -translate-x-1/2 md:translate-x-0 mt-2 w-56 bg-white border border-gray-100 rounded-2xl shadow-xl opacity-0 pointer-events-none group-hover:opacity-100 group-hover:pointer-events-auto transition-all duration-200 z-50 py-2" id="dropdown-menu">
+                <a href="/unsere-rechte.html" class="flex items-center gap-2 px-4 py-2.5 text-sm text-gray-700 hover:bg-blue-50 hover:text-blue-600 font-bold transition-all no-underline">
+                    🌍 Übersicht (Hub)
+                </a>
+                <div class="border-b border-gray-100 my-1"></div>
+                <a href="/kinderrechte.html" class="flex items-center gap-2 px-4 py-2.5 text-sm text-gray-600 hover:bg-blue-50 hover:text-blue-600 transition-all no-underline">
+                    🎒 Kinderrechte
+                </a>
+                <a href="/menschenrechte.html" class="flex items-center gap-2 px-4 py-2.5 text-sm text-gray-600 hover:bg-blue-50 hover:text-blue-600 transition-all no-underline">
+                    ⚖️ Menschenrechte
+                </a>
+                <a href="/digitalrechte.html" class="flex items-center gap-2 px-4 py-2.5 text-sm text-gray-600 hover:bg-blue-50 hover:text-blue-600 transition-all no-underline">
+                    📱 Digitalrechte
+                </a>
+                <a href="/umweltrechte.html" class="flex items-center gap-2 px-4 py-2.5 text-sm text-gray-600 hover:bg-blue-50 hover:text-blue-600 transition-all no-underline">
+                    🌱 Umweltrechte
+                </a>
+            </div>
+        </div>
+
         <a href="/spenden.html" class="hover:text-blue-600 pb-1 transition-all no-underline">Spenden</a>
         <a href="/kontakt.html" class="hover:text-blue-600 pb-1 transition-all no-underline">Kontakt</a>
         
@@ -24,12 +53,27 @@
 </div>
 
 <script>
-    // Projektdaten bleiben gleich
     const SUPABASE_URL_NAV = "https://xxuanzhrrpwurkyjfjky.supabase.co";
     const SUPABASE_ANON_KEY_NAV = "sb_publishable_WdzN1r5HkdnqrfIN2phV1g_-GdLlknq";
 
-    // Name geändert zu supabaseClientNav, um Konflikte zu vermeiden!
     const supabaseClientNav = supabase.createClient(SUPABASE_URL_NAV, SUPABASE_ANON_KEY_NAV);
+
+    // Funktion für Klick-Steuerung auf Mobilgeräten
+    function toggleDropdown(event) {
+        event.stopPropagation();
+        const menu = document.getElementById('dropdown-menu');
+        menu.classList.toggle('opacity-0');
+        menu.classList.toggle('pointer-events-none');
+    }
+
+    // Dropdown schießen, wenn man irgendwo anders hinklickt
+    document.addEventListener('click', function() {
+        const menu = document.getElementById('dropdown-menu');
+        if (menu && !menu.classList.contains('opacity-0')) {
+            menu.classList.add('opacity-0');
+            menu.classList.add('pointer-events-none');
+        }
+    });
 
     async function checkUser() {
         const { data: { user } } = await supabaseClientNav.auth.getUser();
