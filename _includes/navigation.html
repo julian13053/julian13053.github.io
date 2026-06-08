@@ -1,18 +1,19 @@
 <script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script>
 
-<div class="max-w-6xl mx-auto px-4 py-4 flex flex-col md:flex-row justify-between items-center gap-4">
-    <a href="/index.html" class="flex items-center gap-3 group no-underline text-current">
-        <img src="/auge-logo.jpg" alt="M-Fleger Logo" class="w-16 h-14 md:w-24 md:h-20 rounded-xl md:rounded-2xl object-contain transition-transform duration-300 group-hover:scale-105">
-        <span class="text-2xl md:text-3xl font-black tracking-tight text-blue-600">M-Fleger</span>
+<div class="w-full max-w-none px-4 md:px-6 flex items-center justify-between h-20 bg-white border-b border-gray-100">
+    
+    <a href="/index.html" class="flex items-center gap-2 shrink-0 no-underline text-current mr-4">
+        <img src="/auge-logo.jpg" alt="M-Fleger Logo" class="w-14 h-12 md:w-16 md:h-14 rounded-xl object-contain transition-transform duration-300 hover:scale-105">
+        <span class="text-xl md:text-2xl font-black tracking-tight text-blue-600">M-Fleger</span>
     </a>
     
-    <div class="flex flex-wrap justify-center items-center gap-x-5 gap-y-2 font-semibold text-gray-600 text-base md:text-lg">
+    <div class="hidden lg:flex flex-wrap items-center gap-x-2 xl:gap-x-5 font-semibold text-gray-600 text-sm md:text-base flex-grow justify-start">
         <a href="/index.html" class="hover:text-blue-600 pb-1 transition-all no-underline">Startseite</a>
         <a href="/ueber-mich.html" class="hover:text-blue-600 pb-1 transition-all no-underline">Über mich</a>
         <a href="/blog.html" class="hover:text-blue-600 pb-1 transition-all no-underline">Blog</a>
         
         <div class="relative group" id="rights-dropdown">
-            <button onclick="toggleDropdown(event)" class="hover:text-blue-600 pb-1 transition-all no-underline font-semibold text-gray-600 text-base md:text-lg flex items-center gap-1 bg-transparent border-0 cursor-pointer">
+            <button onclick="toggleDropdown(event)" class="hover:text-blue-600 pb-1 transition-all no-underline font-semibold text-gray-600 text-sm md:text-base flex items-center gap-1 bg-transparent border-0 cursor-pointer">
                 Unsere Rechte
                 <svg class="w-4 h-4 transform transition-transform duration-200 group-hover:rotate-180" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                     <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2.5" d="M19 9l-7 7-7-7"></path>
@@ -20,7 +21,6 @@
             </button>
             
             <div class="absolute left-1/2 md:left-0 transform -translate-x-1/2 md:translate-x-0 pt-2 w-56 opacity-0 pointer-events-none group-hover:opacity-100 group-hover:pointer-events-auto transition-all duration-200 z-50" id="dropdown-menu">
-                
                 <div class="bg-white border border-gray-100 rounded-2xl shadow-xl py-2">
                     <a href="/unsere-rechte.html" class="flex items-center gap-2 px-4 py-2.5 text-sm text-gray-700 hover:bg-blue-50 hover:text-blue-600 font-bold transition-all no-underline">
                         🌍 Übersicht (Hub)
@@ -39,21 +39,21 @@
                         🌱 Umweltrechte
                     </a>
                 </div>
-
             </div>
         </div>
 
         <a href="/spenden.html" class="hover:text-blue-600 pb-1 transition-all no-underline">Spenden</a>
         <a href="/kontakt.html" class="hover:text-blue-600 pb-1 transition-all no-underline">Kontakt</a>
-        
-        <span class="hidden md:inline text-gray-200">|</span>
+    </div>
 
+    <div class="flex items-center gap-3 shrink-0 ml-auto border-l border-gray-100 pl-4">
         <div id="auth-nav-section" class="flex items-center">
             <a href="/login.html" class="bg-blue-600 text-white font-bold px-4 py-2 rounded-xl text-sm shadow-xs hover:bg-blue-700 transition-all no-underline">
                 🔑 Login
             </a>
         </div>
     </div>
+
 </div>
 
 <script>
@@ -62,7 +62,6 @@
 
     const supabaseClientNav = supabase.createClient(SUPABASE_URL_NAV, SUPABASE_ANON_KEY_NAV);
 
-    // Funktion für Klick-Steuerung auf Mobilgeräten
     function toggleDropdown(event) {
         event.stopPropagation();
         const menu = document.getElementById('dropdown-menu');
@@ -70,7 +69,6 @@
         menu.classList.toggle('pointer-events-none');
     }
 
-    // Dropdown schließen, wenn man irgendwo anders hinklickt
     document.addEventListener('click', function() {
         const menu = document.getElementById('dropdown-menu');
         if (menu && !menu.classList.contains('opacity-0')) {
@@ -84,12 +82,14 @@
         const authSection = document.getElementById('auth-nav-section');
 
         if (user && authSection) {
+            // Angepasste Struktur innerhalb der rechten Zone mit maximaler Breiten-Begrenzung für lange E-Mails
             authSection.innerHTML = `
-                <div class="flex items-center gap-3 text-sm">
-                    <a href="/profil.html" class="text-gray-700 hover:text-blue-600 font-bold transition-all no-underline flex items-center gap-1">
-                        👤 <span class="max-w-[150px] truncate">${user.email}</span>
+                <div class="flex items-center gap-3 text-xs md:text-sm">
+                    <a href="/profil.html" class="text-gray-700 hover:text-blue-600 font-bold transition-all no-underline flex items-center gap-1 shrink-0">
+                        <span>👤</span> 
+                        <span class="max-w-[120px] md:max-w-[160px] truncate">${user.email}</span>
                     </a>
-                    <button onclick="logoutNav()" class="bg-gray-100 hover:bg-gray-200 text-gray-700 font-bold px-3 py-1.5 rounded-xl transition-all cursor-pointer border-0">
+                    <button onclick="logoutNav()" class="bg-gray-100 hover:bg-gray-200 text-gray-700 font-bold px-2.5 py-1.5 rounded-xl transition-all cursor-pointer border-0 text-xs shrink-0">
                         Abmelden
                     </button>
                 </div>
