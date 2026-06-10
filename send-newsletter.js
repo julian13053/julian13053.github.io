@@ -9,16 +9,10 @@ const resend = new Resend(process.env.RESEND_API_KEY);
 
 async function run() {
   const postsDir = path.join(process.cwd(), '_posts');
-  if (!fs.existsSync(postsDir)) {
-    console.log('Kein _posts Ordner gefunden.');
-    return;
-  }
+  if (!fs.existsSync(postsDir)) return;
   
   const files = fs.readdirSync(postsDir).filter(f => f.endsWith('.md') || f.endsWith('.html'));
-  if (files.length === 0) {
-    console.log('Keine Artikel gefunden.');
-    return;
-  }
+  if (files.length === 0) return;
   
   files.sort();
   const latestFile = files[files.length - 1];
@@ -33,13 +27,9 @@ async function run() {
     .from('newsletter_subscribers')
     .select('email');
     
-  if (error || !subscribers || subscribers.length === 0) {
-    console.log('Keine Abonnenten gefunden oder Fehler:', error);
-    return;
-  }
+  if (error || !subscribers || subscribers.length === 0) return;
 
   const emailList = subscribers.map(s => s.email);
-  console.log(`Sende an ${emailList.length} Abonnenten...`);
 
   try {
     await resend.emails.send({
