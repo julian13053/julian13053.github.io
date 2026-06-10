@@ -3,7 +3,7 @@ name: Send Newsletter on New Post
 on:
   push:
     paths:
-      - '_posts/**' # Reagiert nur, wenn im Ordner _posts etwas Neues hochgeladen wird
+      - '_posts/**'
 
 jobs:
   send-newsletter:
@@ -40,10 +40,8 @@ jobs:
 
           async function run() {
             const postsDir = path.join(process.cwd(), '_posts');
-            if (!fs.existsSync(postsDir)) {
-              console.log('Kein _posts Ordner gefunden.');
-              return;
-            }
+            if (!fs.existsSync(postsDir)) return;
+            
             const files = fs.readdirSync(postsDir).filter(f => f.endsWith('.md') || f.endsWith('.html'));
             if (files.length === 0) return;
             
@@ -54,27 +52,55 @@ jobs:
             const fileContent = fs.readFileSync(filePath, 'utf8');
             const { data } = matter(fileContent);
             
-            const title = data.title || 'Neuer Artikel auf M-Fleger';
+            const title = data.title || 'Neuer Artikel online!';
             
             const { data: subscribers, error } = await supabase
               .from('newsletter_subscribers')
               .select('email');
               
-            if (error || !subscribers || subscribers.length === 0) {
-              console.log('Keine Abonnenten gefunden oder Fehler:', error);
-              return;
-            }
+            if (error || !subscribers || subscribers.length === 0) return;
 
             const emailList = subscribers.map(s => s.email);
-            console.log('Sende an ' + emailList.length + ' Abonnenten...');
 
             try {
               await resend.emails.send({
-                from: 'Julian Fleger | M-Fleger.de <onboarding@resend.dev>',
+                // 1. ABSENDERNAME (Hier steht jetzt dein Name + Website)
+                from: 'Julian Fleger | Überfliegerwebsite <onboarding@resend.dev>',
                 to: 'julian@m-fleger.de',
                 bcc: emailList,
-                subject: '🔥 Neuer Artikel: ' + title,
-                html: '<h2>Hallo!</h2><p>Es gibt einen brandneuen Artikel auf unserer Plattform:</p><h3>' + title + '</h3><p>Lies jetzt den vollständigen Beitrag direkt auf der Website!</p><br><a href=\"https://m-fleger.de/blog.html\" style=\"background:#2563eb;color:white;padding:10px 20px;text-decoration:none;border-radius:8px;font-weight:bold;\">Zum Artikel springen</a>'
+                
+                // 2. BETREFFZEILE (Hier wird der Titel des Beitrags automatisch eingesetzt)
+                subject: '✨ Überfliegerwebsite: ' + title,
+                
+                // 3. DAS DESIGN DER E-MAIL (Reines HTML - das kannst du frei gestalten!)
+                html: `
+                  <div style=\"font-family: 'Helvetica Neue', Helvetica, Arial, sans-serif; max-width: 600px; margin: 0 auto; padding: 20px; color: #1f2937;\">
+                    <div style=\"text-align: center; padding-bottom: 20px; border-bottom: 2px solid #f3f4f6;\">
+                      <h1 style=\"color: #2563eb; margin: 0; font-size: 28px;\">🚀 Überfliegerwebsite</h1>
+                      <p style=\"color: #6b7280; font-size: 14px; margin-top: 5px;\">Nichts mehr verpassen!</p>
+                    </div>
+                    
+                    <div style=\"padding: 30px 0;\">
+                      <p style=\"font-size: 16px; line-height: 1.6;\">Hallo,</p>
+                      <p style=\"font-size: 16px; line-height: 1.6;\">Es gibt Neuigkeiten auf der Plattform! Ich habe soeben einen brandneuen Artikel veröffentlicht, den du nicht verpassen solltest:</p>
+                      
+                      <div style=\"background-color: #eff6ff; border-left: 4px solid #2563eb; padding: 15px; margin: 25px 0; border-radius: 0 12px 12px 0;\">
+                        <h2 style=\"margin: 0; font-size: 18px; color: #1e3a8a;\">${title}</h2>
+                      </div>
+                      
+                      <p style=\"font-size: 16px; line-height: 1.6;\">Klicke einfach auf den Button unten, um direkt zum Blog zu gelangen und den ganzen Beitrag zu lesen.</p>
+                      
+                      <div style=\"text-align: center; margin: 35px 0;\">
+                        <a href=\"https://m-fleger.de/blog.html\" style=\"background-color: #2563eb; color: white; padding: 14px 28px; text-decoration: none; border-radius: 12px; font-weight: bold; font-size: 16px; display: inline-block; shadow: 0 4px 6px -1px rgba(0,0,0,0.1);\">📖 Jetzt Artikel lesen</a>
+                      </div>
+                    </div>
+                    
+                    <div style=\"text-align: center; padding-top: 20px; border-top: 1px solid #e5e7eb; color: #9ca3af; font-size: 12px;\">
+                      <p>&copy; 2026 Überfliegerwebsite. Alle Rechte vorbehalten.</p>
+                      <p style=\"margin-top: 5px;\">Du erhältst diese E-Mail, weil du dich auf m-fleger.de eingetragen hast.</p>
+                    </div>
+                  </div>
+                `
               });
               console.log('Newsletter erfolgreich verschickt!');
             } catch (mailError) {
