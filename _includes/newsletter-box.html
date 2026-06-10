@@ -1,0 +1,63 @@
+<div class="bg-blue-50 border border-blue-100 rounded-3xl p-6 md:p-8 my-8 max-w-2xl mx-auto shadow-xs text-center">
+    <div class="inline-flex items-center justify-center w-12 h-12 bg-blue-600 text-white rounded-2xl text-xl font-bold mb-4">
+        📬
+    </div>
+    <h3 class="text-xl font-black text-gray-950 mb-2 leading-tight">Nichts mehr verpassen!</h3>
+    <p class="text-gray-600 text-sm leading-relaxed mb-6 max-w-md mx-auto">
+        Lass dich automatisch per Mail benachrichtigen, sobald ein neuer Artikel online geht. Komplett kostenlos und jederzeit abbestellbar.
+    </p>
+
+    <div id="newsletter-form" class="flex flex-col sm:flex-row gap-3 max-w-md mx-auto">
+        <input type="email" id="newsletter-email" placeholder="Deine E-Mail-Adresse..." required
+            class="flex-grow px-4 py-3 bg-white border border-gray-200 rounded-2xl text-sm font-semibold text-gray-800 placeholder-gray-400 focus:outline-none focus:border-blue-500 focus:ring-2 focus:ring-blue-100 transition-all">
+        
+        <button onclick="subscribeNewsletter()" class="bg-blue-600 hover:bg-blue-700 text-white font-bold px-6 py-3 rounded-2xl text-sm transition-all shadow-xs cursor-pointer shrink-0">
+            Abonnieren
+        </button>
+    </div>
+
+    <p id="newsletter-success" class="text-sm font-bold text-green-700 mt-4 hidden animate-fade-in">
+        🎉 Fast geschafft! Deine E-Mail wurde eingetragen.
+    </p>
+    <p id="newsletter-error" class="text-sm font-bold text-red-600 mt-4 hidden animate-fade-in"></p>
+</div>
+
+<script>
+    async function subscribeNewsletter() {
+        const emailInput = document.getElementById('newsletter-email');
+        const email = emailInput.value.trim();
+        const successMessage = document.getElementById('newsletter-success');
+        const errorMessage = document.getElementById('newsletter-error');
+
+        errorMessage.classList.add('hidden');
+        successMessage.classList.add('hidden');
+
+        if (!email || !email.includes('@')) {
+            errorMessage.textContent = "❌ Bitte gib eine gültige E-Mail-Adresse ein.";
+            errorMessage.classList.remove('hidden');
+            return;
+        }
+
+        try {
+            const { error } = await supabaseClientNav
+                .from('newsletter_subscribers')
+                .insert([{ email: email }]);
+
+            if (error) {
+                if (error.code === '23505') {
+                    errorMessage.textContent = "💡 Diese E-Mail-Adresse hat den Newsletter bereits abonniert!";
+                } else {
+                    errorMessage.textContent = "❌ Fehler: " + error.message;
+                }
+                errorMessage.classList.remove('hidden');
+            } else {
+                document.getElementById('newsletter-form').classList.add('hidden');
+                successMessage.classList.remove('hidden');
+                emailInput.value = '';
+            }
+        } catch (err) {
+            errorMessage.textContent = "❌ Ein unerwarteter Fehler ist aufgetreten.";
+            errorMessage.classList.remove('hidden');
+        }
+    }
+</script>
