@@ -25,4 +25,4 @@ Da uns deine Digitalrechte besonders am Herzen liegen, bauen wir das System abso
 
 > 🛠️ **Der Code wird gerade fleißig geschrieben!** Wir halten dich hier im Blog auf dem Laufenden, sobald die Anmeldung freigeschaltet wird. 
 
-Welche Themen wünschst du dir im Newsletter? Sag es uns gerne auf dem Schulhof oder schreib uns eine Nachricht über die [Kontaktseite](/kontakt.html)!
+Welche Themen wünschst du dir im Newsletter? Sag es uns gerne auf dem Schulhof oder schreib uns eine Nachricht über die [Kontaktseite](/kontakt.html)!!
