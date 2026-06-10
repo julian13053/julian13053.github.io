@@ -1,0 +1,85 @@
+const { createClient } = require('@supabase/supabase-js');
+const { Resend } = require('resend');
+const fs = require('fs');
+const path = require('path');
+const matter = require('gray-matter');
+
+const supabase = createClient(process.env.SUPABASE_URL, process.env.SUPABASE_SERVICE_ROLE_KEY);
+const resend = new Resend(process.env.RESEND_API_KEY);
+
+async function run() {
+  const postsDir = path.join(process.cwd(), '_posts');
+  if (!fs.existsSync(postsDir)) {
+    console.log('Kein _posts Ordner gefunden.');
+    return;
+  }
+  
+  const files = fs.readdirSync(postsDir).filter(f => f.endsWith('.md') || f.endsWith('.html'));
+  if (files.length === 0) {
+    console.log('Keine Artikel gefunden.');
+    return;
+  }
+  
+  files.sort();
+  const latestFile = files[files.length - 1];
+  const filePath = path.join(postsDir, latestFile);
+  
+  const fileContent = fs.readFileSync(filePath, 'utf8');
+  const { data } = matter(fileContent);
+  
+  const title = data.title || 'Neuer Artikel online!';
+  
+  const { data: subscribers, error } = await supabase
+    .from('newsletter_subscribers')
+    .select('email');
+    
+  if (error || !subscribers || subscribers.length === 0) {
+    console.log('Keine Abonnenten gefunden oder Fehler:', error);
+    return;
+  }
+
+  const emailList = subscribers.map(s => s.email);
+  console.log(`Sende an ${emailList.length} Abonnenten...`);
+
+  try {
+    await resend.emails.send({
+      from: 'Julian Fleger | Überfliegerwebsite <onboarding@resend.dev>',
+      to: 'julian@m-fleger.de',
+      bcc: emailList,
+      subject: '✨ Überfliegerwebsite: ' + title,
+      html: `
+        <div style="font-family: 'Helvetica Neue', Helvetica, Arial, sans-serif; max-width: 600px; margin: 0 auto; padding: 20px; color: #1f2937;">
+          <div style="text-align: center; padding-bottom: 20px; border-bottom: 2px solid #f3f4f6;">
+            <h1 style="color: #2563eb; margin: 0; font-size: 28px;">🚀 Überfliegerwebsite</h1>
+            <p style="color: #6b7280; font-size: 14px; margin-top: 5px;">Nichts mehr verpassen!</p>
+          </div>
+          
+          <div style="padding: 30px 0;">
+            <p style="font-size: 16px; line-height: 1.6;">Hallo,</p>
+            <p style="font-size: 16px; line-height: 1.6;">Es gibt Neuigkeiten auf der Plattform! Ich habe soeben einen brandneuen Artikel veröffentlicht, den du nicht verpassen solltest:</p>
+            
+            <div style="background-color: #eff6ff; border-left: 4px solid #2563eb; padding: 15px; margin: 25px 0; border-radius: 0 12px 12px 0;">
+              <h2 style="margin: 0; font-size: 18px; color: #1e3a8a;">${title}</h2>
+            </div>
+            
+            <p style="font-size: 16px; line-height: 1.6;">Klicke einfach auf den Button unten, um direkt zum Blog zu gelangen und den ganzen Beitrag zu lesen.</p>
+            
+            <div style="text-align: center; margin: 35px 0;">
+              <a href="https://m-fleger.de/blog.html" style="background-color: #2563eb; color: white; padding: 14px 28px; text-decoration: none; border-radius: 12px; font-weight: bold; font-size: 16px; display: inline-block;">📖 Jetzt Artikel lesen</a>
+            </div>
+          </div>
+          
+          <div style="text-align: center; padding-top: 20px; border-top: 1px solid #e5e7eb; color: #9ca3af; font-size: 12px;">
+            <p>&copy; 2026 Überfliegerwebsite. Alle Rechte vorbehalten.</p>
+            <p style="margin-top: 5px;">Du erhältst diese E-Mail, weil du dich auf m-fleger.de eingetragen hast.</p>
+          </div>
+        </div>
+      `
+    });
+    console.log('Newsletter erfolgreich verschickt!');
+  } catch (mailError) {
+    console.error('Fehler beim E-Mail-Versand:', mailError);
+  }
+}
+
+run();
