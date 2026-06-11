@@ -1,333 +1,366 @@
-<!DOCTYPE html>
-<html lang="de">
-<head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Aktionstag-Kalender | M-Fleger</title>
+---
+layout: default
+title: "Aktionstag-Kalender"
+---
+
+<style>
+    .kalender-seiten-bereich {
+        width: 100%;
+        min-height: 75vh;
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        padding: 40px 20px;
+        background-color: #f8fafc;
+        box-sizing: border-box;
+    }
     
-    <style>
-        * {
-            box-sizing: border-box;
-            margin: 0;
-            padding: 0;
-            font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Helvetica, Arial, sans-serif;
-        }
-        body {
-            background-color: #f8fafc;
-            color: #1e293b;
-            display: flex;
-            flex-direction: column;
-            min-height: 100vh;
-        }
-        
-        /* --- SAUBERER NEUER HEADER --- */
-        .site-header {
-            background: #ffffff;
-            border-b: 1px solid #e2e8f0;
-            width: 100%;
-            height: 80px;
-            display: flex;
-            align-items: center;
-            justify-content: space-between;
-            padding: 0 40px;
-            box-shadow: 0 1px 3px rgba(0,0,0,0.02);
-        }
-        .brand-section {
-            display: flex;
-            align-items: center;
-            gap: 12px;
-            text-decoration: none;
-        }
-        .brand-logo {
-            width: 48px;
-            height: 40px;
-            border-radius: 12px;
-            object-fit: contain;
-        }
-        .brand-name {
-            font-size: 22px;
-            font-weight: 900;
-            color: #2563eb;
-            letter-spacing: -0.02em;
-        }
-        .nav-links {
-            display: flex;
-            align-items: center;
-            gap: 24px;
-        }
-        .nav-item {
-            text-decoration: none;
-            color: #475569;
-            font-weight: 600;
-            font-size: 15px;
-            transition: color 0.15s;
-        }
-        .nav-item:hover, .nav-item.active {
-            color: #2563eb;
-        }
-        .login-btn {
-            background: #2563eb;
-            color: white !important;
-            padding: 8px 16px;
-            border-radius: 12px;
-            font-weight: 700;
-            box-shadow: 0 2px 4px rgba(37, 99, 235, 0.1);
-        }
-        .login-btn:hover {
-            background: #1d4ed8;
-        }
+    .kalender-karte {
+        background: #ffffff;
+        max-width: 800px;
+        width: 100%;
+        border-radius: 30px;
+        box-shadow: 0 10px 30px rgba(0,0,0,0.04);
+        padding: 35px;
+        border: 1px solid #e2e8f0;
+        box-sizing: border-box;
+    }
+    
+    .kalender-kopf {
+        text-align: center;
+        margin-bottom: 25px;
+    }
+    
+    .kalender-kopf h1 {
+        font-size: 28px !important;
+        color: #0f172a !important;
+        font-weight: 800 !important;
+        margin-bottom: 8px !important;
+        background: transparent !important;
+        padding: 0 !important;
+    }
+    
+    .kalender-kopf p {
+        color: #64748b !important;
+        font-size: 15px !important;
+        margin: 0 !important;
+    }
+    
+    .kalender-regler {
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        gap: 12px;
+        background: #f8fafc;
+        padding: 12px;
+        border-radius: 20px;
+        margin-bottom: 25px;
+        border: 1px solid #edf2f7;
+    }
+    
+    .kal-btn {
+        background: #ffffff;
+        border: 1px solid #e2e8f0;
+        padding: 10px 16px;
+        font-weight: bold;
+        border-radius: 14px;
+        cursor: pointer;
+        transition: all 0.15s;
+    }
+    
+    .kal-btn:hover {
+        background: #f1f5f9;
+    }
+    
+    .kal-select, .kal-year {
+        padding: 10px 16px;
+        border: 1px solid #e2e8f0;
+        background: #ffffff;
+        border-radius: 14px;
+        font-weight: bold;
+        color: #334155;
+        outline: none;
+        font-size: 15px;
+    }
+    
+    .kal-year {
+        width: 85px;
+        text-align: center;
+    }
+    
+    /* Das CSS-Grid für die Kacheln - Jetzt ohne Navigations-Konflikte */
+    .kal-wochentage {
+        display: grid !important;
+        grid-template-columns: repeat(7, 1fr) !important;
+        width: 100% !important;
+        margin-bottom: 12px !important;
+        border-bottom: 2px solid #f1f5f9 !important;
+        padding-bottom: 10px !important;
+    }
+    
+    .kal-wochentag {
+        text-align: center !important;
+        font-weight: 700 !important;
+        color: #94a3b8 !important;
+        font-size: 13px !important;
+        text-transform: uppercase !important;
+    }
+    
+    .kal-raster-container {
+        display: flex !important;
+        flex-direction: column !important;
+        gap: 8px !important;
+        width: 100% !important;
+    }
+    
+    .kal-wochen-zeile {
+        display: grid !important;
+        grid-template-columns: repeat(7, 1fr) !important;
+        width: 100% !important;
+        gap: 8px !important;
+    }
+    
+    .kal-tag-zelle {
+        aspect-ratio: 1 / 1 !important;
+        display: flex !important;
+        flex-direction: column !important;
+        align-items: center !important;
+        justify-content: center !important;
+        background: #ffffff !important;
+        border: 1px solid #f1f5f9 !important;
+        border-radius: 16px !important;
+        font-weight: 600 !important;
+        font-size: 15px !important;
+        color: #475569 !important;
+        position: relative !important;
+    }
+    
+    .kal-tag-zelle.empty {
+        background: transparent !important;
+        border: none !important;
+    }
+    
+    .kal-tag-zelle.action-day {
+        background: #eff6ff !important;
+        color: #2563eb !important;
+        border: 2px solid #bfdbfe !important;
+        cursor: pointer !important;
+        transition: all 0.2s !important;
+    }
+    
+    .kal-tag-zelle.action-day:hover {
+        background: #dbeafe !important;
+        transform: translateY(-2px) !important;
+        box-shadow: 0 4px 12px rgba(37, 99, 235, 0.1) !important;
+    }
+    
+    .kal-punkt {
+        width: 6px;
+        height: 6px;
+        background: #2563eb;
+        border-radius: 50%;
+        margin-top: 4px;
+    }
+    
+    .kal-heute {
+        outline: 3px solid #2563eb !important;
+        outline-offset: 2px;
+    }
 
-        /* --- KALENDER BEREICH --- */
-        .main-content {
-            flex: 1;
-            display: flex;
-            justify-content: center;
-            align-items: center;
-            padding: 40px 20px;
-        }
-        .calendar-card {
-            background: #ffffff;
-            max-width: 800px;
-            width: 100%;
-            border-radius: 30px;
-            box-shadow: 0 10px 30px rgba(0,0,0,0.04);
-            padding: 35px;
-            border: 1px solid #e2e8f0;
-        }
-        .calendar-title-area {
-            text-align: center;
-            margin-bottom: 25px;
-        }
-        .calendar-title-area h1 {
-            font-size: 28px;
-            color: #0f172a;
-            font-weight: 800;
-            margin-bottom: 8px;
-        }
-        .calendar-title-area p {
-            color: #64748b;
-            font-size: 15px;
-        }
-        .controls {
-            display: flex;
-            justify-content: center;
-            align-items: center;
-            gap: 12px;
-            background: #f8fafc;
-            padding: 12px;
-            border-radius: 20px;
-            margin-bottom: 25px;
-            border: 1px solid #edf2f7;
-        }
-        .btn {
-            background: #ffffff;
-            border: 1px solid #e2e8f0;
-            padding: 10px 16px;
-            font-weight: bold;
-            border-radius: 14px;
-            cursor: pointer;
-            transition: all 0.15s;
-        }
-        .btn:hover {
-            background: #f1f5f9;
-        }
-        .select-input, .year-input {
-            padding: 10px 16px;
-            border: 1px solid #e2e8f0;
-            background: #ffffff;
-            border-radius: 14px;
-            font-weight: bold;
-            color: #334155;
-            outline: none;
-            font-size: 15px;
-        }
-        .year-input {
-            width: 85px;
-            text-align: center;
-        }
-        .weekdays {
-            display: flex;
-            width: 100%;
-            margin-bottom: 12px;
-            border-bottom: 2px solid #f1f5f9;
-            padding-bottom: 10px;
-        }
-        .weekday {
-            flex: 1;
-            text-align: center;
-            font-weight: 700;
-            color: #94a3b8;
-            font-size: 13px;
-            text-transform: uppercase;
-        }
-        .days-container {
-            display: flex;
-            flex-direction: column;
-            gap: 8px;
-            width: 100%;
-        }
-        .week-row {
-            display: flex;
-            width: 100%;
-            gap: 8px;
-        }
-        .day-cell {
-            flex: 1;
-            aspect-ratio: 1 / 1;
-            display: flex;
-            flex-direction: column;
-            align-items: center;
-            justify-content: center;
-            background: #ffffff;
-            border: 1px solid #f1f5f9;
-            border-radius: 16px;
-            font-weight: 600;
-            font-size: 15px;
-            color: #475569;
-            position: relative;
-        }
-        .day-cell.empty {
-            background: transparent;
-            border: none;
-        }
-        .day-cell.action-day {
-            background: #eff6ff;
-            color: #2563eb;
-            border: 2px solid #bfdbfe;
-            cursor: pointer;
-            transition: all 0.2s;
-        }
-        .day-cell.action-day:hover {
-            background: #dbeafe;
-            transform: translateY(-2px);
-            box-shadow: 0 4px 12px rgba(37, 99, 235, 0.1);
-        }
-        .indicator-dot {
-            width: 6px;
-            height: 6px;
-            background: #2563eb;
-            border-radius: 50%;
-            margin-top: 4px;
-        }
-        .current-day {
-            outline: 3px solid #2563eb;
-            outline-offset: 2px;
-        }
+    /* Modal Box */
+    .kal-modal-overlay {
+        display: none;
+        position: fixed;
+        top: 0; left: 0; right: 0; bottom: 0;
+        background: rgba(15, 23, 42, 0.3);
+        backdrop-filter: blur(4px);
+        align-items: center;
+        justify-content: center;
+        z-index: 9999;
+        padding: 20px;
+    }
+    .kal-modal-overlay.active { display: flex !important; }
+    
+    .kal-modal-box {
+        background: #ffffff;
+        padding: 30px;
+        border-radius: 24px;
+        max-width: 460px;
+        width: 100%;
+        position: relative;
+        box-shadow: 0 20px 40px rgba(0,0,0,0.1);
+    }
+    
+    .kal-close-btn {
+        position: absolute;
+        top: 15px; right: 20px;
+        font-size: 28px;
+        background: none; border: none;
+        color: #94a3b8; cursor: pointer;
+    }
+    
+    .kal-date-badge {
+        display: inline-block;
+        background: #eff6ff;
+        color: #2563eb;
+        font-size: 12px;
+        font-weight: 700;
+        padding: 4px 12px;
+        border-radius: 20px;
+        margin-bottom: 12px;
+    }
+</style>
 
-        /* --- CLEANER FOOTER --- */
-        .site-footer {
-            background: #ffffff;
-            border-top: 1px solid #e2e8f0;
-            padding: 30px 40px;
-            text-align: center;
-            color: #64748b;
-            font-size: 14px;
-        }
-        .footer-links {
-            display: flex;
-            justify-content: center;
-            gap: 20px;
-            margin-top: 10px;
-        }
-        .footer-links a {
-            text-decoration: none;
-            color: #94a3b8;
-            transition: color 0.15s;
-        }
-        .footer-links a:hover {
-            color: #2563eb;
-        }
-
-        /* Modal Box */
-        .modal-overlay {
-            display: none;
-            position: fixed;
-            top: 0; left: 0; right: 0; bottom: 0;
-            background: rgba(15, 23, 42, 0.3);
-            backdrop-filter: blur(4px);
-            align-items: center;
-            justify-content: center;
-            z-index: 9999;
-            padding: 20px;
-        }
-        .modal-overlay.active { display: flex; }
-        .modal-box {
-            background: #ffffff;
-            padding: 30px;
-            border-radius: 24px;
-            max-width: 460px;
-            width: 100%;
-            position: relative;
-            box-shadow: 0 20px 40px rgba(0,0,0,0.1);
-        }
-        .close-btn {
-            position: absolute;
-            top: 15px; right: 20px;
-            font-size: 28px;
-            background: none; border: none;
-            color: #94a3b8; cursor: pointer;
-        }
-        .date-badge {
-            display: inline-block;
-            background: #eff6ff;
-            color: #2563eb;
-            font-size: 12px;
-            font-weight: 700;
-            padding: 4px 12px;
-            border-radius: 20px;
-            margin-bottom: 12px;
-        }
-    </style>
-</head>
-<body>
-
-<header class="site-header">
-    <a href="/index.html" class="brand-section">
-        <img src="/auge-logo.jpg" alt="Logo" class="brand-logo">
-        <span class="brand-name">M-Fleger</span>
-    </a>
-    <nav class="nav-links">
-        <a href="/index.html" class="nav-item">Startseite</a>
-        <a href="/ueber-mich.html" class="nav-item">Über mich</a>
-        <a href="/blog.html" class="nav-item">Blog</a>
-        <a href="/unsere-rechte.html" class="nav-item">Unsere Rechte</a>
-        <a href="/kalender.html" class="nav-item active">Aktionstage</a>
-        <a href="/kontakt.html" class="nav-item">Kontakt</a>
-        <a href="/login.html" class="nav-item login-btn">🔑 Login</a>
-    </nav>
-</header>
-
-<main class="main-content">
-    <div class="calendar-card">
-        <div class="calendar-title-area">
+<div class="kalender-seiten-bereich">
+    <div class="kalender-karte">
+        <div class="kalender-kopf">
             <h1>📅 Der Überflieger-Aktionstagskalender</h1>
             <p>Klicke auf einen blau markierten Tag, um die Bedeutung zu erfahren!</p>
         </div>
 
-        <div class="controls">
-            <button id="prevMonth" class="btn">◀</button>
-            <select id="monthSelect" class="select-input"></select>
-            <input id="yearInput" type="number" class="year-input">
-            <button id="nextMonth" class="btn">▶</button>
+        <div class="kalender-regler">
+            <button id="prevMonth" class="kal-btn">◀</button>
+            <select id="monthSelect" class="kal-select"></select>
+            <input id="yearInput" type="number" class="kal-year">
+            <button id="nextMonth" class="kal-btn">▶</button>
         </div>
 
-        <div class="weekdays">
-            <div class="weekday">Mo</div>
-            <div class="weekday">Di</div>
-            <div class="weekday">Mi</div>
-            <div class="weekday">Do</div>
-            <div class="weekday">Fr</div>
-            <div class="weekday">Sa</div>
-            <div class="weekday">So</div>
+        <div class="kal-wochentage">
+            <div class="kal-wochentag">Mo</div>
+            <div class="kal-wochentag">Di</div>
+            <div class="kal-wochentag">Mi</div>
+            <div class="kal-wochentag">Do</div>
+            <div class="kal-wochentag">Fr</div>
+            <div class="kal-wochentag">Sa</div>
+            <div class="kal-wochentag">So</div>
         </div>
 
-        <div id="calendarGrid" class="days-container"></div>
+        <div id="calendarGrid" class="kal-raster-container"></div>
     </div>
-</main>
+</div>
 
-<footer class="site-footer">
-    <p>&copy; 2026 M-Fleger. Alle Rechte vorbehalten.</p>
-    <div class="footer-links">
-        <a href="/impressum.html">Impressum</a>
-        <a href="/datenschutz.html">Datenschutz</a>
-        <a href="/spenden.html">Sp
+<div id="infoModal" class="kal-modal-overlay">
+    <div class="kal-modal-box">
+        <button id="closeModal" class="kal-close-btn">&times;</button>
+        <div id="modalDate" class="kal-date-badge">00.00.</div>
+        <h3 id="modalTitle" style="margin: 0 0 10px 0; font-size: 22px; color: #0f172a; font-weight: bold;">Titel</h3>
+        <p id="modalDescription" style="margin: 0; color: #475569; line-height: 1.6; font-size: 15px;">Beschreibung...</p>
+    </div>
+</div>
+
+<script>
+const actionDays = {
+    "03-21": { title: "Tag gegen Rassismus ✊", desc: "Erinnert an Gleichberechtigung und setzt weltweit Zeichen gegen Diskriminierung." },
+    "05-03": { title: "Tag der Pressefreiheit 📰", desc: "Macht auf die Wichtigkeit freier Berichterstattung weltweit aufmerksam." },
+    "06-01": { title: "Weltkindertag 👶", desc: "Stellt den Schutz und die Rechte von Kindern in den Fokus." },
+    "06-09": { title: "Tag der Antidiskriminierung ✊", desc: "Ein Tag für Vielfalt und den gleichen Respekt für alle Menschen." },
+    "06-11": { title: "Tag der Freiheit 🗽", desc: "Erinnert daran, wie wichtig Freiheit und Demokratie für uns alle sind." },
+    "11-20": { title: "Tag der Kinderrechte 📜", desc: "Feiert den Beschluss der UN-Kinderrechtskonvention." },
+    "12-10": { title: "Tag der Menschenrechte 🌍", desc: "Erinnert an die Erklärung der Menschenrechte von 1948." }
+};
+
+const monatsNamen = ["Januar", "Februar", "März", "April", "Mai", "Juni", "Juli", "August", "September", "Oktober", "November", "Dezember"];
+const grid = document.getElementById('calendarGrid');
+const monthSelect = document.getElementById('monthSelect');
+const yearInput = document.getElementById('yearInput');
+const modal = document.getElementById('infoModal');
+
+monatsNamen.forEach((m, idx) => {
+    let opt = document.createElement('option');
+    opt.value = idx;
+    opt.innerText = m;
+    monthSelect.appendChild(opt);
+});
+
+let d = new Date();
+let aktMonat = d.getMonth();
+let aktJahr = d.getFullYear() < 2026 ? 2026 : d.getFullYear();
+
+function baueKalender() {
+    grid.innerHTML = '';
+    const m = parseInt(monthSelect.value);
+    const y = parseInt(yearInput.value);
+    
+    let ersterTag = new Date(y, m, 1).getDay() - 1;
+    if (ersterTag === -1) ersterTag = 6; 
+    
+    let tageImMonat = new Date(y, m + 1, 0).getDate();
+    
+    let alleZellen = [];
+    for (let i = 0; i < ersterTag; i++) {
+        alleZellen.push({ leer: true });
+    }
+    for (let tag = 1; tag <= tageImMonat; tag++) {
+        alleZellen.push({ leer: false, nummer: tag });
+    }
+    
+    while(alleZellen.length > 0) {
+        let wochenZellen = alleZellen.splice(0, 7);
+        let wochenReihe = document.createElement('div');
+        wochenReihe.className = 'kal-wochen-zeile';
+        
+        while(wochenZellen.length < 7) {
+            wochenZellen.push({ leer: true });
+        }
+        
+        wochenZellen.forEach(z => {
+            let zelleHtml = document.createElement('div');
+            if (z.leer) {
+                zelleHtml.className = 'kal-tag-zelle empty';
+            } else {
+                zelleHtml.className = 'kal-tag-zelle';
+                zelleHtml.innerText = z.nummer;
+                
+                let mKey = String(m + 1).padStart(2, '0');
+                let dKey = String(z.nummer).padStart(2, '0');
+                let schluessel = `${mKey}-${dKey}`;
+                
+                if (actionDays[schluessel]) {
+                    zelleHtml.classList.add('action-day');
+                    let punkt = document.createElement('div');
+                    punkt.className = 'kal-punkt';
+                    zelleHtml.appendChild(punkt);
+                    zelleHtml.onclick = () => zeigeDetails(z.nummer, m + 1, y, actionDays[schluessel]);
+                }
+                
+                let heute = new Date();
+                if (z.nummer === heute.getDate() && m === heute.getMonth() && y === heute.getFullYear()) {
+                    zelleHtml.classList.add('kal-heute');
+                }
+            }
+            wochenReihe.appendChild(zelleHtml);
+        });
+        grid.appendChild(wochenReihe);
+    }
+}
+
+function zeigeDetails(tag, monat, jahr, daten) {
+    document.getElementById('modalDate').innerText = `${String(tag).padStart(2, '0')}.${String(monat).padStart(2, '0')}.${jahr}`;
+    document.getElementById('modalTitle').innerText = daten.title;
+    document.getElementById('modalDescription').innerText = daten.desc;
+    modal.classList.add('active');
+}
+
+document.getElementById('closeModal').onclick = () => modal.classList.remove('active');
+window.onclick = (e) => { if (e.target === modal) modal.classList.remove('active'); };
+
+monthSelect.onchange = baueKalender;
+yearInput.oninput = baueKalender;
+
+document.getElementById('prevMonth').onclick = () => {
+    let val = parseInt(monthSelect.value) - 1;
+    if (val < 0) { val = 11; yearInput.value = parseInt(yearInput.value) - 1; }
+    monthSelect.value = val;
+    baueKalender();
+};
+document.getElementById('nextMonth').onclick = () => {
+    let val = parseInt(monthSelect.value) + 1;
+    if (val > 11) { val = 0; yearInput.value = parseInt(yearInput.value) + 1; }
+    monthSelect.value = val;
+    baueKalender();
+};
+
+monthSelect.value = aktMonat;
+yearInput.value = aktJahr;
+baueKalender();
+</script>
