@@ -4,123 +4,114 @@ title: "Aktionstag-Kalender"
 ---
 
 <style>
-    .kalender-seiten-bereich {
+    .ak-seite-container {
         width: 100%;
         min-height: 75vh;
         display: flex;
         justify-content: center;
         align-items: center;
-        padding: 40px 20px;
+        padding: 20px;
         background-color: #f8fafc;
         box-sizing: border-box;
     }
     
-    .kalender-karte {
+    .ak-kalender-karte {
         background: #ffffff;
         max-width: 800px;
         width: 100%;
-        border-radius: 30px;
+        border-radius: 24px;
         box-shadow: 0 10px 30px rgba(0,0,0,0.04);
-        padding: 35px;
+        padding: 25px;
         border: 1px solid #e2e8f0;
         box-sizing: border-box;
     }
     
-    .kalender-kopf {
+    .ak-ueberschrift-zone {
         text-align: center;
-        margin-bottom: 25px;
+        margin-bottom: 20px;
     }
     
-    .kalender-kopf h1 {
-        font-size: 28px !important;
+    .ak-ueberschrift-zone h1 {
+        font-size: 24px !important;
         color: #0f172a !important;
         font-weight: 800 !important;
-        margin-bottom: 8px !important;
+        margin-bottom: 6px !important;
         background: transparent !important;
-        padding: 0 !important;
     }
     
-    .kalender-kopf p {
+    .ak-ueberschrift-zone p {
         color: #64748b !important;
-        font-size: 15px !important;
+        font-size: 14px !important;
         margin: 0 !important;
     }
     
-    .kalender-regler {
+    .ak-steuerung {
         display: flex;
         justify-content: center;
         align-items: center;
-        gap: 12px;
+        gap: 10px;
         background: #f8fafc;
-        padding: 12px;
-        border-radius: 20px;
-        margin-bottom: 25px;
+        padding: 10px;
+        border-radius: 16px;
+        margin-bottom: 20px;
         border: 1px solid #edf2f7;
     }
     
-    .kal-btn {
+    .ak-btn {
         background: #ffffff;
         border: 1px solid #e2e8f0;
-        padding: 10px 16px;
+        padding: 8px 14px;
         font-weight: bold;
-        border-radius: 14px;
+        border-radius: 12px;
         cursor: pointer;
-        transition: all 0.15s;
     }
     
-    .kal-btn:hover {
-        background: #f1f5f9;
-    }
-    
-    .kal-select, .kal-year {
-        padding: 10px 16px;
+    .ak-select, .ak-jahr-input {
+        padding: 8px 12px;
         border: 1px solid #e2e8f0;
         background: #ffffff;
-        border-radius: 14px;
+        border-radius: 12px;
         font-weight: bold;
         color: #334155;
-        outline: none;
-        font-size: 15px;
     }
     
-    .kal-year {
-        width: 85px;
+    .ak-jahr-input {
+        width: 80px;
         text-align: center;
     }
     
-    /* Das CSS-Grid für die Kacheln - Jetzt ohne Navigations-Konflikte */
-    .kal-wochentage {
+    /* Wochentage im Grid-System */
+    .ak-wochentage-grid {
         display: grid !important;
         grid-template-columns: repeat(7, 1fr) !important;
         width: 100% !important;
-        margin-bottom: 12px !important;
+        margin-bottom: 10px !important;
         border-bottom: 2px solid #f1f5f9 !important;
-        padding-bottom: 10px !important;
+        padding-bottom: 8px !important;
     }
     
-    .kal-wochentag {
+    .ak-wochentag-name {
         text-align: center !important;
         font-weight: 700 !important;
         color: #94a3b8 !important;
-        font-size: 13px !important;
-        text-transform: uppercase !important;
+        font-size: 12px !important;
     }
     
-    .kal-raster-container {
+    .ak-wochen-zeilen-block {
         display: flex !important;
         flex-direction: column !important;
-        gap: 8px !important;
+        gap: 6px !important;
         width: 100% !important;
     }
     
-    .kal-wochen-zeile {
+    .ak-woche-reihe {
         display: grid !important;
         grid-template-columns: repeat(7, 1fr) !important;
         width: 100% !important;
-        gap: 8px !important;
+        gap: 6px !important;
     }
     
-    .kal-tag-zelle {
+    .ak-tag-feld {
         aspect-ratio: 1 / 1 !important;
         display: flex !important;
         flex-direction: column !important;
@@ -128,123 +119,93 @@ title: "Aktionstag-Kalender"
         justify-content: center !important;
         background: #ffffff !important;
         border: 1px solid #f1f5f9 !important;
-        border-radius: 16px !important;
+        border-radius: 12px !important;
         font-weight: 600 !important;
-        font-size: 15px !important;
+        font-size: 14px !important;
         color: #475569 !important;
-        position: relative !important;
     }
     
-    .kal-tag-zelle.empty {
+    .ak-tag-feld.empty {
         background: transparent !important;
         border: none !important;
     }
     
-    .kal-tag-zelle.action-day {
+    .ak-tag-feld.action-day {
         background: #eff6ff !important;
         color: #2563eb !important;
         border: 2px solid #bfdbfe !important;
         cursor: pointer !important;
-        transition: all 0.2s !important;
     }
     
-    .kal-tag-zelle.action-day:hover {
-        background: #dbeafe !important;
-        transform: translateY(-2px) !important;
-        box-shadow: 0 4px 12px rgba(37, 99, 235, 0.1) !important;
-    }
-    
-    .kal-punkt {
-        width: 6px;
-        height: 6px;
+    .ak-punkt {
+        width: 5px;
+        height: 5px;
         background: #2563eb;
         border-radius: 50%;
-        margin-top: 4px;
+        margin-top: 2px;
     }
     
-    .kal-heute {
+    .ak-heute-markierung {
         outline: 3px solid #2563eb !important;
-        outline-offset: 2px;
     }
 
-    /* Modal Box */
-    .kal-modal-overlay {
+    /* Modal Popup */
+    .ak-popup-overlay {
         display: none;
         position: fixed;
         top: 0; left: 0; right: 0; bottom: 0;
         background: rgba(15, 23, 42, 0.3);
-        backdrop-filter: blur(4px);
         align-items: center;
         justify-content: center;
         z-index: 9999;
         padding: 20px;
     }
-    .kal-modal-overlay.active { display: flex !important; }
+    .ak-popup-overlay.active { display: flex !important; }
     
-    .kal-modal-box {
+    .ak-popup-box {
         background: #ffffff;
-        padding: 30px;
-        border-radius: 24px;
-        max-width: 460px;
+        padding: 25px;
+        border-radius: 20px;
+        max-width: 400px;
         width: 100%;
         position: relative;
-        box-shadow: 0 20px 40px rgba(0,0,0,0.1);
-    }
-    
-    .kal-close-btn {
-        position: absolute;
-        top: 15px; right: 20px;
-        font-size: 28px;
-        background: none; border: none;
-        color: #94a3b8; cursor: pointer;
-    }
-    
-    .kal-date-badge {
-        display: inline-block;
-        background: #eff6ff;
-        color: #2563eb;
-        font-size: 12px;
-        font-weight: 700;
-        padding: 4px 12px;
-        border-radius: 20px;
-        margin-bottom: 12px;
     }
 </style>
 
-<div class="kalender-seiten-bereich">
-    <div class="kalender-karte">
-        <div class="kalender-kopf">
+<div class="ak-seite-container">
+    <div class="ak-kalender-karte">
+        <div class="ak-ueberschrift-zone">
             <h1>📅 Der Überflieger-Aktionstagskalender</h1>
             <p>Klicke auf einen blau markierten Tag, um die Bedeutung zu erfahren!</p>
         </div>
 
-        <div class="kalender-regler">
-            <button id="prevMonth" class="kal-btn">◀</button>
-            <select id="monthSelect" class="kal-select"></select>
-            <input id="yearInput" type="number" class="kal-year">
-            <button id="nextMonth" class="kal-btn">▶</button>
+        <div class="ak-steuerung">
+            <button id="prevMonth" class="ak-btn">◀</button>
+            <select id="monthSelect" class="ak-select"></select>
+            <input id="yearInput" type="number" class="ak-jahr-input">
+            <button id="nextMonth" class="ak-btn">▶</button>
         </div>
 
-        <div class="kal-wochentage">
-            <div class="kal-wochentag">Mo</div>
-            <div class="kal-wochentag">Di</div>
-            <div class="kal-wochentag">Mi</div>
-            <div class="kal-wochentag">Do</div>
-            <div class="kal-wochentag">Fr</div>
-            <div class="kal-wochentag">Sa</div>
-            <div class="kal-wochentag">So</div>
+        <div class="ak-wochentage-grid">
+            <div class="ak-wochentag-name">Mo</div>
+            <div class="ak-wochentag-name">Di</div>
+            <div class="ak-wochentag-name">Mi</div>
+            <div class="ak-wochentag-name">Do</div>
+            <div class="ak-wochentag-name">Fr</div>
+            <div class="ak-wochentag-name">Sa</div>
+            <div class="ak-wochentag-name">So</div>
         </div>
 
-        <div id="calendarGrid" class="kal-raster-container"></div>
+        <div id="calendarGrid" class="ak-wochen-zeilen-block"></div>
     </div>
 </div>
 
-<div id="infoModal" class="kal-modal-overlay">
-    <div class="kal-modal-box">
-        <button id="closeModal" class="kal-close-btn">&times;</button>
-        <div id="modalDate" class="kal-date-badge">00.00.</div>
-        <h3 id="modalTitle" style="margin: 0 0 10px 0; font-size: 22px; color: #0f172a; font-weight: bold;">Titel</h3>
-        <p id="modalDescription" style="margin: 0; color: #475569; line-height: 1.6; font-size: 15px;">Beschreibung...</p>
+<div id="infoModal" class="ak-popup-overlay">
+    <div class="ak-popup-box">
+        <button id="closeModal" style="position: absolute; top: 10px; right: 15px; background: none; border: none; font-size: 24px; cursor: pointer; color: #94a3b8;">&times;</button>
+        <div id="modalDate" style="display: inline-block; background: #eff6ff; color: #2563eb; padding: 4px 10px; border-radius: 12px; font-size: 12px; font-weight: bold; margin-bottom: 10px;"></div>
+        <h3 id="modalTitle" style="margin: 0 0 10px 0; color: #0f172a;"></h3>
+        <p id="modalDescription" style="margin: 0; color: #475569; font-size: 14px; line-height: 1.5;"></p>
     </div>
 </div>
 
@@ -265,18 +226,22 @@ const monthSelect = document.getElementById('monthSelect');
 const yearInput = document.getElementById('yearInput');
 const modal = document.getElementById('infoModal');
 
-monatsNamen.forEach((m, idx) => {
-    let opt = document.createElement('option');
-    opt.value = idx;
-    opt.innerText = m;
-    monthSelect.appendChild(opt);
-});
+// Befülle Dropdown nur, wenn es noch leer ist
+if(monthSelect && monthSelect.options.length === 0) {
+    monatsNamen.forEach((m, idx) => {
+        let opt = document.createElement('option');
+        opt.value = idx;
+        opt.innerText = m;
+        monthSelect.appendChild(opt);
+    });
+}
 
 let d = new Date();
 let aktMonat = d.getMonth();
 let aktJahr = d.getFullYear() < 2026 ? 2026 : d.getFullYear();
 
 function baueKalender() {
+    if(!grid || !monthSelect || !yearInput) return;
     grid.innerHTML = '';
     const m = parseInt(monthSelect.value);
     const y = parseInt(yearInput.value);
@@ -297,7 +262,7 @@ function baueKalender() {
     while(alleZellen.length > 0) {
         let wochenZellen = alleZellen.splice(0, 7);
         let wochenReihe = document.createElement('div');
-        wochenReihe.className = 'kal-wochen-zeile';
+        wochenReihe.className = 'ak-woche-reihe';
         
         while(wochenZellen.length < 7) {
             wochenZellen.push({ leer: true });
@@ -306,9 +271,9 @@ function baueKalender() {
         wochenZellen.forEach(z => {
             let zelleHtml = document.createElement('div');
             if (z.leer) {
-                zelleHtml.className = 'kal-tag-zelle empty';
+                zelleHtml.className = 'ak-tag-feld empty';
             } else {
-                zelleHtml.className = 'kal-tag-zelle';
+                zelleHtml.className = 'ak-tag-feld';
                 zelleHtml.innerText = z.nummer;
                 
                 let mKey = String(m + 1).padStart(2, '0');
@@ -318,14 +283,14 @@ function baueKalender() {
                 if (actionDays[schluessel]) {
                     zelleHtml.classList.add('action-day');
                     let punkt = document.createElement('div');
-                    punkt.className = 'kal-punkt';
+                    punkt.className = 'ak-punkt';
                     zelleHtml.appendChild(punkt);
                     zelleHtml.onclick = () => zeigeDetails(z.nummer, m + 1, y, actionDays[schluessel]);
                 }
                 
                 let heute = new Date();
-                if (z.nummer === heute.getDate() && m === heute.getMonth() && y === heute.getFullYear()) {
-                    zelleHtml.classList.add('kal-heute');
+                if (z.nummer === heute.getDate() && m === heute.getMonth() && y === today.getFullYear()) {
+                    zelleHtml.classList.add('ak-heute-markierung');
                 }
             }
             wochenReihe.appendChild(zelleHtml);
@@ -341,7 +306,9 @@ function zeigeDetails(tag, monat, jahr, daten) {
     modal.classList.add('active');
 }
 
-document.getElementById('closeModal').onclick = () => modal.classList.remove('active');
+if(document.getElementById('closeModal')) {
+    document.getElementById('closeModal').onclick = () => modal.classList.remove('active');
+}
 window.onclick = (e) => { if (e.target === modal) modal.classList.remove('active'); };
 
 monthSelect.onchange = baueKalender;
