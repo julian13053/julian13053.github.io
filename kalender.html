@@ -13,54 +13,100 @@
             font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Helvetica, Arial, sans-serif;
         }
         body {
-            background-color: #f4f6f9;
+            background-color: #f8fafc;
             color: #1e293b;
-            padding: 20px;
+            display: flex;
+            flex-direction: column;
+            min-height: 100vh;
+        }
+        
+        /* --- SAUBERER NEUER HEADER --- */
+        .site-header {
+            background: #ffffff;
+            border-b: 1px solid #e2e8f0;
+            width: 100%;
+            height: 80px;
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            padding: 0 40px;
+            box-shadow: 0 1px 3px rgba(0,0,0,0.02);
+        }
+        .brand-section {
+            display: flex;
+            align-items: center;
+            gap: 12px;
+            text-decoration: none;
+        }
+        .brand-logo {
+            width: 48px;
+            height: 40px;
+            border-radius: 12px;
+            object-fit: contain;
+        }
+        .brand-name {
+            font-size: 22px;
+            font-weight: 900;
+            color: #2563eb;
+            letter-spacing: -0.02em;
+        }
+        .nav-links {
+            display: flex;
+            align-items: center;
+            gap: 24px;
+        }
+        .nav-item {
+            text-decoration: none;
+            color: #475569;
+            font-weight: 600;
+            font-size: 15px;
+            transition: color 0.15s;
+        }
+        .nav-item:hover, .nav-item.active {
+            color: #2563eb;
+        }
+        .login-btn {
+            background: #2563eb;
+            color: white !important;
+            padding: 8px 16px;
+            border-radius: 12px;
+            font-weight: 700;
+            box-shadow: 0 2px 4px rgba(37, 99, 235, 0.1);
+        }
+        .login-btn:hover {
+            background: #1d4ed8;
+        }
+
+        /* --- KALENDER BEREICH --- */
+        .main-content {
+            flex: 1;
             display: flex;
             justify-content: center;
             align-items: center;
-            min-height: 100vh;
-        }
-        .back-link {
-            position: absolute;
-            top: 20px;
-            left: 20px;
-            text-decoration: none;
-            color: #2563eb;
-            font-weight: bold;
-            font-size: 14px;
-            background: white;
-            padding: 10px 16px;
-            border-radius: 12px;
-            box-shadow: 0 2px 8px rgba(0,0,0,0.05);
-            transition: all 0.2s;
-        }
-        .back-link:hover {
-            background: #2563eb;
-            color: white;
+            padding: 40px 20px;
         }
         .calendar-card {
             background: #ffffff;
-            max-width: 750px;
+            max-width: 800px;
             width: 100%;
             border-radius: 30px;
-            box-shadow: 0 10px 30px rgba(0,0,0,0.06);
-            padding: 30px;
+            box-shadow: 0 10px 30px rgba(0,0,0,0.04);
+            padding: 35px;
             border: 1px solid #e2e8f0;
         }
-        .calendar-header {
+        .calendar-title-area {
             text-align: center;
             margin-bottom: 25px;
         }
-        .calendar-header h1 {
-            font-size: 26px;
+        .calendar-title-area h1 {
+            font-size: 28px;
             color: #0f172a;
             font-weight: 800;
-            margin-bottom: 6px;
+            margin-bottom: 8px;
         }
-        .calendar-header p {
+        .calendar-title-area p {
             color: #64748b;
-            font-size: 14px;
+            font-size: 15px;
         }
         .controls {
             display: flex;
@@ -81,11 +127,9 @@
             border-radius: 14px;
             cursor: pointer;
             transition: all 0.15s;
-            box-shadow: 0 2px 4px rgba(0,0,0,0.02);
         }
         .btn:hover {
             background: #f1f5f9;
-            border-color: #cbd5e1;
         }
         .select-input, .year-input {
             padding: 10px 16px;
@@ -106,7 +150,7 @@
             width: 100%;
             margin-bottom: 12px;
             border-bottom: 2px solid #f1f5f9;
-            padding-bottom: 8px;
+            padding-bottom: 10px;
         }
         .weekday {
             flex: 1;
@@ -115,7 +159,6 @@
             color: #94a3b8;
             font-size: 13px;
             text-transform: uppercase;
-            tracking-ratio: 0.05em;
         }
         .days-container {
             display: flex;
@@ -170,21 +213,44 @@
             outline: 3px solid #2563eb;
             outline-offset: 2px;
         }
-        /* Popup / Modal */
+
+        /* --- CLEANER FOOTER --- */
+        .site-footer {
+            background: #ffffff;
+            border-top: 1px solid #e2e8f0;
+            padding: 30px 40px;
+            text-align: center;
+            color: #64748b;
+            font-size: 14px;
+        }
+        .footer-links {
+            display: flex;
+            justify-content: center;
+            gap: 20px;
+            margin-top: 10px;
+        }
+        .footer-links a {
+            text-decoration: none;
+            color: #94a3b8;
+            transition: color 0.15s;
+        }
+        .footer-links a:hover {
+            color: #2563eb;
+        }
+
+        /* Modal Box */
         .modal-overlay {
             display: none;
             position: fixed;
             top: 0; left: 0; right: 0; bottom: 0;
-            background: rgba(15, 23, 42, 0.4);
+            background: rgba(15, 23, 42, 0.3);
             backdrop-filter: blur(4px);
             align-items: center;
             justify-content: center;
             z-index: 9999;
             padding: 20px;
         }
-        .modal-overlay.active {
-            display: flex;
-        }
+        .modal-overlay.active { display: flex; }
         .modal-box {
             background: #ffffff;
             padding: 30px;
@@ -192,12 +258,7 @@
             max-width: 460px;
             width: 100%;
             position: relative;
-            box-shadow: 0 20px 40px rgba(0,0,0,0.12);
-            animation: popIn 0.25s ease-out;
-        }
-        @keyframes popIn {
-            from { transform: scale(0.95); opacity: 0; }
-            to { transform: scale(1); opacity: 1; }
+            box-shadow: 0 20px 40px rgba(0,0,0,0.1);
         }
         .close-btn {
             position: absolute;
@@ -206,7 +267,6 @@
             background: none; border: none;
             color: #94a3b8; cursor: pointer;
         }
-        .close-btn:hover { color: #475569; }
         .date-badge {
             display: inline-block;
             background: #eff6ff;
@@ -221,68 +281,53 @@
 </head>
 <body>
 
-<a href="/index.html" class="back-link">⬅ Zur Startseite</a>
+<header class="site-header">
+    <a href="/index.html" class="brand-section">
+        <img src="/auge-logo.jpg" alt="Logo" class="brand-logo">
+        <span class="brand-name">M-Fleger</span>
+    </a>
+    <nav class="nav-links">
+        <a href="/index.html" class="nav-item">Startseite</a>
+        <a href="/ueber-mich.html" class="nav-item">Über mich</a>
+        <a href="/blog.html" class="nav-item">Blog</a>
+        <a href="/unsere-rechte.html" class="nav-item">Unsere Rechte</a>
+        <a href="/kalender.html" class="nav-item active">Aktionstage</a>
+        <a href="/kontakt.html" class="nav-item">Kontakt</a>
+        <a href="/login.html" class="nav-item login-btn">🔑 Login</a>
+    </nav>
+</header>
 
-<div class="calendar-card">
-    <div class="calendar-header">
-        <h1>📅 Der Überflieger-Aktionstagskalender</h1>
-        <p>Klicke auf die blauen Tage, um mehr über ihre Bedeutung zu erfahren!</p>
+<main class="main-content">
+    <div class="calendar-card">
+        <div class="calendar-title-area">
+            <h1>📅 Der Überflieger-Aktionstagskalender</h1>
+            <p>Klicke auf einen blau markierten Tag, um die Bedeutung zu erfahren!</p>
+        </div>
+
+        <div class="controls">
+            <button id="prevMonth" class="btn">◀</button>
+            <select id="monthSelect" class="select-input"></select>
+            <input id="yearInput" type="number" class="year-input">
+            <button id="nextMonth" class="btn">▶</button>
+        </div>
+
+        <div class="weekdays">
+            <div class="weekday">Mo</div>
+            <div class="weekday">Di</div>
+            <div class="weekday">Mi</div>
+            <div class="weekday">Do</div>
+            <div class="weekday">Fr</div>
+            <div class="weekday">Sa</div>
+            <div class="weekday">So</div>
+        </div>
+
+        <div id="calendarGrid" class="days-container"></div>
     </div>
+</main>
 
-    <div class="controls">
-        <button id="prevMonth" class="btn">◀</button>
-        <select id="monthSelect" class="select-input"></select>
-        <input id="yearInput" type="number" class="year-input">
-        <button id="nextMonth" class="btn">▶</button>
-    </div>
-
-    <div class="weekdays">
-        <div class="weekday">Mo</div>
-        <div class="weekday">Di</div>
-        <div class="weekday">Mi</div>
-        <div class="weekday">Do</div>
-        <div class="weekday">Fr</div>
-        <div class="weekday">Sa</div>
-        <div class="weekday">So</div>
-    </div>
-
-    <div id="calendarGrid" class="days-container"></div>
-</div>
-
-<div id="infoModal" class="modal-overlay">
-    <div class="modal-box">
-        <button id="closeModal" class="close-btn">&times;</button>
-        <div id="modalDate" class="date-badge">00.00.</div>
-        <h3 id="modalTitle" style="margin: 0 0 10px 0; font-size: 22px; color: #0f172a;">Titel</h3>
-        <p id="modalDescription" style="margin: 0; color: #475569; line-height: 1.6; font-size: 15px;">Beschreibung...</p>
-    </div>
-</div>
-
-<script>
-const actionDays = {
-    "03-21": { title: "Tag gegen Rassismus ✊", desc: "Erinnert an Gleichberechtigung und setzt weltweit Zeichen gegen Diskriminierung." },
-    "05-03": { title: "Tag der Pressefreiheit 📰", desc: "Macht auf die Wichtigkeit freier Berichterstattung weltweit aufmerksam." },
-    "06-01": { title: "Weltkindertag 👶", desc: "Stellt den Schutz und die Rechte von Kindern in den Fokus." },
-    "06-09": { title: "Tag der Antidiskriminierung ✊", desc: "Ein Tag für Vielfalt und den gleichen Respekt für alle Menschen." },
-    "06-11": { title: "Tag der Freiheit 🗽", desc: "Erinnert daran, wie wichtig Freiheit und Demokratie für uns alle sind." },
-    "11-20": { title: "Tag der Kinderrechte 📜", desc: "Feiert den Beschluss der UN-Kinderrechtskonvention." },
-    "12-10": { title: "Tag der Menschenrechte 🌍", desc: "Erinnert an die Erklärung der Menschenrechte von 1948." }
-};
-
-const monatsNamen = ["Januar", "Februar", "März", "April", "Mai", "Juni", "Juli", "August", "September", "Oktober", "November", "Dezember"];
-const grid = document.getElementById('calendarGrid');
-const monthSelect = document.getElementById('monthSelect');
-const yearInput = document.getElementById('yearInput');
-const modal = document.getElementById('infoModal');
-
-// Dropdown befüllen
-monatsNamen.forEach((m, idx) => {
-    let opt = document.createElement('option');
-    opt.value = idx;
-    opt.innerText = m;
-    monthSelect.appendChild(opt);
-});
-
-let d = new Date();
-let aktMonat = d.getMonth();
-let aktJahr = d.getFullYear() < 2026 ?
+<footer class="site-footer">
+    <p>&copy; 2026 M-Fleger. Alle Rechte vorbehalten.</p>
+    <div class="footer-links">
+        <a href="/impressum.html">Impressum</a>
+        <a href="/datenschutz.html">Datenschutz</a>
+        <a href="/spenden.html">Sp
