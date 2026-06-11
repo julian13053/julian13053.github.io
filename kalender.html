@@ -1,0 +1,174 @@
+---
+layout: default
+title: "Aktionstag-Kalender"
+---
+
+<div class="max-w-4xl mx-auto my-10 px-4 font-sans">
+    
+    <div class="text-center mb-8">
+        <h1 class="text-3xl font-bold text-gray-800 mb-2">📅 Der Überflieger-Aktionstagskalender</h1>
+        <p class="text-gray-500">Klicke auf einen markierten Tag, um mehr über seine Bedeutung zu erfahren!</p>
+    </div>
+
+    <div class="flex flex-wrap justify-center items-center gap-4 bg-white p-4 rounded-2xl shadow-sm border border-gray-100 mb-6">
+        <button id="prevMonth" class="px-3 py-2 bg-gray-100 hover:bg-gray-200 text-gray-700 font-bold rounded-xl transition-colors">◀</button>
+        
+        <select id="monthSelect" class="bg-gray-50 border border-gray-200 rounded-xl px-4 py-2 font-semibold text-gray-700 focus:outline-none">
+            <option value="0">Januar</option>
+            <option value="1">Februar</option>
+            <option value="2">März</option>
+            <option value="3">April</option>
+            <option value="4">Mai</option>
+            <option value="5">Juni</option>
+            <option value="6">Juli</option>
+            <option value="7">August</option>
+            <option value="8">September</option>
+            <option value="9">Oktober</option>
+            <option value="10">November</option>
+            <option value="11">Dezember</option>
+        </select>
+
+        <input id="yearInput" type="number" value="2026" min="1900" max="2100" class="w-24 bg-gray-50 border border-gray-200 rounded-xl px-4 py-2 font-semibold text-gray-700 text-center focus:outline-none">
+
+        <button id="nextMonth" class="px-3 py-2 bg-gray-100 hover:bg-gray-200 text-gray-700 font-bold rounded-xl transition-colors">▶</button>
+    </div>
+
+    <div class="bg-white p-6 rounded-3xl shadow-sm border border-gray-100">
+        <div class="grid grid-cols-7 gap-2 text-center font-bold text-gray-400 text-xs uppercase tracking-wider mb-4">
+            <div>Mo</div><div>Di</div><div>Mi</div><div>Do</div><div>Fr</div><div>Sa</div><div>So</div>
+        </div>
+        <div id="calendarGrid" class="grid grid-cols-7 gap-2"></div>
+    </div>
+
+    <div id="infoModal" class="hidden fixed inset-0 bg-black/50 backdrop-blur-sm flex items-center justify-center p-4 z-50">
+        <div class="bg-white rounded-3xl max-w-md w-full p-6 shadow-xl transform transition-all border border-gray-100">
+            <div class="flex justify-between items-start mb-4">
+                <div class="bg-blue-50 text-blue-600 font-bold text-xs px-3 py-1 rounded-full uppercase tracking-wider" id="modalDate">00.00.</div>
+                <button id="closeModal" class="text-gray-400 hover:text-gray-600 font-bold text-xl">&times;</button>
+            </div>
+            <h3 id="modalTitle" class="text-xl font-bold text-gray-800 mb-2">Titel des Tages</h3>
+            <p id="modalDescription" class="text-gray-600 leading-relaxed text-sm">Beschreibung...</p>
+        </div>
+    </div>
+
+</div>
+
+<script>
+// Hier hinterlegen wir beispielhaft ein paar wichtige Tage. 
+// Format: "MM-DD" (Monat zweistellig, Tag zweistellig)
+const actionDays = {
+    "03-21": { title: "Tag gegen Rassismus ✊", desc: "Der Internationale Tag gegen Rassismus erinnert an das Massaker von Sharpeville und ruft weltweit zu Gleichberechtigung und gegen Diskriminierung auf." },
+    "05-03": { title: "Tag der Pressefreiheit 📰", desc: "Ein Aktionstag, der auf die Bedeutung freier Berichterstattung und die Gefahren, denen Journalisten weltweit ausgesetzt sind, aufmerksam macht." },
+    "06-01": { title: "Weltkindertag 👶", desc: "Dieser Tag stellt die Rechte, Bedürfnisse und den Schutz von Kindern weltweit in den Mittelpunkt der Gesellschaft." },
+    "06-09": { title: "Tag der Antidiskriminierung 🕊️", desc: "Ein Tag, der das Bewusstsein dafür schärfen soll, dass jeder Mensch unabhängig von Herkunft, Geschlecht oder Religion dieselben Rechte und Respekt verdient." },
+    "06-11": { title: "Tag der Freiheit 🗽", desc: "Ein symbolischer Tag, der daran erinnert, wie wertvoll persönliche Freiheit, Meinungsäußerung und Demokratie für ein friedliches Zusammenleben sind." },
+    "11-20": { title: "Tag der Kinderrechte 📜", desc: "Am 20. November 1989 wurde die UN-Kinderrechtskonvention verabschiedet. Dieser Tag fordert die weltweite Einhaltung dieser Rechte." },
+    "12-10": { title: "Tag der Menschenrechte 🌍", desc: "Erinnert an die Allgemeine Erklärung der Menschenrechte durch die Vereinten Nationen im Jahr 1948." }
+};
+
+const grid = document.getElementById('calendarGrid');
+const monthSelect = document.getElementById('monthSelect');
+const yearInput = document.getElementById('yearInput');
+const modal = document.getElementById('infoModal');
+
+let currentGridDate = new Date();
+// Falls das aktuelle Jahr 2026 sein soll, passen wir es an:
+if(currentGridDate.getFullYear() < 2026) {
+    currentGridDate.setFullYear(2026);
+}
+
+function renderCalendar() {
+    grid.innerHTML = '';
+    const month = parseInt(monthSelect.value);
+    const year = parseInt(yearInput.value);
+    
+    // Erster Tag des Monats
+    const firstDay = new Date(year, month, 1);
+    // Bestimmen, welcher Wochentag der 1. ist (0=So, 1=Mo, ..., 6=Sa)
+    // Umwandeln, sodass Montag = 0 und Sonntag = 6 ist:
+    let startDay = firstDay.getDay() - 1;
+    if (startDay === -1) startDay = 6; 
+    
+    // Anzahl der Tage im Monat
+    const totalDays = new Date(year, month + 1, 0).getDate();
+    
+    // Leere Felder für die Tage des Vormonats einfügen
+    for (let i = 0; i < startDay; i++) {
+        const emptyCell = document.createElement('div');
+        grid.appendChild(emptyCell);
+    }
+    
+    // Die eigentlichen Tage rendern
+    for (let day = 1; day <= totalDays; day++) {
+        const cell = document.createElement('button');
+        cell.className = "aspect-square w-full flex flex-col items-center justify-between p-2 rounded-xl text-sm font-semibold transition-all border border-transparent ";
+        
+        // Formatieren für den Abgleich mit unseren Aktionstagen
+        const mKey = String(month + 1).padStart(2, '0');
+        const dKey = String(day).padStart(2, '0');
+        const dateKey = `${mKey}-${dKey}`;
+        
+        // Nummer des Tages eintragen
+        const numSpan = document.createElement('span');
+        numSpan.innerText = day;
+        cell.appendChild(numSpan);
+
+        // Prüfen, ob für diesen Tag ein Aktionstag eingetragen ist
+        if (actionDays[dateKey]) {
+            cell.className += "bg-blue-50 text-blue-600 hover:bg-blue-100 hover:scale-105 border-blue-200 shadow-sm";
+            
+            // Ein kleines visuelles Pünktchen hinzufügen
+            const dot = document.createElement('span');
+            dot.className = "w-1.5 h-1.5 bg-blue-500 rounded-full mt-1";
+            cell.appendChild(dot);
+            
+            // Klick-Event für das Popup
+            cell.onclick = () => showDetails(day, month + 1, year, actionDays[dateKey]);
+        } else {
+            cell.className += "bg-gray-50 text-gray-700 hover:bg-gray-100 cursor-default";
+            cell.disabled = true; // Normale Tage sind nicht anklickbar
+        }
+        
+        // Heutigen Tag markieren (falls Monat und Jahr übereinstimmen)
+        const today = new Date();
+        if (day === today.getDate() && month === today.getMonth() && year === today.getFullYear()) {
+            cell.className += " ring-2 ring-blue-600 ring-offset-2";
+        }
+        
+        grid.appendChild(cell);
+    }
+}
+
+function showDetails(day, month, year, data) {
+    document.getElementById('modalDate').innerText = `${String(day).padStart(2, '0')}.${String(month).padStart(2, '0')}.${year}`;
+    document.getElementById('modalTitle').innerText = data.title;
+    document.getElementById('modalDescription').innerText = data.desc;
+    modal.classList.remove('hidden');
+}
+
+// Event Listener für Steuerung
+document.getElementById('closeModal').onclick = () => modal.classList.add('hidden');
+window.onclick = (e) => { if (e.target === modal) modal.classList.add('hidden'); };
+
+monthSelect.onchange = renderCalendar;
+yearInput.oninput = renderCalendar;
+
+document.getElementById('prevMonth').onclick = () => {
+    let m = parseInt(monthSelect.value) - 1;
+    if (m < 0) { m = 11; yearInput.value = parseInt(yearInput.value) - 1; }
+    monthSelect.value = m;
+    renderCalendar();
+};
+
+document.getElementById('nextMonth').onclick = () => {
+    let m = parseInt(monthSelect.value) + 1;
+    if (m > 11) { m = 0; yearInput.value = parseInt(yearInput.value) + 1; }
+    monthSelect.value = m;
+    renderCalendar();
+};
+
+// Initial befüllen
+monthSelect.value = currentGridDate.getMonth();
+yearInput.value = currentGridDate.getFullYear();
+renderCalendar();
+</script>
