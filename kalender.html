@@ -14,7 +14,6 @@ title: "Aktionstag-Kalender"
         background-color: #f8fafc;
         box-sizing: border-box;
     }
-    
     .ak-kalender-karte {
         background: #ffffff;
         max-width: 800px;
@@ -25,12 +24,10 @@ title: "Aktionstag-Kalender"
         border: 1px solid #e2e8f0;
         box-sizing: border-box;
     }
-    
     .ak-ueberschrift-zone {
         text-align: center;
         margin-bottom: 20px;
     }
-    
     .ak-ueberschrift-zone h1 {
         font-size: 24px !important;
         color: #0f172a !important;
@@ -38,13 +35,11 @@ title: "Aktionstag-Kalender"
         margin-bottom: 6px !important;
         background: transparent !important;
     }
-    
     .ak-ueberschrift-zone p {
         color: #64748b !important;
         font-size: 14px !important;
         margin: 0 !important;
     }
-    
     .ak-steuerung {
         display: flex;
         justify-content: center;
@@ -56,7 +51,6 @@ title: "Aktionstag-Kalender"
         margin-bottom: 20px;
         border: 1px solid #edf2f7;
     }
-    
     .ak-btn {
         background: #ffffff;
         border: 1px solid #e2e8f0;
@@ -65,7 +59,6 @@ title: "Aktionstag-Kalender"
         border-radius: 12px;
         cursor: pointer;
     }
-    
     .ak-select, .ak-jahr-input {
         padding: 8px 12px;
         border: 1px solid #e2e8f0;
@@ -74,13 +67,10 @@ title: "Aktionstag-Kalender"
         font-weight: bold;
         color: #334155;
     }
-    
     .ak-jahr-input {
         width: 80px;
         text-align: center;
     }
-    
-    /* Wochentage im Grid-System */
     .ak-wochentage-grid {
         display: grid !important;
         grid-template-columns: repeat(7, 1fr) !important;
@@ -89,28 +79,24 @@ title: "Aktionstag-Kalender"
         border-bottom: 2px solid #f1f5f9 !important;
         padding-bottom: 8px !important;
     }
-    
     .ak-wochentag-name {
         text-align: center !important;
         font-weight: 700 !important;
         color: #94a3b8 !important;
         font-size: 12px !important;
     }
-    
     .ak-wochen-zeilen-block {
         display: flex !important;
         flex-direction: column !important;
         gap: 6px !important;
         width: 100% !important;
     }
-    
     .ak-woche-reihe {
         display: grid !important;
         grid-template-columns: repeat(7, 1fr) !important;
         width: 100% !important;
         gap: 6px !important;
     }
-    
     .ak-tag-feld {
         aspect-ratio: 1 / 1 !important;
         display: flex !important;
@@ -124,19 +110,16 @@ title: "Aktionstag-Kalender"
         font-size: 14px !important;
         color: #475569 !important;
     }
-    
     .ak-tag-feld.empty {
         background: transparent !important;
         border: none !important;
     }
-    
     .ak-tag-feld.action-day {
         background: #eff6ff !important;
         color: #2563eb !important;
         border: 2px solid #bfdbfe !important;
         cursor: pointer !important;
     }
-    
     .ak-punkt {
         width: 5px;
         height: 5px;
@@ -144,12 +127,9 @@ title: "Aktionstag-Kalender"
         border-radius: 50%;
         margin-top: 2px;
     }
-    
     .ak-heute-markierung {
         outline: 3px solid #2563eb !important;
     }
-
-    /* Modal Popup */
     .ak-popup-overlay {
         display: none;
         position: fixed;
@@ -161,7 +141,6 @@ title: "Aktionstag-Kalender"
         padding: 20px;
     }
     .ak-popup-overlay.active { display: flex !important; }
-    
     .ak-popup-box {
         background: #ffffff;
         padding: 25px;
@@ -226,7 +205,6 @@ const monthSelect = document.getElementById('monthSelect');
 const yearInput = document.getElementById('yearInput');
 const modal = document.getElementById('infoModal');
 
-// Befülle Dropdown nur, wenn es noch leer ist
 if(monthSelect && monthSelect.options.length === 0) {
     monatsNamen.forEach((m, idx) => {
         let opt = document.createElement('option');
@@ -289,7 +267,8 @@ function baueKalender() {
                 }
                 
                 let heute = new Date();
-                if (z.nummer === heute.getDate() && m === heute.getMonth() && y === today.getFullYear()) {
+                // HIER WAR DER FEHLER BEHOBEN: heute statt today
+                if (z.nummer === heute.getDate() && m === heute.getMonth() && y === heute.getFullYear()) {
                     zelleHtml.classList.add('ak-heute-markierung');
                 }
             }
