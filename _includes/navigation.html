@@ -13,6 +13,8 @@
             <a href="/ueber-mich.html" class="hover:text-blue-600 pb-1 transition-all no-underline">Über mich</a>
             <a href="/blog.html" class="hover:text-blue-600 pb-1 transition-all no-underline">Blog</a>
             
+            <a href="/kalender.html" class="hover:text-blue-600 pb-1 transition-all no-underline">Aktionstage</a>
+            
             <div class="relative group" id="rights-dropdown">
                 <button onclick="toggleDropdown(event)" class="hover:text-blue-600 pb-1 transition-all no-underline font-semibold text-gray-600 text-sm md:text-base flex items-center gap-1 bg-transparent border-0 cursor-pointer">
                     Unsere Rechte
@@ -25,7 +27,6 @@
                     <div class="bg-white border border-gray-100 rounded-2xl shadow-xl py-2">
                         <a href="/unsere-rechte.html" class="flex items-center gap-2 px-4 py-2.5 text-sm text-gray-700 hover:bg-blue-50 hover:text-blue-600 font-bold transition-all no-underline">🌍 Übersicht (Hub)</a>
                         <div class="border-b border-gray-100 my-1"></div>
-                        <a href="/kalender.html" class="hover:text-blue-600 transition-colors no-underline">Aktionstage</a>
                         <a href="/kinderrechte.html" class="flex items-center gap-2 px-4 py-2.5 text-sm text-gray-600 hover:bg-blue-50 hover:text-blue-600 transition-all no-underline">🎒 Kinderrechte</a>
                         <a href="/menschenrechte.html" class="flex items-center gap-2 px-4 py-2.5 text-sm text-gray-600 hover:bg-blue-50 hover:text-blue-600 transition-all no-underline">⚖️ Menschenrechte</a>
                         <a href="/digitalrechte.html" class="flex items-center gap-2 px-4 py-2.5 text-sm text-gray-600 hover:bg-blue-50 hover:text-blue-600 transition-all no-underline">📱 Digitalrechte</a>
@@ -58,6 +59,8 @@
         <a href="/ueber-mich.html" class="block py-2.5 px-3 rounded-xl hover:bg-blue-50 hover:text-blue-600 no-underline transition-all">Über mich</a>
         <a href="/blog.html" class="block py-2.5 px-3 rounded-xl hover:bg-blue-50 hover:text-blue-600 no-underline transition-all">Blog</a>
         
+        <a href="/kalender.html" class="block py-2.5 px-3 rounded-xl hover:bg-blue-50 hover:text-blue-600 no-underline transition-all">📅 Aktionstage</a>
+        
         <div class="bg-gray-50 rounded-2xl p-2 space-y-1">
             <span class="block text-xs font-black text-gray-400 uppercase tracking-wider px-3 pt-1 pb-2">Unsere Rechte</span>
             <a href="/unsere-rechte.html" class="block py-2 px-3 text-sm rounded-lg hover:bg-blue-100 text-gray-900 font-bold no-underline">🌍 Übersicht (Hub)</a>
@@ -78,7 +81,6 @@
 
     const supabaseClientNav = supabase.createClient(SUPABASE_URL_NAV, SUPABASE_ANON_KEY_NAV);
 
-    // Desktop Dropdown Steuerung
     function toggleDropdown(event) {
         event.stopPropagation();
         const menu = document.getElementById('dropdown-menu');
@@ -86,13 +88,11 @@
         menu.classList.toggle('pointer-events-none');
     }
 
-    // NEU: Handymenü auf- und zuklappen
     function toggleMobileMenu() {
         const mobileMenu = document.getElementById('mobile-menu');
         const icon = document.getElementById('menu-icon');
         mobileMenu.classList.toggle('hidden');
         
-        // Icon wechseln (Burger-Striche zu "X" bei geöffnetem Zustand)
         if (mobileMenu.classList.contains('hidden')) {
             icon.innerHTML = '<path stroke-linecap="round" stroke-linejoin="round" stroke-width="2.5" d="M4 6h16M4 12h16M4 18h16"></path>';
         } else {
@@ -100,7 +100,6 @@
         }
     }
 
-    // Schließen, wenn man außerhalb klickt
     document.addEventListener('click', function(e) {
         const dMenu = document.getElementById('dropdown-menu');
         if (dMenu && !dMenu.classList.contains('opacity-0') && !e.target.closest('#rights-dropdown')) {
