@@ -3,17 +3,175 @@ layout: default
 title: "Aktionstag-Kalender"
 ---
 
-<div class="max-w-4xl mx-auto my-10 px-4 font-sans">
-    
-    <div class="text-center mb-8">
-        <h1 class="text-3xl font-bold text-gray-800 mb-2">📅 Der Überflieger-Aktionstagskalender</h1>
-        <p class="text-gray-500">Klicke auf einen markierten Tag, um mehr über seine Bedeutung zu erfahren!</p>
+<style>
+    .cal-wrapper {
+        max-width: 800px;
+        margin: 40px auto;
+        padding: 0 20px;
+        font-family: 'Helvetica Neue', Arial, sans-serif;
+        color: #333;
+    }
+    .cal-title-section {
+        text-align: center;
+        margin-bottom: 30px;
+    }
+    .cal-title-section h1 {
+        font-size: 28px;
+        margin-bottom: 8px;
+        color: #1a202c;
+    }
+    .cal-controls {
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        gap: 15px;
+        background: #ffffff;
+        padding: 15px;
+        border-radius: 16px;
+        box-shadow: 0 2px 10px rgba(0,0,0,0.05);
+        margin-bottom: 25px;
+    }
+    .cal-btn {
+        background: #f1f5f9;
+        border: none;
+        padding: 8px 16px;
+        font-weight: bold;
+        border-radius: 10px;
+        cursor: pointer;
+        transition: background 0.2s;
+    }
+    .cal-btn:hover { background: #e2e8f0; }
+    .cal-select, .cal-input {
+        padding: 8px 16px;
+        border: 1px solid #cbd5e1;
+        background: #f8fafc;
+        border-radius: 10px;
+        font-weight: bold;
+        color: #475569;
+    }
+    .cal-container {
+        background: #ffffff;
+        padding: 25px;
+        border-radius: 24px;
+        box-shadow: 0 4px 15px rgba(0,0,0,0.05);
+    }
+    .cal-weekdays {
+        display: grid;
+        grid-template-cols: repeat(7, 1fr);
+        gap: 10px;
+        text-align: center;
+        font-weight: bold;
+        color: #94a3b8;
+        font-size: 12px;
+        text-transform: uppercase;
+        margin-bottom: 15px;
+    }
+    .cal-grid {
+        display: grid;
+        grid-template-cols: repeat(7, 1fr);
+        gap: 10px;
+    }
+    .cal-day {
+        aspect-ratio: 1;
+        width: 100%;
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+        justify-content: center;
+        border-radius: 12px;
+        font-weight: 600;
+        font-size: 14px;
+        border: 1px solid transparent;
+        background: #f8fafc;
+        color: #334155;
+        cursor: default;
+    }
+    .cal-day.has-action {
+        background: #eff6ff;
+        color: #2563eb;
+        border-color: #bfdbfe;
+        cursor: pointer;
+        transition: all 0.2s;
+    }
+    .cal-day.has-action:hover {
+        background: #dbeafe;
+        transform: scale(1.05);
+    }
+    .cal-dot {
+        width: 6px;
+        height: 6px;
+        background: #2563eb;
+        border-radius: 50%;
+        margin-top: 4px;
+    }
+    .cal-day.is-today {
+        outline: 3px solid #2563eb;
+        outline-offset: 2px;
+    }
+    /* Modal / Popup Styling */
+    .cal-modal {
+        display: none; /* Standardmäßig unsichtbar */
+        position: fixed;
+        inset: 0;
+        background: rgba(0,0,0,0.5);
+        align-items: center;
+        justify-content: center;
+        padding: 20px;
+        z-index: 9999;
+    }
+    .cal-modal.is-active { display: flex; }
+    .cal-modal-content {
+        background: #ffffff;
+        padding: 25px;
+        border-radius: 24px;
+        max-width: 450px;
+        width: 100%;
+        box-shadow: 0 10px 25px rgba(0,0,0,0.1);
+        position: relative;
+    }
+    .cal-modal-close {
+        position: absolute;
+        top: 15px;
+        right: 20px;
+        background: none;
+        border: none;
+        font-size: 24px;
+        color: #94a3b8;
+        cursor: pointer;
+    }
+    .cal-modal-close:hover { color: #475569; }
+    .cal-badge {
+        display: inline-block;
+        background: #eff6ff;
+        color: #2563eb;
+        font-size: 12px;
+        font-weight: bold;
+        padding: 4px 10px;
+        border-radius: 20px;
+        margin-bottom: 12px;
+    }
+    .cal-modal-content h3 {
+        margin: 0 0 10px 0;
+        font-size: 20px;
+        color: #1e293b;
+    }
+    .cal-modal-content p {
+        margin: 0;
+        color: #475569;
+        line-height: 1.6;
+        font-size: 14px;
+    }
+</style>
+
+<div class="cal-wrapper">
+    <div class="cal-title-section">
+        <h1>📅 Der Überflieger-Aktionstagskalender</h1>
+        <p style="color: #64748b;">Klicke auf einen markierten Tag, um mehr über seine Bedeutung zu erfahren!</p>
     </div>
 
-    <div class="flex flex-wrap justify-center items-center gap-4 bg-white p-4 rounded-2xl shadow-sm border border-gray-100 mb-6">
-        <button id="prevMonth" class="px-3 py-2 bg-gray-100 hover:bg-gray-200 text-gray-700 font-bold rounded-xl transition-colors">◀</button>
-        
-        <select id="monthSelect" class="bg-gray-50 border border-gray-200 rounded-xl px-4 py-2 font-semibold text-gray-700 focus:outline-none">
+    <div class="cal-controls">
+        <button id="prevMonth" class="cal-btn">◀</button>
+        <select id="monthSelect" class="cal-select">
             <option value="0">Januar</option>
             <option value="1">Februar</option>
             <option value="2">März</option>
@@ -27,42 +185,35 @@ title: "Aktionstag-Kalender"
             <option value="10">November</option>
             <option value="11">Dezember</option>
         </select>
-
-        <input id="yearInput" type="number" value="2026" min="1900" max="2100" class="w-24 bg-gray-50 border border-gray-200 rounded-xl px-4 py-2 font-semibold text-gray-700 text-center focus:outline-none">
-
-        <button id="nextMonth" class="px-3 py-2 bg-gray-100 hover:bg-gray-200 text-gray-700 font-bold rounded-xl transition-colors">▶</button>
+        <input id="yearInput" type="number" class="cal-input" style="w-24">
+        <button id="nextMonth" class="cal-btn">▶</button>
     </div>
 
-    <div class="bg-white p-6 rounded-3xl shadow-sm border border-gray-100">
-        <div class="grid grid-cols-7 gap-2 text-center font-bold text-gray-400 text-xs uppercase tracking-wider mb-4">
+    <div class="cal-container">
+        <div class="cal-weekdays">
             <div>Mo</div><div>Di</div><div>Mi</div><div>Do</div><div>Fr</div><div>Sa</div><div>So</div>
         </div>
-        <div id="calendarGrid" class="grid grid-cols-7 gap-2"></div>
+        <div id="calendarGrid" class="cal-grid"></div>
     </div>
 
-    <div id="infoModal" class="hidden fixed inset-0 bg-black/50 backdrop-blur-sm flex items-center justify-center p-4 z-50">
-        <div class="bg-white rounded-3xl max-w-md w-full p-6 shadow-xl transform transition-all border border-gray-100">
-            <div class="flex justify-between items-start mb-4">
-                <div class="bg-blue-50 text-blue-600 font-bold text-xs px-3 py-1 rounded-full uppercase tracking-wider" id="modalDate">00.00.</div>
-                <button id="closeModal" class="text-gray-400 hover:text-gray-600 font-bold text-xl">&times;</button>
-            </div>
-            <h3 id="modalTitle" class="text-xl font-bold text-gray-800 mb-2">Titel des Tages</h3>
-            <p id="modalDescription" class="text-gray-600 leading-relaxed text-sm">Beschreibung...</p>
+    <div id="infoModal" class="cal-modal">
+        <div class="cal-modal-content">
+            <button id="closeModal" class="cal-modal-close">&times;</button>
+            <div id="modalDate" class="cal-badge">00.00.</div>
+            <h3 id="modalTitle">Titel</h3>
+            <p id="modalDescription">Beschreibung...</p>
         </div>
     </div>
-
 </div>
 
 <script>
-// Hier hinterlegen wir beispielhaft ein paar wichtige Tage. 
-// Format: "MM-DD" (Monat zweistellig, Tag zweistellig)
 const actionDays = {
-    "03-21": { title: "Tag gegen Rassismus ✊", desc: "Der Internationale Tag gegen Rassismus erinnert an das Massaker von Sharpeville und ruft weltweit zu Gleichberechtigung und gegen Diskriminierung auf." },
+    "03-21": { title: "Tag gegen Rassismus ✊", desc: "Der Internationale Tag gegen Rassismus erinnert an das Massaker von Sharpeville und ruft weltweit zu Gleichberechtigung und gegen jede Form von Diskriminierung auf." },
     "05-03": { title: "Tag der Pressefreiheit 📰", desc: "Ein Aktionstag, der auf die Bedeutung freier Berichterstattung und die Gefahren, denen Journalisten weltweit ausgesetzt sind, aufmerksam macht." },
     "06-01": { title: "Weltkindertag 👶", desc: "Dieser Tag stellt die Rechte, Bedürfnisse und den Schutz von Kindern weltweit in den Mittelpunkt der Gesellschaft." },
-    "06-09": { title: "Tag der Antidiskriminierung 🕊️", desc: "Ein Tag, der das Bewusstsein dafür schärfen soll, dass jeder Mensch unabhängig von Herkunft, Geschlecht oder Religion dieselben Rechte und Respekt verdient." },
+    "06-09": { title: "Tag der Antidiskriminierung ✊", desc: "Ein Tag, der das Bewusstsein dafür schärfen soll, dass jeder Mensch unabhängig von Herkunft, Geschlecht oder Religion dieselben Rechte und den gleichen Respekt verdient." },
     "06-11": { title: "Tag der Freiheit 🗽", desc: "Ein symbolischer Tag, der daran erinnert, wie wertvoll persönliche Freiheit, Meinungsäußerung und Demokratie für ein friedliches Zusammenleben sind." },
-    "11-20": { title: "Tag der Kinderrechte 📜", desc: "Am 20. November 1989 wurde die UN-Kinderrechtskonvention verabschiedet. Dieser Tag fordert die weltweite Einhaltung dieser Rechte." },
+    "11-20": { title: "Tag der Kinderrechte 📜", desc: "Am 20. November 1989 wurde die UN-Kinderrechtskonvention verabschiedet. Dieser Tag fordert die weltweite Einhaltung und Umsetzung dieser Rechte." },
     "12-10": { title: "Tag der Menschenrechte 🌍", desc: "Erinnert an die Allgemeine Erklärung der Menschenrechte durch die Vereinten Nationen im Jahr 1948." }
 };
 
@@ -72,7 +223,6 @@ const yearInput = document.getElementById('yearInput');
 const modal = document.getElementById('infoModal');
 
 let currentGridDate = new Date();
-// Falls das aktuelle Jahr 2026 sein soll, passen wir es an:
 if(currentGridDate.getFullYear() < 2026) {
     currentGridDate.setFullYear(2026);
 }
@@ -82,57 +232,42 @@ function renderCalendar() {
     const month = parseInt(monthSelect.value);
     const year = parseInt(yearInput.value);
     
-    // Erster Tag des Monats
     const firstDay = new Date(year, month, 1);
-    // Bestimmen, welcher Wochentag der 1. ist (0=So, 1=Mo, ..., 6=Sa)
-    // Umwandeln, sodass Montag = 0 und Sonntag = 6 ist:
     let startDay = firstDay.getDay() - 1;
     if (startDay === -1) startDay = 6; 
     
-    // Anzahl der Tage im Monat
     const totalDays = new Date(year, month + 1, 0).getDate();
     
-    // Leere Felder für die Tage des Vormonats einfügen
     for (let i = 0; i < startDay; i++) {
         const emptyCell = document.createElement('div');
         grid.appendChild(emptyCell);
     }
     
-    // Die eigentlichen Tage rendern
     for (let day = 1; day <= totalDays; day++) {
-        const cell = document.createElement('button');
-        cell.className = "aspect-square w-full flex flex-col items-center justify-between p-2 rounded-xl text-sm font-semibold transition-all border border-transparent ";
+        const cell = document.createElement('div');
+        cell.className = "cal-day";
         
-        // Formatieren für den Abgleich mit unseren Aktionstagen
         const mKey = String(month + 1).padStart(2, '0');
         const dKey = String(day).padStart(2, '0');
         const dateKey = `${mKey}-${dKey}`;
         
-        // Nummer des Tages eintragen
         const numSpan = document.createElement('span');
         numSpan.innerText = day;
         cell.appendChild(numSpan);
 
-        // Prüfen, ob für diesen Tag ein Aktionstag eingetragen ist
         if (actionDays[dateKey]) {
-            cell.className += "bg-blue-50 text-blue-600 hover:bg-blue-100 hover:scale-105 border-blue-200 shadow-sm";
+            cell.classList.add('has-action');
             
-            // Ein kleines visuelles Pünktchen hinzufügen
-            const dot = document.createElement('span');
-            dot.className = "w-1.5 h-1.5 bg-blue-500 rounded-full mt-1";
+            const dot = document.createElement('div');
+            dot.className = "cal-dot";
             cell.appendChild(dot);
             
-            // Klick-Event für das Popup
             cell.onclick = () => showDetails(day, month + 1, year, actionDays[dateKey]);
-        } else {
-            cell.className += "bg-gray-50 text-gray-700 hover:bg-gray-100 cursor-default";
-            cell.disabled = true; // Normale Tage sind nicht anklickbar
         }
         
-        // Heutigen Tag markieren (falls Monat und Jahr übereinstimmen)
         const today = new Date();
         if (day === today.getDate() && month === today.getMonth() && year === today.getFullYear()) {
-            cell.className += " ring-2 ring-blue-600 ring-offset-2";
+            cell.classList.add('is-today');
         }
         
         grid.appendChild(cell);
@@ -143,12 +278,11 @@ function showDetails(day, month, year, data) {
     document.getElementById('modalDate').innerText = `${String(day).padStart(2, '0')}.${String(month).padStart(2, '0')}.${year}`;
     document.getElementById('modalTitle').innerText = data.title;
     document.getElementById('modalDescription').innerText = data.desc;
-    modal.classList.remove('hidden');
+    modal.classList.add('is-active');
 }
 
-// Event Listener für Steuerung
-document.getElementById('closeModal').onclick = () => modal.classList.add('hidden');
-window.onclick = (e) => { if (e.target === modal) modal.classList.add('hidden'); };
+document.getElementById('closeModal').onclick = () => modal.classList.remove('is-active');
+window.onclick = (e) => { if (e.target === modal) modal.classList.remove('is-active'); };
 
 monthSelect.onchange = renderCalendar;
 yearInput.oninput = renderCalendar;
@@ -167,7 +301,6 @@ document.getElementById('nextMonth').onclick = () => {
     renderCalendar();
 };
 
-// Initial befüllen
 monthSelect.value = currentGridDate.getMonth();
 yearInput.value = currentGridDate.getFullYear();
 renderCalendar();
