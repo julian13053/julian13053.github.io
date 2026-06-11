@@ -1,193 +1,258 @@
----
-layout: default
-title: "Aktionstag-Kalender"
----
-
-<style>
-    .mein-kalender-raum {
-        max-width: 800px;
-        margin: 40px auto;
-        padding: 20px;
-        font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Helvetica, Arial, sans-serif;
-        background-color: #f8fafc;
-        border-radius: 24px;
-        box-shadow: 0 4px 20px rgba(0,0,0,0.05);
-    }
-    .kal-kopf {
-        text-align: center;
-        margin-bottom: 30px;
-    }
-    .kal-kopf h1 {
-        font-size: 28px;
-        color: #1e293b;
-        margin-bottom: 10px;
-    }
-    .kal-regler {
-        display: flex;
-        justify-content: center;
-        align-items: center;
-        gap: 15px;
-        background: #ffffff;
-        padding: 15px;
-        border-radius: 16px;
-        margin-bottom: 25px;
-        border: 1px solid #e2e8f0;
-    }
-    .kal-knopf {
-        background: #f1f5f9;
-        border: none;
-        padding: 10px 16px;
-        font-weight: bold;
-        border-radius: 12px;
-        cursor: pointer;
-    }
-    .kal-waehler, .kal-eingabe {
-        padding: 10px 16px;
-        border: 1px solid #cbd5e1;
-        background: #ffffff;
-        border-radius: 12px;
-        font-weight: bold;
-        color: #334155;
-    }
+<!DOCTYPE html>
+<html lang="de">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Aktionstag-Kalender | M-Fleger</title>
     
-    /* Wochentage erzwungen in einer Reihe nebeneinander */
-    .wochen-zeile {
-        display: flex !important;
-        flex-direction: row !important;
-        width: 100% !important;
-        margin-bottom: 10px;
-        border-bottom: 2px solid #e2e8f0;
-        padding-bottom: 10px;
-    }
-    .wochen-tag-kopf {
-        flex: 1 !important;
-        text-align: center !important;
-        font-weight: bold !important;
-        color: #64748b !important;
-        font-size: 14px !important;
-    }
+    <style>
+        * {
+            box-sizing: border-box;
+            margin: 0;
+            padding: 0;
+            font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Helvetica, Arial, sans-serif;
+        }
+        body {
+            background-color: #f4f6f9;
+            color: #1e293b;
+            padding: 20px;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            min-height: 100vh;
+        }
+        .back-link {
+            position: absolute;
+            top: 20px;
+            left: 20px;
+            text-decoration: none;
+            color: #2563eb;
+            font-weight: bold;
+            font-size: 14px;
+            background: white;
+            padding: 10px 16px;
+            border-radius: 12px;
+            box-shadow: 0 2px 8px rgba(0,0,0,0.05);
+            transition: all 0.2s;
+        }
+        .back-link:hover {
+            background: #2563eb;
+            color: white;
+        }
+        .calendar-card {
+            background: #ffffff;
+            max-width: 750px;
+            width: 100%;
+            border-radius: 30px;
+            box-shadow: 0 10px 30px rgba(0,0,0,0.06);
+            padding: 30px;
+            border: 1px solid #e2e8f0;
+        }
+        .calendar-header {
+            text-align: center;
+            margin-bottom: 25px;
+        }
+        .calendar-header h1 {
+            font-size: 26px;
+            color: #0f172a;
+            font-weight: 800;
+            margin-bottom: 6px;
+        }
+        .calendar-header p {
+            color: #64748b;
+            font-size: 14px;
+        }
+        .controls {
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            gap: 12px;
+            background: #f8fafc;
+            padding: 12px;
+            border-radius: 20px;
+            margin-bottom: 25px;
+            border: 1px solid #edf2f7;
+        }
+        .btn {
+            background: #ffffff;
+            border: 1px solid #e2e8f0;
+            padding: 10px 16px;
+            font-weight: bold;
+            border-radius: 14px;
+            cursor: pointer;
+            transition: all 0.15s;
+            box-shadow: 0 2px 4px rgba(0,0,0,0.02);
+        }
+        .btn:hover {
+            background: #f1f5f9;
+            border-color: #cbd5e1;
+        }
+        .select-input, .year-input {
+            padding: 10px 16px;
+            border: 1px solid #e2e8f0;
+            background: #ffffff;
+            border-radius: 14px;
+            font-weight: bold;
+            color: #334155;
+            outline: none;
+            font-size: 15px;
+        }
+        .year-input {
+            width: 85px;
+            text-align: center;
+        }
+        .weekdays {
+            display: flex;
+            width: 100%;
+            margin-bottom: 12px;
+            border-bottom: 2px solid #f1f5f9;
+            padding-bottom: 8px;
+        }
+        .weekday {
+            flex: 1;
+            text-align: center;
+            font-weight: 700;
+            color: #94a3b8;
+            font-size: 13px;
+            text-transform: uppercase;
+            tracking-ratio: 0.05em;
+        }
+        .days-container {
+            display: flex;
+            flex-direction: column;
+            gap: 8px;
+            width: 100%;
+        }
+        .week-row {
+            display: flex;
+            width: 100%;
+            gap: 8px;
+        }
+        .day-cell {
+            flex: 1;
+            aspect-ratio: 1 / 1;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            justify-content: center;
+            background: #ffffff;
+            border: 1px solid #f1f5f9;
+            border-radius: 16px;
+            font-weight: 600;
+            font-size: 15px;
+            color: #475569;
+            position: relative;
+        }
+        .day-cell.empty {
+            background: transparent;
+            border: none;
+        }
+        .day-cell.action-day {
+            background: #eff6ff;
+            color: #2563eb;
+            border: 2px solid #bfdbfe;
+            cursor: pointer;
+            transition: all 0.2s;
+        }
+        .day-cell.action-day:hover {
+            background: #dbeafe;
+            transform: translateY(-2px);
+            box-shadow: 0 4px 12px rgba(37, 99, 235, 0.1);
+        }
+        .indicator-dot {
+            width: 6px;
+            height: 6px;
+            background: #2563eb;
+            border-radius: 50%;
+            margin-top: 4px;
+        }
+        .current-day {
+            outline: 3px solid #2563eb;
+            outline-offset: 2px;
+        }
+        /* Popup / Modal */
+        .modal-overlay {
+            display: none;
+            position: fixed;
+            top: 0; left: 0; right: 0; bottom: 0;
+            background: rgba(15, 23, 42, 0.4);
+            backdrop-filter: blur(4px);
+            align-items: center;
+            justify-content: center;
+            z-index: 9999;
+            padding: 20px;
+        }
+        .modal-overlay.active {
+            display: flex;
+        }
+        .modal-box {
+            background: #ffffff;
+            padding: 30px;
+            border-radius: 24px;
+            max-width: 460px;
+            width: 100%;
+            position: relative;
+            box-shadow: 0 20px 40px rgba(0,0,0,0.12);
+            animation: popIn 0.25s ease-out;
+        }
+        @keyframes popIn {
+            from { transform: scale(0.95); opacity: 0; }
+            to { transform: scale(1); opacity: 1; }
+        }
+        .close-btn {
+            position: absolute;
+            top: 15px; right: 20px;
+            font-size: 28px;
+            background: none; border: none;
+            color: #94a3b8; cursor: pointer;
+        }
+        .close-btn:hover { color: #475569; }
+        .date-badge {
+            display: inline-block;
+            background: #eff6ff;
+            color: #2563eb;
+            font-size: 12px;
+            font-weight: 700;
+            padding: 4px 12px;
+            border-radius: 20px;
+            margin-bottom: 12px;
+        }
+    </style>
+</head>
+<body>
 
-    /* Das eigentliche Tage-System */
-    .tage-block {
-        display: flex !important;
-        flex-direction: column !important;
-        gap: 8px !important;
-        width: 100% !important;
-    }
-    .wochen-reihe {
-        display: flex !important;
-        flex-direction: row !important;
-        width: 100% !important;
-        gap: 8px !important;
-    }
-    .tag-zelle {
-        flex: 1 !important;
-        aspect-ratio: 1 / 1 !important;
-        min-height: 50px !important;
-        display: flex !important;
-        flex-direction: column !important;
-        align-items: center !important;
-        justify-content: center !important;
-        background: #ffffff;
-        border: 1px solid #e2e8f0;
-        border-radius: 12px;
-        font-weight: 600;
-        position: relative;
-    }
-    .tag-zelle.leer {
-        background: transparent !important;
-        border: none !important;
-    }
-    .tag-zelle.aktiv-tag {
-        background: #eff6ff !important;
-        color: #2563eb !important;
-        border: 2px solid #bfdbfe !important;
-        cursor: pointer !important;
-    }
-    .tag-zelle.aktiv-tag:hover {
-        background: #dbeafe !important;
-        transform: scale(1.03);
-    }
-    .punkt-indikator {
-        width: 6px;
-        height: 6px;
-        background: #2563eb;
-        border-radius: 50%;
-        margin-top: 4px;
-    }
-    .heute-marker {
-        outline: 3px solid #2563eb !important;
-    }
+<a href="/index.html" class="back-link">⬅ Zur Startseite</a>
 
-    /* Modalfenster absolut abgesichert */
-    .kal-schleuse {
-        display: none;
-        position: fixed;
-        top: 0; left: 0; right: 0; bottom: 0;
-        background: rgba(0,0,0,0.6);
-        align-items: center;
-        justify-content: center;
-        z-index: 99999;
-        padding: 20px;
-    }
-    .kal-schleuse.offen { display: flex !important; }
-    .kal-box-inhalt {
-        background: #ffffff;
-        padding: 30px;
-        border-radius: 24px;
-        max-width: 480px;
-        width: 100%;
-        position: relative;
-    }
-    .schliessen-kreuz {
-        position: absolute;
-        top: 15px; right: 20px;
-        font-size: 28px;
-        background: none; border: none;
-        color: #94a3b8; cursor: pointer;
-    }
-    .datum-abzeichen {
-        display: inline-block;
-        background: #eff6ff;
-        color: #2563eb;
-        font-size: 12px;
-        font-weight: bold;
-        padding: 4px 12px;
-        border-radius: 99px;
-        margin-bottom: 12px;
-    }
-</style>
-
-<div class="mein-kalender-raum">
-    <div class="kal-kopf">
+<div class="calendar-card">
+    <div class="calendar-header">
         <h1>📅 Der Überflieger-Aktionstagskalender</h1>
-        <p style="color: #64748b; margin: 0;">Klicke auf einen blau markierten Tag, um die Bedeutung zu erfahren!</p>
+        <p>Klicke auf die blauen Tage, um mehr über ihre Bedeutung zu erfahren!</p>
     </div>
 
-    <div class="kal-regler">
-        <button id="prevMonth" class="kal-knopf">◀</button>
-        <select id="monthSelect" class="kal-waehler"></select>
-        <input id="yearInput" type="number" class="kal-eingabe" style="width: 90px;">
-        <button id="nextMonth" class="kal-knopf">▶</button>
+    <div class="controls">
+        <button id="prevMonth" class="btn">◀</button>
+        <select id="monthSelect" class="select-input"></select>
+        <input id="yearInput" type="number" class="year-input">
+        <button id="nextMonth" class="btn">▶</button>
     </div>
 
-    <div class="wochen-zeile">
-        <div class="wochen-tag-kopf">Mo</div>
-        <div class="wochen-tag-kopf">Di</div>
-        <div class="wochen-tag-kopf">Mi</div>
-        <div class="wochen-tag-kopf">Do</div>
-        <div class="wochen-tag-kopf">Fr</div>
-        <div class="wochen-tag-kopf">Sa</div>
-        <div class="wochen-tag-kopf">So</div>
+    <div class="weekdays">
+        <div class="weekday">Mo</div>
+        <div class="weekday">Di</div>
+        <div class="weekday">Mi</div>
+        <div class="weekday">Do</div>
+        <div class="weekday">Fr</div>
+        <div class="weekday">Sa</div>
+        <div class="weekday">So</div>
     </div>
 
-    <div id="calendarGrid" class="tage-block"></div>
+    <div id="calendarGrid" class="days-container"></div>
 </div>
 
-<div id="infoModal" class="kal-schleuse">
-    <div class="kal-box-inhalt">
-        <button id="closeModal" class="schliessen-kreuz">&times;</button>
-        <div id="modalDate" class="datum-abzeichen">00.00.</div>
+<div id="infoModal" class="modal-overlay">
+    <div class="modal-box">
+        <button id="closeModal" class="close-btn">&times;</button>
+        <div id="modalDate" class="date-badge">00.00.</div>
         <h3 id="modalTitle" style="margin: 0 0 10px 0; font-size: 22px; color: #0f172a;">Titel</h3>
         <p id="modalDescription" style="margin: 0; color: #475569; line-height: 1.6; font-size: 15px;">Beschreibung...</p>
     </div>
@@ -220,95 +285,4 @@ monatsNamen.forEach((m, idx) => {
 
 let d = new Date();
 let aktMonat = d.getMonth();
-let aktJahr = d.getFullYear() < 2026 ? 2026 : d.getFullYear();
-
-function baueKalender() {
-    grid.innerHTML = '';
-    const m = parseInt(monthSelect.value);
-    const y = parseInt(yearInput.value);
-    
-    let ersterTag = new Date(y, m, 1).getDay() - 1;
-    if (ersterTag === -1) ersterTag = 6; // Sonntag korrigieren
-    
-    let tageImMonat = new Date(y, m + 1, 0).getDate();
-    
-    let alleZellen = [];
-    for (let i = 0; i < ersterTag; i++) {
-        alleZellen.push({ leer: true });
-    }
-    for (let tag = 1; tag <= tageImMonat; tag++) {
-        alleZellen.push({ leer: false, nummer: tag });
-    }
-    
-    // In exakte 7er-Wochen-Reihen schneiden
-    while(alleZellen.length > 0) {
-        let wochenZellen = alleZellen.splice(0, 7);
-        let wochenReihe = document.createElement('div');
-        wochenReihe.className = 'wochen-reihe';
-        
-        // Falls die letzte Woche unvollständig ist, mit leeren Zellen auffüllen
-        while(wochenZellen.length < 7) {
-            wochenZellen.push({ leer: true });
-        }
-        
-        wochenZellen.forEach(z => {
-            let zelleHtml = document.createElement('div');
-            if (z.leere || z.leer) {
-                zelleHtml.className = 'tag-zelle leer';
-            } else {
-                zelleHtml.className = 'tag-zelle';
-                zelleHtml.innerText = z.nummer;
-                
-                let mKey = String(m + 1).padStart(2, '0');
-                let dKey = String(z.nummer).padStart(2, '0');
-                let schluessel = `${mKey}-${dKey}`;
-                
-                if (actionDays[schluessel]) {
-                    zelleHtml.classList.add('aktiv-tag');
-                    let punkt = document.createElement('div');
-                    punkt.className = 'punkt-indikator';
-                    zelleHtml.appendChild(punkt);
-                    zelleHtml.onclick = () => zeigeDetails(z.nummer, m + 1, y, actionDays[schluessel]);
-                }
-                
-                let heute = new Date();
-                if (z.nummer === heute.getDate() && m === heute.getMonth() && y === heute.getFullYear()) {
-                    zelleHtml.classList.add('heute-marker');
-                }
-            }
-            wochenReihe.appendChild(zelleHtml);
-        });
-        grid.appendChild(wochenReihe);
-    }
-}
-
-function zeigeDetails(tag, monat, jahr, daten) {
-    document.getElementById('modalDate').innerText = `${String(tag).padStart(2, '0')}.${String(monat).padStart(2, '0')}.${jahr}`;
-    document.getElementById('modalTitle').innerText = daten.title;
-    document.getElementById('modalDescription').innerText = daten.desc;
-    modal.classList.add('offen');
-}
-
-document.getElementById('closeModal').onclick = () => modal.classList.remove('offen');
-window.onclick = (e) => { if (e.target === modal) modal.classList.remove('offen'); };
-
-monthSelect.onchange = baueKalender;
-yearInput.oninput = baueKalender;
-
-document.getElementById('prevMonth').onclick = () => {
-    let val = parseInt(monthSelect.value) - 1;
-    if (val < 0) { val = 11; yearInput.value = parseInt(yearInput.value) - 1; }
-    monthSelect.value = val;
-    baueKalender();
-};
-document.getElementById('nextMonth').onclick = () => {
-    let val = parseInt(monthSelect.value) + 1;
-    if (val > 11) { val = 0; yearInput.value = parseInt(yearInput.value) + 1; }
-    monthSelect.value = val;
-    baueKalender();
-};
-
-monthSelect.value = aktMonat;
-yearInput.value = aktJahr;
-baueKalender();
-</script>
+let aktJahr = d.getFullYear() < 2026 ?
