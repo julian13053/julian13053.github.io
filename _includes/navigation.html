@@ -14,7 +14,7 @@
             <a href="/blog.html" class="hover:text-blue-600 pb-1 transition-all no-underline">Blog</a>
             
             <div class="relative group" id="rights-dropdown">
-                <button onclick="toggleDropdown(event)" class="hover:text-blue-600 pb-1 transition-all no-underline font-semibold text-gray-600 text-sm md:text-base flex items-center gap-1 bg-transparent border-0 cursor-pointer">
+                <button onclick="toggleDropdown(event, 'dropdown-menu')" class="hover:text-blue-600 pb-1 transition-all no-underline font-semibold text-gray-600 text-sm md:text-base flex items-center gap-1 bg-transparent border-0 cursor-pointer">
                     Unsere Rechte
                     <svg class="w-4 h-4 transform transition-transform duration-200 group-hover:rotate-180" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                         <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2.5" d="M19 9l-7 7-7-7"></path>
@@ -29,6 +29,21 @@
                         <a href="/menschenrechte.html" class="flex items-center gap-2 px-4 py-2.5 text-sm text-gray-600 hover:bg-blue-50 hover:text-blue-600 transition-all no-underline">⚖️ Menschenrechte</a>
                         <a href="/digitalrechte.html" class="flex items-center gap-2 px-4 py-2.5 text-sm text-gray-600 hover:bg-blue-50 hover:text-blue-600 transition-all no-underline">📱 Digitalrechte</a>
                         <a href="/umweltrechte.html" class="flex items-center gap-2 px-4 py-2.5 text-sm text-gray-600 hover:bg-blue-50 hover:text-blue-600 transition-all no-underline">🌱 Umweltrechte</a>
+                    </div>
+                </div>
+            </div>
+
+            <div class="relative group" id="schule-dropdown">
+                <button onclick="toggleDropdown(event, 'schule-menu')" class="hover:text-blue-600 pb-1 transition-all no-underline font-semibold text-gray-600 text-sm md:text-base flex items-center gap-1 bg-transparent border-0 cursor-pointer">
+                    Schule
+                    <svg class="w-4 h-4 transform transition-transform duration-200 group-hover:rotate-180" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2.5" d="M19 9l-7 7-7-7"></path>
+                    </svg>
+                </button>
+                
+                <div class="absolute left-1/2 md:left-0 transform -translate-x-1/2 md:translate-x-0 pt-2 w-56 opacity-0 pointer-events-none group-hover:opacity-100 group-hover:pointer-events-auto transition-all duration-200 z-50" id="schule-menu">
+                    <div class="bg-white border border-gray-100 rounded-2xl shadow-xl py-2">
+                        <a href="/prozentrechner.html" class="flex items-center gap-2 px-4 py-2.5 text-sm text-gray-600 hover:bg-blue-50 hover:text-blue-600 transition-all no-underline">🧮 Prozentrechner</a>
                     </div>
                 </div>
             </div>
@@ -66,6 +81,11 @@
             <a href="/umweltrechte.html" class="block py-2 px-3 text-sm rounded-lg hover:bg-blue-100 no-underline">🌱 Umweltrechte</a>
         </div>
 
+        <div class="bg-gray-50 rounded-2xl p-2 space-y-1">
+            <span class="block text-xs font-black text-gray-400 uppercase tracking-wider px-3 pt-1 pb-2">Schule</span>
+            <a href="/prozentrechner.html" class="block py-2 px-3 text-sm rounded-lg hover:bg-blue-100 no-underline">🧮 Prozentrechner</a>
+        </div>
+
         <a href="/spenden.html" class="block py-2.5 px-3 rounded-xl hover:bg-blue-50 hover:text-blue-600 no-underline transition-all">Spenden</a>
         <a href="/kontakt.html" class="block py-2.5 px-3 rounded-xl hover:bg-blue-50 hover:text-blue-600 no-underline transition-all">Kontakt</a>
     </div>
@@ -77,9 +97,9 @@
 
     const supabaseClientNav = supabase.createClient(SUPABASE_URL_NAV, SUPABASE_ANON_KEY_NAV);
 
-    function toggleDropdown(event) {
+    function toggleDropdown(event, menuId) {
         event.stopPropagation();
-        const menu = document.getElementById('dropdown-menu');
+        const menu = document.getElementById(menuId);
         menu.classList.toggle('opacity-0');
         menu.classList.toggle('pointer-events-none');
     }
@@ -97,11 +117,13 @@
     }
 
     document.addEventListener('click', function(e) {
-        const dMenu = document.getElementById('dropdown-menu');
-        if (dMenu && !dMenu.classList.contains('opacity-0') && !e.target.closest('#rights-dropdown')) {
-            dMenu.classList.add('opacity-0');
-            dMenu.classList.add('pointer-events-none');
-        }
+        ['dropdown-menu', 'schule-menu'].forEach(id => {
+            const menu = document.getElementById(id);
+            if (menu && !menu.classList.contains('opacity-0') && !e.target.closest('#rights-dropdown') && !e.target.closest('#schule-dropdown')) {
+                menu.classList.add('opacity-0');
+                menu.classList.add('pointer-events-none');
+            }
+        });
     });
 
     async function checkUser() {
