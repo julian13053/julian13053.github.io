@@ -1,6 +1,5 @@
 ---
-layout: none
-permalink: /prozentrechner/
+layout: null
 ---
 <!DOCTYPE html>
 <html lang="de">
@@ -21,7 +20,7 @@ permalink: /prozentrechner/
 
         body {
             margin: 0;
-            font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Helvetica, Arial, sans-serif;
+            font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, sans-serif;
             background-color: var(--bg);
             color: var(--text);
             display: flex;
@@ -38,69 +37,68 @@ permalink: /prozentrechner/
             width: 100%;
             border-radius: 24px;
             box-shadow: 0 20px 40px rgba(15, 23, 42, 0.05);
-            padding: 35px;
+            padding: 30px;
             border: 1px solid var(--border);
             box-sizing: border-box;
         }
 
         .calc-header {
             text-align: center;
-            margin-bottom: 30px;
+            margin-bottom: 25px;
         }
 
         .calc-header h1 {
-            font-size: 28px;
+            font-size: 26px;
             color: var(--primary);
-            margin: 0 0 10px 0;
+            margin: 0 0 8px 0;
             font-weight: 800;
-            letter-spacing: -0.5px;
         }
 
         .calc-header p {
             color: var(--text-muted);
-            font-size: 15px;
+            font-size: 14px;
             margin: 0;
         }
 
         .calc-section {
             background: #f8fafc;
-            padding: 22px;
+            padding: 20px;
             border-radius: 18px;
-            margin-bottom: 25px;
+            margin-bottom: 20px;
             border: 1px solid #edf2f7;
             box-sizing: border-box;
         }
 
         .calc-section h2 {
-            font-size: 16px;
+            font-size: 15px;
             color: var(--text);
             margin-top: 0;
-            margin-bottom: 18px;
+            margin-bottom: 15px;
             border-bottom: 2px solid var(--border);
-            padding-bottom: 8px;
+            padding-bottom: 6px;
             font-weight: 700;
         }
 
         .input-inline-row {
             display: flex;
             flex-wrap: wrap;
-            gap: 10px;
+            gap: 8px;
             align-items: center;
             font-size: 15px;
             font-weight: 600;
             color: #334155;
-            margin-bottom: 15px;
+            margin-bottom: 12px;
         }
 
         .input-field {
-            padding: 10px 14px;
+            padding: 10px 12px;
             border: 2px solid var(--border);
             background: #ffffff;
             border-radius: 12px;
             font-weight: 700;
             color: var(--text);
             outline: none;
-            font-size: 16px;
+            font-size: 15px;
             transition: border-color 0.2s;
             box-sizing: border-box;
         }
@@ -109,38 +107,34 @@ permalink: /prozentrechner/
             border-color: var(--primary);
         }
 
-        /* Spezialbreiten für die Inline-Zeile */
         .w-preis { width: 100px; flex-grow: 1; }
         .w-prozent { width: 75px; flex-grow: 1; }
 
         .result-box {
             background: #eff6ff;
             border-left: 4px solid var(--primary);
-            padding: 14px 16px;
+            padding: 12px 15px;
             border-radius: 12px;
-            font-size: 15px;
+            font-size: 14px;
             color: #1e40af;
             font-weight: 700;
-            margin-top: 5px;
             line-height: 1.4;
         }
 
         .grid-3 {
             display: grid;
             grid-template-columns: repeat(3, 1fr);
-            gap: 12px;
+            gap: 10px;
         }
 
         @media (max-width: 440px) {
-            .grid-3 {
-                grid-template-columns: 1fr;
-            }
+            .grid-3 { grid-template-columns: 1fr; }
         }
 
         .grid-box {
             display: flex;
             flex-direction: column;
-            gap: 6px;
+            gap: 4px;
         }
 
         .grid-box label {
@@ -148,18 +142,16 @@ permalink: /prozentrechner/
             font-weight: 800;
             color: var(--text-muted);
             text-transform: uppercase;
-            letter-spacing: 0.5px;
         }
 
         .back-link {
             display: block;
             text-align: center;
-            margin-top: 10px;
+            margin-top: 15px;
             color: var(--text-muted);
             text-decoration: none;
             font-size: 14px;
             font-weight: 600;
-            transition: color 0.2s;
         }
 
         .back-link:hover {
@@ -185,14 +177,12 @@ permalink: /prozentrechner/
             <input type="number" id="rabattProzent" class="input-field w-prozent" value="10" oninput="rechneRabatt()">
             <span>% Rabatt.</span>
         </div>
-        <div id="rabattErgebnis" class="result-box">
-            Geladen...
-        </div>
+        <div id="rabattErgebnis" class="result-box"></div>
     </div>
 
     <div class="calc-section">
         <h2>🔄 2. Universal-Umrechner (In alle Richtungen)</h2>
-        <p style="font-size: 13px; color: var(--text-muted); margin-top: -10px; margin-bottom: 18px;">Ändere ein Feld – die anderen rechnen sich von alleine aus!</p>
+        <p style="font-size: 12px; color: var(--text-muted); margin-top: -10px; margin-bottom: 12px;">Ändere ein Feld – die anderen rechnen sich automatisch um!</p>
         
         <div class="grid-3">
             <div class="grid-box">
@@ -208,9 +198,7 @@ permalink: /prozentrechner/
                 <input type="text" id="convBruch" class="input-field" value="3/10" oninput="vonBruch()">
             </div>
         </div>
-        <div id="umrechnungInfo" class="result-box" style="margin-top: 18px; background: #f0fdf4; border-left-color: #22c55e; color: #166534;">
-            Geladen...
-        </div>
+        <div id="umrechnungInfo" class="result-box" style="margin-top: 15px; background: #f0fdf4; border-left-color: #22c55e; color: #166534;"></div>
     </div>
 
     <a href="/index.html" class="back-link">← Zurück zur Startseite</a>
@@ -220,17 +208,13 @@ permalink: /prozentrechner/
 function rechneRabatt() {
     const preis = parseFloat(document.getElementById('rabattPreis').value) || 0;
     const prozent = parseFloat(document.getElementById('rabattProzent').value) || 0;
-    
     const ersparnis = (preis * prozent) / 100;
     const endpreis = preis - ersparnis;
-    
     document.getElementById('rabattErgebnis').innerHTML = 
         `Du sparst: <strong>${ersparnis.toFixed(2)} €</strong><br>Neuer Endpreis: <strong>${endpreis.toFixed(2)} €</strong>`;
 }
 
-function ggt(a, b) {
-    return b ? ggt(b, a % b) : a;
-}
+function ggt(a, b) { return b ? ggt(b, a % b) : a; }
 
 function prozentZuBruch(prozent) {
     if (prozent === 0 || isNaN(prozent)) return "0";
@@ -244,14 +228,11 @@ function vonProzent() {
     const pInput = document.getElementById('convProzent');
     const dInput = document.getElementById('convDezimal');
     const bInput = document.getElementById('convBruch');
-    
     let p = parseFloat(pInput.value);
     if (isNaN(p)) { dInput.value = ""; bInput.value = ""; return; }
-    
     let d = p / 100;
     dInput.value = Number(d.toFixed(4));
     bInput.value = prozentZuBruch(p);
-    
     aktualisiereInfoText(p, dInput.value, bInput.value);
 }
 
@@ -259,14 +240,11 @@ function vonDezimal() {
     const pInput = document.getElementById('convProzent');
     const dInput = document.getElementById('convDezimal');
     const bInput = document.getElementById('convBruch');
-    
     let d = parseFloat(dInput.value);
     if (isNaN(d)) { pInput.value = ""; bInput.value = ""; return; }
-    
     let p = d * 100;
     pInput.value = Number(p.toFixed(2));
     bInput.value = prozentZuBruch(p);
-    
     aktualisiereInfoText(pInput.value, d, bInput.value);
 }
 
@@ -274,22 +252,16 @@ function vonBruch() {
     const pInput = document.getElementById('convProzent');
     const dInput = document.getElementById('convDezimal');
     const bInput = document.getElementById('convBruch');
-    
     let bruchText = bInput.value.trim();
     if (!bruchText.includes('/')) return;
-    
     let teile = bruchText.split('/');
     let zaehler = parseFloat(teile[0]);
     let nenner = parseFloat(teile[1]);
-    
     if (isNaN(zaehler) || isNaN(nenner) || nenner === 0) return;
-    
     let d = zaehler / nenner;
     let p = d * 100;
-    
     dInput.value = Number(d.toFixed(4));
     pInput.value = Number(p.toFixed(2));
-    
     aktualisiereInfoText(pInput.value, dInput.value, bruchText);
 }
 
@@ -298,7 +270,7 @@ function aktualisiereInfoText(p, d, b) {
         `<strong>${p}%</strong> ist als Bruch <strong>${b}</strong> und als Dezimalzahl <strong>${d}</strong>`;
 }
 
-// Start-Ausführung
+// Startwerte berechnen
 rechneRabatt();
 vonProzent();
 </script>
