@@ -1,0 +1,262 @@
+---
+layout: default
+title: "Superschneller Prozentrechner"
+---
+
+<style>
+    .calc-container {
+        width: 100%;
+        min-height: 75vh;
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        padding: 20px;
+        background-color: #f8fafc;
+        box-sizing: border-box;
+        font-family: sans-serif;
+    }
+    
+    .calc-card {
+        background: #ffffff;
+        max-width: 600px;
+        width: 100%;
+        border-radius: 24px;
+        box-shadow: 0 10px 30px rgba(0,0,0,0.04);
+        padding: 30px;
+        border: 1px solid #e2e8f0;
+        box-sizing: border-box;
+    }
+    
+    .calc-header {
+        text-align: center;
+        margin-bottom: 30px;
+    }
+    
+    .calc-header h1 {
+        font-size: 26px;
+        color: #1e3a8a;
+        font-weight: 800;
+        margin-bottom: 8px;
+    }
+    
+    .calc-header p {
+        color: #64748b;
+        font-size: 14px;
+        margin: 0;
+    }
+    
+    .calc-section {
+        background: #f8fafc;
+        padding: 20px;
+        border-radius: 16px;
+        margin-bottom: 25px;
+        border: 1px solid #edf2f7;
+    }
+    
+    .calc-section h2 {
+        font-size: 16px;
+        color: #334155;
+        margin-top: 0;
+        margin-bottom: 15px;
+        border-bottom: 2px solid #e2e8f0;
+        padding-bottom: 6px;
+    }
+    
+    .input-group {
+        display: flex;
+        flex-wrap: wrap;
+        gap: 10px;
+        align-items: center;
+        margin-bottom: 15px;
+    }
+    
+    .input-field {
+        padding: 10px 14px;
+        border: 1px solid #cbd5e1;
+        background: #ffffff;
+        border-radius: 12px;
+        font-weight: bold;
+        color: #334155;
+        outline: none;
+        font-size: 15px;
+        flex: 1;
+        min-width: 80px;
+    }
+    
+    .input-field:focus {
+        border-color: #2563eb;
+    }
+    
+    .calc-label {
+        font-weight: 600;
+        color: #475569;
+        font-size: 14px;
+    }
+    
+    .result-box {
+        background: #eff6ff;
+        border-left: 4px solid #2563eb;
+        padding: 12px 15px;
+        border-radius: 8px;
+        margin-top: 10px;
+        font-size: 15px;
+        color: #1e40af;
+        font-weight: 600;
+    }
+    
+    .grid-3 {
+        display: grid;
+        grid-template-columns: repeat(auto-fit, minmax(130px, 1fr));
+        gap: 15px;
+    }
+    
+    .grid-box {
+        display: flex;
+        flex-direction: column;
+        gap: 5px;
+    }
+    
+    .grid-box label {
+        font-size: 12px;
+        font-weight: 700;
+        color: #64748b;
+        text-transform: uppercase;
+    }
+</style>
+
+<div class="calc-container">
+    <div class="calc-card">
+        
+        <div class="calc-header">
+            <h1>🧮 Blitz-Prozentrechner</h1>
+            <p>Einfach Werte eingeben – das Ergebnis erscheint sofort!</p>
+        </div>
+
+        <div class="calc-section">
+            <h2>🛍️ 1. Rabatt & Anteile berechnen</h2>
+            <div class="input-group">
+                <span class="calc-label">Ich kaufe für</span>
+                <input type="number" id="rabattPreis" class="input-field" value="30" oninput="rechneRabatt()">
+                <span class="calc-label">€ und kriege</span>
+                <input type="number" id="rabattProzent" class="input-field" value="10" oninput="rechneRabatt()">
+                <span class="calc-label">% Rabatt.</span>
+            </div>
+            <div id="rabattErgebnis" class="result-box">
+                Du sparst: 3.00 € | Neuer Preis: 27.00 €
+            </div>
+        </div>
+
+        <div class="calc-section">
+            <h2>🔄 2. Alles-Umrechner (Gegenseitig)</h2>
+            <p style="font-size: 12px; color: #94a3b8; margin-top: -10px; margin-bottom: 15px;">Ändere einen beliebigen Wert, die anderen passen sich automatisch an!</p>
+            
+            <div class="grid-3">
+                <div class="grid-box">
+                    <label>Prozent (%)</label>
+                    <input type="number" id="convProzent" class="input-field" value="30" oninput="vonProzent()">
+                </div>
+                <div class="grid-box">
+                    <label>Dezimalzahl</label>
+                    <input type="number" id="convDezimal" class="input-field" value="0.3" step="0.01" oninput="vonDezimal()">
+                </div>
+                <div class="grid-box">
+                    <label>Bruch</label>
+                    <input type="text" id="convBruch" class="input-field" value="3/10" oninput="vonBruch()">
+                </div>
+            </div>
+            <div id="umrechnungInfo" class="result-box" style="margin-top: 15px; background: #f0fdf4; border-left-color: #22c55e; color: #166534;">
+                30% entspricht dem Bruch 3/10 und der Dezimalzahl 0.3
+            </div>
+        </div>
+
+    </div>
+</div>
+
+<script>
+// --- FUNKTIONEN FÜR RECHNER 1 (RABATT) ---
+function rechneRabatt() {
+    const preis = parseFloat(document.getElementById('rabattPreis').value) || 0;
+    const prozent = parseFloat(document.getElementById('rabattProzent').value) || 0;
+    
+    const ersparnis = (preis * prozent) / 100;
+    const endpreis = preis - ersparnis;
+    
+    document.getElementById('rabattErgebnis').innerHTML = 
+        `Du sparst: <strong>${ersparnis.toFixed(2)} €</strong> | Neuer Preis: <strong>${endpreis.toFixed(2)} €</strong>`;
+}
+
+// --- MATHEMATISCHE HILFSFUNKTION (GgT zum Kürzen von Brüchen) ---
+function ggt(a, b) {
+    return b ? ggt(b, a % b) : a;
+}
+
+function prozentZuBruch(prozent) {
+    if (prozent === 0) return "0";
+    let zaehler = Math.round(prozent * 100);
+    let nenner = 10000;
+    let teiler = ggt(zaehler, nenner);
+    return `${zaehler / teiler}/${nenner / teiler}`;
+}
+
+// --- FUNKTIONEN FÜR RECHNER 2 (UMRECHNER) ---
+function vonProzent() {
+    const pInput = document.getElementById('convProzent');
+    const dInput = document.getElementById('convDezimal');
+    const bInput = document.getElementById('convBruch');
+    
+    let p = parseFloat(pInput.value);
+    if (isNaN(p)) { dInput.value = ""; bInput.value = ""; return; }
+    
+    let d = p / 100;
+    dInput.value = Number(d.toFixed(4)); // Max 4 Nachkommastellen
+    bInput.value = prozentZuBruch(p);
+    
+    aktualisiereInfoText(p, dInput.value, bInput.value);
+}
+
+function vonDezimal() {
+    const pInput = document.getElementById('convProzent');
+    const dInput = document.getElementById('convDezimal');
+    const bInput = document.getElementById('convBruch');
+    
+    let d = parseFloat(dInput.value);
+    if (isNaN(d)) { pInput.value = ""; bInput.value = ""; return; }
+    
+    let p = d * 100;
+    pInput.value = Number(p.toFixed(2));
+    bInput.value = prozentZuBruch(p);
+    
+    aktualisiereInfoText(pInput.value, d, bInput.value);
+}
+
+function vonBruch() {
+    const pInput = document.getElementById('convProzent');
+    const dInput = document.getElementById('convDezimal');
+    const bInput = document.getElementById('convBruch');
+    
+    let bruchText = bInput.value.trim();
+    if (!bruchText.includes('/')) return;
+    
+    let teile = bruchText.split('/');
+    let zaehler = parseFloat(teile[0]);
+    let nenner = parseFloat(teile[1]);
+    
+    if (isNaN(zaehler) || isNaN(nenner) || nenner === 0) return;
+    
+    let d = zaehler / nenner;
+    let p = d * 100;
+    
+    dInput.value = Number(d.toFixed(4));
+    pInput.value = Number(p.toFixed(2));
+    
+    aktualisiereInfoText(pInput.value, dInput.value, bruchText);
+}
+
+function aktualisiereInfoText(p, d, b) {
+    document.getElementById('umrechnungInfo').innerHTML = 
+        `<strong>${p}%</strong> entspricht dem gekürzten Bruch <strong>${b}</strong> und der Dezimalzahl <strong>${d}</strong>`;
+}
+
+// Einmal beim Start ausführen, damit alles passt
+rechneRabatt();
+</script>
