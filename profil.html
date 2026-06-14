@@ -10,8 +10,9 @@ title: Mein Profil
     <title>Mein Profil | M-Fleger</title>
     <meta name="description" content="Verwalte deine Kontoeinstellungen, ändere deinen Namen, deine E-Mail-Adresse oder dein Passwort.">
     
-    <link class="flex" rel="icon" type="image/jpeg" href="auge-logo.jpg">
+    <link rel="icon" type="image/jpeg" href="auge-logo.jpg">
     <script src="https://cdn.jsdelivr.net/npm/@tailwindcss/browser@4"></script>
+    <script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script>
     <style>
         @keyframes fadeInUp {
             from { opacity: 0; transform: translateY(20px); }
@@ -40,6 +41,9 @@ title: Mein Profil
 
     <main class="max-w-2xl mx-auto px-4 md:px-6 py-12 flex-grow w-full">
         
+        <div id="global-error" class="text-red-600 text-sm font-semibold bg-red-50 p-4 rounded-xl border border-red-100 mb-6 hidden animate-fade-in"></div>
+        <div id="global-success" class="text-green-600 text-sm font-semibold bg-green-50 p-4 rounded-xl border border-green-100 mb-6 hidden animate-fade-in"></div>
+        
         <div class="space-y-8 animate-fade-in">
             
             <div class="bg-white border border-gray-100 rounded-3xl p-6 md:p-8 shadow-xs">
@@ -51,19 +55,20 @@ title: Mein Profil
                 <form id="profile-data-form" class="space-y-5">
                     <div>
                         <label for="username" class="block text-sm font-semibold text-gray-700 mb-1.5">Anzeigename / Name</label>
-                        <input type="text" id="username" name="username" placeholder="z. B. Max Mustermann" required
-                               class="w-full bg-gray-50 border border-gray-200 rounded-xl px-4 py-3 text-sm focus:outline-hidden focus:border-slate-500 focus:bg-white transition-all">
+                        <input type="text" id="username" name="username" placeholder="z. B. Max Mustermann"
+                               class="w-full bg-gray-50 border border-gray-200 rounded-xl px-4 py-3 text-sm focus:outline-hidden focus:border-slate-500 focus:bg-white transition-all font-medium">
                         <p class="text-xs text-gray-400 mt-1">Dieser Name wird angezeigt, wenn du Kommentare verfasst.</p>
                     </div>
 
                     <div>
                         <label for="email" class="block text-sm font-semibold text-gray-700 mb-1.5">E-Mail-Adresse</label>
                         <input type="email" id="email" name="email" placeholder="max@beispiel.de" required
-                               class="w-full bg-gray-50 border border-gray-200 rounded-xl px-4 py-3 text-sm focus:outline-hidden focus:border-slate-500 focus:bg-white transition-all">
+                               class="w-full bg-gray-50 border border-gray-200 rounded-xl px-4 py-3 text-sm focus:outline-hidden focus:border-slate-500 focus:bg-white transition-all font-medium">
+                        <p class="text-xs text-gray-400 mt-1">Hinweis: Bei einer Änderung musst du die neue Adresse via E-Mail bestätigen.</p>
                     </div>
 
                     <div class="pt-2">
-                        <button type="submit" 
+                        <button type="submit" id="save-profile-btn"
                                 class="w-full sm:w-auto bg-slate-900 hover:bg-slate-800 text-white font-bold px-6 py-3 rounded-xl transition-all shadow-xs cursor-pointer text-sm">
                             Änderungen speichern
                         </button>
@@ -78,34 +83,34 @@ title: Mein Profil
                 </div>
                 
                 <form id="password-form" class="space-y-5">
-                    <div>
-                        <label for="current-password" class="block text-sm font-semibold text-gray-700 mb-1.5">Aktuelles Passwort</label>
-                        <input type="password" id="current-password" name="current-password" required
-                               class="w-full bg-gray-50 border border-gray-200 rounded-xl px-4 py-3 text-sm focus:outline-hidden focus:border-slate-500 focus:bg-white transition-all">
-                    </div>
-
                     <div class="grid grid-cols-1 sm:grid-cols-2 gap-4">
                         <div>
                             <label for="new-password" class="block text-sm font-semibold text-gray-700 mb-1.5">Neues Passwort</label>
-                            <input type="password" id="new-password" name="new-password" required minlength="8"
+                            <input type="password" id="new-password" name="new-password" required minlength="8" placeholder="••••••••"
                                    class="w-full bg-gray-50 border border-gray-200 rounded-xl px-4 py-3 text-sm focus:outline-hidden focus:border-slate-500 focus:bg-white transition-all">
                         </div>
 
                         <div>
-                            <label for="confirm-password" class="block text-sm font-semibold text-gray-700 mb-1.5">Neues Passwort bestätigen</label>
-                            <input type="password" id="confirm-password" name="confirm-password" required minlength="8"
+                            <label for="confirm-password" class="block text-sm font-semibold text-gray-700 mb-1.5">Passwort bestätigen</label>
+                            <input type="password" id="confirm-password" name="confirm-password" required minlength="8" placeholder="••••••••"
                                    class="w-full bg-gray-50 border border-gray-200 rounded-xl px-4 py-3 text-sm focus:outline-hidden focus:border-slate-500 focus:bg-white transition-all">
                         </div>
                     </div>
                     <p class="text-xs text-gray-400">Das Passwort muss mindestens 8 Zeichen lang sein.</p>
 
                     <div class="pt-2">
-                        <button type="submit" 
-                                class="w-full sm:w-auto bg-red-600 hover:bg-red-700 text-white font-bold px-6 py-3 rounded-xl transition-all shadow-xs cursor-pointer text-sm">
+                        <button type="submit" id="change-password-btn"
+                                class="w-full sm:w-auto bg-blue-600 hover:bg-blue-700 text-white font-bold px-6 py-3 rounded-xl transition-all shadow-xs cursor-pointer text-sm">
                             Passwort aktualisieren
                         </button>
                     </div>
                 </form>
+            </div>
+
+            <div class="text-center pt-4">
+                <button onclick="handleLogout()" class="text-sm font-bold text-red-600 hover:text-red-700 hover:underline cursor-pointer transition-all">
+                    Aus diesem Konto ausloggen
+                </button>
             </div>
 
         </div>
@@ -116,26 +121,114 @@ title: Mein Profil
     {% include cookie-banner.html %}
 
     <script>
-        // Formular 1: Profildaten absenden
-        document.getElementById('profile-data-form').addEventListener('submit', function(e) {
-            e.preventDefault();
-            alert('Deine Profildaten wurden lokal verarbeitet! Sobald wir das Backend anbinden, werden diese dauerhaft gespeichert.');
-        });
+        const CONFIG_SUPABASE_URL = "https://xxuanzhrrpwurkyjfjky.supabase.co";
+        const CONFIG_SUPABASE_ANON_KEY = "sb_publishable_WdzN1r5HkdnqrfIN2phV1g_-GdLlknq";
+        
+        const supabaseClient = supabase.createClient(CONFIG_SUPABASE_URL, CONFIG_SUPABASE_ANON_KEY);
 
-        // Formular 2: Passwort ändern mit Validierung
-        document.getElementById('password-form').addEventListener('submit', function(e) {
-            e.preventDefault();
-            const newPw = document.getElementById('new-password').value;
-            const confirmPw = document.getElementById('confirm-password').value;
+        const errorBox = document.getElementById('global-error');
+        const successBox = document.getElementById('global-success');
 
-            if (newPw !== confirmPw) {
-                alert('Fehler: Die neuen Passwörter stimmen nicht überein!');
+        function showMessage(type, message) {
+            errorBox.classList.add('hidden');
+            successBox.classList.add('hidden');
+            
+            if (type === 'error') {
+                errorBox.innerText = message;
+                errorBox.classList.remove('hidden');
+            } else if (type === 'success') {
+                successBox.innerText = message;
+                successBox.classList.remove('hidden');
+            }
+            window.scrollTo({ top: 0, behavior: 'smooth' });
+        }
+
+        // 1. Session prüfen & Formulardaten laden
+        async function loadUserData() {
+            const { data: { session }, error: sessionError } = await supabaseClient.auth.getSession();
+            
+            if (sessionError || !session) {
+                // Wenn kein User eingeloggt ist, direkt zum Login schicken
+                window.location.href = "login.html";
                 return;
             }
 
-            alert('Passwort-Änderung erfolgreich simuliert!');
-            this.reset();
+            const user = session.user;
+            document.getElementById('email').value = user.email || '';
+            
+            // Falls ein Anzeigename in den user_metadata existiert
+            if (user.user_metadata && user.user_metadata.username) {
+                document.getElementById('username').value = user.user_metadata.username;
+            }
+        }
+
+        // 2. Profildaten (Name & E-Mail) in Supabase aktualisieren
+        document.getElementById('profile-data-form').addEventListener('submit', async function(e) {
+            e.preventDefault();
+            const emailInput = document.getElementById('email').value.trim();
+            const usernameInput = document.getElementById('username').value.trim();
+            const btn = document.getElementById('save-profile-btn');
+
+            btn.disabled = true;
+            btn.innerText = "Wird gespeichert...";
+
+            const { data, error } = await supabaseClient.auth.updateUser({
+                email: emailInput,
+                data: { username: usernameInput }
+            });
+
+            btn.disabled = false;
+            btn.innerText = "Änderungen speichern";
+
+            if (error) {
+                showMessage('error', "Fehler beim Aktualisieren: " + error.message);
+            } else {
+                showMessage('success', "Profil erfolgreich aktualisiert! Falls du deine E-Mail geändert hast, bestätige bitte den Link in deinem Postfach.");
+            }
         });
+
+        // 3. Passwort in Supabase aktualisieren
+        document.getElementById('password-form').addEventListener('submit', async function(e) {
+            e.preventDefault();
+            const newPw = document.getElementById('new-password').value;
+            const confirmPw = document.getElementById('confirm-password').value;
+            const btn = document.getElementById('change-password-btn');
+
+            if (newPw !== confirmPw) {
+                showMessage('error', "Fehler: Die neuen Passwörter stimmen nicht überein!");
+                return;
+            }
+
+            btn.disabled = true;
+            btn.innerText = "Wird aktualisiert...";
+
+            const { data, error } = await supabaseClient.auth.updateUser({
+                password: newPw
+            });
+
+            btn.disabled = false;
+            btn.innerText = "Passwort aktualisieren";
+
+            if (error) {
+                showMessage('error', "Fehler beim Passwort-Update: " + error.message);
+            } else {
+                showMessage('success', "Dein Passwort wurde erfolgreich geändert.");
+                this.reset();
+            }
+        });
+
+        // 4. Logout-Funktion
+        async function handleLogout() {
+            const { error } = await supabaseClient.auth.signOut();
+            if (error) {
+                showMessage('error', "Fehler beim Ausloggen: " + error.message);
+            } else {
+                window.location.href = "login.html";
+            }
+        }
+
+        // Seite initialisieren
+        document.addEventListener('DOMContentLoaded', loadUserData);
     </script>
 
 </body>
