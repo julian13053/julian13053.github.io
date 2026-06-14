@@ -1,152 +1,186 @@
 ---
-layout: default
-title: "Superschneller Prozentrechner"
+layout: null
+permalink: /prozentrechner.html
 ---
+<!DOCTYPE html>
+<html lang="de">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>🧮 Blitz-Prozentrechner - M-Fleger</title>
+    <script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <style>
+        :root {
+            --primary: #2563eb;
+            --bg: #f8fafc;
+            --card-bg: #ffffff;
+            --text: #0f172a;
+            --text-muted: #64748b;
+            --border: #e2e8f0;
+        }
+        body {
+            margin: 0;
+            font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, sans-serif;
+            background-color: var(--bg);
+            color: var(--text);
+        }
+        .calc-wrapper {
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            min-height: 75vh;
+            padding: 40px 20px;
+            box-sizing: border-box;
+        }
+        .calc-karte {
+            background: var(--card-bg);
+            max-width: 550px;
+            width: 100%;
+            border-radius: 24px;
+            box-shadow: 0 20px 40px rgba(15, 23, 42, 0.04);
+            padding: 30px;
+            border: 1px solid var(--border);
+            box-sizing: border-box;
+        }
+        .calc-titel {
+            text-align: center;
+            margin-bottom: 25px;
+        }
+        .calc-titel h1 {
+            font-size: 26px !important;
+            color: var(--primary) !important;
+            margin: 0 0 6px 0 !important;
+            font-weight: 800 !important;
+        }
+        .calc-abschnitt {
+            background: #f8fafc;
+            padding: 20px;
+            border-radius: 18px;
+            margin-bottom: 20px;
+            border: 1px solid #edf2f7;
+            box-sizing: border-box;
+        }
+        .calc-abschnitt h2 {
+            font-size: 15px !important;
+            color: var(--text) !important;
+            margin-top: 0 !important;
+            margin-bottom: 15px !important;
+            border-bottom: 2px solid var(--border) !important;
+            padding-bottom: 6px !important;
+            font-weight: 700 !important;
+        }
+        .input-row {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 8px;
+            align-items: center;
+            font-size: 15px;
+            font-weight: 600;
+            color: #334155;
+            margin-bottom: 12px;
+        }
+        .prozent-input {
+            padding: 10px 12px;
+            border: 2px solid var(--border);
+            background: #ffffff;
+            border-radius: 12px;
+            font-weight: 700;
+            color: var(--text);
+            outline: none;
+            font-size: 15px;
+            transition: border-color 0.2s;
+            box-sizing: border-box;
+        }
+        .prozent-input:focus {
+            border-color: var(--primary);
+        }
+        .w-p { width: 100px; flex-grow: 1; }
+        .w-pct { width: 75px; flex-grow: 1; }
+        .ergebnis-box {
+            background: #eff6ff;
+            border-left: 4px solid var(--primary);
+            padding: 12px 15px;
+            border-radius: 12px;
+            font-size: 14px;
+            color: #1e40af;
+            font-weight: 700;
+            line-height: 1.4;
+        }
+        .grid-container {
+            display: grid;
+            grid-template-columns: repeat(3, 1fr);
+            gap: 12px;
+        }
+        @media (max-width: 440px) {
+            .grid-container { grid-template-columns: 1fr; }
+        }
+        .grid-item {
+            display: flex;
+            flex-direction: column;
+            gap: 4px;
+        }
+        .grid-item label {
+            font-size: 11px;
+            font-weight: 800;
+            color: var(--text-muted);
+            text-transform: uppercase;
+        }
+    </style>
+</head>
+<body>
 
-<style>
-    .prozent-wrapper {
-        width: 100%;
-        min-height: 70vh;
-        display: flex;
-        justify-content: center;
-        align-items: center;
-        padding: 40px 20px;
-        background-color: #f8fafc;
-        box-sizing: border-box;
-    }
-    
-    .prozent-karte {
-        background: #ffffff;
-        max-width: 550px;
-        width: 100%;
-        border-radius: 24px;
-        box-shadow: 0 10px 30px rgba(0,0,0,0.03);
-        padding: 30px;
-        border: 1px solid #e2e8f0;
-        box-sizing: border-box;
-    }
-    
-    .prozent-titel {
-        text-align: center;
-        margin-bottom: 25px;
-    }
-    
-    .prozent-titel h1 {
-        font-size: 26px !important;
-        color: #2563eb !important;
-        margin: 0 0 6px 0 !important;
-        font-weight: 800 !important;
-        background: transparent !important;
-    }
-    
-    .prozent-titel p {
-        color: #64748b !important;
-        font-size: 14px !important;
-        margin: 0 !important;
-    }
-    
-    .prozent-abschnitt {
-        background: #f8fafc;
-        padding: 20px;
-        border-radius: 18px;
-        margin-bottom: 20px;
-        border: 1px solid #edf2f7;
-        box-sizing: border-box;
-    }
-    
-    .prozent-abschnitt h2 {
-        font-size: 15px !important;
-        color: #0f172a !important;
-        margin-top: 0 !important;
-        margin-bottom: 15px !important;
-        border-bottom: 2px solid #e2e8f0 !important;
-        padding-bottom: 6px !important;
-        font-weight: 700 !important;
-    }
-    
-    .input-row {
-        display: flex;
-        flex-wrap: wrap;
-        gap: 8px;
-        align-items: center;
-        font-size: 15px;
-        font-weight: 600;
-        color: #334155;
-        margin-bottom: 12px;
-    }
-    
-    .prozent-input {
-        padding: 10px 12px;
-        border: 2px solid #e2e8f0;
-        background: #ffffff;
-        border-radius: 12px;
-        font-weight: 700;
-        color: #0f172a;
-        outline: none;
-        font-size: 15px;
-        transition: border-color 0.2s;
-        box-sizing: border-box;
-    }
-    
-    .prozent-input:focus {
-        border-color: #2563eb;
-    }
-    
-    .ergebnis-box {
-        background: #eff6ff;
-        border-left: 4px solid #2563eb;
-        padding: 12px 15px;
-        border-radius: 12px;
-        font-size: 14px;
-        color: #1e40af;
-        font-weight: 700;
-        line-height: 1.4;
-    }
-    
-    .grid-container {
-        display: grid;
-        grid-template-columns: repeat(auto-fit, minmax(130px, 1fr));
-        gap: 15px;
-    }
-    
-    .grid-item {
-        display: flex;
-        flex-direction: column;
-        gap: 5px;
-    }
-    
-    .grid-item label {
-        font-size: 12px;
-        font-weight: 700;
-        color: #64748b;
-        text-transform: uppercase;
-    }
-</style>
+<nav class="bg-white border-b border-gray-100 w-full relative">
+    <div class="w-full max-w-none px-4 md:px-6 flex items-center justify-between h-20">
+        <a href="/index.html" class="flex items-center gap-2 shrink-0 no-underline text-current mr-4">
+            <img src="/auge-logo.jpg" alt="M-Fleger Logo" class="w-12 h-10 md:w-16 md:h-14 rounded-xl object-contain">
+            <span class="text-xl md:text-2xl font-black tracking-tight text-blue-600">M-Fleger</span>
+        </a>
+        <div class="hidden lg:flex flex-wrap items-center gap-x-2 xl:gap-x-5 font-semibold text-gray-600 text-sm md:text-base flex-grow justify-start">
+            <a href="/index.html" class="hover:text-blue-600 pb-1 transition-all no-underline">Startseite</a>
+            <a href="/ueber-mich.html" class="hover:text-blue-600 pb-1 transition-all no-underline">Über mich</a>
+            <a href="/blog.html" class="hover:text-blue-600 pb-1 transition-all no-underline">Blog</a>
+            
+            <div class="relative group">
+                <button class="text-blue-600 pb-1 transition-all no-underline font-bold text-sm md:text-base flex items-center gap-1 bg-transparent border-0 cursor-pointer">
+                    Schule
+                    <svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2.5" d="M19 9l-7 7-7-7"></path></svg>
+                </button>
+                <div class="absolute left-0 pt-2 w-56 opacity-0 pointer-events-none group-hover:opacity-100 group-hover:pointer-events-auto transition-all duration-200 z-50">
+                    <div class="bg-white border border-gray-100 rounded-2xl shadow-xl py-2">
+                        <a href="/prozentrechner.html" class="flex items-center gap-2 px-4 py-2.5 text-sm text-blue-600 font-bold bg-blue-50 no-underline">🧮 Prozentrechner</a>
+                    </div>
+                </div>
+            </div>
 
-<div class="prozent-wrapper">
-    <div class="prozent-karte">
-        
-        <div class="prozent-titel">
+            <a href="/spenden.html" class="hover:text-blue-600 pb-1 transition-all no-underline">Spenden</a>
+            <a href="/kontakt.html" class="hover:text-blue-600 pb-1 transition-all no-underline">Kontakt</a>
+        </div>
+    </div>
+</nav>
+
+<div class="calc-wrapper">
+    <div class="calc-karte">
+        <div class="calc-titel">
             <h1>🧮 Blitz-Prozentrechner</h1>
-            <p>Einfach Werte eingeben – das Ergebnis wechselt sofort!</p>
+            <p style="color: #64748b; font-size: 14px; margin: 0;">Einfach Werte eingeben – das Ergebnis wechselt sofort!</p>
         </div>
 
-        <div class="prozent-abschnitt">
+        <div class="calc-abschnitt">
             <h2>🛍️ 1. Rabatt & Anteile ausrechnen</h2>
             <div class="input-row">
                 <span>Einkauf für</span>
-                <input type="number" id="rabattPreis" class="prozent-input" value="30" oninput="rechneRabatt()">
+                <input type="number" id="rabattPreis" class="prozent-input w-p" value="30" oninput="rechneRabatt()">
                 <span>€ mit</span>
-                <input type="number" id="rabattProzent" class="prozent-input" value="10" oninput="rechneRabatt()">
+                <input type="number" id="rabattProzent" class="prozent-input w-pct" value="10" oninput="rechneRabatt()">
                 <span>% Rabatt.</span>
             </div>
             <div id="rabattErgebnis" class="ergebnis-box"></div>
         </div>
 
-        <div class="prozent-abschnitt">
+        <div class="calc-abschnitt">
             <h2>🔄 2. Universal-Umrechner (In alle Richtungen)</h2>
             <p style="font-size: 12px; color: #64748b; margin-top: -10px; margin-bottom: 12px;">Ändere ein Feld – die anderen rechnen sich automatisch um!</p>
-            
             <div class="grid-container">
                 <div class="grid-item">
                     <label>Prozent (%)</label>
@@ -163,9 +197,12 @@ title: "Superschneller Prozentrechner"
             </div>
             <div id="umrechnungInfo" class="ergebnis-box" style="margin-top: 15px; background: #f0fdf4; border-left-color: #22c55e; color: #166534;"></div>
         </div>
-
     </div>
 </div>
+
+<footer class="bg-white border-t border-gray-100 py-6 mt-12 text-center text-sm text-gray-500">
+    <p>© 2026 M-Fleger. Alle Rechte vorbehalten.</p>
+</footer>
 
 <script>
 function rechneRabatt() {
@@ -173,12 +210,9 @@ function rechneRabatt() {
     const prozent = parseFloat(document.getElementById('rabattProzent').value) || 0;
     const ersparnis = (preis * prozent) / 100;
     const endpreis = preis - ersparnis;
-    document.getElementById('rabattErgebnis').innerHTML = 
-        `Du sparst: <strong>${ersparnis.toFixed(2)} €</strong><br>Neuer Endpreis: <strong>${endpreis.toFixed(2)} €</strong>`;
+    document.getElementById('rabattErgebnis').innerHTML = `Du sparst: <strong>${ersparnis.toFixed(2)} €</strong><br>Neuer Endpreis: <strong>${endpreis.toFixed(2)} €</strong>`;
 }
-
 function ggt(a, b) { return b ? ggt(b, a % b) : a; }
-
 function prozentZuBruch(prozent) {
     if (prozent === 0 || isNaN(prozent)) return "0";
     let zaehler = Math.round(prozent * 100);
@@ -186,7 +220,6 @@ function prozentZuBruch(prozent) {
     let teiler = ggt(zaehler, nenner);
     return `${zaehler / teiler}/${nenner / teiler}`;
 }
-
 function vonProzent() {
     const pInput = document.getElementById('convProzent');
     const dInput = document.getElementById('convDezimal');
@@ -198,7 +231,6 @@ function vonProzent() {
     bInput.value = prozentZuBruch(p);
     aktualisiereInfoText(p, dInput.value, bInput.value);
 }
-
 function vonDezimal() {
     const pInput = document.getElementById('convProzent');
     const dInput = document.getElementById('convDezimal');
@@ -210,7 +242,6 @@ function vonDezimal() {
     bInput.value = prozentZuBruch(p);
     aktualisiereInfoText(pInput.value, d, bInput.value);
 }
-
 function vonBruch() {
     const pInput = document.getElementById('convProzent');
     const dInput = document.getElementById('convDezimal');
@@ -227,12 +258,12 @@ function vonBruch() {
     pInput.value = Number(p.toFixed(2));
     aktualisiereInfoText(pInput.value, dInput.value, bruchText);
 }
-
 function aktualisiereInfoText(p, d, b) {
-    document.getElementById('umrechnungInfo').innerHTML = 
-        `<strong>${p}%</strong> ist als Bruch <strong>${b}</strong> und als Dezimalzahl <strong>${d}</strong>`;
+    document.getElementById('umrechnungInfo').innerHTML = `<strong>${p}%</strong> ist als Bruch <strong>${b}</strong> und als Dezimalzahl <strong>${d}</strong>`;
 }
-
 rechneRabatt();
 vonProzent();
 </script>
+
+</body>
+</html>
