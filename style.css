@@ -7,195 +7,167 @@
     --glass-border: rgba(255, 255, 255, 0.45);
     --glass-shadow: rgba(15, 23, 42, 0.08);
     --text-primary: #0f172a;
-    --text-secondary: #475569;
+    --text-secondary: #334155; /* Kontrast leicht erhöht für bessere Lesbarkeit */
 }
 
-/* Hintergrund */
+/* Hintergrund mit weichen, flüssigen Radial-Glows */
 body {
-    margin: 0;
-    padding: 0;
-    min-height: 100vh;
-
+    margin: 0 !important;
+    padding: 0 !important;
+    min-height: 100vh !important;
     background:
-        radial-gradient(circle at top left,
-            rgba(99,102,241,0.18),
-            transparent 35%),
-        radial-gradient(circle at top right,
-            rgba(59,130,246,0.15),
-            transparent 40%),
-        radial-gradient(circle at bottom,
-            rgba(14,165,233,0.12),
-            transparent 45%),
-        linear-gradient(
-            135deg,
-            #f8fafc 0%,
-            #eef2ff 30%,
-            #dbeafe 65%,
-            #f8fafc 100%
-        );
-
-    background-attachment: fixed;
-    font-family:
-        Inter,
-        "SF Pro Display",
-        system-ui,
-        sans-serif;
+        radial-gradient(circle at top left, rgba(99, 102, 241, 0.18), transparent 35%),
+        radial-gradient(circle at top right, rgba(59, 130, 246, 0.15), transparent 40%),
+        radial-gradient(circle at bottom, rgba(14, 165, 233, 0.12), transparent 45%),
+        linear-gradient(135deg, #f8fafc 0%, #eef2ff 30%, #dbeafe 65%, #f8fafc 100%) !important;
+    background-attachment: fixed !important;
+    font-family: Inter, "SF Pro Display", system-ui, sans-serif !important;
 }
 
-/* Hauptglas */
+/* ==========================================
+   ✨ HAUPTGLAS-KOMPONENTE
+   ========================================== */
 .liquid-glass {
-    position: relative;
-    overflow: hidden;
-
-    background: var(--glass-bg);
-
-    backdrop-filter:
-        blur(40px)
-        saturate(220%)
-        brightness(1.08);
-
-    -webkit-backdrop-filter:
-        blur(40px)
-        saturate(220%)
-        brightness(1.08);
-
-    border: 1px solid var(--glass-border);
-
-    border-radius: 32px;
-
+    position: relative !important;
+    overflow: hidden !important;
+    background: var(--glass-bg) !important;
+    
+    /* Premium High-End Glassmorphismus */
+    backdrop-filter: blur(40px) saturate(220%) brightness(1.08) !important;
+    -webkit-backdrop-filter: blur(40px) saturate(220%) brightness(1.08) !important;
+    
+    border: 1px solid var(--glass-border) !important;
+    border-radius: 32px !important;
+    
+    /* Komplexe Lichtbrechung im Glas & Schatten-Ebenen */
     box-shadow:
-        0 8px 32px rgba(255,255,255,0.35) inset,
-        0 1px 0 rgba(255,255,255,0.9) inset,
+        0 8px 32px rgba(255, 255, 255, 0.35) inset,
+        0 1px 0 rgba(255, 255, 255, 0.9) inset,
         0 20px 60px var(--glass-shadow),
-        0 40px 120px rgba(59,130,246,0.06);
-
-    transition:
-        transform .4s ease,
-        box-shadow .4s ease,
-        background .4s ease;
+        0 40px 120px rgba(59, 130, 246, 0.06) !important;
+    
+    transition: transform .4s cubic-bezier(0.25, 1, 0.5, 1), 
+                box-shadow .4s cubic-bezier(0.25, 1, 0.5, 1), 
+                background .4s cubic-bezier(0.25, 1, 0.5, 1) !important;
 }
 
 /* Oberer Lichtreflex */
 .liquid-glass::before {
-    content: "";
-
-    position: absolute;
-    top: -30%;
-    left: -10%;
-
-    width: 120%;
-    height: 70%;
-
-    background:
-        linear-gradient(
-            135deg,
-            rgba(255,255,255,0.9),
-            rgba(255,255,255,0.25),
-            transparent
-        );
-
-    pointer-events: none;
+    content: "" !important;
+    position: absolute !important;
+    top: -30% !important;
+    left: -10% !important;
+    width: 120% !important;
+    height: 70% !important;
+    background: linear-gradient(135deg, rgba(255, 255, 255, 0.9), rgba(255, 255, 255, 0.25), transparent) !important;
+    pointer-events: none !important;
+    z-index: 1 !important;
 }
 
 /* Zusätzlicher Lichtpunkt */
 .liquid-glass::after {
-    content: "";
-
-    position: absolute;
-    top: 15px;
-    right: 20px;
-
-    width: 180px;
-    height: 180px;
-
-    border-radius: 50%;
-
-    background:
-        radial-gradient(
-            circle,
-            rgba(255,255,255,0.35),
-            transparent 70%
-        );
-
-    pointer-events: none;
+    content: "" !important;
+    position: absolute !important;
+    top: 15px !important;
+    right: 20px !important;
+    width: 180px !important;
+    height: 180px !important;
+    border-radius: 50% !important;
+    background: radial-gradient(circle, rgba(255, 255, 255, 0.35), transparent 70%) !important;
+    pointer-events: none !important;
+    z-index: 1 !important;
 }
 
-/* Hover */
+/* Hover-Effekt: Glas hebt sich an */
 .liquid-glass:hover {
-    transform:
-        translateY(-8px)
-        scale(1.01);
-
-    background:
-        rgba(255,255,255,0.28);
-
-    border-color:
-        rgba(255,255,255,0.7);
-
+    transform: translateY(-8px) scale(1.01) !important;
+    background: rgba(255, 255, 255, 0.28) !important;
+    border-color: rgba(255, 255, 255, 0.7) !important;
     box-shadow:
-        0 8px 40px rgba(255,255,255,0.5) inset,
-        0 30px 80px rgba(59,130,246,0.12),
-        0 60px 160px rgba(59,130,246,0.08);
+        0 8px 40px rgba(255, 255, 255, 0.5) inset,
+        0 30px 80px rgba(59, 130, 246, 0.12),
+        0 60px 160px rgba(59, 130, 246, 0.08) !important;
 }
 
-/* Texte */
-.liquid-glass h1,
-.liquid-glass h2,
-.liquid-glass h3,
-.liquid-glass h4,
-.liquid-glass h5,
-.liquid-glass h6 {
-    color: var(--text-primary);
-    font-weight: 800;
-    letter-spacing: -0.02em;
+/* Typografie im Glas */
+.liquid-glass h1, .liquid-glass h2, .liquid-glass h3, 
+.liquid-glass h4, .liquid-glass h5, .liquid-glass h6 {
+    color: var(--text-primary) !important;
+    font-weight: 800 !important;
+    letter-spacing: -0.02em !important;
 }
 
-.liquid-glass p,
-.liquid-glass span,
-.liquid-glass li {
-    color: var(--text-secondary);
-    line-height: 1.7;
+.liquid-glass p, .liquid-glass span, .liquid-glass li {
+    color: var(--text-secondary) !important;
+    line-height: 1.7 !important;
 }
 
-/* Buttons */
-.liquid-glass button,
-.liquid-glass .btn {
-    background:
-        rgba(255,255,255,0.25);
-
-    border:
-        1px solid rgba(255,255,255,0.5);
-
-    backdrop-filter: blur(20px);
-
-    border-radius: 16px;
-
-    padding: 12px 20px;
-
-    color: var(--text-primary);
-
-    cursor: pointer;
-
-    transition: all .3s ease;
+/* Gläserne Buttons */
+.liquid-glass button, .liquid-glass .btn {
+    background: rgba(255, 255, 255, 0.25) !important;
+    border: 1px solid rgba(255, 255, 255, 0.5) !important;
+    backdrop-filter: blur(20px) !important;
+    -webkit-backdrop-filter: blur(20px) !important;
+    border-radius: 16px !important;
+    padding: 12px 20px !important;
+    color: var(--text-primary) !important;
+    font-weight: 700 !important;
+    cursor: pointer !important;
+    transition: all .3s ease !important;
 }
 
-.liquid-glass button:hover,
-.liquid-glass .btn:hover {
-    background:
-        rgba(255,255,255,0.4);
-
-    transform: translateY(-2px);
+.liquid-glass button:hover, .liquid-glass .btn:hover {
+    background: rgba(255, 255, 255, 0.45) !important;
+    transform: translateY(-2px) !important;
 }
 
 /* Mobile Optimierung */
 @media (max-width: 768px) {
-
     .liquid-glass {
-        border-radius: 24px;
-
-        backdrop-filter:
-            blur(30px)
-            saturate(180%);
+        border-radius: 24px !important;
+        backdrop-filter: blur(30px) saturate(180%) !important;
+        -webkit-backdrop-filter: blur(30px) saturate(180%) !important;
     }
+    .liquid-glass::after, .liquid-glass::before {
+        display: none !important; /* Performance-Boost auf Smartphones */
+    }
+}
 
+/* ==========================================
+   ♿ BARRIEREFREIER MODUS (TOGGLE)
+   Greift, wenn html/body das Attribut oder die Klasse hat
+   ========================================== */
+[data-theme="accessible"] body, body.no-glass {
+    background: #f8fafc !important; /* Klassischer, statischer Hintergrund */
+}
+
+[data-theme="accessible"] .liquid-glass, body.no-glass .liquid-glass {
+    background: #ffffff !important; /* Solides, hochkontrastiertes Weiß */
+    backdrop-filter: none !important;
+    -webkit-backdrop-filter: none !important;
+    border: 2px solid #0f172a !important; /* Starke, gut sichtbare Outline */
+    box-shadow: 0 4px 6px -1px rgba(0, 0, 0, 0.1) !important; /* Flacher, ruhiger Schatten */
+    transform: none !important; /* Keine störenden Bewegungen */
+}
+
+/* Schaltet die Lichtreflexe im barrierefreien Modus ab */
+[data-theme="accessible"] .liquid-glass::before, [data-theme="accessible"] .liquid-glass::after,
+body.no-glass .liquid-glass::before, body.no-glass .liquid-glass::after {
+    display: none !important;
+}
+
+/* Statischer Hover-Zustand ohne Bewegung */
+[data-theme="accessible"] .liquid-glass:hover, body.no-glass .liquid-glass:hover {
+    transform: none !important;
+    background: #f1f5f9 !important; /* Minimale, ruhige Farbänderung */
+    box-shadow: 0 4px 6px -1px rgba(0, 0, 0, 0.1) !important;
+}
+
+/* Kontraststarke Buttons im barrierefreien Modus */
+[data-theme="accessible"] .liquid-glass button, [data-theme="accessible"] .liquid-glass .btn,
+body.no-glass .liquid-glass button, body.no-glass .liquid-glass .btn {
+    background: #0f172a !important;
+    color: #ffffff !important;
+    border: none !important;
+    backdrop-filter: none !important;
 }
