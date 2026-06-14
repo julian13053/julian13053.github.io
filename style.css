@@ -1,52 +1,42 @@
 /* ==========================================================================
-   🌌 GLOBALES LIQUID GLASS (GLASSMORPHISM) DESIGN FÜR M-FLEGER
+   🔮 LIQUID GLASS GLOBAL DESIGN SYSTEM - M-FLEGER
    ========================================================================== */
 
-/* 1. Globaler Hintergrund-Verlauf für alle Seiten */
+/* 🌌 1. Der magische Hintergrund (Damit das Glas überhaupt sichtbar wird) */
 body {
     margin: 0;
     padding: 0;
     font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, sans-serif;
-    background: linear-gradient(135deg, #f1f5f9 0%, #e0e7ff 50%, #f8fafc 100%) !important;
-    background-attachment: fixed !important; /* Verlauf bleibt beim Scrollen fest stehen */
+    background: linear-gradient(135deg, #f1f5f9 0%, #dbeafe 50%, #f8fafc 100%) !important;
+    background-attachment: fixed !important;
     min-height: 100vh;
+    color: #0f172a;
 }
 
-/* 2. Der magische Liquid Glass Look für Inhalts-Karten */
+/* 🔮 2. Die Haupt-Glaskarte (Für den Blogpost, Rechner, Boxen etc.) */
 .glass-karte {
-    background: rgba(255, 255, 255, 0.42) !important; /* Semitransparent */
-    backdrop-filter: blur(16px) saturate(130%) !important; /* Weichzeichner & Farbsättigung */
-    -webkit-backdrop-filter: blur(16px) saturate(130%) !important;
-    border: 1px solid rgba(255, 255, 255, 0.6) !important; /* Gläserne Lichtkante */
-    box-shadow: 0 15px 35px rgba(31, 38, 135, 0.05) !important; /* Weicher Schatten */
-    border-radius: 24px;
-    transition: all 0.4s cubic-bezier(0.25, 0.8, 0.25, 1) !important; /* Butterweiche Animation */
-}
-
-/* ✨ 3. Der geniale interaktive Maus-Effekt (Hover) */
-.glass-karte:hover {
-    transform: translateY(-6px) scale(1.01) !important; /* Karte hebt sich elegant an */
-    background: rgba(255, 255, 255, 0.55) !important; /* Wird beim Drüberfahren etwas klarer */
-    border-color: rgba(37, 99, 235, 0.3) !important; /* Lichtkante färbt sich leicht M-Fleger-Blau */
-    box-shadow: 0 25px 50px rgba(37, 99, 235, 0.12) !important; /* Stärkerer, bläulicher Tiefenschatten */
-}
-
-/* 🎛️ Kleinere gläserne Abschnitte im Inneren von Karten (z.B. Rechner-Felder) */
-.glass-sub-abschnitt {
-    background: rgba(255, 255, 255, 0.3) !important;
-    backdrop-filter: blur(8px) !important;
-    border: 1px solid rgba(255, 255, 255, 0.4) !important;
-    border-radius: 18px;
-    transition: all 0.3s ease !important;
-}
-.glass-sub-abschnitt:hover {
     background: rgba(255, 255, 255, 0.45) !important;
-    border-color: rgba(255, 255, 255, 0.8) !important;
+    backdrop-filter: blur(20px) saturate(125%) !important;
+    -webkit-backdrop-filter: blur(20px) saturate(125%) !important;
+    border: 1px solid rgba(255, 255, 255, 0.6) !important;
+    box-shadow: 0 20px 50px rgba(31, 38, 135, 0.04) !important;
+    border-radius: 24px;
+    transition: all 0.4s cubic-bezier(0.25, 0.8, 0.25, 1) !important;
 }
 
-/* 🟦 Header & Footer passend teilsichtbar machen */
-nav, footer {
-    background: rgba(255, 255, 255, 0.75) !important;
-    backdrop-filter: blur(12px) !important;
-    -webkit-backdrop-filter: blur(12px) !important;
+/* ✨ 3. Der interaktive Schwebe-Effekt bei Maus-Hover */
+.glass-karte:hover {
+    transform: translateY(-4px) scale(1.002) !important;
+    background: rgba(255, 255, 255, 0.55) !important;
+    border-color: rgba(37, 99, 235, 0.3) !important;
+    box-shadow: 0 25px 50px rgba(37, 99, 235, 0.08) !important;
+}
+
+/* 🎛️ 4. Kleinere Unter-Abschnitte (Wie die "Was kann der Rechner"-Box) */
+.glass-sub-abschnitt {
+    background: rgba(255, 255, 255, 0.35) !important;
+    backdrop-filter: blur(10px) !important;
+    -webkit-backdrop-filter: blur(10px) !important;
+    border: 1px solid rgba(255, 255, 255, 0.4) !important;
+    border-radius: 16px;
 }
