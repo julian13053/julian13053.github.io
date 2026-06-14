@@ -29,7 +29,7 @@ permalink: /prozentrechner.html
             display: flex;
             justify-content: center;
             align-items: center;
-            min-height: 75vh;
+            min-height: 60vh;
             padding: 40px 20px;
             box-sizing: border-box;
         }
@@ -43,15 +43,12 @@ permalink: /prozentrechner.html
             border: 1px solid var(--border);
             box-sizing: border-box;
         }
-        .calc-titel {
-            text-align: center;
-            margin-bottom: 25px;
-        }
         .calc-titel h1 {
             font-size: 26px !important;
             color: var(--primary) !important;
             margin: 0 0 6px 0 !important;
             font-weight: 800 !important;
+            text-align: center;
         }
         .calc-abschnitt {
             background: #f8fafc;
@@ -132,29 +129,58 @@ permalink: /prozentrechner.html
 
 <nav class="bg-white border-b border-gray-100 w-full relative">
     <div class="w-full max-w-none px-4 md:px-6 flex items-center justify-between h-20">
+        
         <a href="/index.html" class="flex items-center gap-2 shrink-0 no-underline text-current mr-4">
             <img src="/auge-logo.jpg" alt="M-Fleger Logo" class="w-12 h-10 md:w-16 md:h-14 rounded-xl object-contain">
             <span class="text-xl md:text-2xl font-black tracking-tight text-blue-600">M-Fleger</span>
         </a>
+        
         <div class="hidden lg:flex flex-wrap items-center gap-x-2 xl:gap-x-5 font-semibold text-gray-600 text-sm md:text-base flex-grow justify-start">
             <a href="/index.html" class="hover:text-blue-600 pb-1 transition-all no-underline">Startseite</a>
             <a href="/ueber-mich.html" class="hover:text-blue-600 pb-1 transition-all no-underline">Über mich</a>
             <a href="/blog.html" class="hover:text-blue-600 pb-1 transition-all no-underline">Blog</a>
             
-            <div class="relative group">
-                <button class="text-blue-600 pb-1 transition-all no-underline font-bold text-sm md:text-base flex items-center gap-1 bg-transparent border-0 cursor-pointer">
-                    Schule
-                    <svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2.5" d="M19 9l-7 7-7-7"></path></svg>
+            <div class="relative group" id="rights-dropdown">
+                <button onclick="toggleDropdown(event, 'dropdown-menu')" class="hover:text-blue-600 pb-1 transition-all no-underline font-semibold text-gray-600 text-sm md:text-base flex items-center gap-1 bg-transparent border-0 cursor-pointer">
+                    Unsere Rechte
+                    <svg class="w-4 h-4 transform transition-transform duration-200 group-hover:rotate-180" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2.5" d="M19 9l-7 7-7-7"></path>
+                    </svg>
                 </button>
-                <div class="absolute left-0 pt-2 w-56 opacity-0 pointer-events-none group-hover:opacity-100 group-hover:pointer-events-auto transition-all duration-200 z-50">
+                <div class="absolute left-0 pt-2 w-56 opacity-0 pointer-events-none group-hover:opacity-100 group-hover:pointer-events-auto transition-all duration-200 z-50" id="dropdown-menu">
                     <div class="bg-white border border-gray-100 rounded-2xl shadow-xl py-2">
-                        <a href="/prozentrechner.html" class="flex items-center gap-2 px-4 py-2.5 text-sm text-blue-600 font-bold bg-blue-50 no-underline">🧮 Prozentrechner</a>
+                        <a href="/unsere-rechte.html" class="flex items-center gap-2 px-4 py-2.5 text-sm text-gray-700 hover:bg-blue-50 hover:text-blue-600 font-bold transition-all no-underline">🌍 Übersicht (Hub)</a>
+                        <div class="border-b border-gray-100 my-1"></div>
+                        <a href="/kinderrechte.html" class="flex items-center gap-2 px-4 py-2.5 text-sm text-gray-600 hover:bg-blue-50 hover:text-blue-600 transition-all no-underline">🎒 Kinderrechte</a>
+                        <a href="/menschenrechte.html" class="flex items-center gap-2 px-4 py-2.5 text-sm text-gray-600 hover:bg-blue-50 hover:text-blue-600 transition-all no-underline">⚖️ Menschenrechte</a>
+                        <a href="/digitalrechte.html" class="flex items-center gap-2 px-4 py-2.5 text-sm text-gray-600 hover:bg-blue-50 hover:text-blue-600 transition-all no-underline">📱 Digitalrechte</a>
+                        <a href="/umweltrechte.html" class="flex items-center gap-2 px-4 py-2.5 text-sm text-gray-600 hover:bg-blue-50 hover:text-blue-600 transition-all no-underline">🌱 Umweltrechte</a>
+                    </div>
+                </div>
+            </div>
+
+            <div class="relative group" id="schule-dropdown">
+                <button onclick="toggleDropdown(event, 'schule-menu')" class="text-blue-600 pb-1 transition-all no-underline font-bold text-sm md:text-base flex items-center gap-1 bg-transparent border-0 cursor-pointer">
+                    Schule
+                    <svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2.5" d="M19 9l-7 7-7-7"></path>
+                    </svg>
+                </button>
+                <div class="absolute left-0 pt-2 w-56 opacity-0 pointer-events-none group-hover:opacity-100 group-hover:pointer-events-auto transition-all duration-200 z-50" id="schule-menu">
+                    <div class="bg-white border border-gray-100 rounded-2xl shadow-xl py-2">
+                        <a href="/prozentrechner.html" class="flex items-center gap-2 px-4 py-2.5 text-sm text-blue-600 bg-blue-50 hover:text-blue-600 transition-all no-underline font-bold">🧮 Prozentrechner</a>
                     </div>
                 </div>
             </div>
 
             <a href="/spenden.html" class="hover:text-blue-600 pb-1 transition-all no-underline">Spenden</a>
-            <a href="/kontakt.html" class="hover:text-blue-600 pb-1 transition-all no-underline">Kontakt</a>
+            <a href="/kontakt.html" class="hover:text-blue-600 pb-1 transition-all no-underline">Contact</a>
+        </div>
+
+        <div class="flex items-center gap-2 md:gap-3 shrink-0 ml-auto md:border-l md:border-gray-100 md:pl-4">
+            <div id="auth-nav-section" class="flex items-center">
+                <a href="/login.html" class="bg-blue-600 text-white font-bold px-3 py-2 rounded-xl text-xs md:text-sm shadow-xs hover:bg-blue-700 transition-all no-underline">🔑 Login</a>
+            </div>
         </div>
     </div>
 </nav>
@@ -163,7 +189,7 @@ permalink: /prozentrechner.html
     <div class="calc-karte">
         <div class="calc-titel">
             <h1>🧮 Blitz-Prozentrechner</h1>
-            <p style="color: #64748b; font-size: 14px; margin: 0;">Einfach Werte eingeben – das Ergebnis wechselt sofort!</p>
+            <p style="color: #64748b; font-size: 14px; margin: 0 0 25px 0; text-align: center;">Einfach Werte eingeben – das Ergebnis wechselt sofort!</p>
         </div>
 
         <div class="calc-abschnitt">
@@ -200,11 +226,53 @@ permalink: /prozentrechner.html
     </div>
 </div>
 
-<footer class="bg-white border-t border-gray-100 py-6 mt-12 text-center text-sm text-gray-500">
-    <p>© 2026 M-Fleger. Alle Rechte vorbehalten.</p>
+<footer class="bg-white border-t border-gray-100 pt-10 pb-6 w-full">
+    <div class="max-w-6xl mx-auto px-4 flex flex-col items-center">
+        
+        <div class="bg-gray-50 border border-gray-100 rounded-2xl p-6 max-w-md w-full text-center relative mb-8">
+            <span class="absolute -top-3 left-1/2 transform -translate-x-1/2 bg-red-100 text-red-500 font-bold px-2 py-0.5 rounded-full text-[10px] uppercase tracking-wider">Beta Beendet 🛑</span>
+            <h4 class="text-gray-700 font-bold text-base mb-1">Der Überflieger-Newsletter</h4>
+            <p class="text-gray-400 text-xs mb-4">Aus Datenschutzgründen dauerhaft im Hangar. Schön war die Beta-Phase!</p>
+            <div class="flex gap-2">
+                <input type="text" disabled placeholder="keine@mails.mehr" class="bg-white border border-gray-200 rounded-xl px-3 py-2 text-sm text-gray-300 w-full outline-none">
+                <button disabled class="bg-gray-200 text-gray-400 font-bold px-4 py-2 rounded-xl text-sm border-0">Offline</button>
+            </div>
+        </div>
+
+        <div class="w-full flex flex-col sm:flex-row items-center justify-between border-t border-gray-50 pt-6 text-sm text-gray-500 font-medium gap-4">
+            <p>© 2026 M-Fleger. Alle Rechte vorbehalten.</p>
+            <div class="flex flex-wrap gap-x-4 gap-y-2 justify-center">
+                <a href="/aktionstage.html" class="text-gray-500 hover:text-blue-600 no-underline">Aktionstage</a>
+                <a href="/index.html" class="text-gray-500 hover:text-blue-600 no-underline">Startseite</a>
+                <a href="/ueber-mich.html" class="text-gray-500 hover:text-blue-600 no-underline">Über mich</a>
+                <a href="/blog.html" class="text-gray-500 hover:text-blue-600 no-underline">Blog</a>
+                <a href="/kontakt.html" class="text-gray-500 hover:text-blue-600 no-underline">Kontakt</a>
+                <a href="/spenden.html" class="text-gray-500 hover:text-blue-600 no-underline">Spenden</a>
+            </div>
+        </div>
+
+    </div>
 </footer>
 
 <script>
+// Dropdown Logik
+function toggleDropdown(event, menuId) {
+    event.stopPropagation();
+    const menu = document.getElementById(menuId);
+    menu.classList.toggle('opacity-0');
+    menu.classList.toggle('pointer-events-none');
+}
+document.addEventListener('click', function(e) {
+    ['dropdown-menu', 'schule-menu'].forEach(id => {
+        const menu = document.getElementById(id);
+        if (menu && !menu.classList.contains('opacity-0') && !e.target.closest('#rights-dropdown') && !e.target.closest('#schule-dropdown')) {
+            menu.classList.add('opacity-0');
+            menu.classList.add('pointer-events-none');
+        }
+    });
+});
+
+// Rechner Funktionen
 function rechneRabatt() {
     const preis = parseFloat(document.getElementById('rabattPreis').value) || 0;
     const prozent = parseFloat(document.getElementById('rabattProzent').value) || 0;
