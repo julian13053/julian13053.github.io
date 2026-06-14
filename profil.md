@@ -12,7 +12,6 @@ title: Mein Profil
 </head>
 <body class="bg-gray-50 text-gray-900 font-sans antialiased flex flex-col min-h-screen relative">
 
-    <!-- DYNAMISCHES BANNER (TOAST) -->
     <div id="custom-banner" class="fixed top-24 right-4 z-50 transform translate-x-full opacity-0 transition-all duration-300 ease-out max-w-sm w-full bg-white border shadow-xl rounded-2xl p-4 flex items-start gap-3">
         <span id="banner-icon" class="text-xl"></span>
         <div class="flex-grow">
@@ -21,7 +20,6 @@ title: Mein Profil
         </div>
     </div>
 
-    <!-- KONTO LÖSCHEN BESTÄTIGUNGS-MODAL -->
     <div id="delete-modal" class="fixed inset-0 bg-black/50 backdrop-blur-xs z-50 flex items-center justify-center p-4 hidden">
         <div class="bg-white border border-gray-100 max-w-md w-full rounded-2xl p-6 shadow-xl transform scale-95 transition-all duration-300">
             <span class="text-3xl block mb-2">⚠️</span>
@@ -40,7 +38,6 @@ title: Mein Profil
         </div>
     </div>
 
-    <!-- MENÜ -->
     <nav class="bg-white border-b border-gray-100 sticky top-0 z-50 shadow-xs">
         <div class="max-w-6xl mx-auto px-4 py-4 flex flex-col md:flex-row justify-between items-center gap-4">
             <a href="/index.html" class="flex items-center gap-3 group no-underline text-current">
@@ -57,7 +54,6 @@ title: Mein Profil
         </div>
     </nav>
 
-    <!-- HEADER -->
     <header class="bg-gradient-to-br from-[#1d4ed8] via-[#1e3a8a] to-[#312e81] text-white py-12 md:py-16 px-4">
         <div class="max-w-4xl mx-auto text-center">
             <h1 class="text-3xl md:text-5xl font-black tracking-tight mb-4">👤 Mein Profil</h1>
@@ -65,10 +61,8 @@ title: Mein Profil
         </div>
     </header>
 
-    <!-- INHALT -->
     <main class="max-w-6xl mx-auto px-4 py-10 md:py-12 flex-grow w-full">
         
-        <!-- Bereich wenn nicht angemeldet -->
         <div id="login-required-card" class="max-w-md mx-auto bg-white border border-gray-100 p-8 rounded-2xl shadow-sm text-center hidden">
             <span class="text-4xl block mb-4">🔒</span>
             <h2 class="text-xl font-bold mb-2">Anmeldung erforderlich</h2>
@@ -78,15 +72,19 @@ title: Mein Profil
             </a>
         </div>
 
-        <!-- Profil-Bereich (Favoriten-Liste) -->
         <div id="profile-content" class="hidden">
             <div class="flex flex-col md:flex-row justify-between items-start md:items-center gap-4 mb-8 border-b border-gray-100 pb-6">
                 <h2 class="text-2xl font-black text-gray-950 tracking-tight flex items-center gap-2">
                     ❤️ Meine gespeicherten Favoriten
                 </h2>
-                <button onclick="zeigeDeleteModal()" class="text-xs font-bold px-4 py-2 rounded-xl bg-red-50 text-red-600 border border-red-100 hover:bg-red-100 transition-all cursor-pointer">
-                    ⚙️ Konto löschen
-                </button>
+                <div class="flex gap-3">
+                    <button onclick="handleLogout()" class="text-xs font-bold px-4 py-2 rounded-xl bg-gray-100 text-gray-700 border border-gray-200 hover:bg-gray-200 transition-all cursor-pointer">
+                        🚪 Abmelden
+                    </button>
+                    <button onclick="zeigeDeleteModal()" class="text-xs font-bold px-4 py-2 rounded-xl bg-red-50 text-red-600 border border-red-100 hover:bg-red-100 transition-all cursor-pointer">
+                        ⚙️ Konto löschen
+                    </button>
+                </div>
             </div>
             
             <div class="grid grid-cols-1 md:grid-cols-3 gap-6 md:gap-8" id="favorites-grid"></div>
@@ -149,13 +147,16 @@ title: Mein Profil
 
         async function loadProfilePage() {
             try {
-                const { data: { user } } = await supabaseClient.auth.getUser();
+                const { data: { user }, error: userError } = await supabaseClient.auth.getUser();
 
-                if (!user) {
+                if (userError || !user) {
+                    document.getElementById('user-email-display').innerText = "Nicht angemeldet";
                     document.getElementById('login-required-card').classList.remove('hidden');
+                    document.getElementById('profile-content').classList.add('hidden');
                     return;
                 }
 
+                document.getElementById('login-required-card').classList.add('hidden');
                 document.getElementById('profile-content').classList.remove('hidden');
                 document.getElementById('user-email-display').innerText = `Eingeloggt als: ${user.email}`;
 
@@ -167,6 +168,7 @@ title: Mein Profil
                 if (error) throw error;
 
                 const grid = document.getElementById('favorites-grid');
+                grid.innerHTML = ""; // Reset grid content
                 const noFavsMessage = document.getElementById('no-favorites-message');
 
                 if (!favoriten || favoriten.length === 0) {
@@ -174,6 +176,7 @@ title: Mein Profil
                     return;
                 }
 
+                noFavsMessage.classList.add('hidden');
                 const favIds = new Set(favoriten.map(f => f.blog_id.toString()));
                 let counter = 0;
 
@@ -227,12 +230,12 @@ title: Mein Profil
 
                 if (!error) {
                     const card = button.closest('[data-post-id]');
-                    card.remove();
+                    if (card) card.remove();
                     
                     zeigeBanner('info', 'Entfernt', 'Der Artikel wurde aus deinen Favoriten gelöscht.');
 
                     const grid = document.getElementById('favorites-grid');
-                    if (grid.children.length === 0) {
+                    if (grid && grid.children.length === 0) {
                         document.getElementById('no-favorites-message').classList.remove('hidden');
                     }
                 } else {
@@ -243,7 +246,7 @@ title: Mein Profil
             }
         }
 
-        // Konto-löschen Modallogik
+        // Modallogik für Konto löschen
         function zeigeDeleteModal() {
             const modal = document.getElementById('delete-modal');
             modal.classList.remove('hidden');
@@ -258,8 +261,6 @@ title: Mein Profil
 
         async function kontoDefinitivLoeschen() {
             try {
-                // Da Supabase Client-seitig Kontenlöschung aus Sicherheitsgründen einschränkt, 
-                // rufen wir die dafür vorgesehene RPC auf oder löschen den User-Datensatz.
                 const { data: { user } } = await supabaseClient.auth.getUser();
                 if (!user) return;
 
@@ -271,12 +272,22 @@ title: Mein Profil
 
                 schließeDeleteModal();
                 
-                // Wir zeigen das Banner auf der Startseite an
                 alert("Dein Konto wurde erfolgreich gelöscht. Auf Wiedersehen!"); 
                 window.location.href = "/index.html";
 
             } catch (err) {
                 zeigeBanner('error', 'Löschen fehlgeschlagen', err.message);
+            }
+        }
+
+        // Abmelde-Logik
+        async function handleLogout() {
+            try {
+                const { error } = await supabaseClient.auth.signOut();
+                if (error) throw error;
+                window.location.href = "/index.html";
+            } catch (err) {
+                zeigeBanner('error', 'Abmeldung fehlgeschlagen', err.message);
             }
         }
 
