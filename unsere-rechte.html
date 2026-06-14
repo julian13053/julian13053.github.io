@@ -2,6 +2,7 @@
 layout: null
 title: Unsere Rechte - Hub
 ---
+<!DOCTYPE html>
 <html lang="de">
 <head>
     <meta charset="UTF-8">
@@ -10,7 +11,7 @@ title: Unsere Rechte - Hub
     <title>Unsere Rechte | M-Fleger</title>
     <meta name="description" content="Willkommen auf dem Rechte-Hub von M-Fleger. Entdecke und verstehe Kinderrechte, Menschenrechte, Digitalrechte und Umweltrechte auf Augenhöhe.">
     
-    <link class="flex" rel="icon" type="image/jpeg" href="auge-logo.jpg">
+    <link rel="icon" type="image/jpeg" href="auge-logo.jpg">
     <script src="https://cdn.jsdelivr.net/npm/@tailwindcss/browser@4"></script>
     <style>
         @keyframes fadeInUp {
@@ -42,56 +43,64 @@ title: Unsere Rechte - Hub
         
         <div class="grid grid-cols-1 md:grid-cols-2 gap-8 mb-12">
             
-            <div class="bg-white border border-gray-100 rounded-3xl p-8 shadow-xs flex flex-col justify-between hover:shadow-xl hover:scale-[1.02] transition-all duration-300">
-                <div>
+            <div class="bg-white border border-gray-100 rounded-3xl p-8 shadow-xs flex flex-col justify-between hover:shadow-xl hover:scale-[1.02] transition-all duration-300 group">
+                <div class="flex-grow">
                     <div class="w-14 h-14 bg-amber-50 rounded-2xl flex items-center justify-center text-3xl mb-6 shadow-xs">🎒</div>
                     <h2 class="text-2xl font-black text-gray-950 tracking-tight mb-3">Kinderrechte</h2>
                     <p class="text-gray-600 text-sm md:text-base leading-relaxed mb-6">
-                        Kinder sind keine "kleinen Erwachsenen" – sie haben ganz eigene, verbriefte Rechte auf Schutz, Förderung und Mitbestimmung. Erfahre alles über die UN-Kinderrechtskonvention, verständlich aufbereitet.
+                        Kinder sind keine „kleinen Erwachsenen“ – sie haben ganz eigene, verbriefte Rechte auf Schutz, Förderung und Mitbestimmung. Erfahre alles über die UN-Kinderrechtskonvention, verständlich aufbereitet.
                     </p>
                 </div>
-                <a href="kinderrechte.html" class="inline-flex items-center justify-center bg-amber-500 hover:bg-amber-600 text-white font-bold px-6 py-3 rounded-xl no-underline transition-all w-full text-center shadow-xs">
-                    Zu den Kinderrechten →
-                </a>
+                <div class="mt-auto">
+                    <a href="kinderrechte.html" class="inline-flex items-center justify-center bg-amber-500 hover:bg-amber-600 text-white font-bold px-6 py-3 rounded-xl no-underline transition-all w-full text-center shadow-xs active:scale-95">
+                        Zu den Kinderrechten &rarr;
+                    </a>
+                </div>
             </div>
 
-            <div class="bg-white border border-gray-100 rounded-3xl p-8 shadow-xs flex flex-col justify-between hover:shadow-xl hover:scale-[1.02] transition-all duration-300">
-                <div>
+            <div class="bg-white border border-gray-100 rounded-3xl p-8 shadow-xs flex flex-col justify-between hover:shadow-xl hover:scale-[1.02] transition-all duration-300 group">
+                <div class="flex-grow">
                     <div class="w-14 h-14 bg-blue-50 rounded-2xl flex items-center justify-center text-3xl mb-6 shadow-xs">⚖️</div>
                     <h2 class="text-2xl font-black text-gray-950 tracking-tight mb-3">Allgemeine Menschenrechte</h2>
                     <p class="text-gray-600 text-sm md:text-base leading-relaxed mb-6">
                         Die Würde des Menschen ist unantastbar. Von Freiheit über Gleichheit bis hin zu fairen Arbeitsbedingungen – diese universellen Rechte gelten für jeden Menschen auf diesem Planeten ab der Geburt.
                     </p>
                 </div>
-                <a href="menschenrechte.html" class="inline-flex items-center justify-center bg-blue-600 hover:bg-blue-700 text-white font-bold px-6 py-3 rounded-xl no-underline transition-all w-full text-center shadow-xs">
-                    Zu den Menschenrechten →
-                </a>
+                <div class="mt-auto">
+                    <a href="menschenrechte.html" class="inline-flex items-center justify-center bg-blue-600 hover:bg-blue-700 text-white font-bold px-6 py-3 rounded-xl no-underline transition-all w-full text-center shadow-xs active:scale-95">
+                        Zu den Menschenrechten &rarr;
+                    </a>
+                </div>
             </div>
 
-            <div class="bg-white border border-gray-100 rounded-3xl p-8 shadow-xs flex flex-col justify-between hover:shadow-xl hover:scale-[1.02] transition-all duration-300">
-                <div>
+            <div class="bg-white border border-gray-100 rounded-3xl p-8 shadow-xs flex flex-col justify-between hover:shadow-xl hover:scale-[1.02] transition-all duration-300 group">
+                <div class="flex-grow">
                     <div class="w-14 h-14 bg-purple-50 rounded-2xl flex items-center justify-center text-3xl mb-6 shadow-xs">📱</div>
                     <h2 class="text-2xl font-black text-gray-950 tracking-tight mb-3">Digitalrechte</h2>
                     <p class="text-gray-600 text-sm md:text-base leading-relaxed mb-6">
                         Das Internet ist kein rechtsfreier Raum. Dein Recht auf informationelle Selbstbestimmung, Datenschutz (DSGVO), das Recht auf Vergessenwerden und der Schutz vor digitaler Gewalt stehen hier im Fokus.
                     </p>
                 </div>
-                <a href="digitalrechte.html" class="inline-flex items-center justify-center bg-purple-600 hover:bg-purple-700 text-white font-bold px-6 py-3 rounded-xl no-underline transition-all w-full text-center shadow-xs">
-                    Zu den Digitalrechten →
-                </a>
+                <div class="mt-auto">
+                    <a href="digitalrechte.html" class="inline-flex items-center justify-center bg-purple-600 hover:bg-purple-700 text-white font-bold px-6 py-3 rounded-xl no-underline transition-all w-full text-center shadow-xs active:scale-95">
+                        Zu den Digitalrechten &rarr;
+                    </a>
+                </div>
             </div>
 
-            <div class="bg-white border border-gray-100 rounded-3xl p-8 shadow-xs flex flex-col justify-between hover:shadow-xl hover:scale-[1.02] transition-all duration-300">
-                <div>
+            <div class="bg-white border border-gray-100 rounded-3xl p-8 shadow-xs flex flex-col justify-between hover:shadow-xl hover:scale-[1.02] transition-all duration-300 group">
+                <div class="flex-grow">
                     <div class="w-14 h-14 bg-emerald-50 rounded-2xl flex items-center justify-center text-3xl mb-6 shadow-xs">🌱</div>
                     <h2 class="text-2xl font-black text-gray-950 tracking-tight mb-3">Klima- & Umweltrechte</h2>
                     <p class="text-gray-600 text-sm md:text-base leading-relaxed mb-6">
                         Ohne eine intakte Natur gibt es kein gesundes Leben. Erfahre mehr über das anerkannte Menschenrecht auf eine saubere, gesunde und nachhaltige Umwelt sowie den rechtlichen Schutz nachfolgender Generationen.
                     </p>
                 </div>
-                <a href="umweltrechte.html" class="inline-flex items-center justify-center bg-emerald-600 hover:bg-emerald-700 text-white font-bold px-6 py-3 rounded-xl no-underline transition-all w-full text-center shadow-xs">
-                    Zu den Umweltrechten →
-                </a>
+                <div class="mt-auto">
+                    <a href="umweltrechte.html" class="inline-flex items-center justify-center bg-emerald-600 hover:bg-emerald-700 text-white font-bold px-6 py-3 rounded-xl no-underline transition-all w-full text-center shadow-xs active:scale-95">
+                        Zu den Umweltrechten &rarr;
+                    </a>
+                </div>
             </div>
 
         </div>
