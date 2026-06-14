@@ -1,92 +1,77 @@
 /* ==========================================
-   🌊 ULTRA LIQUID GLASS SYSTEM 2026
+   🌊 ULTRA LIQUID GLASS SYSTEM 2026 (REPAIRED)
    ========================================== */
 
 :root {
     --glass-bg: rgba(255, 255, 255, 0.22);
-    --glass-border: rgba(255, 255, 255, 0.45);
-    --glass-shadow: rgba(15, 23, 42, 0.08);
+    --glass-border: rgba(255, 255, 255, 0.55);
+    --glass-shadow: rgba(15, 23, 42, 0.06);
     --text-primary: #0f172a;
-    --text-secondary: #334155; /* Kontrast leicht erhöht für bessere Lesbarkeit */
+    --text-secondary: #334155;
 }
 
-/* Hintergrund mit weichen, flüssigen Radial-Glows */
+/* Dynamischer Hintergrund mit flüssigen Radial-Glows */
 body {
     margin: 0 !important;
     padding: 0 !important;
     min-height: 100vh !important;
     background:
-        radial-gradient(circle at top left, rgba(99, 102, 241, 0.18), transparent 35%),
-        radial-gradient(circle at top right, rgba(59, 130, 246, 0.15), transparent 40%),
-        radial-gradient(circle at bottom, rgba(14, 165, 233, 0.12), transparent 45%),
-        linear-gradient(135deg, #f8fafc 0%, #eef2ff 30%, #dbeafe 65%, #f8fafc 100%) !important;
+        radial-gradient(circle at 15% 15%, rgba(99, 102, 241, 0.15), transparent 40%),
+        radial-gradient(circle at 85% 20%, rgba(59, 130, 246, 0.12), transparent 40%),
+        radial-gradient(circle at 50% 85%, rgba(14, 165, 233, 0.10), transparent 50%),
+        linear-gradient(135deg, #f8fafc 0%, #eef2ff 35%, #dbeafe 70%, #f8fafc 100%) !important;
     background-attachment: fixed !important;
     font-family: Inter, "SF Pro Display", system-ui, sans-serif !important;
 }
 
-/* ==========================================
-   ✨ HAUPTGLAS-KOMPONENTE
-   ========================================== */
+/* Hauptglas-Komponente - FIX: kein overflow: hidden mehr! */
 .liquid-glass {
     position: relative !important;
-    overflow: hidden !important;
     background: var(--glass-bg) !important;
     
-    /* Premium High-End Glassmorphismus */
-    backdrop-filter: blur(40px) saturate(220%) brightness(1.08) !important;
-    -webkit-backdrop-filter: blur(40px) saturate(220%) brightness(1.08) !important;
+    /* Hochauflösender Apple-Blur */
+    backdrop-filter: blur(30px) saturate(210%) brightness(1.04) !important;
+    -webkit-backdrop-filter: blur(30px) saturate(210%) brightness(1.04) !important;
     
     border: 1px solid var(--glass-border) !important;
-    border-radius: 32px !important;
+    border-radius: 28px !important;
     
-    /* Komplexe Lichtbrechung im Glas & Schatten-Ebenen */
+    /* Weiche, geschachtelte Schatten verhindern abgehackte Kanten */
     box-shadow:
-        0 8px 32px rgba(255, 255, 255, 0.35) inset,
-        0 1px 0 rgba(255, 255, 255, 0.9) inset,
-        0 20px 60px var(--glass-shadow),
-        0 40px 120px rgba(59, 130, 246, 0.06) !important;
+        0 1px 0 0 rgba(255, 255, 255, 0.8) inset,
+        0 12px 32px -4px var(--glass-shadow),
+        0 24px 60px -8px rgba(59, 130, 246, 0.04) !important;
     
-    transition: transform .4s cubic-bezier(0.25, 1, 0.5, 1), 
-                box-shadow .4s cubic-bezier(0.25, 1, 0.5, 1), 
-                background .4s cubic-bezier(0.25, 1, 0.5, 1) !important;
+    /* Flüssige, ruckelfreie Animation */
+    transition: transform 0.4s cubic-bezier(0.16, 1, 0.3, 1), 
+                box-shadow 0.4s cubic-bezier(0.16, 1, 0.3, 1), 
+                background-color 0.4s cubic-bezier(0.16, 1, 0.3, 1) !important;
+    
+    /* Sorgt dafür, dass die Hardware-Beschleunigung genutzt wird */
+    transform: translateZ(0);
+    will-change: transform, box-shadow;
 }
 
-/* Oberer Lichtreflex */
+/* Integrierter Lichtreflex über linearen Verlauf (verhindert Abschneiden) */
 .liquid-glass::before {
     content: "" !important;
     position: absolute !important;
-    top: -30% !important;
-    left: -10% !important;
-    width: 120% !important;
-    height: 70% !important;
-    background: linear-gradient(135deg, rgba(255, 255, 255, 0.9), rgba(255, 255, 255, 0.25), transparent) !important;
+    inset: 0 !important;
+    border-radius: 27px !important; /* Minimal kleiner als der Rahmen */
+    background: linear-gradient(135deg, rgba(255, 255, 255, 0.4) 0%, rgba(255, 255, 255, 0.05) 40%, transparent 100%) !important;
     pointer-events: none !important;
     z-index: 1 !important;
 }
 
-/* Zusätzlicher Lichtpunkt */
-.liquid-glass::after {
-    content: "" !important;
-    position: absolute !important;
-    top: 15px !important;
-    right: 20px !important;
-    width: 180px !important;
-    height: 180px !important;
-    border-radius: 50% !important;
-    background: radial-gradient(circle, rgba(255, 255, 255, 0.35), transparent 70%) !important;
-    pointer-events: none !important;
-    z-index: 1 !important;
-}
-
-/* Hover-Effekt: Glas hebt sich an */
+/* Hover-Effekt: Gleitet absolut flüssig ohne Kantenbruch */
 .liquid-glass:hover {
-    transform: translateY(-8px) scale(1.01) !important;
-    background: rgba(255, 255, 255, 0.28) !important;
-    border-color: rgba(255, 255, 255, 0.7) !important;
+    transform: translateY(-6px) !important;
+    background-color: rgba(255, 255, 255, 0.32) !important;
+    border-color: rgba(255, 255, 255, 0.75) !important;
     box-shadow:
-        0 8px 40px rgba(255, 255, 255, 0.5) inset,
-        0 30px 80px rgba(59, 130, 246, 0.12),
-        0 60px 160px rgba(59, 130, 246, 0.08) !important;
+        0 1px 0 0 rgba(255, 255, 255, 0.9) inset,
+        0 20px 38px -4px rgba(31, 38, 135, 0.08),
+        0 40px 80px -12px rgba(59, 130, 246, 0.12) !important;
 }
 
 /* Typografie im Glas */
@@ -99,75 +84,47 @@ body {
 
 .liquid-glass p, .liquid-glass span, .liquid-glass li {
     color: var(--text-secondary) !important;
-    line-height: 1.7 !important;
+    line-height: 1.6 !important;
 }
 
-/* Gläserne Buttons */
-.liquid-glass button, .liquid-glass .btn {
-    background: rgba(255, 255, 255, 0.25) !important;
-    border: 1px solid rgba(255, 255, 255, 0.5) !important;
-    backdrop-filter: blur(20px) !important;
-    -webkit-backdrop-filter: blur(20px) !important;
-    border-radius: 16px !important;
-    padding: 12px 20px !important;
+/* Gläserne Buttons und Inputs (z.B. Newsletter-Feld) */
+.liquid-glass button, .liquid-glass .btn, .liquid-glass input {
+    background: rgba(255, 255, 255, 0.4) !important;
+    border: 1px solid rgba(255, 255, 255, 0.6) !important;
+    backdrop-filter: blur(10px) !important;
+    -webkit-backdrop-filter: blur(10px) !important;
+    border-radius: 14px !important;
+    padding: 10px 18px !important;
     color: var(--text-primary) !important;
-    font-weight: 700 !important;
-    cursor: pointer !important;
-    transition: all .3s ease !important;
+    transition: all 0.25s ease !important;
 }
 
 .liquid-glass button:hover, .liquid-glass .btn:hover {
-    background: rgba(255, 255, 255, 0.45) !important;
-    transform: translateY(-2px) !important;
-}
-
-/* Mobile Optimierung */
-@media (max-width: 768px) {
-    .liquid-glass {
-        border-radius: 24px !important;
-        backdrop-filter: blur(30px) saturate(180%) !important;
-        -webkit-backdrop-filter: blur(30px) saturate(180%) !important;
-    }
-    .liquid-glass::after, .liquid-glass::before {
-        display: none !important; /* Performance-Boost auf Smartphones */
-    }
+    background: rgba(255, 255, 255, 0.6) !important;
+    transform: translateY(-1px) !important;
 }
 
 /* ==========================================
-   ♿ BARRIEREFREIER MODUS (TOGGLE)
-   Greift, wenn html/body das Attribut oder die Klasse hat
+   ♿ ACCESSIBLE / NO-GLASS MODUS
    ========================================== */
 [data-theme="accessible"] body, body.no-glass {
-    background: #f8fafc !important; /* Klassischer, statischer Hintergrund */
+    background: #f8fafc !important;
 }
 
 [data-theme="accessible"] .liquid-glass, body.no-glass .liquid-glass {
-    background: #ffffff !important; /* Solides, hochkontrastiertes Weiß */
+    background: #ffffff !important;
     backdrop-filter: none !important;
     -webkit-backdrop-filter: none !important;
-    border: 2px solid #0f172a !important; /* Starke, gut sichtbare Outline */
-    box-shadow: 0 4px 6px -1px rgba(0, 0, 0, 0.1) !important; /* Flacher, ruhiger Schatten */
-    transform: none !important; /* Keine störenden Bewegungen */
+    border: 2px solid #0f172a !important;
+    box-shadow: 0 4px 6px -1px rgba(0, 0, 0, 0.05) !important;
+    transform: none !important;
 }
 
-/* Schaltet die Lichtreflexe im barrierefreien Modus ab */
-[data-theme="accessible"] .liquid-glass::before, [data-theme="accessible"] .liquid-glass::after,
-body.no-glass .liquid-glass::before, body.no-glass .liquid-glass::after {
+[data-theme="accessible"] .liquid-glass::before, body.no-glass .liquid-glass::before {
     display: none !important;
 }
 
-/* Statischer Hover-Zustand ohne Bewegung */
 [data-theme="accessible"] .liquid-glass:hover, body.no-glass .liquid-glass:hover {
     transform: none !important;
-    background: #f1f5f9 !important; /* Minimale, ruhige Farbänderung */
-    box-shadow: 0 4px 6px -1px rgba(0, 0, 0, 0.1) !important;
-}
-
-/* Kontraststarke Buttons im barrierefreien Modus */
-[data-theme="accessible"] .liquid-glass button, [data-theme="accessible"] .liquid-glass .btn,
-body.no-glass .liquid-glass button, body.no-glass .liquid-glass .btn {
-    background: #0f172a !important;
-    color: #ffffff !important;
-    border: none !important;
-    backdrop-filter: none !important;
+    background: #f1f5f9 !important;
 }
