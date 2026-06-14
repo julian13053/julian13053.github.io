@@ -19,6 +19,8 @@ title: Startseite
     <meta property="og:image" content="https://julian13053.github.io/auge-logo.jpg">
     <meta property="og:url" content="https://julian13053.github.io/index.html">
     
+    <link rel="stylesheet" href="/style.css">
+    
     <link class="flex" rel="icon" type="image/jpeg" href="auge-logo.jpg">
     <script src="https://cdn.jsdelivr.net/npm/@tailwindcss/browser@4"></script>
     <script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script>
@@ -30,9 +32,9 @@ title: Startseite
         .animate-fade-in { animation: fadeInUp 0.8s ease-out forwards; }
     </style>
 </head>
-<body class="bg-gray-50 text-gray-900 font-sans antialiased flex flex-col min-h-screen relative">
+<body class="text-gray-900 font-sans antialiased flex flex-col min-h-screen relative">
 
-    <div id="custom-banner" class="fixed top-24 right-4 z-50 transform translate-x-full opacity-0 transition-all duration-300 ease-out max-w-sm w-full bg-white border shadow-xl rounded-2xl p-4 flex items-start gap-3">
+    <div id="custom-banner" class="fixed top-24 right-4 z-50 transform translate-x-full opacity-0 transition-all duration-300 ease-out max-w-sm w-full backdrop-blur-xl shadow-xl rounded-2xl p-4 flex items-start gap-3" style="background: rgba(255, 255, 255, 0.7); border: 1px solid rgba(255, 255, 255, 0.5);">
         <span id="banner-icon" class="text-xl"></span>
         <div class="flex-grow">
             <h4 id="banner-title" class="font-bold text-sm text-gray-900"></h4>
@@ -40,7 +42,7 @@ title: Startseite
         </div>
     </div>
 
-    <nav class="bg-white border-b border-gray-100 sticky top-0 z-50 shadow-xs">
+    <nav class="sticky top-0 z-50 shadow-xs">
         {% include navigation.html %}
     </nav>
 
@@ -54,9 +56,9 @@ title: Startseite
                 <p class="text-base md:text-xl text-blue-100 max-w-xl mb-8 leading-relaxed">
                     Ich teile hier meine Projekte, Gedanken und kreativen Ideas. Außerdem findest du Einblicke in meine Brandings, meine Arbeit und neue Blogartikel.
                 </p>
-                <span class="bg-cyan-400 text-blue-950 font-black px-8 py-4 rounded-xl shadow-lg inline-block w-full md:w-auto text-center cursor-default select-none">
+                <a href="blog.html" class="bg-cyan-400 hover:bg-cyan-300 text-blue-950 font-black px-8 py-4 rounded-xl shadow-lg inline-block w-full md:w-auto text-center no-underline transition-all transform hover:-translate-y-0.5">
                     Direkt zum Blog →
-                </span>
+                </a>
             </div>
             
             <div class="md:col-span-5 flex justify-center">
@@ -69,11 +71,12 @@ title: Startseite
     </header>
 
     <main class="max-w-6xl mx-auto px-4 md:px-6 pt-12 md:pt-20 flex-grow w-full">
+        
         <div class="mb-12">
             <div class="flex flex-col md:flex-row justify-between items-center md:items-baseline mb-10 gap-4 text-center md:text-left">
                 <div>
-                    <h2 class="text-3xl md:text-4xl font-black text-gray-950 tracking-tight">📰 Neueste Artikel</h2>
-                    <p class="text-gray-500 text-base md:text-lg mt-2">Frisch aus dem Gedankenkarussell gegriffen.</p>
+                    <h2 class="text-3xl md:text-4xl font-black tracking-tight" style="color: #0f172a;">📰 Neueste Artikel</h2>
+                    <p class="text-base md:text-lg mt-2" style="color: #475569;">Frisch aus dem Gedankenkarussell gegriffen.</p>
                 </div>
                 <a href="blog.html" class="text-blue-600 font-bold hover:text-blue-800 transition-colors flex items-center gap-1 group no-underline">
                     Alle Artikel ansehen <span class="transform group-hover:translate-x-1 transition-transform">→</span>
@@ -83,97 +86,98 @@ title: Startseite
             <div class="grid grid-cols-1 md:grid-cols-3 gap-6 md:gap-8 mb-16">
                 {% for post in site.posts limit:3 %}
                 {% assign numeric_id = post.date | date: "%Y%m%d%H%M" %}
-                <div class="blog-card bg-white border border-gray-100 p-6 rounded-2xl shadow-xs flex flex-col justify-between hover:shadow-md hover:scale-105 transition-all duration-300" data-post-id="{{ numeric_id }}">
+                
+                <div class="blog-card p-6 rounded-2xl flex flex-col justify-between hover:scale-103 transition-all duration-300 liquid-glass" data-post-id="{{ numeric_id }}">
                     <div>
-                        <div class="flex justify-between items-center mb-3">
+                        <div class="flex justify-between items-center mb-4">
                             <span class="text-xs bg-blue-600 text-white px-2.5 py-1 rounded-md font-bold uppercase">{{ post.date | date: "%d.%m.%Y" }}</span>
                             {% assign words = post.content | strip_html | number_of_words %}
                             {% assign read_time = words | divided_by: 180 | plus: 1 %}
-                            <span class="text-xs text-gray-400 font-semibold">📖 {{ read_time }} Min.</span>
+                            <span class="text-xs font-semibold" style="color: #64748b;">📖 {{ read_time }} Min.</span>
                         </div>
-                        <h3 class="text-xl font-black text-gray-950 mt-1 mb-2 line-clamp-2">{{ post.title }}</h3>
-                        <p class="text-gray-600 text-sm mb-4 line-clamp-3">{{ post.excerpt | strip_html }}</p>
+                        <h3 class="text-xl font-black mt-1 mb-2 line-clamp-2" style="color: #0f172a;">{{ post.title }}</h3>
+                        <p class="text-sm mb-4 line-clamp-3" style="color: #334155;">{{ post.excerpt | strip_html }}</p>
                     </div>
                     
-                    <div class="flex flex-col gap-3 mt-2">
+                    <div class="flex flex-col gap-3 mt-4">
                         <div class="flex justify-between items-center">
                             <a href="{{ post.url | relative_url }}" class="text-blue-600 font-bold text-sm hover:text-blue-800 no-underline inline-block">
                                 Artikel lesen →
                             </a>
                             
-                            <button onclick="likeUmschalten('{{ numeric_id }}', this)" class="like-btn text-xs font-bold px-3 py-1.5 rounded-full border border-gray-200 bg-white hover:bg-gray-50 transition-all cursor-pointer flex items-center gap-1">
+                            <button onclick="likeUmschalten('{{ numeric_id }}', this)" class="like-btn text-xs font-bold px-3 py-1.5 rounded-full border transition-all cursor-pointer flex items-center gap-1" style="background: rgba(255,255,255,0.4); border-color: rgba(0,0,0,0.08); color: #0f172a;">
                                 🤍 <span class="like-counter">0</span> Likes
                             </button>
                         </div>
                         
                         <div class="flex justify-end">
-                            <button onclick="favoritUmschalten('{{ numeric_id }}', this)" class="fav-btn text-xs font-bold px-3 py-1.5 rounded-full border border-gray-200 bg-white hover:bg-gray-50 transition-all cursor-pointer w-full md:w-auto text-center">
+                            <button onclick="favoritUmschalten('{{ numeric_id }}', this)" class="fav-btn text-xs font-bold px-3 py-1.5 rounded-full border transition-all cursor-pointer w-full md:w-auto text-center" style="background: rgba(255,255,255,0.4); border-color: rgba(0,0,0,0.08); color: #0f172a;">
                                 ⭐ Favorit
                             </button>
                         </div>
                     </div>
                 </div>
                 {% else %}
-                <div class="col-span-1 md:col-span-3 text-center py-12 bg-gray-100 rounded-2xl">
-                    <p class="text-gray-500 text-lg font-medium">Bisher wurden noch keine Blog-Artikel veröffentlicht.</p>
+                <div class="col-span-1 md:col-span-3 text-center py-12 rounded-2xl liquid-glass">
+                    <p class="text-lg font-medium" style="color: #475569;">Bisher wurden noch keine Blog-Artikel veröffentlicht.</p>
                 </div>
                 {% endfor %}
             </div>
         </div>
 
-        <section class="my-16 bg-white border border-gray-100 p-8 md:p-12 rounded-3xl shadow-xs">
+        <section class="my-16 p-8 md:p-12 rounded-3xl liquid-glass">
             <div class="max-w-3xl mx-auto text-center mb-10">
-                <span class="bg-blue-100 text-blue-700 font-extrabold px-4 py-1.5 rounded-full text-xs uppercase tracking-wider">Neu auf M-Fleger</span>
-                <h2 class="text-3xl md:text-4xl font-black text-gray-950 tracking-tight mt-3">🌍 Das große Rechte-Hub</h2>
-                <p class="text-gray-500 text-base md:text-lg mt-2">Rechte gehen uns alle an – egal wie alt wir sind. Entdecke unser neues Portal, das Rechte für jeden verständlich erklärt.</p>
+                <span class="bg-blue-100/60 text-blue-800 font-extrabold px-4 py-1.5 rounded-full text-xs uppercase tracking-wider backdrop-blur-xs">Neu auf M-Fleger</span>
+                <h2 class="text-3xl md:text-4xl font-black tracking-tight mt-3" style="color: #0f172a;">🌍 Das große Rechte-Hub</h2>
+                <p class="text-base md:text-lg mt-2" style="color: #334155;">Rechte gehen uns alle an – egal wie alt wir sind. Entdecke unser neues Portal, das Rechte für jeden verständlich erklärt.</p>
             </div>
 
             <div class="grid grid-cols-1 md:grid-cols-3 gap-6">
-                <a href="kinderrechte.html" class="group border border-gray-100 p-6 rounded-2xl bg-gray-50 hover:bg-blue-600 hover:text-white transition-all duration-300 no-underline flex flex-col justify-between shadow-xs hover:shadow-md hover:scale-102">
+                <a href="kinderrechte.html" class="group p-6 rounded-2xl transition-all duration-300 no-underline flex flex-col justify-between hover:scale-103" style="background: rgba(255, 255, 255, 0.3); border: 1px solid rgba(255, 255, 255, 0.4);">
                     <div>
                         <span class="text-3xl block mb-3">🎒</span>
-                        <h3 class="text-xl font-black text-gray-950 group-hover:text-white transition-colors">Kinderrechte</h3>
-                        <p class="text-gray-500 group-hover:text-blue-100 text-sm mt-2 leading-relaxed">Schutz, Bildung und Freizeit. Auf Augenhöhe und einfach erklärt für Kinder und Eltern.</p>
+                        <h3 class="text-xl font-black transition-colors" style="color: #0f172a;">Kinderrechte</h3>
+                        <p class="text-sm mt-2 leading-relaxed" style="color: #334155;">Schutz, Bildung und Freizeit. Auf Augenhöhe und einfach erklärt für Kinder und Eltern.</p>
                     </div>
-                    <span class="text-blue-600 group-hover:text-white font-bold text-sm mt-4 inline-block">Mehr erfahren →</span>
+                    <span class="text-blue-600 font-bold text-sm mt-4 inline-block">Mehr erfahren →</span>
                 </a>
 
-                <a href="menschenrechte.html" class="group border border-gray-100 p-6 rounded-2xl bg-gray-50 hover:bg-blue-600 hover:text-white transition-all duration-300 no-underline flex flex-col justify-between shadow-xs hover:shadow-md hover:scale-102">
+                <a href="menschenrechte.html" class="group p-6 rounded-2xl transition-all duration-300 no-underline flex flex-col justify-between hover:scale-103" style="background: rgba(255, 255, 255, 0.3); border: 1px solid rgba(255, 255, 255, 0.4);">
                     <div>
                         <span class="text-3xl block mb-3">⚖️</span>
-                        <h3 class="text-xl font-black text-gray-950 group-hover:text-white transition-colors">Menschenrechte</h3>
-                        <p class="text-gray-500 group-hover:text-blue-100 text-sm mt-2 leading-relaxed">Meinungsfreiheit, Gleichberechtigung und Würde. Die Säulen unserer Gesellschaft.</p>
+                        <h3 class="text-xl font-black transition-colors" style="color: #0f172a;">Menschenrechte</h3>
+                        <p class="text-sm mt-2 leading-relaxed" style="color: #334155;">Meinungsfreiheit, Gleichberechtigung und Würde. Die Säulen unserer Gesellschaft.</p>
                     </div>
-                    <span class="text-blue-600 group-hover:text-white font-bold text-sm mt-4 inline-block">Mehr erfahren →</span>
+                    <span class="text-blue-600 font-bold text-sm mt-4 inline-block">Mehr erfahren →</span>
                 </a>
 
-                <a href="digitalrechte.html" class="group border border-gray-100 p-6 rounded-2xl bg-gray-50 hover:bg-blue-600 hover:text-white transition-all duration-300 no-underline flex flex-col justify-between shadow-xs hover:shadow-md hover:scale-102">
+                <a href="digitalrechte.html" class="group p-6 rounded-2xl transition-all duration-300 no-underline flex flex-col justify-between hover:scale-103" style="background: rgba(255, 255, 255, 0.3); border: 1px solid rgba(255, 255, 255, 0.4);">
                     <div>
                         <span class="text-3xl block mb-3">📱</span>
-                        <h3 class="text-xl font-black text-gray-950 group-hover:text-white transition-colors">Digitalrechte</h3>
-                        <p class="text-gray-500 group-hover:text-blue-100 text-sm mt-2 leading-relaxed">Deine Rechte im Netz. Von Datenschutz bis zum Schutz vor Cybermobbing.</p>
+                        <h3 class="text-xl font-black transition-colors" style="color: #0f172a;">Digitalrechte</h3>
+                        <p class="text-sm mt-2 leading-relaxed" style="color: #334155;">Deine Rechte im Netz. Von Datenschutz bis zum Schutz vor Cybermobbing.</p>
                     </div>
-                    <span class="text-blue-600 group-hover:text-white font-bold text-sm mt-4 inline-block">Mehr erfahren →</span>
+                    <span class="text-blue-600 font-bold text-sm mt-4 inline-block">Mehr erfahren →</span>
                 </a>
             </div>
             
-            <div class="text-center mt-8">
-                <a href="unsere-rechte.html" class="inline-block bg-blue-600 hover:bg-blue-700 text-white font-black px-6 py-3 rounded-xl shadow-md no-underline transition-all">
+            <div class="text-center mt-10">
+                <a href="unsere-rechte.html" class="inline-block bg-blue-600 hover:bg-blue-700 text-white font-black px-6 py-3 rounded-xl shadow-md no-underline transition-all transform hover:-translate-y-0.5 border-0">
                     Zum gesamten Rechte-Hub
                 </a>
             </div>
         </section>
 
-        <hr class="border-gray-200/60 my-12">
+        <div style="border-top: 1px solid rgba(255,255,255,0.4); margin: 3rem 0;"></div>
 
         <div class="grid grid-cols-1 sm:grid-cols-2 gap-6 mb-12">
-            <div class="bg-white border border-gray-100 p-6 rounded-2xl shadow-xs flex items-center gap-4 hover:shadow-md transition-all">
-                <div class="bg-blue-50 text-blue-600 text-3xl p-4 rounded-xl">
+            <div class="p-6 rounded-2xl flex items-center gap-4 hover:scale-102 transition-all liquid-glass">
+                <div class="text-3xl p-4 rounded-xl" style="background: rgba(37, 99, 235, 0.1); color: #2563eb;">
                     📰
                 </div>
                 <div>
-                    <span class="block text-2xl md:text-3xl font-black text-gray-950">{{ site.posts.size }}</span>
-                    <span class="text-sm font-bold text-gray-500 uppercase tracking-wider">Artikel veröffentlicht</span>
+                    <span class="block text-2xl md:text-3xl font-black" style="color: #0f172a;">{{ site.posts.size }}</span>
+                    <span class="text-sm font-bold uppercase tracking-wider" style="color: #64748b;">Artikel veröffentlicht</span>
                 </div>
             </div>
 
@@ -182,13 +186,13 @@ title: Startseite
                 {% assign words = post.content | strip_html | number_of_words %}
                 {% assign total_words = total_words | plus: words %}
             {% endfor %}
-            <div class="bg-white border border-gray-100 p-6 rounded-2xl shadow-xs flex items-center gap-4 hover:shadow-md transition-all">
-                <div class="bg-cyan-50 text-cyan-600 text-3xl p-4 rounded-xl">
+            <div class="p-6 rounded-2xl flex items-center gap-4 hover:scale-102 transition-all liquid-glass">
+                <div class="text-3xl p-4 rounded-xl" style="background: rgba(6, 182, 212, 0.1); color: #0891b2;">
                     ✍️
                 </div>
                 <div>
-                    <span class="block text-2xl md:text-3xl font-black text-gray-950">{{ total_words }}</span>
-                    <span class="text-sm font-bold text-gray-500 uppercase tracking-wider">Wörter geschrieben</span>
+                    <span class="block text-2xl md:text-3xl font-black" style="color: #0f172a;">{{ total_words }}</span>
+                    <span class="text-sm font-bold uppercase tracking-wider" style="color: #64748b;">Wörter geschrieben</span>
                 </div>
             </div>
         </div>
@@ -209,13 +213,19 @@ title: Startseite
             const msgEl = document.getElementById('banner-message');
 
             if(type === 'success') {
-                banner.className = "fixed top-24 right-4 z-50 transform transition-all duration-300 ease-out max-w-sm w-full bg-white border border-green-200 shadow-xl rounded-2xl p-4 flex items-start gap-3 text-green-800";
+                banner.style.backgroundColor = "rgba(240, 253, 244, 0.85)";
+                banner.style.borderColor = "rgba(74, 222, 128, 0.5)";
+                banner.style.color = "#166534";
                 icon.innerText = "❤️";
             } else if(type === 'info') {
-                banner.className = "fixed top-24 right-4 z-50 transform transition-all duration-300 ease-out max-w-sm w-full bg-white border border-blue-200 shadow-xl rounded-2xl p-4 flex items-start gap-3 text-blue-800";
+                banner.style.backgroundColor = "rgba(239, 246, 255, 0.85)";
+                banner.style.borderColor = "rgba(96, 165, 250, 0.5)";
+                banner.style.color = "#1e40af";
                 icon.innerText = "ℹ️";
             } else {
-                banner.className = "fixed top-24 right-4 z-50 transform transition-all duration-300 ease-out max-w-sm w-full bg-white border border-red-200 shadow-xl rounded-2xl p-4 flex items-start gap-3 text-red-800";
+                banner.style.backgroundColor = "rgba(254, 242, 242, 0.85)";
+                banner.style.borderColor = "rgba(248, 113, 113, 0.5)";
+                banner.style.color = "#991b1b";
                 icon.innerText = "❌";
             }
 
@@ -266,8 +276,9 @@ title: Startseite
                                 const btn = card.querySelector('.fav-btn');
                                 if (btn) {
                                     btn.innerHTML = "❤️ Favorisiert";
-                                    btn.classList.remove('bg-white', 'text-gray-900', 'border-gray-200');
-                                    btn.classList.add('bg-red-500', 'text-white', 'border-red-500');
+                                    btn.style.backgroundColor = "#ef4444";
+                                    btn.style.color = "#ffffff";
+                                    btn.style.borderColor = "#ef4444";
                                 }
                             }
                         }
@@ -287,8 +298,9 @@ title: Startseite
                                 const btn = card.querySelector('.like-btn');
                                 if (btn) {
                                     btn.innerHTML = `💖 <span class="like-counter">${btn.querySelector('.like-counter').innerText}</span> Likes`;
-                                    btn.classList.remove('bg-white', 'text-gray-900', 'border-gray-200');
-                                    btn.classList.add('bg-pink-500', 'text-white', 'border-pink-500');
+                                    btn.style.backgroundColor = "#ec4899";
+                                    btn.style.color = "#ffffff";
+                                    btn.style.borderColor = "#ec4899";
                                 }
                             }
                         }
@@ -308,16 +320,18 @@ title: Startseite
                     const { error } = await supabaseClient.from('favoriten').delete().eq('user_id', user.id).eq('blog_id', blogId);
                     if (!error) {
                         button.innerHTML = "⭐ Favorit";
-                        button.classList.remove('bg-red-500', 'text-white', 'border-red-500');
-                        button.classList.add('bg-white', 'text-gray-900', 'border-gray-200');
+                        button.style.backgroundColor = "rgba(255,255,255,0.4)";
+                        button.style.color = "#0f172a";
+                        button.style.borderColor = "rgba(0,0,0,0.08)";
                         zeigeBanner('info', 'Entfernt', 'Der Artikel wurde aus deinen Favoriten gelöscht.');
                     }
                 } else {
                     const { error } = await supabaseClient.from('favoriten').insert([{ user_id: user.id, blog_id: blogId }]);
                     if (!error) {
                         button.innerHTML = "❤️ Favorisiert";
-                        button.classList.remove('bg-white', 'text-gray-900', 'border-gray-200');
-                        button.classList.add('bg-red-500', 'text-white', 'border-red-500');
+                        button.style.backgroundColor = "#ef4444";
+                        button.style.color = "#ffffff";
+                        button.style.borderColor = "#ef4444";
                         zeigeBanner('success', 'Favorisiert!', 'Gespeichert in deinem Profil unter Favoriten.');
                     }
                 }
@@ -339,8 +353,9 @@ title: Startseite
                     if (!error) {
                         counterEl.innerText = aktuellerStand - 1;
                         button.innerHTML = `🤍 <span class="like-counter">${counterEl.innerText}</span> Likes`;
-                        button.classList.remove('bg-pink-500', 'text-white', 'border-pink-500');
-                        button.classList.add('bg-white', 'text-gray-900', 'border-gray-200');
+                        button.style.backgroundColor = "rgba(255,255,255,0.4)";
+                        button.style.color = "#0f172a";
+                        button.style.borderColor = "rgba(0,0,0,0.08)";
                         zeigeBanner('info', 'Like entfernt', 'Schade, dir gefällt dieser Beitrag nicht mehr.');
                     }
                 } else {
@@ -348,8 +363,9 @@ title: Startseite
                     if (!error) {
                         counterEl.innerText = aktuellerStand + 1;
                         button.innerHTML = `💖 <span class="like-counter">${counterEl.innerText}</span> Likes`;
-                        button.classList.remove('bg-white', 'text-gray-900', 'border-gray-200');
-                        button.classList.add('bg-pink-500', 'text-white', 'border-pink-500');
+                        button.style.backgroundColor = "#ec4899";
+                        button.style.color = "#ffffff";
+                        button.style.borderColor = "#ec4899";
                         zeigeBanner('success', 'Geliked!', 'Danke für dein Feedback zu diesem Beitrag!');
                     }
                 }
