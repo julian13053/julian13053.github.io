@@ -1,38 +1,53 @@
 /* ==========================================
-   🔮 ZENTRALES LIQUID GLASS SYSTEM
+   🔮 ZENTRALES LIQUID GLASS SYSTEM (LIGHT MODE)
    ========================================== */
 
-/* Der Hintergrundverlauf für die Website */
+/* Der Hintergrundverlauf für die Website – perfekt abgestimmt auf helles Glas */
 body {
     margin: 0;
     padding: 0;
-    background: linear-gradient(135deg, #f1f5f9 0%, #dbeafe 50%, #f8fafc 100%) !important;
+    background: linear-gradient(135deg, #f8fafc 0%, #e0e7ff 40%, #dbeafe 70%, #f1f5f9 100%) !important;
     background-attachment: fixed !important;
     min-height: 100vh;
 }
 
 /* Die universelle Liquid Glass Klasse */
 .liquid-glass {
-    background: rgba(255, 255, 255, 0.45) !important;
-    backdrop-filter: blur(20px) saturate(125%) !important;
-    -webkit-backdrop-filter: blur(20px) saturate(125%) !important;
-    border: 1px solid rgba(255, 255, 255, 0.6) !important;
-    box-shadow: 0 20px 50px rgba(31, 38, 135, 0.05) !important;
+    /* Höhere Transparenz, damit der Indigo/Blau-Verlauf des Bodys wunderschön durchschimmert */
+    background: rgba(255, 255, 255, 0.35) !important;
+    
+    /* Starker Blur kombiniert mit Sättigung für den "flüssigen" Milchglas-Effekt */
+    backdrop-filter: blur(25px) saturate(160%) !important;
+    -webkit-backdrop-filter: blur(25px) saturate(160%) !important;
+    
+    /* Eine extrem feine, halbtransparente weiße Kante simuliert die Lichtbrechung im Glas */
+    border: 1px solid rgba(255, 255, 255, 0.5) !important;
+    
+    /* Weicher, tiefer Schatten mit einem Hauch von Blau, um das Glas plastisch anzuheben */
+    box-shadow: 0 8px 32px 0 rgba(31, 38, 135, 0.06),
+                0 20px 50px 0 rgba(31, 38, 135, 0.04) !important;
+    
     border-radius: 24px;
-    transition: all 0.4s ease !important;
+    transition: all 0.4s cubic-bezier(0.25, 1, 0.5, 1) !important;
 }
 
-/* Schwebekonfiguration bei Mauszeigerkontakt */
+/* Schwebekonfiguration bei Mauszeigerkontakt (Haptisches Feedback) */
 .liquid-glass:hover {
-    transform: translateY(-4px) !important;
-    background: rgba(255, 255, 255, 0.55) !important;
-    border-color: rgba(37, 99, 235, 0.3) !important;
+    transform: translateY(-6px) !important;
+    /* Glas verdichtet sich beim Anheben leicht */
+    background: rgba(255, 255, 255, 0.45) !important;
+    /* Die Kante reflektiert das Licht intensiver */
+    border-color: rgba(255, 255, 255, 0.8) !important;
+    /* Der Schatten wird tiefer, da das Objekt "höher" schwebt */
+    box-shadow: 0 20px 40px 0 rgba(31, 38, 135, 0.12) !important;
 }
 
-/* Standardfarben für Texte im Glas (Dunkelblau für Titel) */
+/* Standardfarben für Texte im Glas (Edles Dunkelblau & Schiefergrau) */
 .liquid-glass h1, .liquid-glass h2, .liquid-glass h3, .liquid-glass h4 {
-    color: #1e3a8a !important;
+    color: #1e3a8a !important; /* Premium Navy */
+    font-weight: 800;
 }
+
 .liquid-glass p {
-    color: #334155 !important;
+    color: #475569 !important; /* Gut lesbares Schiefergrau */
 }
