@@ -19,10 +19,12 @@ title: Blog
     <meta property="og:image" content="https://julian13053.github.io/auge-logo.jpg">
     <meta property="og:url" content="https://julian13053.github.io/blog.html">
 
+    <link rel="stylesheet" href="/style.css">
+
     <script src="https://cdn.jsdelivr.net/npm/@tailwindcss/browser@4"></script>
     <script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script>
 </head>
-<body class="bg-gray-50 text-gray-900 font-sans antialiased flex flex-col min-h-screen relative">
+<body class="text-gray-900 font-sans antialiased flex flex-col min-h-screen relative">
 
     <div id="custom-banner" class="fixed top-24 right-4 z-50 transform translate-x-full opacity-0 transition-all duration-300 ease-out max-w-sm w-full bg-white border shadow-xl rounded-2xl p-4 flex items-start gap-3">
         <span id="banner-icon" class="text-xl"></span>
@@ -32,7 +34,7 @@ title: Blog
         </div>
     </div>
 
-    <nav class="bg-white border-b border-gray-100 sticky top-0 z-50 shadow-xs">
+    <nav class="sticky top-0 z-50 shadow-xs">
         {% include navigation.html %}
     </nav>
 
@@ -47,24 +49,25 @@ title: Blog
         
         <div class="max-w-md mx-auto mb-10 md:mb-16">
             <div class="relative">
-                <input type="text" id="blogSearch" onkeyup="filterBlogPosts()" placeholder="🔍 Artikel nach Titel durchsuchen..." class="w-full px-4 py-3 bg-white border border-gray-200 rounded-xl md:rounded-2xl shadow-xs focus:outline-none focus:border-blue-600 font-medium transition-all text-base">
+                <input type="text" id="blogSearch" onkeyup="filterBlogPosts()" placeholder="🔍 Artikel nach Titel durchsuchen..." class="w-full px-4 py-3 rounded-xl md:rounded-2xl shadow-xs focus:outline-none focus:border-blue-500 font-medium transition-all text-base" style="background: rgba(255, 255, 255, 0.6); border: 1px solid rgba(255, 255, 255, 0.5); backdrop-filter: blur(4px); -webkit-backdrop-filter: blur(4px);">
             </div>
         </div>
 
         <div class="grid grid-cols-1 md:grid-cols-3 gap-6 md:gap-8" id="blogGrid">
             {% for post in site.posts %}
             {% assign numeric_id = post.date | date: "%Y%m%d%H%M" %}
-            <div class="blog-card bg-white border border-gray-100 p-6 rounded-2xl shadow-xs flex flex-col justify-between hover:shadow-md hover:scale-105 transition-all duration-300" data-post-id="{{ numeric_id }}">
+            
+            <div class="blog-card p-6 flex flex-col justify-between hover:shadow-lg hover:scale-102 transition-all duration-300 liquid-glass" data-post-id="{{ numeric_id }}">
                 <div>
                     <div class="flex justify-between items-center mb-3">
-                        <span class="text-xs bg-blue-600 text-white px-2.5 py-1 rounded-md font-bold uppercase">{{ post.date | date: "%d.%m.%Y" }}</span>
+                        <span class="text-xs bg-blue-600 text-white px-2.5 py-1 rounded-md font-bold uppercase border-0">{{ post.date | date: "%d.%m.%Y" }}</span>
                         {% assign words = post.content | strip_html | number_of_words %}
                         {% assign read_time = words | divided_by: 180 | plus: 1 %}
-                        <span class="text-xs text-gray-400 font-semibold">📖 {{ read_time }} Min.</span>
+                        <span class="text-xs text-gray-500 font-semibold">📖 {{ read_time }} Min.</span>
                     </div>
                     
-                    <h2 class="post-title text-xl font-black text-gray-950 mt-1 mb-3 line-clamp-2">{{ post.title }}</h2>
-                    <p class="text-gray-600 text-sm mb-4 line-clamp-4">{{ post.excerpt | strip_html }}</p>
+                    <h2 class="post-title text-xl font-black mt-1 mb-3 line-clamp-2" style="color: #0f172a;">{{ post.title }}</h2>
+                    <p class="text-sm mb-4 line-clamp-4" style="color: #334155;">{{ post.excerpt | strip_html }}</p>
                 </div>
                 
                 <div class="flex flex-col gap-3 mt-2">
@@ -86,8 +89,8 @@ title: Blog
                 </div>
             </div>
             {% else %}
-            <div class="col-span-1 md:col-span-3 text-center py-12 bg-gray-100 rounded-2xl">
-                <p class="text-gray-500 text-lg font-medium">Bisher wurden noch keine Artikel veröffentlicht.</p>
+            <div class="col-span-1 md:col-span-3 text-center py-12 liquid-glass">
+                <p class="text-lg font-medium" style="color: #475569;">Bisher wurden noch keine Artikel veröffentlicht.</p>
             </div>
             {% endfor %}
         </div>
