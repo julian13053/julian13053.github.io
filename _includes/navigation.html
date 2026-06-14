@@ -1,43 +1,44 @@
-<nav class="bg-white border-b border-gray-100 w-full relative z-50">
+<nav class="w-full relative z-50" style="background: rgba(255, 255, 255, 0.2); border-b: 1px solid rgba(255, 255, 255, 0.4); backdrop-filter: blur(8px); -webkit-backdrop-filter: blur(8px);">
     <div class="w-full max-w-none px-4 md:px-6 flex items-center justify-between h-20">
         <a href="/index.html" class="flex items-center gap-2 shrink-0 no-underline text-current mr-4">
             <img src="/auge-logo.jpg" alt="M-Fleger Logo" class="w-12 h-10 md:w-16 md:h-14 rounded-xl object-contain">
             <span class="text-xl md:text-2xl font-black tracking-tight text-blue-600">M-Fleger</span>
         </a>
-        <div class="hidden lg:flex flex-wrap items-center gap-x-2 xl:gap-x-5 font-semibold text-gray-600 text-sm md:text-base flex-grow justify-start">
+        
+        <div class="hidden lg:flex flex-wrap items-center gap-x-2 xl:gap-x-5 font-semibold text-gray-700 text-sm md:text-base flex-grow justify-start">
             <a href="/index.html" class="hover:text-blue-600 pb-1 transition-all no-underline">Startseite</a>
             <a href="/ueber-mich.html" class="hover:text-blue-600 pb-1 transition-all no-underline">Über mich</a>
             <a href="/blog.html" class="hover:text-blue-600 pb-1 transition-all no-underline">Blog</a>
             
             <div class="relative group" id="rights-dropdown">
-                <button onclick="toggleDropdown(event, 'dropdown-menu')" class="hover:text-blue-600 pb-1 transition-all no-underline font-semibold text-gray-600 text-sm md:text-base flex items-center gap-1 bg-transparent border-0 cursor-pointer">
+                <button onclick="toggleDropdown(event, 'dropdown-menu')" class="hover:text-blue-600 pb-1 transition-all no-underline font-semibold text-gray-700 text-sm md:text-base flex items-center gap-1 bg-transparent border-0 cursor-pointer">
                     Unsere Rechte
                     <svg class="w-4 h-4 transform transition-transform duration-200 group-hover:rotate-180" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                         <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2.5" d="M19 9l-7 7-7-7"></path>
                     </svg>
                 </button>
                 <div class="absolute left-0 pt-2 w-56 opacity-0 pointer-events-none group-hover:opacity-100 group-hover:pointer-events-auto transition-all duration-200 z-50" id="dropdown-menu">
-                    <div class="bg-white border border-gray-100 rounded-2xl shadow-xl py-2">
-                        <a href="/unsere-rechte.html" class="flex items-center gap-2 px-4 py-2.5 text-sm text-gray-700 hover:bg-blue-50 hover:text-blue-600 font-bold transition-all no-underline">🌍 Übersicht (Hub)</a>
-                        <div class="border-b border-gray-100 my-1"></div>
-                        <a href="/kinderrechte.html" class="flex items-center gap-2 px-4 py-2.5 text-sm text-gray-600 hover:bg-blue-50 hover:text-blue-600 transition-all no-underline">🎒 Kinderrechte</a>
-                        <a href="/menschenrechte.html" class="flex items-center gap-2 px-4 py-2.5 text-sm text-gray-600 hover:bg-blue-50 hover:text-blue-600 transition-all no-underline">⚖️ Menschenrechte</a>
-                        <a href="/digitalrechte.html" class="flex items-center gap-2 px-4 py-2.5 text-sm text-gray-600 hover:bg-blue-50 hover:text-blue-600 transition-all no-underline">📱 Digitalrechte</a>
-                        <a href="/umweltrechte.html" class="flex items-center gap-2 px-4 py-2.5 text-sm text-gray-600 hover:bg-blue-50 hover:text-blue-600 transition-all no-underline">🌱 Umweltrechte</a>
+                    <div class="liquid-glass py-2" style="border-radius: 16px; box-shadow: 0 10px 30px rgba(31, 38, 135, 0.08) !important;">
+                        <a href="/unsere-rechte.html" class="flex items-center gap-2 px-4 py-2.5 text-sm hover:bg-blue-50/50 hover:text-blue-600 font-bold transition-all no-underline">🌍 Übersicht (Hub)</a>
+                        <div class="border-b border-gray-200/40 my-1"></div>
+                        <a href="/kinderrechte.html" class="flex items-center gap-2 px-4 py-2.5 text-sm text-gray-700 hover:bg-blue-50/50 hover:text-blue-600 transition-all no-underline">🎒 Kinderrechte</a>
+                        <a href="/menschenrechte.html" class="flex items-center gap-2 px-4 py-2.5 text-sm text-gray-700 hover:bg-blue-50/50 hover:text-blue-600 transition-all no-underline">⚖️ Menschenrechte</a>
+                        <a href="/digitalrechte.html" class="flex items-center gap-2 px-4 py-2.5 text-sm text-gray-700 hover:bg-blue-50/50 hover:text-blue-600 transition-all no-underline">📱 Digitalrechte</a>
+                        <a href="/umweltrechte.html" class="flex items-center gap-2 px-4 py-2.5 text-sm text-gray-700 hover:bg-blue-50/50 hover:text-blue-600 transition-all no-underline">🌱 Umweltrechte</a>
                     </div>
                 </div>
             </div>
 
             <div class="relative group" id="schule-dropdown">
-                <button onclick="toggleDropdown(event, 'schule-menu')" class="hover:text-blue-600 pb-1 transition-all no-underline font-semibold text-gray-600 text-sm md:text-base flex items-center gap-1 bg-transparent border-0 cursor-pointer">
+                <button onclick="toggleDropdown(event, 'schule-menu')" class="hover:text-blue-600 pb-1 transition-all no-underline font-semibold text-gray-700 text-sm md:text-base flex items-center gap-1 bg-transparent border-0 cursor-pointer">
                     Schule
                     <svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                         <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2.5" d="M19 9l-7 7-7-7"></path>
                     </svg>
                 </button>
                 <div class="absolute left-0 pt-2 w-56 opacity-0 pointer-events-none group-hover:opacity-100 group-hover:pointer-events-auto transition-all duration-200 z-50" id="schule-menu">
-                    <div class="bg-white border border-gray-100 rounded-2xl shadow-xl py-2">
-                        <a href="/prozentrechner.html" class="flex items-center gap-2 px-4 py-2.5 text-sm text-blue-600 bg-blue-50 hover:text-blue-600 transition-all no-underline font-bold">🧮 Prozentrechner</a>
+                    <div class="liquid-glass py-2" style="border-radius: 16px; box-shadow: 0 10px 30px rgba(31, 38, 135, 0.08) !important;">
+                        <a href="/prozentrechner.html" class="flex items-center gap-2 px-4 py-2.5 text-sm text-blue-600 hover:text-blue-700 transition-all no-underline font-bold">🧮 Prozentrechner</a>
                     </div>
                 </div>
             </div>
@@ -45,8 +46,9 @@
             <a href="/spenden.html" class="hover:text-blue-600 pb-1 transition-all no-underline">Spenden</a>
             <a href="/kontakt.html" class="hover:text-blue-600 pb-1 transition-all no-underline">Kontakt</a>
         </div>
-        <div class="flex items-center gap-2 md:gap-3 shrink-0 ml-auto md:border-l md:border-gray-100 md:pl-4">
-            <a href="/login.html" class="bg-blue-600 text-white font-bold px-3 py-2 rounded-xl text-xs md:text-sm shadow-xs hover:bg-blue-700 transition-all no-underline">🔑 Login</a>
+        
+        <div class="flex items-center gap-2 md:gap-3 shrink-0 ml-auto md:border-l md:border-white/40 md:pl-4">
+            <a href="/login.html" class="bg-blue-600 text-white font-bold px-4 py-2 rounded-xl text-xs md:text-sm shadow-md hover:bg-blue-700 transition-all no-underline">🔑 Login</a>
         </div>
     </div>
 </nav>
