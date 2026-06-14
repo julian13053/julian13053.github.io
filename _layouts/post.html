@@ -7,6 +7,9 @@ layout: null
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>{{ page.title }} - M-Fleger</title>
+    
+    <link rel="stylesheet" href="/style.css">
+    
     <script src="https://cdn.jsdelivr.net/npm/@tailwindcss/browser@4"></script>
     <script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script>
     
@@ -17,6 +20,13 @@ layout: null
         }
         .print-header { display: none; }
         @media print {
+            nav, footer, .no-print, #cookie-banner, .fixed, .liquid-glass { 
+                background: white !important; 
+                box-shadow: none !important; 
+                border: none !important;
+                backdrop-filter: none !important;
+                -webkit-backdrop-filter: none !important;
+            }
             nav, footer, .no-print, #cookie-banner, .fixed { display: none !important; }
             .print-header { display: flex !important; justify-content: space-between; align-items: center; width: 100%; padding-bottom: 8px; border-bottom: 1px solid #d1d5db; margin-bottom: 25px; font-family: sans-serif; }
             .print-header-left { font-size: 14px; font-weight: 700; color: #1d4ed8; }
@@ -33,9 +43,8 @@ layout: null
         }
     </style>
 </head>
-<body class="bg-gray-50 text-gray-900 font-sans antialiased flex flex-col min-h-screen relative">
+<body class="text-gray-900 font-sans antialiased flex flex-col min-h-screen relative">
 
-    <!-- DYNAMISCHES BANNER (TOAST) -->
     <div id="custom-banner" class="fixed top-24 right-4 z-50 transform translate-x-full opacity-0 transition-all duration-300 ease-out max-w-sm w-full bg-white border shadow-xl rounded-2xl p-4 flex items-start gap-3">
         <span id="banner-icon" class="text-xl"></span>
         <div class="flex-grow">
@@ -80,7 +89,7 @@ layout: null
 
     {% assign numeric_id = page.date | date: "%Y%m%d%H%M" %}
     <main class="max-w-4xl mx-auto px-4 py-12 flex-grow w-full -mt-10">
-        <article class="bg-white border border-gray-100 p-8 md:p-12 rounded-3xl shadow-sm" data-post-id="{{ numeric_id }}">
+        <article class="p-8 md:p-12 liquid-glass" data-post-id="{{ numeric_id }}">
             <div class="blog-text prose max-w-none leading-relaxed space-y-6 text-base md:text-lg">
                 {{ content }}
             </div>
@@ -89,7 +98,7 @@ layout: null
                 Text von Julian Fleger
             </div>
             
-            <div class="mt-6 pt-6 border-t border-gray-100 flex flex-wrap gap-3 justify-start no-print">
+            <div class="mt-6 pt-6 border-t border-gray-200/30 flex flex-wrap gap-3 justify-start no-print">
                 <button onclick="window.print()" class="bg-gray-100 hover:bg-gray-200 text-gray-700 font-bold text-sm px-5 py-2.5 rounded-xl transition-all cursor-pointer border border-gray-200 shadow-xs active:scale-95">
                     Artikel ausdrucken / als PDF speichern
                 </button>
@@ -99,7 +108,7 @@ layout: null
                 </button>
             </div>
             
-            <div class="mt-8 pt-6 border-t border-gray-100 flex justify-center no-print">
+            <div class="mt-8 pt-6 border-t border-gray-200/30 flex justify-center no-print">
                 <a href="/blog.html" class="inline-flex items-center gap-2 text-sm font-bold text-blue-600 hover:text-blue-800 transition-colors no-underline">
                     &larr; Zurück zur Blog-Übersicht
                 </a>
