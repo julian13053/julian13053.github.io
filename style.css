@@ -1,53 +1,201 @@
 /* ==========================================
-   🔮 ZENTRALES LIQUID GLASS SYSTEM (LIGHT MODE)
+   🌊 ULTRA LIQUID GLASS SYSTEM 2026
    ========================================== */
 
-/* Der Hintergrundverlauf für die Website – perfekt abgestimmt auf helles Glas */
+:root {
+    --glass-bg: rgba(255, 255, 255, 0.22);
+    --glass-border: rgba(255, 255, 255, 0.45);
+    --glass-shadow: rgba(15, 23, 42, 0.08);
+    --text-primary: #0f172a;
+    --text-secondary: #475569;
+}
+
+/* Hintergrund */
 body {
     margin: 0;
     padding: 0;
-    background: linear-gradient(135deg, #f8fafc 0%, #e0e7ff 40%, #dbeafe 70%, #f1f5f9 100%) !important;
-    background-attachment: fixed !important;
     min-height: 100vh;
+
+    background:
+        radial-gradient(circle at top left,
+            rgba(99,102,241,0.18),
+            transparent 35%),
+        radial-gradient(circle at top right,
+            rgba(59,130,246,0.15),
+            transparent 40%),
+        radial-gradient(circle at bottom,
+            rgba(14,165,233,0.12),
+            transparent 45%),
+        linear-gradient(
+            135deg,
+            #f8fafc 0%,
+            #eef2ff 30%,
+            #dbeafe 65%,
+            #f8fafc 100%
+        );
+
+    background-attachment: fixed;
+    font-family:
+        Inter,
+        "SF Pro Display",
+        system-ui,
+        sans-serif;
 }
 
-/* Die universelle Liquid Glass Klasse */
+/* Hauptglas */
 .liquid-glass {
-    /* Höhere Transparenz, damit der Indigo/Blau-Verlauf des Bodys wunderschön durchschimmert */
-    background: rgba(255, 255, 255, 0.35) !important;
-    
-    /* Starker Blur kombiniert mit Sättigung für den "flüssigen" Milchglas-Effekt */
-    backdrop-filter: blur(25px) saturate(160%) !important;
-    -webkit-backdrop-filter: blur(25px) saturate(160%) !important;
-    
-    /* Eine extrem feine, halbtransparente weiße Kante simuliert die Lichtbrechung im Glas */
-    border: 1px solid rgba(255, 255, 255, 0.5) !important;
-    
-    /* Weicher, tiefer Schatten mit einem Hauch von Blau, um das Glas plastisch anzuheben */
-    box-shadow: 0 8px 32px 0 rgba(31, 38, 135, 0.06),
-                0 20px 50px 0 rgba(31, 38, 135, 0.04) !important;
-    
-    border-radius: 24px;
-    transition: all 0.4s cubic-bezier(0.25, 1, 0.5, 1) !important;
+    position: relative;
+    overflow: hidden;
+
+    background: var(--glass-bg);
+
+    backdrop-filter:
+        blur(40px)
+        saturate(220%)
+        brightness(1.08);
+
+    -webkit-backdrop-filter:
+        blur(40px)
+        saturate(220%)
+        brightness(1.08);
+
+    border: 1px solid var(--glass-border);
+
+    border-radius: 32px;
+
+    box-shadow:
+        0 8px 32px rgba(255,255,255,0.35) inset,
+        0 1px 0 rgba(255,255,255,0.9) inset,
+        0 20px 60px var(--glass-shadow),
+        0 40px 120px rgba(59,130,246,0.06);
+
+    transition:
+        transform .4s ease,
+        box-shadow .4s ease,
+        background .4s ease;
 }
 
-/* Schwebekonfiguration bei Mauszeigerkontakt (Haptisches Feedback) */
+/* Oberer Lichtreflex */
+.liquid-glass::before {
+    content: "";
+
+    position: absolute;
+    top: -30%;
+    left: -10%;
+
+    width: 120%;
+    height: 70%;
+
+    background:
+        linear-gradient(
+            135deg,
+            rgba(255,255,255,0.9),
+            rgba(255,255,255,0.25),
+            transparent
+        );
+
+    pointer-events: none;
+}
+
+/* Zusätzlicher Lichtpunkt */
+.liquid-glass::after {
+    content: "";
+
+    position: absolute;
+    top: 15px;
+    right: 20px;
+
+    width: 180px;
+    height: 180px;
+
+    border-radius: 50%;
+
+    background:
+        radial-gradient(
+            circle,
+            rgba(255,255,255,0.35),
+            transparent 70%
+        );
+
+    pointer-events: none;
+}
+
+/* Hover */
 .liquid-glass:hover {
-    transform: translateY(-6px) !important;
-    /* Glas verdichtet sich beim Anheben leicht */
-    background: rgba(255, 255, 255, 0.45) !important;
-    /* Die Kante reflektiert das Licht intensiver */
-    border-color: rgba(255, 255, 255, 0.8) !important;
-    /* Der Schatten wird tiefer, da das Objekt "höher" schwebt */
-    box-shadow: 0 20px 40px 0 rgba(31, 38, 135, 0.12) !important;
+    transform:
+        translateY(-8px)
+        scale(1.01);
+
+    background:
+        rgba(255,255,255,0.28);
+
+    border-color:
+        rgba(255,255,255,0.7);
+
+    box-shadow:
+        0 8px 40px rgba(255,255,255,0.5) inset,
+        0 30px 80px rgba(59,130,246,0.12),
+        0 60px 160px rgba(59,130,246,0.08);
 }
 
-/* Standardfarben für Texte im Glas (Edles Dunkelblau & Schiefergrau) */
-.liquid-glass h1, .liquid-glass h2, .liquid-glass h3, .liquid-glass h4 {
-    color: #1e3a8a !important; /* Premium Navy */
+/* Texte */
+.liquid-glass h1,
+.liquid-glass h2,
+.liquid-glass h3,
+.liquid-glass h4,
+.liquid-glass h5,
+.liquid-glass h6 {
+    color: var(--text-primary);
     font-weight: 800;
+    letter-spacing: -0.02em;
 }
 
-.liquid-glass p {
-    color: #475569 !important; /* Gut lesbares Schiefergrau */
+.liquid-glass p,
+.liquid-glass span,
+.liquid-glass li {
+    color: var(--text-secondary);
+    line-height: 1.7;
+}
+
+/* Buttons */
+.liquid-glass button,
+.liquid-glass .btn {
+    background:
+        rgba(255,255,255,0.25);
+
+    border:
+        1px solid rgba(255,255,255,0.5);
+
+    backdrop-filter: blur(20px);
+
+    border-radius: 16px;
+
+    padding: 12px 20px;
+
+    color: var(--text-primary);
+
+    cursor: pointer;
+
+    transition: all .3s ease;
+}
+
+.liquid-glass button:hover,
+.liquid-glass .btn:hover {
+    background:
+        rgba(255,255,255,0.4);
+
+    transform: translateY(-2px);
+}
+
+/* Mobile Optimierung */
+@media (max-width: 768px) {
+
+    .liquid-glass {
+        border-radius: 24px;
+
+        backdrop-filter:
+            blur(30px)
+            saturate(180%);
+    }
+
 }
