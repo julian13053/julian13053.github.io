@@ -4,7 +4,7 @@ title: "Superschneller Prozentrechner"
 ---
 
 <style>
-    .calc-seite-wrapper {
+    .prozent-wrapper {
         width: 100%;
         min-height: 70vh;
         display: flex;
@@ -15,7 +15,7 @@ title: "Superschneller Prozentrechner"
         box-sizing: border-box;
     }
     
-    .calc-box-karte {
+    .prozent-karte {
         background: #ffffff;
         max-width: 550px;
         width: 100%;
@@ -26,12 +26,12 @@ title: "Superschneller Prozentrechner"
         box-sizing: border-box;
     }
     
-    .calc-titel-zone {
+    .prozent-titel {
         text-align: center;
         margin-bottom: 25px;
     }
     
-    .calc-titel-zone h1 {
+    .prozent-titel h1 {
         font-size: 26px !important;
         color: #2563eb !important;
         margin: 0 0 6px 0 !important;
@@ -39,13 +39,13 @@ title: "Superschneller Prozentrechner"
         background: transparent !important;
     }
     
-    .calc-titel-zone p {
+    .prozent-titel p {
         color: #64748b !important;
         font-size: 14px !important;
         margin: 0 !important;
     }
     
-    .calc-abschnitt {
+    .prozent-abschnitt {
         background: #f8fafc;
         padding: 20px;
         border-radius: 18px;
@@ -54,7 +54,7 @@ title: "Superschneller Prozentrechner"
         box-sizing: border-box;
     }
     
-    .calc-abschnitt h2 {
+    .prozent-abschnitt h2 {
         font-size: 15px !important;
         color: #0f172a !important;
         margin-top: 0 !important;
@@ -64,7 +64,7 @@ title: "Superschneller Prozentrechner"
         font-weight: 700 !important;
     }
     
-    .input-inline-reihe {
+    .input-row {
         display: flex;
         flex-wrap: wrap;
         gap: 8px;
@@ -75,7 +75,7 @@ title: "Superschneller Prozentrechner"
         margin-bottom: 12px;
     }
     
-    .calc-eingabe {
+    .prozent-input {
         padding: 10px 12px;
         border: 2px solid #e2e8f0;
         background: #ffffff;
@@ -88,14 +88,11 @@ title: "Superschneller Prozentrechner"
         box-sizing: border-box;
     }
     
-    .calc-eingabe:focus {
+    .prozent-input:focus {
         border-color: #2563eb;
     }
     
-    .w-p { width: 100px; flex-grow: 1; }
-    .w-pct { width: 75px; flex-grow: 1; }
-    
-    .rechner-ergebnis-box {
+    .ergebnis-box {
         background: #eff6ff;
         border-left: 4px solid #2563eb;
         padding: 12px 15px;
@@ -106,69 +103,65 @@ title: "Superschneller Prozentrechner"
         line-height: 1.4;
     }
     
-    .dreier-raster {
+    .grid-container {
         display: grid;
-        grid-template-columns: repeat(3, 1fr);
-        gap: 10px;
+        grid-template-columns: repeat(auto-fit, minmax(130px, 1fr));
+        gap: 15px;
     }
     
-    @media (max-width: 440px) {
-        .dreier-raster { grid-template-columns: 1fr; }
-    }
-    
-    .raster-box {
+    .grid-item {
         display: flex;
         flex-direction: column;
-        gap: 4px;
+        gap: 5px;
     }
     
-    .raster-box label {
-        font-size: 11px;
-        font-weight: 800;
+    .grid-item label {
+        font-size: 12px;
+        font-weight: 700;
         color: #64748b;
         text-transform: uppercase;
     }
 </style>
 
-<div class="calc-seite-wrapper">
-    <div class="calc-box-karte">
+<div class="prozent-wrapper">
+    <div class="prozent-karte">
         
-        <div class="calc-titel-zone">
+        <div class="prozent-titel">
             <h1>🧮 Blitz-Prozentrechner</h1>
             <p>Einfach Werte eingeben – das Ergebnis wechselt sofort!</p>
         </div>
 
-        <div class="calc-abschnitt">
+        <div class="prozent-abschnitt">
             <h2>🛍️ 1. Rabatt & Anteile ausrechnen</h2>
-            <div class="input-inline-reihe">
+            <div class="input-row">
                 <span>Einkauf für</span>
-                <input type="number" id="rabattPreis" class="calc-eingabe w-p" value="30" oninput="rechneRabatt()">
+                <input type="number" id="rabattPreis" class="prozent-input" value="30" oninput="rechneRabatt()">
                 <span>€ mit</span>
-                <input type="number" id="rabattProzent" class="calc-eingabe w-pct" value="10" oninput="rechneRabatt()">
+                <input type="number" id="rabattProzent" class="prozent-input" value="10" oninput="rechneRabatt()">
                 <span>% Rabatt.</span>
             </div>
-            <div id="rabattErgebnis" class="rechner-ergebnis-box"></div>
+            <div id="rabattErgebnis" class="ergebnis-box"></div>
         </div>
 
-        <div class="calc-abschnitt">
+        <div class="prozent-abschnitt">
             <h2>🔄 2. Universal-Umrechner (In alle Richtungen)</h2>
             <p style="font-size: 12px; color: #64748b; margin-top: -10px; margin-bottom: 12px;">Ändere ein Feld – die anderen rechnen sich automatisch um!</p>
             
-            <div class="dreier-raster">
-                <div class="raster-box">
+            <div class="grid-container">
+                <div class="grid-item">
                     <label>Prozent (%)</label>
-                    <input type="number" id="convProzent" class="calc-eingabe" value="30" oninput="vonProzent()">
+                    <input type="number" id="convProzent" class="prozent-input" value="30" oninput="vonProzent()">
                 </div>
-                <div class="raster-box">
+                <div class="grid-item">
                     <label>Dezimalzahl</label>
-                    <input type="number" id="convDezimal" class="calc-eingabe" value="0.3" step="0.01" oninput="vonDezimal()">
+                    <input type="number" id="convDezimal" class="prozent-input" value="0.3" step="0.01" oninput="vonDezimal()">
                 </div>
-                <div class="raster-box">
+                <div class="grid-item">
                     <label>Bruch</label>
-                    <input type="text" id="convBruch" class="calc-eingabe" value="3/10" oninput="vonBruch()">
+                    <input type="text" id="convBruch" class="prozent-input" value="3/10" oninput="vonBruch()">
                 </div>
             </div>
-            <div id="umrechnungInfo" class="rechner-ergebnis-box" style="margin-top: 15px; background: #f0fdf4; border-left-color: #22c55e; color: #166534;"></div>
+            <div id="umrechnungInfo" class="ergebnis-box" style="margin-top: 15px; background: #f0fdf4; border-left-color: #22c55e; color: #166534;"></div>
         </div>
 
     </div>
