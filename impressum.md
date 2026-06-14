@@ -8,47 +8,48 @@ permalink: /impressum.html
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Impressum - M-Fleger</title>
+    
+    <link rel="stylesheet" href="/style.css">
+    
     <script src="https://cdn.jsdelivr.net/npm/@tailwindcss/browser@4"></script>
 </head>
-<body class="bg-gray-50 text-gray-900 font-sans antialiased flex flex-col min-h-screen">
+<body class="font-sans antialiased flex flex-col min-h-screen relative">
 
-    <!-- NAVIGATION -->
-    <nav class="bg-white border-b border-gray-100 sticky top-0 z-50 shadow-xs">
+    <nav class="sticky top-0 z-50 shadow-xs">
         {% include navigation.html %}
     </nav>
 
-    <!-- INHALT -->
     <main class="max-w-3xl mx-auto px-4 py-12 flex-grow w-full">
-        <div class="bg-white border border-gray-100 p-8 md:p-12 rounded-3xl shadow-xs">
-            <h1 class="text-3xl md:text-4xl font-black tracking-tight text-gray-950 mb-6">Impressum</h1>
+        
+        <div class="p-8 md:p-12 rounded-3xl liquid-glass">
+            <h1 class="text-3xl md:text-4xl font-black tracking-tight mb-6" style="color: #0f172a;">Impressum</h1>
             
-            <h2 class="text-xl font-bold text-gray-950 mt-6 mb-2">Angaben gemäß § 5 TMG</h2>
-            <p class="text-gray-600 leading-relaxed">
+            <h2 class="text-xl font-bold mt-6 mb-2" style="color: #0f172a;">Angaben gemäß § 5 TMG</h2>
+            <p class="leading-relaxed" style="color: #334155;">
                 Julian Fleger<br>
                 Rüdickenstr. 30<br>
                 13053 Berlin
             </p>
 
-            <h2 class="text-xl font-bold text-gray-950 mt-6 mb-2">Kontakt</h2>
-            <p class="text-gray-600 leading-relaxed">
+            <h2 class="text-xl font-bold mt-6 mb-2" style="color: #0f172a;">Kontakt</h2>
+            <p class="leading-relaxed" style="color: #334155;">
                 E-Mail: julian(at)m-fleger.de
             </p>
 
-            <h2 class="text-xl font-bold text-gray-950 mt-6 mb-2">Redaktionell verantwortlich</h2>
-            <p class="text-gray-600 leading-relaxed">
+            <h2 class="text-xl font-bold mt-6 mb-2" style="color: #0f172a;">Redaktionell verantwortlich</h2>
+            <p class="leading-relaxed" style="color: #334155;">
                 Julian Fleger<br>
                 Rüdickenstr. 30<br>
                 13053 Berlin
             </p>
 
-            <h2 class="text-xl font-bold text-gray-950 mt-6 mb-2">Verbraucherstreitbeilegung/Universalschlichtungsstelle</h2>
-            <p class="text-gray-600 text-sm leading-relaxed mt-2">
+            <h2 class="text-xl font-bold mt-6 mb-2" style="color: #0f172a;">Verbraucherstreitbeilegung/Universalschlichtungsstelle</h2>
+            <p class="text-sm leading-relaxed mt-2" style="color: #475569;">
                 Wir sind nicht bereit oder verpflichtet, an Streitbeilegungsverfahren vor einer Verbraucherschlichtungsstelle teilzunehmen.
             </p>
         </div>
     </main>
 
-    <!-- FOOTER -->
     {% include footer.html %}
 
     {% include cookie-banner.html %}
