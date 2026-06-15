@@ -1,58 +1,30 @@
-<div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-    <div class="flex items-center justify-between h-16">
+<div class="hidden md:hidden px-4 pt-2 pb-4 space-y-2" id="mobile-menu">
+    <div class="liquid-glass p-4 space-y-2 shadow-lg">
         
-        <div class="flex-shrink-0">
-            <a href="/" class="text-xl font-black tracking-tight text-gray-900 no-underline">
-                M-Fleger
+        <a href="/" class="block px-3 py-2 rounded-xl text-base font-semibold text-gray-950 hover:bg-white/40 no-underline transition-all">Startseite</a>
+        <a href="/unsere-rechte.html" class="block px-3 py-2 rounded-xl text-base font-semibold text-gray-950 hover:bg-white/40 no-underline transition-all">Rechte-Hub</a>
+        <a href="/spenden.html" class="block px-3 py-2 rounded-xl text-base font-semibold text-gray-950 hover:bg-white/40 no-underline transition-all">Spenden</a>
+        <a href="/blog.html" class="block px-3 py-2 rounded-xl text-base font-semibold text-gray-950 hover:bg-white/40 no-underline transition-all">Blog</a>
+        
+        <div class="border-t border-white/20 my-2"></div>
+        
+        <a href="/kontakt.html" class="block px-3 py-2 rounded-xl text-sm font-medium text-gray-800 hover:bg-white/40 no-underline transition-all flex items-center gap-2">
+            ✉️ Kontakt
+        </a>
+        <a href="/impressum.html" class="block px-3 py-2 rounded-xl text-sm font-medium text-gray-800 hover:bg-white/40 no-underline transition-all flex items-center gap-2">
+            ⚖️ Impressum
+        </a>
+        <a href="/datenschutz.html" class="block px-3 py-2 rounded-xl text-sm font-medium text-gray-800 hover:bg-white/40 no-underline transition-all flex items-center gap-2">
+            🔒 Datenschutz
+        </a>
+
+        <div class="border-t border-white/20 my-2"></div>
+
+        <div class="pt-1">
+            <a href="/login.html" class="block w-full text-center px-4 py-2.5 rounded-xl text-base font-bold text-white bg-blue-600 hover:bg-blue-700 no-underline shadow-md shadow-blue-600/10 transition-all active:scale-95">
+                👤 Einloggen
             </a>
         </div>
 
-        <div class="hidden md:flex items-center space-x-8">
-            <a href="/" class="text-sm font-medium text-gray-700 hover:text-blue-600 no-underline transition-colors">Startseite</a>
-            <a href="/unsere-rechte.html" class="text-sm font-medium text-gray-700 hover:text-blue-600 no-underline transition-colors">Rechte-Hub</a>
-            <a href="/spenden.html" class="text-sm font-medium text-gray-700 hover:text-blue-600 no-underline transition-colors">Spenden</a>
-            <a href="/blog.html" class="text-sm font-medium text-gray-700 hover:text-blue-600 no-underline transition-colors">Blog</a>
-        </div>
-
-        <div class="flex md:hidden">
-            <button id="mobile-menu-button" type="button" class="inline-flex items-center justify-center p-2 rounded-xl text-gray-700 hover:text-blue-600 hover:bg-gray-100/50 focus:outline-none transition-all" aria-controls="mobile-menu" aria-expanded="false">
-                <span class="sr-only">Hauptmenü öffnen</span>
-                <svg class="block h-6 w-6" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke="currentColor" aria-hidden="true">
-                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 6h16M4 12h16M4 18h16" />
-                </svg>
-            </button>
-        </div>
-
     </div>
 </div>
-
-<div class="hidden md:hidden px-4 pt-2 pb-4 space-y-2" id="mobile-menu">
-    <div class="liquid-glass p-4 space-y-3 shadow-lg">
-        <a href="/" class="block px-3 py-2.5 rounded-xl text-base font-semibold text-gray-900 hover:bg-white/40 no-underline transition-all">Startseite</a>
-        <a href="/unsere-rechte.html" class="block px-3 py-2.5 rounded-xl text-base font-semibold text-gray-900 hover:bg-white/40 no-underline transition-all">Rechte-Hub</a>
-        <a href="/spenden.html" class="block px-3 py-2.5 rounded-xl text-base font-semibold text-gray-900 hover:bg-white/40 no-underline transition-all">Spenden</a>
-        <a href="/blog.html" class="block px-3 py-2.5 rounded-xl text-base font-semibold text-gray-900 hover:bg-white/40 no-underline transition-all">Blog</a>
-    </div>
-</div>
-
-<script>
-    document.addEventListener('DOMContentLoaded', function () {
-        const button = document.getElementById('mobile-menu-button');
-        const menu = document.getElementById('mobile-menu');
-
-        if (button && menu) {
-            button.addEventListener('click', function () {
-                const expanded = button.getAttribute('aria-expanded') === 'true' || false;
-                button.setAttribute('aria-expanded', !expanded);
-                
-                // Menü ein- oder ausblenden
-                menu.classList.toggle('hidden');
-                
-                // Sanfter Pop-Effekt für das Glas-Menü
-                if(!expanded) {
-                    menu.classList.add('animate-fade-in');
-                }
-            });
-        }
-    });
-</script>
