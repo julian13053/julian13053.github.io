@@ -1,72 +1,58 @@
-<nav class="w-full relative z-50" style="background: rgba(255, 255, 255, 0.2); border-b: 1px solid rgba(255, 255, 255, 0.4); backdrop-filter: blur(8px); -webkit-backdrop-filter: blur(8px);">
-    <div class="w-full max-w-none px-4 md:px-6 flex items-center justify-between h-20">
-        <a href="/index.html" class="flex items-center gap-2 shrink-0 no-underline text-current mr-4">
-            <img src="/auge-logo.jpg" alt="M-Fleger Logo" class="w-12 h-10 md:w-16 md:h-14 rounded-xl object-contain">
-            <span class="text-xl md:text-2xl font-black tracking-tight text-blue-600">M-Fleger</span>
-        </a>
+<div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+    <div class="flex items-center justify-between h-16">
         
-        <div class="hidden lg:flex flex-wrap items-center gap-x-2 xl:gap-x-5 font-semibold text-gray-700 text-sm md:text-base flex-grow justify-start">
-            <a href="/index.html" class="hover:text-blue-600 pb-1 transition-all no-underline">Startseite</a>
-            <a href="/ueber-mich.html" class="hover:text-blue-600 pb-1 transition-all no-underline">Über mich</a>
-            <a href="/blog.html" class="hover:text-blue-600 pb-1 transition-all no-underline">Blog</a>
-            
-            <div class="relative group" id="rights-dropdown">
-                <button onclick="toggleDropdown(event, 'dropdown-menu')" class="hover:text-blue-600 pb-1 transition-all no-underline font-semibold text-gray-700 text-sm md:text-base flex items-center gap-1 bg-transparent border-0 cursor-pointer">
-                    Unsere Rechte
-                    <svg class="w-4 h-4 transform transition-transform duration-200 group-hover:rotate-180" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2.5" d="M19 9l-7 7-7-7"></path>
-                    </svg>
-                </button>
-                <div class="absolute left-0 pt-2 w-56 opacity-0 pointer-events-none group-hover:opacity-100 group-hover:pointer-events-auto transition-all duration-200 z-50" id="dropdown-menu">
-                    <div class="liquid-glass py-2" style="border-radius: 16px; box-shadow: 0 10px 30px rgba(31, 38, 135, 0.08) !important;">
-                        <a href="/unsere-rechte.html" class="flex items-center gap-2 px-4 py-2.5 text-sm hover:bg-blue-50/50 hover:text-blue-600 font-bold transition-all no-underline">🌍 Übersicht (Hub)</a>
-                        <div class="border-b border-gray-200/40 my-1"></div>
-                        <a href="/kinderrechte.html" class="flex items-center gap-2 px-4 py-2.5 text-sm text-gray-700 hover:bg-blue-50/50 hover:text-blue-600 transition-all no-underline">🎒 Kinderrechte</a>
-                        <a href="/menschenrechte.html" class="flex items-center gap-2 px-4 py-2.5 text-sm text-gray-700 hover:bg-blue-50/50 hover:text-blue-600 transition-all no-underline">⚖️ Menschenrechte</a>
-                        <a href="/digitalrechte.html" class="flex items-center gap-2 px-4 py-2.5 text-sm text-gray-700 hover:bg-blue-50/50 hover:text-blue-600 transition-all no-underline">📱 Digitalrechte</a>
-                        <a href="/umweltrechte.html" class="flex items-center gap-2 px-4 py-2.5 text-sm text-gray-700 hover:bg-blue-50/50 hover:text-blue-600 transition-all no-underline">🌱 Umweltrechte</a>
-                    </div>
-                </div>
-            </div>
-
-            <div class="relative group" id="schule-dropdown">
-                <button onclick="toggleDropdown(event, 'schule-menu')" class="hover:text-blue-600 pb-1 transition-all no-underline font-semibold text-gray-700 text-sm md:text-base flex items-center gap-1 bg-transparent border-0 cursor-pointer">
-                    Schule
-                    <svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2.5" d="M19 9l-7 7-7-7"></path>
-                    </svg>
-                </button>
-                <div class="absolute left-0 pt-2 w-56 opacity-0 pointer-events-none group-hover:opacity-100 group-hover:pointer-events-auto transition-all duration-200 z-50" id="schule-menu">
-                    <div class="liquid-glass py-2" style="border-radius: 16px; box-shadow: 0 10px 30px rgba(31, 38, 135, 0.08) !important;">
-                        <a href="/prozentrechner.html" class="flex items-center gap-2 px-4 py-2.5 text-sm text-blue-600 hover:text-blue-700 transition-all no-underline font-bold">🧮 Prozentrechner</a>
-                    </div>
-                </div>
-            </div>
-
-            <a href="/spenden.html" class="hover:text-blue-600 pb-1 transition-all no-underline">Spenden</a>
-            <a href="/kontakt.html" class="hover:text-blue-600 pb-1 transition-all no-underline">Kontakt</a>
+        <div class="flex-shrink-0">
+            <a href="/" class="text-xl font-black tracking-tight text-gray-900 no-underline">
+                M-Fleger
+            </a>
         </div>
-        
-        <div class="flex items-center gap-2 md:gap-3 shrink-0 ml-auto md:border-l md:border-white/40 md:pl-4">
-            <a href="/login.html" class="bg-blue-600 text-white font-bold px-4 py-2 rounded-xl text-xs md:text-sm shadow-md hover:bg-blue-700 transition-all no-underline">🔑 Login</a>
+
+        <div class="hidden md:flex items-center space-x-8">
+            <a href="/" class="text-sm font-medium text-gray-700 hover:text-blue-600 no-underline transition-colors">Startseite</a>
+            <a href="/unsere-rechte.html" class="text-sm font-medium text-gray-700 hover:text-blue-600 no-underline transition-colors">Rechte-Hub</a>
+            <a href="/spenden.html" class="text-sm font-medium text-gray-700 hover:text-blue-600 no-underline transition-colors">Spenden</a>
+            <a href="/blog.html" class="text-sm font-medium text-gray-700 hover:text-blue-600 no-underline transition-colors">Blog</a>
         </div>
+
+        <div class="flex md:hidden">
+            <button id="mobile-menu-button" type="button" class="inline-flex items-center justify-center p-2 rounded-xl text-gray-700 hover:text-blue-600 hover:bg-gray-100/50 focus:outline-none transition-all" aria-controls="mobile-menu" aria-expanded="false">
+                <span class="sr-only">Hauptmenü öffnen</span>
+                <svg class="block h-6 w-6" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke="currentColor" aria-hidden="true">
+                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 6h16M4 12h16M4 18h16" />
+                </svg>
+            </button>
+        </div>
+
     </div>
-</nav>
+</div>
+
+<div class="hidden md:hidden px-4 pt-2 pb-4 space-y-2" id="mobile-menu">
+    <div class="liquid-glass p-4 space-y-3 shadow-lg">
+        <a href="/" class="block px-3 py-2.5 rounded-xl text-base font-semibold text-gray-900 hover:bg-white/40 no-underline transition-all">Startseite</a>
+        <a href="/unsere-rechte.html" class="block px-3 py-2.5 rounded-xl text-base font-semibold text-gray-900 hover:bg-white/40 no-underline transition-all">Rechte-Hub</a>
+        <a href="/spenden.html" class="block px-3 py-2.5 rounded-xl text-base font-semibold text-gray-900 hover:bg-white/40 no-underline transition-all">Spenden</a>
+        <a href="/blog.html" class="block px-3 py-2.5 rounded-xl text-base font-semibold text-gray-900 hover:bg-white/40 no-underline transition-all">Blog</a>
+    </div>
+</div>
 
 <script>
-function toggleDropdown(event, menuId) {
-    event.stopPropagation();
-    const menu = document.getElementById(menuId);
-    menu.classList.toggle('opacity-0');
-    menu.classList.toggle('pointer-events-none');
-}
-document.addEventListener('click', function(e) {
-    ['dropdown-menu', 'schule-menu'].forEach(id => {
-        const menu = document.getElementById(id);
-        if (menu && !menu.classList.contains('opacity-0') && !e.target.closest('#rights-dropdown') && !e.target.closest('#schule-dropdown')) {
-            menu.classList.add('opacity-0');
-            menu.classList.add('pointer-events-none');
+    document.addEventListener('DOMContentLoaded', function () {
+        const button = document.getElementById('mobile-menu-button');
+        const menu = document.getElementById('mobile-menu');
+
+        if (button && menu) {
+            button.addEventListener('click', function () {
+                const expanded = button.getAttribute('aria-expanded') === 'true' || false;
+                button.setAttribute('aria-expanded', !expanded);
+                
+                // Menü ein- oder ausblenden
+                menu.classList.toggle('hidden');
+                
+                // Sanfter Pop-Effekt für das Glas-Menü
+                if(!expanded) {
+                    menu.classList.add('animate-fade-in');
+                }
+            });
         }
     });
-});
 </script>
