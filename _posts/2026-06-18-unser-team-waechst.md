@@ -33,6 +33,4 @@ Dass wir diesen Schritt überhaupt gehen können, liegt vor allem an euch. Euer 
 
 M-Fleger fängt gerade erst an, so richtig Fahrt aufzunehmen. Wir sind extrem motiviert und freuen uns riesig auf alles, was wir ab jetzt als vergrößertes Team für euch auf die Beine stellen werden!
 
-> **Seid gespannt:** In den nächsten Artikeln werden sich die neuen Teammitglieder hier auf dem Blog auch noch ganz persönlich bei euch vorstellen. 
-
 *Euer Julian und das neue Team von M-Fleger*
