@@ -1,125 +1,38 @@
----
-layout: null
----
-<!DOCTYPE html>
-<html lang="de">
-<head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Spenden - M-Fleger</title>
-    <script src="https://cdn.jsdelivr.net/npm/@tailwindcss/browser@4"></script>
-</head>
-<body class="bg-gray-50 text-gray-900 font-sans antialiased flex flex-col min-h-screen">
+<!-- Spenden-Karten-Sektion -->
+<div class="grid grid-cols-1 md:grid-cols-2 gap-6 mt-8">
 
-    <nav class="bg-white border-b border-gray-100 sticky top-0 z-50 shadow-xs">
-        {% include navigation.html %}
-    </nav>
+    <!-- SOS Kinderdorf -->
+    <div class="liquid-glass p-6 rounded-3xl border border-white/20 flex flex-col items-center text-center space-y-4">
+        <!-- Verweist auf deine Datei mit echten Web-Leerzeichen (%20) -->
+        <img src="/SOS%20Kinderdörfer%20transparentes%20logo.png" alt="SOS Kinderdorf" class="h-16 w-auto object-contain">
+        <h3 class="text-xl font-bold text-gray-900">SOS-Kinderdorf Berlin</h3>
+        <p class="text-sm text-gray-600 leading-relaxed">Unterstützt direkt die Arbeit im Kinderdorf Berlin. Es bietet Kindern ein liebevolles und sicheres Zuhause sowie wichtige Betreuungsangebote.</p>
+        <a href="https://www.sos-kinderdorf.de" target="_blank" class="mt-auto px-5 py-2.5 bg-blue-600 text-white font-bold text-sm rounded-xl no-underline hover:bg-blue-700 transition-all">Zu SOS-Kinderdorf Berlin →</a>
+    </div>
 
-    <header class="bg-gradient-to-r from-blue-900 via-indigo-900 to-blue-950 text-white text-center py-16 px-4">
-        <div class="max-w-4xl mx-auto flex flex-col items-center">
-            <h1 class="text-3xl md:text-5xl font-black tracking-tight drop-shadow-md mb-4">
-                Wähle deine Spendenart
-            </h1>
-            <div class="flex flex-col items-center gap-1 text-xs md:text-sm text-gray-300/90 font-medium w-full max-w-xs">
-                <span>Unterstützung für Kinder in Not</span>
-                <div class="w-full border-b border-white/20 mt-3"></div>
-            </div>
-        </div>
-    </header>
+    <!-- Save the Children -->
+    <div class="liquid-glass p-6 rounded-3xl border border-white/20 flex flex-col items-center text-center space-y-4">
+        <!-- Verweist exakt auf deinen Dateinamen aus dem Screenshot -->
+        <img src="/Save%20the%20Childrean%20transparentes%20logo.png" alt="Save the Children" class="h-16 w-auto object-contain">
+        <h3 class="text-xl font-bold text-gray-900">Save the Children</h3>
+        <p class="text-sm text-gray-600 leading-relaxed">Die weltweit größte unabhängige Organisation für Kinderrechte leistet Soforthilfe in Krisengebieten und schützt Kinder vor Gewalt.</p>
+        <a href="https://www.savethechildren.de" target="_blank" class="mt-auto px-5 py-2.5 bg-blue-600 text-white font-bold text-sm rounded-xl no-underline hover:bg-blue-700 transition-all">Zu Save the Children →</a>
+    </div>
 
-    <main class="max-w-4xl mx-auto px-4 py-12 flex-grow w-full -mt-10">
-        <article class="bg-white border border-gray-100 p-6 md:p-12 rounded-3xl shadow-sm space-y-10">
-            
-            <p class="text-gray-600 text-base md:text-lg leading-relaxed border-b border-gray-100 pb-6">
-                Kinder brauchen unseren Schutz und eine sichere Zukunft. Hier findest du eine Auswahl an Organisationen und Stiftungen, die sich direkt für Kinder in schwierigen Lebenslagen einsetzen. Mit einem Klick auf den jeweiligen Button wirst du direkt zur offiziellen Spendenseite weitergeleitet.
-            </p>
+    <!-- Zukunft für Dich -->
+    <div class="liquid-glass p-6 rounded-3xl border border-white/20 flex flex-col items-center text-center space-y-4">
+        <img src="/Zukunft%20für%20Dich%20transparentes%20logo.png" alt="Zukunft für Dich" class="h-16 w-auto object-contain">
+        <h3 class="text-xl font-bold text-gray-900">Zukunft für Dich</h3>
+        <p class="text-sm text-gray-600 leading-relaxed">Fördert Bildungs- und Freizeitprojekte für benachteiligte Jugendliche, um ihnen neue Perspektiven im Leben zu eröffnen.</p>
+        <a href="#" class="mt-auto px-5 py-2.5 bg-blue-600 text-white font-bold text-sm rounded-xl no-underline hover:bg-blue-700 transition-all">Zu Zukunft für Dich →</a>
+    </div>
 
-            <div class="flex flex-col md:flex-row items-start justify-between gap-6">
-                <div class="space-y-4 flex-1">
-                    <div class="h-12 md:h-14 flex items-center">
-                        <img src="SOS-Kinderdoerfer-logo.png" alt="SOS Kinderdörfer Logo" class="h-full object-contain object-left">
-                    </div>
-                    <div class="space-y-2">
-                        <h2 class="text-xl md:text-2xl font-bold text-gray-900">SOS-Kinderdorf Berlin</h2>
-                        <p class="text-gray-600 text-base leading-relaxed">
-                            Unterstützt direkt die Arbeit im Kinderdorf Berlin. Es bietet Kindern, die nicht bei ihren leiblichen Eltern aufwachsen können, ein liebevolles und sicheres Zuhause sowie wichtige Betreuungsangebote.
-                        </p>
-                    </div>
-                    <div class="pt-1">
-                        <a href="https://www.sos-kinderdorf.de/kinderdorf-berlin/spenden" target="_blank" rel="noopener noreferrer" class="inline-block bg-blue-600 hover:bg-blue-700 text-white font-bold text-sm px-5 py-3 rounded-xl transition-all shadow-xs active:scale-95 no-underline">
-                            Zu SOS-Kinderdorf Berlin &rarr;
-                        </a>
-                    </div>
-                </div>
-            </div>
+    <!-- Glaube Liebe Hoffnung -->
+    <div class="liquid-glass p-6 rounded-3xl border border-white/20 flex flex-col items-center text-center space-y-4">
+        <img src="/glaube%20liebe%20hoffnung%20stiftung%20transparent%20logo.png" alt="Glaube Liebe Hoffnung" class="h-16 w-auto object-contain">
+        <h3 class="text-xl font-bold text-gray-900">Glaube Liebe Hoffnung</h3>
+        <p class="text-sm text-gray-600 leading-relaxed">Die Stiftung engagiert sich in sozialen Brennpunkten und unterstützt Projekte im Bereich der Familienhilfe und Jugendförderung.</p>
+        <a href="#" class="mt-auto px-5 py-2.5 bg-blue-600 text-white font-bold text-sm rounded-xl no-underline hover:bg-blue-700 transition-all">Zur Stiftung →</a>
+    </div>
 
-            <hr class="border-gray-100">
-
-            <div class="flex flex-col md:flex-row items-start justify-between gap-6">
-                <div class="space-y-4 flex-1">
-                    <div class="h-12 md:h-14 flex items-center">
-                        <img src="save-the-children-logo.png" alt="Save the Children Logo" class="h-full object-contain object-left">
-                    </div>
-                    <div class="space-y-2">
-                        <h2 class="text-xl md:text-2xl font-bold text-gray-900">Save the Children</h2>
-                        <p class="text-gray-600 text-base leading-relaxed">
-                            Die weltweit größte unabhängige Organisation für Kinderrechte. Sie leistet Soforthilfe in Krisengebieten, schützt Kinder vor Gewalt und Ausbeutung und sorgt für Bildung.
-                        </p>
-                    </div>
-                    <div class="pt-1">
-                        <a href="https://www.savethechildren.de/" target="_blank" rel="noopener noreferrer" class="inline-block bg-blue-600 hover:bg-blue-700 text-white font-bold text-sm px-5 py-3 rounded-xl transition-all shadow-xs active:scale-95 no-underline">
-                            Zu Save the Children &rarr;
-                        </a>
-                    </div>
-                </div>
-            </div>
-
-            <hr class="border-gray-100">
-
-            <div class="flex flex-col md:flex-row items-start justify-between gap-6">
-                <div class="space-y-4 flex-1">
-                    <div class="h-12 md:h-14 flex items-center">
-                        <img src="Zukunft-fuer-Dich-logo.png" alt="Zukunft für Dich Logo" class="h-full object-contain object-left">
-                    </div>
-                    <div class="space-y-2">
-                        <h2 class="text-xl md:text-2xl font-bold text-gray-900">Zukunft für DICH e.V. (Förderprojekt Berlin)</h2>
-                        <p class="text-gray-600 text-base leading-relaxed">
-                            Spezielle Projektförderung für benachteiligte Kinder im Raum Berlin. Die Spenden über dieses Konto fließen direkt in regionale Berliner Hilfsmaßnahmen und Betreuungsangebote.
-                        </p>
-                    </div>
-                    <div class="pt-1">
-                        <a href="https://www.glaube-liebe-hoffnung-stiftung.de/spenden/" target="_blank" rel="noopener noreferrer" class="inline-block bg-blue-600 hover:bg-blue-700 text-white font-bold text-sm px-5 py-3 rounded-xl transition-all shadow-xs active:scale-95 no-underline">
-                            Spenden über Zukunft für DICH &rarr;
-                        </a>
-                    </div>
-                </div>
-            </div>
-
-            <hr class="border-gray-100">
-
-            <div class="flex flex-col md:flex-row items-start justify-between gap-6">
-                <div class="space-y-4 flex-1">
-                    <div class="h-12 md:h-14 flex items-center">
-                        <img src="glaube-liebe-hoffnung-stiftung-logo.png" alt="Glaube Liebe Hoffnung Stiftung Logo" class="h-full object-contain object-left">
-                    </div>
-                    <div class="space-y-2">
-                        <h2 class="text-xl md:text-2xl font-bold text-gray-900">Glaube-Liebe-Hoffnung Stiftung</h2>
-                        <p class="text-gray-600 text-base leading-relaxed">
-                            Unterstützt nachhaltig heilpädagogische Kinder-Wohngruppen, Jugendhilfe-Zentren und Schutzräume. Hier hast du auch die Möglichkeit, der Stiftung Kapital langfristig zuzustiften.
-                        </p>
-                    </div>
-                    <div class="pt-1">
-                        <a href="https://www.glaube-liebe-hoffnung-stiftung.de/spenden/" target="_blank" rel="noopener noreferrer" class="inline-block bg-blue-600 hover:bg-blue-700 text-white font-bold text-sm px-5 py-3 rounded-xl transition-all shadow-xs active:scale-95 no-underline">
-                            Zur Stiftung spenden / zustiften &rarr;
-                        </a>
-                    </div>
-                </div>
-            </div>
-
-        </article>
-    </main>
-
-    {% include footer.html %}
-    {% include cookie-banner.html %}
-</body>
-</html>
+</div>
