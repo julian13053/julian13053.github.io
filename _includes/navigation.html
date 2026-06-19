@@ -1,14 +1,19 @@
+<!-- Haupt-Header-Leiste -->
 <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 h-16 flex items-center justify-between">
     
+    <!-- Globales Auge-Logo & Markenname -->
     <div class="flex-shrink-0">
-        <a href="/" class="flex items-center gap-2 no-underline text-xl font-black tracking-tight text-gray-900">
-            <img src="/assets/images/auge-logo.jpg" alt="Logo" class="h-8 w-auto object-contain transition-transform hover:scale-105" onerror="this.style.display='none'">
+        <a href="/" class="flex items-center gap-3 no-underline text-xl font-black tracking-tight text-gray-900">
+            <!-- Pfad zu deinem hochgeladenen Auge-Logo -->
+            <img src="/auge-logo.jpg" alt="Auge" class="h-8 w-8 object-cover rounded-full shadow-sm" onerror="this.style.display='none'">
             <span>M-Fleger</span>
         </a>
     </div>
 
+    <!-- Desktop-Menü -->
     <div class="hidden md:flex items-center space-x-8">
         <a href="/" class="text-sm font-medium text-gray-700 hover:text-blue-600 no-underline transition-colors">Startseite</a>
+        <a href="/ueber-mich.html" class="text-sm font-medium text-gray-700 hover:text-blue-600 no-underline transition-colors">Über mich</a>
         <a href="/unsere-rechte.html" class="text-sm font-medium text-gray-700 hover:text-blue-600 no-underline transition-colors">Rechte-Hub</a>
         <a href="/spenden.html" class="text-sm font-medium text-gray-700 hover:text-blue-600 no-underline transition-colors">Spenden</a>
         <a href="/blog.html" class="text-sm font-medium text-gray-700 hover:text-blue-600 no-underline transition-colors">Blog</a>
@@ -16,9 +21,9 @@
         <a href="/login.html" class="text-sm font-bold text-white bg-blue-600 px-4 py-2 rounded-xl hover:bg-blue-700 no-underline transition-all">Login</a>
     </div>
 
+    <!-- Mobil-Button -->
     <div class="flex md:hidden">
         <button id="mobile-menu-trigger" type="button" class="inline-flex items-center justify-center p-2 rounded-xl text-gray-700 hover:text-blue-600 focus:outline-none transition-all">
-            <span class="sr-only">Menü öffnen</span>
             <svg class="h-6 w-6" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke="currentColor">
                 <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 6h16M4 12h16M4 18h16" />
             </svg>
@@ -26,26 +31,18 @@
     </div>
 </div>
 
+<!-- Mobiles Overlay-Menü -->
 <div id="mobile-menu-container" class="md:hidden opacity-0 translate-y-[-10px] pointer-events-none fixed inset-x-4 top-16 z-50 transition-all duration-300 ease-out">
     <div class="liquid-glass p-5 space-y-2 shadow-xl border border-white/40 bg-white/90 backdrop-blur-lg rounded-2xl">
         <a href="/" class="block px-3 py-2.5 rounded-xl text-base font-semibold text-gray-950 hover:bg-white/40 no-underline transition-all">Startseite</a>
+        <a href="/ueber-mich.html" class="block px-3 py-2.5 rounded-xl text-base font-semibold text-gray-950 hover:bg-white/40 no-underline transition-all">Über mich</a>
         <a href="/unsere-rechte.html" class="block px-3 py-2.5 rounded-xl text-base font-semibold text-gray-950 hover:bg-white/40 no-underline transition-all">Rechte-Hub</a>
         <a href="/spenden.html" class="block px-3 py-2.5 rounded-xl text-base font-semibold text-gray-950 hover:bg-white/40 no-underline transition-all">Spenden</a>
         <a href="/blog.html" class="block px-3 py-2.5 rounded-xl text-base font-semibold text-gray-950 hover:bg-white/40 no-underline transition-all">Blog</a>
         
         <div class="border-t border-black/5 my-2"></div>
-        
         <a href="/kontakt.html" class="block px-3 py-2 rounded-xl text-sm font-medium text-gray-800 hover:bg-white/30 no-underline transition-all">✉️ Kontakt</a>
-        <a href="/impressum.html" class="block px-3 py-2 rounded-xl text-sm font-medium text-gray-800 hover:bg-white/30 no-underline transition-all">⚖️ Impressum</a>
-        <a href="/datenschutz.html" class="block px-3 py-2 rounded-xl text-sm font-medium text-gray-800 hover:bg-white/30 no-underline transition-all">🔒 Datenschutz</a>
-
-        <div class="border-t border-black/5 my-2"></div>
-
-        <div class="pt-1">
-            <a href="/login.html" class="block w-full text-center px-4 py-2.5 rounded-xl text-base font-bold text-white bg-blue-600 hover:bg-blue-700 no-underline shadow-md transition-all">
-                👤 Einloggen
-            </a>
-        </div>
+        <a href="/login.html" class="block w-full text-center mt-2 px-4 py-2.5 rounded-xl text-base font-bold text-white bg-blue-600 hover:bg-blue-700 no-underline shadow-md transition-all">👤 Einloggen</a>
     </div>
 </div>
 
@@ -53,23 +50,15 @@
     (function() {
         const trigger = document.getElementById('mobile-menu-trigger');
         const menu = document.getElementById('mobile-menu-container');
-        
         if (trigger && menu) {
             trigger.addEventListener('click', function(e) {
                 e.stopPropagation();
-                const isHidden = menu.classList.contains('opacity-0');
-                if (isHidden) {
+                if (menu.classList.contains('opacity-0')) {
                     menu.classList.remove('opacity-0', 'translate-y-[-10px]', 'pointer-events-none');
                     menu.classList.add('opacity-100', 'translate-y-0');
                 } else {
-                    menu.classList.remove('opacity-100', 'translate-y-0');
                     menu.classList.add('opacity-0', 'translate-y-[-10px]', 'pointer-events-none');
                 }
-            });
-
-            document.addEventListener('click', function() {
-                menu.classList.remove('opacity-100', 'translate-y-0');
-                menu.classList.add('opacity-0', 'translate-y-[-10px]', 'pointer-events-none');
             });
         }
     })();
