@@ -1,41 +1,37 @@
 <!-- Haupt-Header-Leiste -->
-<div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 relative z-50">
-    <div class="flex items-center justify-between h-16">
-        
-        <!-- NEU: Logo-Bereich mit Bild statt Text -->
-        <div class="flex-shrink-0">
-            <a href="/" class="flex items-center no-underline">
-                <!-- Ersetze /assets/images/logo.png durch den echten Pfad zu deinem Logo -->
-                <img src="/assets/images/logo.png" alt="M-Fleger Logo" class="h-8 w-auto object-contain transition-transform hover:scale-105">
-            </a>
-        </div>
+<div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 h-16 flex items-center justify-between">
+    
+    <!-- Markenname / Logo-Ersatz -->
+    <div class="flex-shrink-0">
+        <a href="/" class="flex items-center gap-2 no-underline text-xl font-black tracking-tight text-gray-900 hover:text-blue-600 transition-colors">
+            <span>🚀 M-Fleger</span>
+        </a>
+    </div>
 
-        <!-- Desktop-Menü (PC) -->
-        <div class="hidden md:flex items-center space-x-8">
-            <a href="/" class="text-sm font-medium text-gray-700 hover:text-blue-600 no-underline transition-colors">Startseite</a>
-            <a href="/unsere-rechte.html" class="text-sm font-medium text-gray-700 hover:text-blue-600 no-underline transition-colors">Rechte-Hub</a>
-            <a href="/spenden.html" class="text-sm font-medium text-gray-700 hover:text-blue-600 no-underline transition-colors">Spenden</a>
-            <a href="/blog.html" class="text-sm font-medium text-gray-700 hover:text-blue-600 no-underline transition-colors">Blog</a>
-            <a href="/kontakt.html" class="text-sm font-medium text-gray-700 hover:text-blue-600 no-underline transition-colors">Kontakt</a>
-        </div>
+    <!-- Desktop-Menü (PC-Ansicht) -->
+    <div class="hidden md:flex items-center space-x-8">
+        <a href="/" class="text-sm font-medium text-gray-700 hover:text-blue-600 no-underline transition-colors">Startseite</a>
+        <a href="/unsere-rechte.html" class="text-sm font-medium text-gray-700 hover:text-blue-600 no-underline transition-colors">Rechte-Hub</a>
+        <a href="/spenden.html" class="text-sm font-medium text-gray-700 hover:text-blue-600 no-underline transition-colors">Spenden</a>
+        <a href="/blog.html" class="text-sm font-medium text-gray-700 hover:text-blue-600 no-underline transition-colors">Blog</a>
+        <a href="/kontakt.html" class="text-sm font-medium text-gray-700 hover:text-blue-600 no-underline transition-colors">Kontakt</a>
+        <a href="/login.html" class="text-sm font-bold text-white bg-blue-600 px-4 py-2 rounded-xl hover:bg-blue-700 no-underline transition-all">Login</a>
+    </div>
 
-        <!-- Mobil-Button (Drei Striche) -->
-        <div class="flex md:hidden">
-            <button id="mobile-menu-trigger" type="button" class="inline-flex items-center justify-center p-2 rounded-xl text-gray-700 hover:text-blue-600 focus:outline-none transition-all">
-                <span class="sr-only">Menü öffnen</span>
-                <svg class="h-6 w-6" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke="currentColor">
-                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 6h16M4 12h16M4 18h16" />
-                </svg>
-            </button>
-        </div>
-
+    <!-- Mobil-Button (Drei Striche für Handys) -->
+    <div class="flex md:hidden">
+        <button id="mobile-menu-trigger" type="button" class="inline-flex items-center justify-center p-2 rounded-xl text-gray-700 hover:text-blue-600 focus:outline-none transition-all">
+            <span class="sr-only">Menü öffnen</span>
+            <svg class="h-6 w-6" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 6h16M4 12h16M4 18h16" />
+            </svg>
+        </button>
     </div>
 </div>
 
 <!-- Mobiles Overlay-Menü -->
 <div id="mobile-menu-container" class="md:hidden opacity-0 translate-y-[-10px] pointer-events-none fixed inset-x-4 top-16 z-50 transition-all duration-300 ease-out">
-    <div class="liquid-glass p-5 space-y-2 shadow-xl border border-white/40">
-        
+    <div class="liquid-glass p-5 space-y-2 shadow-xl border border-white/40 bg-white/90 backdrop-blur-lg rounded-2xl">
         <a href="/" class="block px-3 py-2.5 rounded-xl text-base font-semibold text-gray-950 hover:bg-white/40 no-underline transition-all">Startseite</a>
         <a href="/unsere-rechte.html" class="block px-3 py-2.5 rounded-xl text-base font-semibold text-gray-950 hover:bg-white/40 no-underline transition-all">Rechte-Hub</a>
         <a href="/spenden.html" class="block px-3 py-2.5 rounded-xl text-base font-semibold text-gray-950 hover:bg-white/40 no-underline transition-all">Spenden</a>
@@ -54,7 +50,6 @@
                 👤 Einloggen
             </a>
         </div>
-
     </div>
 </div>
 
