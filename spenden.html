@@ -19,7 +19,7 @@ title: Spendenpartner
 </head>
 <body class="bg-gradient-to-br from-slate-50 to-blue-100 min-h-screen text-gray-900 font-sans">
 
-    <!-- Feste Navigationsleiste direkt auf der Seite -->
+    <!-- Navigationsleiste -->
     <nav class="w-full max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 h-20 flex items-center justify-between">
         <div class="flex-shrink-0">
             <a href="/" class="flex items-center gap-4 no-underline text-2xl font-black tracking-tight text-gray-900">
@@ -33,19 +33,30 @@ title: Spendenpartner
             <a href="/unsere-rechte.html" class="text-sm font-semibold text-gray-700 hover:text-blue-600 no-underline">Rechte-Hub</a>
             <a href="/spenden.html" class="text-sm font-semibold text-blue-600 no-underline">Spenden</a>
             <a href="/blog.html" class="text-sm font-semibold text-gray-700 hover:text-blue-600 no-underline">Blog</a>
-            <a href="/kontakt.html" class="text-sm font-semibold text-gray-700 hover:text-blue-600 no-underline">Contact</a>
+            <a href="/kontakt.html" class="text-sm font-semibold text-gray-700 hover:text-blue-600 no-underline">Kontakt</a>
             <a href="/login.html" class="text-sm font-bold text-white bg-blue-600 px-5 py-2.5 rounded-xl no-underline shadow-sm">Login</a>
         </div>
     </nav>
 
-    <!-- Hauptinhalt mit allen vier Partnern -->
-    <main class="max-w-6xl mx-auto px-4 py-12 space-y-8">
-        <div class="text-center space-y-3">
+    <!-- Hauptinhalt -->
+    <main class="max-w-6xl mx-auto px-4 py-12 space-y-12">
+        
+        <!-- Überschrift & Einleitungstext -->
+        <div class="text-center space-y-4 max-w-3xl mx-auto">
             <h1 class="text-4xl font-black tracking-tight text-gray-900">Unterstütze wichtige Projekte</h1>
-            <p class="text-gray-600 max-w-xl mx-auto">Gemeinsam können wir etwas bewegen. Hier findest du die Organisationen, die wir aktiv unterstützen.</p>
+            <div class="liquid-glass p-6 rounded-2xl border border-white/30 shadow-sm text-left text-gray-700 space-y-3">
+                <h2 class="text-xl font-bold text-gray-900">Möchtest du helfen?</h2>
+                <p class="text-sm leading-relaxed">
+                    Mit deiner Unterstützung können wichtige Projekte und Organisationen ihre Arbeit fortsetzen. Jede Spende – egal wie groß oder klein – kann dazu beitragen, Kindern, Jugendlichen und Familien neue Perspektiven zu ermöglichen.
+                </p>
+                <p class="text-sm leading-relaxed">
+                    Auf dieser Seite findest du ausgewählte Organisationen, die sich täglich für Menschen einsetzen und konkrete Hilfe leisten.
+                </p>
+            </div>
         </div>
 
-        <div class="grid grid-cols-1 md:grid-cols-2 gap-8 mt-8">
+        <!-- Grid-Karten der Partner -->
+        <div class="grid grid-cols-1 md:grid-cols-2 gap-8">
             <!-- 1. SOS Kinderdorf -->
             <div class="liquid-glass p-8 rounded-3xl border border-white/40 shadow-md flex flex-col items-center text-center space-y-5">
                 <div class="h-20 flex items-center justify-center">
@@ -53,7 +64,7 @@ title: Spendenpartner
                 </div>
                 <h3 class="text-xl font-bold text-gray-900">SOS-Kinderdorf Berlin</h3>
                 <p class="text-sm text-gray-600 flex-grow">Unterstützt direkt die Arbeit im Kinderdorf Berlin. Es bietet Kindern ein sicheres Zuhause.</p>
-                <a href="https://www.sos-kinderdorf.de" target="_blank" class="w-full py-3 bg-blue-600 text-white font-bold text-sm rounded-xl no-underline">Zu SOS-Kinderdorf →</a>
+                <a href="https://www.sos-kinderdorf.de" target="_blank" class="w-full py-3 bg-blue-600 text-white font-bold text-sm rounded-xl no-underline hover:bg-blue-700 transition-colors">Zu SOS-Kinderdorf →</a>
             </div>
 
             <!-- 2. Save the Children -->
@@ -63,7 +74,7 @@ title: Spendenpartner
                 </div>
                 <h3 class="text-xl font-bold text-gray-900">Save the Children</h3>
                 <p class="text-sm text-gray-600 flex-grow">Die weltweit größte unabhängige Organisation für Kinderrechte leistet wichtige Soforthilfe.</p>
-                <a href="https://www.savethechildren.de" target="_blank" class="w-full py-3 bg-blue-600 text-white font-bold text-sm rounded-xl no-underline">Zu Save the Children →</a>
+                <a href="https://www.savethechildren.de" target="_blank" class="w-full py-3 bg-blue-600 text-white font-bold text-sm rounded-xl no-underline hover:bg-blue-700 transition-colors">Zu Save the Children →</a>
             </div>
 
             <!-- 3. Zukunft für Dich -->
@@ -73,7 +84,7 @@ title: Spendenpartner
                 </div>
                 <h3 class="text-xl font-bold text-gray-900">Zukunft für Dich</h3>
                 <p class="text-sm text-gray-600 flex-grow">Fördert Bildungs- und Freizeitprojekte für benachteiligte Kinder und Jugendliche.</p>
-                <a href="#" class="w-full py-3 bg-blue-600 text-white font-bold text-sm rounded-xl no-underline">Zu Zukunft für Dich →</a>
+                <a href="#" class="w-full py-3 bg-blue-600 text-white font-bold text-sm rounded-xl no-underline hover:bg-blue-700 transition-colors">Zu Zukunft für Dich →</a>
             </div>
 
             <!-- 4. Glaube Liebe Hoffnung -->
@@ -83,8 +94,37 @@ title: Spendenpartner
                 </div>
                 <h3 class="text-xl font-bold text-gray-900">Glaube Liebe Hoffnung</h3>
                 <p class="text-sm text-gray-600 flex-grow">Engagiert sich in sozialen Brennpunkten und unterstützt innovative Familienhilfen.</p>
-                <a href="#" class="w-full py-3 bg-blue-600 text-white font-bold text-sm rounded-xl no-underline">Zur Stiftung →</a>
+                <a href="#" class="w-full py-3 bg-blue-600 text-white font-bold text-sm rounded-xl no-underline hover:bg-blue-700 transition-colors">Zur Stiftung →</a>
             </div>
+        </div>
+
+        <!-- Transparenz- & Info-Abschnitt im unteren Bereich -->
+        <div class="grid grid-cols-1 md:grid-cols-2 gap-8 pt-6">
+            
+            <!-- Wo kommt deine Spende hin? -->
+            <div class="liquid-glass p-6 rounded-2xl border border-white/30 shadow-sm space-y-3 text-gray-700">
+                <h3 class="text-lg font-bold text-gray-900">Wo kommt deine Spende hin?</h3>
+                <p class="text-sm leading-relaxed">
+                    Transparenz ist uns wichtig. Deshalb unterstützen wir ausschließlich Organisationen, die sich nachweislich für Kinder, Jugendliche und Familien einsetzen.
+                </p>
+                <p class="text-sm leading-relaxed">
+                    Deine Spende geht direkt an die jeweilige Organisation. M-Fleger behält keine Spenden ein und erhebt keine Gebühren. Durch einen Klick auf die jeweilige Organisation wirst du direkt auf deren offizielle Spendenseite weitergeleitet. Dort kannst du selbst entscheiden, ob und wie du die Arbeit unterstützen möchtest.
+                </p>
+            </div>
+
+            <!-- Warum spenden? -->
+            <div class="liquid-glass p-6 rounded-2xl border border-white/30 shadow-sm space-y-3 text-gray-700">
+                <h3 class="text-lg font-bold text-gray-900">Warum spenden?</h3>
+                <p class="text-sm mb-2 font-medium">Schon kleine Beiträge können Großes bewirken. Spenden helfen dabei:</p>
+                <ul class="space-y-2 text-sm pl-1">
+                    <li class="flex items-start gap-2"><span>✅</span> <span>Kindern ein sicheres Zuhause zu ermöglichen</span></li>
+                    <li class="flex items-start gap-2"><span>✅</span> <span>Bildungs- und Freizeitangebote zu finanzieren</span></li>
+                    <li class="flex items-start gap-2"><span>✅</span> <span>Familien in schwierigen Situationen zu unterstützen</span></li>
+                    <li class="flex items-start gap-2"><span>✅</span> <span>Hilfsprojekte langfristig aufrechtzuerhalten</span></li>
+                    <li class="flex items-start gap-2"><span>✅</span> <span>Menschen neue Chancen und Perspektiven zu geben</span></li>
+                </ul>
+            </div>
+
         </div>
     </main>
 
