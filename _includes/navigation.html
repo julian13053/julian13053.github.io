@@ -1,12 +1,16 @@
+<!-- Haupt-Header-Leiste -->
 <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 relative z-50">
     <div class="flex items-center justify-between h-16">
         
+        <!-- NEU: Logo-Bereich mit Bild statt Text -->
         <div class="flex-shrink-0">
-            <a href="/" class="text-xl font-black tracking-tight text-gray-900 no-underline">
-                M-Fleger
+            <a href="/" class="flex items-center no-underline">
+                <!-- Ersetze /assets/images/logo.png durch den echten Pfad zu deinem Logo -->
+                <img src="/assets/images/logo.png" alt="M-Fleger Logo" class="h-8 w-auto object-contain transition-transform hover:scale-105">
             </a>
         </div>
 
+        <!-- Desktop-Menü (PC) -->
         <div class="hidden md:flex items-center space-x-8">
             <a href="/" class="text-sm font-medium text-gray-700 hover:text-blue-600 no-underline transition-colors">Startseite</a>
             <a href="/unsere-rechte.html" class="text-sm font-medium text-gray-700 hover:text-blue-600 no-underline transition-colors">Rechte-Hub</a>
@@ -15,6 +19,7 @@
             <a href="/kontakt.html" class="text-sm font-medium text-gray-700 hover:text-blue-600 no-underline transition-colors">Kontakt</a>
         </div>
 
+        <!-- Mobil-Button (Drei Striche) -->
         <div class="flex md:hidden">
             <button id="mobile-menu-trigger" type="button" class="inline-flex items-center justify-center p-2 rounded-xl text-gray-700 hover:text-blue-600 focus:outline-none transition-all">
                 <span class="sr-only">Menü öffnen</span>
@@ -27,6 +32,7 @@
     </div>
 </div>
 
+<!-- Mobiles Overlay-Menü -->
 <div id="mobile-menu-container" class="md:hidden opacity-0 translate-y-[-10px] pointer-events-none fixed inset-x-4 top-16 z-50 transition-all duration-300 ease-out">
     <div class="liquid-glass p-5 space-y-2 shadow-xl border border-white/40">
         
@@ -52,6 +58,7 @@
     </div>
 </div>
 
+<!-- Klick-Logik -->
 <script>
     (function() {
         const trigger = document.getElementById('mobile-menu-trigger');
@@ -60,10 +67,7 @@
         if (trigger && menu) {
             trigger.addEventListener('click', function(e) {
                 e.stopPropagation();
-                
-                // Schaltet die Sichtbarkeit über CSS-Klassen um
                 const isHidden = menu.classList.contains('opacity-0');
-                
                 if (isHidden) {
                     menu.classList.remove('opacity-0', 'translate-y-[-10px]', 'pointer-events-none');
                     menu.classList.add('opacity-100', 'translate-y-0');
@@ -73,7 +77,6 @@
                 }
             });
 
-            // Schließen, wenn man irgendwo anders hinklickt
             document.addEventListener('click', function() {
                 menu.classList.remove('opacity-100', 'translate-y-0');
                 menu.classList.add('opacity-0', 'translate-y-[-10px]', 'pointer-events-none');
