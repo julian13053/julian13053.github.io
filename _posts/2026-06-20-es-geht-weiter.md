@@ -32,5 +32,3 @@ Mit den täglichen Optimierungen bringen wir frische Struktur und technisches Kn
 Dass wir diesen Schritt überhaupt gehen können, liegt vor allem an euch. Euer tägliches Feedback, die Klicks auf unsere Artikel und eure Unterstützung auf der Spendenseite zeigen uns, dass wir auf dem richtigen Weg sind. 
 
 M-Fleger fängt gerade erst an, so richtig Fahrt aufzunehmen. Wir sind extrem motiviert und freuen uns riesig auf alles, was wir ab jetzt durch die tägliche Arbeit an der Seite für euch auf die Beine stellen werden!
-
-*Euer Fabian und das Team von M-Fleger*
