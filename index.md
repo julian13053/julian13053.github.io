@@ -29,16 +29,16 @@ title: Startseite
             from { opacity: 0; transform: translateY(20px); }
             to { opacity: 1; transform: translateY(0); }
         }
+        @keyframes drawLine {
+            to { stroke-dashoffset: 0; }
+        }
         .animate-fade-in { animation: fadeInUp 0.8s ease-out forwards; }
+        .animate-draw { stroke-dasharray: 500; stroke-dashoffset: 500; animation: drawLine 1.2s cubic-bezier(0.4, 0, 0.2, 1) forwards; animation-delay: 0.6s; }
     </style>
 </head>
-<body class="bg-slate-50 text-gray-900 font-sans antialiased flex flex-col min-h-screen relative overflow-x-hidden">
+<body class="bg-slate-100 text-gray-900 font-sans antialiased flex flex-col min-h-screen relative overflow-x-hidden">
 
-    <div class="w-full bg-slate-900 text-gray-400 text-xs py-2 px-4 md:px-8 flex justify-center md:justify-end gap-6 font-medium">
-        <span class="flex items-center gap-1.5">📧 info@m-fleger.de</span>
-        <span class="flex items-center gap-1.5">🌍 m-fleger.de</span>
-    </div>
-
+    <!-- Custom Banner für Systemnachrichten -->
     <div id="custom-banner" class="fixed top-24 right-4 z-50 transform translate-x-full opacity-0 transition-all duration-300 ease-out max-w-sm w-full backdrop-blur-xl shadow-xl rounded-2xl p-4 flex items-start gap-3" style="background: rgba(255, 255, 255, 0.7); border: 1px solid rgba(255, 255, 255, 0.5);">
         <span id="banner-icon" class="text-xl"></span>
         <div class="flex-grow">
@@ -47,20 +47,31 @@ title: Startseite
         </div>
     </div>
 
-    <div class="w-full max-w-6xl mx-auto px-4 sticky top-4 z-50">
-        <nav class="backdrop-blur-md bg-white/75 shadow-lg rounded-2xl border border-white/20 transition-all duration-300 hover:bg-white/85">
+    <!-- Schwebende, mitlaufende Navigation (Dunkler Kapsel-Look aus der Vorlage) -->
+    <div class="w-full max-w-5xl mx-auto px-4 sticky top-6 z-50">
+        <nav class="backdrop-blur-xl bg-slate-900/85 text-white shadow-2xl rounded-2xl border border-white/10 transition-all duration-300 hover:bg-slate-900/90">
             {% include navigation.html %}
         </nav>
     </div>
 
-    <header class="bg-gradient-to-br from-[#1d4ed8] via-[#1e3a8a] to-[#312e81] text-white pt-12 pb-24 md:pt-20 md:pb-36 px-4 md:px-6 relative overflow-hidden">
+    <!-- Schwebender Hero-Bereich (Biegt sich unten wie eine edle Karte) -->
+    <header class="bg-gradient-to-br from-[#1d4ed8] via-[#1e3a8a] to-[#312e81] text-white mx-4 mt-[-4rem] pt-32 pb-24 md:pb-32 px-6 md:px-12 rounded-b-[50px] md:rounded-b-[80px] shadow-2xl relative overflow-hidden">
         <div class="max-w-6xl mx-auto grid md:grid-cols-12 gap-12 items-center animate-fade-in relative z-10">
             <div class="md:col-span-7 text-center md:text-left">
                 <span class="bg-cyan-400/20 text-cyan-300 border border-cyan-400/30 font-extrabold px-4 py-1.5 rounded-full text-xs uppercase tracking-wider">Design & Development</span>
-                <h1 class="text-4xl md:text-6xl font-black tracking-tight mt-5 mb-6 leading-tight">
-                    Julian Fleger.<br><span class="text-cyan-300">Punktgenau verbunden.</span>
+                
+                <!-- Name mit animiertem Stift-Unterstrich-Effekt -->
+                <h1 class="text-4xl md:text-6xl font-black tracking-tight mt-5 mb-6 leading-tight relative inline-block">
+                    Julian Fleger.
+                    <span class="absolute left-0 bottom-[-12px] w-full h-4 text-cyan-400">
+                        <svg viewBox="0 0 500 20" fill="none" xmlns="http://www.w3.org/2000/svg" class="w-full h-full">
+                            <path d="M4.5 12.5C120.5 4 360.5 2.5 494.5 15.5" stroke="currentColor" stroke-width="4.5" stroke-linecap="round" class="animate-draw"/>
+                        </svg>
+                    </span>
+                    <br><span class="text-cyan-300 block mt-3">Punktgenau verbunden.</span>
                 </h1>
-                <p class="text-base md:text-xl text-blue-100 max-w-xl mb-8 leading-relaxed">
+                
+                <p class="text-base md:text-xl text-blue-100 max-w-xl mb-8 mt-4 leading-relaxed">
                     Ich teile hier meine Projekte, Gedanken und kreativen Ideas. Außerdem findest du Einblicke in meine Brandings, meine Arbeit und neue Blogartikel.
                 </p>
                 <a href="blog.html" class="bg-cyan-400 hover:bg-cyan-300 text-blue-950 font-black px-8 py-4 rounded-xl shadow-lg inline-block w-full md:w-auto text-center no-underline transition-all transform hover:-translate-y-1 hover:shadow-cyan-400/20">
@@ -71,20 +82,16 @@ title: Startseite
             <div class="md:col-span-5 flex justify-center">
                 <div class="relative group">
                     <div class="absolute inset-0 bg-cyan-400 rounded-3xl transform rotate-3 scale-105 opacity-20 blur-xs transition-transform duration-300 group-hover:rotate-1"></div>
-                    <img src="ich.jpeg" alt="Julian Fleger" class="relative w-72 h-80 md:w-[26rem] md:h-[32rem] object-cover rounded-3xl shadow-2xl border-4 border-white/10 transition-transform duration-300 group-hover:scale-103">
+                    <img src="ich.jpeg" alt="Julian Fleger" class="relative w-72 h-80 md:w-[24rem] md:h-[30rem] object-cover rounded-3xl shadow-2xl border-4 border-white/10 transition-transform duration-300 group-hover:scale-103">
                 </div>
             </div>
         </div>
-
-        <div class="absolute bottom-0 left-0 w-full overflow-hidden leading-[0] transform rotate-180">
-            <svg viewBox="0 0 1200 120" preserveAspectRatio="none" class="relative block w-full h-[60px] fill-slate-50">
-                <path d="M321.39,56.44c58-10.79,114.16-30.13,172-41.86,82.39-16.72,168.19-17.73,250.45-.39C823.78,31,906.67,72,985.66,92.83c70.05,18.48,146.53,26.09,214.34,3V120H0V0C26.9,3.87,57.06,14,88,27.71,180.75,67.74,229,66.86,321.39,56.44Z"></path>
-            </svg>
-        </div>
     </header>
 
-    <main class="max-w-6xl mx-auto px-4 md:px-6 pt-10 flex-grow w-full relative z-20">
+    <!-- Hauptinhalt scrollt unter die abgerundete Karte -->
+    <main class="max-w-6xl mx-auto px-4 md:px-6 pt-16 flex-grow w-full relative z-20">
         
+        <!-- Sektion: Neueste Artikel -->
         <div class="mb-12">
             <div class="flex flex-col md:flex-row justify-between items-center md:items-baseline mb-10 gap-4 text-center md:text-left">
                 <div>
@@ -100,7 +107,7 @@ title: Startseite
                 {% for post in site.posts limit:3 %}
                 {% assign numeric_id = post.date | date: "%Y%m%d%H%M" %}
                 
-                <div class="blog-card p-6 rounded-2xl flex flex-col justify-between transition-all duration-300 hover:-translate-y-1 hover:shadow-xl bg-white/60 border border-slate-200/50 backdrop-blur-md" data-post-id="{{ numeric_id }}">
+                <div class="blog-card p-6 rounded-2xl flex flex-col justify-between transition-all duration-300 hover:-translate-y-1 hover:shadow-xl bg-white border border-slate-200/60 shadow-md" data-post-id="{{ numeric_id }}">
                     <div>
                         <div class="flex justify-between items-center mb-4">
                             <span class="text-xs bg-blue-600 text-white px-2.5 py-1 rounded-md font-bold uppercase">{{ post.date | date: "%d.%m.%Y" }}</span>
@@ -131,13 +138,14 @@ title: Startseite
                     </div>
                 </div>
                 {% else %}
-                <div class="col-span-1 md:col-span-3 text-center py-12 rounded-2xl bg-white/60 border border-slate-200/50 backdrop-blur-md">
+                <div class="col-span-1 md:col-span-3 text-center py-12 rounded-2xl bg-white border border-slate-200">
                     <p class="text-lg font-medium" style="color: #475569;">Bisher wurden noch keine Blog-Artikel veröffentlicht.</p>
                 </div>
                 {% endfor %}
             </div>
         </div>
 
+        <!-- Sektion: Das große Rechte-Hub -->
         <section class="my-16 p-8 md:p-12 rounded-3xl bg-white border border-slate-200/60 shadow-xl relative overflow-hidden">
             <div class="max-w-3xl mx-auto text-center mb-10">
                 <span class="bg-blue-100 text-blue-800 font-extrabold px-4 py-1.5 rounded-full text-xs uppercase tracking-wider">Neu auf M-Fleger</span>
@@ -181,8 +189,9 @@ title: Startseite
             </div>
         </section>
 
+        <!-- Statistiken -->
         <div class="grid grid-cols-1 sm:grid-cols-2 gap-6 mb-12">
-            <div class="p-6 rounded-2xl flex items-center gap-4 hover:shadow-md transition-all bg-white border border-slate-100">
+            <div class="p-6 rounded-2xl flex items-center gap-4 hover:shadow-md transition-all bg-white border border-slate-200">
                 <div class="text-3xl p-4 rounded-xl" style="background: rgba(37, 99, 235, 0.1); color: #2563eb;">
                     📰
                 </div>
@@ -197,7 +206,7 @@ title: Startseite
                 {% assign words = post.content | strip_html | number_of_words %}
                 {% assign total_words = total_words | plus: words %}
             {% endfor %}
-            <div class="p-6 rounded-2xl flex items-center gap-4 hover:shadow-md transition-all bg-white border border-slate-100">
+            <div class="p-6 rounded-2xl flex items-center gap-4 hover:shadow-md transition-all bg-white border border-slate-200">
                 <div class="text-3xl p-4 rounded-xl" style="background: rgba(6, 182, 212, 0.1); color: #0891b2;">
                     ✍️
                 </div>
