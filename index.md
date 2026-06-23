@@ -25,45 +25,44 @@ title: Startseite
     <script src="https://cdn.jsdelivr.net/npm/@tailwindcss/browser@4"></script>
     <script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script>
     <style>
-        /* CSS-Keyframes für das exakte Vorbild-Timing (Bildschirmaufnahme 2026-06-23 143311.mp4) */
+        /* CSS-Keyframes für das exakte Vorbild-Timing */
         
-        /* 1. Das Hereinfliegen des gesamten Headers von unten */
+        /* 1. Das Hereinfliegen und Aufklappen des gesamten blauen Headers von unten */
         @keyframes headerPopUp {
-            0% { opacity: 0; transform: translateY(60px) scale(0.98); }
+            0% { opacity: 0; transform: translateY(50px) scale(0.99); }
             100% { opacity: 1; transform: translateY(0) scale(1); }
         }
         
-        /* 2. Das zeitversetzte Hochspringen der Texte */
+        /* 2. Das zeitversetzte Hochspringen der Texte und des Bildes */
         @keyframes textJumpUp {
-            0% { opacity: 0; transform: translateY(30px); }
+            0% { opacity: 0; transform: translateY(25px); }
             100% { opacity: 1; transform: translateY(0); }
         }
 
-        /* 3. Das Zeichnen der Stift-Linie */
+        /* 3. Das animierte Zeichnen des Stifts von links nach rechts */
         @keyframes drawLine {
             to { stroke-dashoffset: 0; }
         }
 
-        /* Animations-Klassen mit perfekt abgestimmten Delays */
-        .animate-header { animation: headerPopUp 1s cubic-bezier(0.16, 1, 0.3, 1) forwards; }
+        /* Animations-Klassen mit perfekt abgestimmten Verzögerungen (Delays) */
+        .animate-header { animation: headerPopUp 0.9s cubic-bezier(0.16, 1, 0.3, 1) forwards; }
         
-        /* Die Texte warten, bis der Header da ist */
-        .reveal-item-1 { opacity: 0; animation: textJumpUp 0.8s cubic-bezier(0.16, 1, 0.3, 1) forwards; animation-delay: 0.4s; }
-        .reveal-item-2 { opacity: 0; animation: textJumpUp 0.8s cubic-bezier(0.16, 1, 0.3, 1) forwards; animation-delay: 0.6s; }
-        .reveal-item-3 { opacity: 0; animation: textJumpUp 0.8s cubic-bezier(0.16, 1, 0.3, 1) forwards; animation-delay: 0.8s; }
+        /* Einzelne Elemente ploppen nacheinander hoch */
+        .reveal-item-1 { opacity: 0; animation: textJumpUp 0.7s cubic-bezier(0.16, 1, 0.3, 1) forwards; animation-delay: 0.3s; }
+        .reveal-item-2 { opacity: 0; animation: textJumpUp 0.7s cubic-bezier(0.16, 1, 0.3, 1) forwards; animation-delay: 0.5s; }
+        .reveal-item-3 { opacity: 0; animation: textJumpUp 0.7s cubic-bezier(0.16, 1, 0.3, 1) forwards; animation-delay: 0.7s; }
         
-        /* Der Stift zeichnet erst, wenn der Name fertig hochgesprungen ist */
+        /* Die Stift-Unterstreichung startet erst, wenn der Name voll da ist */
         .animate-draw { 
             stroke-dasharray: 600; 
             stroke-dashoffset: 600; 
-            animation: drawLine 1s cubic-bezier(0.4, 0, 0.2, 1) forwards; 
-            animation-delay: 1.2s; 
+            animation: drawLine 0.9s cubic-bezier(0.4, 0, 0.2, 1) forwards; 
+            animation-delay: 1.1s; 
         }
     </style>
 </head>
 <body class="bg-slate-100 text-gray-900 font-sans antialiased flex flex-col min-h-screen relative overflow-x-hidden">
 
-    <!-- Custom Banner für Systemnachrichten -->
     <div id="custom-banner" class="fixed top-24 right-4 z-50 transform translate-x-full opacity-0 transition-all duration-300 ease-out max-w-sm w-full backdrop-blur-xl shadow-xl rounded-2xl p-4 flex items-start gap-3" style="background: rgba(255, 255, 255, 0.7); border: 1px solid rgba(255, 255, 255, 0.5);">
         <span id="banner-icon" class="text-xl"></span>
         <div class="flex-grow">
@@ -72,39 +71,32 @@ title: Startseite
         </div>
     </div>
 
-    <!-- Schwebende, mitlaufende Navigation (Dunkler Kapsel-Look aus der Vorlage) -->
     <div class="w-full max-w-5xl mx-auto px-4 sticky top-6 z-50">
         <nav class="backdrop-blur-xl bg-slate-900/85 text-white shadow-2xl rounded-2xl border border-white/10 transition-all duration-300 hover:bg-slate-900/90">
             {% include navigation.html %}
         </nav>
     </div>
 
-    <!-- Schwebender Hero-Bereich (Fliegt als Ganzes hinein und biegt sich unten ab) -->
     <header class="animate-header bg-gradient-to-br from-[#1d4ed8] via-[#1e3a8a] to-[#312e81] text-white mx-4 mt-[-4rem] pt-32 pb-24 md:pb-32 px-6 md:px-12 rounded-b-[50px] md:rounded-b-[80px] shadow-2xl relative overflow-hidden">
         <div class="max-w-6xl mx-auto grid md:grid-cols-12 gap-12 items-center relative z-10">
             
             <div class="md:col-span-7 text-center md:text-left">
-                <!-- Tag ploppt zuerst auf -->
                 <div class="reveal-item-1">
                     <span class="bg-cyan-400/20 text-cyan-300 border border-cyan-400/30 font-extrabold px-4 py-1.5 rounded-full text-xs uppercase tracking-wider">Design & Development</span>
                 </div>
                 
-                <!-- Name springt hoch und wird anschließend präzise unterstrichen -->
                 <div class="reveal-item-2 mt-5 mb-6">
                     <h1 class="text-4xl md:text-6xl font-black tracking-tight leading-tight relative inline-block pb-4">
                         Julian Fleger.
-                        <!-- Der animierte Zeichenstift-Effekt, exakt unter dem Namen platziert -->
                         <span class="absolute left-0 bottom-0 w-full h-4 text-cyan-400">
                             <svg viewBox="0 0 500 20" fill="none" xmlns="http://www.w3.org/2000/svg" class="w-full h-full" preserveAspectRatio="none">
                                 <path d="M5 15C130 5 370 4 495 15" stroke="currentColor" stroke-width="5" stroke-linecap="round" class="animate-draw"/>
                             </svg>
                         </span>
                     </h1>
-                    <!-- Der Untertitel ist visuell getrennt, damit nichts vermischt wird -->
                     <span class="text-cyan-300 block text-3xl md:text-5xl font-black mt-2">Punktgenau verbunden.</span>
                 </div>
                 
-                <!-- Beschreibungstext und Button folgen als Letztes -->
                 <div class="reveal-item-3">
                     <p class="text-base md:text-xl text-blue-100 max-w-xl mb-8 leading-relaxed">
                         Ich teile hier meine Projekte, Gedanken und kreativen Ideas. Außerdem findest du Einblicke in meine Brandings, meine Arbeit und neue Blogartikel.
@@ -115,7 +107,6 @@ title: Startseite
                 </div>
             </div>
             
-            <!-- Rechtes Bild fliesst parallel mit dem Header ein -->
             <div class="md:col-span-5 flex justify-center reveal-item-2">
                 <div class="relative group">
                     <div class="absolute inset-0 bg-cyan-400 rounded-3xl transform rotate-3 scale-105 opacity-20 blur-xs transition-transform duration-300 group-hover:rotate-1"></div>
@@ -125,10 +116,8 @@ title: Startseite
         </div>
     </header>
 
-    <!-- Hauptinhalt scrollt unter die abgerundete Karte -->
     <main class="max-w-6xl mx-auto px-4 md:px-6 pt-16 flex-grow w-full relative z-20">
         
-        <!-- Sektion: Neueste Artikel -->
         <div class="mb-12">
             <div class="flex flex-col md:flex-row justify-between items-center md:items-baseline mb-10 gap-4 text-center md:text-left">
                 <div>
@@ -182,7 +171,6 @@ title: Startseite
             </div>
         </div>
 
-        <!-- Sektion: Das große Rechte-Hub -->
         <section class="my-16 p-8 md:p-12 rounded-3xl bg-white border border-slate-200/60 shadow-xl relative overflow-hidden">
             <div class="max-w-3xl mx-auto text-center mb-10">
                 <span class="bg-blue-100 text-blue-800 font-extrabold px-4 py-1.5 rounded-full text-xs uppercase tracking-wider">Neu auf M-Fleger</span>
@@ -226,7 +214,6 @@ title: Startseite
             </div>
         </section>
 
-        <!-- Statistiken -->
         <div class="grid grid-cols-1 sm:grid-cols-2 gap-6 mb-12">
             <div class="p-6 rounded-2xl flex items-center gap-4 hover:shadow-md transition-all bg-white border border-slate-200">
                 <div class="text-3xl p-4 rounded-xl" style="background: rgba(37, 99, 235, 0.1); color: #2563eb;">
