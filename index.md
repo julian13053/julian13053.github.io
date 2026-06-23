@@ -2,7 +2,7 @@
 layout: null
 title: Startseite
 ---
-<html lang="de">
+<html lang="de" class="scroll-smooth">
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
@@ -32,7 +32,12 @@ title: Startseite
         .animate-fade-in { animation: fadeInUp 0.8s ease-out forwards; }
     </style>
 </head>
-<body class="text-gray-900 font-sans antialiased flex flex-col min-h-screen relative">
+<body class="bg-slate-50 text-gray-900 font-sans antialiased flex flex-col min-h-screen relative overflow-x-hidden">
+
+    <div class="w-full bg-slate-900 text-gray-400 text-xs py-2 px-4 md:px-8 flex justify-center md:justify-end gap-6 font-medium">
+        <span class="flex items-center gap-1.5">📧 info@m-fleger.de</span>
+        <span class="flex items-center gap-1.5">🌍 m-fleger.de</span>
+    </div>
 
     <div id="custom-banner" class="fixed top-24 right-4 z-50 transform translate-x-full opacity-0 transition-all duration-300 ease-out max-w-sm w-full backdrop-blur-xl shadow-xl rounded-2xl p-4 flex items-start gap-3" style="background: rgba(255, 255, 255, 0.7); border: 1px solid rgba(255, 255, 255, 0.5);">
         <span id="banner-icon" class="text-xl"></span>
@@ -42,12 +47,14 @@ title: Startseite
         </div>
     </div>
 
-    <nav class="sticky top-0 z-50 shadow-xs">
-        {% include navigation.html %}
-    </nav>
+    <div class="w-full max-w-6xl mx-auto px-4 sticky top-4 z-50">
+        <nav class="backdrop-blur-md bg-white/75 shadow-lg rounded-2xl border border-white/20 transition-all duration-300 hover:bg-white/85">
+            {% include navigation.html %}
+        </nav>
+    </div>
 
-    <header class="bg-gradient-to-br from-[#1d4ed8] via-[#1e3a8a] to-[#312e81] text-white py-16 md:py-24 px-4 md:px-6 overflow-hidden">
-        <div class="max-w-6xl mx-auto grid md:grid-cols-12 gap-12 items-center animate-fade-in">
+    <header class="bg-gradient-to-br from-[#1d4ed8] via-[#1e3a8a] to-[#312e81] text-white pt-12 pb-24 md:pt-20 md:pb-36 px-4 md:px-6 relative overflow-hidden">
+        <div class="max-w-6xl mx-auto grid md:grid-cols-12 gap-12 items-center animate-fade-in relative z-10">
             <div class="md:col-span-7 text-center md:text-left">
                 <span class="bg-cyan-400/20 text-cyan-300 border border-cyan-400/30 font-extrabold px-4 py-1.5 rounded-full text-xs uppercase tracking-wider">Design & Development</span>
                 <h1 class="text-4xl md:text-6xl font-black tracking-tight mt-5 mb-6 leading-tight">
@@ -56,7 +63,7 @@ title: Startseite
                 <p class="text-base md:text-xl text-blue-100 max-w-xl mb-8 leading-relaxed">
                     Ich teile hier meine Projekte, Gedanken und kreativen Ideas. Außerdem findest du Einblicke in meine Brandings, meine Arbeit und neue Blogartikel.
                 </p>
-                <a href="blog.html" class="bg-cyan-400 hover:bg-cyan-300 text-blue-950 font-black px-8 py-4 rounded-xl shadow-lg inline-block w-full md:w-auto text-center no-underline transition-all transform hover:-translate-y-0.5">
+                <a href="blog.html" class="bg-cyan-400 hover:bg-cyan-300 text-blue-950 font-black px-8 py-4 rounded-xl shadow-lg inline-block w-full md:w-auto text-center no-underline transition-all transform hover:-translate-y-1 hover:shadow-cyan-400/20">
                     Direkt zum Blog →
                 </a>
             </div>
@@ -64,13 +71,19 @@ title: Startseite
             <div class="md:col-span-5 flex justify-center">
                 <div class="relative group">
                     <div class="absolute inset-0 bg-cyan-400 rounded-3xl transform rotate-3 scale-105 opacity-20 blur-xs transition-transform duration-300 group-hover:rotate-1"></div>
-                    <img src="ich.jpeg" alt="Julian Fleger" class="relative w-72 h-80 md:w-[26rem] md:h-[32rem] object-cover rounded-3xl shadow-2xl border-4 border-white/10 transition-transform duration-300 group-hover:scale-105">
+                    <img src="ich.jpeg" alt="Julian Fleger" class="relative w-72 h-80 md:w-[26rem] md:h-[32rem] object-cover rounded-3xl shadow-2xl border-4 border-white/10 transition-transform duration-300 group-hover:scale-103">
                 </div>
             </div>
         </div>
+
+        <div class="absolute bottom-0 left-0 w-full overflow-hidden leading-[0] transform rotate-180">
+            <svg viewBox="0 0 1200 120" preserveAspectRatio="none" class="relative block w-full h-[60px] fill-slate-50">
+                <path d="M321.39,56.44c58-10.79,114.16-30.13,172-41.86,82.39-16.72,168.19-17.73,250.45-.39C823.78,31,906.67,72,985.66,92.83c70.05,18.48,146.53,26.09,214.34,3V120H0V0C26.9,3.87,57.06,14,88,27.71,180.75,67.74,229,66.86,321.39,56.44Z"></path>
+            </svg>
+        </div>
     </header>
 
-    <main class="max-w-6xl mx-auto px-4 md:px-6 pt-12 md:pt-20 flex-grow w-full">
+    <main class="max-w-6xl mx-auto px-4 md:px-6 pt-10 flex-grow w-full relative z-20">
         
         <div class="mb-12">
             <div class="flex flex-col md:flex-row justify-between items-center md:items-baseline mb-10 gap-4 text-center md:text-left">
@@ -87,7 +100,7 @@ title: Startseite
                 {% for post in site.posts limit:3 %}
                 {% assign numeric_id = post.date | date: "%Y%m%d%H%M" %}
                 
-                <div class="blog-card p-6 rounded-2xl flex flex-col justify-between hover:scale-103 transition-all duration-300 liquid-glass" data-post-id="{{ numeric_id }}">
+                <div class="blog-card p-6 rounded-2xl flex flex-col justify-between transition-all duration-300 hover:-translate-y-1 hover:shadow-xl bg-white/60 border border-slate-200/50 backdrop-blur-md" data-post-id="{{ numeric_id }}">
                     <div>
                         <div class="flex justify-between items-center mb-4">
                             <span class="text-xs bg-blue-600 text-white px-2.5 py-1 rounded-md font-bold uppercase">{{ post.date | date: "%d.%m.%Y" }}</span>
@@ -118,43 +131,43 @@ title: Startseite
                     </div>
                 </div>
                 {% else %}
-                <div class="col-span-1 md:col-span-3 text-center py-12 rounded-2xl liquid-glass">
+                <div class="col-span-1 md:col-span-3 text-center py-12 rounded-2xl bg-white/60 border border-slate-200/50 backdrop-blur-md">
                     <p class="text-lg font-medium" style="color: #475569;">Bisher wurden noch keine Blog-Artikel veröffentlicht.</p>
                 </div>
                 {% endfor %}
             </div>
         </div>
 
-        <section class="my-16 p-8 md:p-12 rounded-3xl liquid-glass">
+        <section class="my-16 p-8 md:p-12 rounded-3xl bg-white border border-slate-200/60 shadow-xl relative overflow-hidden">
             <div class="max-w-3xl mx-auto text-center mb-10">
-                <span class="bg-blue-100/60 text-blue-800 font-extrabold px-4 py-1.5 rounded-full text-xs uppercase tracking-wider backdrop-blur-xs">Neu auf M-Fleger</span>
+                <span class="bg-blue-100 text-blue-800 font-extrabold px-4 py-1.5 rounded-full text-xs uppercase tracking-wider">Neu auf M-Fleger</span>
                 <h2 class="text-3xl md:text-4xl font-black tracking-tight mt-3" style="color: #0f172a;">🌍 Das große Rechte-Hub</h2>
                 <p class="text-base md:text-lg mt-2" style="color: #334155;">Rechte gehen uns alle an – egal wie alt wir sind. Entdecke unser neues Portal, das Rechte für jeden verständlich erklärt.</p>
             </div>
 
             <div class="grid grid-cols-1 md:grid-cols-3 gap-6">
-                <a href="kinderrechte.html" class="group p-6 rounded-2xl transition-all duration-300 no-underline flex flex-col justify-between hover:scale-103" style="background: rgba(255, 255, 255, 0.3); border: 1px solid rgba(255, 255, 255, 0.4);">
+                <a href="kinderrechte.html" class="group p-6 rounded-2xl transition-all duration-300 no-underline flex flex-col justify-between hover:-translate-y-1 hover:shadow-lg bg-slate-50 border border-slate-200">
                     <div>
                         <span class="text-3xl block mb-3">🎒</span>
-                        <h3 class="text-xl font-black transition-colors" style="color: #0f172a;">Kinderrechte</h3>
+                        <h3 class="text-xl font-black transition-colors group-hover:text-blue-600" style="color: #0f172a;">Kinderrechte</h3>
                         <p class="text-sm mt-2 leading-relaxed" style="color: #334155;">Schutz, Bildung und Freizeit. Auf Augenhöhe und einfach erklärt für Kinder und Eltern.</p>
                     </div>
                     <span class="text-blue-600 font-bold text-sm mt-4 inline-block">Mehr erfahren →</span>
                 </a>
 
-                <a href="menschenrechte.html" class="group p-6 rounded-2xl transition-all duration-300 no-underline flex flex-col justify-between hover:scale-103" style="background: rgba(255, 255, 255, 0.3); border: 1px solid rgba(255, 255, 255, 0.4);">
+                <a href="menschenrechte.html" class="group p-6 rounded-2xl transition-all duration-300 no-underline flex flex-col justify-between hover:-translate-y-1 hover:shadow-lg bg-slate-50 border border-slate-200">
                     <div>
                         <span class="text-3xl block mb-3">⚖️</span>
-                        <h3 class="text-xl font-black transition-colors" style="color: #0f172a;">Menschenrechte</h3>
+                        <h3 class="text-xl font-black transition-colors group-hover:text-blue-600" style="color: #0f172a;">Menschenrechte</h3>
                         <p class="text-sm mt-2 leading-relaxed" style="color: #334155;">Meinungsfreiheit, Gleichberechtigung und Würde. Die Säulen unserer Gesellschaft.</p>
                     </div>
                     <span class="text-blue-600 font-bold text-sm mt-4 inline-block">Mehr erfahren →</span>
                 </a>
 
-                <a href="digitalrechte.html" class="group p-6 rounded-2xl transition-all duration-300 no-underline flex flex-col justify-between hover:scale-103" style="background: rgba(255, 255, 255, 0.3); border: 1px solid rgba(255, 255, 255, 0.4);">
+                <a href="digitalrechte.html" class="group p-6 rounded-2xl transition-all duration-300 no-underline flex flex-col justify-between hover:-translate-y-1 hover:shadow-lg bg-slate-50 border border-slate-200">
                     <div>
                         <span class="text-3xl block mb-3">📱</span>
-                        <h3 class="text-xl font-black transition-colors" style="color: #0f172a;">Digitalrechte</h3>
+                        <h3 class="text-xl font-black transition-colors group-hover:text-blue-600" style="color: #0f172a;">Digitalrechte</h3>
                         <p class="text-sm mt-2 leading-relaxed" style="color: #334155;">Deine Rechte im Netz. Von Datenschutz bis zum Schutz vor Cybermobbing.</p>
                     </div>
                     <span class="text-blue-600 font-bold text-sm mt-4 inline-block">Mehr erfahren →</span>
@@ -168,10 +181,8 @@ title: Startseite
             </div>
         </section>
 
-        <div style="border-top: 1px solid rgba(255,255,255,0.4); margin: 3rem 0;"></div>
-
         <div class="grid grid-cols-1 sm:grid-cols-2 gap-6 mb-12">
-            <div class="p-6 rounded-2xl flex items-center gap-4 hover:scale-102 transition-all liquid-glass">
+            <div class="p-6 rounded-2xl flex items-center gap-4 hover:shadow-md transition-all bg-white border border-slate-100">
                 <div class="text-3xl p-4 rounded-xl" style="background: rgba(37, 99, 235, 0.1); color: #2563eb;">
                     📰
                 </div>
@@ -186,7 +197,7 @@ title: Startseite
                 {% assign words = post.content | strip_html | number_of_words %}
                 {% assign total_words = total_words | plus: words %}
             {% endfor %}
-            <div class="p-6 rounded-2xl flex items-center gap-4 hover:scale-102 transition-all liquid-glass">
+            <div class="p-6 rounded-2xl flex items-center gap-4 hover:shadow-md transition-all bg-white border border-slate-100">
                 <div class="text-3xl p-4 rounded-xl" style="background: rgba(6, 182, 212, 0.1); color: #0891b2;">
                     ✍️
                 </div>
