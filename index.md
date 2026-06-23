@@ -25,15 +25,40 @@ title: Startseite
     <script src="https://cdn.jsdelivr.net/npm/@tailwindcss/browser@4"></script>
     <script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script>
     <style>
-        @keyframes fadeInUp {
-            from { opacity: 0; transform: translateY(20px); }
-            to { opacity: 1; transform: translateY(0); }
+        /* CSS-Keyframes für das exakte Vorbild-Timing (Bildschirmaufnahme 2026-06-23 143311.mp4) */
+        
+        /* 1. Das Hereinfliegen des gesamten Headers von unten */
+        @keyframes headerPopUp {
+            0% { opacity: 0; transform: translateY(60px) scale(0.98); }
+            100% { opacity: 1; transform: translateY(0) scale(1); }
         }
+        
+        /* 2. Das zeitversetzte Hochspringen der Texte */
+        @keyframes textJumpUp {
+            0% { opacity: 0; transform: translateY(30px); }
+            100% { opacity: 1; transform: translateY(0); }
+        }
+
+        /* 3. Das Zeichnen der Stift-Linie */
         @keyframes drawLine {
             to { stroke-dashoffset: 0; }
         }
-        .animate-fade-in { animation: fadeInUp 0.8s ease-out forwards; }
-        .animate-draw { stroke-dasharray: 500; stroke-dashoffset: 500; animation: drawLine 1.2s cubic-bezier(0.4, 0, 0.2, 1) forwards; animation-delay: 0.6s; }
+
+        /* Animations-Klassen mit perfekt abgestimmten Delays */
+        .animate-header { animation: headerPopUp 1s cubic-bezier(0.16, 1, 0.3, 1) forwards; }
+        
+        /* Die Texte warten, bis der Header da ist */
+        .reveal-item-1 { opacity: 0; animation: textJumpUp 0.8s cubic-bezier(0.16, 1, 0.3, 1) forwards; animation-delay: 0.4s; }
+        .reveal-item-2 { opacity: 0; animation: textJumpUp 0.8s cubic-bezier(0.16, 1, 0.3, 1) forwards; animation-delay: 0.6s; }
+        .reveal-item-3 { opacity: 0; animation: textJumpUp 0.8s cubic-bezier(0.16, 1, 0.3, 1) forwards; animation-delay: 0.8s; }
+        
+        /* Der Stift zeichnet erst, wenn der Name fertig hochgesprungen ist */
+        .animate-draw { 
+            stroke-dasharray: 600; 
+            stroke-dashoffset: 600; 
+            animation: drawLine 1s cubic-bezier(0.4, 0, 0.2, 1) forwards; 
+            animation-delay: 1.2s; 
+        }
     </style>
 </head>
 <body class="bg-slate-100 text-gray-900 font-sans antialiased flex flex-col min-h-screen relative overflow-x-hidden">
@@ -54,32 +79,44 @@ title: Startseite
         </nav>
     </div>
 
-    <!-- Schwebender Hero-Bereich (Biegt sich unten wie eine edle Karte) -->
-    <header class="bg-gradient-to-br from-[#1d4ed8] via-[#1e3a8a] to-[#312e81] text-white mx-4 mt-[-4rem] pt-32 pb-24 md:pb-32 px-6 md:px-12 rounded-b-[50px] md:rounded-b-[80px] shadow-2xl relative overflow-hidden">
-        <div class="max-w-6xl mx-auto grid md:grid-cols-12 gap-12 items-center animate-fade-in relative z-10">
+    <!-- Schwebender Hero-Bereich (Fliegt als Ganzes hinein und biegt sich unten ab) -->
+    <header class="animate-header bg-gradient-to-br from-[#1d4ed8] via-[#1e3a8a] to-[#312e81] text-white mx-4 mt-[-4rem] pt-32 pb-24 md:pb-32 px-6 md:px-12 rounded-b-[50px] md:rounded-b-[80px] shadow-2xl relative overflow-hidden">
+        <div class="max-w-6xl mx-auto grid md:grid-cols-12 gap-12 items-center relative z-10">
+            
             <div class="md:col-span-7 text-center md:text-left">
-                <span class="bg-cyan-400/20 text-cyan-300 border border-cyan-400/30 font-extrabold px-4 py-1.5 rounded-full text-xs uppercase tracking-wider">Design & Development</span>
+                <!-- Tag ploppt zuerst auf -->
+                <div class="reveal-item-1">
+                    <span class="bg-cyan-400/20 text-cyan-300 border border-cyan-400/30 font-extrabold px-4 py-1.5 rounded-full text-xs uppercase tracking-wider">Design & Development</span>
+                </div>
                 
-                <!-- Name mit animiertem Stift-Unterstrich-Effekt -->
-                <h1 class="text-4xl md:text-6xl font-black tracking-tight mt-5 mb-6 leading-tight relative inline-block">
-                    Julian Fleger.
-                    <span class="absolute left-0 bottom-[-12px] w-full h-4 text-cyan-400">
-                        <svg viewBox="0 0 500 20" fill="none" xmlns="http://www.w3.org/2000/svg" class="w-full h-full">
-                            <path d="M4.5 12.5C120.5 4 360.5 2.5 494.5 15.5" stroke="currentColor" stroke-width="4.5" stroke-linecap="round" class="animate-draw"/>
-                        </svg>
-                    </span>
-                    <br><span class="text-cyan-300 block mt-3">Punktgenau verbunden.</span>
-                </h1>
+                <!-- Name springt hoch und wird anschließend präzise unterstrichen -->
+                <div class="reveal-item-2 mt-5 mb-6">
+                    <h1 class="text-4xl md:text-6xl font-black tracking-tight leading-tight relative inline-block pb-4">
+                        Julian Fleger.
+                        <!-- Der animierte Zeichenstift-Effekt, exakt unter dem Namen platziert -->
+                        <span class="absolute left-0 bottom-0 w-full h-4 text-cyan-400">
+                            <svg viewBox="0 0 500 20" fill="none" xmlns="http://www.w3.org/2000/svg" class="w-full h-full" preserveAspectRatio="none">
+                                <path d="M5 15C130 5 370 4 495 15" stroke="currentColor" stroke-width="5" stroke-linecap="round" class="animate-draw"/>
+                            </svg>
+                        </span>
+                    </h1>
+                    <!-- Der Untertitel ist visuell getrennt, damit nichts vermischt wird -->
+                    <span class="text-cyan-300 block text-3xl md:text-5xl font-black mt-2">Punktgenau verbunden.</span>
+                </div>
                 
-                <p class="text-base md:text-xl text-blue-100 max-w-xl mb-8 mt-4 leading-relaxed">
-                    Ich teile hier meine Projekte, Gedanken und kreativen Ideas. Außerdem findest du Einblicke in meine Brandings, meine Arbeit und neue Blogartikel.
-                </p>
-                <a href="blog.html" class="bg-cyan-400 hover:bg-cyan-300 text-blue-950 font-black px-8 py-4 rounded-xl shadow-lg inline-block w-full md:w-auto text-center no-underline transition-all transform hover:-translate-y-1 hover:shadow-cyan-400/20">
-                    Direkt zum Blog →
-                </a>
+                <!-- Beschreibungstext und Button folgen als Letztes -->
+                <div class="reveal-item-3">
+                    <p class="text-base md:text-xl text-blue-100 max-w-xl mb-8 leading-relaxed">
+                        Ich teile hier meine Projekte, Gedanken und kreativen Ideas. Außerdem findest du Einblicke in meine Brandings, meine Arbeit und neue Blogartikel.
+                    </p>
+                    <a href="blog.html" class="bg-cyan-400 hover:bg-cyan-300 text-blue-950 font-black px-8 py-4 rounded-xl shadow-lg inline-block w-full md:w-auto text-center no-underline transition-all transform hover:-translate-y-1 hover:shadow-cyan-400/20">
+                        Direkt zum Blog →
+                    </a>
+                </div>
             </div>
             
-            <div class="md:col-span-5 flex justify-center">
+            <!-- Rechtes Bild fliesst parallel mit dem Header ein -->
+            <div class="md:col-span-5 flex justify-center reveal-item-2">
                 <div class="relative group">
                     <div class="absolute inset-0 bg-cyan-400 rounded-3xl transform rotate-3 scale-105 opacity-20 blur-xs transition-transform duration-300 group-hover:rotate-1"></div>
                     <img src="ich.jpeg" alt="Julian Fleger" class="relative w-72 h-80 md:w-[24rem] md:h-[30rem] object-cover rounded-3xl shadow-2xl border-4 border-white/10 transition-transform duration-300 group-hover:scale-103">
