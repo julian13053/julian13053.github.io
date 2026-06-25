@@ -2,6 +2,7 @@
 layout: null
 title: Startseite
 ---
+<!DOCTYPE html>
 <html lang="de" class="scroll-smooth">
 <head>
     <meta charset="UTF-8">
@@ -20,39 +21,33 @@ title: Startseite
     <meta property="og:url" content="https://julian13053.github.io/index.html">
     
     <link rel="stylesheet" href="/style.css">
+    <link rel="icon" type="image/jpeg" href="auge-logo.jpg">
     
-    <link class="flex" rel="icon" type="image/jpeg" href="auge-logo.jpg">
     <script src="https://cdn.jsdelivr.net/npm/@tailwindcss/browser@4"></script>
     <script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script>
+    
     <style>
         /* CSS-Keyframes für das exakte Vorbild-Timing */
-        
-        /* 1. Das Hereinfliegen und Aufklappen des gesamten blauen Headers von unten */
         @keyframes headerPopUp {
             0% { opacity: 0; transform: translateY(50px) scale(0.99); }
             100% { opacity: 1; transform: translateY(0) scale(1); }
         }
         
-        /* 2. Das zeitversetzte Hochspringen der Texte und des Bildes */
         @keyframes textJumpUp {
             0% { opacity: 0; transform: translateY(25px); }
             100% { opacity: 1; transform: translateY(0); }
         }
 
-        /* 3. Das animierte Zeichnen des Stifts von links nach rechts */
         @keyframes drawLine {
             to { stroke-dashoffset: 0; }
         }
 
-        /* Animations-Klassen mit perfekt abgestimmten Verzögerungen (Delays) */
         .animate-header { animation: headerPopUp 0.9s cubic-bezier(0.16, 1, 0.3, 1) forwards; }
         
-        /* Einzelne Elemente ploppen nacheinander hoch */
         .reveal-item-1 { opacity: 0; animation: textJumpUp 0.7s cubic-bezier(0.16, 1, 0.3, 1) forwards; animation-delay: 0.3s; }
         .reveal-item-2 { opacity: 0; animation: textJumpUp 0.7s cubic-bezier(0.16, 1, 0.3, 1) forwards; animation-delay: 0.5s; }
         .reveal-item-3 { opacity: 0; animation: textJumpUp 0.7s cubic-bezier(0.16, 1, 0.3, 1) forwards; animation-delay: 0.7s; }
         
-        /* Die Stift-Unterstreichung startet erst, wenn der Name voll da ist */
         .animate-draw { 
             stroke-dasharray: 600; 
             stroke-dashoffset: 600; 
@@ -99,7 +94,7 @@ title: Startseite
                 
                 <div class="reveal-item-3">
                     <p class="text-base md:text-xl text-blue-100 max-w-xl mb-8 leading-relaxed">
-                        Ich teile hier meine Projekte, Gedanken und kreativen Ideas. Außerdem findest du Einblicke in meine Brandings, meine Arbeit und neue Blogartikel.
+                        Ich teile hier meine Projekte, Gedanken und kreativen Ideen. Außerdem findest du Einblicke in meine Brandings, meine Arbeit und neue Blogartikel.
                     </p>
                     <a href="blog.html" class="bg-cyan-400 hover:bg-cyan-300 text-blue-950 font-black px-8 py-4 rounded-xl shadow-lg inline-block w-full md:w-auto text-center no-underline transition-all transform hover:-translate-y-1 hover:shadow-cyan-400/20">
                         Direkt zum Blog →
@@ -109,8 +104,8 @@ title: Startseite
             
             <div class="md:col-span-5 flex justify-center reveal-item-2">
                 <div class="relative group">
-                    <div class="absolute inset-0 bg-cyan-400 rounded-3xl transform rotate-3 scale-105 opacity-20 blur-xs transition-transform duration-300 group-hover:rotate-1"></div>
-                    <img src="ich.jpeg" alt="Julian Fleger" class="relative w-72 h-80 md:w-[24rem] md:h-[30rem] object-cover rounded-3xl shadow-2xl border-4 border-white/10 transition-transform duration-300 group-hover:scale-103">
+                    <div class="absolute inset-0 bg-cyan-400 rounded-3xl transform rotate-3 scale-105 opacity-20 blur-md transition-transform duration-300 group-hover:rotate-1"></div>
+                    <img src="ich.jpeg" alt="Julian Fleger" class="relative w-72 h-80 md:w-[24rem] md:h-[30rem] object-cover rounded-3xl shadow-2xl border-4 border-white/10 transition-transform duration-300 group-hover:scale-105">
                 </div>
             </div>
         </div>
@@ -121,8 +116,8 @@ title: Startseite
         <div class="mb-12">
             <div class="flex flex-col md:flex-row justify-between items-center md:items-baseline mb-10 gap-4 text-center md:text-left">
                 <div>
-                    <h2 class="text-3xl md:text-4xl font-black tracking-tight" style="color: #0f172a;">📰 Neueste Artikel</h2>
-                    <p class="text-base md:text-lg mt-2" style="color: #475569;">Frisch aus dem Gedankenkarussell gegriffen.</p>
+                    <h2 class="text-3xl md:text-4xl font-black tracking-tight text-slate-900">📰 Neueste Artikel</h2>
+                    <p class="text-base md:text-lg text-slate-600 mt-2">Frisch aus dem Gedankenkarussell gegriffen.</p>
                 </div>
                 <a href="blog.html" class="text-blue-600 font-bold hover:text-blue-800 transition-colors flex items-center gap-1 group no-underline">
                     Alle Artikel ansehen <span class="transform group-hover:translate-x-1 transition-transform">→</span>
@@ -139,10 +134,10 @@ title: Startseite
                             <span class="text-xs bg-blue-600 text-white px-2.5 py-1 rounded-md font-bold uppercase">{{ post.date | date: "%d.%m.%Y" }}</span>
                             {% assign words = post.content | strip_html | number_of_words %}
                             {% assign read_time = words | divided_by: 180 | plus: 1 %}
-                            <span class="text-xs font-semibold" style="color: #64748b;">📖 {{ read_time }} Min.</span>
+                            <span class="text-xs font-semibold text-slate-500">📖 {{ read_time }} Min.</span>
                         </div>
-                        <h3 class="text-xl font-black mt-1 mb-2 line-clamp-2" style="color: #0f172a;">{{ post.title }}</h3>
-                        <p class="text-sm mb-4 line-clamp-3" style="color: #334155;">{{ post.excerpt | strip_html }}</p>
+                        <h3 class="text-xl font-black mt-1 mb-2 line-clamp-2 text-slate-900">{{ post.title }}</h3>
+                        <p class="text-sm mb-4 line-clamp-3 text-slate-600">{{ post.excerpt | strip_html }}</p>
                     </div>
                     
                     <div class="flex flex-col gap-3 mt-4">
@@ -151,13 +146,13 @@ title: Startseite
                                 Artikel lesen →
                             </a>
                             
-                            <button onclick="likeUmschalten('{{ numeric_id }}', this)" class="like-btn text-xs font-bold px-3 py-1.5 rounded-full border transition-all cursor-pointer flex items-center gap-1" style="background: rgba(255,255,255,0.4); border-color: rgba(0,0,0,0.08); color: #0f172a;">
+                            <button onclick="likeUmschalten('{{ numeric_id }}', this)" class="like-btn text-xs font-bold px-3 py-1.5 rounded-full border transition-all cursor-pointer flex items-center gap-1 bg-white/40 border-black/10 text-slate-900 hover:bg-slate-50">
                                 🤍 <span class="like-counter">0</span> Likes
                             </button>
                         </div>
                         
                         <div class="flex justify-end">
-                            <button onclick="favoritUmschalten('{{ numeric_id }}', this)" class="fav-btn text-xs font-bold px-3 py-1.5 rounded-full border transition-all cursor-pointer w-full md:w-auto text-center" style="background: rgba(255,255,255,0.4); border-color: rgba(0,0,0,0.08); color: #0f172a;">
+                            <button onclick="favoritUmschalten('{{ numeric_id }}', this)" class="fav-btn text-xs font-bold px-3 py-1.5 rounded-full border transition-all cursor-pointer w-full md:w-auto text-center bg-white/40 border-black/10 text-slate-900 hover:bg-slate-50">
                                 ⭐ Favorit
                             </button>
                         </div>
@@ -165,7 +160,7 @@ title: Startseite
                 </div>
                 {% else %}
                 <div class="col-span-1 md:col-span-3 text-center py-12 rounded-2xl bg-white border border-slate-200">
-                    <p class="text-lg font-medium" style="color: #475569;">Bisher wurden noch keine Blog-Artikel veröffentlicht.</p>
+                    <p class="text-lg font-medium text-slate-600">Bisher wurden noch keine Blog-Artikel veröffentlicht.</p>
                 </div>
                 {% endfor %}
             </div>
@@ -174,16 +169,16 @@ title: Startseite
         <section class="my-16 p-8 md:p-12 rounded-3xl bg-white border border-slate-200/60 shadow-xl relative overflow-hidden">
             <div class="max-w-3xl mx-auto text-center mb-10">
                 <span class="bg-blue-100 text-blue-800 font-extrabold px-4 py-1.5 rounded-full text-xs uppercase tracking-wider">Neu auf M-Fleger</span>
-                <h2 class="text-3xl md:text-4xl font-black tracking-tight mt-3" style="color: #0f172a;">🌍 Das große Rechte-Hub</h2>
-                <p class="text-base md:text-lg mt-2" style="color: #334155;">Rechte gehen uns alle an – egal wie alt wir sind. Entdecke unser neues Portal, das Rechte für jeden verständlich erklärt.</p>
+                <h2 class="text-3xl md:text-4xl font-black tracking-tight mt-3 text-slate-900">🌍 Das große Rechte-Hub</h2>
+                <p class="text-base md:text-lg mt-2 text-slate-600">Rechte gehen uns alle an – egal wie alt wir sind. Entdecke unser neues Portal, das Rechte für jeden verständlich erklärt.</p>
             </div>
 
             <div class="grid grid-cols-1 md:grid-cols-3 gap-6">
                 <a href="kinderrechte.html" class="group p-6 rounded-2xl transition-all duration-300 no-underline flex flex-col justify-between hover:-translate-y-1 hover:shadow-lg bg-slate-50 border border-slate-200">
                     <div>
                         <span class="text-3xl block mb-3">🎒</span>
-                        <h3 class="text-xl font-black transition-colors group-hover:text-blue-600" style="color: #0f172a;">Kinderrechte</h3>
-                        <p class="text-sm mt-2 leading-relaxed" style="color: #334155;">Schutz, Bildung und Freizeit. Auf Augenhöhe und einfach erklärt für Kinder und Eltern.</p>
+                        <h3 class="text-xl font-black text-slate-900 transition-colors group-hover:text-blue-600">Kinderrechte</h3>
+                        <p class="text-sm mt-2 leading-relaxed text-slate-600">Schutz, Bildung und Freizeit. Auf Augenhöhe und einfach erklärt für Kinder und Eltern.</p>
                     </div>
                     <span class="text-blue-600 font-bold text-sm mt-4 inline-block">Mehr erfahren →</span>
                 </a>
@@ -191,8 +186,8 @@ title: Startseite
                 <a href="menschenrechte.html" class="group p-6 rounded-2xl transition-all duration-300 no-underline flex flex-col justify-between hover:-translate-y-1 hover:shadow-lg bg-slate-50 border border-slate-200">
                     <div>
                         <span class="text-3xl block mb-3">⚖️</span>
-                        <h3 class="text-xl font-black transition-colors group-hover:text-blue-600" style="color: #0f172a;">Menschenrechte</h3>
-                        <p class="text-sm mt-2 leading-relaxed" style="color: #334155;">Meinungsfreiheit, Gleichberechtigung und Würde. Die Säulen unserer Gesellschaft.</p>
+                        <h3 class="text-xl font-black text-slate-900 transition-colors group-hover:text-blue-600">Menschenrechte</h3>
+                        <p class="text-sm mt-2 leading-relaxed text-slate-600">Meinungsfreiheit, Gleichberechtigung und Würde. Die Säulen unserer Gesellschaft.</p>
                     </div>
                     <span class="text-blue-600 font-bold text-sm mt-4 inline-block">Mehr erfahren →</span>
                 </a>
@@ -200,8 +195,8 @@ title: Startseite
                 <a href="digitalrechte.html" class="group p-6 rounded-2xl transition-all duration-300 no-underline flex flex-col justify-between hover:-translate-y-1 hover:shadow-lg bg-slate-50 border border-slate-200">
                     <div>
                         <span class="text-3xl block mb-3">📱</span>
-                        <h3 class="text-xl font-black transition-colors group-hover:text-blue-600" style="color: #0f172a;">Digitalrechte</h3>
-                        <p class="text-sm mt-2 leading-relaxed" style="color: #334155;">Deine Rechte im Netz. Von Datenschutz bis zum Schutz vor Cybermobbing.</p>
+                        <h3 class="text-xl font-black text-slate-900 transition-colors group-hover:text-blue-600">Digitalrechte</h3>
+                        <p class="text-sm mt-2 leading-relaxed text-slate-600">Deine Rechte im Netz. Von Datenschutz bis zum Schutz vor Cybermobbing.</p>
                     </div>
                     <span class="text-blue-600 font-bold text-sm mt-4 inline-block">Mehr erfahren →</span>
                 </a>
@@ -216,12 +211,12 @@ title: Startseite
 
         <div class="grid grid-cols-1 sm:grid-cols-2 gap-6 mb-12">
             <div class="p-6 rounded-2xl flex items-center gap-4 hover:shadow-md transition-all bg-white border border-slate-200">
-                <div class="text-3xl p-4 rounded-xl" style="background: rgba(37, 99, 235, 0.1); color: #2563eb;">
+                <div class="text-3xl p-4 rounded-xl bg-blue-600/10 text-blue-600">
                     📰
                 </div>
                 <div>
-                    <span class="block text-2xl md:text-3xl font-black" style="color: #0f172a;">{{ site.posts.size }}</span>
-                    <span class="text-sm font-bold uppercase tracking-wider" style="color: #64748b;">Artikel veröffentlicht</span>
+                    <span class="block text-2xl md:text-3xl font-black text-slate-900">{{ site.posts.size }}</span>
+                    <span class="text-sm font-bold uppercase tracking-wider text-slate-500">Artikel veröffentlicht</span>
                 </div>
             </div>
 
@@ -231,12 +226,12 @@ title: Startseite
                 {% assign total_words = total_words | plus: words %}
             {% endfor %}
             <div class="p-6 rounded-2xl flex items-center gap-4 hover:shadow-md transition-all bg-white border border-slate-200">
-                <div class="text-3xl p-4 rounded-xl" style="background: rgba(6, 182, 212, 0.1); color: #0891b2;">
+                <div class="text-3xl p-4 rounded-xl bg-cyan-600/10 text-cyan-600">
                     ✍️
                 </div>
                 <div>
-                    <span class="block text-2xl md:text-3xl font-black" style="color: #0f172a;">{{ total_words }}</span>
-                    <span class="text-sm font-bold uppercase tracking-wider" style="color: #64748b;">Wörter geschrieben</span>
+                    <span class="block text-2xl md:text-3xl font-black text-slate-900">{{ total_words }}</span>
+                    <span class="text-sm font-bold uppercase tracking-wider text-slate-500">Wörter geschrieben</span>
                 </div>
             </div>
         </div>
