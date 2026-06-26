@@ -19,22 +19,22 @@ title: Spendenpartner
 </head>
 <body class="bg-gradient-to-br from-slate-50 to-blue-100 min-h-screen text-gray-900 font-sans">
 
-    <!-- Navigationsleiste -->
+    <!-- Navigationsleiste (Passend zum dunklen Kapsel-Look der Website) -->
     <nav class="w-full max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 h-20 flex items-center justify-between">
         <div class="flex-shrink-0">
             <a href="/" class="flex items-center gap-4 no-underline text-2xl font-black tracking-tight text-gray-900">
-                <img src="/auge-logo.jpg" alt="M-Fleger Logo" class="h-12 w-12 object-cover rounded-full shadow-md border border-white/40">
+                <img src="/auge-logo.jpg" alt="M-Fleger Logo" class="h-12 w-12 object-cover rounded-full shadow-md border border-gray-200">
                 <span>M-Fleger</span>
             </a>
         </div>
         <div class="hidden md:flex items-center space-x-8">
-            <a href="/" class="text-sm font-semibold text-gray-700 hover:text-blue-600 no-underline">Startseite</a>
-            <a href="/ueber-mich.html" class="text-sm font-semibold text-gray-700 hover:text-blue-600 no-underline">Über mich</a>
-            <a href="/unsere-rechte.html" class="text-sm font-semibold text-gray-700 hover:text-blue-600 no-underline">Rechte-Hub</a>
-            <a href="/spenden.html" class="text-sm font-semibold text-blue-600 no-underline">Spenden</a>
-            <a href="/blog.html" class="text-sm font-semibold text-gray-700 hover:text-blue-600 no-underline">Blog</a>
-            <a href="/kontakt.html" class="text-sm font-semibold text-gray-700 hover:text-blue-600 no-underline">Kontakt</a>
-            <a href="/login.html" class="text-sm font-bold text-white bg-blue-600 px-5 py-2.5 rounded-xl no-underline shadow-sm">Login</a>
+            <a href="/" class="text-sm font-semibold text-gray-700 hover:text-blue-600 no-underline transition-colors">Startseite</a>
+            <a href="/ueber-mich.html" class="text-sm font-semibold text-gray-700 hover:text-blue-600 no-underline transition-colors">Über mich</a>
+            <a href="/unsere-rechte.html" class="text-sm font-semibold text-gray-700 hover:text-blue-600 no-underline transition-colors">Rechte-Hub</a>
+            <a href="/spenden.html" class="text-sm font-semibold text-blue-600 no-underline transition-colors">Spenden</a>
+            <a href="/blog.html" class="text-sm font-semibold text-gray-700 hover:text-blue-600 no-underline transition-colors">Blog</a>
+            <a href="/kontakt.html" class="text-sm font-semibold text-gray-700 hover:text-blue-600 no-underline transition-colors">Contact</a>
+            <a href="/login.html" class="text-sm font-bold text-white bg-blue-600 px-5 py-2.5 rounded-xl no-underline shadow-sm hover:bg-blue-700 transition-all">Login</a>
         </div>
     </nav>
 
@@ -50,65 +50,78 @@ title: Spendenpartner
                     Mit deiner Unterstützung können wichtige Projekte und Organisationen ihre Arbeit fortsetzen. Jede Spende – egal wie groß oder klein – kann dazu beitragen, Kindern, Jugendlichen und Familien neue Perspektiven zu ermöglichen.
                 </p>
                 <p class="text-sm leading-relaxed">
-                    Auf dieser Seite findest du ausgewählte Organisationen, die sich täglich für Menschen einsetzen und konkrete Hilfe leisten.
+                    Auf dieser Seite findest du eine Auswahl an Organisationen, die sich täglich für Menschen einsetzen und konkrete Hilfe leisten.
                 </p>
             </div>
         </div>
 
-        <!-- Grid-Karten der Partner -->
+        <!-- Grid-Karten der Partner (Ohne geschützte Bild-Logos) -->
         <div class="grid grid-cols-1 md:grid-cols-2 gap-8">
+            
             <!-- 1. SOS Kinderdorf -->
-            <div class="liquid-glass p-8 rounded-3xl border border-white/40 shadow-md flex flex-col items-center text-center space-y-5">
-                <div class="h-20 flex items-center justify-center">
-                    <img src="/SOS%20Kinderdörfer%20transparentes%20logo.png" alt="SOS Kinderdorf" class="max-h-16 w-auto object-contain">
+            <div class="liquid-glass p-8 rounded-3xl border border-white/40 shadow-md flex flex-col items-center text-center space-y-5 transform hover:-translate-y-1 transition-all">
+                <div class="h-20 flex items-center justify-center text-emerald-600">
+                    <!-- Haus/Familie Icon -->
+                    <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor" class="w-14 h-14">
+                        <path stroke-linecap="round" stroke-linejoin="round" d="M2.25 12l8.954-8.955c.44-.439 1.152-.439 1.591 0L21.75 12M4.5 9.75v10.125c0 .621.504 1.125 1.125 1.125H9.75v-4.875c0-.621.504-1.125 1.125-1.125h2.25c.621 0 1.125.504 1.125 1.125V21h4.125c.621 0 1.125-.504 1.125-1.125V9.75M8.25 21h8.25" />
+                    </svg>
                 </div>
                 <h3 class="text-xl font-bold text-gray-900">SOS-Kinderdorf Berlin</h3>
-                <p class="text-sm text-gray-600 flex-grow">Unterstützt direkt die Arbeit im Kinderdorf Berlin. Es bietet Kindern ein sicheres Zuhause.</p>
-                <a href="https://www.sos-kinderdorf.de" target="_blank" class="w-full py-3 bg-blue-600 text-white font-bold text-sm rounded-xl no-underline hover:bg-blue-700 transition-colors">Zu SOS-Kinderdorf →</a>
+                <p class="text-sm text-gray-600 flex-grow">Unterstützt direkt die Arbeit im Kinderdorf Berlin. Es bietet Kindern ein sicheres, behütetes Zuhause.</p>
+                <a href="https://www.sos-kinderdorf.de" target="_blank" class="w-full py-3 bg-blue-600 text-white font-bold text-sm rounded-xl no-underline hover:bg-blue-700 transition-colors shadow-sm">Zu SOS-Kinderdorf →</a>
             </div>
 
             <!-- 2. Save the Children -->
-            <div class="liquid-glass p-8 rounded-3xl border border-white/40 shadow-md flex flex-col items-center text-center space-y-5">
-                <div class="h-20 flex items-center justify-center">
-                    <img src="/Save%20the%20Childrean%20transparentes%20logo.png" alt="Save the Children" class="max-h-16 w-auto object-contain">
+            <div class="liquid-glass p-8 rounded-3xl border border-white/40 shadow-md flex flex-col items-center text-center space-y-5 transform hover:-translate-y-1 transition-all">
+                <div class="h-20 flex items-center justify-center text-red-500">
+                    <!-- Weltkugel/Kinderrechte Icon -->
+                    <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor" class="w-14 h-14">
+                        <path stroke-linecap="round" stroke-linejoin="round" d="M12.75 3.03v.568c0 .334.148.65.405.864l1.068.89c.442.369.535 1.01.216 1.49l-.51.766a2.25 2.25 0 01-1.161.886l-.143.048a1.107 1.107 0 00-.57 1.664c.369.553.168 1.307-.434 1.604L10.5 11.362v1.13c0 .138-.034.275-.1.398l-.99 1.782A2.25 2.25 0 008.99 15.75v1.237c0 .139-.036.276-.104.399l-.49.882a2.25 2.25 0 01-1.968 1.164H6.75a2.25 2.25 0 01-1.962-1.144l-.715-1.3A2.25 2.25 0 014.07 15.42a2.25 2.25 0 01.378-1.332l1.157-1.735a2.25 2.25 0 011.088-.82l1.373-.458c.451-.15.748-.578.748-1.054V6.75a2.25 2.25 0 01.394-1.24l1.245-1.743a2.25 2.25 0 011.665-.92l.854-.053c.12-.007.24-.012.36-.014zm0 0h-.012A9.75 9.75 0 1021.75 12c0-.728-.08-1.436-.232-2.116l-.123-.554a2.25 2.25 0 00-1.772-1.723l-.318-.063a2.25 2.25 0 01-1.802-2.182v-.503a2.25 2.25 0 00-1.741-2.19l-.431-.092a2.25 2.25 0 00-1.815.451l-.29.23a2.25 2.25 0 01-2.428.291l-.15-.075a2.25 2.25 0 00-1.57-.115l-.11.034z" />
+                    </svg>
                 </div>
                 <h3 class="text-xl font-bold text-gray-900">Save the Children</h3>
-                <p class="text-sm text-gray-600 flex-grow">Die weltweit größte unabhängige Organisation für Kinderrechte leistet wichtige Soforthilfe.</p>
-                <a href="https://www.savethechildren.de" target="_blank" class="w-full py-3 bg-blue-600 text-white font-bold text-sm rounded-xl no-underline hover:bg-blue-700 transition-colors">Zu Save the Children →</a>
+                <p class="text-sm text-gray-600 flex-grow">Die weltweit größte unabhängige Organisation für Kinderrechte leistet wichtige humanitäre Soforthilfe.</p>
+                <a href="https://www.savethechildren.de" target="_blank" class="w-full py-3 bg-blue-600 text-white font-bold text-sm rounded-xl no-underline hover:bg-blue-700 transition-colors shadow-sm">Zu Save the Children →</a>
             </div>
 
             <!-- 3. Zukunft für Dich -->
-            <div class="liquid-glass p-8 rounded-3xl border border-white/40 shadow-md flex flex-col items-center text-center space-y-5">
-                <div class="h-20 flex items-center justify-center">
-                    <img src="/Zukunft%20für%20Dich%20transparentes%20logo.png" alt="Zukunft für Dich" class="max-h-16 w-auto object-contain">
+            <div class="liquid-glass p-8 rounded-3xl border border-white/40 shadow-md flex flex-col items-center text-center space-y-5 transform hover:-translate-y-1 transition-all">
+                <div class="h-20 flex items-center justify-center text-orange-500">
+                    <!-- Bildungs-Icon (Buch/Abschluss) -->
+                    <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor" class="w-14 h-14">
+                        <path stroke-linecap="round" stroke-linejoin="round" d="M4.26 10.174L10.72 14.17a1.65 1.65 0 001.56 0l6.46-3.995M21 12v5.25a2.25 2.25 0 01-2.25 2.25H5.25A2.25 2.25 0 013 17.25V12M12 3L3 8.5 12 14l9-5.5L12 3z" />
+                    </svg>
                 </div>
                 <h3 class="text-xl font-bold text-gray-900">Zukunft für Dich</h3>
-                <p class="text-sm text-gray-600 flex-grow">Fördert Bildungs- und Freizeitprojekte für benachteiligte Kinder und Jugendliche.</p>
-                <a href="#" class="w-full py-3 bg-blue-600 text-white font-bold text-sm rounded-xl no-underline hover:bg-blue-700 transition-colors">Zu Zukunft für Dich →</a>
+                <p class="text-sm text-gray-600 flex-grow">Fördert Bildungs-, Kultur- und Freizeitprojekte für finanziell oder sozial benachteiligte Kinder und Jugendliche.</p>
+                <a href="#" class="w-full py-3 bg-blue-600 text-white font-bold text-sm rounded-xl no-underline hover:bg-blue-700 transition-colors shadow-sm">Zu Zukunft für Dich →</a>
             </div>
 
             <!-- 4. Glaube Liebe Hoffnung -->
-            <div class="liquid-glass p-8 rounded-3xl border border-white/40 shadow-md flex flex-col items-center text-center space-y-5">
-                <div class="h-20 flex items-center justify-center">
-                    <img src="/glaube%20liebe%20hoffnung%20stiftung%20transparent%20logo.png" alt="Glaube Liebe Hoffnung" class="max-h-16 w-auto object-contain">
+            <div class="liquid-glass p-8 rounded-3xl border border-white/40 shadow-md flex flex-col items-center text-center space-y-5 transform hover:-translate-y-1 transition-all">
+                <div class="h-20 flex items-center justify-center text-cyan-600">
+                    <!-- Herz/Hoffnung Icon -->
+                    <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor" class="w-14 h-14">
+                        <path stroke-linecap="round" stroke-linejoin="round" d="M21 8.25c0-2.485-2.099-4.5-4.688-4.5-1.935 0-3.597 1.126-4.312 2.733-.715-1.607-2.377-2.733-4.313-2.733C5.1 3.75 3 5.765 3 8.25c0 7.22 9 12 9 12s9-4.78 9-12z" />
+                    </svg>
                 </div>
                 <h3 class="text-xl font-bold text-gray-900">Glaube Liebe Hoffnung</h3>
-                <p class="text-sm text-gray-600 flex-grow">Engagiert sich in sozialen Brennpunkten und unterstützt innovative Familienhilfen.</p>
-                <a href="#" class="w-full py-3 bg-blue-600 text-white font-bold text-sm rounded-xl no-underline hover:bg-blue-700 transition-colors">Zur Stiftung →</a>
+                <p class="text-sm text-gray-600 flex-grow">Engagiert sich aktiv in sozialen Brennpunkten und unterstützt innovative, nachhaltige Familienhilfen.</p>
+                <a href="#" class="w-full py-3 bg-blue-600 text-white font-bold text-sm rounded-xl no-underline hover:bg-blue-700 transition-colors shadow-sm">Zur Stiftung →</a>
             </div>
         </div>
 
-        <!-- Transparenz- & Info-Abschnitt im unteren Bereich -->
+        <!-- Transparenz- & Info-Abschnitt -->
         <div class="grid grid-cols-1 md:grid-cols-2 gap-8 pt-6">
             
             <!-- Wo kommt deine Spende hin? -->
             <div class="liquid-glass p-6 rounded-2xl border border-white/30 shadow-sm space-y-3 text-gray-700">
                 <h3 class="text-lg font-bold text-gray-900">Wo kommt deine Spende hin?</h3>
                 <p class="text-sm leading-relaxed">
-                    Transparenz ist uns wichtig. Deshalb unterstützen wir ausschließlich Organisationen, die sich nachweislich für Kinder, Jugendliche und Familien einsetzen.
+                    Transparenz ist uns wichtig. Deshalb listen wir ausschließlich anerkannte Organisationen, die sich nachweislich für Kinder, Jugendliche und Familien einsetzen.
                 </p>
                 <p class="text-sm leading-relaxed">
-                    Deine Spende geht direkt an die jeweilige Organisation. M-Fleger behält keine Spenden ein und erhebt keine Gebühren. Durch einen Klick auf die jeweilige Organisation wirst du direkt auf deren offizielle Spendenseite weitergeleitet. Dort kannst du selbst entscheiden, ob und wie du die Arbeit unterstützen möchtest.
+                    Deine Spende geht direkt an die jeweilige Organisation. M-Fleger behält keine Spenden ein und erhebt keinerlei Gebühren. Durch einen Klick auf den Button wirst du direkt auf deren offizielle Spendenseite weitergeleitet.
                 </p>
             </div>
 
