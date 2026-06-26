@@ -1,26 +1,37 @@
-<div id="cookie-banner" class="hidden fixed bottom-4 right-4 left-4 md:left-auto md:max-w-md p-5 z-50 animate-fade-in flex flex-col gap-3 liquid-glass">
-    <div class="flex items-start gap-3">
-        <span class="text-2xl mt-0.5">🍪</span>
-        <div>
-            <h4 class="font-bold text-sm">Cookie-Hinweis</h4>
-            <p class="text-xs mt-1 leading-relaxed">
-                Diese Website nutzt lediglich technisch notwendige Funktionen, um dir ein sicheres und stabiles Surfen zu ermöglichen. Es werden keine Tracking-Cookies verwendet! 
-                Weitere Infos findest du in unserer <a href="/datenschutz.html" class="text-blue-600 underline hover:text-blue-700 font-medium">Datenschutzerklärung</a>.
-            </p>
+<!-- Das neue Full-Screen Overlay Banner (wird standardmäßig komplett versteckt) -->
+<div id="cookie-overlay" class="hidden fixed inset-0 bg-black/60 backdrop-blur-sm z-[9999] flex items-center justify-center p-4">
+    <div class="bg-white rounded-2xl shadow-2xl max-w-md w-full p-6 animate-fade-in flex flex-col gap-4 border border-gray-100">
+        <div class="flex items-start gap-4">
+            <span class="text-3xl">🍪</span>
+            <div>
+                <h3 class="font-bold text-lg text-gray-900">Cookie- & Tracking-Einstellungen</h3>
+                <p class="text-sm text-gray-600 mt-1 leading-relaxed">
+                    Wir würden gerne Google Analytics verwenden, um unsere Website für dich zu verbessern. Dabei werden anonyme Daten über deine Gerätenutzung gesammelt.
+                    Weitere Infos findest du in unserer <a href="/datenschutz.html" class="text-blue-600 underline hover:text-blue-700 font-medium">Datenschutzerklärung</a>.
+                </p>
+            </div>
         </div>
-    </div>
-    <div class="flex justify-end mt-1">
-        <button id="accept-cookies" class="bg-blue-600 hover:bg-blue-500 text-white font-bold text-xs px-4 py-2 rounded-lg transition-colors cursor-pointer border-0 shadow-md">
-            Alles klar!
-        </button>
+        
+        <!-- Die zwei Buttons zum Annehmen oder Ablehnen -->
+        <div class="flex gap-3 justify-end mt-2">
+            <button id="reject-cookies" class="bg-gray-100 hover:bg-gray-200 text-gray-700 font-semibold text-sm px-4 py-2.5 rounded-xl transition-colors cursor-pointer border-0">
+                Ablehnen
+            </button>
+            <button id="accept-cookies" class="bg-blue-600 hover:bg-blue-500 text-white font-bold text-sm px-5 py-2.5 rounded-xl transition-colors cursor-pointer border-0 shadow-md">
+                Akzeptieren
+            </button>
+        </div>
     </div>
 </div>
 
 <script>
-   const GA_MEASUREMENT_ID = "G-GMBFPW849F"; // <--- DEINE ID REIN
+    // DEINE ECHTE MESS-ID
+    const GA_MEASUREMENT_ID = "G-GMBFPW849F"; 
 
+    // Funktion zum Laden von Google Analytics
     function loadGoogleAnalytics() {
         if (document.getElementById('ga-script')) return;
+        
         const gaScript = document.createElement('script');
         gaScript.id = 'ga-script';
         gaScript.async = true;
@@ -35,19 +46,31 @@
     }
 
     document.addEventListener("DOMContentLoaded", function() {
-        // Wenn schon mal akzeptiert wurde -> GA direkt starten (Banner bleibt zu)
-        if (localStorage.getItem("cookies-accepted")) {
+        const consentStatus = localStorage.getItem("cookie-consent");
+
+        // 1. Wenn bereits zugestimmt wurde, Analytics sofort laden
+        if (consentStatus === "accepted") {
             loadGoogleAnalytics();
-        } else {
-            // Wenn noch nicht akzeptiert -> Banner zeigen
-            document.getElementById("cookie-banner").classList.remove("hidden");
+        } 
+        // 2. Wenn noch keine Entscheidung getroffen wurde (weder akzeptiert noch abgelehnt)
+        else if (consentStatus === null) {
+            // Nach exakt 3 Sekunden (3000 Millisekunden) das Banner einblenden
+            setTimeout(function() {
+                document.getElementById("cookie-overlay").classList.remove("hidden");
+            }, 3000);
         }
 
-        // Klick auf den Button
+        // Event-Listener für den "Akzeptieren"-Button
         document.getElementById("accept-cookies").addEventListener("click", function() {
-            localStorage.setItem("cookies-accepted", "true"); // Merken für die nächsten Seiten
-            document.getElementById("cookie-banner").classList.add("hidden");
-            loadGoogleAnalytics(); // Jetzt tracken
+            localStorage.setItem("cookie-consent", "accepted");
+            document.getElementById("cookie-overlay").classList.add("hidden");
+            loadGoogleAnalytics(); // Analytics startet sofort
+        });
+
+        // Event-Listener für den "Ablehnen"-Button
+        document.getElementById("reject-cookies").addEventListener("click", function() {
+            localStorage.setItem("cookie-consent", "rejected");
+            document.getElementById("cookie-overlay").classList.add("hidden"); // Schließt das Banner, lädt kein Analytics
         });
     });
 </script>
