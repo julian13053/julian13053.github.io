@@ -81,21 +81,38 @@ title: Datenschutz
             <section>
                 <h2 class="text-2xl font-black mb-3" style="color: #0f172a;">5. Cookies und LocalStorage</h2>
                 <p class="leading-relaxed mb-4" style="color: #334155;">
-                    Diese Website nutzt technisch notwendige Speichermedien, um die Funktionalität zu gewährleisten. 
+                    Diese Website nutzt Speichermedien im Browser, um grundlegende Funktionen bereitzustellen und deine Privatsphäre-Einstellungen zu sichern.
                 </p>
                 <ul class="list-disc pl-5 space-y-2 text-sm" style="color: #334155;">
-                    <li><strong>Cookie-Banner Auswahl:</strong> Deine Entscheidung im Cookie-Banner wird in einem technisch notwendigen Cookie oder im LocalStorage gespeichert, damit das Banner nicht bei jedem Seitenaufruf neu erscheint.</li>
+                    <li><strong>Cookie-Banner-Auswahl:</strong> Deine Entscheidung im Cookie-Banner (akzeptiert oder abgelehnt) wird im LocalStorage unter dem Schlüssel <code>cookie-consent</code> gespeichert. Dies ist technisch notwendig, damit das Banner nach deiner Entscheidung ausgeblendet bleibt und nicht bei jedem Seitenaufruf neu erscheint.</li>
                     <li><strong>Anmelde-Sitzung (Session):</strong> Supabase nutzt den LocalStorage deines Browsers, um ein sicheres Zugriffs-Token (Session-Token) zu speichern. Dadurch bleibst du eingeloggt, während du durch die verschiedenen Seiten navigierst. Ohne diesen Speicher wäre eine Anmeldung technisch nicht möglich.</li>
                 </ul>
                 <p class="text-sm mt-4" style="color: #475569;">
-                    Da es sich hierbei ausschließlich um <strong>technisch absolut notwendige Funktionen</strong> handelt, ist hierfür keine gesonderte Marketing-Einwilligung erforderlich (gemäß TTDSG / DSGVO).
+                    Da es sich hierbei um <strong>technisch absolut notwendige Funktionen</strong> zur Ausführung der von dir gewünschten Dienste (Einloggen & Cookie-Präferenz merken) handelt, ist hierfür keine gesonderte Einwilligung erforderlich (gemäß TDDDG / DSGVO).
                 </p>
             </section>
 
             <hr style="border-color: rgba(255, 255, 255, 0.4);">
 
+            <!-- NEUER ABSCHNITT FÜR GOOGLE ANALYTICS -->
             <section>
-                <h2 class="text-2xl font-black mb-3" style="color: #0f172a;">6. Dein Recht auf Löschung ("Recht auf Vergessenwerden")</h2>
+                <h2 class="text-2xl font-black mb-3" style="color: #0f172a;">6. Webanalyse (Google Analytics 4)</h2>
+                <p class="leading-relaxed mb-4" style="color: #334155;">
+                    Diese Website nutzt Google Analytics 4, einen Webanalysedienst der Google Ireland Limited, Gordon House, Barrow Street, Dublin 4, Irland („Google“). 
+                </p>
+                <p class="leading-relaxed mb-4" style="color: #334155;">
+                    Google Analytics hilft uns zu verstehen, wie Besucher mit unserer Website interagieren. Dabei werden anonymisierte Daten wie Seitenaufrufe, Verweildauer, genutzte Betriebssysteme und die grobe Herkunft erfasst. Deine IP-Adresse wird bei der Erfassung in Google Analytics 4 standardmäßig automatisch anonymisiert (gekürzt), sodass eine direkte persönliche Zuordnung ausgeschlossen ist.
+                </p>
+                <div class="p-4 rounded-xl text-sm space-y-2 mb-4" style="background: rgba(37, 99, 235, 0.08); border: 1px solid rgba(37, 99, 235, 0.2); color: #1e3a8a;">
+                    <p><strong>Freiwilligkeit & Widerruf:</strong> Die Datenerfassung durch Google Analytics startet erst, wenn du im Cookie-Overlay aktiv auf <strong>„Akzeptieren“</strong> klickst. Wenn du auf „Ablehnen“ klickst, wird kein Code geladen und kein Tracking durchgeführt.</p>
+                    <p><strong>Rechtsgrundlage:</strong> Die Verarbeitung deiner Daten erfolgt ausschließlich auf Grundlage deiner ausdrücklichen Einwilligung gemäß <strong>Art. 6 Abs. 1 lit. a DSGVO</strong>.</p>
+                </div>
+            </section>
+
+            <hr style="border-color: rgba(255, 255, 255, 0.4);">
+
+            <section>
+                <h2 class="text-2xl font-black mb-3" style="color: #0f172a;">7. Dein Recht auf Löschung ("Recht auf Vergessenwerden")</h2>
                 <p class="leading-relaxed mb-4" style="color: #334155;">
                     Du hast jederzeit die volle Kontrolle über deine Daten. Du hast das Recht, Auskunft über deine gespeicherten Daten zu erhalten, diese zu korrigieren oder komplett löschen zu lassen.
                 </p>
@@ -107,7 +124,7 @@ title: Datenschutz
             <hr style="border-color: rgba(255, 255, 255, 0.4);">
 
             <section>
-                <h2 class="text-2xl font-black mb-3" style="color: #0f172a;">7. Hosting der Website</h2>
+                <h2 class="text-2xl font-black mb-3" style="color: #0f172a;">8. Hosting der Website</h2>
                 <p class="leading-relaxed" style="color: #334155;">
                     Diese Website wird über <strong>GitHub Pages</strong> (GitHub Inc., 88 Colin P Kelly Jr St, San Francisco, CA 94107, USA) gehostet. Beim Aufruf der Seite werden automatisch Logfiles (u.a. IP-Adresse des Aufrufers) durch GitHub verarbeitet, um die Sicherheit und Stabilität des Dienstes zu gewährleisten.
                 </p>
