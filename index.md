@@ -107,25 +107,25 @@ robots: index, follow
                         Ich bin Julian Fleger. Auf diesem Portfolio teile ich meine kreativen Ideen, Brandings und Web-Projekte rund um das Thema digitale Pflege-Agenturen sowie neue, spannende Blogartikel.
                     </p>
                     <a href="blog.html" class="bg-cyan-400 hover:bg-cyan-300 text-blue-950 font-black px-8 py-4 rounded-xl shadow-lg inline-block w-full md:w-auto text-center no-underline transition-all transform hover:-translate-y-1 hover:shadow-cyan-400/20">
-                        Direkt zum Blog →
+                        Direct zum Blog →
                     </a>
                 </div>
             </div>
             
-            <!-- AUTOMATISCHE BILDER-SLIDESHOW MIT 2 BILDERN -->
+            <!-- AUTOMATISCHE BILDER-SLIDESHOW MIT 2 RECHTECKIGEN BILDERN -->
             <div class="md:col-span-5 flex justify-center reveal-item-2">
                 <div class="relative group">
-                    <!-- Schicker Glow-Effekt im Hintergrund -->
-                    <div class="absolute inset-0 bg-cyan-400 rounded-full transform rotate-3 scale-105 opacity-20 blur-xs transition-transform duration-300 group-hover:rotate-1"></div>
+                    <!-- Schicker Glow-Effekt im Hintergrund (rechteckig) -->
+                    <div class="absolute inset-0 bg-cyan-400 rounded-2xl transform rotate-3 scale-105 opacity-20 blur-xs transition-transform duration-300 group-hover:rotate-1"></div>
                     
-                    <!-- Kreisrunder Bilder-Container -->
-                    <div class="relative w-64 h-64 md:w-80 md:h-80 rounded-full overflow-hidden shadow-2xl border-4 border-white/10 bg-slate-800">
+                    <!-- Rechteckiger Bilder-Container (Hochformat) -->
+                    <div class="relative w-64 h-80 md:w-80 md:h-[400px] rounded-2xl overflow-hidden shadow-2xl border-4 border-white/10 bg-slate-800">
                         <!-- Bild 1 -->
-                        <img src="ich.jpeg" alt="Julian Fleger Portfolio - Webentwicklung" 
+                        <img src="mein-bild-1.jpg" alt="Julian Fleger Portfolio - Webentwicklung" 
                              class="slideshow-img absolute inset-0 w-full h-full object-cover transition-opacity duration-1000 opacity-100">
                         
                         <!-- Bild 2 -->
-                        <img src="ich2.jpeg" alt="Julian Fleger - Digitale Lösungen für die Agentur Pflege" 
+                        <img src="mein-bild-2.jpg" alt="Julian Fleger - Digitale Lösungen für die Agentur Pflege" 
                              class="slideshow-img absolute inset-0 w-full h-full object-cover transition-opacity duration-1000 opacity-0">
                     </div>
                 </div>
