@@ -112,7 +112,7 @@ robots: index, follow
                 </div>
             </div>
             
-            <!-- HIER IST DIE NEUE BILDER-SLIDESHOW -->
+            <!-- AUTOMATISCHE BILDER-SLIDESHOW MIT 2 BILDERN -->
             <div class="md:col-span-5 flex justify-center reveal-item-2">
                 <div class="relative group">
                     <!-- Schicker Glow-Effekt im Hintergrund -->
@@ -120,16 +120,12 @@ robots: index, follow
                     
                     <!-- Kreisrunder Bilder-Container -->
                     <div class="relative w-64 h-64 md:w-80 md:h-80 rounded-full overflow-hidden shadow-2xl border-4 border-white/10 bg-slate-800">
-                        <!-- Bild 1 (Dein Originalbild) -->
+                        <!-- Bild 1 -->
                         <img src="ich.jpeg" alt="Julian Fleger Portfolio - Webentwicklung" 
                              class="slideshow-img absolute inset-0 w-full h-full object-cover transition-opacity duration-1000 opacity-100">
                         
-                        <!-- Bild 2 (Ersetze 'ich2.jpeg' durch den Pfad deines 2. Bildes) -->
+                        <!-- Bild 2 -->
                         <img src="ich2.jpeg" alt="Julian Fleger - Digitale Lösungen für die Agentur Pflege" 
-                             class="slideshow-img absolute inset-0 w-full h-full object-cover transition-opacity duration-1000 opacity-0">
-                        
-                        <!-- Bild 3 (Ersetze 'ich3.jpeg' durch den Pfad deines 3. Bildes) -->
-                        <img src="ich3.jpeg" alt="M-Fleger Branding und Design für die Pflege" 
                              class="slideshow-img absolute inset-0 w-full h-full object-cover transition-opacity duration-1000 opacity-0">
                     </div>
                 </div>
@@ -438,24 +434,24 @@ robots: index, follow
             } catch (err) { zeigeBanner('error', 'Fehler', err.message); }
         }
 
-        // NEUES JAVASCRIPT FÜR DIE AUTOMATISCHE BILDER-SLIDESHOW
+        // OPTIMIERTES JAVASCRIPT FÜR DIE AUTOMATISCHE BILDER-SLIDESHOW (NUR 2 BILDER)
         document.addEventListener("DOMContentLoaded", function() {
-            datenLaden(); // Lädt deine Supabase-Daten
+            datenLaden();
 
             const images = document.querySelectorAll('.slideshow-img');
             let currentIndex = 0;
 
-            if (images.length <= 1) return;
+            if (images.length < 2) return;
 
             setInterval(function() {
-                // 1. Altes Bild ausblenden
+                // Altes Bild ausblenden
                 images[currentIndex].classList.remove('opacity-100');
                 images[currentIndex].classList.add('opacity-0');
 
-                // 2. Index erhöhen (und nach dem letzten Bild wieder von vorne starten)
-                currentIndex = (currentIndex + 1) % images.length;
+                // Index wechseln (0 wird 1, 1 wird 0)
+                currentIndex = (currentIndex + 1) % 2;
 
-                // 3. Neues Bild einblenden
+                // Neues Bild einblenden
                 images[currentIndex].classList.remove('opacity-0');
                 images[currentIndex].classList.add('opacity-100');
             }, 4000); // Wechselt alle 4 Sekunden vollautomatisch
