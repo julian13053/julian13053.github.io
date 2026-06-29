@@ -1,27 +1,32 @@
 ---
 layout: null
-title: Startseite
+title: Julian Fleger | Portfolio & Web-Projekte für die Pflege-Agentur
+description: Entdecke das kreative Portfolio und den Blog von Julian Fleger. Moderne Web-Projekte, Brandings und digitale Lösungen für Pflege-Agenturen.
+keywords: Julian Fleger, Julian Fleger Portfolio, M-Fleger, Agentur Pflege, Pflege Webdesign, Webentwickler Berlin, Blog, Branding
+robots: index, follow
 ---
 <html lang="de" class="scroll-smooth">
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     
-    <title>M-Fleger | Portfolio & Blog von Julian Fleger</title>
-    <meta name="description" content="Willkommen auf M-Fleger. Entdecke die kreativen Projekte, Brandings und neuesten Blogartikel von Julian Fleger. Punktgenau verbunden.">
-    <meta name="keywords" content="Julian Fleger, M-Fleger, Portfolio, Blog, Design, Development, Branding, Projekte">
-    <meta name="robots" content="index, follow">
-    <link rel="canonical" href="https://julian13053.github.io/index.html">
+    <!-- Dynamische & optimierte SEO-Tags -->
+    <title>{{ page.title }}</title>
+    <meta name="description" content="{{ page.description }}">
+    <meta name="keywords" content="{{ page.keywords }}">
+    <meta name="robots" content="{{ page.robots }}">
+    <link class="flex" rel="icon" type="image/jpeg" href="auge-logo.jpg">
+    <link class="canonical" href="https://julian13053.github.io/index.html">
 
+    <!-- Open Graph Tags (Für WhatsApp & Social Media Vorschauen) -->
     <meta property="og:type" content="website">
-    <meta property="og:title" content="M-Fleger | Portfolio & Blog von Julian Fleger">
-    <meta property="og:description" content="Willkommen auf M-Fleger. Entdecke meine Projekte, kreativen Ideen und neuesten Blogartikel!">
+    <meta property="og:title" content="{{ page.title }}">
+    <meta property="og:description" content="{{ page.description }}">
     <meta property="og:image" content="https://julian13053.github.io/auge-logo.jpg">
     <meta property="og:url" content="https://julian13053.github.io/index.html">
     
     <link rel="stylesheet" href="/style.css">
     
-    <link class="flex" rel="icon" type="image/jpeg" href="auge-logo.jpg">
     <script src="https://cdn.jsdelivr.net/npm/@tailwindcss/browser@4"></script>
     <script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script>
     <style>
@@ -82,7 +87,7 @@ title: Startseite
             
             <div class="md:col-span-7 text-center md:text-left">
                 <div class="reveal-item-1">
-                    <span class="bg-cyan-400/20 text-cyan-300 border border-cyan-400/30 font-extrabold px-4 py-1.5 rounded-full text-xs uppercase tracking-wider">Design & Development</span>
+                    <span class="bg-cyan-400/20 text-cyan-300 border border-cyan-400/30 font-extrabold px-4 py-1.5 rounded-full text-xs uppercase tracking-wider">Design & Development für Pflege-Agenturen</span>
                 </div>
                 
                 <div class="reveal-item-2 mt-5 mb-6">
@@ -99,7 +104,7 @@ title: Startseite
                 
                 <div class="reveal-item-3">
                     <p class="text-base md:text-xl text-blue-100 max-w-xl mb-8 leading-relaxed">
-                        Ich teile hier meine Projekte, Gedanken und kreativen Ideas. Außerdem findest du Einblicke in meine Brandings, meine Arbeit und neue Blogartikel.
+                        Ich bin Julian Fleger. Auf diesem Portfolio teile ich meine kreativen Ideen, Brandings und Web-Projekte rund um das Thema digitale Pflege-Agenturen sowie neue, spannende Blogartikel.
                     </p>
                     <a href="blog.html" class="bg-cyan-400 hover:bg-cyan-300 text-blue-950 font-black px-8 py-4 rounded-xl shadow-lg inline-block w-full md:w-auto text-center no-underline transition-all transform hover:-translate-y-1 hover:shadow-cyan-400/20">
                         Direkt zum Blog →
@@ -107,12 +112,29 @@ title: Startseite
                 </div>
             </div>
             
+            <!-- HIER IST DIE NEUE BILDER-SLIDESHOW -->
             <div class="md:col-span-5 flex justify-center reveal-item-2">
                 <div class="relative group">
-                    <div class="absolute inset-0 bg-cyan-400 rounded-3xl transform rotate-3 scale-105 opacity-20 blur-xs transition-transform duration-300 group-hover:rotate-1"></div>
-                    <img src="ich.jpeg" alt="Julian Fleger" class="relative w-72 h-80 md:w-[24rem] md:h-[30rem] object-cover rounded-3xl shadow-2xl border-4 border-white/10 transition-transform duration-300 group-hover:scale-103">
+                    <!-- Schicker Glow-Effekt im Hintergrund -->
+                    <div class="absolute inset-0 bg-cyan-400 rounded-full transform rotate-3 scale-105 opacity-20 blur-xs transition-transform duration-300 group-hover:rotate-1"></div>
+                    
+                    <!-- Kreisrunder Bilder-Container -->
+                    <div class="relative w-64 h-64 md:w-80 md:h-80 rounded-full overflow-hidden shadow-2xl border-4 border-white/10 bg-slate-800">
+                        <!-- Bild 1 (Dein Originalbild) -->
+                        <img src="ich.jpeg" alt="Julian Fleger Portfolio - Webentwicklung" 
+                             class="slideshow-img absolute inset-0 w-full h-full object-cover transition-opacity duration-1000 opacity-100">
+                        
+                        <!-- Bild 2 (Ersetze 'ich2.jpeg' durch den Pfad deines 2. Bildes) -->
+                        <img src="ich2.jpeg" alt="Julian Fleger - Digitale Lösungen für die Agentur Pflege" 
+                             class="slideshow-img absolute inset-0 w-full h-full object-cover transition-opacity duration-1000 opacity-0">
+                        
+                        <!-- Bild 3 (Ersetze 'ich3.jpeg' durch den Pfad deines 3. Bildes) -->
+                        <img src="ich3.jpeg" alt="M-Fleger Branding und Design für die Pflege" 
+                             class="slideshow-img absolute inset-0 w-full h-full object-cover transition-opacity duration-1000 opacity-0">
+                    </div>
                 </div>
             </div>
+            
         </div>
     </header>
 
@@ -416,7 +438,28 @@ title: Startseite
             } catch (err) { zeigeBanner('error', 'Fehler', err.message); }
         }
 
-        document.addEventListener("DOMContentLoaded", datenLaden);
+        // NEUES JAVASCRIPT FÜR DIE AUTOMATISCHE BILDER-SLIDESHOW
+        document.addEventListener("DOMContentLoaded", function() {
+            datenLaden(); // Lädt deine Supabase-Daten
+
+            const images = document.querySelectorAll('.slideshow-img');
+            let currentIndex = 0;
+
+            if (images.length <= 1) return;
+
+            setInterval(function() {
+                // 1. Altes Bild ausblenden
+                images[currentIndex].classList.remove('opacity-100');
+                images[currentIndex].classList.add('opacity-0');
+
+                // 2. Index erhöhen (und nach dem letzten Bild wieder von vorne starten)
+                currentIndex = (currentIndex + 1) % images.length;
+
+                // 3. Neues Bild einblenden
+                images[currentIndex].classList.remove('opacity-0');
+                images[currentIndex].classList.add('opacity-100');
+            }, 4000); // Wechselt alle 4 Sekunden vollautomatisch
+        });
     </script>
 </body>
 </html>
