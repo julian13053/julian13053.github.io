@@ -112,17 +112,21 @@ robots: index, follow
                 </div>
             </div>
             
-            <!-- EINZELNES BILD STATT SLIDESHOW (BILD 2) -->
+            <!-- AUTOMATISCHE BILDER-SLIDESHOW MIT 2 RECHTECKIGEN BILDERN -->
             <div class="md:col-span-5 flex justify-center reveal-item-2">
                 <div class="relative group">
-                    <!-- Schicker Glow-Effekt im Hintergrund -->
+                    <!-- Schicker Glow-Effekt im Hintergrund (rechteckig) -->
                     <div class="absolute inset-0 bg-cyan-400 rounded-2xl transform rotate-3 scale-105 opacity-20 blur-xs transition-transform duration-300 group-hover:rotate-1"></div>
                     
                     <!-- Rechteckiger Bilder-Container (Hochformat) -->
                     <div class="relative w-64 h-80 md:w-80 md:h-[400px] rounded-2xl overflow-hidden shadow-2xl border-4 border-white/10 bg-slate-800">
-                        <!-- Das ehemals 2. Bild ist jetzt das einzige und dauerhaft sichtbar -->
+                        <!-- Bild 1 -->
+                        <img src="mein-bild-1.jpg" alt="Julian Fleger Portfolio - Webentwicklung" 
+                             class="slideshow-img absolute inset-0 w-full h-full object-cover transition-opacity duration-1000 opacity-100">
+                        
+                        <!-- Bild 2 -->
                         <img src="mein-bild-2.jpg" alt="Julian Fleger - Digitale Lösungen für die Agentur Pflege" 
-                             class="absolute inset-0 w-full h-full object-cover opacity-100">
+                             class="slideshow-img absolute inset-0 w-full h-full object-cover transition-opacity duration-1000 opacity-0">
                     </div>
                 </div>
             </div>
@@ -430,9 +434,27 @@ robots: index, follow
             } catch (err) { zeigeBanner('error', 'Fehler', err.message); }
         }
 
-        // Nur Daten laden, kein Slideshow-Interval mehr nötig
+        // OPTIMIERTES JAVASCRIPT FÜR DIE AUTOMATISCHE BILDER-SLIDESHOW (NUR 2 BILDER)
         document.addEventListener("DOMContentLoaded", function() {
             datenLaden();
+
+            const images = document.querySelectorAll('.slideshow-img');
+            let currentIndex = 0;
+
+            if (images.length < 2) return;
+
+            setInterval(function() {
+                // Altes Bild ausblenden
+                images[currentIndex].classList.remove('opacity-100');
+                images[currentIndex].classList.add('opacity-0');
+
+                // Index wechseln (0 wird 1, 1 wird 0)
+                currentIndex = (currentIndex + 1) % 2;
+
+                // Neues Bild einblenden
+                images[currentIndex].classList.remove('opacity-0');
+                images[currentIndex].classList.add('opacity-100');
+            }, 4000); // Wechselt alle 4 Sekunden vollautomatisch
         });
     </script>
 </body>
