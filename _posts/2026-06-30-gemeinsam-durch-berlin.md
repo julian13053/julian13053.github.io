@@ -1,7 +1,7 @@
 ---
 layout: post
 title: "Gemeinsam durch die Hauptstadt: Warum Alltagsbegleitung in Berlin so wichtig ist"
-date: 2026-06-30 14:15:00 +0200
+date: 2026-06-30 15:00:00 +0200
 author: Julian Fleger
 excerpt: "Berlin ist wunderschön, kann im Alter aber auch herausfordernd sein. Ein Spaziergang vom Kurfürstendamm bis zum Müggelsee – und wie eine gute Pflege-Agentur das Leben in der Heimatstadt lebenswert hält."
 ---
