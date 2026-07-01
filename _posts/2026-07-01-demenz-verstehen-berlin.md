@@ -1,7 +1,7 @@
 ---
 layout: post
 title: "Der ultimative XXL-Leitfaden: Demenz verstehen, pflegen und den Alltag in Berlin meistern"
-date: 2026-07-01 05:00:00 +0200
+date: 2026-07-01 13:00:00 +0200
 author: Julian Fleger
 excerpt: "Ein umfassender Leitfaden über Demenzerkrankungen, die psychische Belastung von Angehörigen und wie professionelle Alltagsbegleitung in allen Berliner Bezirken echte Entlastung und Lebensqualität schafft."
 ---
