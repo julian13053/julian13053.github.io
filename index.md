@@ -5,7 +5,6 @@ description: Entdecke das kreative Portfolio und den Blog von Julian Fleger. Mod
 keywords: Julian Fleger, Julian Fleger Portfolio, M-Fleger, Webentwickler Berlin, Blog, Branding
 robots: index, follow
 ---
-<!DOCTYPE html>
 <html lang="de" class="scroll-smooth">
 <head>
     <meta charset="UTF-8">
@@ -238,8 +237,8 @@ robots: index, follow
             {% assign total_read_time = total_read_time | plus: read_time %}
         {% endfor %}
 
-        <!-- Original Apple Activity Card (KokonutUI Port) -->
-        <section class="my-16 p-8 md:p-12 rounded-3xl bg-slate-900 text-white shadow-2xl relative overflow-hidden">
+        <!-- Apple Activity Card Section -->
+        <section id="activity-section" class="my-16 p-8 md:p-12 rounded-3xl bg-slate-900 text-white shadow-2xl relative overflow-hidden">
             <div class="relative mx-auto w-full max-w-3xl rounded-3xl p-2 md:p-8 text-white">
                 <div class="flex flex-col items-center gap-8">
                     <h2 class="font-medium text-2xl text-white">Aktivitätsringe</h2>
@@ -309,24 +308,24 @@ robots: index, follow
                             <div class="flex flex-col">
                                 <span class="font-medium text-sm text-zinc-400">WÖRTER</span>
                                 <span class="font-semibold text-2xl" style="color: #FF2D55;">
-                                    {{ total_words }}/10000
-                                    <span class="ml-1 text-base text-zinc-400">WÖRTER</span>
+                                    {{ total_words }}
+                                    <span class="ml-1 text-base text-zinc-400">WÖRTER GESCHRIEBEN</span>
                                 </span>
                             </div>
 
                             <div class="flex flex-col">
                                 <span class="font-medium text-sm text-zinc-400">ARTIKEL</span>
                                 <span class="font-semibold text-2xl" style="color: #A3F900;">
-                                    {{ site.posts.size }}/20
-                                    <span class="ml-1 text-base text-zinc-400">BEITRÄGE</span>
+                                    {{ site.posts.size }}
+                                    <span class="ml-1 text-base text-zinc-400">ARTIKEL GESCHRIEBEN</span>
                                 </span>
                             </div>
 
                             <div class="flex flex-col">
                                 <span class="font-medium text-sm text-zinc-400">LESEZEIT</span>
                                 <span class="font-semibold text-2xl" style="color: #04C7DD;">
-                                    {{ total_read_time }}/60
-                                    <span class="ml-1 text-base text-zinc-400">MIN</span>
+                                    {{ total_read_time }}
+                                    <span class="ml-1 text-base text-zinc-400">MIN. LESEZEIT</span>
                                 </span>
                             </div>
                         </div>
@@ -512,48 +511,61 @@ robots: index, follow
             } catch (err) { zeigeBanner('error', 'Fehler', err.message); }
         }
 
-        // Aktivitätsringe genau wie Framer-Motion steuern
+        // Aktivitätsringe animieren nach Scroll-Event
         function animiereAktivitaetsRinge() {
             const words = parseInt("{{ total_words }}") || 0;
             const posts = parseInt("{{ site.posts.size }}") || 0;
             const readTime = parseInt("{{ total_read_time }}") || 0;
 
-            const targetWords = 10000;
-            const targetPosts = 20;
-            const targetTime = 60;
+            // Dynamische Skalierungsziele für sauberen visuellen Ring-Fortschritt
+            const targetWords = Math.max(words, 5000);
+            const targetPosts = Math.max(posts, 10);
+            const targetTime = Math.max(readTime, 30);
 
-            // Fortschritt in Prozent berechnen (KokonutUI Formel: ((100 - value) / 100) * circumference)
             const wordsVal = Math.min((words / targetWords) * 100, 100);
             const postsVal = Math.min((posts / targetPosts) * 100, 100);
             const timeVal = Math.min((readTime / targetTime) * 100, 100);
 
-            // Ring 1 (Wörter): Radius 92 -> Umfang 578.05
             const cWords = document.getElementById('circle-words');
             if (cWords) {
                 const offsetWords = ((100 - wordsVal) / 100) * 578.05;
-                setTimeout(() => { cWords.style.strokeDashoffset = offsetWords; }, 100);
+                cWords.style.strokeDashoffset = offsetWords;
             }
 
-            // Ring 2 (Artikel): Radius 72 -> Umfang 452.39
             const cPosts = document.getElementById('circle-posts');
             if (cPosts) {
                 const offsetPosts = ((100 - postsVal) / 100) * 452.39;
-                setTimeout(() => { cPosts.style.strokeDashoffset = offsetPosts; }, 300);
+                cPosts.style.strokeDashoffset = offsetPosts;
             }
 
-            // Ring 3 (Lesezeit): Radius 52 -> Umfang 326.73
             const cTime = document.getElementById('circle-time');
             if (cTime) {
                 const offsetTime = ((100 - timeVal) / 100) * 326.73;
-                setTimeout(() => { cTime.style.strokeDashoffset = offsetTime; }, 500);
+                cTime.style.strokeDashoffset = offsetTime;
             }
         }
 
         document.addEventListener("DOMContentLoaded", function() {
             datenLaden();
             
-            // Verzögerte Startanimation für das echte KokonutUI-Gefühl
-            setTimeout(animiereAktivitaetsRinge, 200);
+            // Scroll-Observer für die Aktivitätsringe mit 1 Sekunde Verzögerung
+            const targetSection = document.getElementById('activity-section');
+            let animationTriggered = false;
+
+            if (targetSection) {
+                const observer = new IntersectionObserver((entries) => {
+                    entries.forEach(entry => {
+                        if (entry.isIntersecting && !animationTriggered) {
+                            animationTriggered = true;
+                            // Genau 1000ms (1 Sekunde) warten, nachdem das Element im Sichtfeld ist
+                            setTimeout(animiereAktivitaetsRinge, 1000);
+                            observer.unobserve(entry.target);
+                        }
+                    });
+                }, { threshold: 0.3 });
+
+                observer.observe(targetSection);
+            }
 
             // Bilder-Slideshow
             const images = document.querySelectorAll('.slideshow-img');
