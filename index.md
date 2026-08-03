@@ -54,15 +54,10 @@ robots: index, follow
             animation-delay: 1.1s; 
         }
 
-        /* Apple Activity Rings Styling */
-        .ring-bg { fill: none; opacity: 0.2; stroke-width: 12; }
-        .ring-fill { 
-            fill: none; 
-            stroke-width: 12; 
-            stroke-linecap: round; 
-            transform-origin: center; 
-            transform: rotate(-90deg);
-            transition: stroke-dashoffset 1.5s cubic-bezier(0.16, 1, 0.3, 1);
+        /* Smooth Activity Rings Transition */
+        .ring-progress {
+            transition: stroke-dashoffset 1.8s cubic-bezier(0.42, 0, 0.58, 1);
+            filter: drop-shadow(0 0 6px rgba(0, 0, 0, 0.15));
         }
     </style>
 </head>
@@ -233,7 +228,7 @@ robots: index, follow
             </div>
         </section>
 
-        <!-- Dynamic Calculation Liquid variables -->
+        <!-- Dynamische Liquid Berechnungen -->
         {% assign total_words = 0 %}
         {% assign total_read_time = 0 %}
         {% for post in site.posts %}
@@ -243,76 +238,100 @@ robots: index, follow
             {% assign total_read_time = total_read_time | plus: read_time %}
         {% endfor %}
 
-        <!-- Apple Activity Ring Section -->
+        <!-- Original Apple Activity Card (KokonutUI Port) -->
         <section class="my-16 p-8 md:p-12 rounded-3xl bg-slate-900 text-white shadow-2xl relative overflow-hidden">
-            <div class="flex flex-col md:flex-row items-center justify-between gap-10">
-                
-                <!-- Ring Graphic -->
-                <div class="relative w-56 h-56 flex-shrink-0 flex items-center justify-center">
-                    <svg class="w-full h-full" viewBox="0 0 200 200">
-                        <!-- Red Ring (Geschriebene Wörter) Radius: 80 -->
-                        <circle class="ring-bg" stroke="#ff0055" cx="100" cy="100" r="80" />
-                        <circle class="ring-fill" stroke="#ff0055" cx="100" cy="100" r="80" 
-                                stroke-dasharray="502.65" stroke-dashoffset="502.65" id="ring-words" />
+            <div class="relative mx-auto w-full max-w-3xl rounded-3xl p-2 md:p-8 text-white">
+                <div class="flex flex-col items-center gap-8">
+                    <h2 class="font-medium text-2xl text-white">Aktivitätsringe</h2>
 
-                        <!-- Green Ring (Geschriebene Artikel) Radius: 62 -->
-                        <circle class="ring-bg" stroke="#a3e635" cx="100" cy="100" r="62" />
-                        <circle class="ring-fill" stroke="#a3e635" cx="100" cy="100" r="62" 
-                                stroke-dasharray="389.55" stroke-dashoffset="389.55" id="ring-posts" />
+                    <div class="flex items-center flex-col sm:flex-row gap-6 sm:gap-0">
+                        <!-- Activity Rings SVGs Container -->
+                        <div class="relative h-[200px] w-[200px] flex items-center justify-center">
+                            
+                            <!-- RING 1: WÖRTER (Größe 200) -->
+                            <div class="absolute inset-0 flex items-center justify-center">
+                                <svg class="-rotate-90 transform" width="200" height="200" viewBox="0 0 200 200">
+                                    <defs>
+                                        <linearGradient id="gradient-woerter" x1="0%" y1="0%" x2="100%" y2="100%">
+                                            <stop offset="0%" style="stop-color: #FF2D55; stop-opacity: 1;" />
+                                            <stop offset="100%" style="stop-color: #FF6B8B; stop-opacity: 1;" />
+                                        </linearGradient>
+                                    </defs>
+                                    <!-- Background Circle -->
+                                    <circle class="text-zinc-800/50" cx="100" cy="100" r="92" fill="none" stroke="currentColor" stroke-width="16" />
+                                    <!-- Animated Progress Circle -->
+                                    <circle id="circle-words" class="ring-progress" cx="100" cy="100" r="92" fill="none" 
+                                            stroke="url(#gradient-woerter)" stroke-width="16" stroke-linecap="round" 
+                                            stroke-dasharray="578.05" stroke-dashoffset="578.05" />
+                                </svg>
+                            </div>
 
-                        <!-- Blue Ring (Gesamte Lesezeit) Radius: 44 -->
-                        <circle class="ring-bg" stroke="#00d2ff" cx="100" cy="100" r="44" />
-                        <circle class="ring-fill" stroke="#00d2ff" cx="100" cy="100" r="44" 
-                                stroke-dasharray="276.46" stroke-dashoffset="276.46" id="ring-time" />
-                    </svg>
-                </div>
+                            <!-- RING 2: ARTIKEL (Größe 160) -->
+                            <div class="absolute inset-0 flex items-center justify-center">
+                                <svg class="-rotate-90 transform" width="160" height="160" viewBox="0 0 160 160">
+                                    <defs>
+                                        <linearGradient id="gradient-artikel" x1="0%" y1="0%" x2="100%" y2="100%">
+                                            <stop offset="0%" style="stop-color: #A3F900; stop-opacity: 1;" />
+                                            <stop offset="100%" style="stop-color: #C5FF4D; stop-opacity: 1;" />
+                                        </linearGradient>
+                                    </defs>
+                                    <!-- Background Circle -->
+                                    <circle class="text-zinc-800/50" cx="80" cy="80" r="72" fill="none" stroke="currentColor" stroke-width="16" />
+                                    <!-- Animated Progress Circle -->
+                                    <circle id="circle-posts" class="ring-progress" cx="80" cy="80" r="72" fill="none" 
+                                            stroke="url(#gradient-artikel)" stroke-width="16" stroke-linecap="round" 
+                                            stroke-dasharray="452.39" stroke-dashoffset="452.39" />
+                                </svg>
+                            </div>
 
-                <!-- Stats Display -->
-                <div class="flex-grow space-y-6 text-left">
-                    <div>
-                        <span class="text-xs uppercase font-extrabold tracking-widest text-slate-400">Aktivität</span>
-                        <h2 class="text-3xl font-black tracking-tight text-white mt-1">Blog-Aktivitätsringe</h2>
+                            <!-- RING 3: LESEZEIT (Größe 120) -->
+                            <div class="absolute inset-0 flex items-center justify-center">
+                                <svg class="-rotate-90 transform" width="120" height="120" viewBox="0 0 120 120">
+                                    <defs>
+                                        <linearGradient id="gradient-lesezeit" x1="0%" y1="0%" x2="100%" y2="100%">
+                                            <stop offset="0%" style="stop-color: #04C7DD; stop-opacity: 1;" />
+                                            <stop offset="100%" style="stop-color: #4DDFED; stop-opacity: 1;" />
+                                        </linearGradient>
+                                    </defs>
+                                    <!-- Background Circle -->
+                                    <circle class="text-zinc-800/50" cx="60" cy="60" r="52" fill="none" stroke="currentColor" stroke-width="16" />
+                                    <!-- Animated Progress Circle -->
+                                    <circle id="circle-time" class="ring-progress" cx="60" cy="60" r="52" fill="none" 
+                                            stroke="url(#gradient-lesezeit)" stroke-width="16" stroke-linecap="round" 
+                                            stroke-dasharray="326.73" stroke-dashoffset="326.73" />
+                                </svg>
+                            </div>
+
+                        </div>
+
+                        <!-- Detailed Activity Info -->
+                        <div class="ml-0 sm:ml-8 flex flex-col gap-6 text-center sm:text-left">
+                            <div class="flex flex-col">
+                                <span class="font-medium text-sm text-zinc-400">WÖRTER</span>
+                                <span class="font-semibold text-2xl" style="color: #FF2D55;">
+                                    {{ total_words }}/10000
+                                    <span class="ml-1 text-base text-zinc-400">WÖRTER</span>
+                                </span>
+                            </div>
+
+                            <div class="flex flex-col">
+                                <span class="font-medium text-sm text-zinc-400">ARTIKEL</span>
+                                <span class="font-semibold text-2xl" style="color: #A3F900;">
+                                    {{ site.posts.size }}/20
+                                    <span class="ml-1 text-base text-zinc-400">BEITRÄGE</span>
+                                </span>
+                            </div>
+
+                            <div class="flex flex-col">
+                                <span class="font-medium text-sm text-zinc-400">LESEZEIT</span>
+                                <span class="font-semibold text-2xl" style="color: #04C7DD;">
+                                    {{ total_read_time }}/60
+                                    <span class="ml-1 text-base text-zinc-400">MIN</span>
+                                </span>
+                            </div>
+                        </div>
                     </div>
-
-                    <div class="space-y-4">
-                        <!-- Rot: Wörter -->
-                        <div class="flex items-center justify-between border-b border-slate-800 pb-3">
-                            <div class="flex items-center gap-3">
-                                <span class="w-3.5 h-3.5 rounded-full bg-[#ff0055] inline-block shadow-sm"></span>
-                                <span class="font-bold text-slate-200">Geschriebene Wörter</span>
-                            </div>
-                            <div class="text-right">
-                                <span class="text-xl font-black text-white">{{ total_words }}</span>
-                                <span class="text-xs text-slate-400 block">/ 10.000 Wörter Ziel</span>
-                            </div>
-                        </div>
-
-                        <!-- Grün: Artikel -->
-                        <div class="flex items-center justify-between border-b border-slate-800 pb-3">
-                            <div class="flex items-center gap-3">
-                                <span class="w-3.5 h-3.5 rounded-full bg-[#a3e635] inline-block shadow-sm"></span>
-                                <span class="font-bold text-slate-200">Geschriebene Artikel</span>
-                            </div>
-                            <div class="text-right">
-                                <span class="text-xl font-black text-white">{{ site.posts.size }}</span>
-                                <span class="text-xs text-slate-400 block">/ 20 Artikel Ziel</span>
-                            </div>
-                        </div>
-
-                        <!-- Blau: Lesezeit -->
-                        <div class="flex items-center justify-between">
-                            <div class="flex items-center gap-3">
-                                <span class="w-3.5 h-3.5 rounded-full bg-[#00d2ff] inline-block shadow-sm"></span>
-                                <span class="font-bold text-slate-200">Gesamte Lesezeit</span>
-                            </div>
-                            <div class="text-right">
-                                <span class="text-xl font-black text-white">{{ total_read_time }} Min.</span>
-                                <span class="text-xs text-slate-400 block">/ 60 Min. Ziel</span>
-                            </div>
-                        </div>
-                    </div>
                 </div>
-
             </div>
         </section>
     </main>
@@ -493,39 +512,50 @@ robots: index, follow
             } catch (err) { zeigeBanner('error', 'Fehler', err.message); }
         }
 
-        // Ring-Animationen berechnen
+        // Aktivitätsringe genau wie Framer-Motion steuern
         function animiereAktivitaetsRinge() {
             const words = parseInt("{{ total_words }}") || 0;
             const posts = parseInt("{{ site.posts.size }}") || 0;
             const readTime = parseInt("{{ total_read_time }}") || 0;
 
-            // Ziele
             const targetWords = 10000;
             const targetPosts = 20;
             const targetTime = 60;
 
-            // Fortschritte (in % max 100)
-            const wordsPercent = Math.min(words / targetWords, 1);
-            const postsPercent = Math.min(posts / targetPosts, 1);
-            const timePercent = Math.min(readTime / targetTime, 1);
+            // Fortschritt in Prozent berechnen (KokonutUI Formel: ((100 - value) / 100) * circumference)
+            const wordsVal = Math.min((words / targetWords) * 100, 100);
+            const postsVal = Math.min((posts / targetPosts) * 100, 100);
+            const timeVal = Math.min((readTime / targetTime) * 100, 100);
 
-            // Ring-Längen (2 * PI * r)
-            const ringWords = document.getElementById('ring-words');
-            const ringPosts = document.getElementById('ring-posts');
-            const ringTime = document.getElementById('ring-time');
+            // Ring 1 (Wörter): Radius 92 -> Umfang 578.05
+            const cWords = document.getElementById('circle-words');
+            if (cWords) {
+                const offsetWords = ((100 - wordsVal) / 100) * 578.05;
+                setTimeout(() => { cWords.style.strokeDashoffset = offsetWords; }, 100);
+            }
 
-            if (ringWords) ringWords.style.strokeDashoffset = 502.65 - (502.65 * wordsPercent);
-            if (ringPosts) ringPosts.style.strokeDashoffset = 389.55 - (389.55 * postsPercent);
-            if (ringTime) ringTime.style.strokeDashoffset = 276.46 - (276.46 * timePercent);
+            // Ring 2 (Artikel): Radius 72 -> Umfang 452.39
+            const cPosts = document.getElementById('circle-posts');
+            if (cPosts) {
+                const offsetPosts = ((100 - postsVal) / 100) * 452.39;
+                setTimeout(() => { cPosts.style.strokeDashoffset = offsetPosts; }, 300);
+            }
+
+            // Ring 3 (Lesezeit): Radius 52 -> Umfang 326.73
+            const cTime = document.getElementById('circle-time');
+            if (cTime) {
+                const offsetTime = ((100 - timeVal) / 100) * 326.73;
+                setTimeout(() => { cTime.style.strokeDashoffset = offsetTime; }, 500);
+            }
         }
 
-        // Bilder-Slideshow mit Hover-Pause
         document.addEventListener("DOMContentLoaded", function() {
             datenLaden();
             
-            // Verzögerte Animation für Ring-Effekt
-            setTimeout(animiereAktivitaetsRinge, 300);
+            // Verzögerte Startanimation für das echte KokonutUI-Gefühl
+            setTimeout(animiereAktivitaetsRinge, 200);
 
+            // Bilder-Slideshow
             const images = document.querySelectorAll('.slideshow-img');
             const container = images[0] ? images[0].parentElement : null; 
             let currentIndex = 0;
