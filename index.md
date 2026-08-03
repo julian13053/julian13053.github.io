@@ -1,10 +1,11 @@
 ---
 layout: null
 title: Julian Fleger | Portfolio & Web-Projekte
-description: Entdecke das kreative Portfolio und den Blog von Julian Fleger. Moderne Web-Projekte, Brandings und digitale Lösungen
+description: Entdecke das kreative Portfolio und den Blog von Julian Fleger. Moderne Web-Projekte, Brandings und digitale Lösungen.
 keywords: Julian Fleger, Julian Fleger Portfolio, M-Fleger, Webentwickler Berlin, Blog, Branding
 robots: index, follow
 ---
+<!DOCTYPE html>
 <html lang="de" class="scroll-smooth">
 <head>
     <meta charset="UTF-8">
@@ -14,8 +15,8 @@ robots: index, follow
     <meta name="description" content="{{ page.description }}">
     <meta name="keywords" content="{{ page.keywords }}">
     <meta name="robots" content="{{ page.robots }}">
-    <link class="flex" rel="icon" type="image/jpeg" href="auge-logo.jpg">
-    <link class="canonical" href="https://julian13053.github.io/index.html">
+    <link rel="icon" type="image/jpeg" href="auge-logo.jpg">
+    <link rel="canonical" href="https://julian13053.github.io/index.html">
 
     <meta property="og:type" content="website">
     <meta property="og:title" content="{{ page.title }}">
@@ -28,34 +29,31 @@ robots: index, follow
     <script src="https://cdn.jsdelivr.net/npm/@tailwindcss/browser@4"></script>
     <script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script>
     <style>
-        /* CSS-Keyframes für das exakte Vorbild-Timing */
+        /* CSS-Keyframes für Animationen */
         
-        /* 1. Das Hereinfliegen und Aufklappen des gesamten blauen Headers von unten */
+        /* 1. Header Pop-up Animation */
         @keyframes headerPopUp {
             0% { opacity: 0; transform: translateY(50px) scale(0.99); }
             100% { opacity: 1; transform: translateY(0) scale(1); }
         }
         
-        /* 2. Das zeitversetzte Hochspringen der Texte und des Bildes */
+        /* 2. Text/Element Jump Animation */
         @keyframes textJumpUp {
             0% { opacity: 0; transform: translateY(25px); }
             100% { opacity: 1; transform: translateY(0); }
         }
 
-        /* 3. Das animierte Zeichnen des Stifts von links nach rechts */
+        /* 3. Stift-Unterstreichung */
         @keyframes drawLine {
             to { stroke-dashoffset: 0; }
         }
 
-        /* Animations-Klassen mit perfekt abgestimmten Verzögerungen (Delays) */
         .animate-header { animation: headerPopUp 0.9s cubic-bezier(0.16, 1, 0.3, 1) forwards; }
         
-        /* Einzelne Elemente ploppen nacheinander hoch */
         .reveal-item-1 { opacity: 0; animation: textJumpUp 0.7s cubic-bezier(0.16, 1, 0.3, 1) forwards; animation-delay: 0.3s; }
         .reveal-item-2 { opacity: 0; animation: textJumpUp 0.7s cubic-bezier(0.16, 1, 0.3, 1) forwards; animation-delay: 0.5s; }
         .reveal-item-3 { opacity: 0; animation: textJumpUp 0.7s cubic-bezier(0.16, 1, 0.3, 1) forwards; animation-delay: 0.7s; }
         
-        /* Die Stift-Unterstreichung startet erst, wenn der Name voll da ist */
         .animate-draw { 
             stroke-dasharray: 600; 
             stroke-dashoffset: 600; 
@@ -66,7 +64,8 @@ robots: index, follow
 </head>
 <body class="bg-slate-100 text-gray-900 font-sans antialiased flex flex-col min-h-screen relative overflow-x-hidden">
 
-    <div id="custom-banner" class="fixed top-24 right-4 z-50 transform translate-x-full opacity-0 transition-all duration-300 ease-out max-w-sm w-full backdrop-blur-xl shadow-xl rounded-2xl p-4 flex items-start gap-3" style="background: rgba(255, 255, 255, 0.7); border: 1px solid rgba(255, 255, 255, 0.5);">
+    <!-- Toast Banner -->
+    <div id="custom-banner" class="fixed top-24 right-4 z-50 transform translate-x-full opacity-0 transition-all duration-300 ease-out max-w-sm w-full backdrop-blur-xl shadow-xl rounded-2xl p-4 flex items-start gap-3" style="background: rgba(255, 255, 255, 0.85); border: 1px solid rgba(255, 255, 255, 0.5);">
         <span id="banner-icon" class="text-xl"></span>
         <div class="flex-grow">
             <h4 id="banner-title" class="font-bold text-sm text-gray-900"></h4>
@@ -74,12 +73,14 @@ robots: index, follow
         </div>
     </div>
 
+    <!-- Navigation -->
     <div class="w-full max-w-5xl mx-auto px-4 sticky top-6 z-50">
         <nav class="backdrop-blur-xl bg-slate-900/85 text-white shadow-2xl rounded-2xl border border-white/10 transition-all duration-300 hover:bg-slate-900/90">
             {% include navigation.html %}
         </nav>
     </div>
 
+    <!-- Hero Header -->
     <header class="animate-header bg-gradient-to-br from-[#1d4ed8] via-[#1e3a8a] to-[#312e81] text-white mx-4 mt-[-4rem] pt-32 pb-24 md:pb-32 px-6 md:px-12 rounded-b-[50px] md:rounded-b-[80px] shadow-2xl relative overflow-hidden">
         <div class="max-w-6xl mx-auto grid md:grid-cols-12 gap-12 items-center relative z-10">
             
@@ -105,7 +106,7 @@ robots: index, follow
                         Ich bin Julian Fleger. Auf diesem Portfolio teile ich meine kreativen Ideen, Brandings und Web-Projekte rund um das Thema digitale Pflege-Agenturen sowie neue, spannende Blogartikel.
                     </p>
                     <a href="blog.html" class="bg-cyan-400 hover:bg-cyan-300 text-blue-950 font-black px-8 py-4 rounded-xl shadow-lg inline-block w-full md:w-auto text-center no-underline transition-all transform hover:-translate-y-1 hover:shadow-cyan-400/20">
-                        Direct zum Blog →
+                        Direkt zum Blog →
                     </a>
                 </div>
             </div>
@@ -118,7 +119,7 @@ robots: index, follow
                         <img src="mein-bild-1.jpg" alt="Julian Fleger Portfolio - Webentwicklung" 
                              class="slideshow-img absolute inset-0 w-full h-full object-cover transition-opacity duration-1000 opacity-100">
                         
-                        <img src="mein-bild-2.jpg" alt="Julian Fleger - Digitale Lösungen für die Agentur Pflege" 
+                        <img src="mein-bild-2.jpg" alt="Julian Fleger - Digitale Lösungen für die Pflege" 
                              class="slideshow-img absolute inset-0 w-full h-full object-cover transition-opacity duration-1000 opacity-0">
                     </div>
                 </div>
@@ -127,13 +128,15 @@ robots: index, follow
         </div>
     </header>
 
+    <!-- Main Content -->
     <main class="max-w-6xl mx-auto px-4 md:px-6 pt-16 flex-grow w-full relative z-20">
         
+        <!-- Neueste Artikel -->
         <div class="mb-12">
             <div class="flex flex-col md:flex-row justify-between items-center md:items-baseline mb-10 gap-4 text-center md:text-left">
                 <div>
-                    <h2 class="text-3xl md:text-4xl font-black tracking-tight" style="color: #0f172a;">📰 Neueste Artikel</h2>
-                    <p class="text-base md:text-lg mt-2" style="color: #475569;">Frisch aus dem Gedankenkarussell gegriffen.</p>
+                    <h2 class="text-3xl md:text-4xl font-black tracking-tight text-slate-900">📰 Neueste Artikel</h2>
+                    <p class="text-base md:text-lg mt-2 text-slate-600">Frisch aus dem Gedankenkarussell gegriffen.</p>
                 </div>
                 <a href="blog.html" class="text-blue-600 font-bold hover:text-blue-800 transition-colors flex items-center gap-1 group no-underline">
                     Alle Artikel ansehen <span class="transform group-hover:translate-x-1 transition-transform">→</span>
@@ -150,10 +153,10 @@ robots: index, follow
                             <span class="text-xs bg-blue-600 text-white px-2.5 py-1 rounded-md font-bold uppercase">{{ post.date | date: "%d.%m.%Y" }}</span>
                             {% assign words = post.content | strip_html | number_of_words %}
                             {% assign read_time = words | divided_by: 180 | plus: 1 %}
-                            <span class="text-xs font-semibold" style="color: #64748b;">📖 {{ read_time }} Min.</span>
+                            <span class="text-xs font-semibold text-slate-500">📖 {{ read_time }} Min.</span>
                         </div>
-                        <h3 class="text-xl font-black mt-1 mb-2 line-clamp-2" style="color: #0f172a;">{{ post.title }}</h3>
-                        <p class="text-sm mb-4 line-clamp-3" style="color: #334155;">{{ post.excerpt | strip_html }}</p>
+                        <h3 class="text-xl font-black mt-1 mb-2 line-clamp-2 text-slate-900">{{ post.title }}</h3>
+                        <p class="text-sm mb-4 line-clamp-3 text-slate-700">{{ post.excerpt | strip_html }}</p>
                     </div>
                     
                     <div class="flex flex-col gap-3 mt-4">
@@ -162,13 +165,13 @@ robots: index, follow
                                 Artikel lesen →
                             </a>
                             
-                            <button onclick="likeUmschalten('{{ numeric_id }}', this)" class="like-btn text-xs font-bold px-3 py-1.5 rounded-full border transition-all cursor-pointer flex items-center gap-1" style="background: rgba(255,255,255,0.4); border-color: rgba(0,0,0,0.08); color: #0f172a;">
+                            <button onclick="likeUmschalten('{{ numeric_id }}', this)" class="like-btn text-xs font-bold px-3 py-1.5 rounded-full border transition-all cursor-pointer flex items-center gap-1 text-slate-900 bg-white/40 border-black/10">
                                 🤍 <span class="like-counter">0</span> Likes
                             </button>
                         </div>
                         
                         <div class="flex justify-end">
-                            <button onclick="favoritUmschalten('{{ numeric_id }}', this)" class="fav-btn text-xs font-bold px-3 py-1.5 rounded-full border transition-all cursor-pointer w-full md:w-auto text-center" style="background: rgba(255,255,255,0.4); border-color: rgba(0,0,0,0.08); color: #0f172a;">
+                            <button onclick="favoritUmschalten('{{ numeric_id }}', this)" class="fav-btn text-xs font-bold px-3 py-1.5 rounded-full border transition-all cursor-pointer w-full md:w-auto text-center text-slate-900 bg-white/40 border-black/10">
                                 ⭐ Favorit
                             </button>
                         </div>
@@ -176,25 +179,26 @@ robots: index, follow
                 </div>
                 {% else %}
                 <div class="col-span-1 md:col-span-3 text-center py-12 rounded-2xl bg-white border border-slate-200">
-                    <p class="text-lg font-medium" style="color: #475569;">Bisher wurden noch keine Blog-Artikel veröffentlicht.</p>
+                    <p class="text-lg font-medium text-slate-600">Bisher wurden noch keine Blog-Artikel veröffentlicht.</p>
                 </div>
                 {% endfor %}
             </div>
         </div>
 
+        <!-- Rechte-Hub Section -->
         <section class="my-16 p-8 md:p-12 rounded-3xl bg-white border border-slate-200/60 shadow-xl relative overflow-hidden">
             <div class="max-w-3xl mx-auto text-center mb-10">
                 <span class="bg-blue-100 text-blue-800 font-extrabold px-4 py-1.5 rounded-full text-xs uppercase tracking-wider">Neu auf M-Fleger</span>
-                <h2 class="text-3xl md:text-4xl font-black tracking-tight mt-3" style="color: #0f172a;">🌍 Das große Rechte-Hub</h2>
-                <p class="text-base md:text-lg mt-2" style="color: #334155;">Rechte gehen uns alle an – egal wie alt wir sind. Entdecke unser neues Portal, das Rechte für jeden verständlich erklärt.</p>
+                <h2 class="text-3xl md:text-4xl font-black tracking-tight mt-3 text-slate-900">🌍 Das große Rechte-Hub</h2>
+                <p class="text-base md:text-lg mt-2 text-slate-700">Rechte gehen uns alle an – egal wie alt wir sind. Entdecke unser neues Portal, das Rechte für jeden verständlich erklärt.</p>
             </div>
 
             <div class="grid grid-cols-1 md:grid-cols-3 gap-6">
                 <a href="kinderrechte.html" class="group p-6 rounded-2xl transition-all duration-300 no-underline flex flex-col justify-between hover:-translate-y-1 hover:shadow-lg bg-slate-50 border border-slate-200">
                     <div>
                         <span class="text-3xl block mb-3">🎒</span>
-                        <h3 class="text-xl font-black transition-colors group-hover:text-blue-600" style="color: #0f172a;">Kinderrechte</h3>
-                        <p class="text-sm mt-2 leading-relaxed" style="color: #334155;">Schutz, Bildung und Freizeit. Auf Augenhöhe und einfach erklärt für Kinder und Eltern.</p>
+                        <h3 class="text-xl font-black transition-colors group-hover:text-blue-600 text-slate-900">Kinderrechte</h3>
+                        <p class="text-sm mt-2 leading-relaxed text-slate-700">Schutz, Bildung und Freizeit. Auf Augenhöhe und einfach erklärt für Kinder und Eltern.</p>
                     </div>
                     <span class="text-blue-600 font-bold text-sm mt-4 inline-block">Mehr erfahren →</span>
                 </a>
@@ -202,8 +206,8 @@ robots: index, follow
                 <a href="menschenrechte.html" class="group p-6 rounded-2xl transition-all duration-300 no-underline flex flex-col justify-between hover:-translate-y-1 hover:shadow-lg bg-slate-50 border border-slate-200">
                     <div>
                         <span class="text-3xl block mb-3">⚖️</span>
-                        <h3 class="text-xl font-black transition-colors group-hover:text-blue-600" style="color: #0f172a;">Menschenrechte</h3>
-                        <p class="text-sm mt-2 leading-relaxed" style="color: #334155;">Meinungsfreiheit, Gleichberechtigung und Würde. Die Säulen unserer Gesellschaft.</p>
+                        <h3 class="text-xl font-black transition-colors group-hover:text-blue-600 text-slate-900">Menschenrechte</h3>
+                        <p class="text-sm mt-2 leading-relaxed text-slate-700">Meinungsfreiheit, Gleichberechtigung und Würde. Die Säulen unserer Gesellschaft.</p>
                     </div>
                     <span class="text-blue-600 font-bold text-sm mt-4 inline-block">Mehr erfahren →</span>
                 </a>
@@ -211,8 +215,8 @@ robots: index, follow
                 <a href="digitalrechte.html" class="group p-6 rounded-2xl transition-all duration-300 no-underline flex flex-col justify-between hover:-translate-y-1 hover:shadow-lg bg-slate-50 border border-slate-200">
                     <div>
                         <span class="text-3xl block mb-3">📱</span>
-                        <h3 class="text-xl font-black transition-colors group-hover:text-blue-600" style="color: #0f172a;">Digitalrechte</h3>
-                        <p class="text-sm mt-2 leading-relaxed" style="color: #334155;">Deine Rechte im Netz. Von Datenschutz bis zum Schutz vor Cybermobbing.</p>
+                        <h3 class="text-xl font-black transition-colors group-hover:text-blue-600 text-slate-900">Digitalrechte</h3>
+                        <p class="text-sm mt-2 leading-relaxed text-slate-700">Deine Rechte im Netz. Von Datenschutz bis zum Schutz vor Cybermobbing.</p>
                     </div>
                     <span class="text-blue-600 font-bold text-sm mt-4 inline-block">Mehr erfahren →</span>
                 </a>
@@ -225,14 +229,15 @@ robots: index, follow
             </div>
         </section>
 
+        <!-- Stat-Cards -->
         <div class="grid grid-cols-1 sm:grid-cols-2 gap-6 mb-12">
             <div class="p-6 rounded-2xl flex items-center gap-4 hover:shadow-md transition-all bg-white border border-slate-200">
-                <div class="text-3xl p-4 rounded-xl" style="background: rgba(37, 99, 235, 0.1); color: #2563eb;">
+                <div class="text-3xl p-4 rounded-xl bg-blue-500/10 text-blue-600">
                     📰
                 </div>
                 <div>
-                    <span class="block text-2xl md:text-3xl font-black" style="color: #0f172a;">{{ site.posts.size }}</span>
-                    <span class="text-sm font-bold uppercase tracking-wider" style="color: #64748b;">Artikel veröffentlicht</span>
+                    <span class="block text-2xl md:text-3xl font-black text-slate-900">{{ site.posts.size }}</span>
+                    <span class="text-sm font-bold uppercase tracking-wider text-slate-500">Artikel veröffentlicht</span>
                 </div>
             </div>
 
@@ -242,12 +247,12 @@ robots: index, follow
                 {% assign total_words = total_words | plus: words %}
             {% endfor %}
             <div class="p-6 rounded-2xl flex items-center gap-4 hover:shadow-md transition-all bg-white border border-slate-200">
-                <div class="text-3xl p-4 rounded-xl" style="background: rgba(6, 182, 212, 0.1); color: #0891b2;">
+                <div class="text-3xl p-4 rounded-xl bg-cyan-500/10 text-cyan-600">
                     ✍️
                 </div>
                 <div>
-                    <span class="block text-2xl md:text-3xl font-black" style="color: #0f172a;">{{ total_words }}</span>
-                    <span class="text-sm font-bold uppercase tracking-wider" style="color: #64748b;">Wörter geschrieben</span>
+                    <span class="block text-2xl md:text-3xl font-black text-slate-900">{{ total_words }}</span>
+                    <span class="text-sm font-bold uppercase tracking-wider text-slate-500">Wörter geschrieben</span>
                 </div>
             </div>
         </div>
@@ -352,7 +357,9 @@ robots: index, follow
                             if (likedIds.has(postId)) {
                                 const btn = card.querySelector('.like-btn');
                                 if (btn) {
-                                    btn.innerHTML = `💖 <span class="like-counter">${btn.querySelector('.like-counter').innerText}</span> Likes`;
+                                    const counter = btn.querySelector('.like-counter');
+                                    const countVal = counter ? counter.innerText : '0';
+                                    btn.innerHTML = `💖 <span class="like-counter">${countVal}</span> Likes`;
                                     btn.style.backgroundColor = "#ec4899";
                                     btn.style.color = "#ffffff";
                                     btn.style.borderColor = "#ec4899";
@@ -399,15 +406,15 @@ robots: index, follow
                 if (!user) { window.location.href = "/anmeldung-erforderlich.html"; return; }
 
                 const counterEl = button.querySelector('.like-counter');
-                let aktuellerStand = parseInt(counterEl.innerText);
+                let aktuellerStand = parseInt(counterEl.innerText) || 0;
 
                 const { data: existiert } = await supabaseClient.from('likes').select('*').eq('user_id', user.id).eq('blog_id', blogId);
 
                 if (existiert && existiert.length > 0) {
                     const { error } = await supabaseClient.from('likes').delete().eq('user_id', user.id).eq('blog_id', blogId);
                     if (!error) {
-                        counterEl.innerText = aktuellerStand - 1;
-                        button.innerHTML = `🤍 <span class="like-counter">${counterEl.innerText}</span> Likes`;
+                        const neuStand = Math.max(0, aktuellerStand - 1);
+                        button.innerHTML = `🤍 <span class="like-counter">${neuStand}</span> Likes`;
                         button.style.backgroundColor = "rgba(255,255,255,0.4)";
                         button.style.color = "#0f172a";
                         button.style.borderColor = "rgba(0,0,0,0.08)";
@@ -416,8 +423,8 @@ robots: index, follow
                 } else {
                     const { error } = await supabaseClient.from('likes').insert([{ user_id: user.id, blog_id: blogId }]);
                     if (!error) {
-                        counterEl.innerText = aktuellerStand + 1;
-                        button.innerHTML = `💖 <span class="like-counter">${counterEl.innerText}</span> Likes`;
+                        const neuStand = aktuellerStand + 1;
+                        button.innerHTML = `💖 <span class="like-counter">${neuStand}</span> Likes`;
                         button.style.backgroundColor = "#ec4899";
                         button.style.color = "#ffffff";
                         button.style.borderColor = "#ec4899";
@@ -427,43 +434,35 @@ robots: index, follow
             } catch (err) { zeigeBanner('error', 'Fehler', err.message); }
         }
 
-        // OPTIMIERTES JAVASCRIPT FÜR DIE AUTOMATISCHE BILDER-SLIDESHOW (MIT START/STOPP BEI HOVER)
+        // Bilder-Slideshow mit Hover-Pause
         document.addEventListener("DOMContentLoaded", function() {
             datenLaden();
 
             const images = document.querySelectorAll('.slideshow-img');
-            // Greift sich das übergeordnete Element des ersten Slideshow-Bildes als interaktiven Container
             const container = images[0] ? images[0].parentElement : null; 
             let currentIndex = 0;
             let slideshowInterval;
 
             if (images.length < 2) return;
 
-            // Funktion zum Starten der Slideshow
             function startSlideshow() {
                 slideshowInterval = setInterval(function() {
-                    // Altes Bild ausblenden
                     images[currentIndex].classList.remove('opacity-100');
                     images[currentIndex].classList.add('opacity-0');
 
-                    // Index wechseln (0 wird 1, 1 wird 0)
-                    currentIndex = (currentIndex + 1) % 2;
+                    currentIndex = (currentIndex + 1) % images.length;
 
-                    // Neues Bild einblenden
                     images[currentIndex].classList.remove('opacity-0');
                     images[currentIndex].classList.add('opacity-100');
-                }, 4000); // Wechselt alle 4 Sekunden
+                }, 4000);
             }
 
-            // Funktion zum Stoppen/Pausieren der Slideshow
             function stopSlideshow() {
                 clearInterval(slideshowInterval);
             }
 
-            // Startet die Slideshow direkt beim Seitenaufruf
             startSlideshow();
 
-            // Event-Listener: Stoppt bei Mausberührung, startet wieder beim Verlassen
             if (container) {
                 container.addEventListener('mouseenter', stopSlideshow);
                 container.addEventListener('mouseleave', startSlideshow);
