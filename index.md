@@ -29,27 +29,20 @@ robots: index, follow
     <script src="https://cdn.jsdelivr.net/npm/@tailwindcss/browser@4"></script>
     <script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script>
     <style>
-        /* CSS-Keyframes für Animationen */
-        
-        /* 1. Header Pop-up Animation */
+        /* Keyframes */
         @keyframes headerPopUp {
             0% { opacity: 0; transform: translateY(50px) scale(0.99); }
             100% { opacity: 1; transform: translateY(0) scale(1); }
         }
-        
-        /* 2. Text/Element Jump Animation */
         @keyframes textJumpUp {
             0% { opacity: 0; transform: translateY(25px); }
             100% { opacity: 1; transform: translateY(0); }
         }
-
-        /* 3. Stift-Unterstreichung */
         @keyframes drawLine {
             to { stroke-dashoffset: 0; }
         }
 
         .animate-header { animation: headerPopUp 0.9s cubic-bezier(0.16, 1, 0.3, 1) forwards; }
-        
         .reveal-item-1 { opacity: 0; animation: textJumpUp 0.7s cubic-bezier(0.16, 1, 0.3, 1) forwards; animation-delay: 0.3s; }
         .reveal-item-2 { opacity: 0; animation: textJumpUp 0.7s cubic-bezier(0.16, 1, 0.3, 1) forwards; animation-delay: 0.5s; }
         .reveal-item-3 { opacity: 0; animation: textJumpUp 0.7s cubic-bezier(0.16, 1, 0.3, 1) forwards; animation-delay: 0.7s; }
@@ -59,6 +52,17 @@ robots: index, follow
             stroke-dashoffset: 600; 
             animation: drawLine 0.9s cubic-bezier(0.4, 0, 0.2, 1) forwards; 
             animation-delay: 1.1s; 
+        }
+
+        /* Apple Activity Rings Styling */
+        .ring-bg { fill: none; opacity: 0.2; stroke-width: 12; }
+        .ring-fill { 
+            fill: none; 
+            stroke-width: 12; 
+            stroke-linecap: round; 
+            transform-origin: center; 
+            transform: rotate(-90deg);
+            transition: stroke-dashoffset 1.5s cubic-bezier(0.16, 1, 0.3, 1);
         }
     </style>
 </head>
@@ -229,33 +233,88 @@ robots: index, follow
             </div>
         </section>
 
-        <!-- Stat-Cards -->
-        <div class="grid grid-cols-1 sm:grid-cols-2 gap-6 mb-12">
-            <div class="p-6 rounded-2xl flex items-center gap-4 hover:shadow-md transition-all bg-white border border-slate-200">
-                <div class="text-3xl p-4 rounded-xl bg-blue-500/10 text-blue-600">
-                    📰
-                </div>
-                <div>
-                    <span class="block text-2xl md:text-3xl font-black text-slate-900">{{ site.posts.size }}</span>
-                    <span class="text-sm font-bold uppercase tracking-wider text-slate-500">Artikel veröffentlicht</span>
-                </div>
-            </div>
+        <!-- Dynamic Calculation Liquid variables -->
+        {% assign total_words = 0 %}
+        {% assign total_read_time = 0 %}
+        {% for post in site.posts %}
+            {% assign words = post.content | strip_html | number_of_words %}
+            {% assign read_time = words | divided_by: 180 | plus: 1 %}
+            {% assign total_words = total_words | plus: words %}
+            {% assign total_read_time = total_read_time | plus: read_time %}
+        {% endfor %}
 
-            {% assign total_words = 0 %}
-            {% for post in site.posts %}
-                {% assign words = post.content | strip_html | number_of_words %}
-                {% assign total_words = total_words | plus: words %}
-            {% endfor %}
-            <div class="p-6 rounded-2xl flex items-center gap-4 hover:shadow-md transition-all bg-white border border-slate-200">
-                <div class="text-3xl p-4 rounded-xl bg-cyan-500/10 text-cyan-600">
-                    ✍️
+        <!-- Apple Activity Ring Section -->
+        <section class="my-16 p-8 md:p-12 rounded-3xl bg-slate-900 text-white shadow-2xl relative overflow-hidden">
+            <div class="flex flex-col md:flex-row items-center justify-between gap-10">
+                
+                <!-- Ring Graphic -->
+                <div class="relative w-56 h-56 flex-shrink-0 flex items-center justify-center">
+                    <svg class="w-full h-full" viewBox="0 0 200 200">
+                        <!-- Red Ring (Geschriebene Wörter) Radius: 80 -->
+                        <circle class="ring-bg" stroke="#ff0055" cx="100" cy="100" r="80" />
+                        <circle class="ring-fill" stroke="#ff0055" cx="100" cy="100" r="80" 
+                                stroke-dasharray="502.65" stroke-dashoffset="502.65" id="ring-words" />
+
+                        <!-- Green Ring (Geschriebene Artikel) Radius: 62 -->
+                        <circle class="ring-bg" stroke="#a3e635" cx="100" cy="100" r="62" />
+                        <circle class="ring-fill" stroke="#a3e635" cx="100" cy="100" r="62" 
+                                stroke-dasharray="389.55" stroke-dashoffset="389.55" id="ring-posts" />
+
+                        <!-- Blue Ring (Gesamte Lesezeit) Radius: 44 -->
+                        <circle class="ring-bg" stroke="#00d2ff" cx="100" cy="100" r="44" />
+                        <circle class="ring-fill" stroke="#00d2ff" cx="100" cy="100" r="44" 
+                                stroke-dasharray="276.46" stroke-dashoffset="276.46" id="ring-time" />
+                    </svg>
                 </div>
-                <div>
-                    <span class="block text-2xl md:text-3xl font-black text-slate-900">{{ total_words }}</span>
-                    <span class="text-sm font-bold uppercase tracking-wider text-slate-500">Wörter geschrieben</span>
+
+                <!-- Stats Display -->
+                <div class="flex-grow space-y-6 text-left">
+                    <div>
+                        <span class="text-xs uppercase font-extrabold tracking-widest text-slate-400">Aktivität</span>
+                        <h2 class="text-3xl font-black tracking-tight text-white mt-1">Blog-Aktivitätsringe</h2>
+                    </div>
+
+                    <div class="space-y-4">
+                        <!-- Rot: Wörter -->
+                        <div class="flex items-center justify-between border-b border-slate-800 pb-3">
+                            <div class="flex items-center gap-3">
+                                <span class="w-3.5 h-3.5 rounded-full bg-[#ff0055] inline-block shadow-sm"></span>
+                                <span class="font-bold text-slate-200">Geschriebene Wörter</span>
+                            </div>
+                            <div class="text-right">
+                                <span class="text-xl font-black text-white">{{ total_words }}</span>
+                                <span class="text-xs text-slate-400 block">/ 10.000 Wörter Ziel</span>
+                            </div>
+                        </div>
+
+                        <!-- Grün: Artikel -->
+                        <div class="flex items-center justify-between border-b border-slate-800 pb-3">
+                            <div class="flex items-center gap-3">
+                                <span class="w-3.5 h-3.5 rounded-full bg-[#a3e635] inline-block shadow-sm"></span>
+                                <span class="font-bold text-slate-200">Geschriebene Artikel</span>
+                            </div>
+                            <div class="text-right">
+                                <span class="text-xl font-black text-white">{{ site.posts.size }}</span>
+                                <span class="text-xs text-slate-400 block">/ 20 Artikel Ziel</span>
+                            </div>
+                        </div>
+
+                        <!-- Blau: Lesezeit -->
+                        <div class="flex items-center justify-between">
+                            <div class="flex items-center gap-3">
+                                <span class="w-3.5 h-3.5 rounded-full bg-[#00d2ff] inline-block shadow-sm"></span>
+                                <span class="font-bold text-slate-200">Gesamte Lesezeit</span>
+                            </div>
+                            <div class="text-right">
+                                <span class="text-xl font-black text-white">{{ total_read_time }} Min.</span>
+                                <span class="text-xs text-slate-400 block">/ 60 Min. Ziel</span>
+                            </div>
+                        </div>
+                    </div>
                 </div>
+
             </div>
-        </div>
+        </section>
     </main>
 
     {% include footer.html %}
@@ -434,9 +493,38 @@ robots: index, follow
             } catch (err) { zeigeBanner('error', 'Fehler', err.message); }
         }
 
+        // Ring-Animationen berechnen
+        function animiereAktivitaetsRinge() {
+            const words = parseInt("{{ total_words }}") || 0;
+            const posts = parseInt("{{ site.posts.size }}") || 0;
+            const readTime = parseInt("{{ total_read_time }}") || 0;
+
+            // Ziele
+            const targetWords = 10000;
+            const targetPosts = 20;
+            const targetTime = 60;
+
+            // Fortschritte (in % max 100)
+            const wordsPercent = Math.min(words / targetWords, 1);
+            const postsPercent = Math.min(posts / targetPosts, 1);
+            const timePercent = Math.min(readTime / targetTime, 1);
+
+            // Ring-Längen (2 * PI * r)
+            const ringWords = document.getElementById('ring-words');
+            const ringPosts = document.getElementById('ring-posts');
+            const ringTime = document.getElementById('ring-time');
+
+            if (ringWords) ringWords.style.strokeDashoffset = 502.65 - (502.65 * wordsPercent);
+            if (ringPosts) ringPosts.style.strokeDashoffset = 389.55 - (389.55 * postsPercent);
+            if (ringTime) ringTime.style.strokeDashoffset = 276.46 - (276.46 * timePercent);
+        }
+
         // Bilder-Slideshow mit Hover-Pause
         document.addEventListener("DOMContentLoaded", function() {
             datenLaden();
+            
+            // Verzögerte Animation für Ring-Effekt
+            setTimeout(animiereAktivitaetsRinge, 300);
 
             const images = document.querySelectorAll('.slideshow-img');
             const container = images[0] ? images[0].parentElement : null; 
