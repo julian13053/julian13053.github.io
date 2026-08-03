@@ -5,7 +5,6 @@ description: Entdecke das kreative Portfolio und den Blog von Julian Fleger. Mod
 keywords: Julian Fleger, Julian Fleger Portfolio, M-Fleger, Webentwickler Berlin, Blog, Branding
 robots: index, follow
 ---
-<!DOCTYPE html>
 <html lang="de" class="scroll-smooth">
 <head>
     <meta charset="UTF-8">
@@ -29,29 +28,29 @@ robots: index, follow
     <script src="https://cdn.jsdelivr.net/npm/@tailwindcss/browser@4"></script>
     <script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script>
     <style>
-        /* Keyframes für schwebende 3D-Objekte (Oreo-Style) */
-        @keyframes floatSlow {
-            0%, 100% { transform: translateY(0px) rotate(0deg) scale(1); }
-            50% { transform: translateY(-18px) rotate(5deg) scale(1.03); }
+        /* Keyframes */
+        @keyframes headerPopUp {
+            0% { opacity: 0; transform: translateY(50px) scale(0.99); }
+            100% { opacity: 1; transform: translateY(0) scale(1); }
         }
-        @keyframes floatFast {
-            0%, 100% { transform: translateY(0px) rotate(0deg); }
-            50% { transform: translateY(-28px) rotate(-8deg); }
+        @keyframes textJumpUp {
+            0% { opacity: 0; transform: translateY(25px); }
+            100% { opacity: 1; transform: translateY(0); }
         }
-        @keyframes pulseGlow {
-            0%, 100% { opacity: 0.4; transform: scale(1); }
-            50% { opacity: 0.8; transform: scale(1.1); }
+        @keyframes drawLine {
+            to { stroke-dashoffset: 0; }
         }
 
-        .animate-float-1 { animation: floatSlow 6s ease-in-out infinite; }
-        .animate-float-2 { animation: floatFast 5s ease-in-out infinite; animation-delay: 1s; }
-        .animate-float-3 { animation: floatSlow 7s ease-in-out infinite; animation-delay: 2s; }
-        .animate-glow { animation: pulseGlow 4s ease-in-out infinite; }
-
-        /* Hintergrund Dot-Pattern wie auf der Oreo Website */
-        .bg-oreo-dots {
-            background-image: radial-gradient(rgba(255, 255, 255, 0.18) 2px, transparent 2px);
-            background-size: 28px 28px;
+        .animate-header { animation: headerPopUp 0.9s cubic-bezier(0.16, 1, 0.3, 1) forwards; }
+        .reveal-item-1 { opacity: 0; animation: textJumpUp 0.7s cubic-bezier(0.16, 1, 0.3, 1) forwards; animation-delay: 0.3s; }
+        .reveal-item-2 { opacity: 0; animation: textJumpUp 0.7s cubic-bezier(0.16, 1, 0.3, 1) forwards; animation-delay: 0.5s; }
+        .reveal-item-3 { opacity: 0; animation: textJumpUp 0.7s cubic-bezier(0.16, 1, 0.3, 1) forwards; animation-delay: 0.7s; }
+        
+        .animate-draw { 
+            stroke-dasharray: 600; 
+            stroke-dashoffset: 600; 
+            animation: drawLine 0.9s cubic-bezier(0.4, 0, 0.2, 1) forwards; 
+            animation-delay: 1.1s; 
         }
 
         /* Smooth Activity Rings Transition */
@@ -61,7 +60,7 @@ robots: index, follow
         }
     </style>
 </head>
-<body class="bg-slate-950 text-gray-100 font-sans antialiased flex flex-col min-h-screen relative overflow-x-hidden">
+<body class="bg-slate-100 text-gray-900 font-sans antialiased flex flex-col min-h-screen relative overflow-x-hidden">
 
     <!-- Toast Banner -->
     <div id="custom-banner" class="fixed top-24 right-4 z-50 transform translate-x-full opacity-0 transition-all duration-300 ease-out max-w-sm w-full backdrop-blur-xl shadow-xl rounded-2xl p-4 flex items-start gap-3" style="background: rgba(255, 255, 255, 0.85); border: 1px solid rgba(255, 255, 255, 0.5);">
@@ -79,91 +78,65 @@ robots: index, follow
         </nav>
     </div>
 
-    <!-- HERO SECTION IM OREO-STYLE (SCHWEBENDE ELEMENTE + RIESIGE TYPO) -->
-    <header class="relative bg-gradient-to-b from-blue-700 via-blue-900 to-slate-950 text-white min-h-[90vh] flex items-center justify-center pt-24 pb-20 px-4 md:px-8 overflow-hidden bg-oreo-dots">
-        
-        <!-- Leuchtender Hintergrund-Glow -->
-        <div class="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-[600px] h-[600px] bg-cyan-500/20 rounded-full blur-[120px] pointer-events-none animate-glow"></div>
-
-        <!-- SCHWEBENDE 3D-OBJEKTE (Ersetzen die Oreos & Milchspritzer) -->
-        <!-- Objekt 1: Oben Links (Digitales Herz / Pflege) -->
-        <div class="absolute -top-6 -left-8 md:top-12 md:left-12 w-32 md:w-48 h-32 md:h-48 z-10 pointer-events-none animate-float-1">
-            <div class="w-full h-full bg-gradient-to-tr from-pink-500 to-rose-400 rounded-3xl rotate-12 shadow-2xl flex items-center justify-center border-4 border-white/20 backdrop-blur-md">
-                <span class="text-5xl md:text-7xl">🩺</span>
-            </div>
-        </div>
-
-        <!-- Objekt 2: Oben Rechts (Code / Zukunfts-Brille) -->
-        <div class="absolute top-16 -right-10 md:top-20 md:right-16 w-36 md:w-52 h-36 md:h-52 z-10 pointer-events-none animate-float-2">
-            <div class="w-full h-full bg-gradient-to-br from-cyan-400 to-blue-600 rounded-full -rotate-12 shadow-2xl flex items-center justify-center border-4 border-white/30">
-                <span class="text-6xl md:text-8xl">🚀</span>
-            </div>
-        </div>
-
-        <!-- Objekt 3: Unten Links (Verbindung / Netze) -->
-        <div class="absolute bottom-10 -left-10 md:bottom-16 md:left-20 w-28 md:w-44 h-28 md:h-44 z-10 pointer-events-none animate-float-3">
-            <div class="w-full h-full bg-gradient-to-tr from-indigo-500 to-cyan-400 rounded-2xl rotate-45 shadow-2xl flex items-center justify-center border-4 border-white/20">
-                <span class="text-4xl md:text-6xl">🌐</span>
-            </div>
-        </div>
-
-        <!-- Objekt 4: Unten Rechts (Blog / Gedanken) -->
-        <div class="absolute -bottom-8 -right-6 md:bottom-12 md:right-24 w-32 md:w-48 h-32 md:h-48 z-10 pointer-events-none animate-float-1">
-            <div class="w-full h-full bg-gradient-to-br from-amber-400 to-orange-500 rounded-3xl -rotate-6 shadow-2xl flex items-center justify-center border-4 border-white/20">
-                <span class="text-5xl md:text-7xl">💡</span>
-            </div>
-        </div>
-
-        <!-- ZENTRALER INHALT -->
-        <div class="max-w-5xl mx-auto text-center relative z-20 space-y-6">
+    <!-- Hero Header -->
+    <header class="animate-header bg-gradient-to-br from-[#1d4ed8] via-[#1e3a8a] to-[#312e81] text-white mx-4 mt-[-4rem] pt-32 pb-24 md:pb-32 px-6 md:px-12 rounded-b-[50px] md:rounded-b-[80px] shadow-2xl relative overflow-hidden">
+        <div class="max-w-6xl mx-auto grid md:grid-cols-12 gap-12 items-center relative z-10">
             
-            <div class="inline-block">
-                <span class="bg-cyan-400 text-slate-950 font-black px-5 py-2 rounded-full text-xs uppercase tracking-widest shadow-lg transform hover:scale-105 transition-transform inline-block">
-                    Julian Fleger • Digital Portfolio
-                </span>
+            <div class="md:col-span-7 text-center md:text-left">
+                <div class="reveal-item-1">
+                    <span class="bg-cyan-400/20 text-cyan-300 border border-cyan-400/30 font-extrabold px-4 py-1.5 rounded-full text-xs uppercase tracking-wider">Design & Development für Pflege-Agenturen</span>
+                </div>
+                
+                <div class="reveal-item-2 mt-5 mb-6">
+                    <h1 class="text-4xl md:text-6xl font-black tracking-tight leading-tight relative inline-block pb-4">
+                        Julian Fleger.
+                        <span class="absolute left-0 bottom-0 w-full h-4 text-cyan-400">
+                            <svg viewBox="0 0 500 20" fill="none" xmlns="http://www.w3.org/2000/svg" class="w-full h-full" preserveAspectRatio="none">
+                                <path d="M5 15C130 5 370 4 495 15" stroke="currentColor" stroke-width="5" stroke-linecap="round" class="animate-draw"/>
+                            </svg>
+                        </span>
+                    </h1>
+                    <span class="text-cyan-300 block text-3xl md:text-5xl font-black mt-2">Punktgenau verbunden.</span>
+                </div>
+                
+                <div class="reveal-item-3">
+                    <p class="text-base md:text-xl text-blue-100 max-w-xl mb-8 leading-relaxed">
+                        Ich bin Julian Fleger. Auf diesem Portfolio teile ich meine kreativen Ideen, Brandings und Web-Projekte rund um das Thema digitale Pflege-Agenturen sowie neue, spannende Blogartikel.
+                    </p>
+                    <a href="blog.html" class="bg-cyan-400 hover:bg-cyan-300 text-blue-950 font-black px-8 py-4 rounded-xl shadow-lg inline-block w-full md:w-auto text-center no-underline transition-all transform hover:-translate-y-1 hover:shadow-cyan-400/20">
+                        Direkt zum Blog →
+                    </a>
+                </div>
             </div>
-
-            <!-- Fette Headline im Stil von "WILLKOMMEN BEI DIE ZUKUNFT..." -->
-            <h1 class="text-5xl sm:text-7xl md:text-9xl font-black tracking-tight uppercase leading-[0.9] text-white drop-shadow-2xl">
-                Willkommen bei <br/>
-                <span class="text-transparent bg-clip-text bg-gradient-to-r from-cyan-300 via-blue-200 to-pink-400">
-                    M-Fleger.
-                </span>
-            </h1>
-
-            <p class="text-lg md:text-2xl text-blue-100 max-w-2xl mx-auto font-medium leading-relaxed drop-shadow">
-                Punktgenau verbunden. Moderne Web-Entwicklung, starke Brandings und digitale Konzepte für Pflege-Agenturen.
-            </p>
-
-            <div class="pt-6 flex flex-col sm:flex-row items-center justify-center gap-4">
-                <a href="blog.html" class="w-full sm:w-auto bg-white text-blue-950 hover:bg-cyan-300 font-black text-lg px-10 py-5 rounded-2xl shadow-2xl transition-all transform hover:-translate-y-1 hover:scale-105 no-underline">
-                    Direkt zum Blog →
-                </a>
-                <a href="#projekte" class="w-full sm:w-auto backdrop-blur-md bg-white/10 hover:bg-white/20 border border-white/30 text-white font-bold text-lg px-8 py-5 rounded-2xl shadow-lg transition-all no-underline">
-                    Mehr entdecken
-                </a>
+            
+            <div class="md:col-span-5 flex justify-center reveal-item-2">
+                <div class="relative group">
+                    <div class="absolute inset-0 bg-cyan-400 rounded-2xl transform rotate-3 scale-105 opacity-20 blur-xs transition-transform duration-300 group-hover:rotate-1"></div>
+                    
+                    <div class="relative w-64 h-80 md:w-80 md:h-[400px] rounded-2xl overflow-hidden shadow-2xl border-4 border-white/10 bg-slate-800">
+                        <img src="mein-bild-1.jpg" alt="Julian Fleger Portfolio - Webentwicklung" 
+                             class="slideshow-img absolute inset-0 w-full h-full object-cover transition-opacity duration-1000 opacity-100">
+                        
+                        <img src="mein-bild-2.jpg" alt="Julian Fleger - Digitale Lösungen für die Pflege" 
+                             class="slideshow-img absolute inset-0 w-full h-full object-cover transition-opacity duration-1000 opacity-0">
+                    </div>
+                </div>
             </div>
-
-            <!-- Scroll Indicator -->
-            <div class="pt-12 animate-bounce">
-                <span class="text-xs uppercase tracking-widest text-cyan-300 font-bold block mb-1">Scrollen</span>
-                <span class="text-2xl">↓</span>
-            </div>
-
+            
         </div>
     </header>
 
-    <!-- Main Content Bereich -->
-    <main class="max-w-6xl mx-auto px-4 md:px-6 pt-16 flex-grow w-full relative z-20 text-slate-900">
+    <!-- Main Content -->
+    <main class="max-w-6xl mx-auto px-4 md:px-6 pt-16 flex-grow w-full relative z-20">
         
         <!-- Neueste Artikel -->
         <div class="mb-12">
             <div class="flex flex-col md:flex-row justify-between items-center md:items-baseline mb-10 gap-4 text-center md:text-left">
                 <div>
-                    <h2 class="text-3xl md:text-5xl font-black tracking-tight text-white">📰 Neueste Artikel</h2>
-                    <p class="text-base md:text-lg mt-2 text-slate-400">Frisch aus dem Gedankenkarussell gegriffen.</p>
+                    <h2 class="text-3xl md:text-4xl font-black tracking-tight text-slate-900">📰 Neueste Artikel</h2>
+                    <p class="text-base md:text-lg mt-2 text-slate-600">Frisch aus dem Gedankenkarussell gegriffen.</p>
                 </div>
-                <a href="blog.html" class="text-cyan-400 font-bold hover:text-cyan-300 transition-colors flex items-center gap-1 group no-underline">
+                <a href="blog.html" class="text-blue-600 font-bold hover:text-blue-800 transition-colors flex items-center gap-1 group no-underline">
                     Alle Artikel ansehen <span class="transform group-hover:translate-x-1 transition-transform">→</span>
                 </a>
             </div>
@@ -172,83 +145,83 @@ robots: index, follow
                 {% for post in site.posts limit:3 %}
                 {% assign numeric_id = post.date | date: "%Y%m%d%H%M" %}
                 
-                <div class="blog-card p-6 rounded-3xl flex flex-col justify-between transition-all duration-300 hover:-translate-y-2 hover:shadow-2xl bg-slate-900/90 border border-slate-800 text-white shadow-xl" data-post-id="{{ numeric_id }}">
+                <div class="blog-card p-6 rounded-2xl flex flex-col justify-between transition-all duration-300 hover:-translate-y-1 hover:shadow-xl bg-white border border-slate-200/60 shadow-md" data-post-id="{{ numeric_id }}">
                     <div>
                         <div class="flex justify-between items-center mb-4">
-                            <span class="text-xs bg-blue-600 text-white px-3 py-1 rounded-full font-extrabold uppercase">{{ post.date | date: "%d.%m.%Y" }}</span>
+                            <span class="text-xs bg-blue-600 text-white px-2.5 py-1 rounded-md font-bold uppercase">{{ post.date | date: "%d.%m.%Y" }}</span>
                             {% assign words = post.content | strip_html | number_of_words %}
                             {% assign read_time = words | divided_by: 180 | plus: 1 %}
-                            <span class="text-xs font-semibold text-slate-400">📖 {{ read_time }} Min.</span>
+                            <span class="text-xs font-semibold text-slate-500">📖 {{ read_time }} Min.</span>
                         </div>
-                        <h3 class="text-2xl font-black mt-1 mb-2 line-clamp-2 text-white">{{ post.title }}</h3>
-                        <p class="text-sm mb-4 line-clamp-3 text-slate-300">{{ post.excerpt | strip_html }}</p>
+                        <h3 class="text-xl font-black mt-1 mb-2 line-clamp-2 text-slate-900">{{ post.title }}</h3>
+                        <p class="text-sm mb-4 line-clamp-3 text-slate-700">{{ post.excerpt | strip_html }}</p>
                     </div>
                     
                     <div class="flex flex-col gap-3 mt-4">
                         <div class="flex justify-between items-center">
-                            <a href="{{ post.url | relative_url }}" class="text-cyan-400 font-bold text-sm hover:text-cyan-300 no-underline inline-block">
+                            <a href="{{ post.url | relative_url }}" class="text-blue-600 font-bold text-sm hover:text-blue-800 no-underline inline-block">
                                 Artikel lesen →
                             </a>
                             
-                            <button onclick="likeUmschalten('{{ numeric_id }}', this)" class="like-btn text-xs font-bold px-3 py-1.5 rounded-full border transition-all cursor-pointer flex items-center gap-1 text-white bg-slate-800 border-slate-700">
+                            <button onclick="likeUmschalten('{{ numeric_id }}', this)" class="like-btn text-xs font-bold px-3 py-1.5 rounded-full border transition-all cursor-pointer flex items-center gap-1 text-slate-900 bg-white/40 border-black/10">
                                 🤍 <span class="like-counter">0</span> Likes
                             </button>
                         </div>
                         
                         <div class="flex justify-end">
-                            <button onclick="favoritUmschalten('{{ numeric_id }}', this)" class="fav-btn text-xs font-bold px-3 py-1.5 rounded-full border transition-all cursor-pointer w-full md:w-auto text-center text-white bg-slate-800 border-slate-700">
+                            <button onclick="favoritUmschalten('{{ numeric_id }}', this)" class="fav-btn text-xs font-bold px-3 py-1.5 rounded-full border transition-all cursor-pointer w-full md:w-auto text-center text-slate-900 bg-white/40 border-black/10">
                                 ⭐ Favorit
                             </button>
                         </div>
                     </div>
                 </div>
                 {% else %}
-                <div class="col-span-1 md:col-span-3 text-center py-12 rounded-3xl bg-slate-900 border border-slate-800">
-                    <p class="text-lg font-medium text-slate-400">Bisher wurden noch keine Blog-Artikel veröffentlicht.</p>
+                <div class="col-span-1 md:col-span-3 text-center py-12 rounded-2xl bg-white border border-slate-200">
+                    <p class="text-lg font-medium text-slate-600">Bisher wurden noch keine Blog-Artikel veröffentlicht.</p>
                 </div>
                 {% endfor %}
             </div>
         </div>
 
         <!-- Rechte-Hub Section -->
-        <section class="my-16 p-8 md:p-12 rounded-3xl bg-slate-900 border border-slate-800 shadow-2xl relative overflow-hidden text-white">
+        <section class="my-16 p-8 md:p-12 rounded-3xl bg-white border border-slate-200/60 shadow-xl relative overflow-hidden">
             <div class="max-w-3xl mx-auto text-center mb-10">
-                <span class="bg-cyan-400/20 text-cyan-300 font-extrabold px-4 py-1.5 rounded-full text-xs uppercase tracking-wider border border-cyan-400/30">Neu auf M-Fleger</span>
-                <h2 class="text-3xl md:text-5xl font-black tracking-tight mt-3 text-white">🌍 Das große Rechte-Hub</h2>
-                <p class="text-base md:text-lg mt-2 text-slate-300">Rechte gehen uns alle an – egal wie alt wir sind. Entdecke unser neues Portal, das Rechte für jeden verständlich erklärt.</p>
+                <span class="bg-blue-100 text-blue-800 font-extrabold px-4 py-1.5 rounded-full text-xs uppercase tracking-wider">Neu auf M-Fleger</span>
+                <h2 class="text-3xl md:text-4xl font-black tracking-tight mt-3 text-slate-900">🌍 Das große Rechte-Hub</h2>
+                <p class="text-base md:text-lg mt-2 text-slate-700">Rechte gehen uns alle an – egal wie alt wir sind. Entdecke unser neues Portal, das Rechte für jeden verständlich erklärt.</p>
             </div>
 
             <div class="grid grid-cols-1 md:grid-cols-3 gap-6">
-                <a href="kinderrechte.html" class="group p-6 rounded-2xl transition-all duration-300 no-underline flex flex-col justify-between hover:-translate-y-1 hover:shadow-lg bg-slate-800/80 border border-slate-700">
+                <a href="kinderrechte.html" class="group p-6 rounded-2xl transition-all duration-300 no-underline flex flex-col justify-between hover:-translate-y-1 hover:shadow-lg bg-slate-50 border border-slate-200">
                     <div>
-                        <span class="text-4xl block mb-3">🎒</span>
-                        <h3 class="text-xl font-black transition-colors group-hover:text-cyan-400 text-white">Kinderrechte</h3>
-                        <p class="text-sm mt-2 leading-relaxed text-slate-300">Schutz, Bildung und Freizeit. Auf Augenhöhe und einfach erklärt für Kinder und Eltern.</p>
+                        <span class="text-3xl block mb-3">🎒</span>
+                        <h3 class="text-xl font-black transition-colors group-hover:text-blue-600 text-slate-900">Kinderrechte</h3>
+                        <p class="text-sm mt-2 leading-relaxed text-slate-700">Schutz, Bildung und Freizeit. Auf Augenhöhe und einfach erklärt für Kinder und Eltern.</p>
                     </div>
-                    <span class="text-cyan-400 font-bold text-sm mt-4 inline-block">Mehr erfahren →</span>
+                    <span class="text-blue-600 font-bold text-sm mt-4 inline-block">Mehr erfahren →</span>
                 </a>
 
-                <a href="menschenrechte.html" class="group p-6 rounded-2xl transition-all duration-300 no-underline flex flex-col justify-between hover:-translate-y-1 hover:shadow-lg bg-slate-800/80 border border-slate-700">
+                <a href="menschenrechte.html" class="group p-6 rounded-2xl transition-all duration-300 no-underline flex flex-col justify-between hover:-translate-y-1 hover:shadow-lg bg-slate-50 border border-slate-200">
                     <div>
-                        <span class="text-4xl block mb-3">⚖️</span>
-                        <h3 class="text-xl font-black transition-colors group-hover:text-cyan-400 text-white">Menschenrechte</h3>
-                        <p class="text-sm mt-2 leading-relaxed text-slate-300">Meinungsfreiheit, Gleichberechtigung und Würde. Die Säulen unserer Gesellschaft.</p>
+                        <span class="text-3xl block mb-3">⚖️</span>
+                        <h3 class="text-xl font-black transition-colors group-hover:text-blue-600 text-slate-900">Menschenrechte</h3>
+                        <p class="text-sm mt-2 leading-relaxed text-slate-700">Meinungsfreiheit, Gleichberechtigung und Würde. Die Säulen unserer Gesellschaft.</p>
                     </div>
-                    <span class="text-cyan-400 font-bold text-sm mt-4 inline-block">Mehr erfahren →</span>
+                    <span class="text-blue-600 font-bold text-sm mt-4 inline-block">Mehr erfahren →</span>
                 </a>
 
-                <a href="digitalrechte.html" class="group p-6 rounded-2xl transition-all duration-300 no-underline flex flex-col justify-between hover:-translate-y-1 hover:shadow-lg bg-slate-800/80 border border-slate-700">
+                <a href="digitalrechte.html" class="group p-6 rounded-2xl transition-all duration-300 no-underline flex flex-col justify-between hover:-translate-y-1 hover:shadow-lg bg-slate-50 border border-slate-200">
                     <div>
-                        <span class="text-4xl block mb-3">📱</span>
-                        <h3 class="text-xl font-black transition-colors group-hover:text-cyan-400 text-white">Digitalrechte</h3>
-                        <p class="text-sm mt-2 leading-relaxed text-slate-300">Deine Rechte im Netz. Von Datenschutz bis zum Schutz vor Cybermobbing.</p>
+                        <span class="text-3xl block mb-3">📱</span>
+                        <h3 class="text-xl font-black transition-colors group-hover:text-blue-600 text-slate-900">Digitalrechte</h3>
+                        <p class="text-sm mt-2 leading-relaxed text-slate-700">Deine Rechte im Netz. Von Datenschutz bis zum Schutz vor Cybermobbing.</p>
                     </div>
-                    <span class="text-cyan-400 font-bold text-sm mt-4 inline-block">Mehr erfahren →</span>
+                    <span class="text-blue-600 font-bold text-sm mt-4 inline-block">Mehr erfahren →</span>
                 </a>
             </div>
             
             <div class="text-center mt-10">
-                <a href="unsere-rechte.html" class="inline-block bg-cyan-400 hover:bg-cyan-300 text-slate-950 font-black px-8 py-4 rounded-xl shadow-lg no-underline transition-all transform hover:-translate-y-0.5 border-0">
+                <a href="unsere-rechte.html" class="inline-block bg-blue-600 hover:bg-blue-700 text-white font-black px-6 py-3 rounded-xl shadow-md no-underline transition-all transform hover:-translate-y-0.5 border-0">
                     Zum gesamten Rechte-Hub
                 </a>
             </div>
@@ -265,10 +238,10 @@ robots: index, follow
         {% endfor %}
 
         <!-- Apple Activity Card Section -->
-        <section id="activity-section" class="my-16 p-8 md:p-12 rounded-3xl bg-slate-900 text-white shadow-2xl relative overflow-hidden border border-slate-800">
+        <section id="activity-section" class="my-16 p-8 md:p-12 rounded-3xl bg-slate-900 text-white shadow-2xl relative overflow-hidden">
             <div class="relative mx-auto w-full max-w-3xl rounded-3xl p-2 md:p-8 text-white">
                 <div class="flex flex-col items-center gap-8">
-                    <h2 class="font-black text-3xl text-white">Aktivitätsringe</h2>
+                    <h2 class="font-medium text-2xl text-white">Aktivitätsringe</h2>
 
                     <div class="flex items-center flex-col sm:flex-row gap-6 sm:gap-0">
                         <!-- Activity Rings SVGs Container -->
@@ -283,7 +256,9 @@ robots: index, follow
                                             <stop offset="100%" style="stop-color: #FF6B8B; stop-opacity: 1;" />
                                         </linearGradient>
                                     </defs>
-                                    <circle class="text-zinc-800/80" cx="100" cy="100" r="92" fill="none" stroke="currentColor" stroke-width="16" />
+                                    <!-- Background Circle -->
+                                    <circle class="text-zinc-800/50" cx="100" cy="100" r="92" fill="none" stroke="currentColor" stroke-width="16" />
+                                    <!-- Animated Progress Circle -->
                                     <circle id="circle-words" class="ring-progress" cx="100" cy="100" r="92" fill="none" 
                                             stroke="url(#gradient-woerter)" stroke-width="16" stroke-linecap="round" 
                                             stroke-dasharray="578.05" stroke-dashoffset="578.05" />
@@ -299,7 +274,9 @@ robots: index, follow
                                             <stop offset="100%" style="stop-color: #C5FF4D; stop-opacity: 1;" />
                                         </linearGradient>
                                     </defs>
-                                    <circle class="text-zinc-800/80" cx="80" cy="80" r="72" fill="none" stroke="currentColor" stroke-width="16" />
+                                    <!-- Background Circle -->
+                                    <circle class="text-zinc-800/50" cx="80" cy="80" r="72" fill="none" stroke="currentColor" stroke-width="16" />
+                                    <!-- Animated Progress Circle -->
                                     <circle id="circle-posts" class="ring-progress" cx="80" cy="80" r="72" fill="none" 
                                             stroke="url(#gradient-artikel)" stroke-width="16" stroke-linecap="round" 
                                             stroke-dasharray="452.39" stroke-dashoffset="452.39" />
@@ -315,7 +292,9 @@ robots: index, follow
                                             <stop offset="100%" style="stop-color: #4DDFED; stop-opacity: 1;" />
                                         </linearGradient>
                                     </defs>
-                                    <circle class="text-zinc-800/80" cx="60" cy="60" r="52" fill="none" stroke="currentColor" stroke-width="16" />
+                                    <!-- Background Circle -->
+                                    <circle class="text-zinc-800/50" cx="60" cy="60" r="52" fill="none" stroke="currentColor" stroke-width="16" />
+                                    <!-- Animated Progress Circle -->
                                     <circle id="circle-time" class="ring-progress" cx="60" cy="60" r="52" fill="none" 
                                             stroke="url(#gradient-lesezeit)" stroke-width="16" stroke-linecap="round" 
                                             stroke-dasharray="326.73" stroke-dashoffset="326.73" />
@@ -328,25 +307,25 @@ robots: index, follow
                         <div class="ml-0 sm:ml-8 flex flex-col gap-6 text-center sm:text-left">
                             <div class="flex flex-col">
                                 <span class="font-medium text-sm text-zinc-400">WÖRTER</span>
-                                <span class="font-black text-3xl" style="color: #FF2D55;">
+                                <span class="font-semibold text-2xl" style="color: #FF2D55;">
                                     {{ total_words }}
-                                    <span class="ml-1 text-base text-zinc-400 font-normal">WÖRTER GESCHRIEBEN</span>
+                                    <span class="ml-1 text-base text-zinc-400">WÖRTER GESCHRIEBEN</span>
                                 </span>
                             </div>
 
                             <div class="flex flex-col">
                                 <span class="font-medium text-sm text-zinc-400">ARTIKEL</span>
-                                <span class="font-black text-3xl" style="color: #A3F900;">
+                                <span class="font-semibold text-2xl" style="color: #A3F900;">
                                     {{ site.posts.size }}
-                                    <span class="ml-1 text-base text-zinc-400 font-normal">ARTIKEL GESCHRIEBEN</span>
+                                    <span class="ml-1 text-base text-zinc-400">ARTIKEL GESCHRIEBEN</span>
                                 </span>
                             </div>
 
                             <div class="flex flex-col">
                                 <span class="font-medium text-sm text-zinc-400">LESEZEIT</span>
-                                <span class="font-black text-3xl" style="color: #04C7DD;">
+                                <span class="font-semibold text-2xl" style="color: #04C7DD;">
                                     {{ total_read_time }}
-                                    <span class="ml-1 text-base text-zinc-400 font-normal">MIN. LESEZEIT</span>
+                                    <span class="ml-1 text-base text-zinc-400">MIN. LESEZEIT</span>
                                 </span>
                             </div>
                         </div>
@@ -480,9 +459,9 @@ robots: index, follow
                     const { error } = await supabaseClient.from('favoriten').delete().eq('user_id', user.id).eq('blog_id', blogId);
                     if (!error) {
                         button.innerHTML = "⭐ Favorit";
-                        button.style.backgroundColor = "rgba(255,255,255,0.1)";
-                        button.style.color = "#ffffff";
-                        button.style.borderColor = "rgba(255,255,255,0.2)";
+                        button.style.backgroundColor = "rgba(255,255,255,0.4)";
+                        button.style.color = "#0f172a";
+                        button.style.borderColor = "rgba(0,0,0,0.08)";
                         zeigeBanner('info', 'Entfernt', 'Der Artikel wurde aus deinen Favoriten gelöscht.');
                     }
                 } else {
@@ -513,9 +492,9 @@ robots: index, follow
                     if (!error) {
                         const neuStand = Math.max(0, aktuellerStand - 1);
                         button.innerHTML = `🤍 <span class="like-counter">${neuStand}</span> Likes`;
-                        button.style.backgroundColor = "rgba(255,255,255,0.1)";
-                        button.style.color = "#ffffff";
-                        button.style.borderColor = "rgba(255,255,255,0.2)";
+                        button.style.backgroundColor = "rgba(255,255,255,0.4)";
+                        button.style.color = "#0f172a";
+                        button.style.borderColor = "rgba(0,0,0,0.08)";
                         zeigeBanner('info', 'Like entfernt', 'Schade, dir gefällt dieser Beitrag nicht mehr.');
                     }
                 } else {
@@ -532,12 +511,13 @@ robots: index, follow
             } catch (err) { zeigeBanner('error', 'Fehler', err.message); }
         }
 
-        // Aktivitätsringe animieren
+        // Aktivitätsringe animieren nach Scroll-Event
         function animiereAktivitaetsRinge() {
             const words = parseInt("{{ total_words }}") || 0;
             const posts = parseInt("{{ site.posts.size }}") || 0;
             const readTime = parseInt("{{ total_read_time }}") || 0;
 
+            // Dynamische Skalierungsziele für sauberen visuellen Ring-Fortschritt
             const targetWords = Math.max(words, 5000);
             const targetPosts = Math.max(posts, 10);
             const targetTime = Math.max(readTime, 30);
@@ -568,7 +548,7 @@ robots: index, follow
         document.addEventListener("DOMContentLoaded", function() {
             datenLaden();
             
-            // Scroll-Observer für Ring-Animation (1s Delay nach Scrollen)
+            // Scroll-Observer für die Aktivitätsringe mit 1 Sekunde Verzögerung
             const targetSection = document.getElementById('activity-section');
             let animationTriggered = false;
 
@@ -577,6 +557,7 @@ robots: index, follow
                     entries.forEach(entry => {
                         if (entry.isIntersecting && !animationTriggered) {
                             animationTriggered = true;
+                            // Genau 1000ms (1 Sekunde) warten, nachdem das Element im Sichtfeld ist
                             setTimeout(animiereAktivitaetsRinge, 1000);
                             observer.unobserve(entry.target);
                         }
@@ -584,6 +565,37 @@ robots: index, follow
                 }, { threshold: 0.3 });
 
                 observer.observe(targetSection);
+            }
+
+            // Bilder-Slideshow
+            const images = document.querySelectorAll('.slideshow-img');
+            const container = images[0] ? images[0].parentElement : null; 
+            let currentIndex = 0;
+            let slideshowInterval;
+
+            if (images.length < 2) return;
+
+            function startSlideshow() {
+                slideshowInterval = setInterval(function() {
+                    images[currentIndex].classList.remove('opacity-100');
+                    images[currentIndex].classList.add('opacity-0');
+
+                    currentIndex = (currentIndex + 1) % images.length;
+
+                    images[currentIndex].classList.remove('opacity-0');
+                    images[currentIndex].classList.add('opacity-100');
+                }, 4000);
+            }
+
+            function stopSlideshow() {
+                clearInterval(slideshowInterval);
+            }
+
+            startSlideshow();
+
+            if (container) {
+                container.addEventListener('mouseenter', stopSlideshow);
+                container.addEventListener('mouseleave', startSlideshow);
             }
         });
     </script>
