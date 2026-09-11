@@ -1,0 +1,153 @@
+<!DOCTYPE html>
+<html lang="de">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>11k16 | Erreichbarkeit & Sicherheit</title>
+    <style>
+        :root {
+            --bg-color: #0d1117;
+            --card-bg: #161b22;
+            --accent-blue: #1f57d9;
+            --accent-cyan: #53b4d9;
+            --text-color: #f0f6fc;
+            --text-muted: #8b949e;
+            --border-color: #30363d;
+        }
+
+        body {
+            font-family: 'Inter Tight', Arial, sans-serif;
+            background-color: var(--bg-color);
+            color: var(--text-color);
+            margin: 0;
+            padding: 40px 20px;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            min-height: 100vh;
+            box-sizing: border-box;
+        }
+
+        .container {
+            max-width: 620px;
+            background-color: var(--card-bg);
+            border: 1px solid var(--border-color);
+            border-radius: 24px;
+            padding: 40px;
+            box-shadow: 0 20px 40px rgba(0,0,0,0.4);
+        }
+
+        .badge {
+            display: inline-block;
+            background-color: rgba(83, 180, 217, 0.15);
+            color: var(--accent-cyan);
+            padding: 6px 14px;
+            border-radius: 20px;
+            font-size: 0.85rem;
+            font-weight: 600;
+            margin-bottom: 20px;
+        }
+
+        h1 {
+            font-size: 2rem;
+            margin: 0 0 15px 0;
+            color: #ffffff;
+        }
+
+        p {
+            line-height: 1.6;
+            color: var(--text-muted);
+            margin-bottom: 20px;
+        }
+
+        .highlight-box {
+            background-color: rgba(31, 87, 217, 0.12);
+            border-left: 4px solid var(--accent-blue);
+            padding: 16px 20px;
+            border-radius: 8px;
+            margin: 25px 0;
+            color: #f0f6fc;
+        }
+
+        .contact-methods {
+            display: flex;
+            flex-direction: column;
+            gap: 15px;
+            margin-top: 30px;
+        }
+
+        .contact-card {
+            background-color: var(--bg-color);
+            border: 1px solid var(--border-color);
+            padding: 16px 20px;
+            border-radius: 12px;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+
+        .contact-label {
+            font-size: 0.85rem;
+            color: var(--text-muted);
+        }
+
+        .contact-value {
+            font-weight: 600;
+            color: var(--accent-cyan);
+            text-decoration: none;
+        }
+
+        .contact-value:hover {
+            text-decoration: underline;
+        }
+
+        .footer-note {
+            margin-top: 35px;
+            padding-top: 20px;
+            border-top: 1px solid var(--border-color);
+            font-size: 0.85rem;
+            text-align: center;
+            color: var(--text-muted);
+        }
+    </style>
+</head>
+<body>
+
+<div class="container">
+    <span class="badge">Sicherheits- & Systembereich</span>
+    <h1>Hinweis zur Adresse 11k16</h1>
+    
+    <p>Aus Sicherheitsgründen und zum Schutz vor unbefugtem Zugriff sowie automatisierte Spam-Nachrichten ist das Mail-Gateway der Endung <code>@11k16.de</code> isoliert eingerichtet.</p>
+
+    <div class="highlight-box">
+        <strong style="color: #fff;">Warum schlägt eine externe Zustellung fehl?</strong><br>
+        E-Mail-Adressen mit der Endung <strong>@11k16.de</strong> nehmen ausschließlich eingehende Nachrichten von Absendern innerhalb der eigenen 11k16-Domäne an. Externe E-Mails von anderen Anbietern werden vom System blockiert.
+    </div>
+
+    <p>Für Anfragen von externen Personen, Partnern oder Dienstleistern nutzen Sie bitte die folgenden Kontaktwege zu Julian Fleger:</p>
+
+    <div class="contact-methods">
+        <div class="contact-card">
+            <div>
+                <div class="contact-label">Externe E-Mail-Adresse</div>
+                <div style="color: #fff; font-weight: 600;">julian@m-fleger.de</div>
+            </div>
+            <a href="mailto:julian@m-fleger.de" class="contact-value">E-Mail senden →</a>
+        </div>
+
+        <div class="contact-card">
+            <div>
+                <div class="contact-label">Telefon / Mobil</div>
+                <div style="color: #fff; font-weight: 600;">+49 155 65 28 98 49</div>
+            </div>
+            <a href="tel:+4915565289849" class="contact-value">Anrufen →</a>
+        </div>
+    </div>
+
+    <div class="footer-note">
+        Vielen Dank für das Verständnis &ndash; Julian Fleger
+    </div>
+</div>
+
+</body>
+</html>
