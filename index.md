@@ -1,3 +1,6 @@
+Startseite
+
+
 ---
 layout: null
 title: Julian Fleger | Portfolio & Web-Projekte
@@ -110,23 +113,18 @@ robots: index, follow
             </div>
             
             <div class="md:col-span-5 flex justify-center reveal-item-2">
-  <div class="relative group">
- <div class="md:col-span-5 flex justify-center reveal-item-2">
-  <div class="relative group">
-    <div class="absolute inset-0 bg-cyan-400 rounded-2xl transform rotate-3 scale-105 opacity-20 blur-xs transition-transform duration-300 group-hover:rotate-1"></div>
-
-    <div class="relative w-64 h-80 md:w-80 md:h-[400px] rounded-2xl overflow-hidden shadow-2xl border-4 border-white/10 bg-slate-800">
-      <img src="julian-bild-1.jpg" alt="Julian Fleger Portfolio - Webentwicklung"
-           class="slideshow-img absolute inset-0 w-full h-full object-cover transition-opacity duration-1000 opacity-100">
-
-      <img src="julian-bild-2.jpg" alt="Julian Fleger - Digitale Lösungen für die Pflege"
-           class="slideshow-img absolute inset-0 w-full h-full object-cover transition-opacity duration-1000 opacity-0">
-
-      <img src="julian-bild-3.jpg" alt="Julian Fleger - Projekte und Dokumentationen"
-           class="slideshow-img absolute inset-0 w-full h-full object-cover transition-opacity duration-1000 opacity-0">
-    </div>
-  </div>
-</div>
+                <div class="relative group">
+                    <div class="absolute inset-0 bg-cyan-400 rounded-2xl transform rotate-3 scale-105 opacity-20 blur-xs transition-transform duration-300 group-hover:rotate-1"></div>
+                    
+                    <div class="relative w-64 h-80 md:w-80 md:h-[400px] rounded-2xl overflow-hidden shadow-2xl border-4 border-white/10 bg-slate-800">
+                        <img src="mein-bild-1.jpg" alt="Julian Fleger Portfolio - Webentwicklung" 
+                             class="slideshow-img absolute inset-0 w-full h-full object-cover transition-opacity duration-1000 opacity-100">
+                        
+                        <img src="mein-bild-2.jpg" alt="Julian Fleger - Digitale Lösungen für die Pflege" 
+                             class="slideshow-img absolute inset-0 w-full h-full object-cover transition-opacity duration-1000 opacity-0">
+                    </div>
+                </div>
+            </div>
             
         </div>
     </header>
