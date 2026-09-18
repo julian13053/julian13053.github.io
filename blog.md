@@ -2,6 +2,7 @@
 layout: null
 title: Blog
 ---
+<!DOCTYPE html>
 <html lang="de">
 <head>
     <meta charset="UTF-8">
@@ -23,9 +24,18 @@ title: Blog
 
     <script src="https://cdn.jsdelivr.net/npm/@tailwindcss/browser@4"></script>
     <script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script>
+    <style>
+        .liquid-glass {
+            background: rgba(255, 255, 255, 0.75);
+            backdrop-filter: blur(12px);
+            -webkit-backdrop-filter: blur(12px);
+            border: 1px solid rgba(255, 255, 255, 0.5);
+        }
+    </style>
 </head>
-<body class="text-gray-900 font-sans antialiased flex flex-col min-h-screen relative">
+<body class="bg-gradient-to-br from-slate-50 to-blue-100 min-h-screen text-gray-900 font-sans antialiased flex flex-col justify-between relative">
 
+    <!-- Toast Banner -->
     <div id="custom-banner" class="fixed top-24 right-4 z-50 transform translate-x-full opacity-0 transition-all duration-300 ease-out max-w-sm w-full bg-white border shadow-xl rounded-2xl p-4 flex items-start gap-3">
         <span id="banner-icon" class="text-xl"></span>
         <div class="flex-grow">
@@ -34,71 +44,75 @@ title: Blog
         </div>
     </div>
 
-    <nav class="sticky top-0 z-50 shadow-xs">
-        {% include navigation.html %}
-    </nav>
+    <!-- Navigationsleiste aus _includes/navigation.html -->
+    {% include navigation.html %}
 
-    <header class="bg-gradient-to-br from-[#1d4ed8] via-[#1e3a8a] to-[#312e81] text-white py-12 md:py-16 px-4">
-        <div class="max-w-4xl mx-auto text-center">
-            <h1 class="text-3xl md:text-5xl font-black tracking-tight mb-4">📰 Mein Blog</h1>
-            <p class="text-base md:text-lg text-blue-100">Gedanken, Projekte und creative Ideen punktgenau festgehalten.</p>
+    <!-- Header Section -->
+    <header class="py-10 md:py-14 px-4 text-center">
+        <div class="max-w-4xl mx-auto space-y-3">
+            <h1 class="text-3xl md:text-5xl font-black tracking-tight text-slate-900">📰 Mein Blog</h1>
+            <p class="text-base md:text-lg text-slate-600 font-medium">Gedanken, Projekte und kreative Ideen punktgenau festgehalten.</p>
         </div>
     </header>
 
-    <main class="max-w-6xl mx-auto px-4 py-10 md:py-12 flex-grow w-full">
+    <!-- Hauptinhalt -->
+    <main class="max-w-6xl mx-auto px-4 pb-12 flex-grow w-full">
         
-        <div class="max-w-md mx-auto mb-10 md:mb-16">
+        <!-- Suchfeld -->
+        <div class="max-w-md mx-auto mb-10 md:mb-12">
             <div class="relative">
-                <input type="text" id="blogSearch" onkeyup="filterBlogPosts()" placeholder="🔍 Artikel nach Titel durchsuchen..." class="w-full px-4 py-3 rounded-xl md:rounded-2xl shadow-xs focus:outline-none focus:border-blue-500 font-medium transition-all text-base" style="background: rgba(255, 255, 255, 0.6); border: 1px solid rgba(255, 255, 255, 0.5); backdrop-filter: blur(4px); -webkit-backdrop-filter: blur(4px);">
+                <input type="text" id="blogSearch" onkeyup="filterBlogPosts()" placeholder="🔍 Artikel nach Titel durchsuchen..." class="w-full px-5 py-3.5 rounded-2xl shadow-sm focus:outline-none focus:ring-2 focus:ring-blue-500/50 font-medium transition-all text-base liquid-glass text-gray-900 placeholder-gray-500">
             </div>
         </div>
 
+        <!-- Grid mit Blogkarten -->
         <div class="grid grid-cols-1 md:grid-cols-3 gap-6 md:gap-8" id="blogGrid">
             {% for post in site.posts %}
             {% assign numeric_id = post.date | date: "%Y%m%d%H%M" %}
             
-            <div class="blog-card p-6 flex flex-col justify-between hover:shadow-lg hover:scale-102 transition-all duration-300 liquid-glass" data-post-id="{{ numeric_id }}">
+            <div class="blog-card p-6 rounded-3xl flex flex-col justify-between hover:shadow-xl hover:-translate-y-1 transition-all duration-300 liquid-glass shadow-sm" data-post-id="{{ numeric_id }}">
                 <div>
                     <div class="flex justify-between items-center mb-3">
-                        <span class="text-xs bg-blue-600 text-white px-2.5 py-1 rounded-md font-bold uppercase border-0">{{ post.date | date: "%d.%m.%Y" }}</span>
+                        <span class="text-xs bg-blue-600 text-white px-3 py-1 rounded-full font-bold uppercase tracking-wider shadow-xs">{{ post.date | date: "%d.%m.%Y" }}</span>
                         {% assign words = post.content | strip_html | number_of_words %}
                         {% assign read_time = words | divided_by: 180 | plus: 1 %}
-                        <span class="text-xs text-gray-500 font-semibold">📖 {{ read_time }} Min.</span>
+                        <span class="text-xs text-slate-500 font-semibold">📖 {{ read_time }} Min.</span>
                     </div>
                     
-                    <h2 class="post-title text-xl font-black mt-1 mb-3 line-clamp-2" style="color: #0f172a;">{{ post.title }}</h2>
-                    <p class="text-sm mb-4 line-clamp-4" style="color: #334155;">{{ post.excerpt | strip_html }}</p>
+                    <h2 class="post-title text-xl font-black mt-1 mb-3 line-clamp-2 text-slate-900">{{ post.title }}</h2>
+                    <p class="text-sm mb-4 line-clamp-4 text-slate-600 leading-relaxed">{{ post.excerpt | strip_html }}</p>
                 </div>
                 
-                <div class="flex flex-col gap-3 mt-2">
+                <div class="flex flex-col gap-3 mt-4 pt-4 border-t border-slate-200/60">
                     <div class="flex justify-between items-center">
-                        <a href="{{ post.url | relative_url }}" class="text-blue-600 font-bold text-sm hover:text-blue-800 no-underline inline-block">
+                        <a href="{{ post.url | relative_url }}" class="text-blue-600 font-bold text-sm hover:text-blue-700 no-underline inline-flex items-center gap-1 transition-colors">
                             Artikel lesen →
                         </a>
                         
-                        <button onclick="likeUmschalten('{{ numeric_id }}', this)" class="like-btn text-xs font-bold px-3 py-1.5 rounded-full border border-gray-200 bg-white hover:bg-gray-50 transition-all cursor-pointer flex items-center gap-1">
+                        <button onclick="likeUmschalten('{{ numeric_id }}', this)" class="like-btn text-xs font-bold px-3 py-1.5 rounded-full border border-gray-200 bg-white hover:bg-gray-50 transition-all cursor-pointer flex items-center gap-1 shadow-xs">
                             🤍 <span class="like-counter">0</span> Likes
                         </button>
                     </div>
                     
                     <div class="flex justify-end">
-                        <button onclick="favoritUmschalten('{{ numeric_id }}', this)" class="fav-btn text-xs font-bold px-3 py-1.5 rounded-full border border-gray-200 bg-white hover:bg-gray-50 transition-all cursor-pointer w-full md:w-auto text-center">
+                        <button onclick="favoritUmschalten('{{ numeric_id }}', this)" class="fav-btn text-xs font-bold px-3 py-1.5 rounded-full border border-gray-200 bg-white hover:bg-gray-50 transition-all cursor-pointer w-full md:w-auto text-center shadow-xs">
                             ⭐ Favorit
                         </button>
                     </div>
                 </div>
             </div>
             {% else %}
-            <div class="col-span-1 md:col-span-3 text-center py-12 liquid-glass">
-                <p class="text-lg font-medium" style="color: #475569;">Bisher wurden noch keine Artikel veröffentlicht.</p>
+            <div class="col-span-1 md:col-span-3 text-center py-12 rounded-3xl liquid-glass">
+                <p class="text-lg font-medium text-slate-600">Bisher wurden noch keine Artikel veröffentlicht.</p>
             </div>
             {% endfor %}
         </div>
 
-        <p id="noResultsMessage" class="text-gray-500 text-center py-12 text-lg hidden">Keine passenden Artikel gefunden.</p>
+        <p id="noResultsMessage" class="text-slate-500 text-center py-12 text-lg font-medium hidden">Keine passenden Artikel gefunden.</p>
 
     </main>
 
+    <!-- Fußzeile aus _includes/footer.html -->
     {% include footer.html %}
 
     <script>
