@@ -72,11 +72,7 @@ robots: index, follow
     </div>
 
     <!-- Navigation -->
-    <div class="w-full max-w-5xl mx-auto px-4 sticky top-6 z-50">
-        <nav class="backdrop-blur-xl bg-slate-900/85 text-white shadow-2xl rounded-2xl border border-white/10 transition-all duration-300 hover:bg-slate-900/90">
-            {% include navigation.html %}
-        </nav>
-    </div>
+    {% include navigation.html %}
 
     <!-- Hero Header -->
     <header class="animate-header bg-gradient-to-br from-[#1d4ed8] via-[#1e3a8a] to-[#312e81] text-white mx-4 mt-[-4rem] pt-32 pb-24 md:pb-32 px-6 md:px-12 rounded-b-[50px] md:rounded-b-[80px] shadow-2xl relative overflow-hidden">
