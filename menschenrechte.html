@@ -10,67 +10,78 @@ title: Menschenrechte
     <title>Menschenrechte | M-Fleger</title>
     <meta name="description" content="Freiheit, Gerechtigkeit und Frieden. Entdecke die Allgemeine Erklärung der Menschenrechte im ungekürzten Originaltext.">
     
-    <link rel="icon" type="image/jpeg" href="auge-logo.jpg">
+    <link rel="stylesheet" href="/style.css">
+    <link rel="icon" type="image/jpeg" href="/auge-logo.jpg">
+
     <script src="https://cdn.jsdelivr.net/npm/@tailwindcss/browser@4"></script>
     <style>
         @keyframes fadeInUp {
-            from { opacity: 0; transform: translateY(20px); }
+            from { opacity: 0; transform: translateY(15px); }
             to { opacity: 1; transform: translateY(0); }
         }
-        .animate-fade-in { animation: fadeInUp 0.8s ease-out forwards; }
+        .animate-fade-in { animation: fadeInUp 0.5s ease-out forwards; }
+        .liquid-glass {
+            background: rgba(255, 255, 255, 0.75);
+            backdrop-filter: blur(12px);
+            -webkit-backdrop-filter: blur(12px);
+            border: 1px solid rgba(255, 255, 255, 0.5);
+        }
     </style>
 </head>
-<body class="bg-gray-50 text-gray-900 font-sans antialiased flex flex-col min-h-screen relative">
+<body class="bg-gradient-to-br from-slate-50 to-blue-100 min-h-screen text-gray-900 font-sans antialiased flex flex-col justify-between relative">
 
-    <nav class="bg-white border-b border-gray-100 sticky top-0 z-50 shadow-xs">
-        {% include navigation.html %}
-    </nav>
+    <!-- Navigationsleiste aus _includes/navigation.html -->
+    {% include navigation.html %}
 
-    <header class="bg-gradient-to-br from-[#1e3a8a] via-[#3b82f6] to-[#1d4ed8] text-white py-16 px-4 md:px-6 overflow-hidden">
+    <!-- Header-Bereich -->
+    <header class="bg-gradient-to-br from-blue-900 via-blue-600 to-blue-800 text-white py-16 px-4 md:px-6 shadow-md relative overflow-hidden">
         <div class="max-w-4xl mx-auto text-center animate-fade-in">
-            <span class="bg-blue-200/20 text-blue-200 border border-blue-300/30 font-extrabold px-4 py-1.5 rounded-full text-xs uppercase tracking-wider">UN-Menschenrechtscharta</span>
-            <h1 class="text-4xl md:text-5xl font-black tracking-tight mt-5 mb-6 leading-tight">
+            <span class="bg-white/10 text-blue-100 border border-white/20 font-extrabold px-4 py-1.5 rounded-full text-xs uppercase tracking-wider inline-block mb-4">
+                UN-Menschenrechtscharta
+            </span>
+            <h1 class="text-4xl md:text-5xl font-black tracking-tight mb-6 leading-tight">
                 🌍 Menschenrechte.<br><span class="text-blue-200">Freiheit und Würde für alle Menschen.</span>
             </h1>
-            <p class="text-base md:text-lg text-blue-50 max-w-2xl mx-auto leading-relaxed">
+            <p class="text-base md:text-lg text-blue-50 max-w-2xl mx-auto leading-relaxed font-medium">
                 Alle Menschen sind frei und gleich an Würde und Rechten geboren. Diese Rechte sind unveräußerlich und gelten für jeden Einzelnen – unabhängig von Herkunft, Geschlecht oder Status.
             </p>
         </div>
     </header>
 
+    <!-- Hauptinhalt -->
     <main class="max-w-4xl mx-auto px-4 md:px-6 py-12 md:py-16 flex-grow w-full">
         
-        <div class="text-center mb-12">
-            <h2 class="text-3xl font-black text-gray-950 tracking-tight">Die wichtigsten Rechte im Überblick</h2>
+        <div class="text-center mb-10">
+            <h2 class="text-3xl font-black text-slate-900 tracking-tight">Die wichtigsten Rechte im Überblick</h2>
         </div>
 
         <div class="space-y-6 mb-16">
             
-            <div class="bg-white border border-gray-100 rounded-3xl p-6 shadow-xs flex flex-col sm:flex-row items-start gap-4 transition-all hover:border-blue-200 hover:shadow-md">
-                <div class="bg-blue-50 text-blue-600 font-black text-xl w-12 h-12 rounded-2xl flex items-center justify-center shrink-0">01</div>
+            <div class="liquid-glass p-6 rounded-3xl shadow-xs flex flex-col sm:flex-row items-start gap-4 transition-all hover:border-blue-300 hover:shadow-md">
+                <div class="bg-blue-100 text-blue-600 font-black text-xl w-12 h-12 rounded-2xl flex items-center justify-center shrink-0">01</div>
                 <div>
-                    <h3 class="text-xl font-bold text-gray-950 mb-2">Recht auf Freiheit und Gleichheit</h3>
-                    <p class="text-gray-600 text-sm leading-relaxed">
+                    <h3 class="text-xl font-bold text-slate-900 mb-2">Recht auf Freiheit und Gleichheit</h3>
+                    <p class="text-slate-600 text-sm leading-relaxed font-medium">
                         Kein Mensch darf über einen anderen bestimmen oder ihn versklaven. Jeder hat das Recht, sein Leben in Freiheit, Sicherheit und nach eigenen Vorstellungen zu gestalten.
                     </p>
                 </div>
             </div>
 
-            <div class="bg-white border border-gray-100 rounded-3xl p-6 shadow-xs flex flex-col sm:flex-row items-start gap-4 transition-all hover:border-blue-200 hover:shadow-md">
-                <div class="bg-blue-50 text-blue-600 font-black text-xl w-12 h-12 rounded-2xl flex items-center justify-center shrink-0">02</div>
+            <div class="liquid-glass p-6 rounded-3xl shadow-xs flex flex-col sm:flex-row items-start gap-4 transition-all hover:border-blue-300 hover:shadow-md">
+                <div class="bg-blue-100 text-blue-600 font-black text-xl w-12 h-12 rounded-2xl flex items-center justify-center shrink-0">02</div>
                 <div>
-                    <h3 class="text-xl font-bold text-gray-950 mb-2">Schutz vor Folter und Diskriminierung</h3>
-                    <p class="text-gray-600 text-sm leading-relaxed">
+                    <h3 class="text-xl font-bold text-slate-900 mb-2">Schutz vor Folter und Diskriminierung</h3>
+                    <p class="text-slate-600 text-sm leading-relaxed font-medium">
                         Niemand darf grausam, unmenschlich oder erniedrigend behandelt oder bestraft werden. Das Gesetz muss jeden Menschen absolut gleich und gerecht schützen.
                     </p>
                 </div>
             </div>
 
-            <div class="bg-white border border-gray-100 rounded-3xl p-6 shadow-xs flex flex-col sm:flex-row items-start gap-4 transition-all hover:border-blue-200 hover:shadow-md">
-                <div class="bg-blue-50 text-blue-600 font-black text-xl w-12 h-12 rounded-2xl flex items-center justify-center shrink-0">03</div>
+            <div class="liquid-glass p-6 rounded-3xl shadow-xs flex flex-col sm:flex-row items-start gap-4 transition-all hover:border-blue-300 hover:shadow-md">
+                <div class="bg-blue-100 text-blue-600 font-black text-xl w-12 h-12 rounded-2xl flex items-center justify-center shrink-0">03</div>
                 <div>
-                    <h3 class="text-xl font-bold text-gray-950 mb-2">Gedanken- und Meinungsfreiheit</h3>
-                    <p class="text-gray-600 text-sm leading-relaxed">
+                    <h3 class="text-xl font-bold text-slate-900 mb-2">Gedanken- und Meinungsfreiheit</h3>
+                    <p class="text-slate-600 text-sm leading-relaxed font-medium">
                         Jeder Mensch darf glauben, was er möchte, und seine Meinung frei äußern, Informationen suchen und mit anderen teilen – ohne Angst vor Unterdrückung zu haben.
                     </p>
                 </div>
@@ -78,173 +89,176 @@ title: Menschenrechte
 
         </div>
 
-        <div class="pt-12 border-t border-gray-200 mt-16">
-            <h2 class="text-3xl font-black text-gray-950 tracking-tight mb-2">Menschenrechte Gesetzestext</h2>
-            <p class="text-gray-500 text-base mb-8 leading-relaxed">Allgemeine Erklärung der Menschenrechte — Verkündet von der Generalversammlung der Vereinten Nationen am 10. Dezember 1948.</p>
+        <div class="pt-12 border-t border-slate-200/80 mt-16">
+            <h2 class="text-3xl font-black text-slate-900 tracking-tight mb-2">Menschenrechte Gesetzestext</h2>
+            <p class="text-slate-600 text-sm md:text-base mb-8 leading-relaxed font-medium">
+                Allgemeine Erklärung der Menschenrechte — Verkündet von der Generalversammlung der Vereinten Nationen am 10. Dezember 1948.
+            </p>
             
             <div class="space-y-4">
 
-                <div class="bg-white border border-gray-200 rounded-2xl p-6 shadow-xs transition-all hover:border-gray-300">
+                <div class="liquid-glass p-6 rounded-2xl shadow-xs transition-all hover:border-blue-300">
                     <h4 class="font-bold text-blue-900 text-base">Artikel 1 - Freiheit, Gleichheit, Brüderlichkeit</h4>
-                    <p class="text-gray-700 text-sm mt-2 leading-relaxed">Alle Menschen sind frei und gleich an Würde und Rechten geboren. Sie sind mit Vernunft und Gewissen begabt und sollten einander im Geist der Brüderlichkeit begegnen.</p>
+                    <p class="text-slate-700 text-sm mt-2 leading-relaxed">Alle Menschen sind frei und gleich an Würde und Rechten geboren. Sie sind mit Vernunft und Gewissen begabt und sollten einander im Geist der Brüderlichkeit begegnen.</p>
                 </div>
 
-                <div class="bg-white border border-gray-200 rounded-2xl p-6 shadow-xs transition-all hover:border-gray-300">
+                <div class="liquid-glass p-6 rounded-2xl shadow-xs transition-all hover:border-blue-300">
                     <h4 class="font-bold text-blue-900 text-base">Artikel 2 - Verbot der Diskriminierung</h4>
-                    <p class="text-gray-700 text-sm mt-2 leading-relaxed">Jeder hat Anspruch auf die in dieser Erklärung verkündeten Rechte und Freiheiten ohne irgendeinen Unterschied, etwa nach Rasse, Hautfarbe, Geschlecht, Sprache, Religion, politischer oder sonstiger Überzeugung, nationaler oder sozialer Herkunft, Vermögen, Geburt oder sonstigem Status.<br><br>Des Weiteren darf kein Unterschied gemacht werden auf Grund der politischen, rechtlichen oder internationalen Stellung des Landes oder Gebiets, dem eine Person angehört, gleichviel ob dieses unabhängig ist, unter Berücksichtigung steht, keine Selbstregierung besitzt oder sonst in seiner Souveränität eingeschränkt ist.</p>
+                    <p class="text-slate-700 text-sm mt-2 leading-relaxed">Jeder hat Anspruch auf die in dieser Erklärung verkündeten Rechte und Freiheiten ohne irgendeinen Unterschied, etwa nach Rasse, Hautfarbe, Geschlecht, Sprache, Religion, politischer oder sonstiger Überzeugung, nationaler oder sozialer Herkunft, Vermögen, Geburt oder sonstigem Status.<br><br>Des Weiteren darf kein Unterschied gemacht werden auf Grund der politischen, rechtlichen oder internationalen Stellung des Landes oder Gebiets, dem eine Person angehört, gleichviel ob dieses unabhängig ist, unter Berücksichtigung steht, keine Selbstregierung besitzt oder sonst in seiner Souveränität eingeschränkt ist.</p>
                 </div>
 
-                <div class="bg-white border border-gray-200 rounded-2xl p-6 shadow-xs transition-all hover:border-gray-300">
+                <div class="liquid-glass p-6 rounded-2xl shadow-xs transition-all hover:border-blue-300">
                     <h4 class="font-bold text-blue-900 text-base">Artikel 3 - Recht auf Leben und Freiheit</h4>
-                    <p class="text-gray-700 text-sm mt-2 leading-relaxed">Jeder hat das Recht auf Leben, Freiheit und Sicherheit der Person.</p>
+                    <p class="text-slate-700 text-sm mt-2 leading-relaxed">Jeder hat das Recht auf Leben, Freiheit und Sicherheit der Person.</p>
                 </div>
 
-                <div class="bg-white border border-gray-200 rounded-2xl p-6 shadow-xs transition-all hover:border-gray-300">
+                <div class="liquid-glass p-6 rounded-2xl shadow-xs transition-all hover:border-blue-300">
                     <h4 class="font-bold text-blue-900 text-base">Artikel 4 - Verbot der Sklaverei</h4>
-                    <p class="text-gray-700 text-sm mt-2 leading-relaxed">Niemand darf in Sklaverei oder Leibeigenschaft gehalten werden; Sklaverei und Sklavenhandel sind in allen ihren Formen verboten.</p>
+                    <p class="text-slate-700 text-sm mt-2 leading-relaxed">Niemand darf in Sklaverei oder Leibeigenschaft gehalten werden; Sklaverei und Sklavenhandel sind in allen ihren Formen verboten.</p>
                 </div>
 
-                <div class="bg-white border border-gray-200 rounded-2xl p-6 shadow-xs transition-all hover:border-gray-300">
+                <div class="liquid-glass p-6 rounded-2xl shadow-xs transition-all hover:border-blue-300">
                     <h4 class="font-bold text-blue-900 text-base">Artikel 5 - Verbot der Folter</h4>
-                    <p class="text-gray-700 text-sm mt-2 leading-relaxed">Niemand darf der Folter oder grausamer, unmenschlicher oder erniedrigender Behandlung oder Strafe unterworfen werden.</p>
+                    <p class="text-slate-700 text-sm mt-2 leading-relaxed">Niemand darf der Folter oder grausamer, unmenschlicher oder erniedrigender Behandlung oder Strafe unterworfen werden.</p>
                 </div>
 
-                <div class="bg-white border border-gray-200 rounded-2xl p-6 shadow-xs transition-all hover:border-gray-300">
+                <div class="liquid-glass p-6 rounded-2xl shadow-xs transition-all hover:border-blue-300">
                     <h4 class="font-bold text-blue-900 text-base">Artikel 6 - Anerkennung als Rechtsperson</h4>
-                    <p class="text-gray-700 text-sm mt-2 leading-relaxed">Jeder hat das Recht, überall als rechtsfähig anerkannt zu werden.</p>
+                    <p class="text-slate-700 text-sm mt-2 leading-relaxed">Jeder hat das Recht, überall als rechtsfähig anerkannt zu werden.</p>
                 </div>
 
-                <div class="bg-white border border-gray-200 rounded-2xl p-6 shadow-xs transition-all hover:border-gray-300">
+                <div class="liquid-glass p-6 rounded-2xl shadow-xs transition-all hover:border-blue-300">
                     <h4 class="font-bold text-blue-900 text-base">Artikel 7 - Gleichheit vor dem Gesetz</h4>
-                    <p class="text-gray-700 text-sm mt-2 leading-relaxed">Alle Menschen sind vor dem Gesetz gleich und haben ohne Diskriminierung Anspruch auf gleichen Schutz durch das Gesetz. Alle haben Anspruch auf gleichen Schutz gegen jede Diskriminierung, die diese Erklärung verletzt, und gegen jede Aufreizung zu einer derartigen Diskriminierung.</p>
+                    <p class="text-slate-700 text-sm mt-2 leading-relaxed">Alle Menschen sind vor dem Gesetz gleich und haben ohne Diskriminierung Anspruch auf gleichen Schutz durch das Gesetz. Alle haben Anspruch auf gleichen Schutz gegen jede Diskriminierung, die diese Erklärung verletzt, und gegen jede Aufreizung zu einer derartigen Diskriminierung.</p>
                 </div>
 
-                <div class="bg-white border border-gray-200 rounded-2xl p-6 shadow-xs transition-all hover:border-gray-300">
+                <div class="liquid-glass p-6 rounded-2xl shadow-xs transition-all hover:border-blue-300">
                     <h4 class="font-bold text-blue-900 text-base">Artikel 8 - Recht auf Rechtsschutz</h4>
-                    <p class="text-gray-700 text-sm mt-2 leading-relaxed">Jeder hat Anspruch auf einen wirksamen Rechtsbehelf bei den zuständigen innerstaatlichen Gerichten gegen Handlungen, durch die seine ihm nach der Verfassung oder dem Gesetz zustehenden Grundrechte verletzt werden.</p>
+                    <p class="text-slate-700 text-sm mt-2 leading-relaxed">Jeder hat Anspruch auf einen wirksamen Rechtsbehelf bei den zuständigen innerstaatlichen Gerichten gegen Handlungen, durch die seine ihm nach der Verfassung oder dem Gesetz zustehenden Grundrechte verletzt werden.</p>
                 </div>
 
-                <div class="bg-white border border-gray-200 rounded-2xl p-6 shadow-xs transition-all hover:border-gray-300">
+                <div class="liquid-glass p-6 rounded-2xl shadow-xs transition-all hover:border-blue-300">
                     <h4 class="font-bold text-blue-900 text-base">Artikel 9 - Schutz vor willkürlicher Verhaftung</h4>
-                    <p class="text-gray-700 text-sm mt-2 leading-relaxed">Niemand darf willkürlich festgenommen, in Haft gehalten oder des Landes verwiesen werden.</p>
+                    <p class="text-slate-700 text-sm mt-2 leading-relaxed">Niemand darf willkürlich festgenommen, in Haft gehalten oder des Landes verwiesen werden.</p>
                 </div>
 
-                <div class="bg-white border border-gray-200 rounded-2xl p-6 shadow-xs transition-all hover:border-gray-300">
+                <div class="liquid-glass p-6 rounded-2xl shadow-xs transition-all hover:border-blue-300">
                     <h4 class="font-bold text-blue-900 text-base">Artikel 10 - Recht auf faires Gerichtsverfahren</h4>
-                    <p class="text-gray-700 text-sm mt-2 leading-relaxed">Jeder hat bei der Feststellung seiner Rechte und Pflichten sowie bei einer gegen ihn erhobenen strafrechtlichen Anklage in voller Gleichberechtigung Anspruch auf ein gerechtes und öffentliches Verfahren vor einem unabhängigen und unparteiischen Gericht.</p>
+                    <p class="text-slate-700 text-sm mt-2 leading-relaxed">Jeder hat bei der Feststellung seiner Rechte und Pflichten sowie bei einer gegen ihn erhobenen strafrechtlichen Anklage in voller Gleichberechtigung Anspruch auf ein gerechtes und öffentliches Verfahren vor einem unabhängigen und unparteiischen Gericht.</p>
                 </div>
 
-                <div class="bg-white border border-gray-200 rounded-2xl p-6 shadow-xs transition-all hover:border-gray-300">
+                <div class="liquid-glass p-6 rounded-2xl shadow-xs transition-all hover:border-blue-300">
                     <h4 class="font-bold text-blue-900 text-base">Artikel 11 - Unschuldsvermutung</h4>
-                    <p class="text-gray-700 text-sm mt-2 leading-relaxed">(1) Jeder, der einer strafbaren Handlung beschuldigt wird, hat das Recht, als unschuldig zu gelten, solange seine Schuld nicht in einem öffentlichen Verfahren, in dem er alle für seine Verteidigung notwendigen Garantien gehabt hat, gesetzlich nachgewiesen ist.<br><br>(2) Niemand darf wegen einer Handlung oder Unterlassung verurteilt werden, die zur Zeit ihrer Begehung nach innerstaatlichem oder internationalem Recht nicht strafbar war. Ebenso darf keine schwerere Strafe als die verhängt werden, die zur Zeit der Begehung der strafbaren Handlung angedroht war.</p>
+                    <p class="text-slate-700 text-sm mt-2 leading-relaxed">(1) Jeder, der einer strafbaren Handlung beschuldigt wird, hat das Recht, als unschuldig zu gelten, solange seine Schuld nicht in einem öffentlichen Verfahren, in dem er alle für seine Verteidigung notwendigen Garantien gehabt hat, gesetzlich nachgewiesen ist.<br><br>(2) Niemand darf wegen einer Handlung oder Unterlassung verurteilt werden, die zur Zeit ihrer Begehung nach innerstaatlichem oder internationalem Recht nicht strafbar war. Ebenso darf keine schwerere Strafe als die verhängt werden, die zur Zeit der Begehung der strafbaren Handlung angedroht war.</p>
                 </div>
 
-                <div class="bg-white border border-gray-200 rounded-2xl p-6 shadow-xs transition-all hover:border-gray-300">
+                <div class="liquid-glass p-6 rounded-2xl shadow-xs transition-all hover:border-blue-300">
                     <h4 class="font-bold text-blue-900 text-base">Artikel 12 - Schutz der Privatsphäre</h4>
-                    <p class="text-gray-700 text-sm mt-2 leading-relaxed">Niemand darf willkürlichen Eingriffen in sein Privatleben, seine Familie, seine Wohnung oder seinen Schriftverkehr noch Beeinträchtigungen seiner Ehre und seines Rufes ausgesetzt werden. Jeder hat Anspruch auf gesetzlichen Schutz gegen solche Eingriffe oder Beeinträchtigungen.</p>
+                    <p class="text-slate-700 text-sm mt-2 leading-relaxed">Niemand darf willkürlichen Eingriffen in sein Privatleben, seine Familie, seine Wohnung oder seinen Schriftverkehr noch Beeinträchtigungen seiner Ehre und seines Rufes ausgesetzt werden. Jeder hat Anspruch auf gesetzlichen Schutz gegen solche Eingriffe oder Beeinträchtigungen.</p>
                 </div>
 
-                <div class="bg-white border border-gray-200 rounded-2xl p-6 shadow-xs transition-all hover:border-gray-300">
+                <div class="liquid-glass p-6 rounded-2xl shadow-xs transition-all hover:border-blue-300">
                     <h4 class="font-bold text-blue-900 text-base">Artikel 13 - Freizügigkeit und Auswanderungsfreiheit</h4>
-                    <p class="text-gray-700 text-sm mt-2 leading-relaxed">(1) Jeder hat das Recht, sich innerhalb eines Staates frei zu bewegen und seinen Aufenthaltsort frei zu wählen.<br><br>(2) Jeder hat das Recht, jedes Land, einschließlich seines eigenen, zu verlassen und in sein Land zurückzukehren.</p>
+                    <p class="text-slate-700 text-sm mt-2 leading-relaxed">(1) Jeder hat das Recht, sich innerhalb eines Staates frei zu bewegen und seinen Aufenthaltsort frei zu wählen.<br><br>(2) Jeder hat das Recht, jedes Land, einschließlich seines eigenen, zu verlassen und in sein Land zurückzukehren.</p>
                 </div>
 
-                <div class="bg-white border border-gray-200 rounded-2xl p-6 shadow-xs transition-all hover:border-gray-300">
+                <div class="liquid-glass p-6 rounded-2xl shadow-xs transition-all hover:border-blue-300">
                     <h4 class="font-bold text-blue-900 text-base">Artikel 14 - Asylrecht</h4>
-                    <p class="text-gray-700 text-sm mt-2 leading-relaxed">(1) Jeder hat das Recht, in anderen Ländern vor Verfolgung Asyl zu suchen und zu genießen.<br><br>(2) Dieses Recht kann nicht in Anspruch genommen werden im Falle einer Strafverfolgung, die tatsächlich auf Grund von Straftaten nichtpolitischer Art oder auf Grund von Handlungen erfolgt, die gegen die Ziele und Grundsätze der Vereinten Nationen verstoßen.</p>
+                    <p class="text-slate-700 text-sm mt-2 leading-relaxed">(1) Jeder hat das Recht, in anderen Ländern vor Verfolgung Asyl zu suchen und zu genießen.<br><br>(2) Dieses Recht kann nicht in Anspruch genommen werden im Falle einer Strafverfolgung, die tatsächlich auf Grund von Straftaten nichtpolitischer Art oder auf Grund von Handlungen erfolgt, die gegen die Ziele und Grundsätze der Vereinten Nationen verstoßen.</p>
                 </div>
 
-                <div class="bg-white border border-gray-200 rounded-2xl p-6 shadow-xs transition-all hover:border-gray-300">
+                <div class="liquid-glass p-6 rounded-2xl shadow-xs transition-all hover:border-blue-300">
                     <h4 class="font-bold text-blue-900 text-base">Artikel 15 - Staatsangehörigkeit</h4>
-                    <p class="text-gray-700 text-sm mt-2 leading-relaxed">(1) Jeder hat das Recht auf eine Staatsangehörigkeit.<br><br>(2) Niemandem darf seine Staatsangehörigkeit willkürlich entzogen noch das Recht versagt werden, seine Staatsangehörigkeit zu wechseln.</p>
+                    <p class="text-slate-700 text-sm mt-2 leading-relaxed">(1) Jeder hat das Recht auf eine Staatsangehörigkeit.<br><br>(2) Niemandem darf seine Staatsangehörigkeit willkürlich entzogen noch das Recht versagt werden, seine Staatsangehörigkeit zu wechseln.</p>
                 </div>
 
-                <div class="bg-white border border-gray-200 rounded-2xl p-6 shadow-xs transition-all hover:border-gray-300">
+                <div class="liquid-glass p-6 rounded-2xl shadow-xs transition-all hover:border-blue-300">
                     <h4 class="font-bold text-blue-900 text-base">Artikel 16 - Eherecht und Familienschutz</h4>
-                    <p class="text-gray-700 text-sm mt-2 leading-relaxed">(1) Heiratsfähige Männer und Frauen haben ohne jede Einschränkung auf Grund der Rasse, der Staatsangehörigkeit oder der Religion das Recht, eine Ehe einzugehen und eine Familie zu gründen. Sie haben bei der Eheschließung, während der Ehe und bei deren Auflösung gleiche Rechte.<br><br>(2) Eine Ehe darf nur bei freier und voller Willenseinigung der künftigen Ehegatten geschlossen werden.<br><br>(3) Die Familie ist die natürliche und grundlegende Gemeinschaftseinheit der Gesellschaft und hat Anspruch auf Schutz durch Gesellschaft und Staat.</p>
+                    <p class="text-slate-700 text-sm mt-2 leading-relaxed">(1) Heiratsfähige Männer und Frauen haben ohne jede Einschränkung auf Grund der Rasse, der Staatsangehörigkeit oder der Religion das Recht, eine Ehe einzugehen und eine Familie zu gründen. Sie haben bei der Eheschließung, während der Ehe und bei deren Auflösung gleiche Rechte.<br><br>(2) Eine Ehe darf nur bei freier und voller Willenseinigung der künftigen Ehegatten geschlossen werden.<br><br>(3) Die Familie ist die natürliche und grundlegende Gemeinschaftseinheit der Gesellschaft und hat Anspruch auf Schutz durch Gesellschaft und Staat.</p>
                 </div>
 
-                <div class="bg-white border border-gray-200 rounded-2xl p-6 shadow-xs transition-all hover:border-gray-300">
+                <div class="liquid-glass p-6 rounded-2xl shadow-xs transition-all hover:border-blue-300">
                     <h4 class="font-bold text-blue-900 text-base">Artikel 17 - Recht auf Eigentum</h4>
-                    <p class="text-gray-700 text-sm mt-2 leading-relaxed">(1) Jeder hat das Recht, sowohl allein als auch in Gemeinschaft mit anderen Eigentum zu besitzen.<br><br>(2) Niemand darf willkürlich seines Eigentums beraubt werden.</p>
+                    <p class="text-slate-700 text-sm mt-2 leading-relaxed">(1) Jeder hat das Recht, sowohl allein als auch in Gemeinschaft mit anderen Eigentum zu besitzen.<br><br>(2) Niemand darf willkürlich seines Eigentums beraubt werden.</p>
                 </div>
 
-                <div class="bg-white border border-gray-200 rounded-2xl p-6 shadow-xs transition-all hover:border-gray-300">
+                <div class="liquid-glass p-6 rounded-2xl shadow-xs transition-all hover:border-blue-300">
                     <h4 class="font-bold text-blue-900 text-base">Artikel 18 - Gedanken-, Gewissens- und Religionsfreiheit</h4>
-                    <p class="text-gray-700 text-sm mt-2 leading-relaxed">Jeder hat das Recht auf Gedanken-, Gewissens- und Religionsfreiheit; dieses Recht schließt die Freiheit ein, seine Religion oder Überzeugung zu wechseln, sowie die Freiheit, seine Religion oder Weltanschauung allein oder in Gemeinschaft mit anderen, öffentlich oder privat durch Lehre, Ausübung, Gottesdienst und Beachtung von Riten zu bekennen.</p>
+                    <p class="text-slate-700 text-sm mt-2 leading-relaxed">Jeder hat das Recht auf Gedanken-, Gewissens- und Religionsfreiheit; dieses Recht schließt die Freiheit ein, seine Religion oder Überzeugung zu wechseln, sowie die Freiheit, seine Religion oder Weltanschauung allein oder in Gemeinschaft mit anderen, öffentlich oder privat durch Lehre, Ausübung, Gottesdienst und Beachtung von Riten zu bekennen.</p>
                 </div>
 
-                <div class="bg-white border border-gray-200 rounded-2xl p-6 shadow-xs transition-all hover:border-gray-300">
+                <div class="liquid-glass p-6 rounded-2xl shadow-xs transition-all hover:border-blue-300">
                     <h4 class="font-bold text-blue-900 text-base">Artikel 19 - Meinungs- und Informationsfreiheit</h4>
-                    <p class="text-gray-700 text-sm mt-2 leading-relaxed">Jeder hat das Recht auf freie Meinungsäußerung; dieses Recht schließt die Freiheit ein, Meinungen ungehindert anzuhängen sowie Überlegungen und Informationen mit allen Medien ohne Rücksicht auf Grenzen zu suchen, zu empfangen und zu verbreiten.</p>
+                    <p class="text-slate-700 text-sm mt-2 leading-relaxed">Jeder hat das Recht auf freie Meinungsäußerung; dieses Recht schließt die Freiheit ein, Meinungen ungehindert anzuhängen sowie Überlegungen und Informationen mit allen Medien ohne Rücksicht auf Grenzen zu suchen, zu empfangen und zu verbreiten.</p>
                 </div>
 
-                <div class="bg-white border border-gray-200 rounded-2xl p-6 shadow-xs transition-all hover:border-gray-300">
+                <div class="liquid-glass p-6 rounded-2xl shadow-xs transition-all hover:border-blue-300">
                     <h4 class="font-bold text-blue-900 text-base">Artikel 20 - Versammlungs- und Vereinigungsfreiheit</h4>
-                    <p class="text-gray-700 text-sm mt-2 leading-relaxed">(1) Alle Menschen haben das Recht, sich friedlich zu versammeln und zu Vereinigungen zusammenzuschließen.<br><br>(2) Niemand darf gezwungen werden, einer Vereinigung anzugehören.</p>
+                    <p class="text-slate-700 text-sm mt-2 leading-relaxed">(1) Alle Menschen haben das Recht, sich friedlich zu versammeln und zu Vereinigungen zusammenzuschließen.<br><br>(2) Niemand darf gezwungen werden, einer Vereinigung anzugehören.</p>
                 </div>
 
-                <div class="bg-white border border-gray-200 rounded-2xl p-6 shadow-xs transition-all hover:border-gray-300">
+                <div class="liquid-glass p-6 rounded-2xl shadow-xs transition-all hover:border-blue-300">
                     <h4 class="font-bold text-blue-900 text-base">Artikel 21 - Demokratisches Mitwirkungsrecht</h4>
-                    <p class="text-gray-700 text-sm mt-2 leading-relaxed">(1) Jeder hat das Recht, an der Gestaltung der öffentlichen Angelegenheiten seines Landes direkt oder durch frei gewählte Vertreter mitzuwirken.<br><br>(2) Jeder hat das Recht auf Zugang zu öffentlichen Ämtern in seinem Land unter gleichen Bedingungen.<br><br>(3) Der Wille des Volkes bildet die Grundlage für die Autorität der öffentlichen Gewalt; dieser Wille muss durch regelmäßige, unverfälschte, allgemeine und gleiche Wahlen mit geheimer Stimmabgabe oder in einem gleichwertigen freien Wahlverfahren zum Ausdruck kommen.</p>
+                    <p class="text-slate-700 text-sm mt-2 leading-relaxed">(1) Jeder hat das Recht, an der Gestaltung der öffentlichen Angelegenheiten seines Landes direkt oder durch frei gewählte Vertreter mitzuwirken.<br><br>(2) Jeder hat das Recht auf Zugang zu öffentlichen Ämtern in seinem Land unter gleichen Bedingungen.<br><br>(3) Der Wille des Volkes bildet die Grundlage für die Autorität der öffentlichen Gewalt; dieser Wille muss durch regelmäßige, unverfälschte, allgemeine und gleiche Wahlen mit geheimer Stimmabgabe oder in einem gleichwertigen freien Wahlverfahren zum Ausdruck kommen.</p>
                 </div>
 
-                <div class="bg-white border border-gray-200 rounded-2xl p-6 shadow-xs transition-all hover:border-gray-300">
+                <div class="liquid-glass p-6 rounded-2xl shadow-xs transition-all hover:border-blue-300">
                     <h4 class="font-bold text-blue-900 text-base">Artikel 22 - Recht auf soziale Sicherheit</h4>
-                    <p class="text-gray-700 text-sm mt-2 leading-relaxed">Jeder hat als Mitglied der Gesellschaft das Recht auf soziale Sicherheit und Anspruch darauf, durch innerstaatliche Maßnahmen und internationale Zusammenarbeit sowie unter Berücksichtigung der Organisation und der Mittel jedes Staates in den Genuss der wirtschaftlichen, sozialen und kulturellen Rechte zu gelangen, die für seine Würde und die freie Entwicklung seiner Persönlichkeit unentbehrlich sind.</p>
+                    <p class="text-slate-700 text-sm mt-2 leading-relaxed">Jeder hat als Mitglied der Gesellschaft das Recht auf soziale Sicherheit und Anspruch darauf, durch innerstaatliche Maßnahmen und internationale Zusammenarbeit sowie unter Berücksichtigung der Organisation und der Mittel jedes Staates in den Genuss der wirtschaftlichen, sozialen und kulturellen Rechte zu gelangen, die für seine Würde und die freie Entwicklung seiner Persönlichkeit unentbehrlich sind.</p>
                 </div>
 
-                <div class="bg-white border border-gray-200 rounded-2xl p-6 shadow-xs transition-all hover:border-gray-300">
+                <div class="liquid-glass p-6 rounded-2xl shadow-xs transition-all hover:border-blue-300">
                     <h4 class="font-bold text-blue-900 text-base">Artikel 23 - Recht auf Arbeit und gleichen Lohn</h4>
-                    <p class="text-gray-700 text-sm mt-2 leading-relaxed">(1) Jeder hat das Recht auf Arbeit, auf freie Berufswahl, auf gerechte und angemessene Arbeitsbedingungen sowie auf Schutz vor Arbeitslosigkeit.<br><br>(2) Alle Menschen haben ohne jede Diskriminierung das Recht auf gleichen Lohn für gleiche Arbeit.<br><br>(3) Jeder, der arbeitet, hat das Recht auf eine gerechte und angemessene Entlohnung, die ihm und seiner Familie eine der menschlichen Würde entsprechende Existenz sichert und gegebenenfalls durch andere soziale Schutzmaßnahmen ergänzt wird.<br><br>(4) Jeder hat das Recht, zum Schutz seiner Interessen Gewerkschaften zu bilden und solchen beizutreten.</p>
+                    <p class="text-slate-700 text-sm mt-2 leading-relaxed">(1) Jeder hat das Recht auf Arbeit, auf freie Berufswahl, auf gerechte und angemessene Arbeitsbedingungen sowie auf Schutz vor Arbeitslosigkeit.<br><br>(2) Alle Menschen haben ohne jede Diskriminierung das Recht auf gleichen Lohn für gleiche Arbeit.<br><br>(3) Jeder, der arbeitet, hat das Recht auf eine gerechte und angemessene Entlohnung, die ihm und seiner Familie eine der menschlichen Würde entsprechende Existenz sichert und gegebenenfalls durch andere soziale Schutzmaßnahmen ergänzt wird.<br><br>(4) Jeder hat das Recht, zum Schutz seiner Interessen Gewerkschaften zu bilden und solchen beizutreten.</p>
                 </div>
 
-                <div class="bg-white border border-gray-200 rounded-2xl p-6 shadow-xs transition-all hover:border-gray-300">
+                <div class="liquid-glass p-6 rounded-2xl shadow-xs transition-all hover:border-blue-300">
                     <h4 class="font-bold text-blue-900 text-base">Artikel 24 - Recht auf Erholung und Freizeit</h4>
-                    <p class="text-gray-700 text-sm mt-2 leading-relaxed">Jeder hat das Recht auf Erholung und Freizeit, insbesondere auf eine vernünftige Begrenzung der Arbeitszeit und auf regelmäßigen bezahlten Urlaub.</p>
+                    <p class="text-slate-700 text-sm mt-2 leading-relaxed">Jeder hat das Recht auf Erholung und Freizeit, insbesondere auf eine vernünftige Begrenzung der Arbeitszeit und auf regelmäßigen bezahlten Urlaub.</p>
                 </div>
 
-                <div class="bg-white border border-gray-200 rounded-2xl p-6 shadow-xs transition-all hover:border-gray-300">
+                <div class="liquid-glass p-6 rounded-2xl shadow-xs transition-all hover:border-blue-300">
                     <h4 class="font-bold text-blue-900 text-base">Artikel 25 - Recht auf Wohlfahrt; Schutz von Müttern und Kindern</h4>
-                    <p class="text-gray-700 text-sm mt-2 leading-relaxed">(1) Jeder hat das Recht auf einen Lebensstandard, der seine und seiner Familie Gesundheit und Wohlbefinden, einschließlich Nahrung, Kleidung, Wohnung, ärztliche Versorgung und notwendige soziale Leistungen, gewährleistet, sowie das Recht auf Sicherheit im Falle von Arbeitslosigkeit, Krankheit, Invalidität, Verwitwung, Alter oder anderweitigem Verlust seiner Unterhaltsmittel durch unverschuldete Umstände.<br><br>(2) Mütter und Kinder haben Anspruch auf besondere Fürsorge und Unterstützung. Alle Kinder, gleichviel ob ehelich oder außerehelich geboren, genießen denselben sozialen Schutz.</p>
+                    <p class="text-slate-700 text-sm mt-2 leading-relaxed">(1) Jeder hat das Recht auf einen Lebensstandard, der seine und seiner Familie Gesundheit und Wohlbefinden, einschließlich Nahrung, Kleidung, Wohnung, ärztliche Versorgung und notwendige soziale Leistungen, gewährleistet, sowie das Recht auf Sicherheit im Falle von Arbeitslosigkeit, Krankheit, Invalidität, Verwitwung, Alter oder anderweitigem Verlust seiner Unterhaltsmittel durch unverschuldete Umstände.<br><br>(2) Mütter und Kinder haben Anspruch auf besondere Fürsorge und Unterstützung. Alle Kinder, gleichviel ob ehelich oder außerehelich geboren, genießen denselben sozialen Schutz.</p>
                 </div>
 
-                <div class="bg-white border border-gray-200 rounded-2xl p-6 shadow-xs transition-all hover:border-gray-300">
+                <div class="liquid-glass p-6 rounded-2xl shadow-xs transition-all hover:border-blue-300">
                     <h4 class="font-bold text-blue-900 text-base">Artikel 26 - Recht auf Bildung</h4>
-                    <p class="text-gray-700 text-sm mt-2 leading-relaxed">(1) Jeder hat das Recht auf Bildung. Die Bildung muss mindestens in den Elementar- und Grundschulstufen unentgeltlich sein. Der Grundschulunterricht ist obligatorisch. Fach- und Berufsschulunterricht müssen allgemein verfügbar gemacht werden, und der Höhere Unterricht muss allen gleichermaßen entsprechend ihren Fähigkeiten offenstehen.<br><br>(2) Die Bildung muss auf die volle Entfaltung der menschlichen Persönlichkeit und auf die Stärkung der Achtung vor den Menschenrechten und Grundfreiheiten gerichtet sein. Sie muss Verständnis, Toleranz und Freundschaft zwischen allen Nationen und allen rassistischen oder religiösen Gruppen fördern und die Tätigkeit der Vereinten Nationen für die Erhaltung des Friedens unterstützen.<br><br>(3) Die Eltern haben ein vorrangiges Recht, die Art der Bildung zu wählen, die ihren Kindern zuteilwerden soll.</p>
+                    <p class="text-slate-700 text-sm mt-2 leading-relaxed">(1) Jeder hat das Recht auf Bildung. Die Bildung muss mindestens in den Elementar- und Grundschulstufen unentgeltlich sein. Der Grundschulunterricht ist obligatorisch. Fach- und Berufsschulunterricht müssen allgemein verfügbar gemacht werden, und der Höhere Unterricht muss allen gleichermaßen entsprechend ihren Fähigkeiten offenstehen.<br><br>(2) Die Bildung muss auf die volle Entfaltung der menschlichen Persönlichkeit und auf die Stärkung der Achtung vor den Menschenrechten und Grundfreiheiten gerichtet sein. Sie muss Verständnis, Toleranz und Freundschaft zwischen allen Nationen und allen rassistischen oder religiösen Gruppen fördern und die Tätigkeit der Vereinten Nationen für die Erhaltung des Friedens unterstützen.<br><br>(3) Die Eltern haben ein vorrangiges Recht, die Art der Bildung zu wählen, die ihren Kindern zuteilwerden soll.</p>
                 </div>
 
-                <div class="bg-white border border-gray-200 rounded-2xl p-6 shadow-xs transition-all hover:border-gray-300">
+                <div class="liquid-glass p-6 rounded-2xl shadow-xs transition-all hover:border-blue-300">
                     <h4 class="font-bold text-blue-900 text-base">Artikel 27 - Freiheit des Kultur- und Wissenschaftslebens</h4>
-                    <p class="text-gray-700 text-sm mt-2 leading-relaxed">(1) Jeder hat das Recht, am kulturellen Leben der Gemeinschaft frei teilzunehmen, sich an den Künsten zu erfreuen und am wissenschaftlichen Fortschritt und dessen Errungenschaften teilzuhaben.<br><br>(2) Jeder hat das Recht auf Schutz der geistigen und materiellen Interessen, die ihm als Urheber von Werken der Wissenschaft, Literatur oder Kunst erwachsen.</p>
+                    <p class="text-slate-700 text-sm mt-2 leading-relaxed">(1) Jeder hat das Recht, am kulturellen Leben der Gemeinschaft frei teilzunehmen, sich an den Künsten zu erfreuen und am wissenschaftlichen Fortschritt und dessen Errungenschaften teilzuhaben.<br><br>(2) Jeder hat das Recht auf Schutz der geistigen und materiellen Interessen, die ihm als Urheber von Werken der Wissenschaft, Literatur oder Kunst erwachsen.</p>
                 </div>
 
-                <div class="bg-white border border-gray-200 rounded-2xl p-6 shadow-xs transition-all hover:border-gray-300">
+                <div class="liquid-glass p-6 rounded-2xl shadow-xs transition-all hover:border-blue-300">
                     <h4 class="font-bold text-blue-900 text-base">Artikel 28 - Soziale und internationale Ordnung</h4>
-                    <p class="text-gray-700 text-sm mt-2 leading-relaxed">Jeder hat Anspruch auf eine soziale und internationale Ordnung, in der die in dieser Erklärung verkündeten Rechte und Freiheiten voll verwirklicht werden können.</p>
+                    <p class="text-slate-700 text-sm mt-2 leading-relaxed">Jeder hat Anspruch auf eine soziale und internationale Ordnung, in der die in dieser Erklärung verkündeten Rechte und Freiheiten voll verwirklicht werden können.</p>
                 </div>
 
-                <div class="bg-white border border-gray-200 rounded-2xl p-6 shadow-xs transition-all hover:border-gray-300">
+                <div class="liquid-glass p-6 rounded-2xl shadow-xs transition-all hover:border-blue-300">
                     <h4 class="font-bold text-blue-900 text-base">Artikel 29 - Grundpflichten und Schranken der Rechte</h4>
-                    <p class="text-gray-700 text-sm mt-2 leading-relaxed">(1) Jeder hat Pflichten gegenüber der Gemeinschaft, in der allein die freie und volle Entfaltung seiner Persönlichkeit möglich ist.<br><br>(2) Bei der Ausübung seiner Rechte und Freiheiten unterliegt jeder nur den Einschränkungen, die gesetzlich ausschließlich zu dem Zweck festgelegt sind, die Anerkennung und Achtung der Rechte und Freiheiten anderer zu gewährleisten und den gerechten Anforderungen der Moral, der öffentlichen Ordnung und des allgemeinen Wohlergehens in einer demokratischen Gesellschaft zu genügen.<br><br>(3) Diese Rechte und Freiheiten dürfen in keinem Fall im Widerspruch zu den Zielen und Grundsätzen der Vereinten Nationen ausgeübt werden.</p>
+                    <p class="text-slate-700 text-sm mt-2 leading-relaxed">(1) Jeder hat Pflichten gegenüber der Gemeinschaft, in der allein die freie und volle Entfaltung seiner Persönlichkeit möglich ist.<br><br>(2) Bei der Ausübung seiner Rechte und Freiheiten unterliegt jeder nur den Einschränkungen, die gesetzlich ausschließlich zu dem Zweck festgelegt sind, die Anerkennung und Achtung der Rechte und Freiheiten anderer zu gewährleisten und den gerechten Anforderungen der Moral, der öffentlichen Ordnung und des allgemeinen Wohlergehens in einer demokratischen Gesellschaft zu genügen.<br><br>(3) Diese Rechte und Freiheiten dürfen in keinem Fall im Widerspruch zu den Zielen und Grundsätzen der Vereinten Nationen ausgeübt werden.</p>
                 </div>
 
-                <div class="bg-white border border-gray-200 rounded-2xl p-6 shadow-xs transition-all hover:border-gray-300">
+                <div class="liquid-glass p-6 rounded-2xl shadow-xs transition-all hover:border-blue-300">
                     <h4 class="font-bold text-blue-900 text-base">Artikel 30 - Auslegungsregel gegen Rechtsmissbrauch</h4>
-                    <p class="text-gray-700 text-sm mt-2 leading-relaxed">Keine Bestimmung dieser Erklärung darf so ausgelegt werden, dass sie für einen Staat, eine Gruppe oder eine Person irgendein Recht begründet, eine Tätigkeit auszuüben oder eine Handlung zu begehen, welche die Frustration der in dieser Erklärung verkündeten Rechte und Freiheiten zum Ziel hat.</p>
+                    <p class="text-slate-700 text-sm mt-2 leading-relaxed">Keine Bestimmung dieser Erklärung darf so ausgelegt werden, dass sie für einen Staat, eine Gruppe oder eine Person irgendein Recht begründet, eine Tätigkeit auszuüben oder eine Handlung zu begehen, welche die Frustration der in dieser Erklärung verkündeten Rechte und Freiheiten zum Ziel hat.</p>
                 </div>
 
             </div>
         </div>
 
-        <div class="text-center mt-16 pt-8 border-t border-gray-200">
-            <a href="unsere-rechte.html" class="inline-block bg-gray-900 hover:bg-gray-800 text-white font-bold px-6 py-3 rounded-xl transition-all no-underline shadow-xs">
+        <div class="text-center mt-16 pt-8 border-t border-slate-200/80">
+            <a href="/unsere-rechte.html" class="inline-block bg-slate-900 hover:bg-slate-800 text-white font-bold px-6 py-3.5 rounded-xl transition-all no-underline shadow-md hover:shadow-lg text-sm">
                 ← Zurück zur Rechte-Übersicht
             </a>
         </div>
 
     </main>
 
+    <!-- Fußzeile & Cookie-Banner -->
     {% include footer.html %}
     {% include cookie-banner.html %}
 
