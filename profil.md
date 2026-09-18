@@ -6,82 +6,102 @@ title: Mein Profil
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Mein Profil - M-Fleger</title>
+    
+    <title>Mein Profil | M-Fleger</title>
+    <meta name="description" content="Verwalte deine Favoriten, Einstellungen und dein Konto auf M-Fleger.">
+    
+    <link rel="stylesheet" href="/style.css">
+    <link rel="icon" type="image/jpeg" href="/auge-logo.jpg">
+
     <script src="https://cdn.jsdelivr.net/npm/@tailwindcss/browser@4"></script>
     <script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script>
+    
+    <style>
+        @keyframes fadeInUp {
+            from { opacity: 0; transform: translateY(15px); }
+            to { opacity: 1; transform: translateY(0); }
+        }
+        .animate-fade-in { animation: fadeInUp 0.5s ease-out forwards; }
+        .liquid-glass {
+            background: rgba(255, 255, 255, 0.75);
+            backdrop-filter: blur(12px);
+            -webkit-backdrop-filter: blur(12px);
+            border: 1px solid rgba(255, 255, 255, 0.5);
+        }
+    </style>
 </head>
-<body class="bg-gray-50 text-gray-900 font-sans antialiased flex flex-col min-h-screen relative">
+<body class="bg-gradient-to-br from-slate-50 to-blue-100 text-gray-900 font-sans antialiased flex flex-col min-h-screen relative">
 
-    <div id="custom-banner" class="fixed top-24 right-4 z-50 transform translate-x-full opacity-0 transition-all duration-300 ease-out max-w-sm w-full bg-white border shadow-xl rounded-2xl p-4 flex items-start gap-3">
+    <!-- Benachrichtigungs-Banner -->
+    <div id="custom-banner" class="fixed top-24 right-4 z-50 transform translate-x-full opacity-0 transition-all duration-300 ease-out max-w-sm w-full bg-white/90 backdrop-blur-md border shadow-xl rounded-2xl p-4 flex items-start gap-3">
         <span id="banner-icon" class="text-xl"></span>
         <div class="flex-grow">
-            <h4 id="banner-title" class="font-bold text-sm text-gray-900"></h4>
-            <p id="banner-message" class="text-xs text-gray-600 mt-0.5"></p>
+            <h4 id="banner-title" class="font-bold text-sm text-slate-900"></h4>
+            <p id="banner-message" class="text-xs text-slate-600 mt-0.5"></p>
         </div>
     </div>
 
-    <div id="delete-modal" class="fixed inset-0 bg-black/50 backdrop-blur-xs z-50 flex items-center justify-center p-4 hidden">
-        <div class="bg-white border border-gray-100 max-w-md w-full rounded-2xl p-6 shadow-xl transform scale-95 transition-all duration-300">
-            <span class="text-3xl block mb-2">⚠️</span>
-            <h3 class="text-xl font-black text-gray-950 tracking-tight">Konto unwiderruflich löschen?</h3>
-            <p class="text-sm text-gray-600 mt-2 leading-relaxed">
+    <!-- Modal: Konto löschen -->
+    <div id="delete-modal" class="fixed inset-0 bg-slate-900/40 backdrop-blur-xs z-50 flex items-center justify-center p-4 hidden">
+        <div class="bg-white border border-slate-100 max-w-md w-full rounded-3xl p-6 md:p-8 shadow-2xl transform scale-95 transition-all duration-300">
+            <span class="text-4xl block mb-3">⚠️</span>
+            <h3 class="text-xl font-black text-slate-950 tracking-tight">Konto unwiderruflich löschen?</h3>
+            <p class="text-sm text-slate-600 mt-2 leading-relaxed">
                 Bist du dir absolut sicher? Dadurch werden all deine gespeicherten Favoriten und dein Zugang dauerhaft gelöscht. Dies kann nicht rückgängig gemacht werden.
             </p>
             <div class="mt-6 flex justify-end gap-3">
-                <button onclick="schließeDeleteModal()" class="px-4 py-2 text-sm font-semibold text-gray-600 hover:bg-gray-100 rounded-xl transition-all cursor-pointer">
+                <button onclick="schließeDeleteModal()" class="px-5 py-2.5 text-sm font-semibold text-slate-600 hover:bg-slate-100 rounded-xl transition-all cursor-pointer">
                     Abbrechen
                 </button>
-                <button onclick="kontoDefinitivLoeschen()" class="px-4 py-2 text-sm font-bold bg-red-600 hover:bg-red-700 text-white rounded-xl shadow-xs transition-all cursor-pointer">
+                <button onclick="kontoDefinitivLoeschen()" class="px-5 py-2.5 text-sm font-bold bg-red-600 hover:bg-red-700 text-white rounded-xl shadow-md transition-all cursor-pointer">
                     Ja, löschen
                 </button>
             </div>
         </div>
     </div>
 
-    <nav class="bg-white border-b border-gray-100 sticky top-0 z-50 shadow-xs">
-        <div class="max-w-6xl mx-auto px-4 py-4 flex flex-col md:flex-row justify-between items-center gap-4">
-            <a href="/index.html" class="flex items-center gap-3 group no-underline text-current">
-                <img src="/auge-logo.jpg" alt="M-Fleger Logo" class="w-16 h-14 md:w-24 md:h-20 rounded-xl md:rounded-2xl object-contain">
-                <span class="text-2xl md:text-3xl font-black tracking-tight text-blue-600">M-Fleger</span>
-            </a>
-            <div class="flex flex-wrap justify-center gap-x-5 gap-y-2 font-semibold text-gray-600 text-base md:text-lg">
-                <a href="/index.html" class="hover:text-blue-600 hover:border-b-2 hover:border-blue-600 pb-1 no-underline">Startseite</a>
-                <a href="/ueber-mich.html" class="hover:text-blue-600 hover:border-b-2 hover:border-blue-600 pb-1 no-underline">Über mich</a>
-                <a href="/blog.html" class="hover:text-blue-600 hover:border-b-2 hover:border-blue-600 pb-1 no-underline">Blog</a>
-                <a href="/kontakt.html" class="hover:text-blue-600 hover:border-b-2 hover:border-blue-600 pb-1 no-underline">Contact</a>
-                <a href="/profil.html" class="text-blue-600 border-b-2 border-blue-600 pb-1 no-underline">👤 Mein Profil</a>
-            </div>
-        </div>
-    </nav>
+    <!-- Navigationsleiste -->
+    {% include navigation.html %}
 
-    <header class="bg-gradient-to-br from-[#1d4ed8] via-[#1e3a8a] to-[#312e81] text-white py-12 md:py-16 px-4">
-        <div class="max-w-4xl mx-auto text-center">
-            <h1 class="text-3xl md:text-5xl font-black tracking-tight mb-4">👤 Mein Profil</h1>
-            <p id="user-email-display" class="text-base md:text-lg text-blue-100 font-medium">Lade Profil...</p>
+    <!-- Header-Bereich -->
+    <header class="bg-gradient-to-br from-slate-900 via-slate-800 to-slate-900 text-white py-14 px-4 md:px-6 overflow-hidden relative shadow-md">
+        <div class="max-w-4xl mx-auto text-center animate-fade-in">
+            <span class="bg-white/10 text-slate-200 border border-white/20 font-extrabold px-4 py-1.5 rounded-full text-xs uppercase tracking-wider inline-block mb-3">
+                Benutzerkonto
+            </span>
+            <h1 class="text-4xl md:text-5xl font-black tracking-tight mb-3 leading-tight">
+                👤 Mein Profil
+            </h1>
+            <p id="user-email-display" class="text-base md:text-lg text-slate-300 max-w-xl mx-auto leading-relaxed font-medium">
+                Lade Profil...
+            </p>
         </div>
     </header>
 
-    <main class="max-w-6xl mx-auto px-4 py-10 md:py-12 flex-grow w-full">
+    <!-- Hauptinhalt -->
+    <main class="max-w-6xl mx-auto px-4 md:px-6 py-12 flex-grow w-full">
         
-        <div id="login-required-card" class="max-w-md mx-auto bg-white border border-gray-100 p-8 rounded-2xl shadow-sm text-center hidden">
+        <!-- Falls nicht eingeloggt -->
+        <div id="login-required-card" class="max-w-md mx-auto liquid-glass p-8 rounded-3xl shadow-sm text-center hidden animate-fade-in">
             <span class="text-4xl block mb-4">🔒</span>
-            <h2 class="text-xl font-bold mb-2">Anmeldung erforderlich</h2>
-            <p class="text-gray-600 text-sm mb-6">Du musst eingeloggt sein, um deine Merkliste und dein Profil zu sehen.</p>
-            <a href="/anmeldung-erforderlich.html" class="bg-blue-600 hover:bg-blue-700 text-white font-bold px-6 py-2.5 rounded-xl text-sm transition-all inline-block no-underline">
+            <h2 class="text-xl font-bold mb-2 text-slate-900">Anmeldung erforderlich</h2>
+            <p class="text-slate-600 text-sm mb-6">Du musst eingeloggt sein, um deine Merkliste und dein Profil zu sehen.</p>
+            <a href="/login.html" class="bg-blue-600 hover:bg-blue-700 text-white font-bold px-6 py-3 rounded-xl text-sm transition-all shadow-md inline-block no-underline">
                 Jetzt anmelden
             </a>
         </div>
 
-        <div id="profile-content" class="hidden">
-            <div class="flex flex-col md:flex-row justify-between items-start md:items-center gap-4 mb-8 border-b border-gray-100 pb-6">
-                <h2 class="text-2xl font-black text-gray-950 tracking-tight flex items-center gap-2">
+        <!-- Profil-Content -->
+        <div id="profile-content" class="hidden animate-fade-in">
+            <div class="flex flex-col md:flex-row justify-between items-start md:items-center gap-4 mb-8 border-b border-slate-200/60 pb-6">
+                <h2 class="text-2xl font-black text-slate-900 tracking-tight flex items-center gap-2">
                     ❤️ Meine gespeicherten Favoriten
                 </h2>
                 <div class="flex gap-3">
-                    <button onclick="handleLogout()" class="text-xs font-bold px-4 py-2 rounded-xl bg-gray-100 text-gray-700 border border-gray-200 hover:bg-gray-200 transition-all cursor-pointer">
+                    <button onclick="handleLogout()" class="text-xs font-bold px-4 py-2.5 rounded-xl bg-white/80 hover:bg-white text-slate-700 border border-slate-200 shadow-xs transition-all cursor-pointer">
                         🚪 Abmelden
                     </button>
-                    <button onclick="zeigeDeleteModal()" class="text-xs font-bold px-4 py-2 rounded-xl bg-red-50 text-red-600 border border-red-100 hover:bg-red-100 transition-all cursor-pointer">
+                    <button onclick="zeigeDeleteModal()" class="text-xs font-bold px-4 py-2.5 rounded-xl bg-red-50 hover:bg-red-100 text-red-600 border border-red-100 transition-all cursor-pointer">
                         ⚙️ Konto löschen
                     </button>
                 </div>
@@ -89,14 +109,16 @@ title: Mein Profil
             
             <div class="grid grid-cols-1 md:grid-cols-3 gap-6 md:gap-8" id="favorites-grid"></div>
 
-            <p id="no-favorites-message" class="text-gray-500 text-center py-12 text-lg font-medium hidden">
+            <p id="no-favorites-message" class="text-slate-500 text-center py-12 text-lg font-medium hidden">
                 Du hast bisher noch keine Artikel als Favorit markiert. ⭐
             </p>
         </div>
 
     </main>
 
+    <!-- Fußzeile & Cookie-Banner -->
     {% include footer.html %}
+    {% include cookie-banner.html %}
 
     <script>
         const ALL_JEKYLL_POSTS = [
@@ -113,9 +135,9 @@ title: Mein Profil
     </script>
 
     <script>
-        const SUPABASE_URL = "https://xxuanzhrrpwurkyjfjky.supabase.co";
-        const SUPABASE_ANON_KEY = "sb_publishable_WdzN1r5HkdnqrfIN2phV1g_-GdLlknq"; 
-        const supabaseClient = supabase.createClient(SUPABASE_URL, SUPABASE_ANON_KEY);
+        const CONFIG_SUPABASE_URL = "https://xxuanzhrrpwurkyjfjky.supabase.co";
+        const CONFIG_SUPABASE_ANON_KEY = "sb_publishable_WdzN1r5HkdnqrfIN2phV1g_-GdLlknq"; 
+        const supabaseClient = supabase.createClient(CONFIG_SUPABASE_URL, CONFIG_SUPABASE_ANON_KEY);
 
         // Banner-Steuerung
         function zeigeBanner(type, title, message) {
@@ -124,14 +146,14 @@ title: Mein Profil
             const titleEl = document.getElementById('banner-title');
             const msgEl = document.getElementById('banner-message');
 
-            if(type === 'success') {
-                banner.className = "fixed top-24 right-4 z-50 transform transition-all duration-300 ease-out max-w-sm w-full bg-white border border-green-200 shadow-xl rounded-2xl p-4 flex items-start gap-3 text-green-800";
+            if (type === 'success') {
+                banner.className = "fixed top-24 right-4 z-50 transform transition-all duration-300 ease-out max-w-sm w-full bg-emerald-50/90 backdrop-blur-md border border-emerald-200 shadow-xl rounded-2xl p-4 flex items-start gap-3 text-emerald-900";
                 icon.innerText = "✅";
-            } else if(type === 'info') {
-                banner.className = "fixed top-24 right-4 z-50 transform transition-all duration-300 ease-out max-w-sm w-full bg-white border border-blue-200 shadow-xl rounded-2xl p-4 flex items-start gap-3 text-blue-800";
+            } else if (type === 'info') {
+                banner.className = "fixed top-24 right-4 z-50 transform transition-all duration-300 ease-out max-w-sm w-full bg-blue-50/90 backdrop-blur-md border border-blue-200 shadow-xl rounded-2xl p-4 flex items-start gap-3 text-blue-900";
                 icon.innerText = "ℹ️";
             } else {
-                banner.className = "fixed top-24 right-4 z-50 transform transition-all duration-300 ease-out max-w-sm w-full bg-white border border-red-200 shadow-xl rounded-2xl p-4 flex items-start gap-3 text-red-800";
+                banner.className = "fixed top-24 right-4 z-50 transform transition-all duration-300 ease-out max-w-sm w-full bg-red-50/90 backdrop-blur-md border border-red-200 shadow-xl rounded-2xl p-4 flex items-start gap-3 text-red-900";
                 icon.innerText = "❌";
             }
 
@@ -168,7 +190,7 @@ title: Mein Profil
                 if (error) throw error;
 
                 const grid = document.getElementById('favorites-grid');
-                grid.innerHTML = ""; // Reset grid content
+                grid.innerHTML = "";
                 const noFavsMessage = document.getElementById('no-favorites-message');
 
                 if (!favoriten || favoriten.length === 0) {
@@ -184,22 +206,22 @@ title: Mein Profil
                     if (favIds.has(post.id)) {
                         counter++;
                         const card = document.createElement('div');
-                        card.className = "bg-white border border-gray-100 p-6 rounded-2xl shadow-xs flex flex-col justify-between hover:shadow-md transition-all duration-300";
+                        card.className = "liquid-glass p-6 rounded-3xl shadow-xs flex flex-col justify-between hover:shadow-md transition-all duration-300";
                         card.setAttribute('data-post-id', post.id);
                         
                         card.innerHTML = `
                             <div>
                                 <div class="flex justify-between items-center mb-3">
-                                    <span class="text-xs bg-blue-600 text-white px-2.5 py-1 rounded-md font-bold uppercase">${post.date}</span>
+                                    <span class="text-xs bg-blue-600 text-white px-2.5 py-1 rounded-md font-bold uppercase tracking-wider">${post.date}</span>
                                 </div>
-                                <h3 class="text-xl font-black text-gray-950 mt-1 mb-3 line-clamp-2">${post.title}</h3>
-                                <p class="text-gray-600 text-sm mb-4 line-clamp-3">${post.excerpt}</p>
+                                <h3 class="text-xl font-bold text-slate-900 mt-1 mb-3 line-clamp-2">${post.title}</h3>
+                                <p class="text-slate-600 text-sm mb-4 line-clamp-3">${post.excerpt}</p>
                             </div>
-                            <div class="flex justify-between items-center mt-2">
+                            <div class="flex justify-between items-center mt-2 pt-3 border-t border-slate-200/50">
                                 <a href="${post.url}" class="text-blue-600 font-bold text-sm hover:text-blue-800 no-underline">
                                     Artikel lesen →
                                 </a>
-                                <button onclick="entferneFavorit('${post.id}', this)" class="text-xs font-bold px-3 py-1.5 rounded-full border border-red-200 bg-red-50 text-red-600 hover:bg-red-100 transition-all cursor-pointer">
+                                <button onclick="entferneFavorit('${post.id}', this)" class="text-xs font-bold px-3 py-1.5 rounded-full border border-red-200 bg-red-50 hover:bg-red-100 text-red-600 transition-all cursor-pointer">
                                     ❌ Entfernen
                                 </button>
                             </div>
