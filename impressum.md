@@ -35,7 +35,7 @@ permalink: /impressum.html
             <section>
                 <h2 class="text-xl font-bold mb-2 text-slate-900">Angaben gemäß § 5 DDG</h2>
                 <p class="leading-relaxed text-slate-600">
-                    Julian Fleger<br>
+                    Julian Maximilian Fleger<br>
                     Rüdickenstr. 30<br>
                     13053 Berlin
                 </p>
