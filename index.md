@@ -101,7 +101,7 @@ robots: index, follow
                 
                 <div class="reveal-item-3">
                     <p class="text-base md:text-xl text-blue-100 max-w-xl mb-8 leading-relaxed">
-                        Ich bin Julian Fleger. Auf diesem Portfolio teile ich meine kreativen Ideen, Brandings und Web-Projekte rund um das Thema digitale Pflege-Agenturen sowie neue, spannende Blogartikel.
+                        Ich bin Julian. Ich teile meine kreativen Ideen, Brandings und Web-Projekte sowie neue, spannende Blogartikel.
                     </p>
                     <a href="blog.html" class="bg-cyan-400 hover:bg-cyan-300 text-blue-950 font-black px-8 py-4 rounded-xl shadow-lg inline-block w-full md:w-auto text-center no-underline transition-all transform hover:-translate-y-1 hover:shadow-cyan-400/20">
                         Direkt zum Blog →
