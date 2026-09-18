@@ -11,7 +11,8 @@ title: Unsere Rechte - Hub
     <title>Unsere Rechte | M-Fleger</title>
     <meta name="description" content="Willkommen auf dem Rechte-Hub von M-Fleger. Entdecke und verstehe Kinderrechte, Menschenrechte, Digitalrechte und Umweltrechte auf Augenhöhe.">
     
-    <link rel="icon" type="image/jpeg" href="auge-logo.jpg">
+    <link rel="stylesheet" href="/style.css">
+    <link rel="icon" type="image/jpeg" href="/auge-logo.jpg">
     <script src="https://cdn.jsdelivr.net/npm/@tailwindcss/browser@4"></script>
     <style>
         @keyframes fadeInUp {
@@ -23,9 +24,8 @@ title: Unsere Rechte - Hub
 </head>
 <body class="bg-gray-50 text-gray-900 font-sans antialiased flex flex-col min-h-screen relative">
 
-    <nav class="bg-white border-b border-gray-100 sticky top-0 z-50 shadow-xs">
-        {% include navigation.html %}
-    </nav>
+    <!-- Navigationsleiste -->
+    {% include navigation.html %}
 
     <header class="bg-gradient-to-br from-[#1e3a8a] via-[#3b82f6] to-[#1d4ed8] text-white py-16 px-4 md:px-6 overflow-hidden">
         <div class="max-w-4xl mx-auto text-center animate-fade-in">
@@ -52,7 +52,7 @@ title: Unsere Rechte - Hub
                     </p>
                 </div>
                 <div class="mt-auto">
-                    <a href="kinderrechte.html" class="inline-flex items-center justify-center bg-amber-500 hover:bg-amber-600 text-white font-bold px-6 py-3 rounded-xl no-underline transition-all w-full text-center shadow-xs active:scale-95">
+                    <a href="/kinderrechte.html" class="inline-flex items-center justify-center bg-amber-500 hover:bg-amber-600 text-white font-bold px-6 py-3 rounded-xl no-underline transition-all w-full text-center shadow-xs active:scale-95">
                         Zu den Kinderrechten &rarr;
                     </a>
                 </div>
@@ -67,7 +67,7 @@ title: Unsere Rechte - Hub
                     </p>
                 </div>
                 <div class="mt-auto">
-                    <a href="menschenrechte.html" class="inline-flex items-center justify-center bg-blue-600 hover:bg-blue-700 text-white font-bold px-6 py-3 rounded-xl no-underline transition-all w-full text-center shadow-xs active:scale-95">
+                    <a href="/menschenrechte.html" class="inline-flex items-center justify-center bg-blue-600 hover:bg-blue-700 text-white font-bold px-6 py-3 rounded-xl no-underline transition-all w-full text-center shadow-xs active:scale-95">
                         Zu den Menschenrechten &rarr;
                     </a>
                 </div>
@@ -82,7 +82,7 @@ title: Unsere Rechte - Hub
                     </p>
                 </div>
                 <div class="mt-auto">
-                    <a href="digitalrechte.html" class="inline-flex items-center justify-center bg-purple-600 hover:bg-purple-700 text-white font-bold px-6 py-3 rounded-xl no-underline transition-all w-full text-center shadow-xs active:scale-95">
+                    <a href="/digitalrechte.html" class="inline-flex items-center justify-center bg-purple-600 hover:bg-purple-700 text-white font-bold px-6 py-3 rounded-xl no-underline transition-all w-full text-center shadow-xs active:scale-95">
                         Zu den Digitalrechten &rarr;
                     </a>
                 </div>
@@ -97,7 +97,7 @@ title: Unsere Rechte - Hub
                     </p>
                 </div>
                 <div class="mt-auto">
-                    <a href="umweltrechte.html" class="inline-flex items-center justify-center bg-emerald-600 hover:bg-emerald-700 text-white font-bold px-6 py-3 rounded-xl no-underline transition-all w-full text-center shadow-xs active:scale-95">
+                    <a href="/umweltrechte.html" class="inline-flex items-center justify-center bg-emerald-600 hover:bg-emerald-700 text-white font-bold px-6 py-3 rounded-xl no-underline transition-all w-full text-center shadow-xs active:scale-95">
                         Zu den Umweltrechten &rarr;
                     </a>
                 </div>
@@ -114,6 +114,7 @@ title: Unsere Rechte - Hub
 
     </main>
 
+    <!-- Fußzeile & Cookie Banner -->
     {% include footer.html %}
     {% include cookie-banner.html %}
 
