@@ -1,43 +1,108 @@
-<nav class="w-full max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 h-20 flex items-center justify-between relative z-50">
-    <!-- Logo & Branding -->
-    <div class="flex-shrink-0">
-        <a href="/" class="flex items-center gap-4 no-underline text-2xl font-black tracking-tight text-gray-900 hover:opacity-90 transition-opacity">
-            <img src="/auge-logo.jpg" alt="M-Fleger Logo" class="h-12 w-12 object-cover rounded-full shadow-md border border-gray-200">
-            <span>M-Fleger</span>
-        </a>
-    </div>
+<!-- Haupt-Navigation (Floating Glassbar) -->
+<header class="w-full max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 pt-4 pb-2 relative z-50">
+    <nav class="w-full h-20 px-6 sm:px-8 rounded-2xl bg-slate-900/80 backdrop-blur-md border border-white/10 shadow-2xl flex items-center justify-between transition-all duration-300">
+        
+        <!-- Logo & Branding -->
+        <div class="flex-shrink-0">
+            <a href="/" class="flex items-center gap-3.5 no-underline group">
+                <img src="/auge-logo.jpg" alt="M-Fleger Logo" class="h-11 w-11 object-cover rounded-full shadow-lg border border-white/20 group-hover:scale-105 transition-transform duration-300">
+                <span class="text-xl font-black tracking-tight text-white group-hover:text-cyan-400 transition-colors">M-Fleger</span>
+            </a>
+        </div>
 
-    <!-- Desktop Navigationslinks -->
-    <div class="hidden md:flex items-center space-x-8">
-        <a href="/" class="text-sm font-semibold text-gray-700 hover:text-blue-600 no-underline transition-colors">Startseite</a>
-        <a href="/ueber-mich.html" class="text-sm font-semibold text-gray-700 hover:text-blue-600 no-underline transition-colors">Über mich</a>
-        <a href="/unsere-rechte.html" class="text-sm font-semibold text-gray-700 hover:text-blue-600 no-underline transition-colors">Rechte-Hub</a>
-        <a href="/spenden.html" class="text-sm font-semibold text-gray-700 hover:text-blue-600 no-underline transition-colors">Spenden</a>
-        <a href="/blog.html" class="text-sm font-semibold text-gray-700 hover:text-blue-600 no-underline transition-colors">Blog</a>
-        <a href="/kontakt.html" class="text-sm font-semibold text-gray-700 hover:text-blue-600 no-underline transition-colors">Kontakt</a>
-        <a href="/login.html" class="text-sm font-bold text-white bg-blue-600 px-5 py-2.5 rounded-xl no-underline shadow-sm hover:bg-blue-700 transition-all">Login</a>
-    </div>
+        <!-- Desktop Links (Weiße Schrift) -->
+        <div class="hidden md:flex items-center space-x-1 lg:space-x-2">
+            <a href="/" class="px-4 py-2 text-sm font-medium text-slate-200 hover:text-white hover:bg-white/10 rounded-xl no-underline transition-all duration-200">Startseite</a>
+            <a href="/ueber-mich.html" class="px-4 py-2 text-sm font-medium text-slate-200 hover:text-white hover:bg-white/10 rounded-xl no-underline transition-all duration-200">Über mich</a>
+            <a href="/unsere-rechte.html" class="px-4 py-2 text-sm font-medium text-slate-200 hover:text-white hover:bg-white/10 rounded-xl no-underline transition-all duration-200">Rechte-Hub</a>
+            <a href="/spenden.html" class="px-4 py-2 text-sm font-medium text-slate-200 hover:text-white hover:bg-white/10 rounded-xl no-underline transition-all duration-200">Spenden</a>
+            <a href="/blog.html" class="px-4 py-2 text-sm font-medium text-slate-200 hover:text-white hover:bg-white/10 rounded-xl no-underline transition-all duration-200">Blog</a>
+            <a href="/kontakt.html" class="px-4 py-2 text-sm font-medium text-slate-200 hover:text-white hover:bg-white/10 rounded-xl no-underline transition-all duration-200">Kontakt</a>
+        </div>
 
-    <!-- Mobile Burger-Button -->
-    <div class="md:hidden flex items-center">
-        <button id="mobile-menu-btn" aria-label="Menü öffnen" class="p-2 text-gray-700 hover:text-blue-600 focus:outline-none">
-            <svg class="w-7 h-7" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 6h16M4 12h16M4 18h16"></path>
-            </svg>
-        </button>
-    </div>
-</nav>
+        <!-- CTA / Login Button -->
+        <div class="hidden md:flex items-center pl-2">
+            <a href="/login.html" class="text-sm font-bold text-white bg-gradient-to-r from-blue-600 to-cyan-500 hover:from-blue-500 hover:to-cyan-400 px-6 py-2.5 rounded-xl no-underline shadow-lg shadow-cyan-500/20 hover:shadow-cyan-500/35 transform hover:-translate-y-0.5 transition-all duration-200">Login</a>
+        </div>
 
-<!-- Mobile Ausklapp-Menü -->
-<div id="mobile-menu" class="hidden md:hidden px-4 pt-2 pb-6 space-y-3 bg-white/95 backdrop-blur-md border-b border-gray-200 shadow-lg relative z-40">
-    <a href="/" class="block px-3 py-2 text-base font-semibold text-gray-700 hover:text-blue-600 hover:bg-gray-50 rounded-lg no-underline">Startseite</a>
-    <a href="/ueber-mich.html" class="block px-3 py-2 text-base font-semibold text-gray-700 hover:text-blue-600 hover:bg-gray-50 rounded-lg no-underline">Über mich</a>
-    <a href="/unsere-rechte.html" class="block px-3 py-2 text-base font-semibold text-gray-700 hover:text-blue-600 hover:bg-gray-50 rounded-lg no-underline">Rechte-Hub</a>
-    <a href="/spenden.html" class="block px-3 py-2 text-base font-semibold text-gray-700 hover:text-blue-600 hover:bg-gray-50 rounded-lg no-underline">Spenden</a>
-    <a href="/blog.html" class="block px-3 py-2 text-base font-semibold text-gray-700 hover:text-blue-600 hover:bg-gray-50 rounded-lg no-underline">Blog</a>
-    <a href="/kontakt.html" class="block px-3 py-2 text-base font-semibold text-gray-700 hover:text-blue-600 hover:bg-gray-50 rounded-lg no-underline">Kontakt</a>
-    <a href="/login.html" class="block text-center text-sm font-bold text-white bg-blue-600 px-5 py-2.5 rounded-xl no-underline shadow-sm hover:bg-blue-700">Login</a>
-</div>
+        <!-- Mobile Burger-Button -->
+        <div class="md:hidden flex items-center">
+            <button id="mobile-menu-btn" aria-label="Menü öffnen" class="p-2.5 text-slate-200 hover:text-white hover:bg-white/10 rounded-xl focus:outline-none transition-colors">
+                <svg class="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 6h16M4 12h16M4 18h16"></path>
+                </svg>
+            </button>
+        </div>
+    </nav>
+
+    <!-- Mobile Ausklapp-Menü (Ebenfalls dunkel & weiß beschriftet) -->
+    <div id="mobile-menu" class="hidden md:hidden mt-3 p-4 space-y-2 rounded-2xl bg-slate-900/95 backdrop-blur-xl border border-white/10 shadow-2xl relative z-40 transition-all">
+        <a href="/" class="block px-4 py-2.5 text-base font-medium text-slate-200 hover:text-white hover:bg-white/10 rounded-xl no-underline">Startseite</a>
+        <a href="/ueber-mich.html" class="block px-4 py-2.5 text-base font-medium text-slate-200 hover:text-white hover:bg-white/10 rounded-xl no-underline">Über mich</a>
+        <a href="/unsere-rechte.html" class="block px-4 py-2.5 text-base font-medium text-slate-200 hover:text-white hover:bg-white/10 rounded-xl no-underline">Rechte-Hub</a>
+        <a href="/spenden.html" class="block px-4 py-2.5 text-base font-medium text-slate-200 hover:text-white hover:bg-white/10 rounded-xl no-underline">Spenden</a>
+        <a href="/blog.html" class="block px-4 py-2.5 text-base font-medium text-slate-200 hover:text-white hover:bg-white/10 rounded-xl no-underline">Blog</a>
+        <a href="/kontakt.html" class="block px-4 py-2.5 text-base font-medium text-slate-200 hover:text-white hover:bg-white/10 rounded-xl no-underline">Kontakt</a>
+        <div class="pt-2">
+            <a href="/login.html" class="block text-center text-sm font-bold text-white bg-gradient-to-r from-blue-600 to-cyan-500 px-5 py-3 rounded-xl no-underline shadow-md">Login</a>
+        </div>
+    </div>
+</header>
+
+<script>
+    document.getElementById('mobile-menu-btn')?.addEventListener('click', function() {
+        document.getElementById('mobile-menu')?.classList.toggle('hidden');
+    });
+</script><!-- Haupt-Navigation (Floating Glassbar) -->
+<header class="w-full max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 pt-4 pb-2 relative z-50">
+    <nav class="w-full h-20 px-6 sm:px-8 rounded-2xl bg-slate-900/80 backdrop-blur-md border border-white/10 shadow-2xl flex items-center justify-between transition-all duration-300">
+        
+        <!-- Logo & Branding -->
+        <div class="flex-shrink-0">
+            <a href="/" class="flex items-center gap-3.5 no-underline group">
+                <img src="/auge-logo.jpg" alt="M-Fleger Logo" class="h-11 w-11 object-cover rounded-full shadow-lg border border-white/20 group-hover:scale-105 transition-transform duration-300">
+                <span class="text-xl font-black tracking-tight text-white group-hover:text-cyan-400 transition-colors">M-Fleger</span>
+            </a>
+        </div>
+
+        <!-- Desktop Links (Weiße Schrift) -->
+        <div class="hidden md:flex items-center space-x-1 lg:space-x-2">
+            <a href="/" class="px-4 py-2 text-sm font-medium text-slate-200 hover:text-white hover:bg-white/10 rounded-xl no-underline transition-all duration-200">Startseite</a>
+            <a href="/ueber-mich.html" class="px-4 py-2 text-sm font-medium text-slate-200 hover:text-white hover:bg-white/10 rounded-xl no-underline transition-all duration-200">Über mich</a>
+            <a href="/unsere-rechte.html" class="px-4 py-2 text-sm font-medium text-slate-200 hover:text-white hover:bg-white/10 rounded-xl no-underline transition-all duration-200">Rechte-Hub</a>
+            <a href="/spenden.html" class="px-4 py-2 text-sm font-medium text-slate-200 hover:text-white hover:bg-white/10 rounded-xl no-underline transition-all duration-200">Spenden</a>
+            <a href="/blog.html" class="px-4 py-2 text-sm font-medium text-slate-200 hover:text-white hover:bg-white/10 rounded-xl no-underline transition-all duration-200">Blog</a>
+            <a href="/kontakt.html" class="px-4 py-2 text-sm font-medium text-slate-200 hover:text-white hover:bg-white/10 rounded-xl no-underline transition-all duration-200">Kontakt</a>
+        </div>
+
+        <!-- CTA / Login Button -->
+        <div class="hidden md:flex items-center pl-2">
+            <a href="/login.html" class="text-sm font-bold text-white bg-gradient-to-r from-blue-600 to-cyan-500 hover:from-blue-500 hover:to-cyan-400 px-6 py-2.5 rounded-xl no-underline shadow-lg shadow-cyan-500/20 hover:shadow-cyan-500/35 transform hover:-translate-y-0.5 transition-all duration-200">Login</a>
+        </div>
+
+        <!-- Mobile Burger-Button -->
+        <div class="md:hidden flex items-center">
+            <button id="mobile-menu-btn" aria-label="Menü öffnen" class="p-2.5 text-slate-200 hover:text-white hover:bg-white/10 rounded-xl focus:outline-none transition-colors">
+                <svg class="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 6h16M4 12h16M4 18h16"></path>
+                </svg>
+            </button>
+        </div>
+    </nav>
+
+    <!-- Mobile Ausklapp-Menü (Ebenfalls dunkel & weiß beschriftet) -->
+    <div id="mobile-menu" class="hidden md:hidden mt-3 p-4 space-y-2 rounded-2xl bg-slate-900/95 backdrop-blur-xl border border-white/10 shadow-2xl relative z-40 transition-all">
+        <a href="/" class="block px-4 py-2.5 text-base font-medium text-slate-200 hover:text-white hover:bg-white/10 rounded-xl no-underline">Startseite</a>
+        <a href="/ueber-mich.html" class="block px-4 py-2.5 text-base font-medium text-slate-200 hover:text-white hover:bg-white/10 rounded-xl no-underline">Über mich</a>
+        <a href="/unsere-rechte.html" class="block px-4 py-2.5 text-base font-medium text-slate-200 hover:text-white hover:bg-white/10 rounded-xl no-underline">Rechte-Hub</a>
+        <a href="/spenden.html" class="block px-4 py-2.5 text-base font-medium text-slate-200 hover:text-white hover:bg-white/10 rounded-xl no-underline">Spenden</a>
+        <a href="/blog.html" class="block px-4 py-2.5 text-base font-medium text-slate-200 hover:text-white hover:bg-white/10 rounded-xl no-underline">Blog</a>
+        <a href="/kontakt.html" class="block px-4 py-2.5 text-base font-medium text-slate-200 hover:text-white hover:bg-white/10 rounded-xl no-underline">Kontakt</a>
+        <div class="pt-2">
+            <a href="/login.html" class="block text-center text-sm font-bold text-white bg-gradient-to-r from-blue-600 to-cyan-500 px-5 py-3 rounded-xl no-underline shadow-md">Login</a>
+        </div>
+    </div>
+</header>
 
 <script>
     document.getElementById('mobile-menu-btn')?.addEventListener('click', function() {
