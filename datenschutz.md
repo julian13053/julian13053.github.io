@@ -55,7 +55,7 @@ title: Datenschutz
                 <h2 class="text-2xl font-black mb-3 text-slate-900">2. Verantwortliche Stelle</h2>
                 <p class="leading-relaxed text-slate-600">
                     Die verantwortliche Stelle für die Datenverarbeitung auf dieser Website ist:<br><br>
-                    <strong class="text-slate-900">Julian Fleger</strong><br>
+                    <strong class="text-slate-900">Julian Maximilian Fleger</strong><br>
                     Rüdickenstr. 30<br>
                     13053 Berlin<br><br>
                     <strong class="text-slate-900">Kontakt:</strong><br>
