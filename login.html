@@ -12,7 +12,6 @@ title: Login
     <link rel="icon" type="image/jpeg" href="/auge-logo.jpg">
 
     <script src="https://cdn.jsdelivr.net/npm/@tailwindcss/browser@4"></script>
-    <script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script>
     <style>
         @keyframes fadeInUp {
             from { opacity: 0; transform: translateY(15px); }
@@ -29,10 +28,8 @@ title: Login
 </head>
 <body class="bg-gradient-to-br from-slate-50 to-blue-100 min-h-screen text-gray-900 font-sans antialiased flex flex-col justify-between relative">
 
-    <!-- Navigationsleiste aus _includes/navigation.html -->
     {% include navigation.html %}
 
-    <!-- Hauptinhalt -->
     <main class="flex-grow flex items-center justify-center px-4 py-12 md:py-20">
         <div class="liquid-glass p-8 md:p-10 rounded-3xl shadow-xl max-w-md w-full animate-fade-in">
             
@@ -52,6 +49,12 @@ title: Login
                 <div>
                     <label class="block text-xs font-bold text-slate-500 uppercase tracking-wider mb-1.5">Passwort</label>
                     <input type="password" id="password" placeholder="••••••••" class="w-full bg-white/60 border border-slate-200/80 p-3.5 rounded-xl focus:outline-none focus:ring-2 focus:ring-blue-500/50 focus:bg-white font-medium text-sm transition-all">
+                </div>
+
+                <div class="text-right">
+                    <button type="button" onclick="handleForgotPassword()" class="text-xs font-bold text-blue-600 hover:text-blue-700 cursor-pointer bg-transparent border-0">
+                        Passwort vergessen?
+                    </button>
                 </div>
 
                 <div id="error-msg" class="text-red-700 text-xs font-semibold bg-red-50/90 p-3.5 rounded-xl border border-red-200 hidden"></div>
@@ -89,18 +92,36 @@ title: Login
         </div>
     </main>
 
-    <!-- Fußzeile aus _includes/footer.html -->
     {% include footer.html %}
 
-    <script>
-        const LOGIN_SUPABASE_URL = "https://xxuanzhrrpwurkyjfjky.supabase.co";
-        const LOGIN_SUPABASE_ANON_KEY = "sb_publishable_WdzN1r5HkdnqrfIN2phV1g_-GdLlknq";
-        
-        const supabaseClient = supabase.createClient(LOGIN_SUPABASE_URL, LOGIN_SUPABASE_ANON_KEY);
-        
+    <script type="module">
+        import { initializeApp } from "https://www.gstatic.com/firebasejs/10.8.0/firebase-app.js";
+        import { 
+            getAuth, 
+            signInWithEmailAndPassword, 
+            createUserWithEmailAndPassword, 
+            sendEmailVerification, 
+            sendPasswordResetEmail,
+            GoogleAuthProvider,
+            signInWithPopup,
+            signOut
+        } from "https://www.gstatic.com/firebasejs/10.8.0/firebase-auth.js";
+
+        const firebaseConfig = {
+            apiKey: "AIzaSyBccpK7f0yed4wCOvvDrzZaSIRuIz7DaIE",
+            authDomain: "m-fleger-web.firebaseapp.com",
+            projectId: "m-fleger-web",
+            storageBucket: "m-fleger-web.firebasestorage.app",
+            messagingSenderId: "714771931411",
+            appId: "1:714771931411:web:b9ffa44c25e3af0e2c3ae6",
+            measurementId: "G-2CXLWPY5L9"
+        };
+
+        const app = initializeApp(firebaseConfig);
+        const auth = getAuth(app);
         let isSignUpMode = false;
 
-        function toggleAuthMode() {
+        window.toggleAuthMode = function() {
             isSignUpMode = !isSignUpMode;
             const title = document.getElementById('auth-title');
             const subtitle = document.getElementById('auth-subtitle');
@@ -121,9 +142,9 @@ title: Login
                 btn.innerText = "Einloggen";
                 link.innerText = "Noch kein Konto? Jetzt registrieren";
             }
-        }
+        };
 
-        async function handleAuth() {
+        window.handleAuth = async function() {
             const email = document.getElementById('email').value.trim();
             const password = document.getElementById('password').value;
             const errorMsg = document.getElementById('error-msg');
@@ -138,46 +159,68 @@ title: Login
                 return;
             }
 
-            if (isSignUpMode) {
-                // REGISTRIERUNG
-                const { data, error } = await supabaseClient.auth.signUp({ email, password });
-                if (error) {
-                    errorMsg.innerText = error.message;
-                    errorMsg.classList.remove('hidden');
-                } else {
-                    successMsg.innerText = "Konto erfolgreich erstellt! Du kannst dich jetzt direkt einloggen.";
+            try {
+                if (isSignUpMode) {
+                    const userCredential = await createUserWithEmailAndPassword(auth, email, password);
+                    await sendEmailVerification(userCredential.user);
+                    await signOut(auth); // Direkt wieder ausloggen, bis bestätigt wurde
+                    
+                    successMsg.innerText = "Registrierung erfolgreich! Wir haben dir einen Bestätigungslink per E-Mail geschickt. Bitte bestätige deine Adresse vor dem Login.";
                     successMsg.classList.remove('hidden');
-                    // Schalte Modus zurück auf Login
-                    toggleAuthMode();
-                }
-            } else {
-                // LOGIN
-                const { data, error } = await supabaseClient.auth.signInWithPassword({ email, password });
-                if (error) {
-                    errorMsg.innerText = "Login fehlgeschlagen: " + error.message;
-                    errorMsg.classList.remove('hidden');
+                    window.toggleAuthMode();
                 } else {
+                    const userCredential = await signInWithEmailAndPassword(auth, email, password);
+                    
+                    if (!userCredential.user.emailVerified) {
+                        await signOut(auth);
+                        errorMsg.innerText = "Bitte bestätige zuerst deine E-Mail-Adresse über den zugesandten Link.";
+                        errorMsg.classList.remove('hidden');
+                        return;
+                    }
+
                     window.location.href = "/index.html";
                 }
+            } catch (error) {
+                errorMsg.innerText = "Fehler: " + error.message;
+                errorMsg.classList.remove('hidden');
             }
-        }
+        };
 
-        // GOOGLE OAUTH LOGIN FUNKTION
-        async function loginWithGoogle() {
-            const { data, error } = await supabaseClient.auth.signInWithOAuth({
-                provider: 'google',
-                options: {
-                    redirectTo: window.location.origin + '/index.html'
-                }
-            });
-            
-            if (error) {
+        window.handleForgotPassword = async function() {
+            const email = document.getElementById('email').value.trim();
+            const errorMsg = document.getElementById('error-msg');
+            const successMsg = document.getElementById('success-msg');
+
+            errorMsg.classList.add('hidden');
+            successMsg.classList.add('hidden');
+
+            if (!email) {
+                errorMsg.innerText = "Bitte gib deine E-Mail-Adresse in das Feld ein, um das Passwort zurückzusetzen.";
+                errorMsg.classList.remove('hidden');
+                return;
+            }
+
+            try {
+                await sendPasswordResetEmail(auth, email);
+                successMsg.innerText = "Eine E-Mail zum Zurücksetzen des Passworts wurde versendet!";
+                successMsg.classList.remove('hidden');
+            } catch (error) {
+                errorMsg.innerText = "Fehler beim Zurücksetzen: " + error.message;
+                errorMsg.classList.remove('hidden');
+            }
+        };
+
+        window.loginWithGoogle = async function() {
+            const provider = new GoogleAuthProvider();
+            try {
+                await signInWithPopup(auth, provider);
+                window.location.href = "/index.html";
+            } catch (error) {
                 const errorMsg = document.getElementById('error-msg');
                 errorMsg.innerText = "Google-Login fehlgeschlagen: " + error.message;
                 errorMsg.classList.remove('hidden');
             }
-        }
+        };
     </script>
-
 </body>
 </html>
