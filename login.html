@@ -75,8 +75,7 @@ title: Login
         sendPasswordResetEmail,
         GoogleAuthProvider,
         signInWithPopup,
-        signOut,
-        onAuthStateChanged
+        signOut
     } from "https://www.gstatic.com/firebasejs/10.8.0/firebase-auth.js";
 
     const firebaseConfig = {
@@ -92,13 +91,6 @@ title: Login
     const app = initializeApp(firebaseConfig);
     const auth = getAuth(app);
     let isSignUpMode = false;
-
-    // Falls bereits eingeloggt, direkt auf die Profilseite weiterleiten
-    onAuthStateChanged(auth, (user) => {
-        if (user && user.emailVerified) {
-            window.location.href = "/profil.html";
-        }
-    });
 
     window.toggleAuthMode = function() {
         isSignUpMode = !isSignUpMode;
@@ -157,6 +149,7 @@ title: Login
                     return;
                 }
 
+                // Erst nach erfolgreichem Login weiterleiten
                 window.location.href = "/profil.html";
             }
         } catch (error) {
