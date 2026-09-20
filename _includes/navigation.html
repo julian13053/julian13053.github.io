@@ -11,7 +11,7 @@
                 </a>
             </div>
 
-            <!-- Desktop Links (Weiße Schrift) -->
+            <!-- Desktop Links -->
             <div class="hidden md:flex items-center space-x-1 lg:space-x-2">
                 <a href="/" class="px-4 py-2 text-sm font-medium text-slate-200 hover:text-white hover:bg-white/10 rounded-xl no-underline transition-all duration-200">Startseite</a>
                 <a href="/ueber-mich.html" class="px-4 py-2 text-sm font-medium text-slate-200 hover:text-white hover:bg-white/10 rounded-xl no-underline transition-all duration-200">Über mich</a>
@@ -21,9 +21,9 @@
                 <a href="/kontakt.html" class="px-4 py-2 text-sm font-medium text-slate-200 hover:text-white hover:bg-white/10 rounded-xl no-underline transition-all duration-200">Kontakt</a>
             </div>
 
-            <!-- Login Button -->
+            <!-- Login / Profil Button Desktop -->
             <div class="hidden md:flex items-center pl-2">
-                <a href="/login.html" class="text-sm font-bold text-white bg-gradient-to-r from-blue-600 to-cyan-500 hover:from-blue-500 hover:to-cyan-400 px-6 py-2.5 rounded-xl no-underline shadow-lg shadow-cyan-500/20 hover:shadow-cyan-500/35 transform hover:-translate-y-0.5 transition-all duration-200">Login</a>
+                <a id="nav-auth-btn" href="/login.html" class="text-sm font-bold text-white bg-gradient-to-r from-blue-600 to-cyan-500 hover:from-blue-500 hover:to-cyan-400 px-6 py-2.5 rounded-xl no-underline shadow-lg shadow-cyan-500/20 hover:shadow-cyan-500/35 transform hover:-translate-y-0.5 transition-all duration-200">Login</a>
             </div>
 
             <!-- Mobile Burger-Button -->
@@ -45,14 +45,48 @@
             <a href="/blog.html" class="block px-4 py-2.5 text-base font-medium text-slate-200 hover:text-white hover:bg-white/10 rounded-xl no-underline">Blog</a>
             <a href="/kontakt.html" class="block px-4 py-2.5 text-base font-medium text-slate-200 hover:text-white hover:bg-white/10 rounded-xl no-underline">Kontakt</a>
             <div class="pt-2">
-                <a href="/login.html" class="block text-center text-sm font-bold text-white bg-gradient-to-r from-blue-600 to-cyan-500 px-5 py-3 rounded-xl no-underline shadow-md">Login</a>
+                <a id="mobile-auth-btn" href="/login.html" class="block text-center text-sm font-bold text-white bg-gradient-to-r from-blue-600 to-cyan-500 px-5 py-3 rounded-xl no-underline shadow-md">Login</a>
             </div>
         </div>
     </nav>
 </div>
 
 <script>
+    // Toggle für Mobile Menü
     document.getElementById('mobile-menu-btn')?.addEventListener('click', function() {
         document.getElementById('mobile-menu')?.classList.toggle('hidden');
+    });
+</script>
+
+<!-- Firebase Auth Status für Navigation -->
+<script type="module">
+    import { getAuth, onAuthStateChanged } from "https://www.gstatic.com/firebasejs/10.8.0/firebase-auth.js";
+
+    const auth = getAuth();
+    const navBtn = document.getElementById("nav-auth-btn");
+    const mobileBtn = document.getElementById("mobile-auth-btn");
+
+    onAuthStateChanged(auth, (user) => {
+        if (user) {
+            // Nutzer eingeloggt -> Zeige Profil
+            if (navBtn) {
+                navBtn.textContent = "Profil";
+                navBtn.href = "/profil.html";
+            }
+            if (mobileBtn) {
+                mobileBtn.textContent = "Profil";
+                mobileBtn.href = "/profil.html";
+            }
+        } else {
+            // Nutzer nicht eingeloggt -> Zeige Login
+            if (navBtn) {
+                navBtn.textContent = "Login";
+                navBtn.href = "/login.html";
+            }
+            if (mobileBtn) {
+                mobileBtn.textContent = "Login";
+                mobileBtn.href = "/login.html";
+            }
+        }
     });
 </script>
