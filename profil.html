@@ -1,337 +1,300 @@
 ---
-layout: null
+layout: default
 title: Mein Profil
 ---
-<html lang="de">
-<head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    
-    <title>Mein Profil | M-Fleger</title>
-    <meta name="description" content="Verwalte deine Favoriten, Einstellungen und dein Konto auf M-Fleger.">
-    
-    <link rel="stylesheet" href="/style.css">
-    <link rel="icon" type="image/jpeg" href="/auge-logo.jpg">
 
-    <script src="https://cdn.jsdelivr.net/npm/@tailwindcss/browser@4"></script>
-    
-    <style>
-        @keyframes fadeInUp {
-            from { opacity: 0; transform: translateY(15px); }
-            to { opacity: 1; transform: translateY(0); }
-        }
-        .animate-fade-in { animation: fadeInUp 0.5s ease-out forwards; }
-        .liquid-glass {
-            background: rgba(255, 255, 255, 0.75);
-            backdrop-filter: blur(12px);
-            -webkit-backdrop-filter: blur(12px);
-            border: 1px solid rgba(255, 255, 255, 0.5);
-        }
-    </style>
-</head>
-<body class="bg-gradient-to-br from-slate-50 to-blue-100 text-gray-900 font-sans antialiased flex flex-col min-h-screen relative">
+<!-- Benachrichtigungs-Banner -->
+<div id="custom-banner" class="fixed top-24 right-4 z-50 transform translate-x-full opacity-0 transition-all duration-300 ease-out max-w-sm w-full bg-white/90 backdrop-blur-md border shadow-xl rounded-2xl p-4 flex items-start gap-3">
+    <span id="banner-icon" class="text-xl"></span>
+    <div class="flex-grow">
+        <h4 id="banner-title" class="font-bold text-sm text-slate-900"></h4>
+        <p id="banner-message" class="text-xs text-slate-600 mt-0.5"></p>
+    </div>
+</div>
 
-    <!-- Benachrichtigungs-Banner -->
-    <div id="custom-banner" class="fixed top-24 right-4 z-50 transform translate-x-full opacity-0 transition-all duration-300 ease-out max-w-sm w-full bg-white/90 backdrop-blur-md border shadow-xl rounded-2xl p-4 flex items-start gap-3">
-        <span id="banner-icon" class="text-xl"></span>
-        <div class="flex-grow">
-            <h4 id="banner-title" class="font-bold text-sm text-slate-900"></h4>
-            <p id="banner-message" class="text-xs text-slate-600 mt-0.5"></p>
+<!-- Modal: Konto löschen -->
+<div id="delete-modal" class="fixed inset-0 bg-slate-900/40 backdrop-blur-xs z-50 flex items-center justify-center p-4 hidden">
+    <div class="bg-white border border-slate-100 max-w-md w-full rounded-3xl p-6 md:p-8 shadow-2xl transform scale-95 transition-all duration-300">
+        <span class="text-4xl block mb-3">⚠️</span>
+        <h3 class="text-xl font-black text-slate-950 tracking-tight">Konto unwiderruflich löschen?</h3>
+        <p class="text-sm text-slate-600 mt-2 leading-relaxed">
+            Bist du dir absolut sicher? Dadurch werden all deine gespeicherten Favoriten und dein Zugang dauerhaft gelöscht. Dies kann nicht rückgängig gemacht werden.
+        </p>
+        <div class="mt-6 flex justify-end gap-3">
+            <button onclick="schließeDeleteModal()" class="px-5 py-2.5 text-sm font-semibold text-slate-600 hover:bg-slate-100 rounded-xl transition-all cursor-pointer">
+                Abbrechen
+            </button>
+            <button onclick="kontoDefinitivLoeschen()" class="px-5 py-2.5 text-sm font-bold bg-red-600 hover:bg-red-700 text-white rounded-xl shadow-md transition-all cursor-pointer">
+                Ja, löschen
+            </button>
         </div>
     </div>
+</div>
 
-    <!-- Modal: Konto löschen -->
-    <div id="delete-modal" class="fixed inset-0 bg-slate-900/40 backdrop-blur-xs z-50 flex items-center justify-center p-4 hidden">
-        <div class="bg-white border border-slate-100 max-w-md w-full rounded-3xl p-6 md:p-8 shadow-2xl transform scale-95 transition-all duration-300">
-            <span class="text-4xl block mb-3">⚠️</span>
-            <h3 class="text-xl font-black text-slate-950 tracking-tight">Konto unwiderruflich löschen?</h3>
-            <p class="text-sm text-slate-600 mt-2 leading-relaxed">
-                Bist du dir absolut sicher? Dadurch werden all deine gespeicherten Favoriten und dein Zugang dauerhaft gelöscht. Dies kann nicht rückgängig gemacht werden.
-            </p>
-            <div class="mt-6 flex justify-end gap-3">
-                <button onclick="schließeDeleteModal()" class="px-5 py-2.5 text-sm font-semibold text-slate-600 hover:bg-slate-100 rounded-xl transition-all cursor-pointer">
-                    Abbrechen
+<!-- Header-Bereich -->
+<header class="bg-gradient-to-br from-slate-900 via-slate-800 to-slate-900 text-white py-14 px-4 md:px-6 overflow-hidden relative shadow-md rounded-3xl my-6 max-w-6xl mx-auto">
+    <div class="max-w-4xl mx-auto text-center animate-fade-in">
+        <span class="bg-white/10 text-slate-200 border border-white/20 font-extrabold px-4 py-1.5 rounded-full text-xs uppercase tracking-wider inline-block mb-3">
+            Benutzerkonto
+        </span>
+        <h1 class="text-4xl md:text-5xl font-black tracking-tight mb-3 leading-tight">
+            👤 Mein Profil
+        </h1>
+        <p id="user-email-display" class="text-base md:text-lg text-slate-300 max-w-xl mx-auto leading-relaxed font-medium">
+            Lade Profil...
+        </p>
+    </div>
+</header>
+
+<!-- Hauptinhalt -->
+<main class="max-w-6xl mx-auto px-4 md:px-6 py-6 flex-grow w-full">
+    
+    <!-- Falls nicht eingeloggt -->
+    <div id="login-required-card" class="max-w-md mx-auto liquid-glass p-8 rounded-3xl shadow-sm text-center hidden animate-fade-in">
+        <span class="text-4xl block mb-4">🔒</span>
+        <h2 class="text-xl font-bold mb-2 text-slate-900">Anmeldung erforderlich</h2>
+        <p class="text-slate-600 text-sm mb-6">Du musst eingeloggt sein, um deine Merkliste und dein Profil zu sehen.</p>
+        <a href="/login.html" class="bg-blue-600 hover:bg-blue-700 text-white font-bold px-6 py-3 rounded-xl text-sm transition-all shadow-md inline-block no-underline">
+            Jetzt anmelden
+        </a>
+    </div>
+
+    <!-- Profil-Content -->
+    <div id="profile-content" class="hidden animate-fade-in">
+        <div class="flex flex-col md:flex-row justify-between items-start md:items-center gap-4 mb-8 border-b border-slate-200/60 pb-6">
+            <h2 class="text-2xl font-black text-slate-900 tracking-tight flex items-center gap-2">
+                ❤️ Meine gespeicherten Favoriten
+            </h2>
+            <div class="flex gap-3">
+                <button onclick="handleLogout()" class="text-xs font-bold px-4 py-2.5 rounded-xl bg-white/80 hover:bg-white text-slate-700 border border-slate-200 shadow-xs transition-all cursor-pointer">
+                    🚪 Abmelden
                 </button>
-                <button onclick="kontoDefinitivLoeschen()" class="px-5 py-2.5 text-sm font-bold bg-red-600 hover:bg-red-700 text-white rounded-xl shadow-md transition-all cursor-pointer">
-                    Ja, löschen
+                <button onclick="zeigeDeleteModal()" class="text-xs font-bold px-4 py-2.5 rounded-xl bg-red-50 hover:bg-red-100 text-red-600 border border-red-100 transition-all cursor-pointer">
+                    ⚙️ Konto löschen
                 </button>
             </div>
         </div>
-    </div>
-
-    {% include navigation.html %}
-
-    <!-- Header-Bereich -->
-    <header class="bg-gradient-to-br from-slate-900 via-slate-800 to-slate-900 text-white py-14 px-4 md:px-6 overflow-hidden relative shadow-md">
-        <div class="max-w-4xl mx-auto text-center animate-fade-in">
-            <span class="bg-white/10 text-slate-200 border border-white/20 font-extrabold px-4 py-1.5 rounded-full text-xs uppercase tracking-wider inline-block mb-3">
-                Benutzerkonto
-            </span>
-            <h1 class="text-4xl md:text-5xl font-black tracking-tight mb-3 leading-tight">
-                👤 Mein Profil
-            </h1>
-            <p id="user-email-display" class="text-base md:text-lg text-slate-300 max-w-xl mx-auto leading-relaxed font-medium">
-                Lade Profil...
-            </p>
-        </div>
-    </header>
-
-    <!-- Hauptinhalt -->
-    <main class="max-w-6xl mx-auto px-4 md:px-6 py-12 flex-grow w-full">
         
-        <!-- Falls nicht eingeloggt -->
-        <div id="login-required-card" class="max-w-md mx-auto liquid-glass p-8 rounded-3xl shadow-sm text-center hidden animate-fade-in">
-            <span class="text-4xl block mb-4">🔒</span>
-            <h2 class="text-xl font-bold mb-2 text-slate-900">Anmeldung erforderlich</h2>
-            <p class="text-slate-600 text-sm mb-6">Du musst eingeloggt sein, um deine Merkliste und dein Profil zu sehen.</p>
-            <a href="/login.html" class="bg-blue-600 hover:bg-blue-700 text-white font-bold px-6 py-3 rounded-xl text-sm transition-all shadow-md inline-block no-underline">
-                Jetzt anmelden
-            </a>
-        </div>
+        <div class="grid grid-cols-1 md:grid-cols-3 gap-6 md:gap-8" id="favorites-grid"></div>
 
-        <!-- Profil-Content -->
-        <div id="profile-content" class="hidden animate-fade-in">
-            <div class="flex flex-col md:flex-row justify-between items-start md:items-center gap-4 mb-8 border-b border-slate-200/60 pb-6">
-                <h2 class="text-2xl font-black text-slate-900 tracking-tight flex items-center gap-2">
-                    ❤️ Meine gespeicherten Favoriten
-                </h2>
-                <div class="flex gap-3">
-                    <button onclick="handleLogout()" class="text-xs font-bold px-4 py-2.5 rounded-xl bg-white/80 hover:bg-white text-slate-700 border border-slate-200 shadow-xs transition-all cursor-pointer">
-                        🚪 Abmelden
-                    </button>
-                    <button onclick="zeigeDeleteModal()" class="text-xs font-bold px-4 py-2.5 rounded-xl bg-red-50 hover:bg-red-100 text-red-600 border border-red-100 transition-all cursor-pointer">
-                        ⚙️ Konto löschen
-                    </button>
-                </div>
-            </div>
-            
-            <div class="grid grid-cols-1 md:grid-cols-3 gap-6 md:gap-8" id="favorites-grid"></div>
+        <p id="no-favorites-message" class="text-slate-500 text-center py-12 text-lg font-medium hidden">
+            Du hast bisher noch keine Artikel als Favorit markiert. ⭐
+        </p>
+    </div>
 
-            <p id="no-favorites-message" class="text-slate-500 text-center py-12 text-lg font-medium hidden">
-                Du hast bisher noch keine Artikel als Favorit markiert. ⭐
-            </p>
-        </div>
+</main>
 
-    </main>
+<script>
+    const ALL_JEKYLL_POSTS = [
+        {% for post in site.posts %}
+        {
+            id: "{{ post.date | date: '%Y%m%d%H%M' }}",
+            title: {{ post.title | jsonify }},
+            url: "{{ post.url | relative_url }}",
+            date: "{{ post.date | date: '%d.%m.%Y' }}",
+            excerpt: {{ post.excerpt | strip_html | truncatewords: 25 | jsonify }}
+        }{% unless forloop.last %},{% endunless %}
+        {% endfor %}
+    ];
+</script>
 
-    {% include footer.html %}
-    {% include cookie-banner.html %}
+<script type="module">
+    import { initializeApp } from "https://www.gstatic.com/firebasejs/10.8.0/firebase-app.js";
+    import { 
+        getAuth, 
+        onAuthStateChanged, 
+        signOut, 
+        deleteUser 
+    } from "https://www.gstatic.com/firebasejs/10.8.0/firebase-auth.js";
+    import { 
+        getFirestore, 
+        collection, 
+        query, 
+        where, 
+        getDocs, 
+        deleteDoc, 
+        doc 
+    } from "https://www.gstatic.com/firebasejs/10.8.0/firebase-firestore.js";
 
-    <script>
-        const ALL_JEKYLL_POSTS = [
-            {% for post in site.posts %}
-            {
-                id: "{{ post.date | date: '%Y%m%d%H%M' }}",
-                title: {{ post.title | jsonify }},
-                url: "{{ post.url | relative_url }}",
-                date: "{{ post.date | date: '%d.%m.%Y' }}",
-                excerpt: {{ post.excerpt | strip_html | truncatewords: 25 | jsonify }}
-            }{% unless forloop.last %},{% endunless %}
-            {% endfor %}
-        ];
-    </script>
+    const firebaseConfig = {
+        apiKey: "AIzaSyBccpK7f0yed4wCOvvDrzZaSIRuIz7DaIE",
+        authDomain: "m-fleger-web.firebaseapp.com",
+        projectId: "m-fleger-web",
+        storageBucket: "m-fleger-web.firebasestorage.app",
+        messagingSenderId: "714771931411",
+        appId: "1:714771931411:web:b9ffa44c25e3af0e2c3ae6",
+        measurementId: "G-2CXLWPY5L9"
+    };
 
-    <script type="module">
-        import { initializeApp } from "https://www.gstatic.com/firebasejs/10.8.0/firebase-app.js";
-        import { 
-            getAuth, 
-            onAuthStateChanged, 
-            signOut, 
-            deleteUser 
-        } from "https://www.gstatic.com/firebasejs/10.8.0/firebase-auth.js";
-        import { 
-            getFirestore, 
-            collection, 
-            query, 
-            where, 
-            getDocs, 
-            deleteDoc, 
-            doc 
-        } from "https://www.gstatic.com/firebasejs/10.8.0/firebase-firestore.js";
+    const app = initializeApp(firebaseConfig);
+    const auth = getAuth(app);
+    const db = getFirestore(app);
 
-        const firebaseConfig = {
-            apiKey: "AIzaSyBccpK7f0yed4wCOvvDrzZaSIRuIz7DaIE",
-            authDomain: "m-fleger-web.firebaseapp.com",
-            projectId: "m-fleger-web",
-            storageBucket: "m-fleger-web.firebasestorage.app",
-            messagingSenderId: "714771931411",
-            appId: "1:714771931411:web:b9ffa44c25e3af0e2c3ae6",
-            measurementId: "G-2CXLWPY5L9"
-        };
+    let currentUser = null;
 
-        const app = initializeApp(firebaseConfig);
-        const auth = getAuth(app);
-        const db = getFirestore(app);
+    window.zeigeBanner = function(type, title, message) {
+        const banner = document.getElementById('custom-banner');
+        const icon = document.getElementById('banner-icon');
+        const titleEl = document.getElementById('banner-title');
+        const msgEl = document.getElementById('banner-message');
 
-        let currentUser = null;
-
-        window.zeigeBanner = function(type, title, message) {
-            const banner = document.getElementById('custom-banner');
-            const icon = document.getElementById('banner-icon');
-            const titleEl = document.getElementById('banner-title');
-            const msgEl = document.getElementById('banner-message');
-
-            if (type === 'success') {
-                banner.className = "fixed top-24 right-4 z-50 transform transition-all duration-300 ease-out max-w-sm w-full bg-emerald-50/90 backdrop-blur-md border border-emerald-200 shadow-xl rounded-2xl p-4 flex items-start gap-3 text-emerald-900";
-                icon.innerText = "✅";
-            } else if (type === 'info') {
-                banner.className = "fixed top-24 right-4 z-50 transform transition-all duration-300 ease-out max-w-sm w-full bg-blue-50/90 backdrop-blur-md border border-blue-200 shadow-xl rounded-2xl p-4 flex items-start gap-3 text-blue-900";
-                icon.innerText = "ℹ️";
-            } else {
-                banner.className = "fixed top-24 right-4 z-50 transform transition-all duration-300 ease-out max-w-sm w-full bg-red-50/90 backdrop-blur-md border border-red-200 shadow-xl rounded-2xl p-4 flex items-start gap-3 text-red-900";
-                icon.innerText = "❌";
-            }
-
-            titleEl.innerText = title;
-            msgEl.innerText = message;
-            banner.classList.remove('translate-x-full', 'opacity-0');
-            
-            setTimeout(() => {
-                banner.classList.add('translate-x-full', 'opacity-0');
-            }, 4000);
-        };
-
-        onAuthStateChanged(auth, async (user) => {
-            if (user) {
-                currentUser = user;
-                document.getElementById('login-required-card').classList.add('hidden');
-                document.getElementById('profile-content').classList.remove('hidden');
-                document.getElementById('user-email-display').innerText = `Eingeloggt als: ${user.email}`;
-
-                await loadFavorites();
-            } else {
-                currentUser = null;
-                document.getElementById('user-email-display').innerText = "Nicht angemeldet";
-                document.getElementById('login-required-card').classList.remove('hidden');
-                document.getElementById('profile-content').classList.add('hidden');
-            }
-        });
-
-        async function loadFavorites() {
-            if (!currentUser) return;
-
-            try {
-                const q = query(collection(db, "favoriten"), where("userId", "==", currentUser.uid));
-                const querySnapshot = await getDocs(q);
-                
-                const grid = document.getElementById('favorites-grid');
-                grid.innerHTML = "";
-                const noFavsMessage = document.getElementById('no-favorites-message');
-
-                if (querySnapshot.empty) {
-                    noFavsMessage.classList.remove('hidden');
-                    return;
-                }
-
-                noFavsMessage.classList.add('hidden');
-                const favIds = new Set();
-                const docMap = new Map();
-
-                querySnapshot.forEach((docSnap) => {
-                    const data = docSnap.data();
-                    favIds.add(data.blogId.toString());
-                    docMap.set(data.blogId.toString(), docSnap.id);
-                });
-
-                let counter = 0;
-                ALL_JEKYLL_POSTS.forEach(post => {
-                    if (favIds.has(post.id)) {
-                        counter++;
-                        const firestoreDocId = docMap.get(post.id);
-                        const card = document.createElement('div');
-                        card.className = "liquid-glass p-6 rounded-3xl shadow-xs flex flex-col justify-between hover:shadow-md transition-all duration-300";
-                        card.setAttribute('data-post-id', post.id);
-                        
-                        card.innerHTML = `
-                            <div>
-                                <div class="flex justify-between items-center mb-3">
-                                    <span class="text-xs bg-blue-600 text-white px-2.5 py-1 rounded-md font-bold uppercase tracking-wider">${post.date}</span>
-                                </div>
-                                <h3 class="text-xl font-bold text-slate-900 mt-1 mb-3 line-clamp-2">${post.title}</h3>
-                                <p class="text-slate-600 text-sm mb-4 line-clamp-3">${post.excerpt}</p>
-                            </div>
-                            <div class="flex justify-between items-center mt-2 pt-3 border-t border-slate-200/50">
-                                <a href="${post.url}" class="text-blue-600 font-bold text-sm hover:text-blue-800 no-underline">
-                                    Artikel lesen →
-                                </a>
-                                <button onclick="entferneFavorit('${firestoreDocId}', this)" class="text-xs font-bold px-3 py-1.5 rounded-full border border-red-200 bg-red-50 hover:bg-red-100 text-red-600 transition-all cursor-pointer">
-                                    ❌ Entfernen
-                                </button>
-                            </div>
-                        `;
-                        grid.appendChild(card);
-                    }
-                });
-
-                if (counter === 0) {
-                    noFavsMessage.classList.remove('hidden');
-                }
-
-            } catch (err) {
-                window.zeigeBanner('error', 'Fehler beim Laden', err.message);
-            }
+        if (type === 'success') {
+            banner.className = "fixed top-24 right-4 z-50 transform transition-all duration-300 ease-out max-w-sm w-full bg-emerald-50/90 backdrop-blur-md border border-emerald-200 shadow-xl rounded-2xl p-4 flex items-start gap-3 text-emerald-900";
+            icon.innerText = "✅";
+        } else if (type === 'info') {
+            banner.className = "fixed top-24 right-4 z-50 transform transition-all duration-300 ease-out max-w-sm w-full bg-blue-50/90 backdrop-blur-md border border-blue-200 shadow-xl rounded-2xl p-4 flex items-start gap-3 text-blue-900";
+            icon.innerText = "ℹ️";
+        } else {
+            banner.className = "fixed top-24 right-4 z-50 transform transition-all duration-300 ease-out max-w-sm w-full bg-red-50/90 backdrop-blur-md border border-red-200 shadow-xl rounded-2xl p-4 flex items-start gap-3 text-red-900";
+            icon.innerText = "❌";
         }
 
-        window.entferneFavorit = async function(firestoreDocId, button) {
-            try {
-                await deleteDoc(doc(db, "favoriten", firestoreDocId));
-                const card = button.closest('[data-post-id]');
-                if (card) card.remove();
-                
-                window.zeigeBanner('info', 'Entfernt', 'Der Artikel wurde aus deinen Favoriten gelöscht.');
+        titleEl.innerText = title;
+        msgEl.innerText = message;
+        banner.classList.remove('translate-x-full', 'opacity-0');
+        
+        setTimeout(() => {
+            banner.classList.add('translate-x-full', 'opacity-0');
+        }, 4000);
+    };
 
-                const grid = document.getElementById('favorites-grid');
-                if (grid && grid.children.length === 0) {
-                    document.getElementById('no-favorites-message').classList.remove('hidden');
+    onAuthStateChanged(auth, async (user) => {
+        if (user) {
+            currentUser = user;
+            document.getElementById('login-required-card').classList.add('hidden');
+            document.getElementById('profile-content').classList.remove('hidden');
+            document.getElementById('user-email-display').innerText = `Eingeloggt als: ${user.email}`;
+
+            await loadFavorites();
+        } else {
+            currentUser = null;
+            document.getElementById('user-email-display').innerText = "Nicht angemeldet";
+            document.getElementById('login-required-card').classList.remove('hidden');
+            document.getElementById('profile-content').classList.add('hidden');
+        }
+    });
+
+    async function loadFavorites() {
+        if (!currentUser) return;
+
+        try {
+            const q = query(collection(db, "favoriten"), where("userId", "==", currentUser.uid));
+            const querySnapshot = await getDocs(q);
+            
+            const grid = document.getElementById('favorites-grid');
+            grid.innerHTML = "";
+            const noFavsMessage = document.getElementById('no-favorites-message');
+
+            if (querySnapshot.empty) {
+                noFavsMessage.classList.remove('hidden');
+                return;
+            }
+
+            noFavsMessage.classList.add('hidden');
+            const favIds = new Set();
+            const docMap = new Map();
+
+            querySnapshot.forEach((docSnap) => {
+                const data = docSnap.data();
+                favIds.add(data.blogId.toString());
+                docMap.set(data.blogId.toString(), docSnap.id);
+            });
+
+            let counter = 0;
+            ALL_JEKYLL_POSTS.forEach(post => {
+                if (favIds.has(post.id)) {
+                    counter++;
+                    const firestoreDocId = docMap.get(post.id);
+                    const card = document.createElement('div');
+                    card.className = "liquid-glass p-6 rounded-3xl shadow-xs flex flex-col justify-between hover:shadow-md transition-all duration-300";
+                    card.setAttribute('data-post-id', post.id);
+                    
+                    card.innerHTML = `
+                        <div>
+                            <div class="flex justify-between items-center mb-3">
+                                <span class="text-xs bg-blue-600 text-white px-2.5 py-1 rounded-md font-bold uppercase tracking-wider">${post.date}</span>
+                            </div>
+                            <h3 class="text-xl font-bold text-slate-900 mt-1 mb-3 line-clamp-2">${post.title}</h3>
+                            <p class="text-slate-600 text-sm mb-4 line-clamp-3">${post.excerpt}</p>
+                        </div>
+                        <div class="flex justify-between items-center mt-2 pt-3 border-t border-slate-200/50">
+                            <a href="${post.url}" class="text-blue-600 font-bold text-sm hover:text-blue-800 no-underline">
+                                Artikel lesen →
+                            </a>
+                            <button onclick="entferneFavorit('${firestoreDocId}', this)" class="text-xs font-bold px-3 py-1.5 rounded-full border border-red-200 bg-red-50 hover:bg-red-100 text-red-600 transition-all cursor-pointer">
+                                ❌ Entfernen
+                            </button>
+                        </div>
+                    `;
+                    grid.appendChild(card);
                 }
-            } catch (err) {
-                window.zeigeBanner('error', 'Fehler', err.message);
+            });
+
+            if (counter === 0) {
+                noFavsMessage.classList.remove('hidden');
             }
-        };
 
-        window.zeigeDeleteModal = function() {
-            const modal = document.getElementById('delete-modal');
-            modal.classList.remove('hidden');
-            setTimeout(() => modal.firstElementChild.classList.remove('scale-95'), 10);
-        };
+        } catch (err) {
+            window.zeigeBanner('error', 'Fehler beim Laden', err.message);
+        }
+    }
 
-        window.schließeDeleteModal = function() {
-            const modal = document.getElementById('delete-modal');
-            modal.firstElementChild.classList.add('scale-95');
-            setTimeout(() => modal.classList.add('hidden'), 150);
-        };
+    window.entferneFavorit = async function(firestoreDocId, button) {
+        try {
+            await deleteDoc(doc(doc(db, "favoriten", firestoreDocId)));
+            const card = button.closest('[data-post-id]');
+            if (card) card.remove();
+            
+            window.zeigeBanner('info', 'Entfernt', 'Der Artikel wurde aus deinen Favoriten gelöscht.');
 
-        window.kontoDefinitivLoeschen = async function() {
-            if (!currentUser) return;
-
-            try {
-                // 1. Favoriten des Nutzers löschen
-                const q = query(collection(db, "favoriten"), where("userId", "==", currentUser.uid));
-                const querySnapshot = await getDocs(q);
-                const deletePromises = querySnapshot.docs.map(docSnap => deleteDoc(doc(db, "favoriten", docSnap.id)));
-                await Promise.all(deletePromises);
-
-                // 2. Nutzerkonto löschen
-                await deleteUser(currentUser);
-
-                window.schließeDeleteModal();
-                alert("Dein Konto wurde erfolgreich gelöscht. Auf Wiedersehen!"); 
-                window.location.href = "/index.html";
-
-            } catch (err) {
-                window.schließeDeleteModal();
-                window.zeigeBanner('error', 'Löschen fehlgeschlagen', err.message);
+            const grid = document.getElementById('favorites-grid');
+            if (grid && grid.children.length === 0) {
+                document.getElementById('no-favorites-message').classList.remove('hidden');
             }
-        };
+        } catch (err) {
+            window.zeigeBanner('error', 'Fehler', err.message);
+        }
+    };
 
-        window.handleLogout = async function() {
-            try {
-                await signOut(auth);
-                window.location.href = "/index.html";
-            } catch (err) {
-                window.zeigeBanner('error', 'Abmeldung fehlgeschlagen', err.message);
-            }
-        };
-    </script>
-</body>
-</html>
+    window.zeigeDeleteModal = function() {
+        const modal = document.getElementById('delete-modal');
+        modal.classList.remove('hidden');
+        setTimeout(() => modal.firstElementChild.classList.remove('scale-95'), 10);
+    };
+
+    window.schließeDeleteModal = function() {
+        const modal = document.getElementById('delete-modal');
+        modal.firstElementChild.classList.add('scale-95');
+        setTimeout(() => modal.classList.add('hidden'), 150);
+    };
+
+    window.kontoDefinitivLoeschen = async function() {
+        if (!currentUser) return;
+
+        try {
+            const q = query(collection(db, "favoriten"), where("userId", "==", currentUser.uid));
+            const querySnapshot = await getDocs(q);
+            const deletePromises = querySnapshot.docs.map(docSnap => deleteDoc(doc(db, "favoriten", docSnap.id)));
+            await Promise.all(deletePromises);
+
+            await deleteUser(currentUser);
+
+            window.schließeDeleteModal();
+            alert("Dein Konto wurde erfolgreich gelöscht. Auf Wiedersehen!"); 
+            window.location.href = "/";
+
+        } catch (err) {
+            window.schließeDeleteModal();
+            window.zeigeBanner('error', 'Löschen fehlgeschlagen', err.message);
+        }
+    };
+
+    window.handleLogout = async function() {
+        try {
+            await signOut(auth);
+            window.location.href = "/";
+        } catch (err) {
+            window.zeigeBanner('error', 'Abmeldung fehlgeschlagen', err.message);
+        }
+    };
+</script>
