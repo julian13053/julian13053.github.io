@@ -9,10 +9,6 @@ categories:
   - Sport
 tags: []
 ---
-# Berlin zieht Olympia-Bewerbung zurück
-
-Stand: 23.09.2026 • 17:40Uhr
-
 **Zuletzt waren Berlin ohnehin nur noch Außenseiterchancen eingeräumt worden. Nun will die Stadt ihre Bewerbung für die Olympischen Spiele zurückziehen. Das dürfte auch am Ergebnis der Abgeordnetenhauswahl liegen.**
 
 Kurz vor der Entscheidung über den deutschen Olympia-Kandidaten will Berlin seine Bewerbung offiziell zurückziehen. [Das meldet der rbb](https://www.sportschau.de/regional/rbb/rbb-berlin-will-olympia-bewerbung-zurueckziehen-100.html).
@@ -21,7 +17,7 @@ Berlin galt hinter München und Köln-Rhein-Ruhr nur noch als Außenseiter in de
 
 Erst gestern hatte eine [Evaluierungskommission](https://www.sportschau.de/olympia/bewertung-sieht-berlin-hinter-koeln-rhein-ruhr-und-muenchen,olympia-bewerbung-evaluierung-konzepte-100.html) des Deutschen Olympischen Sportbundes (DOSB) der Hauptstadt ein durchwachsenes Zeugnis ausgestellt. Das Berliner Olympiakonzept wurde schlechter bewertet als das der Konkurrenz. Hinzu kommt die aktuelle politische Entwicklung.
 
-___
+- - -
 
 ## Senat abgewählt
 
@@ -29,7 +25,7 @@ Der schwarz-rote Senat, der die Pläne vorangetrieben hatte, [wurde bei der Abge
 
 Einen Tag nach der Wahl hatte Eralp bereits angekündigt, dass sich die Entscheidung erledigt habe. Auch die Grünen, die voraussichtlich Teil einer Regierung werden, lehnen die Pläne ab. Beide Parteien argumentieren, dass Berlin das Geld an anderen Stellen dringender brauche.
 
-___
+- - -
 
 ## Senat lädt zur Pressekonferenz
 
