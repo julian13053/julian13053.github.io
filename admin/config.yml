@@ -1,9 +1,11 @@
 backend:
   name: github
-  repo: DEIN_GITHUB_USERNAME/DEIN_REPOSITORY_NAME # Pass das hier an (z.B. julian/m-fleger-web)
-  branch: main # Oder master, je nachdem wie dein GitHub-Branch heißt
+  repo: DEIN_GITHUB_NAME/DEIN_REPO_NAME # Stelle sicher, dass hier z.B. julian/m-fleger-web steht!
+  branch: main # Oder master
+  base_url: https://decap-cms-oauth.vercel.app
+  auth_endpoint: /auth
 
-media_folder: "assets/uploads" # Hier landen hochgeladene Bilder
+media_folder: "assets/uploads"
 public_folder: "/assets/uploads"
 
 collections:
