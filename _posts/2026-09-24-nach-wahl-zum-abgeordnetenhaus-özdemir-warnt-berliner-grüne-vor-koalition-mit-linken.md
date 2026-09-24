@@ -14,6 +14,10 @@ categories:
   - Grünen
   - Abgeordnetenhaus
 ---
+![Özdemir warnt Berliner Grüne vor Koalition mit Linken](/assets/uploads/screenshot-2026-09-24-153924.png)
+
+
+
 **Nach dem Wahlsieg der Linken in Berlin brodelt die Debatte über eine mögliche Koalitionsbildung. Führende Politiker der Grünen warnen - 150 jüdische Berliner nehmen die Partei gegen Antisemitismusvorwürfe in Schutz.**
 
 Baden-Württembergs Ministerpräsident Cem Özdemir hat seine Partei vor einer Koalition mit der Linkspartei in Berlin gewarnt. Özdemir forderte die Grünen auf, im Umgang mit antisemitischen Aussagen von Linken-Politikern dieselben Maßstäbe anzulegen wie bei der AfD.
