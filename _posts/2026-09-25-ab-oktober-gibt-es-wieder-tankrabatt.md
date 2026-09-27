@@ -10,6 +10,8 @@ categories:
   - Sprittpresie
   - Bundestag
 ---
+![](/assets/uploads/218268bd-1363-4f5c-aa72-e38420d3c7b3.avif)
+
 **Der "Tankrabatt" kommt wieder. Diesmal gilt die Preissenkung sogar drei Monate lang. Das sind gute Nachrichten für Autofahrer, Spediteure und Landwirte. Es gibt aber auch Kritik an der Maßnahme.**
 
 Die hohen Spritpreise werden für drei Monate durch einen staatlich subventionierten "Tankrabatt" gedrückt. Nach dem [Bundestag gab auch der Bundesrat](https://www.tagesschau.de/inland/innenpolitik/tankrabatt-bundestag-beschluss-100.html) grünes Licht für die Entlastung.
