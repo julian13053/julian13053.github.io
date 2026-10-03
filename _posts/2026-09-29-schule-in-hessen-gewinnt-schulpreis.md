@@ -22,8 +22,7 @@ Die Ehrung fand in diesem Jahr zum 20. Mal statt, auch Bundeskanzler Friedrich M
 
 Deutschlands Schülerinnen und Schüler hatten in Mathematik und Lesekompetenz schlechter abschnitten als je zuvor. Die Studie habe erneut "die großen Defizite in unserem Bildungssystem dokumentiert". Dies sei ein Grund, "jetzt noch mehr zu tun dafür, dass unsere Bildung besser wird in Deutschland".
 
-## 
-Damit haben die Siegerschulen die Jury überzeugt
+## Damit haben die Siegerschulen die Jury überzeugt
 
 Zur Bertha-von-Suttner-Schule als Wettbewerbssieger hieß es von der Jury, sie zeige mit mehr als 2.000 Schülerinnen und Schülern und 250 Lehrkräften eindrucksvoll, wie eine große Schulgemeinschaft gemeinsame pädagogische Ziele konsequent und mit viel Ausdauer verfolge.
 
@@ -35,11 +34,16 @@ Die Lehrkräfte stehen ihnen dabei als Coaches zur Seite. Die Lernenden können 
 
 [Die Hamburger Stadtteilschule Wilhelmsburg bekam den Preis für gesellschaftlichen Zusammenhalt.](https://www.ndr.de/nachrichten/hamburg/hamburger-schule-bei-deutschem-schulpreis-in-berlin-ausgezeichnet,schulpreis-130.html) Die Schule, deren gut 1.200 Schülerinnen und Schüler zu 80 Prozent zweisprachig aufwachsen, habe sich "zu einem Ort entwickelt, der Vielfalt als tragendes Fundament des schulischen Lebens versteht", hieß es zur Begründung. Als beeindruckend wurden auch der Zusammenhalt des Kollegiums und die Elternarbeit gelobt.
 
-## 
-Kriterien um die beste Schule zu finden
+## Kriterien um die beste Schule zu finden
 
 Der Deutsche Schulpreis wird seit 2006 für eine besonders gute Schulqualität vergeben. Ausrichter sind die Robert Bosch Stiftung und die Heidehof Stiftung. Kooperationspartner sind die *ARD* und die ZEIT Verlagsgruppe.
 
 Eine Jury aus Bildungsexperten und Schulpraktikern vergleicht bei den Bewerberschulen die sechs Bereiche Unterrichtsqualität, Leistung, Umgang mit Vielfalt, Verantwortung, Schulleben und Netzwerke sowie Lernende Schule. Diese Merkmale seien als Kennzeichen guter Schulqualität allgemein anerkannt.
 
 Im vergangenen Jahr gewann die [Maria-Leo-Grundschule in Berlin-Pankow,](https://www.tagesschau.de/inland/gesellschaft/schulpreis-berliner-grundschule-100.html) die ebenfalls kein klassisches Stundenplan-Konzept hat, sondern Kinder in sogenannten Lernateliers eigenständig lernen.
+
+
+
+ **Quelle: tagesschau.de**
+
+**Bildnachweis:** traunsteiner-tagblatt.de
