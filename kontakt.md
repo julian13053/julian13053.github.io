@@ -38,10 +38,10 @@ title: Kontakt
                 Get in Touch
             </span>
             <h1 class="text-4xl md:text-5xl font-black tracking-tight text-slate-900 leading-tight">
-                👋 Lass uns connecten!<br><span class="text-blue-600">Fragen, Feedback oder Terminvereinbarung.</span>
+                👋 Lass uns connecten!<br><span class="text-blue-600">Fragen, Feedback oder Kostenlose Terminvereinbarung.</span>
             </h1>
             <p class="text-base md:text-lg text-slate-600 max-w-xl mx-auto leading-relaxed font-medium">
-                Du hast Fragen, möchtest mich erreichen oder direkt einen Gesprächstermin vereinbaren? Melde dich unkompliziert per Formular, E-Mail oder Social Media.
+                Du hast Fragen, möchtest mich erreichen oder direkt einen kostenlosen Termin vereinbaren? Melde dich unkompliziert per Formular, E-Mail oder Social Media.
             </p>
         </div>
     </header>
@@ -51,11 +51,25 @@ title: Kontakt
 
         <!-- Termin buchen Formular -->
         <div class="p-8 md:p-12 rounded-3xl liquid-glass shadow-xs max-w-2xl mx-auto">
-            <h2 class="text-3xl font-black text-slate-900 tracking-tight mb-2 text-center">📅 Termin vereinbaren</h2>
-            <p class="text-slate-600 font-medium text-base mb-8 text-center">Wähle deinen Wunschtermin (zwischen 06:00 und 18:00 Uhr) und gib deine Daten ein.</p>
+            <div class="text-center mb-8">
+                <span class="bg-green-100 text-green-700 border border-green-200 font-bold px-3 py-1 rounded-full text-xs uppercase tracking-wider inline-block mb-2">
+                    100% Kostenlos
+                </span>
+                <h2 class="text-3xl font-black text-slate-900 tracking-tight">📅 Termin vereinbaren</h2>
+                <p class="text-slate-600 font-medium text-base mt-2">Wähle deinen Wunschtermin (nach der Schule von 15:00 bis 18:00 Uhr) und gib deine Daten ein.</p>
+            </div>
 
             <form action="https://formspree.io/f/mppqnypq" method="POST" class="space-y-5 text-left">
                 
+                <div>
+                    <label for="art" class="block text-sm font-bold text-slate-700 mb-1">Art des Termins *</label>
+                    <select id="art" name="Termin-Art" required class="w-full px-4 py-3 rounded-xl border border-slate-300 bg-white/80 focus:bg-white focus:ring-2 focus:ring-blue-500 focus:outline-none transition-all font-medium">
+                        <option value="Persönliches Treffen">Persönliches Treffen</option>
+                        <option value="Online / Telefon Gespräch">Gespräch (Online / Telefon)</option>
+                        <option value="Sonstiges Anliegen">Sonstiges Anliegen</option>
+                    </select>
+                </div>
+
                 <div>
                     <label for="name" class="block text-sm font-bold text-slate-700 mb-1">Vollständiger Name *</label>
                     <input type="text" id="name" name="Name" required placeholder="z. B. Max Mustermann" class="w-full px-4 py-3 rounded-xl border border-slate-300 bg-white/80 focus:bg-white focus:ring-2 focus:ring-blue-500 focus:outline-none transition-all font-medium">
@@ -78,8 +92,8 @@ title: Kontakt
                     </div>
 
                     <div>
-                        <label for="time" class="block text-sm font-bold text-slate-700 mb-1">Uhrzeit *</label>
-                        <input type="time" id="time" name="Termin-Uhrzeit" min="06:00" max="18:00" required class="w-full px-3 py-3 rounded-xl border border-slate-300 bg-white/80 focus:bg-white focus:ring-2 focus:ring-blue-500 focus:outline-none transition-all font-medium">
+                        <label for="time" class="block text-sm font-bold text-slate-700 mb-1">Uhrzeit (15-18h) *</label>
+                        <input type="time" id="time" name="Termin-Uhrzeit" min="15:00" max="18:00" required class="w-full px-3 py-3 rounded-xl border border-slate-300 bg-white/80 focus:bg-white focus:ring-2 focus:ring-blue-500 focus:outline-none transition-all font-medium">
                     </div>
                 </div>
 
@@ -89,7 +103,7 @@ title: Kontakt
                 </div>
 
                 <button type="submit" class="w-full bg-gradient-to-r from-blue-600 to-cyan-500 hover:from-blue-500 hover:to-cyan-400 text-white font-bold py-4 rounded-2xl shadow-lg transition-all duration-200 text-lg cursor-pointer">
-                    Termin jetzt anfragen
+                    Termin jetzt kostenlos anfragen
                 </button>
             </form>
         </div>
