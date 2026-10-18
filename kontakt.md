@@ -56,7 +56,7 @@ title: Kontakt
                     100% Kostenlos
                 </span>
                 <h2 class="text-3xl font-black text-slate-900 tracking-tight">📅 Termin vereinbaren</h2>
-                <p class="text-slate-600 font-medium text-base mt-2">Wähle deinen Wunschtermin (nach der Schule von 15:00 bis 18:00 Uhr) und gib deine Daten ein.</p>
+                <p class="text-slate-600 font-medium text-base mt-2">Wähle deinen Wunschtermin (von 12:00 bis 20:00 Uhr) und gib deine Daten ein.</p>
             </div>
 
             <form action="https://formspree.io/f/mppqnypq" method="POST" class="space-y-5 text-left">
@@ -92,8 +92,8 @@ title: Kontakt
                     </div>
 
                     <div>
-                        <label for="time" class="block text-sm font-bold text-slate-700 mb-1">Uhrzeit (15-18h) *</label>
-                        <input type="time" id="time" name="Termin-Uhrzeit" min="15:00" max="18:00" required class="w-full px-3 py-3 rounded-xl border border-slate-300 bg-white/80 focus:bg-white focus:ring-2 focus:ring-blue-500 focus:outline-none transition-all font-medium">
+                        <label for="time" class="block text-sm font-bold text-slate-700 mb-1">Uhrzeit (12–20 Uhr) *</label>
+                        <input type="time" id="time" name="Termin-Uhrzeit" min="12:00" max="20:00" required class="w-full px-3 py-3 rounded-xl border border-slate-300 bg-white/80 focus:bg-white focus:ring-2 focus:ring-blue-500 focus:outline-none transition-all font-medium">
                     </div>
                 </div>
 
