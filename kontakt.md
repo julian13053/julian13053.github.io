@@ -38,16 +38,63 @@ title: Kontakt
                 Get in Touch
             </span>
             <h1 class="text-4xl md:text-5xl font-black tracking-tight text-slate-900 leading-tight">
-                👋 Lass uns connecten!<br><span class="text-blue-600">Fragen, Feedback oder Austausch.</span>
+                👋 Lass uns connecten!<br><span class="text-blue-600">Fragen, Feedback oder Terminvereinbarung.</span>
             </h1>
             <p class="text-base md:text-lg text-slate-600 max-w-xl mx-auto leading-relaxed font-medium">
-                Du hast Fragen oder möchtest mich erreichen? Melde dich unkompliziert per E-Mail oder über Social Media.
+                Du hast Fragen, möchtest mich erreichen oder direkt einen Gesprächstermin vereinbaren? Melde dich unkompliziert per Formular, E-Mail oder Social Media.
             </p>
         </div>
     </header>
 
     <!-- Hauptinhalt -->
-    <main class="max-w-4xl mx-auto px-4 md:px-6 pb-12 md:pb-16 flex-grow w-full">
+    <main class="max-w-4xl mx-auto px-4 md:px-6 pb-12 md:pb-16 flex-grow w-full space-y-8">
+
+        <!-- Termin buchen Formular -->
+        <div class="p-8 md:p-12 rounded-3xl liquid-glass shadow-xs max-w-2xl mx-auto">
+            <h2 class="text-3xl font-black text-slate-900 tracking-tight mb-2 text-center">📅 Termin vereinbaren</h2>
+            <p class="text-slate-600 font-medium text-base mb-8 text-center">Wähle deinen Wunschtermin (zwischen 06:00 und 18:00 Uhr) und gib deine Daten ein.</p>
+
+            <form action="https://formspree.io/f/mppqnypq" method="POST" class="space-y-5 text-left">
+                
+                <div>
+                    <label for="name" class="block text-sm font-bold text-slate-700 mb-1">Vollständiger Name *</label>
+                    <input type="text" id="name" name="Name" required placeholder="z. B. Max Mustermann" class="w-full px-4 py-3 rounded-xl border border-slate-300 bg-white/80 focus:bg-white focus:ring-2 focus:ring-blue-500 focus:outline-none transition-all font-medium">
+                </div>
+
+                <div>
+                    <label for="email" class="block text-sm font-bold text-slate-700 mb-1">E-Mail-Adresse *</label>
+                    <input type="email" id="email" name="E-Mail" required placeholder="name@beispiel.de" class="w-full px-4 py-3 rounded-xl border border-slate-300 bg-white/80 focus:bg-white focus:ring-2 focus:ring-blue-500 focus:outline-none transition-all font-medium">
+                </div>
+
+                <div class="grid grid-cols-1 sm:grid-cols-3 gap-4">
+                    <div>
+                        <label for="dob" class="block text-sm font-bold text-slate-700 mb-1">Geburtsdatum *</label>
+                        <input type="date" id="dob" name="Geburtsdatum" required class="w-full px-3 py-3 rounded-xl border border-slate-300 bg-white/80 focus:bg-white focus:ring-2 focus:ring-blue-500 focus:outline-none transition-all font-medium">
+                    </div>
+
+                    <div>
+                        <label for="date" class="block text-sm font-bold text-slate-700 mb-1">Wunsch-Datum *</label>
+                        <input type="date" id="date" name="Termin-Datum" required class="w-full px-3 py-3 rounded-xl border border-slate-300 bg-white/80 focus:bg-white focus:ring-2 focus:ring-blue-500 focus:outline-none transition-all font-medium">
+                    </div>
+
+                    <div>
+                        <label for="time" class="block text-sm font-bold text-slate-700 mb-1">Uhrzeit *</label>
+                        <input type="time" id="time" name="Termin-Uhrzeit" min="06:00" max="18:00" required class="w-full px-3 py-3 rounded-xl border border-slate-300 bg-white/80 focus:bg-white focus:ring-2 focus:ring-blue-500 focus:outline-none transition-all font-medium">
+                    </div>
+                </div>
+
+                <div>
+                    <label for="reason" class="block text-sm font-bold text-slate-700 mb-1">Anliegen / Grund des Gesprächs *</label>
+                    <textarea id="reason" name="Grund" rows="4" required placeholder="Worüber möchtest du sprechen?" class="w-full px-4 py-3 rounded-xl border border-slate-300 bg-white/80 focus:bg-white focus:ring-2 focus:ring-blue-500 focus:outline-none transition-all font-medium"></textarea>
+                </div>
+
+                <button type="submit" class="w-full bg-gradient-to-r from-blue-600 to-cyan-500 hover:from-blue-500 hover:to-cyan-400 text-white font-bold py-4 rounded-2xl shadow-lg transition-all duration-200 text-lg cursor-pointer">
+                    Termin jetzt anfragen
+                </button>
+            </form>
+        </div>
+
+        <!-- Direktkontakt -->
         <div class="p-8 md:p-12 rounded-3xl liquid-glass shadow-xs text-center max-w-2xl mx-auto">
             <h2 class="text-3xl font-black text-slate-900 tracking-tight mb-2">Direktkontakt</h2>
             <p class="text-slate-600 font-medium text-base mb-10">Hier findest du meine offiziellen Erreichbarkeiten:</p>
