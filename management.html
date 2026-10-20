@@ -13,7 +13,6 @@ permalink: /management
     <link rel="stylesheet" href="/style.css">
     
     <script src="https://cdn.jsdelivr.net/npm/@tailwindcss/browser@4"></script>
-    <script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script>
     
     <link rel="apple-touch-icon" sizes="180x180" href="/auge-logo.jpg">
     <link rel="icon" type="image/jpeg" href="/auge-logo.jpg">
@@ -26,70 +25,39 @@ permalink: /management
             border: 1px solid rgba(255, 255, 255, 0.6);
             box-shadow: 0 8px 32px 0 rgba(31, 38, 135, 0.07);
         }
-        .print-header { display: none; }
-        @media print {
-            nav, footer, .no-print, #cookie-banner, .fixed, .liquid-glass { 
-                background: white !important; 
-                box-shadow: none !important; 
-                border: none !important;
-                backdrop-filter: none !important;
-                -webkit-backdrop-filter: none !important;
-            }
-            nav, footer, .no-print, #cookie-banner, .fixed { display: none !important; }
-            body { background-color: white !important; }
-            main { margin-top: 0 !important; padding: 0 !important; }
-            article { border: none !important; box-shadow: none !important; padding: 0 !important; }
-        }
     </style>
 </head>
-<body class="text-gray-900 font-sans antialiased flex flex-col min-h-screen relative bg-slate-50">
+<body class="text-gray-900 font-sans antialiased flex flex-col min-h-screen bg-slate-50 justify-center items-center p-4">
 
-    {% include navigation.html %}
-
-    <header class="bg-gradient-to-r from-blue-900 via-indigo-900 to-blue-950 text-white text-center py-16 px-4">
-        <div class="max-w-4xl mx-auto flex flex-col items-center">
-            <h1 class="text-3xl md:text-5xl font-black tracking-tight drop-shadow-md mb-4">
-                Management & Leitung
-            </h1>
-            <p class="text-sm md:text-base text-gray-300 max-w-xl font-medium">
-                Strategische Steuerung, Kooperationen und leitende Anfragen rund um M-Fleger.
-            </p>
-        </div>
-    </header>
-
-    <main class="max-w-4xl mx-auto px-4 py-12 flex-grow w-full -mt-10">
-        <article class="p-8 md:p-12 rounded-3xl liquid-glass space-y-8">
+    <main class="max-w-xl w-full mx-auto my-auto">
+        <article class="p-8 md:p-12 rounded-3xl liquid-glass space-y-6 text-center">
             
-            <section class="space-y-4">
-                <h2 class="text-2xl font-bold text-slate-900 tracking-tight">Verantwortung & Führung</h2>
-                <p class="text-base md:text-lg text-slate-700 leading-relaxed">
-                    Das Management steuert die strategische Ausrichtung, Entwicklung und Partnerschaften von M-Fleger. Unser Ziel ist es, eine nachhaltige, barrierefreie und transparente Plattform für Pflege, Barrierefreiheit und digitale Rechte auszubauen.
-                </p>
-            </section>
+            <!-- Minimalistisches Branding / Logo -->
+            <div class="flex justify-center mb-2">
+                <img src="/auge-logo.jpg" alt="M-Fleger Logo" class="w-20 h-20 rounded-2xl object-contain shadow-md border border-white/50">
+            </div>
 
-            <section class="p-6 rounded-2xl bg-white/60 border border-slate-200/80 shadow-xs space-y-4">
-                <h3 class="text-lg font-bold text-slate-900 flex items-center gap-2">
-                    ✉️ Kontakt zum Management
-                </h3>
-                <p class="text-sm md:text-base text-slate-600 leading-relaxed">
-                    Möchten Sie eine strategische Kooperation anfragen, haben geschäftliche Anliegen oder leitende Fragen? Wenden Sie sich bitte direkt an unsere Management-Adresse:
-                </p>
-                <div class="pt-2">
-                    <a href="mailto:management@m-fleger.de" class="inline-flex items-center gap-2 text-base font-bold text-blue-600 hover:text-blue-800 transition-colors bg-blue-50 px-5 py-3 rounded-xl border border-blue-100">
-                        📧 management@m-fleger.de
-                    </a>
-                </div>
-            </section>
+            <h1 class="text-3xl md:text-4xl font-black text-slate-900 tracking-tight">
+                Management
+            </h1>
 
-            <div class="mt-8 pt-6 border-t border-slate-200/60 flex justify-center no-print">
-                <a href="/" class="inline-flex items-center gap-2 text-sm font-bold text-blue-600 hover:text-blue-800 transition-colors no-underline">
-                    &larr; Zurück zur Startseite
+            <p class="text-base md:text-lg text-slate-700 leading-relaxed font-medium">
+                Das Management vertritt Julian Maximilian Fleger (M-Fleger) in allen geschäftlichen, rechtlichen sowie organisatorischen Belangen. 
+            </p>
+
+            <p class="text-sm md:text-base text-slate-600 leading-relaxed">
+                Möchten Sie Kontakt aufnehmen oder haben Sie eine direkte Anfrage an die Vertretung von M-Fleger? Wenden Sie sich bitte ausschließlich an folgende E-Mail-Adresse:
+            </p>
+
+            <div class="pt-4 flex justify-center">
+                <a href="mailto:management@m-fleger.de" class="inline-flex items-center gap-2 text-base md:text-lg font-bold text-blue-600 hover:text-blue-800 transition-all bg-white/80 hover:bg-white px-6 py-3.5 rounded-2xl border border-slate-200/80 shadow-xs hover:shadow-md">
+                    ✉️ management@m-fleger.de
                 </a>
             </div>
+
         </article>
     </main>
 
-    {% include footer.html %}
     {% include cookie-banner.html %}
 
 </body>
