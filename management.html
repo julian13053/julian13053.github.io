@@ -8,7 +8,7 @@ permalink: /management
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Management - M-Fleger</title>
+    <title>Management & Vertretung - M-Fleger</title>
     
     <link rel="stylesheet" href="/style.css">
     
@@ -19,40 +19,60 @@ permalink: /management
 
     <style>
         .liquid-glass {
-            background: rgba(255, 255, 255, 0.45);
-            backdrop-filter: blur(12px);
-            -webkit-backdrop-filter: blur(12px);
-            border: 1px solid rgba(255, 255, 255, 0.6);
-            box-shadow: 0 8px 32px 0 rgba(31, 38, 135, 0.07);
+            background: rgba(255, 255, 255, 0.55);
+            backdrop-filter: blur(16px);
+            -webkit-backdrop-filter: blur(16px);
+            border: 1px solid rgba(255, 255, 255, 0.7);
+            box-shadow: 0 12px 40px 0 rgba(31, 38, 135, 0.08);
         }
     </style>
 </head>
-<body class="text-gray-900 font-sans antialiased flex flex-col min-h-screen bg-slate-50 justify-center items-center p-4">
+<body class="text-slate-900 font-sans antialiased flex flex-col min-h-screen bg-slate-100 justify-center items-center p-4 md:p-8">
 
-    <main class="max-w-xl w-full mx-auto my-auto">
-        <article class="p-8 md:p-12 rounded-3xl liquid-glass space-y-6 text-center">
+    <main class="max-w-2xl w-full mx-auto my-auto">
+        <article class="p-8 md:p-12 rounded-3xl liquid-glass space-y-8 text-center shadow-2xl">
             
-            <!-- Minimalistisches Branding / Logo -->
+            <!-- Branding Logo -->
             <div class="flex justify-center mb-2">
-                <img src="/auge-logo.jpg" alt="M-Fleger Logo" class="w-20 h-20 rounded-2xl object-contain shadow-md border border-white/50">
+                <img src="/auge-logo.jpg" alt="M-Fleger Logo" class="w-20 h-20 md:w-24 md:h-24 rounded-2xl object-contain shadow-md border border-white/60">
             </div>
 
-            <h1 class="text-3xl md:text-4xl font-black text-slate-900 tracking-tight">
-                Management
-            </h1>
+            <!-- Hauptüberschrift -->
+            <div class="space-y-2">
+                <h1 class="text-3xl md:text-4xl font-black text-slate-900 tracking-tight">
+                    Management & Offizielle Vertretung
+                </h1>
+                <p class="text-xs uppercase font-extrabold tracking-widest text-blue-600 bg-blue-50 py-1.5 px-4 rounded-full inline-block border border-blue-100">
+                    Offizieller Ansprechpartner
+                </p>
+            </div>
 
-            <p class="text-base md:text-lg text-slate-700 leading-relaxed font-medium">
-                Das Management vertritt Julian Maximilian Fleger (M-Fleger) in allen geschäftlichen, rechtlichen sowie organisatorischen Belangen. 
-            </p>
+            <!-- Ausführlicher Inhalt -->
+            <div class="space-y-4 text-slate-700 leading-relaxed text-sm md:text-base text-justify md:text-center">
+                <p class="font-semibold text-slate-900 text-base md:text-lg">
+                    Das Management führt die Geschäfte und koordiniert sämtliche externen sowie internen Belange im Namen von Julian Maximilian Fleger (M-Fleger).
+                </p>
+                <p>
+                    Jegliche Anfragen bezüglich geschäftlicher Kooperationen, rechtlicher Angelegenheiten, Verhandlungen, Terminabsprachen sowie organisatorischer Abstimmungen werden zentral über das Management abgewickelt. 
+                </p>
+                <p>
+                    Wenn Sie ein Anliegen haben, eine Zusammenarbeit anstreben oder eine offizielle Vertretung kontaktieren möchten, richten Sie Ihre Nachricht bitte ausschließlich an die untenstehende E-Mail-Adresse. Unverlangte Anfragen über andere Kanäle werden aus organisatorischen Gründen an das Management weitergeleitet.
+                </p>
+            </div>
 
-            <p class="text-sm md:text-base text-slate-600 leading-relaxed">
-                Möchten Sie Kontakt aufnehmen oder haben Sie eine direkte Anfrage an die Vertretung von M-Fleger? Wenden Sie sich bitte ausschließlich an folgende E-Mail-Adresse:
-            </p>
-
-            <div class="pt-4 flex justify-center">
-                <a href="mailto:management@m-fleger.de" class="inline-flex items-center gap-2 text-base md:text-lg font-bold text-blue-600 hover:text-blue-800 transition-all bg-white/80 hover:bg-white px-6 py-3.5 rounded-2xl border border-slate-200/80 shadow-xs hover:shadow-md">
-                    ✉️ management@m-fleger.de
-                </a>
+            <!-- Kontakt-Box -->
+            <div class="p-6 rounded-2xl bg-white/80 border border-slate-200/80 shadow-xs space-y-4">
+                <h2 class="text-xs font-bold uppercase tracking-wider text-slate-500">
+                    Direkter Kontakt zum Management
+                </h2>
+                <div>
+                    <a href="mailto:management@m-fleger.de" class="inline-flex items-center gap-2 text-base md:text-xl font-black text-blue-600 hover:text-blue-800 transition-all bg-blue-50 hover:bg-blue-100/80 px-6 py-3.5 rounded-2xl border border-blue-200/80 shadow-xs active:scale-95">
+                        ✉️ management@m-fleger.de
+                    </a>
+                </div>
+                <p class="text-xs text-slate-500">
+                    Sendezeitraum für geschäftliche Anfragen: Montag bis Freitag.
+                </p>
             </div>
 
         </article>
