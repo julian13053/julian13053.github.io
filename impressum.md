@@ -42,10 +42,13 @@ permalink: /impressum.html
             </section>
 
             <section>
-                <h2 class="text-xl font-bold mb-2 text-slate-900">Kontakt</h2>
-                <p class="leading-relaxed text-slate-600">
-                    E-Mail: julian@m-fleger.de
-                </p>
+                <h2 class="text-xl font-bold mb-3 text-slate-900">Kontakt & E-Mail-Postfächer</h2>
+                <ul class="space-y-2 leading-relaxed text-slate-600 font-medium">
+                    <li><strong class="text-slate-900">Allgemeiner Kontakt:</strong> <a href="mailto:kontakt@m-fleger.de" class="text-blue-600 hover:underline">kontakt@m-fleger.de</a></li>
+                    <li><strong class="text-slate-900">Allgemeine Fragen:</strong> <a href="mailto:info@m-fleger.de" class="text-blue-600 hover:underline">info@m-fleger.de</a></li>
+                    <li><strong class="text-slate-900">Artikel, Korrekturen & Themen:</strong> <a href="mailto:redaktion@m-fleger.de" class="text-blue-600 hover:underline">redaktion@m-fleger.de</a></li>
+                    <li><strong class="text-slate-900">Presse & Quellen:</strong> <a href="mailto:presse@m-fleger.de" class="text-blue-600 hover:underline">presse@m-fleger.de</a></li>
+                </ul>
             </section>
 
             <section>
@@ -53,7 +56,8 @@ permalink: /impressum.html
                 <p class="leading-relaxed text-slate-600">
                     Julian Maximilian Fleger<br>
                     Rüdickenstr. 30<br>
-                    13053 Berlin
+                    13053 Berlin<br>
+                    E-Mail: <a href="mailto:redaktion@m-fleger.de" class="text-blue-600 hover:underline">redaktion@m-fleger.de</a>
                 </p>
             </section>
 
