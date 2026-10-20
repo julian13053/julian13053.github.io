@@ -108,17 +108,34 @@ title: Kontakt
             </form>
         </div>
 
-        <!-- Direktkontakt -->
+        <!-- Direktkontakt & Postfächer -->
         <div class="p-8 md:p-12 rounded-3xl liquid-glass shadow-xs text-center max-w-2xl mx-auto">
-            <h2 class="text-3xl font-black text-slate-900 tracking-tight mb-2">Direktkontakt</h2>
-            <p class="text-slate-600 font-medium text-base mb-10">Hier findest du meine offiziellen Erreichbarkeiten:</p>
+            <h2 class="text-3xl font-black text-slate-900 tracking-tight mb-2">E-Mail-Postfächer</h2>
+            <p class="text-slate-600 font-medium text-base mb-8">Wähle die passende Adresse für dein Anliegen:</p>
 
-            <div class="space-y-4 max-w-md mx-auto">
-                <a href="mailto:julian@m-fleger.de" class="flex flex-col items-center justify-center bg-gradient-to-r from-blue-600 to-cyan-500 hover:from-blue-500 hover:to-cyan-400 text-white font-bold p-5 rounded-2xl shadow-lg transition-all duration-200 no-underline w-full group">
-                    <span class="text-xs uppercase tracking-wider opacity-90 mb-1 transition-transform group-hover:scale-105">E-Mail schreiben</span>
-                    <span class="text-base md:text-lg tracking-wide">julian@m-fleger.de</span>
+            <div class="grid grid-cols-1 sm:grid-cols-2 gap-4 text-left mb-8">
+                <a href="mailto:kontakt@m-fleger.de" class="p-5 rounded-2xl bg-white/80 hover:bg-white border border-slate-200/80 shadow-sm transition-all group no-underline">
+                    <span class="block text-xs font-bold uppercase tracking-wider text-blue-600 mb-1">Allgemeiner Kontakt</span>
+                    <span class="block text-base font-bold text-slate-900 group-hover:text-blue-600 transition-colors">kontakt@m-fleger.de</span>
                 </a>
 
+                <a href="mailto:info@m-fleger.de" class="p-5 rounded-2xl bg-white/80 hover:bg-white border border-slate-200/80 shadow-sm transition-all group no-underline">
+                    <span class="block text-xs font-bold uppercase tracking-wider text-blue-600 mb-1">Allgemeine Fragen</span>
+                    <span class="block text-base font-bold text-slate-900 group-hover:text-blue-600 transition-colors">info@m-fleger.de</span>
+                </a>
+
+                <a href="mailto:redaktion@m-fleger.de" class="p-5 rounded-2xl bg-white/80 hover:bg-white border border-slate-200/80 shadow-sm transition-all group no-underline">
+                    <span class="block text-xs font-bold uppercase tracking-wider text-blue-600 mb-1">Artikel & Themen</span>
+                    <span class="block text-base font-bold text-slate-900 group-hover:text-blue-600 transition-colors">redaktion@m-fleger.de</span>
+                </a>
+
+                <a href="mailto:presse@m-fleger.de" class="p-5 rounded-2xl bg-white/80 hover:bg-white border border-slate-200/80 shadow-sm transition-all group no-underline">
+                    <span class="block text-xs font-bold uppercase tracking-wider text-blue-600 mb-1">Presse & Quellen</span>
+                    <span class="block text-base font-bold text-slate-900 group-hover:text-blue-600 transition-colors">presse@m-fleger.de</span>
+                </a>
+            </div>
+
+            <div class="space-y-4 max-w-md mx-auto">
                 <a href="https://www.instagram.com/zfd.julian" target="_blank" class="flex flex-col items-center justify-center bg-gradient-to-r from-purple-600 via-pink-500 to-yellow-500 text-white font-bold p-5 rounded-2xl shadow-lg hover:opacity-95 transition-all duration-200 no-underline w-full group">
                     <span class="text-xs uppercase tracking-wider opacity-90 mb-1 transition-transform group-hover:scale-105">Auf Instagram folgen</span>
                     <span class="text-base md:text-lg tracking-wide">@zfd.julian</span>
