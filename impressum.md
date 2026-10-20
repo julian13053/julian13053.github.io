@@ -1,7 +1,7 @@
 ---
 layout: null
 title: "Impressum"
-permalink: /impressum.html
+permalink: /impressum
 ---
 <html lang="de">
 <head>
