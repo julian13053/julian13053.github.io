@@ -9,7 +9,7 @@ title: Datenschutz
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Datenschutzerklärung - M-Fleger</title>
     
-    <meta name="description" content="Datenschutzerklärung von M-Fleger. Erfahre, wie wir deine Daten bei der Anmeldung und Nutzung der Favoriten-Funktion schützen.">
+    <meta name="description" content="Datenschutzerklärung von M-Fleger. Erfahre, wie wir deine Daten bei der Anmeldung, Kontaktaufnahme und Nutzung der Favoriten-Funktion schützen.">
     <meta name="robots" content="noindex, follow">
     
     <link rel="stylesheet" href="/style.css">
@@ -58,8 +58,11 @@ title: Datenschutz
                     <strong class="text-slate-900">Julian Maximilian Fleger</strong><br>
                     Rüdickenstr. 30<br>
                     13053 Berlin<br><br>
-                    <strong class="text-slate-900">Kontakt:</strong><br>
-                    E-Mail: julian@m-fleger.de
+                    <strong class="text-slate-900">Kontakt & E-Mail-Postfächer:</strong><br>
+                    Allgemeiner Kontakt: <a href="mailto:kontakt@m-fleger.de" class="text-blue-600 hover:underline">kontakt@m-fleger.de</a><br>
+                    Allgemeine Fragen: <a href="mailto:info@m-fleger.de" class="text-blue-600 hover:underline">info@m-fleger.de</a><br>
+                    Redaktion & Themen: <a href="mailto:redaktion@m-fleger.de" class="text-blue-600 hover:underline">redaktion@m-fleger.de</a><br>
+                    Presse & Quellen: <a href="mailto:presse@m-fleger.de" class="text-blue-600 hover:underline">presse@m-fleger.de</a>
                 </p>
             </section>
 
@@ -89,7 +92,21 @@ title: Datenschutz
             <hr class="border-slate-200/60">
 
             <section>
-                <h2 class="text-2xl font-black mb-3 text-slate-900">5. Cookies und LocalStorage</h2>
+                <h2 class="text-2xl font-black mb-3 text-slate-900">5. Kontaktformular (Formspree)</h2>
+                <p class="leading-relaxed mb-4 text-slate-600">
+                    Wenn du uns über das Kontaktformular Anfragen zukommen lässt, werden deine Angaben aus dem Formular inklusive der von dir dort angegebenen Kontaktdaten zwecks Bearbeitung der Anfrage und für den Fall von Anschlussfragen verarbeitet.
+                </p>
+                <div class="p-4 rounded-xl text-sm space-y-2 bg-blue-50/80 border border-blue-200/80 text-blue-900">
+                    <p><strong>Dienstleister:</strong> Für die Übermittlung und das Mailing von Formulareingaben nutzen wir den Dienst <strong>Formspree</strong> (Formspree Inc., 2228 E Cesar Chavez St, Austin, TX 78702, USA).</p>
+                    <p><strong>Zweck:</strong> Die Daten werden ausschließlich zur Bearbeitung und Beantwortung deiner Kontaktaufnahme verwendet.</p>
+                    <p><strong>Rechtsgrundlage:</strong> Die Verarbeitung basiert auf deiner Einwilligung (Art. 6 Abs. 1 lit. a DSGVO) sowie unserem berechtigten Interesse an einer effizienten Bearbeitung deiner Anfrage (Art. 6 Abs. 1 lit. f DSGVO).</p>
+                </div>
+            </section>
+
+            <hr class="border-slate-200/60">
+
+            <section>
+                <h2 class="text-2xl font-black mb-3 text-slate-900">6. Cookies und LocalStorage</h2>
                 <p class="leading-relaxed mb-4 text-slate-600">
                     Diese Website nutzt Speichermedien im Browser, um grundlegende Funktionen bereitzustellen und deine Privatsphäre-Einstellungen zu sichern.
                 </p>
@@ -105,7 +122,7 @@ title: Datenschutz
             <hr class="border-slate-200/60">
 
             <section>
-                <h2 class="text-2xl font-black mb-3 text-slate-900">6. Webanalyse (Google Analytics 4)</h2>
+                <h2 class="text-2xl font-black mb-3 text-slate-900">7. Webanalyse (Google Analytics 4)</h2>
                 <p class="leading-relaxed mb-4 text-slate-600">
                     Diese Website nutzt Google Analytics 4, einen Webanalysedienst der Google Ireland Limited, Gordon House, Barrow Street, Dublin 4, Irland („Google“). 
                 </p>
@@ -121,7 +138,7 @@ title: Datenschutz
             <hr class="border-slate-200/60">
 
             <section>
-                <h2 class="text-2xl font-black mb-3 text-slate-900">7. Dein Recht auf Löschung ("Recht auf Vergessenwerden")</h2>
+                <h2 class="text-2xl font-black mb-3 text-slate-900">8. Dein Recht auf Löschung ("Recht auf Vergessenwerden")</h2>
                 <p class="leading-relaxed mb-4 text-slate-600">
                     Du hast jederzeit die volle Kontrolle über deine Daten. Du hast das Recht, Auskunft über deine gespeicherten Daten zu erhalten, diese zu korrigieren oder komplett löschen zu lassen.
                 </p>
@@ -133,7 +150,7 @@ title: Datenschutz
             <hr class="border-slate-200/60">
 
             <section>
-                <h2 class="text-2xl font-black mb-3 text-slate-900">8. Hosting der Website</h2>
+                <h2 class="text-2xl font-black mb-3 text-slate-900">9. Hosting der Website</h2>
                 <p class="leading-relaxed text-slate-600">
                     Diese Website wird über <strong>GitHub Pages</strong> (GitHub Inc., 88 Colin P Kelly Jr St, San Francisco, CA 94107, USA) gehostet. Beim Aufruf der Seite werden automatisch Logfiles (u.a. IP-Adresse des Aufrufers) durch GitHub verarbeitet, um die Sicherheit und Stabilität des Dienstes zu gewährleisten.
                 </p>
