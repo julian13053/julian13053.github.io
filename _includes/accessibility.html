@@ -1,0 +1,53 @@
+<!-- Schwebender Barrierefreiheit-Button (Unten Links) -->
+<div class="fixed bottom-5 left-5 z-50 flex flex-col gap-3 no-print">
+    <button onclick="toggleAccessibilityMenu()" 
+            aria-label="Barrierefreiheit Menü öffnen"
+            class="w-11 h-11 rounded-full bg-blue-600 text-white flex items-center justify-center shadow-lg hover:scale-110 transition-transform duration-200 border border-blue-400/50 cursor-pointer">
+        <svg class="w-5 h-5" fill="currentColor" viewBox="0 0 24 24">
+            <path d="M12 2a2 2 0 1 0 0 4 2 2 0 0 0 0-4zm8 7h-5v12h-2v-6h-2v6H9V9H4V7h16v2z"/>
+        </svg>
+    </button>
+</div>
+
+<!-- Barrierefreiheits-Popup -->
+<div id="accessibility-menu" class="hidden fixed bottom-20 left-5 z-50 p-6 rounded-3xl liquid-glass bg-white/95 shadow-2xl border border-slate-200/80 max-w-xs w-full text-slate-800 space-y-4 backdrop-blur-md">
+    <div class="flex justify-between items-center border-b border-slate-200 pb-2">
+        <h3 class="font-bold text-sm flex items-center gap-2">♿ Barrierefreiheit</h3>
+        <button onclick="toggleAccessibilityMenu()" class="text-slate-400 hover:text-slate-700 text-sm font-bold cursor-pointer">✕</button>
+    </div>
+    
+    <div class="space-y-2 text-xs">
+        <button onclick="adjustFontSize(1)" class="w-full text-left px-3 py-2.5 rounded-xl bg-slate-100 hover:bg-slate-200 font-semibold transition-colors flex justify-between items-center cursor-pointer">
+            <span>Schrift vergrößern</span>
+            <span class="text-[10px] bg-slate-200 px-2 py-0.5 rounded font-bold">A+</span>
+        </button>
+        <button onclick="adjustFontSize(-1)" class="w-full text-left px-3 py-2.5 rounded-xl bg-slate-100 hover:bg-slate-200 font-semibold transition-colors flex justify-between items-center cursor-pointer">
+            <span>Schrift verkleinern</span>
+            <span class="text-[10px] bg-slate-200 px-2 py-0.5 rounded font-bold">A-</span>
+        </button>
+        <button onclick="toggleHighContrast()" class="w-full text-left px-3 py-2.5 rounded-xl bg-slate-100 hover:bg-slate-200 font-semibold transition-colors flex justify-between items-center cursor-pointer">
+            <span>Hoher Kontrast / Schwarz-Weiß</span>
+            <span class="text-[10px] bg-slate-200 px-2 py-0.5 rounded font-bold">☯</span>
+        </button>
+    </div>
+</div>
+
+<script>
+    function toggleAccessibilityMenu() {
+        const menu = document.getElementById('accessibility-menu');
+        menu.classList.toggle('hidden');
+    }
+
+    let currentZoom = 100;
+    function adjustFontSize(direction) {
+        currentZoom += direction * 10;
+        if (currentZoom < 90) currentZoom = 90;
+        if (currentZoom > 140) currentZoom = 140;
+        document.body.style.zoom = currentZoom + "%";
+    }
+
+    function toggleHighContrast() {
+        document.body.classList.toggle('grayscale');
+        document.body.classList.toggle('contrast-125');
+    }
+</script>
