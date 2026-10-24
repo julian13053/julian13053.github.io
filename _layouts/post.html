@@ -4,245 +4,232 @@ layout: null
 <!DOCTYPE html>
 <html lang="de">
 <head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>{{ page.title }} - M-Fleger</title>
-    
-    <link rel="stylesheet" href="/style.css">
-    
-    <script src="https://cdn.jsdelivr.net/npm/@tailwindcss/browser@4"></script>
-    <script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script>
-    
-    <style>
-        .blog-text, .blog-text p, .blog-text span {
-            color: #1f2937 !important; 
-            opacity: 1 !important;
-        }
-        .print-header { display: none; }
-        @media print {
-            nav, footer, .no-print, #cookie-banner, .fixed, .liquid-glass { 
-                background: white !important; 
-                box-shadow: none !important; 
-                border: none !important;
-                backdrop-filter: none !important;
-                -webkit-backdrop-filter: none !important;
-            }
-            nav, footer, .no-print, #cookie-banner, .fixed { display: none !important; }
-            .print-header { display: flex !important; justify-content: space-between; align-items: center; width: 100%; padding-bottom: 8px; border-bottom: 1px solid #d1d5db; margin-bottom: 25px; font-family: sans-serif; }
-            .print-header-left { font-size: 14px; font-weight: 700; color: #1d4ed8; }
-            .print-header-right { font-size: 14px; font-weight: 600; color: #374151; }
-            .blog-text, .blog-text p { color: #000000 !important; }
-            .author-note { color: #374151 !important; margin-top: 24px !important; font-weight: 600 !important; }
-            header.bg-gradient-to-r { background: white !important; background-image: none !important; color: #000000 !important; padding-top: 10px !important; padding-bottom: 15px !important; border-bottom: 1px solid #e5e7eb; }
-            header h1 { color: #0f172a !important; font-size: 26px !important; font-weight: 800 !important; }
-            header span { color: #4b5563 !important; font-weight: 600 !important; }
-            header div.border-b { border-color: #e5e7eb !important; }
-            body { background-color: white !important; }
-            main { margin-top: 0 !important; padding: 0 !important; }
-            article { border: none !important; box-shadow: none !important; padding: 0 !important; }
-        }
-    </style>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>{{ page.title }} - M-Fleger</title>
+    
+    <link rel="stylesheet" href="/style.css">
+    
+    <script src="https://cdn.jsdelivr.net/npm/@tailwindcss/browser@4"></script>
+    <script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script>
+    
+    <style>
+        .blog-text, .blog-text p, .blog-text span {
+            color: #1f2937 !important; 
+            opacity: 1 !important;
+        }
+        .print-header { display: none; }
+        @media print {
+            nav, footer, .no-print, #cookie-banner, .fixed, .liquid-glass { 
+                background: white !important; 
+                box-shadow: none !important; 
+                border: none !important;
+                backdrop-filter: none !important;
+                -webkit-backdrop-filter: none !important;
+            }
+            nav, footer, .no-print, #cookie-banner, .fixed { display: none !important; }
+            .print-header { display: flex !important; justify-content: space-between; align-items: center; width: 100%; padding-bottom: 8px; border-bottom: 1px solid #d1d5db; margin-bottom: 25px; font-family: sans-serif; }
+            .print-header-left { font-size: 14px; font-weight: 700; color: #1d4ed8; }
+            .print-header-right { font-size: 14px; font-weight: 600; color: #374151; }
+            .blog-text, .blog-text p { color: #000000 !important; }
+            .author-note { color: #374151 !important; margin-top: 24px !important; font-weight: 600 !important; }
+            header.bg-gradient-to-r { background: white !important; background-image: none !important; color: #000000 !important; padding-top: 10px !important; padding-bottom: 15px !important; border-bottom: 1px solid #e5e7eb; }
+            header h1 { color: #0f172a !important; font-size: 26px !important; font-weight: 800 !important; }
+            header span { color: #4b5563 !important; font-weight: 600 !important; }
+            header div.border-b { border-color: #e5e7eb !important; }
+            body { background-color: white !important; }
+            main { margin-top: 0 !important; padding: 0 !important; }
+            article { border: none !important; box-shadow: none !important; padding: 0 !important; }
+        }
+    </style>
 </head>
 <body class="text-gray-900 font-sans antialiased flex flex-col min-h-screen relative">
 
-    <div id="custom-banner" class="fixed top-24 right-4 z-50 transform translate-x-full opacity-0 transition-all duration-300 ease-out max-w-sm w-full bg-white border shadow-xl rounded-2xl p-4 flex items-start gap-3">
-        <span id="banner-icon" class="text-xl"></span>
-        <div class="flex-grow">
-            <h4 id="banner-title" class="font-bold text-sm text-gray-900"></h4>
-            <p id="banner-message" class="text-xs text-gray-600 mt-0.5"></p>
-        </div>
-    </div>
+    <div id="custom-banner" class="fixed top-24 right-4 z-50 transform translate-x-full opacity-0 transition-all duration-300 ease-out max-w-sm w-full bg-white border shadow-xl rounded-2xl p-4 flex items-start gap-3">
+        <span id="banner-icon" class="text-xl"></span>
+        <div class="flex-grow">
+            <h4 id="banner-title" class="font-bold text-sm text-gray-900"></h4>
+            <p id="banner-message" class="text-xs text-gray-600 mt-0.5"></p>
+        </div>
+    </div>
 
-    <div class="print-header max-w-4xl mx-auto w-full px-4">
-        <span class="print-header-left">M-Fleger</span>
-        <span class="print-header-right">m-fleger.de</span>
-    </div>
+    <div class="print-header max-w-4xl mx-auto w-full px-4">
+        <span class="print-header-left">M-Fleger</span>
+        <span class="print-header-right">m-fleger.de</span>
+    </div>
 
-    <nav class="bg-white border-b border-gray-100 sticky top-0 z-50 shadow-xs no-print">
-        <div class="max-w-6xl mx-auto px-4 py-4 flex flex-col md:flex-row justify-between items-center gap-4">
-            <a href="/index.html" class="flex items-center gap-3 group no-underline text-current">
-                <img src="/auge-logo.jpg" alt="M-Fleger Logo" class="w-16 h-14 md:w-24 md:h-20 rounded-xl md:rounded-2xl object-contain">
-                <span class="text-2xl md:text-3xl font-black tracking-tight text-blue-600">M-Fleger</span>
-            </a>
-            <div class="flex flex-wrap justify-center gap-x-5 gap-y-2 font-semibold text-gray-600 text-base md:text-lg">
-                <a href="/index.html" class="hover:text-blue-600 hover:border-b-2 hover:border-blue-600 pb-1 no-underline">Startseite</a>
-                <a href="/ueber-mich.html" class="hover:text-blue-600 hover:border-b-2 hover:border-blue-600 pb-1 no-underline">Über mich</a>
-                <a href="/blog.html" class="text-blue-600 border-b-2 border-blue-600 pb-1 no-underline">Blog</a>
-                <a href="/kontakt.html" class="hover:text-blue-600 hover:border-b-2 hover:border-blue-600 pb-1 no-underline">Kontakt</a>
-                <a href="/profil.html" class="hover:text-blue-600 hover:border-b-2 hover:border-blue-600 pb-1 no-underline">👤 Mein Profil</a>
-            </div>
-        </div>
-    </nav>
+    <!-- Navigationsleiste aus _includes/navigation.html -->
+    {% include navigation.html %}
 
-    <header class="bg-gradient-to-r from-blue-900 via-indigo-900 to-blue-950 text-white text-center py-16 px-4">
-        <div class="max-w-4xl mx-auto flex flex-col items-center">
-            <h1 class="text-3xl md:text-5xl font-black tracking-tight drop-shadow-md mb-4">
-                {{ page.title }}
-            </h1>
-            <div class="flex flex-col items-center gap-1 text-xs md:text-sm text-gray-300/90 font-medium w-full max-w-xs">
-                <span>Datum: {{ page.date | date: "%d.%m.%Y" }}</span>
-                <span>Schnellleser: ca. 1 Min. Lesezeit</span>
-                <div class="w-full border-b border-white/20 mt-3"></div>
-            </div>
-        </div>
-    </header>
+    <header class="bg-gradient-to-r from-blue-900 via-indigo-900 to-blue-950 text-white text-center py-16 px-4">
+        <div class="max-w-4xl mx-auto flex flex-col items-center">
+            <h1 class="text-3xl md:text-5xl font-black tracking-tight drop-shadow-md mb-4">
+                {{ page.title }}
+            </h1>
+            <div class="flex flex-col items-center gap-1 text-xs md:text-sm text-gray-300/90 font-medium w-full max-w-xs">
+                <span>Datum: {{ page.date | date: "%d.%m.%Y" }}</span>
+                <span>Schnellleser: ca. 1 Min. Lesezeit</span>
+                <div class="w-full border-b border-white/20 mt-3"></div>
+            </div>
+        </div>
+    </header>
 
-    {% assign numeric_id = page.date | date: "%Y%m%d%H%M" %}
-    <main class="max-w-4xl mx-auto px-4 py-12 flex-grow w-full -mt-10">
-        <article class="p-8 md:p-12 liquid-glass" data-post-id="{{ numeric_id }}">
-            <div class="blog-text prose max-w-none leading-relaxed space-y-6 text-base md:text-lg">
-                {{ content }}
-            </div>
-            
-            <!-- Autorenhinweis & Feedback-Box -->
-            <div class="author-note mt-8 pt-6 border-t border-gray-200/50 space-y-3 text-sm text-gray-600 font-medium">
-                <p><strong class="text-gray-900 font-bold">Text von</strong> Julian Maximilian Fleger</p>
-                <p class="leading-relaxed bg-white/60 p-4 rounded-2xl border border-gray-200/60 shadow-xs">
-                    Hast du Anmerkungen zum Artikel, möchtest uns auf einen Fehler hinweisen oder hast Fragen zu den verwendeten Quellen? Schreibe unserer Redaktion gerne direkt an <a href="mailto:redaktion@m-fleger.de" class="text-blue-600 font-bold hover:underline">redaktion@m-fleger.de</a> oder wende dich bei Presseanfragen an <a href="mailto:presse@m-fleger.de" class="text-blue-600 font-bold hover:underline">presse@m-fleger.de</a>.
-                </p>
-            </div>
-            
-            <div class="mt-6 pt-6 border-t border-gray-200/30 flex flex-wrap gap-3 justify-start no-print">
-                <button onclick="window.print()" class="bg-gray-100 hover:bg-gray-200 text-gray-700 font-bold text-sm px-5 py-2.5 rounded-xl transition-all cursor-pointer border border-gray-200 shadow-xs active:scale-95">
-                    Artikel ausdrucken / als PDF speichern
-                </button>
-                
-                <button onclick="favoritUmschalten('{{ numeric_id }}', this)" class="fav-btn bg-white hover:bg-gray-50 text-gray-900 font-bold text-sm px-5 py-2.5 rounded-xl transition-all cursor-pointer border border-gray-200 shadow-xs active:scale-95">
-                    ⭐ Favorit
-                </button>
-            </div>
-            
-            <div class="mt-8 pt-6 border-t border-gray-200/30 flex justify-center no-print">
-                <a href="/blog.html" class="inline-flex items-center gap-2 text-sm font-bold text-blue-600 hover:text-blue-800 transition-colors no-underline">
-                    &larr; Zurück zur Blog-Übersicht
-                </a>
-            </div>
-        </article>
-    </main>
+    {% assign numeric_id = page.date | date: "%Y%m%d%H%M" %}
+    <main class="max-w-4xl mx-auto px-4 py-12 flex-grow w-full -mt-10">
+        <article class="p-8 md:p-12 liquid-glass" data-post-id="{{ numeric_id }}">
+            <div class="blog-text prose max-w-none leading-relaxed space-y-6 text-base md:text-lg">
+                {{ content }}
+            </div>
+            
+            <!-- Autorenhinweis & Feedback-Box -->
+            <div class="author-note mt-8 pt-6 border-t border-gray-200/50 space-y-3 text-sm text-gray-600 font-medium">
+                <p><strong class="text-gray-900 font-bold">Text von</strong> Julian Maximilian Fleger</p>
+                <p class="leading-relaxed bg-white/60 p-4 rounded-2xl border border-gray-200/60 shadow-xs">
+                    Hast du Anmerkungen zum Artikel, möchtest uns auf einen Fehler hinweisen oder hast Fragen zu den verwendeten Quellen? Schreibe unserer Redaktion gerne direkt an <a href="mailto:redaktion@m-fleger.de" class="text-blue-600 font-bold hover:underline">redaktion@m-fleger.de</a> oder wende dich bei Presseanfragen an <a href="mailto:presse@m-fleger.de" class="text-blue-600 font-bold hover:underline">presse@m-fleger.de</a>.
+                </p>
+            </div>
+            
+            <div class="mt-6 pt-6 border-t border-gray-200/30 flex flex-wrap gap-3 justify-start no-print">
+                <button onclick="window.print()" class="bg-gray-100 hover:bg-gray-200 text-gray-700 font-bold text-sm px-5 py-2.5 rounded-xl transition-all cursor-pointer border border-gray-200 shadow-xs active:scale-95">
+                    Artikel ausdrucken / als PDF speichern
+                </button>
+                
+                <button onclick="favoritUmschalten('{{ numeric_id }}', this)" class="fav-btn bg-white hover:bg-gray-50 text-gray-900 font-bold text-sm px-5 py-2.5 rounded-xl transition-all cursor-pointer border border-gray-200 shadow-xs active:scale-95">
+                    ⭐ Favorit
+                </button>
+            </div>
+            
+            <div class="mt-8 pt-6 border-t border-gray-200/30 flex justify-center no-print">
+                <a href="/blog.html" class="inline-flex items-center gap-2 text-sm font-bold text-blue-600 hover:text-blue-800 transition-colors no-underline">
+                    &larr; Zurück zur Blog-Übersicht
+                </a>
+            </div>
+        </article>
+    </main>
 
-    <footer class="bg-white border-t border-gray-100 py-8 px-4 text-center text-gray-500 font-medium no-print">
-        <div class="max-w-6xl mx-auto flex flex-col md:flex-row justify-between items-center gap-4">
-            <p>&copy; 2026 M-Fleger. Alle Rechte vorbehalten.</p>
-            <div class="flex flex-wrap justify-center gap-4">
-                <a href="/index.html" class="hover:text-blue-600 transition-colors no-underline">Startseite</a>
-                <a href="/ueber-mich.html" class="hover:text-blue-600 transition-colors no-underline">Über mich</a>
-                <a href="/blog.html" class="hover:text-blue-600 transition-colors no-underline">Blog</a>
-                <a href="/kontakt.html" class="hover:text-blue-600 transition-colors no-underline">Kontakt</a>
-                <a href="/impressum.html" class="hover:text-blue-600 transition-colors no-underline">Impressum</a>
-                <a href="/datenschutz.html" class="hover:text-blue-600 transition-colors no-underline">Datenschutz</a>
-            </div>
-        </div>
-    </footer>
+    <footer class="bg-white border-t border-gray-100 py-8 px-4 text-center text-gray-500 font-medium no-print">
+        <div class="max-w-6xl mx-auto flex flex-col md:flex-row justify-between items-center gap-4">
+            <p>&copy; 2026 M-Fleger. Alle Rechte vorbehalten.</p>
+            <div class="flex flex-wrap justify-center gap-4">
+                <a href="/index.html" class="hover:text-blue-600 transition-colors no-underline">Startseite</a>
+                <a href="/ueber-mich.html" class="hover:text-blue-600 transition-colors no-underline">Über mich</a>
+                <a href="/blog.html" class="hover:text-blue-600 transition-colors no-underline">Blog</a>
+                <a href="/kontakt.html" class="hover:text-blue-600 transition-colors no-underline">Kontakt</a>
+                <a href="/impressum.html" class="hover:text-blue-600 transition-colors no-underline">Impressum</a>
+                <a href="/datenschutz.html" class="hover:text-blue-600 transition-colors no-underline">Datenschutz</a>
+            </div>
+        </div>
+    </footer>
 
-    {% include cookie-banner.html %}
+    {% include cookie-banner.html %}
 
-    <script>
-        const SUPABASE_URL = "https://xxuanzhrrpwurkyjfjky.supabase.co";
-        const SUPABASE_ANON_KEY = "sb_publishable_WdzN1r5HkdnqrfIN2phV1g_-GdLlknq"; 
-        const supabaseClient = supabase.createClient(SUPABASE_URL, SUPABASE_ANON_KEY);
+    <script>
+        const SUPABASE_URL = "https://xxuanzhrrpwurkyjfjky.supabase.co";
+        const SUPABASE_ANON_KEY = "sb_publishable_WdzN1r5HkdnqrfIN2phV1g_-GdLlknq"; 
+        const supabaseClient = supabase.createClient(SUPABASE_URL, SUPABASE_ANON_KEY);
 
-        function zeigeBanner(type, title, message) {
-            const banner = document.getElementById('custom-banner');
-            const icon = document.getElementById('banner-icon');
-            const titleEl = document.getElementById('banner-title');
-            const msgEl = document.getElementById('banner-message');
+        function zeigeBanner(type, title, message) {
+            const banner = document.getElementById('custom-banner');
+            const icon = document.getElementById('banner-icon');
+            const titleEl = document.getElementById('banner-title');
+            const msgEl = document.getElementById('banner-message');
 
-            if(type === 'success') {
-                banner.className = "fixed top-24 right-4 z-50 transform transition-all duration-300 ease-out max-w-sm w-full bg-white border border-green-200 shadow-xl rounded-2xl p-4 flex items-start gap-3 text-green-800";
-                icon.innerText = "❤️";
-            } else if(type === 'info') {
-                banner.className = "fixed top-24 right-4 z-50 transform transition-all duration-300 ease-out max-w-sm w-full bg-white border border-blue-200 shadow-xl rounded-2xl p-4 flex items-start gap-3 text-blue-800";
-                icon.innerText = "ℹ️";
-            } else {
-                banner.className = "fixed top-24 right-4 z-50 transform transition-all duration-300 ease-out max-w-sm w-full bg-white border border-red-200 shadow-xl rounded-2xl p-4 flex items-start gap-3 text-red-800";
-                icon.innerText = "❌";
-            }
+            if(type === 'success') {
+                banner.className = "fixed top-24 right-4 z-50 transform transition-all duration-300 ease-out max-w-sm w-full bg-white border border-green-200 shadow-xl rounded-2xl p-4 flex items-start gap-3 text-green-800";
+                icon.innerText = "❤️";
+            } else if(type === 'info') {
+                banner.className = "fixed top-24 right-4 z-50 transform transition-all duration-300 ease-out max-w-sm w-full bg-white border border-blue-200 shadow-xl rounded-2xl p-4 flex items-start gap-3 text-blue-800";
+                icon.innerText = "ℹ️";
+            } else {
+                banner.className = "fixed top-24 right-4 z-50 transform transition-all duration-300 ease-out max-w-sm w-full bg-white border border-red-200 shadow-xl rounded-2xl p-4 flex items-start gap-3 text-red-800";
+                icon.innerText = "❌";
+            }
 
-            titleEl.innerText = title;
-            msgEl.innerText = message;
-            banner.classList.remove('translate-x-full', 'opacity-0');
-            
-            setTimeout(() => {
-                banner.classList.add('translate-x-full', 'opacity-0');
-            }, 4000);
-        }
+            titleEl.innerText = title;
+            msgEl.innerText = message;
+            banner.classList.remove('translate-x-full', 'opacity-0');
+            
+            setTimeout(() => {
+                banner.classList.add('translate-x-full', 'opacity-0');
+            }, 4000);
+        }
 
-        async function checkFavoritesOnLoad() {
-            try {
-                const { data: { user } } = await supabaseClient.auth.getUser();
-                if (user) {
-                    const { data: favoriten, error } = await supabaseClient
-                        .from('favoriten')
-                        .select('blog_id')
-                        .eq('user_id', user.id);
+        async function checkFavoritesOnLoad() {
+            try {
+                const { data: { user } } = await supabaseClient.auth.getUser();
+                if (user) {
+                    const { data: favoriten, error } = await supabaseClient
+                        .from('favoriten')
+                        .select('blog_id')
+                        .eq('user_id', user.id);
 
-                    if (!error && favoriten) {
-                        const favIds = new Set(favoriten.map(f => f.blog_id.toString()));
-                        const article = document.querySelector('article[data-post-id]');
-                        if (article) {
-                            const postId = article.getAttribute('data-post-id');
-                            if (favIds.has(postId)) {
-                                const btn = article.querySelector('.fav-btn');
-                                if (btn) {
-                                    btn.innerHTML = "❤️ Favorisiert";
-                                    btn.classList.remove('bg-white', 'text-gray-900', 'border-gray-200');
-                                    btn.classList.add('bg-red-500', 'text-white', 'border-red-500');
-                                }
-                            }
-                        }
-                    }
-                }
-            } catch (err) { console.error(err); }
-        }
+                    if (!error && favoriten) {
+                        const favIds = new Set(favoriten.map(f => f.blog_id.toString()));
+                        const article = document.querySelector('article[data-post-id]');
+                        if (article) {
+                            const postId = article.getAttribute('data-post-id');
+                            if (favIds.has(postId)) {
+                                const btn = article.querySelector('.fav-btn');
+                                if (btn) {
+                                    btn.innerHTML = "❤️ Favorisiert";
+                                    btn.classList.remove('bg-white', 'text-gray-900', 'border-gray-200');
+                                    btn.classList.add('bg-red-500', 'text-white', 'border-red-500');
+                                }
+                            }
+                        }
+                    }
+                }
+            } catch (err) { console.error(err); }
+        }
 
-        async function favoritUmschalten(blogId, button) {
-            try {
-                const { data: { user } } = await supabaseClient.auth.getUser();
+        async function favoritUmschalten(blogId, button) {
+            try {
+                const { data: { user } } = await supabaseClient.auth.getUser();
 
-                if (!user) {
-                    window.location.href = "/anmeldung-erforderlich.html";
-                    return; 
-                }
+                if (!user) {
+                    window.location.href = "/anmeldung-erforderlich.html";
+                    return; 
+                }
 
-                const { data: existiert } = await supabaseClient
-                    .from('favoriten')
-                    .select('*')
-                    .eq('user_id', user.id)
-                    .eq('blog_id', blogId);
+                const { data: existiert } = await supabaseClient
+                    .from('favoriten')
+                    .select('*')
+                    .eq('user_id', user.id)
+                    .eq('blog_id', blogId);
 
-                if (existiert && existiert.length > 0) {
-                    const { error } = await supabaseClient
-                        .from('favoriten')
-                        .delete()
-                        .eq('user_id', user.id)
-                        .eq('blog_id', blogId);
+                if (existiert && existiert.length > 0) {
+                    const { error } = await supabaseClient
+                        .from('favoriten')
+                        .delete()
+                        .eq('user_id', user.id)
+                        .eq('blog_id', blogId);
 
-                    if (!error) {
-                        button.innerHTML = "⭐ Favorit";
-                        button.classList.remove('bg-red-500', 'text-white', 'border-red-500');
-                        button.classList.add('bg-white', 'text-gray-900', 'border-gray-200');
-                        zeigeBanner('info', 'Entfernt', 'Der Artikel wurde aus deinen Favoriten gelöscht.');
-                    } else {
-                        zeigeBanner('error', 'Fehler', error.message);
-                    }
-                } else {
-                    const { error } = await supabaseClient
-                        .from('favoriten')
-                        .insert([{ user_id: user.id, blog_id: blogId }]);
+                    if (!error) {
+                        button.innerHTML = "⭐ Favorit";
+                        button.classList.remove('bg-red-500', 'text-white', 'border-red-500');
+                        button.classList.add('bg-white', 'text-gray-900', 'border-gray-200');
+                        zeigeBanner('info', 'Entfernt', 'Der Artikel wurde aus deinen Favoriten gelöscht.');
+                    } else {
+                        zeigeBanner('error', 'Fehler', error.message);
+                    }
+                } else {
+                    const { error } = await supabaseClient
+                        .from('favoriten')
+                        .insert([{ user_id: user.id, blog_id: blogId }]);
 
-                    if (!error) {
-                        button.innerHTML = "❤️ Favorisiert";
-                        button.classList.remove('bg-white', 'text-gray-900', 'border-gray-200');
-                        button.classList.add('bg-red-500', 'text-white', 'border-red-500');
-                        zeigeBanner('success', 'Favorisiert!', 'Gespeichert. Du findest den Artikel in deinem Profil.');
-                    } else {
-                        zeigeBanner('error', 'Fehler beim Speichern', error.message);
-                    }
-                }
-            } catch (err) { zeigeBanner('error', 'Fehler', err.message); }
-        }
+                    if (!error) {
+                        button.innerHTML = "❤️ Favorisiert";
+                        button.classList.remove('bg-red-500', 'text-white', 'border-red-500');
+                        button.classList.add('bg-red-500', 'text-white', 'border-red-500');
+                        zeigeBanner('success', 'Favorisiert!', 'Gespeichert. Du findest den Artikel in deinem Profil.');
+                    } else {
+                        zeigeBanner('error', 'Fehler beim Speichern', error.message);
+                    }
+                }
+            } catch (err) { zeigeBanner('error', 'Fehler', err.message); }
+        }
 
-        document.addEventListener("DOMContentLoaded", checkFavoritesOnLoad);
-    </script>
+        document.addEventListener("DOMContentLoaded", checkFavoritesOnLoad);
+    </script>
 </body>
 </html>
