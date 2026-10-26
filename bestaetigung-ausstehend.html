@@ -1,0 +1,58 @@
+---
+layout: null
+---
+<!DOCTYPE html>
+<html lang="de">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>E-Mail-Bestätigung ausstehend - M-Fleger</title>
+    
+    <link rel="stylesheet" href="/style.css">
+    <script src="https://cdn.jsdelivr.net/npm/@tailwindcss/browser@4"></script>
+</head>
+<body class="text-gray-900 font-sans antialiased bg-slate-50 min-h-screen flex flex-col justify-between">
+
+    <!-- Navigationsleiste aus _includes/navigation.html -->
+    {% include navigation.html %}
+
+    <!-- Hauptinhalt der Bestätigungsseite -->
+    <main class="flex-grow flex items-center justify-center px-4 py-16">
+        <div class="p-8 md:p-12 rounded-3xl liquid-glass bg-white/90 shadow-xl border border-slate-200/80 max-w-lg w-full text-center space-y-6">
+            
+            <div class="text-5xl animate-bounce">📩</div>
+            
+            <h1 class="text-2xl md:text-3xl font-black text-slate-900 tracking-tight">
+                Fast geschafft!
+            </h1>
+            
+            <p class="text-slate-600 text-sm md:text-base leading-relaxed">
+                Wir haben dir soeben eine Bestätigungs-E-Mail geschickt. Bitte öffne dein Postfach und klicke auf den enthaltenen Link, um deine E-Mail-Adresse zu bestätigen.
+            </p>
+
+            <div class="p-4 rounded-2xl bg-blue-50 border border-blue-100 text-blue-900 text-xs text-left space-y-2">
+                <p class="font-bold flex items-center gap-1.5 text-blue-950">
+                    <span>💡</span> Wichtiger Hinweis:
+                </p>
+                <p class="text-blue-800 leading-relaxed">
+                    Falls du nach 1–2 Minuten noch keine E-Mail im Posteingang siehst, wirf bitte einen kurzen Blick in deinen <strong>Spam- / Junk-E-Mail-Ordner</strong>.
+                </p>
+            </div>
+
+            <div class="pt-2">
+                <a href="/" class="inline-flex items-center justify-center py-3.5 px-6 rounded-xl bg-blue-600 hover:bg-blue-700 text-white font-bold text-xs transition-all shadow-md active:scale-95 no-underline">
+                    Zurück zur Startseite
+                </a>
+            </div>
+
+        </div>
+    </main>
+
+    <!-- Footer -->
+    <footer class="bg-white border-t border-gray-100 py-6 text-center text-xs text-gray-500 no-print">
+        &copy; 2026 M-Fleger. Alle Rechte vorbehalten.
+    </footer>
+
+    {% include accessibility.html %}
+</body>
+</html>
