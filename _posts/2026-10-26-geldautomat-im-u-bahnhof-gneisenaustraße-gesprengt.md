@@ -18,12 +18,9 @@ categories:
 
 Am U-Bahnhof Gneisenaustraße wurde in der Nacht zum Montag ein Geldautomat gesprengt. Das teilte die Polizei mit. Demnach haben Unbekannte zunächst eine Überwachungskamera mit Farbe besprüht, um sie zu verdunkeln. Anschließend sollen sie den Automaten gesprengt haben. Den Angaben zufolge musste der U-Bahnhof am Montagmorgen zwischenzeitlich gesperrt werden, die Züge der Linie U7 fuhren ohne Halt durch. Erst ab etwa 7 Uhr konnten die Bahnen wieder an der Gneisenaustraße halten.
 
-## 
-**Erbeutete Summe noch unklar**
+**Erbeutete Summe noch unklar.**
 
 Die mutmaßlichen Täter sollen den freistehenden Geldautomaten gesprengt haben, indem sie Gas einleiteten und ihn damit anschließend zur Explosion brachten. Der Automat sei dabei "erheblich" beschädigt worden, ob Geld entwendet wurde, sei noch unklar, hieß es.
-
-
 
 Quelle: [rbb24](rbb24.de)
 
