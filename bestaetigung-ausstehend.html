@@ -10,10 +10,14 @@ layout: null
     
     <link rel="stylesheet" href="/style.css">
     <script src="https://cdn.jsdelivr.net/npm/@tailwindcss/browser@4"></script>
+    <link rel="stylesheet" href="https://sibforms.com/forms/end-form/build/sib-styles.css">
+    <style>
+      :where(.sib-form-message-panel) { display: none; }
+    </style>
 </head>
 <body class="text-gray-900 font-sans antialiased bg-slate-50 min-h-screen flex flex-col justify-between">
 
-    <!-- Navigationsleiste aus _includes/navigation.html -->
+    <!-- Navigationsleiste -->
     {% include navigation.html %}
 
     <!-- Hauptinhalt der Bestätigungsseite -->
@@ -30,17 +34,47 @@ layout: null
                 Wir haben dir soeben eine Bestätigungs-E-Mail geschickt. Bitte öffne dein Postfach und klicke auf den enthaltenen Link, um deine E-Mail-Adresse zu bestätigen.
             </p>
 
+            <!-- Hinweis-Box -->
             <div class="p-4 rounded-2xl bg-blue-50 border border-blue-100 text-blue-900 text-xs text-left space-y-2">
                 <p class="font-bold flex items-center gap-1.5 text-blue-950">
                     <span>💡</span> Wichtiger Hinweis:
                 </p>
                 <p class="text-blue-800 leading-relaxed">
-                    Falls du nach 1–2 Minuten noch keine E-Mail im Posteingang siehst, wirf bitte einen kurzen Blick in deinen <strong>Spam- / Junk-E-Mail-Ordner</strong>.
+                    Falls du nach 1–2 Minuten noch keine E-Mail siehst, wirf bitte einen Blick in deinen <strong>Spam- / Junk-E-Mail-Ordner</strong>.
                 </p>
             </div>
 
+            <!-- E-Mail erneut anfordern Bereich -->
+            <div class="pt-4 border-t border-slate-200/60 text-left space-y-3">
+                <p class="text-xs font-bold text-slate-700 text-center">Keine E-Mail angekommen?</p>
+
+                <div id="sib-form-container">
+                    <!-- Erfolgsmeldung -->
+                    <div id="success-message" class="sib-form-message-panel mb-3 p-3 rounded-xl bg-green-50 text-green-800 text-xs border border-green-200 text-center hidden">
+                        <span class="sib-form-message-panel__inner-text">
+                            Eine neue Bestätigungs-E-Mail wurde verschickt!
+                        </span>
+                    </div>
+
+                    <!-- Brevo Formular zum erneuten Senden -->
+                    <form id="sib-form" method="POST" action="https://4045d026.sibforms.com/serve/MUIFAMsY5JYzYR_jlhEGRPMpfn3bFuM-yZZqoJV_0qxCtPWpBU_OBe8WxODj-_vbmc2z-DuX8ZbFcVLKBL0BLceViajIibGAFMPYpUt3PT0dYaftWAAbIUvRQHS3lD9o0rlbMKl-xeXP6m8dhtmJxE-g4B91nBIbTrOHEihQ0voTEfUnXbueZ9Zl8lQzFvYDa_M7Q78Xggkoa1gFJg==" data-type="subscription" class="flex flex-col sm:flex-row gap-2">
+                        <input type="email" id="EMAIL" name="EMAIL" autocomplete="off" placeholder="Deine E-Mail-Adresse" required 
+                               class="w-full px-4 py-2.5 rounded-xl bg-slate-100 border border-slate-200 text-xs text-slate-800 focus:outline-none focus:border-blue-600 focus:bg-white transition-all">
+                        
+                        <button type="submit" form="sib-form" 
+                                class="py-2.5 px-4 rounded-xl bg-slate-800 hover:bg-slate-900 text-white font-bold text-xs transition-all shadow-md active:scale-95 cursor-pointer whitespace-nowrap">
+                            Erneut senden
+                        </button>
+
+                        <input type="text" name="email_address_check" value="" class="hidden">
+                        <input type="hidden" name="locale" value="de">
+                    </form>
+                </div>
+            </div>
+
+            <!-- Button zurück zur Startseite -->
             <div class="pt-2">
-                <a href="/" class="inline-flex items-center justify-center py-3.5 px-6 rounded-xl bg-blue-600 hover:bg-blue-700 text-white font-bold text-xs transition-all shadow-md active:scale-95 no-underline">
+                <a href="/" class="inline-flex items-center justify-center py-3 px-6 rounded-xl bg-blue-600 hover:bg-blue-700 text-white font-bold text-xs transition-all shadow-md active:scale-95 no-underline">
                     Zurück zur Startseite
                 </a>
             </div>
@@ -54,5 +88,15 @@ layout: null
     </footer>
 
     {% include accessibility.html %}
+
+    <!-- Brevo Skripte für die Erneut-Senden-Funktion -->
+    <script>
+      window.REQUIRED_CODE_ERROR_MESSAGE = 'Wähle bitte eine Ländervorwahl aus.';
+      window.LOCALE = 'de';
+      window.EMAIL_INVALID_MESSAGE = window.SMS_INVALID_MESSAGE = "Die E-Mail-Adresse ist nicht gültig.";
+      window.REQUIRED_ERROR_MESSAGE = "Dieses Feld darf nicht leer sein.";
+      window.GENERIC_INVALID_MESSAGE = "Die Eingabe ist nicht gültig.";
+    </script>
+    <script defer src="https://sibforms.com/forms/end-form/build/main.js"></script>
 </body>
 </html>
