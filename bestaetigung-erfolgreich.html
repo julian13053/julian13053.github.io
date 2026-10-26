@@ -1,0 +1,56 @@
+---
+layout: null
+---
+<!DOCTYPE html>
+<html lang="de">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Anmeldung erfolgreich - M-Fleger</title>
+    
+    <link rel="stylesheet" href="/style.css">
+    <script src="https://cdn.jsdelivr.net/npm/@tailwindcss/browser@4"></script>
+</head>
+<body class="text-gray-900 font-sans antialiased bg-slate-50 min-h-screen flex flex-col justify-between">
+
+    <!-- Navigationsleiste -->
+    {% include navigation.html %}
+
+    <!-- Hauptinhalt der Erfolgsseite -->
+    <main class="flex-grow flex items-center justify-center px-4 py-16">
+        <div class="p-8 md:p-12 rounded-3xl liquid-glass bg-white/90 shadow-xl border border-slate-200/80 max-w-lg w-full text-center space-y-6">
+            
+            <div class="text-5xl animate-bounce">🎉</div>
+            
+            <h1 class="text-2xl md:text-3xl font-black text-slate-900 tracking-tight">
+                E-Mail erfolgreich bestätigt!
+            </h1>
+            
+            <p class="text-slate-600 text-sm md:text-base leading-relaxed">
+                Vielen Dank! Deine E-Mail-Adresse wurde erfolgreich aktiviert. Ab sofort verpasst du keinen neuen Beitrag von Julian mehr.
+            </p>
+
+            <div class="p-4 rounded-2xl bg-green-50 border border-green-100 text-green-900 text-xs text-center">
+                <p class="font-bold text-green-950">Alles erledigt!</p>
+                <p class="text-green-800">Du musst nichts weiter tun.</p>
+            </div>
+
+            <!-- Button zurück zur Startseite oder zum Blog -->
+            <div class="pt-4 flex flex-col sm:flex-row gap-3 justify-center">
+                <a href="/" class="inline-flex items-center justify-center py-3 px-6 rounded-xl bg-blue-600 hover:bg-blue-700 text-white font-bold text-xs transition-all shadow-md active:scale-95 no-underline">
+                    Zur Startseite
+                </a>
+                <a href="/blog" class="inline-flex items-center justify-center py-3 px-6 rounded-xl bg-slate-100 hover:bg-slate-200 text-slate-800 font-bold text-xs transition-all no-underline">
+                    Beiträge lesen
+                </a>
+            </div>
+
+        </div>
+    </main>
+
+    <!-- Fußzeile -->
+    {% include footer.html %}
+
+    {% include accessibility.html %}
+</body>
+</html>
