@@ -40,11 +40,11 @@ layout: null
                     <span>💡</span> Wichtiger Hinweis:
                 </p>
                 <p class="text-blue-800 leading-relaxed">
-                    Falls du nach 1–2 Minuten noch keine E-Mail siehst, wirf bitte einen Blick in deinen <strong>Spam- / Junk-E-Mail-Ordner</strong>.
+                    Falls du nach 1–2 Minuten noch keine E-Mail siehst, wirf bitte einen kurzen Blick in deinen <strong>Spam- / Junk-E-Mail-Ordner</strong>.
                 </p>
             </div>
 
-            <!-- E-Mail erneut anfordern Bereich -->
+            <!-- E-Mail erneut anfordern -->
             <div class="pt-4 border-t border-slate-200/60 text-left space-y-3">
                 <p class="text-xs font-bold text-slate-700 text-center">Keine E-Mail angekommen?</p>
 
@@ -56,7 +56,7 @@ layout: null
                         </span>
                     </div>
 
-                    <!-- Brevo Formular zum erneuten Senden -->
+                    <!-- Brevo-Formular für den Erneut-Senden-Mechanismus -->
                     <form id="sib-form" method="POST" action="https://4045d026.sibforms.com/serve/MUIFAMsY5JYzYR_jlhEGRPMpfn3bFuM-yZZqoJV_0qxCtPWpBU_OBe8WxODj-_vbmc2z-DuX8ZbFcVLKBL0BLceViajIibGAFMPYpUt3PT0dYaftWAAbIUvRQHS3lD9o0rlbMKl-xeXP6m8dhtmJxE-g4B91nBIbTrOHEihQ0voTEfUnXbueZ9Zl8lQzFvYDa_M7Q78Xggkoa1gFJg==" data-type="subscription" class="flex flex-col sm:flex-row gap-2">
                         <input type="email" id="EMAIL" name="EMAIL" autocomplete="off" placeholder="Deine E-Mail-Adresse" required 
                                class="w-full px-4 py-2.5 rounded-xl bg-slate-100 border border-slate-200 text-xs text-slate-800 focus:outline-none focus:border-blue-600 focus:bg-white transition-all">
@@ -82,14 +82,12 @@ layout: null
         </div>
     </main>
 
-    <!-- Footer -->
-    <footer class="bg-white border-t border-gray-100 py-6 text-center text-xs text-gray-500 no-print">
-        &copy; 2026 M-Fleger. Alle Rechte vorbehalten.
-    </footer>
+    <!-- Fußzeile aus _includes/footer.html -->
+    {% include footer.html %}
 
     {% include accessibility.html %}
 
-    <!-- Brevo Skripte für die Erneut-Senden-Funktion -->
+    <!-- Brevo Skripte für das erneute Senden -->
     <script>
       window.REQUIRED_CODE_ERROR_MESSAGE = 'Wähle bitte eine Ländervorwahl aus.';
       window.LOCALE = 'de';
