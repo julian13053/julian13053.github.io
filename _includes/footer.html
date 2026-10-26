@@ -9,15 +9,15 @@
                     Aktiv 🚀
                 </span>
 
-                <!-- Fehlermeldung -->
-                <div id="error-message" class="sib-form-message-panel mb-3 p-3 rounded-xl bg-red-900/40 text-red-200 text-xs border border-red-500/30 text-left hidden">
+                <!-- Fehlermeldung bei Server-/Verbindungsfehlern -->
+                <div id="error-message" class="sib-form-message-panel mb-3 p-3 rounded-xl bg-red-900/50 text-red-200 text-xs border border-red-500/40 text-left hidden">
                     <span class="sib-form-message-panel__inner-text">
                         Deine Anmeldung konnte leider nicht gespeichert werden. Bitte überprüfe deine Internetverbindung und versuche es gleich noch einmal.
                     </span>
                 </div>
 
                 <!-- Erfolgsmeldung -->
-                <div id="success-message" class="sib-form-message-panel mb-3 p-3 rounded-xl bg-green-900/40 text-green-200 text-xs border border-green-500/30 text-left hidden">
+                <div id="success-message" class="sib-form-message-panel mb-3 p-3 rounded-xl bg-green-900/50 text-green-200 text-xs border border-green-500/40 text-left hidden">
                     <span class="sib-form-message-panel__inner-text">
                         Fast geschafft! Wir haben dir eine Bestätigungs-E-Mail geschickt. Bitte klicke auf den darin enthaltenen Link, um deine E-Mail-Adresse zu aktivieren.
                     </span>
@@ -26,16 +26,26 @@
                 <!-- Formular-Inhalt -->
                 <div id="sib-container">
                     <h4 class="font-bold text-base text-white mb-1">Keinen Beitrag von Julian verpassen</h4>
-                    <p class="text-xs text-slate-300 mb-4">Erhalte eine kurze Benachrichtigung direkt in dein Postfach, sobald ein neuer Artikel erscheint. Keine Werbung, jederzeit abbestellbar.</p>
+                    <p class="text-xs text-slate-300 mb-4">
+                        Erhalte eine kurze Benachrichtigung direkt in dein Postfach, sobald ein neuer Artikel erscheint. Keine Werbung, jederzeit abbestellbar.
+                    </p>
                     
-                    <form id="sib-form" method="POST" action="https://4045d026.sibforms.com/serve/MUIFANg6FhWI-God567m5UQUdpEC0bbX8RTwzKDZX8XkbcT-SYLgQ7GWLt2l_MWEQzZU9SKyJS90Ed6uQzRz64g9yNth2bIk7YvCrc17jzca8q7yGD1kd9NmIPcKrWURDyCsE4g5T88nQXm1wOJkM4HzVXfM4y5_aH1lK8Ma62TC5VK-nSJtltUUoFGRxgkxlrfgM-urP53iewRmQQ==" data-type="subscription" class="flex gap-2">
-                        <input type="email" id="EMAIL" name="EMAIL" autocomplete="off" required placeholder="name@beispiel.de" 
-                               class="rounded-xl px-3 py-2 text-sm w-full outline-none text-white bg-white/20 border border-white/30 placeholder:text-slate-300 focus:bg-white/30 transition-all">
+                    <form id="sib-form" method="POST" action="https://4045d026.sibforms.com/serve/MUIFANg6FhWI-God567m5UQUdpEC0bbX8RTwzKDZX8XkbcT-SYLgQ7GWLt2l_MWEQzZU9SKyJS90Ed6uQzRz64g9yNth2bIk7YvCrc17jzca8q7yGD1kd9NmIPcKrWURDyCsE4g5T88nQXm1wOJkM4HzVXfM4y5_aH1lK8Ma62TC5VK-nSJtltUUoFGRxgkxlrfgM-urP53iewRmQQ==" data-type="subscription" class="flex flex-col gap-1">
                         
-                        <button type="submit" form="sib-form" 
-                                class="font-bold px-4 py-2 rounded-xl text-sm border-0 text-white bg-blue-600 hover:bg-blue-500 active:scale-95 transition-all cursor-pointer whitespace-nowrap">
-                            Anmelden
-                        </button>
+                        <div class="flex gap-2">
+                            <div class="w-full text-left">
+                                <input type="email" id="EMAIL" name="EMAIL" autocomplete="off" placeholder="name@beispiel.de" data-required="true" required 
+                                       class="input rounded-xl px-3 py-2 text-sm w-full outline-none text-white bg-white/20 border border-white/30 placeholder:text-slate-300 focus:bg-white/30 transition-all">
+                            </div>
+                            
+                            <button type="submit" form="sib-form" 
+                                    class="font-bold px-4 py-2 rounded-xl text-sm border-0 text-white bg-blue-600 hover:bg-blue-500 active:scale-95 transition-all cursor-pointer whitespace-nowrap self-start">
+                                Anmelden
+                            </button>
+                        </div>
+
+                        <!-- Brevo Feld-Fehlermeldung (z. B. leeres Feld / falsches Format) -->
+                        <label class="entry__error entry__error--primary text-[11px] text-red-300 text-left font-medium mt-1 block hidden"></label>
 
                         <input type="text" name="email_address_check" value="" class="hidden">
                         <input type="hidden" name="locale" value="de">
@@ -108,7 +118,7 @@
     </div>
 </footer>
 
-<!-- Skripte für die Brevo-Verarbeitung & Validierungsmeldungen -->
+<!-- Brevo Skripte für Validierung & Fehlermeldungen -->
 <script>
   window.REQUIRED_CODE_ERROR_MESSAGE = 'Wähle bitte eine Ländervorwahl aus.';
   window.LOCALE = 'de';
