@@ -56,8 +56,8 @@ layout: null
                         </span>
                     </div>
 
-                    <!-- Brevo-Formular für den Erneut-Senden-Mechanismus -->
-                    <form id="sib-form" method="POST" action="https://4045d026.sibforms.com/serve/MUIFAMsY5JYzYR_jlhEGRPMpfn3bFuM-yZZqoJV_0qxCtPWpBU_OBe8WxODj-_vbmc2z-DuX8ZbFcVLKBL0BLceViajIibGAFMPYpUt3PT0dYaftWAAbIUvRQHS3lD9o0rlbMKl-xeXP6m8dhtmJxE-g4B91nBIbTrOHEihQ0voTEfUnXbueZ9Zl8lQzFvYDa_M7Q78Xggkoa1gFJg==" data-type="subscription" class="flex flex-col sm:flex-row gap-2">
+                    <!-- Brevo-Formular mit aktualisierter Action-URL -->
+                    <form id="sib-form" method="POST" action="https://4045d026.sibforms.com/serve/MUIFANg6FhWI-God567m5UQUdpEC0bbX8RTwzKDZX8XkbcT-SYLgQ7GWLt2l_MWEQzZU9SKyJS90Ed6uQzRz64g9yNth2bIk7YvCrc17jzca8q7yGD1kd9NmIPcKrWURDyCsE4g5T88nQXm1wOJkM4HzVXfM4y5_aH1lK8Ma62TC5VK-nSJtltUUoFGRxgkxlrfgM-urP53iewRmQQ==" data-type="subscription" class="flex flex-col sm:flex-row gap-2">
                         <input type="email" id="EMAIL" name="EMAIL" autocomplete="off" placeholder="Deine E-Mail-Adresse" required 
                                class="w-full px-4 py-2.5 rounded-xl bg-slate-100 border border-slate-200 text-xs text-slate-800 focus:outline-none focus:border-blue-600 focus:bg-white transition-all">
                         
@@ -82,18 +82,21 @@ layout: null
         </div>
     </main>
 
-    <!-- Fußzeile aus _includes/footer.html -->
+    <!-- Fußzeile -->
     {% include footer.html %}
 
     {% include accessibility.html %}
 
-    <!-- Brevo Skripte für das erneute Senden -->
+    <!-- Brevo Skripte -->
     <script>
       window.REQUIRED_CODE_ERROR_MESSAGE = 'Wähle bitte eine Ländervorwahl aus.';
       window.LOCALE = 'de';
-      window.EMAIL_INVALID_MESSAGE = window.SMS_INVALID_MESSAGE = "Die E-Mail-Adresse ist nicht gültig.";
-      window.REQUIRED_ERROR_MESSAGE = "Dieses Feld darf nicht leer sein.";
-      window.GENERIC_INVALID_MESSAGE = "Die Eingabe ist nicht gültig.";
+      window.EMAIL_INVALID_MESSAGE = window.SMS_INVALID_MESSAGE = "Die eingegebene E-Mail-Adresse ist nicht gültig. Bitte überprüfe das Format (z. B. name@beispiel.de) und versuche es erneut.";
+      window.REQUIRED_ERROR_MESSAGE = "Dieses Feld darf nicht leer sein. Bitte gib deine E-Mail-Adresse ein.";
+      window.GENERIC_INVALID_MESSAGE = "Die eingegebene E-Mail-Adresse ist nicht gültig. Bitte überprüfe das Format (z. B. name@beispiel.de) und versuche es erneut.";
+      window.INVALID_NUMBER = "Die eingegebene E-Mail-Adresse ist nicht gültig. Bitte überprüfe das Format (z. B. name@beispiel.de) und versuche es erneut.";
+      window.INVALID_DATE = "Bitte gib ein gültiges Datum ein.";
+      window.REQUIRED_MULTISELECT_MESSAGE = 'Wähle bitte mindestens eine Option aus.';
     </script>
     <script defer src="https://sibforms.com/forms/end-form/build/main.js"></script>
 </body>
