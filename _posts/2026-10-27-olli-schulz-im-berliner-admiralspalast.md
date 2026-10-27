@@ -16,7 +16,6 @@ categories:
 
 **Olli Schulz ist ein bekanntes Gesicht der deutschen Medienlandschaft. Seine Karriere begonnen hat Schulz allerdings als Musiker. Derzeit ist er auf Solo-Tour unterwegs, auch wenn bei seinem Konzert im Berliner Admiralspalast die Musik nur eine der Hauptrollen gespielt hat.**
 
-
 Na, was gibt’s denn heute so? Fragt man sich vor dem Konzert, denn was da genau passiert, wenn dieser Tausendsassa Olli Schulz auf die Bühne tritt, kann man nie so genau wissen. Auch wenn der Abend im Berliner Admiralspalast Teil von Schulz‘ aktueller "Konzerttournee" ist, ein reiner Musik-Abend ist bei dem Profi-Plauderer Schulz (seit Jahren betreibt er mit Jan Böhmermann einen der erfolgreichsten deutschen Podcasts "Fest und Flauschig") eher unwahrscheinlich. Und tatsächlich, in den ersten 20 Minuten spielt Olli Schulz vielleicht drei Songs, den Rest der Zeit redet er wie ein Wasserfall. Kein klassischer Konzert-Einstieg, aber ein guter.
 
 ## Das Komische im Alltäglichen
@@ -37,4 +36,4 @@ Das Publikum ist größtenteils 30 plus und bunt gemischt, es ist aufmerksam, zu
 
 *Sendung: rbb24 Inforadio, 27.10.2026, 07:50 Uhr*
 
-Quelle: rbb24
+Quelle: [rbb24](https://www.rbb24.de/kultur/beitrag/2026/10/konzert-olli-schulz-admiralspalast-berlin.html)
