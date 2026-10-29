@@ -16,44 +16,37 @@ title: Datenschutz
     <link rel="stylesheet" href="/style.css">
     
     <script src="https://cdn.jsdelivr.net/npm/@tailwindcss/browser@4"></script>
-    <style>
-        .liquid-glass {
-            background: rgba(255, 255, 255, 0.75);
-            backdrop-filter: blur(12px);
-            -webkit-backdrop-filter: blur(12px);
-            border: 1px solid rgba(255, 255, 255, 0.5);
-        }
-    </style>
 </head>
-<body class="bg-gradient-to-br from-slate-50 to-blue-100 min-h-screen text-gray-900 font-sans antialiased flex flex-col justify-between">
+<body class="text-slate-900 font-sans antialiased flex flex-col min-h-screen relative overflow-x-hidden">
 
     <!-- Navigationsleiste aus _includes/navigation.html -->
     {% include navigation.html %}
 
     <!-- Header Section -->
-    <header class="py-10 md:py-14 px-4 text-center">
-        <div class="max-w-4xl mx-auto space-y-3">
-            <h1 class="text-3xl md:text-5xl font-black tracking-tight text-slate-900">🛡️ Datenschutzerklärung</h1>
-            <p class="text-base md:text-lg text-slate-600 font-medium">Transparenz ist mir wichtig. Hier erfährst du, was mit deinen Daten passiert.</p>
+    <header class="page-hero page-hero--slate text-center">
+        <div class="max-w-3xl mx-auto animate-fade-in">
+            <span class="hero-badge">Rechtliches</span>
+            <h1 class="text-[2.4rem] sm:text-5xl md:text-6xl font-extrabold tracking-tight leading-[1.06] mt-6 mb-5">🛡️ Datenschutzerklärung</h1>
+            <p class="text-base md:text-xl text-slate-300 font-medium max-w-xl mx-auto">Transparenz ist mir wichtig. Hier erfährst du, was mit deinen Daten passiert.</p>
         </div>
     </header>
 
     <!-- Hauptinhalt -->
-    <main class="max-w-4xl mx-auto px-4 pb-12 flex-grow w-full prose prose-slate">
+    <main class="max-w-4xl mx-auto px-5 pb-16 md:pb-24 flex-grow w-full page-overlap">
         
-        <div class="p-8 md:p-10 rounded-3xl space-y-8 liquid-glass shadow-sm">
+        <div class="liquid-glass legal-text p-8 md:p-12 space-y-10">
             
             <section>
-                <h2 class="text-2xl font-black mb-3 text-slate-900">1. Allgemeine Hinweise</h2>
+                <h2 class="text-2xl md:text-[1.7rem] font-extrabold mb-4">1. Allgemeine Hinweise</h2>
                 <p class="leading-relaxed text-slate-600">
                     Die folgenden Hinweise geben einen einfachen Überblick darüber, was mit deinen personenbezogenen Daten passiert, wenn du diese Website besuchst. Personenbezogene Daten sind alle Daten, mit denen du persönlich identifiziert werden kannst.
                 </p>
             </section>
 
-            <hr class="border-slate-200/60">
+            <hr class="border-0 h-px bg-gradient-to-r from-transparent via-slate-300 to-transparent">
 
             <section>
-                <h2 class="text-2xl font-black mb-3 text-slate-900">2. Verantwortliche Stelle</h2>
+                <h2 class="text-2xl md:text-[1.7rem] font-extrabold mb-4">2. Verantwortliche Stelle</h2>
                 <p class="leading-relaxed text-slate-600">
                     Die verantwortliche Stelle für die Datenverarbeitung auf dieser Website ist:<br><br>
                     <strong class="text-slate-900">Julian Maximilian Fleger</strong><br>
@@ -67,47 +60,47 @@ title: Datenschutz
                 </p>
             </section>
 
-            <hr class="border-slate-200/60">
+            <hr class="border-0 h-px bg-gradient-to-r from-transparent via-slate-300 to-transparent">
 
             <section>
-                <h2 class="text-2xl font-black mb-3 text-slate-900">3. Registrierung und Anmeldung (Supabase Auth)</h2>
+                <h2 class="text-2xl md:text-[1.7rem] font-extrabold mb-4">3. Registrierung und Anmeldung (Supabase Auth)</h2>
                 <p class="leading-relaxed mb-4 text-slate-600">
                     Auf meiner Website kannst du dich registrieren, um zusätzliche Funktionen wie das Favorisieren von Blogartikeln zu nutzen. Die von dir eingegebenen Daten (E-Mail-Adresse und Passwort) werden ausschließlich für die Bereitstellung dieses Nutzerkontos verwendet.
                 </p>
-                <div class="p-4 rounded-xl text-sm space-y-2 bg-blue-50/80 border border-blue-200/80 text-blue-900">
+                <div class="callout !p-5 !rounded-2xl text-sm space-y-2 text-blue-950">
                     <p><strong>Dienstleister:</strong> Wir nutzen für die Authentifizierung und Datenbankverwaltung den Dienst <strong>Supabase</strong> (Supabase Inc., 970 Summer St, Stamford, CT 06905, USA).</p>
                     <p><strong>Datenverschlüsselung:</strong> Dein Passwort wird niemals im Klartext gespeichert, sondern vor der Übertragung und Speicherung nach aktuellen Sicherheitsstandards kryptografisch verschlüsselt (gehasht).</p>
                     <p><strong>Rechtsgrundlage:</strong> Die Verarbeitung erfolgt auf Grundlage deiner Einwilligung (Art. 6 Abs. 1 lit. a DSGVO) sowie zur Erfüllung des Nutzungsvertrags (Art. 6 Abs. 1 lit. b DSGVO).</p>
                 </div>
             </section>
 
-            <hr class="border-slate-200/60">
+            <hr class="border-0 h-px bg-gradient-to-r from-transparent via-slate-300 to-transparent">
 
             <section>
-                <h2 class="text-2xl font-black mb-3 text-slate-900">4. Speicherung von Favoriten</h2>
+                <h2 class="text-2xl md:text-[1.7rem] font-extrabold mb-4">4. Speicherung von Favoriten</h2>
                 <p class="leading-relaxed text-slate-600">
                     Wenn du eingeloggt bist und einen Beitrag favorisierst, wird diese Information (welcher User welche Blog-ID markiert hat) in unserer Supabase-Datenbank gespeichert. Dies dient einzig und allein dem Zweck, dir deine persönliche Merkliste bei deinem nächsten Besuch wieder anzuzeigen.
                 </p>
             </section>
 
-            <hr class="border-slate-200/60">
+            <hr class="border-0 h-px bg-gradient-to-r from-transparent via-slate-300 to-transparent">
 
             <section>
-                <h2 class="text-2xl font-black mb-3 text-slate-900">5. Kontaktformular (Formspree)</h2>
+                <h2 class="text-2xl md:text-[1.7rem] font-extrabold mb-4">5. Kontaktformular (Formspree)</h2>
                 <p class="leading-relaxed mb-4 text-slate-600">
                     Wenn du uns über das Kontaktformular Anfragen zukommen lässt, werden deine Angaben aus dem Formular inklusive der von dir dort angegebenen Kontaktdaten zwecks Bearbeitung der Anfrage und für den Fall von Anschlussfragen verarbeitet.
                 </p>
-                <div class="p-4 rounded-xl text-sm space-y-2 bg-blue-50/80 border border-blue-200/80 text-blue-900">
+                <div class="callout !p-5 !rounded-2xl text-sm space-y-2 text-blue-950">
                     <p><strong>Dienstleister:</strong> Für die Übermittlung und das Mailing von Formulareingaben nutzen wir den Dienst <strong>Formspree</strong> (Formspree Inc., 2228 E Cesar Chavez St, Austin, TX 78702, USA).</p>
                     <p><strong>Zweck:</strong> Die Daten werden ausschließlich zur Bearbeitung und Beantwortung deiner Kontaktaufnahme verwendet.</p>
                     <p><strong>Rechtsgrundlage:</strong> Die Verarbeitung basiert auf deiner Einwilligung (Art. 6 Abs. 1 lit. a DSGVO) sowie unserem berechtigten Interesse an einer effizienten Bearbeitung deiner Anfrage (Art. 6 Abs. 1 lit. f DSGVO).</p>
                 </div>
             </section>
 
-            <hr class="border-slate-200/60">
+            <hr class="border-0 h-px bg-gradient-to-r from-transparent via-slate-300 to-transparent">
 
             <section>
-                <h2 class="text-2xl font-black mb-3 text-slate-900">6. Cookies und LocalStorage</h2>
+                <h2 class="text-2xl md:text-[1.7rem] font-extrabold mb-4">6. Cookies und LocalStorage</h2>
                 <p class="leading-relaxed mb-4 text-slate-600">
                     Diese Website nutzt Speichermedien im Browser, um grundlegende Funktionen bereitzustellen und deine Privatsphäre-Einstellungen zu sichern.
                 </p>
@@ -120,26 +113,26 @@ title: Datenschutz
                 </p>
             </section>
 
-            <hr class="border-slate-200/60">
+            <hr class="border-0 h-px bg-gradient-to-r from-transparent via-slate-300 to-transparent">
 
             <section>
-                <h2 class="text-2xl font-black mb-3 text-slate-900">7. Webanalyse (Google Analytics 4)</h2>
+                <h2 class="text-2xl md:text-[1.7rem] font-extrabold mb-4">7. Webanalyse (Google Analytics 4)</h2>
                 <p class="leading-relaxed mb-4 text-slate-600">
                     Diese Website nutzt Google Analytics 4, einen Webanalysedienst der Google Ireland Limited, Gordon House, Barrow Street, Dublin 4, Irland („Google“). 
                 </p>
                 <p class="leading-relaxed mb-4 text-slate-600">
                     Google Analytics hilft uns zu verstehen, wie Besucher mit unserer Website interagieren. Dabei werden anonymisierte Daten wie Seitenaufrufe, Verweildauer, genutzte Betriebssysteme und die grobe Herkunft erfasst. Deine IP-Adresse wird bei der Erfassung in Google Analytics 4 standardmäßig automatisch anonymisiert (gekürzt), sodass eine direkte persönliche Zuordnung ausgeschlossen ist.
                 </p>
-                <div class="p-4 rounded-xl text-sm space-y-2 mb-4 bg-blue-50/80 border border-blue-200/80 text-blue-900">
+                <div class="callout !p-5 !rounded-2xl text-sm space-y-2 mb-4 text-blue-950">
                     <p><strong>Freiwilligkeit & Widerruf:</strong> Die Datenerfassung durch Google Analytics startet erst, wenn du im Cookie-Overlay aktiv auf <strong>„Akzeptieren“</strong> klickst. Wenn du auf „Ablehnen“ klickst, wird kein Code geladen und kein Tracking durchgeführt.</p>
                     <p><strong>Rechtsgrundlage:</strong> Die Verarbeitung deiner Daten erfolgt ausschließlich auf Grundlage deiner ausdrücklichen Einwilligung gemäß <strong>Art. 6 Abs. 1 lit. a DSGVO</strong>.</p>
                 </div>
             </section>
 
-            <hr class="border-slate-200/60">
+            <hr class="border-0 h-px bg-gradient-to-r from-transparent via-slate-300 to-transparent">
 
             <section>
-                <h2 class="text-2xl font-black mb-3 text-slate-900">8. Dein Recht auf Löschung ("Recht auf Vergessenwerden")</h2>
+                <h2 class="text-2xl md:text-[1.7rem] font-extrabold mb-4">8. Dein Recht auf Löschung ("Recht auf Vergessenwerden")</h2>
                 <p class="leading-relaxed mb-4 text-slate-600">
                     Du hast jederzeit die volle Kontrolle über deine Daten. Du hast das Recht, Auskunft über deine gespeicherten Daten zu erhalten, diese zu korrigieren oder komplett löschen zu lassen.
                 </p>
@@ -148,10 +141,10 @@ title: Datenschutz
                 </div>
             </section>
 
-            <hr class="border-slate-200/60">
+            <hr class="border-0 h-px bg-gradient-to-r from-transparent via-slate-300 to-transparent">
 
             <section>
-                <h2 class="text-2xl font-black mb-3 text-slate-900">9. Hosting der Website</h2>
+                <h2 class="text-2xl md:text-[1.7rem] font-extrabold mb-4">9. Hosting der Website</h2>
                 <p class="leading-relaxed text-slate-600">
                     Diese Website wird über <strong>GitHub Pages</strong> (GitHub Inc., 88 Colin P Kelly Jr St, San Francisco, CA 94107, USA) gehostet. Beim Aufruf der Seite werden automatisch Logfiles (u.a. IP-Adresse des Aufrufers) durch GitHub verarbeitet, um die Sicherheit und Stabilität des Dienstes zu gewährleisten.
                 </p>

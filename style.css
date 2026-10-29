@@ -995,6 +995,36 @@ button.liquid-glass:active,
     -webkit-backdrop-filter: blur(14px);
 }
 
+/* Bühne für zentrierte Status-Karten (404, Login nötig, Bestätigungen):
+   zwei leuchtende Flächen schweben hinter der Glaskarte */
+.glow-stage {
+    position: relative;
+    isolation: isolate;
+}
+.glow-stage::before,
+.glow-stage::after {
+    content: "";
+    position: absolute;
+    z-index: -1;
+    top: 50%;
+    left: 50%;
+    width: 22rem;
+    height: 22rem;
+    border-radius: 50%;
+    filter: blur(70px);
+    pointer-events: none;
+    animation: floatY 8s ease-in-out infinite;
+}
+.glow-stage::before {
+    transform: translate(-85%, -70%);
+    background: rgba(59, 130, 246, 0.35);
+}
+.glow-stage::after {
+    transform: translate(-15%, -25%);
+    background: rgba(34, 211, 238, 0.32);
+    animation-delay: -4s;
+}
+
 /* Glas-Eingabefelder für Formulare (Login, Kontakt, Profil) */
 .glass-input {
     width: 100%;

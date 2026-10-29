@@ -11,152 +11,87 @@ permalink: /prozentrechner.html
     
     <link rel="stylesheet" href="/style.css">
     
-    <script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script>
-    <script src="https://cdn.tailwindcss.com"></script>
+    <script src="https://cdn.jsdelivr.net/npm/@tailwindcss/browser@4"></script>
+    <style>
+        /* Ergebnis "atmet" kurz auf, wenn sich der Wert ändert */
+        @keyframes resultPulse {
+            0%   { transform: scale(1); box-shadow: inset 0 1px 0 #fff, 0 0 0 0 rgba(34, 211, 238, 0.45); }
+            40%  { transform: scale(1.015); box-shadow: inset 0 1px 0 #fff, 0 0 0 8px rgba(34, 211, 238, 0); }
+            100% { transform: scale(1); }
+        }
+        .result-box.is-updated { animation: resultPulse 0.55s cubic-bezier(0.34, 1.4, 0.64, 1); }
+        .calc-step { counter-increment: step; }
+        .calc-input {
+            padding: 0.6rem 0.8rem;
+            border-radius: 12px;
+            font-weight: 700;
+            text-align: center;
+            color: #0f172a;
+            background: rgba(255, 255, 255, 0.85);
+            border: 1px solid rgba(15, 23, 42, 0.1);
+            outline: none;
+            transition: border-color 0.25s ease, box-shadow 0.3s ease, transform 0.3s cubic-bezier(0.34, 1.4, 0.64, 1);
+        }
+        .calc-input:focus {
+            border-color: #3b82f6;
+            box-shadow: 0 0 0 4px rgba(59, 130, 246, 0.16);
+            transform: translateY(-1px);
+        }
+    </style>
 </head>
-<body class="bg-gray-50 text-gray-900 font-sans antialiased flex flex-col min-h-screen">
+<body class="text-slate-900 font-sans antialiased flex flex-col min-h-screen relative overflow-x-hidden">
 
-<nav class="bg-white border-b border-gray-100 w-full relative z-50">
-    <div class="w-full max-w-none px-4 md:px-6 flex items-center justify-between h-20">
-        <a href="/index.html" class="flex items-center gap-2 shrink-0 no-underline text-current mr-4">
-            <img src="/auge-logo.jpg" alt="M-Fleger Logo" class="w-12 h-10 md:w-16 md:h-14 rounded-xl object-contain">
-            <span class="text-xl md:text-2xl font-black tracking-tight text-blue-600">M-Fleger</span>
-        </a>
-        <div class="hidden lg:flex flex-wrap items-center gap-x-2 xl:gap-x-5 font-semibold text-gray-600 text-sm md:text-base flex-grow justify-start">
-            <a href="/index.html" class="hover:text-blue-600 pb-1 transition-all no-underline">Startseite</a>
-            <a href="/ueber-mich.html" class="hover:text-blue-600 pb-1 transition-all no-underline">Über mich</a>
-            <a href="/blog.html" class="hover:text-blue-600 pb-1 transition-all no-underline">Blog</a>
-            
-            <div class="relative group" id="rights-dropdown">
-                <button onclick="toggleDropdown(event, 'dropdown-menu')" class="hover:text-blue-600 pb-1 transition-all no-underline font-semibold text-gray-600 text-sm md:text-base flex items-center gap-1 bg-transparent border-0 cursor-pointer">
-                    Unsere Rechte
-                    <svg class="w-4 h-4 transform transition-transform duration-200 group-hover:rotate-180" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2.5" d="M19 9l-7 7-7-7"></path>
-                    </svg>
-                </button>
-                <div class="absolute left-0 pt-2 w-56 opacity-0 pointer-events-none group-hover:opacity-100 group-hover:pointer-events-auto transition-all duration-200 z-50" id="dropdown-menu">
-                    <div class="bg-white border border-gray-100 rounded-2xl shadow-xl py-2">
-                        <a href="/unsere-rechte.html" class="flex items-center gap-2 px-4 py-2.5 text-sm text-gray-700 hover:bg-blue-50 hover:text-blue-600 font-bold transition-all no-underline">🌍 Übersicht (Hub)</a>
-                        <div class="border-b border-gray-100 my-1"></div>
-                        <a href="/kinderrechte.html" class="flex items-center gap-2 px-4 py-2.5 text-sm text-gray-600 hover:bg-blue-50 hover:text-blue-600 transition-all no-underline">🎒 Kinderrechte</a>
-                        <a href="/menschenrechte.html" class="flex items-center gap-2 px-4 py-2.5 text-sm text-gray-600 hover:bg-blue-50 hover:text-blue-600 transition-all no-underline">⚖️ Menschenrechte</a>
-                        <a href="/digitalrechte.html" class="flex items-center gap-2 px-4 py-2.5 text-sm text-gray-600 hover:bg-blue-50 hover:text-blue-600 transition-all no-underline">📱 Digitalrechte</a>
-                        <a href="/umweltrechte.html" class="flex items-center gap-2 px-4 py-2.5 text-sm text-gray-600 hover:bg-blue-50 hover:text-blue-600 transition-all no-underline">🌱 Umweltrechte</a>
-                    </div>
-                </div>
-            </div>
+{% include navigation.html %}
 
-            <div class="relative group" id="schule-dropdown">
-                <button onclick="toggleDropdown(event, 'schule-menu')" class="text-blue-600 pb-1 transition-all no-underline font-bold text-sm md:text-base flex items-center gap-1 bg-transparent border-0 cursor-pointer">
-                    Schule
-                    <svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2.5" d="M19 9l-7 7-7-7"></path>
-                    </svg>
-                </button>
-                <div class="absolute left-0 pt-2 w-56 opacity-0 pointer-events-none group-hover:opacity-100 group-hover:pointer-events-auto transition-all duration-200 z-50" id="schule-menu">
-                    <div class="bg-white border border-gray-100 rounded-2xl shadow-xl py-2">
-                        <a href="/prozentrechner.html" class="flex items-center gap-2 px-4 py-2.5 text-sm text-blue-600 bg-blue-50 hover:text-blue-600 transition-all no-underline font-bold">🧮 Prozentrechner</a>
-                    </div>
-                </div>
-            </div>
-
-            <a href="/spenden.html" class="hover:text-blue-600 pb-1 transition-all no-underline">Spenden</a>
-            <a href="/kontakt.html" class="hover:text-blue-600 pb-1 transition-all no-underline">Kontakt</a>
-        </div>
-        <div class="flex items-center gap-2 md:gap-3 shrink-0 ml-auto md:border-l md:border-gray-100 md:pl-4">
-            <div id="auth-nav-section" class="flex items-center">
-                <a href="/login.html" class="bg-blue-600 text-white font-bold px-3 py-2 rounded-xl text-xs md:text-sm shadow-xs hover:bg-blue-700 transition-all no-underline">🔑 Login</a>
-            </div>
-        </div>
+<header class="page-hero text-center">
+    <div class="max-w-2xl mx-auto animate-fade-in">
+        <span class="hero-badge shimmer">Schule</span>
+        <h1 class="text-[2.4rem] sm:text-5xl md:text-6xl font-extrabold tracking-tight leading-[1.06] mt-6 mb-5">🧮 Blitz-Prozentrechner</h1>
+        <p class="text-base md:text-xl text-blue-100/90">Einfach Werte eingeben – das Ergebnis wechselt sofort!</p>
     </div>
-</nav>
+</header>
 
-<div class="w-full flex justify-center items-center py-12 px-4 flex-grow bg-slate-50">
-    
-    <div class="bg-white border border-slate-100 shadow-xl rounded-3xl max-w-[550px] w-full p-6 md:p-8">
-        
-        <div class="text-center mb-6">
-            <h1 class="text-2xl font-black tracking-tight text-slate-900 mb-1">🧮 Blitz-Prozentrechner</h1>
-            <p class="text-gray-500 text-sm">Einfach Werte eingeben – das Ergebnis wechselt sofort!</p>
-        </div>
+<main class="w-full flex justify-center px-5 pb-16 md:pb-24 flex-grow page-overlap">
+    <div class="liquid-glass max-w-[600px] w-full p-6 md:p-10 space-y-6" data-glass="static">
 
-        <div class="bg-slate-50/70 border border-slate-100 p-5 rounded-2xl mb-5">
-            <h2 class="text-sm font-bold text-gray-800 border-b border-blue-100 pb-2 mb-4">🛍️ 1. Rabatt & Anteile ausrechnen</h2>
-            <div class="flex flex-wrap gap-2 items-center text-sm font-semibold text-gray-700 mb-4">
+        <section class="glass-panel !rounded-2xl p-5 md:p-6">
+            <h2 class="text-base md:text-lg font-extrabold pb-3 mb-4 border-b border-slate-900/10">🛍️ 1. Rabatt &amp; Anteile ausrechnen</h2>
+            <div class="flex flex-wrap gap-2.5 items-center text-sm md:text-base font-semibold text-slate-700 mb-5">
                 <span>Einkauf für</span>
-                <input type="number" id="rabattPreis" class="p-2 border border-gray-200 bg-white rounded-xl font-bold text-gray-900 outline-none focus:border-blue-500 w-24 transition-all" value="30" oninput="rechneRabatt()">
+                <input type="number" id="rabattPreis" class="calc-input w-24" value="30" oninput="rechneRabatt()">
                 <span>€ mit</span>
-                <input type="number" id="rabattProzent" class="p-2 border border-gray-200 bg-white rounded-xl font-bold text-gray-900 outline-none focus:border-blue-500 w-16 transition-all" value="10" oninput="rechneRabatt()">
+                <input type="number" id="rabattProzent" class="calc-input w-20" value="10" oninput="rechneRabatt()">
                 <span>% Rabatt.</span>
             </div>
-            <div id="rabattErgebnis" class="bg-blue-50/60 border-l-4 border-blue-600 p-3 rounded-xl text-sm text-blue-900 font-bold leading-relaxed"></div>
-        </div>
+            <div id="rabattErgebnis" class="result-box callout !p-4 !rounded-2xl text-sm md:text-base text-blue-950 font-bold leading-relaxed"></div>
+        </section>
 
-        <div class="bg-slate-50/70 border border-slate-100 p-5 rounded-2xl">
-            <h2 class="text-sm font-bold text-gray-800 border-b border-blue-100 pb-2 mb-2">🔄 2. Universal-Umrechner (In alle Richtungen)</h2>
-            <p class="text-[11px] text-gray-500 mb-4">Ändere ein Feld – die anderen rechnen sich automatisch um!</p>
+        <section class="glass-panel !rounded-2xl p-5 md:p-6">
+            <h2 class="text-base md:text-lg font-extrabold pb-3 mb-2 border-b border-slate-900/10">🔄 2. Universal-Umrechner (In alle Richtungen)</h2>
+            <p class="text-xs text-slate-500 mb-5">Ändere ein Feld – die anderen rechnen sich automatisch um!</p>
             <div class="grid grid-cols-1 sm:grid-cols-3 gap-3">
-                <div class="flex flex-col gap-1">
-                    <label class="text-[10px] font-bold text-gray-500 uppercase tracking-wider">Prozent (%)</label>
-                    <input type="number" id="convProzent" class="p-2 border border-gray-200 bg-white rounded-xl font-bold text-gray-900 outline-none focus:border-blue-500 transition-all" value="30" oninput="vonProzent()">
+                <div class="flex flex-col gap-1.5">
+                    <label for="convProzent" class="text-[10px] font-bold text-slate-500 uppercase tracking-[0.14em]">Prozent (%)</label>
+                    <input type="number" id="convProzent" class="calc-input" value="30" oninput="vonProzent()">
                 </div>
-                <div class="flex flex-col gap-1">
-                    <label class="text-[10px] font-bold text-gray-500 uppercase tracking-wider">Dezimalzahl</label>
-                    <input type="number" id="convDezimal" class="p-2 border border-gray-200 bg-white rounded-xl font-bold text-gray-900 outline-none focus:border-blue-500 transition-all" value="0.3" step="0.01" oninput="vonDezimal()">
+                <div class="flex flex-col gap-1.5">
+                    <label for="convDezimal" class="text-[10px] font-bold text-slate-500 uppercase tracking-[0.14em]">Dezimalzahl</label>
+                    <input type="number" id="convDezimal" class="calc-input" value="0.3" step="0.01" oninput="vonDezimal()">
                 </div>
-                <div class="flex flex-col gap-1">
-                    <label class="text-[10px] font-bold text-gray-500 uppercase tracking-wider">Bruch</label>
-                    <input type="text" id="convBruch" class="p-2 border border-gray-200 bg-white rounded-xl font-bold text-gray-900 outline-none focus:border-blue-500 transition-all" value="3/10" oninput="vonBruch()">
+                <div class="flex flex-col gap-1.5">
+                    <label for="convBruch" class="text-[10px] font-bold text-slate-500 uppercase tracking-[0.14em]">Bruch</label>
+                    <input type="text" id="convBruch" class="calc-input" value="3/10" oninput="vonBruch()">
                 </div>
             </div>
-            <div id="umrechnungInfo" class="mt-4 bg-green-50/60 border-l-4 border-green-500 p-3 rounded-xl text-sm text-green-900 font-bold"></div>
-        </div>
-    </div>
-</div>
+            <div id="umrechnungInfo" class="result-box mt-5 p-4 rounded-2xl text-sm md:text-base text-emerald-950 font-bold bg-gradient-to-br from-emerald-50/95 to-teal-50/80 border border-white shadow-[inset_0_1px_0_#fff,0_10px_24px_-16px_rgba(16,185,129,0.5)]"></div>
+        </section>
 
-<footer class="bg-white border-t border-gray-100 pt-10 pb-6 w-full">
-    <div class="max-w-6xl mx-auto px-4 flex flex-col items-center">
-        <div class="bg-gray-50 border border-gray-100 rounded-2xl p-6 max-w-md w-full text-center relative mb-8">
-            <span class="absolute -top-3 left-1/2 transform -translate-x-1/2 bg-red-100 text-red-500 font-bold px-2 py-0.5 rounded-full text-[10px] uppercase tracking-wider">Beta Beendet 🛑</span>
-            <h4 class="text-gray-700 font-bold text-base mb-1">Der Überflieger-Newsletter</h4>
-            <p class="text-gray-400 text-xs mb-4">Aus Datenschutzgründen dauerhaft im Hangar. Schön war die Beta-Phase!</p>
-            <div class="flex gap-2">
-                <input type="text" disabled placeholder="keine@mails.mehr" class="bg-white border border-gray-200 rounded-xl px-3 py-2 text-sm text-gray-300 w-full outline-none">
-                <button disabled class="bg-gray-200 text-gray-400 font-bold px-4 py-2 rounded-xl text-sm border-0">Offline</button>
-            </div>
-        </div>
-        <div class="w-full flex flex-col sm:flex-row items-center justify-between border-t border-gray-50 pt-6 text-sm text-gray-500 font-medium gap-4">
-            <p>© 2026 M-Fleger. Alle Rechte vorbehalten.</p>
-            <div class="flex flex-wrap gap-x-4 gap-y-2 justify-center">
-                <a href="/aktionstage.html" class="text-gray-500 hover:text-blue-600 no-underline">Aktionstage</a>
-                <a href="/index.html" class="text-gray-500 hover:text-blue-600 no-underline">Startseite</a>
-                <a href="/ueber-mich.html" class="text-gray-500 hover:text-blue-600 no-underline">Über mich</a>
-                <a href="/blog.html" class="text-gray-500 hover:text-blue-600 no-underline">Blog</a>
-                <a href="/kontakt.html" class="text-gray-500 hover:text-blue-600 no-underline">Kontakt</a>
-                <a href="/spenden.html" class="text-gray-500 hover:text-blue-600 no-underline">Spenden</a>
-            </div>
-        </div>
     </div>
-</footer>
+</main>
+
+{% include footer.html %}
 
 <script>
-// Dropdown Logik
-function toggleDropdown(event, menuId) {
-    event.stopPropagation();
-    const menu = document.getElementById(menuId);
-    menu.classList.toggle('opacity-0');
-    menu.classList.toggle('pointer-events-none');
-}
-document.addEventListener('click', function(e) {
-    ['dropdown-menu', 'schule-menu'].forEach(id => {
-        const menu = document.getElementById(id);
-        if (menu && !menu.classList.contains('opacity-0') && !e.target.closest('#rights-dropdown') && !e.target.closest('#schule-dropdown')) {
-            menu.classList.add('opacity-0');
-            menu.classList.add('pointer-events-none');
-        }
-    });
-});
-
 // Mathematisch korrekte Rechnerfunktionen
 function rechneRabatt() {
     const preis = parseFloat(document.getElementById('rabattPreis').value);
@@ -169,6 +104,7 @@ function rechneRabatt() {
     
     const ersparnis = (preis * prozent) / 100;
     const endpreis = preis - ersparnis;
+    flash('rabattErgebnis');
     document.getElementById('rabattErgebnis').innerHTML = `Du sparst: ${ersparnis.toFixed(2)} €<br>Neuer Endpreis: ${endpreis.toFixed(2)} €`;
 }
 
@@ -240,6 +176,7 @@ function vonBruch() {
 }
 
 function aktualisiereInfoText(p, d, b) {
+    flash('umrechnungInfo');
     document.getElementById('umrechnungInfo').innerHTML = `${p}% ist als Bruch <strong>${b}</strong> und als Dezimalzahl <strong>${d}</strong>`;
 }
 
@@ -247,6 +184,14 @@ function leereInfoText() {
     document.getElementById('umrechnungInfo').innerHTML = "Gib einen Wert ein, um die Berechnung zu starten.";
 }
 
+// Kurzes Aufleuchten des Ergebnisses bei jeder Änderung
+function flash(id) {
+    const el = document.getElementById(id);
+    if (!el) return;
+    el.classList.remove('is-updated');
+    void el.offsetWidth;
+    el.classList.add('is-updated');
+}
 // Initialer Start
 rechneRabatt();
 vonProzent();

@@ -14,36 +14,29 @@ title: Datenschutz WhatsApp-Kontakt
     <link rel="stylesheet" href="/style.css">
     <link rel="icon" type="image/jpeg" href="/auge-logo.jpg">
     <script src="https://cdn.jsdelivr.net/npm/@tailwindcss/browser@4"></script>
-    <style>
-        @keyframes fadeInUp {
-            from { opacity: 0; transform: translateY(20px); }
-            to { opacity: 1; transform: translateY(0); }
-        }
-        .animate-fade-in { animation: fadeInUp 0.8s ease-out forwards; }
-    </style>
 </head>
-<body class="bg-gray-50 text-gray-900 font-sans antialiased flex flex-col min-h-screen relative">
+<body class="text-slate-900 font-sans antialiased flex flex-col min-h-screen relative overflow-x-hidden">
 
     <!-- Navigationsleiste -->
     {% include navigation.html %}
 
-    <header class="bg-gradient-to-br from-emerald-700 via-teal-600 to-green-700 text-white py-16 px-4 md:px-6 overflow-hidden">
+    <header class="page-hero page-hero--teal">
         <div class="max-w-4xl mx-auto text-center animate-fade-in">
-            <span class="bg-white/20 text-white border border-white/30 font-extrabold px-4 py-1.5 rounded-full text-xs uppercase tracking-wider">Datenschutzhinweise</span>
-            <h1 class="text-3xl md:text-5xl font-black tracking-tight mt-5 mb-4 leading-tight">
+            <span class="hero-badge shimmer">Datenschutzhinweise</span>
+            <h1 class="text-[2.3rem] sm:text-5xl md:text-6xl font-extrabold tracking-tight mt-6 mb-5 leading-[1.06]">
                 WhatsApp-Kontaktchat
             </h1>
-            <p class="text-base md:text-lg text-emerald-100 max-w-2xl mx-auto leading-relaxed">
+            <p class="text-base md:text-xl text-emerald-50/90 max-w-2xl mx-auto leading-relaxed">
                 Informationen zur Erhebung und Verarbeitung deiner personenbezogenen Daten bei der Nutzung unseres WhatsApp-Services.
             </p>
         </div>
     </header>
 
-    <main class="max-w-4xl mx-auto px-4 md:px-6 py-12 md:py-16 flex-grow w-full space-y-8">
+    <main class="max-w-4xl mx-auto px-5 md:px-6 pb-16 md:pb-24 flex-grow w-full space-y-8 page-overlap legal-text" style="--tile-a: #0f766e; --tile-b: #22c55e;">
 
         <!-- 1. Verantwortlicher -->
-        <section class="bg-white border border-gray-200 rounded-3xl p-6 md:p-8 shadow-xs space-y-4">
-            <h2 class="text-2xl font-bold text-gray-950 border-b border-gray-100 pb-3">Wer ist verantwortlich für die Datenerhebung und -verarbeitung?</h2>
+        <section class="liquid-glass p-7 md:p-10 space-y-4">
+            <h2 class="text-2xl md:text-[1.7rem] font-extrabold pb-4 border-b border-slate-900/10">Wer ist verantwortlich für die Datenerhebung und -verarbeitung?</h2>
             <p class="text-gray-700 leading-relaxed">
                 <strong>Julian Maximilian Fleger (M-Fleger)</strong>, Rüdickenstr. 30, 13053 Berlin, erhebt und verarbeitet Ihre personenbezogenen Daten als Verantwortlicher.
             </p>
@@ -56,8 +49,8 @@ title: Datenschutz WhatsApp-Kontakt
         </section>
 
         <!-- 2. Welche Daten -->
-        <section class="bg-white border border-gray-200 rounded-3xl p-6 md:p-8 shadow-xs space-y-4">
-            <h2 class="text-2xl font-bold text-gray-950 border-b border-gray-100 pb-3">Welche Daten erheben wir und wie und warum verarbeiten wir Ihre Daten?</h2>
+        <section class="liquid-glass p-7 md:p-10 space-y-4">
+            <h2 class="text-2xl md:text-[1.7rem] font-extrabold pb-4 border-b border-slate-900/10">Welche Daten erheben wir und wie und warum verarbeiten wir Ihre Daten?</h2>
             <p class="text-gray-700 leading-relaxed">
                 Wir nutzen den M-Fleger-WhatsApp-Kontakt, um Nachrichten, Fragen und Hinweise von Ihnen zu unseren Angeboten, Projekten und Dienstleistungen entgegenzunehmen und zu bearbeiten.
             </p>
@@ -80,14 +73,14 @@ title: Datenschutz WhatsApp-Kontakt
             <p class="text-gray-700 leading-relaxed">
                 Die Verarbeitung Ihrer Daten erfolgt ausschließlich zu dem Zweck, Ihre Anfragen zu beantworten, mit Ihnen zu kommunizieren und unsere Angebote und Projekte zu organisieren.
             </p>
-            <p class="text-amber-800 bg-amber-50 border border-amber-200 rounded-2xl p-4 text-sm font-medium">
+            <p class="!text-amber-900 rounded-2xl p-5 text-sm font-medium bg-gradient-to-br from-amber-50/95 to-orange-50/80 border border-white shadow-[inset_0_1px_0_#fff,0_10px_24px_-16px_rgba(217,119,6,0.5)]">
                 ⚠️ Bitte übermitteln Sie uns über WhatsApp keine sensiblen personenbezogenen Daten, sofern dies nicht ausdrücklich erforderlich ist.
             </p>
         </section>
 
         <!-- 3. Rechtsgrundlage -->
-        <section class="bg-white border border-gray-200 rounded-3xl p-6 md:p-8 shadow-xs space-y-4">
-            <h2 class="text-2xl font-bold text-gray-950 border-b border-gray-100 pb-3">Auf welcher Rechtsgrundlage verarbeiten wir Ihre Daten?</h2>
+        <section class="liquid-glass p-7 md:p-10 space-y-4">
+            <h2 class="text-2xl md:text-[1.7rem] font-extrabold pb-4 border-b border-slate-900/10">Auf welcher Rechtsgrundlage verarbeiten wir Ihre Daten?</h2>
             <p class="text-gray-700 leading-relaxed">
                 Die Verarbeitung Ihrer personenbezogenen Daten erfolgt je nach Zweck auf Grundlage von <strong>Art. 6 Abs. 1 lit. b DSGVO</strong>, sofern die Verarbeitung zur Durchführung vorvertraglicher Maßnahmen oder eines Vertrags erforderlich ist, oder auf Grundlage von <strong>Art. 6 Abs. 1 lit. f DSGVO</strong>, sofern ein berechtigtes Interesse an der Bearbeitung Ihrer Anfrage besteht.
             </p>
@@ -97,8 +90,8 @@ title: Datenschutz WhatsApp-Kontakt
         </section>
 
         <!-- 4. Speicherdauer -->
-        <section class="bg-white border border-gray-200 rounded-3xl p-6 md:p-8 shadow-xs space-y-4">
-            <h2 class="text-2xl font-bold text-gray-950 border-b border-gray-100 pb-3">Wie lange werden Ihre Daten gespeichert?</h2>
+        <section class="liquid-glass p-7 md:p-10 space-y-4">
+            <h2 class="text-2xl md:text-[1.7rem] font-extrabold pb-4 border-b border-slate-900/10">Wie lange werden Ihre Daten gespeichert?</h2>
             <p class="text-gray-700 leading-relaxed">
                 Wir speichern Ihre personenbezogenen Daten nur so lange, wie dies für die Bearbeitung Ihrer Anfrage erforderlich ist oder gesetzliche Aufbewahrungspflichten bestehen. Nach Abschluss der Bearbeitung werden die Daten gelöscht, sofern keine gesetzlichen Gründe für eine längere Speicherung bestehen.
             </p>
@@ -108,8 +101,8 @@ title: Datenschutz WhatsApp-Kontakt
         </section>
 
         <!-- 5. Weitergabe -->
-        <section class="bg-white border border-gray-200 rounded-3xl p-6 md:p-8 shadow-xs space-y-4">
-            <h2 class="text-2xl font-bold text-gray-950 border-b border-gray-100 pb-3">Werden Daten weitergegeben?</h2>
+        <section class="liquid-glass p-7 md:p-10 space-y-4">
+            <h2 class="text-2xl md:text-[1.7rem] font-extrabold pb-4 border-b border-slate-900/10">Werden Daten weitergegeben?</h2>
             <p class="text-gray-700 leading-relaxed">
                 Ihre personenbezogenen Daten werden grundsätzlich nicht an Dritte weitergegeben, es sei denn, dies ist zur Bearbeitung Ihrer Anfrage erforderlich, gesetzlich vorgeschrieben oder Sie haben zuvor eingewilligt.
             </p>
@@ -122,25 +115,25 @@ title: Datenschutz WhatsApp-Kontakt
         </section>
 
         <!-- 6. Rechte -->
-        <section class="bg-white border border-gray-200 rounded-3xl p-6 md:p-8 shadow-xs space-y-4">
-            <h2 class="text-2xl font-bold text-gray-950 border-b border-gray-100 pb-3">Welche Rechte haben Nutzerinnen und Nutzer des M-Fleger-Kontaktchats?</h2>
+        <section class="liquid-glass p-7 md:p-10 space-y-4">
+            <h2 class="text-2xl md:text-[1.7rem] font-extrabold pb-4 border-b border-slate-900/10">Welche Rechte haben Nutzerinnen und Nutzer des M-Fleger-Kontaktchats?</h2>
             <p class="text-gray-700 leading-relaxed">Sie haben im Rahmen der gesetzlichen Bestimmungen folgende Rechte:</p>
             
             <ul class="grid grid-cols-1 md:grid-cols-2 gap-3 text-sm text-gray-800 pt-2">
-                <li class="bg-gray-50 border border-gray-200 p-3 rounded-xl"><strong>Auskunft (Art. 15 DSGVO)</strong> über Ihre gespeicherten Daten.</li>
-                <li class="bg-gray-50 border border-gray-200 p-3 rounded-xl"><strong>Berichtigung (Art. 16 DSGVO)</strong> unrichtiger Daten.</li>
-                <li class="bg-gray-50 border border-gray-200 p-3 rounded-xl"><strong>Löschung (Art. 17 DSGVO)</strong> Ihrer Daten.</li>
-                <li class="bg-gray-50 border border-gray-200 p-3 rounded-xl"><strong>Einschränkung der Verarbeitung (Art. 18 DSGVO)</strong>.</li>
-                <li class="bg-gray-50 border border-gray-200 p-3 rounded-xl"><strong>Datenübertragbarkeit (Art. 20 DSGVO)</strong>.</li>
-                <li class="bg-gray-50 border border-gray-200 p-3 rounded-xl"><strong>Widerspruch (Art. 21 DSGVO)</strong> gegen die Verarbeitung.</li>
-                <li class="bg-gray-50 border border-gray-200 p-3 rounded-xl col-span-1 md:col-span-2"><strong>Widerruf</strong> einer erteilten Einwilligung mit Wirkung für die Zukunft.</li>
-                <li class="bg-gray-50 border border-gray-200 p-3 rounded-xl col-span-1 md:col-span-2"><strong>Beschwerderecht (Art. 77 DSGVO)</strong> bei einer Datenschutzaufsichtsbehörde.</li>
+                <li class="law-card !p-4"><strong>Auskunft (Art. 15 DSGVO)</strong> über Ihre gespeicherten Daten.</li>
+                <li class="law-card !p-4"><strong>Berichtigung (Art. 16 DSGVO)</strong> unrichtiger Daten.</li>
+                <li class="law-card !p-4"><strong>Löschung (Art. 17 DSGVO)</strong> Ihrer Daten.</li>
+                <li class="law-card !p-4"><strong>Einschränkung der Verarbeitung (Art. 18 DSGVO)</strong>.</li>
+                <li class="law-card !p-4"><strong>Datenübertragbarkeit (Art. 20 DSGVO)</strong>.</li>
+                <li class="law-card !p-4"><strong>Widerspruch (Art. 21 DSGVO)</strong> gegen die Verarbeitung.</li>
+                <li class="law-card !p-4 col-span-1 md:col-span-2"><strong>Widerruf</strong> einer erteilten Einwilligung mit Wirkung für die Zukunft.</li>
+                <li class="law-card !p-4 col-span-1 md:col-span-2"><strong>Beschwerderecht (Art. 77 DSGVO)</strong> bei einer Datenschutzaufsichtsbehörde.</li>
             </ul>
 
             <div class="mt-6 pt-4 border-t border-gray-100">
                 <h3 class="font-bold text-gray-900 mb-2">Wie können Sie Ihre Rechte ausüben?</h3>
                 <p class="text-gray-700 text-sm mb-3">Für die Ausübung Ihrer Rechte reicht eine Nachricht an:</p>
-                <address class="not-italic text-sm text-gray-700 bg-gray-50 p-4 rounded-2xl border border-gray-200 space-y-1">
+                <address class="law-card not-italic text-sm space-y-1">
                     <strong class="text-gray-900 block">Julian Maximilian Fleger (M-Fleger)</strong>
                     Rüdickenstr. 30<br>
                     13053 Berlin<br>
