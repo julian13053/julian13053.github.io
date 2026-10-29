@@ -6,70 +6,141 @@ layout: null
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="theme-color" content="#1e3a8a">
     <title>{{ page.title }} - M-Fleger</title>
-
+    {% if page.excerpt %}<meta name="description" content="{{ page.excerpt | strip_html | strip_newlines | truncate: 160 }}">{% endif %}
     <link rel="stylesheet" href="/style.css">
-
     <script src="https://cdn.jsdelivr.net/npm/@tailwindcss/browser@4"></script>
     <script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script>
-
     <style>
+        /* ================================
+           LESEFORTSCHRITT
+           ================================ */
+        .read-progress {
+            position: fixed;
+            inset: 0 0 auto 0;
+            height: 3px;
+            z-index: 70;
+            transform-origin: 0 50%;
+            transform: scaleX(0);
+            background: linear-gradient(90deg, #2563eb, #22d3ee, #a5b4fc);
+            box-shadow: 0 0 12px rgba(34, 211, 238, 0.6);
+        }
+        @supports (animation-timeline: scroll()) {
+            .read-progress {
+                animation: readGrow linear both;
+                animation-timeline: scroll(root);
+            }
+            @keyframes readGrow { to { transform: scaleX(1); } }
+        }
+
+        /* ================================
+           HERO-EINBLENDEN
+           ================================ */
+        @keyframes postRise {
+            from { opacity: 0; transform: translateY(24px); filter: blur(6px); }
+            to   { opacity: 1; transform: none; filter: blur(0); }
+        }
+        .post-rise { opacity: 0; animation: postRise 0.9s cubic-bezier(0.16, 1, 0.3, 1) forwards; }
+        .post-rise-2 { animation-delay: 0.15s; }
+        .post-rise-3 { animation-delay: 0.3s; }
+
+        /* ================================
+           ARTIKEL-TYPOGRAFIE
+           ================================ */
         .blog-text,
         .blog-text p,
-        .blog-text span {
+        .blog-text span,
+        .blog-text li {
             color: #1f2937 !important;
             opacity: 1 !important;
         }
+        .blog-text {
+            font-size: 1.0625rem;
+            line-height: 1.85;
+        }
+        @media (min-width: 768px) {
+            .blog-text { font-size: 1.15rem; }
+        }
+        .blog-text > * + * { margin-top: 1.4em; }
+        .blog-text h2,
+        .blog-text h3,
+        .blog-text h4 {
+            color: #0f172a !important;
+            font-family: var(--font-display);
+            font-weight: 800;
+            letter-spacing: -0.02em;
+            line-height: 1.25;
+            margin-top: 2.2em;
+        }
+        .blog-text h2 { font-size: 1.65em; }
+        .blog-text h3 { font-size: 1.3em; }
+        .blog-text a {
+            color: #1d4ed8;
+            font-weight: 600;
+            text-decoration: underline;
+            text-decoration-color: rgba(37, 99, 235, 0.35);
+            text-decoration-thickness: 2px;
+            text-underline-offset: 3px;
+            transition: text-decoration-color 0.25s ease, color 0.25s ease;
+        }
+        .blog-text a:hover { color: #1e3a8a; text-decoration-color: #22d3ee; }
+        .blog-text ul, .blog-text ol { padding-left: 1.4em; }
+        .blog-text ul { list-style: disc; }
+        .blog-text ol { list-style: decimal; }
+        .blog-text li + li { margin-top: 0.4em; }
+        .blog-text li::marker { color: #2563eb; }
+        .blog-text blockquote {
+            margin-left: 0;
+            padding: 1.1em 1.4em;
+            border-left: 4px solid #22d3ee;
+            border-radius: 0 18px 18px 0;
+            background: linear-gradient(90deg, rgba(34, 211, 238, 0.10), rgba(255, 255, 255, 0.4));
+            font-style: italic;
+        }
+        .blog-text hr {
+            border: 0;
+            height: 1px;
+            background: linear-gradient(90deg, transparent, rgba(15, 23, 42, 0.15), transparent);
+        }
+        .blog-text strong { color: #0f172a !important; }
 
         /* ================================
            ARTIKELBILDER
            ================================ */
-
         .blog-text img {
             display: block;
             width: 100%;
             max-width: 900px;
             height: auto;
-            margin: 32px auto;
-            border-radius: 14px;
-            border: 1px solid rgba(0, 0, 0, 0.08);
-            box-shadow: 0 8px 24px rgba(0, 0, 0, 0.12);
+            margin: 36px auto;
+            border-radius: 20px;
+            border: 1px solid rgba(255, 255, 255, 0.8);
+            box-shadow: 0 1px 0 rgba(255, 255, 255, 0.8) inset, 0 20px 44px -18px rgba(30, 58, 138, 0.35);
+            transition: transform 0.6s cubic-bezier(0.16, 1, 0.3, 1), box-shadow 0.6s ease;
         }
-
-        /* Auf kleinen Bildschirmen etwas kleinere Rundung */
+        .blog-text img:hover {
+            transform: scale(1.012);
+            box-shadow: 0 30px 60px -22px rgba(30, 58, 138, 0.45);
+        }
         @media (max-width: 640px) {
-            .blog-text img {
-                border-radius: 10px;
-                margin: 24px auto;
-            }
+            .blog-text img { border-radius: 14px; margin: 26px auto; }
         }
 
-        .print-header {
-            display: none;
-        }
+        .print-header { display: none; }
 
         @media print {
-            nav,
-            footer,
-            .no-print,
-            #cookie-banner,
-            .fixed,
-            .liquid-glass {
+            nav, footer, .no-print, #cookie-banner, .fixed, .liquid-glass, .read-progress, .liquid-bg {
                 background: white !important;
                 box-shadow: none !important;
                 border: none !important;
                 backdrop-filter: none !important;
                 -webkit-backdrop-filter: none !important;
             }
-
-            nav,
-            footer,
-            .no-print,
-            #cookie-banner,
-            .fixed {
+            nav, footer, .no-print, #cookie-banner, .fixed, .read-progress, .liquid-bg {
                 display: none !important;
             }
-
+            .liquid-glass::before, .liquid-glass::after { display: none !important; }
             .print-header {
                 display: flex !important;
                 justify-content: space-between;
@@ -80,91 +151,41 @@ layout: null
                 margin-bottom: 25px;
                 font-family: sans-serif;
             }
-
-            .print-header-left {
-                font-size: 14px;
-                font-weight: 700;
-                color: #1d4ed8;
-            }
-
-            .print-header-right {
-                font-size: 14px;
-                font-weight: 600;
-                color: #374151;
-            }
-
-            .blog-text,
-            .blog-text p {
-                color: #000000 !important;
-            }
-
-            .author-note {
-                color: #374151 !important;
-                margin-top: 24px !important;
-                font-weight: 600 !important;
-            }
-
-            header.bg-gradient-to-r {
+            .print-header-left { font-size: 14px; font-weight: 700; color: #1d4ed8; }
+            .print-header-right { font-size: 14px; font-weight: 600; color: #374151; }
+            .blog-text, .blog-text p { color: #000000 !important; }
+            .author-note { color: #374151 !important; margin-top: 24px !important; font-weight: 600 !important; }
+            .post-hero {
                 background: white !important;
                 background-image: none !important;
                 color: #000000 !important;
-                padding-top: 10px !important;
-                padding-bottom: 15px !important;
+                margin: 0 !important;
+                padding: 10px 0 15px !important;
+                border-radius: 0 !important;
+                box-shadow: none !important;
                 border-bottom: 1px solid #e5e7eb;
             }
+            .post-hero .hero-deco { display: none !important; }
+            .post-hero h1 { color: #0f172a !important; font-size: 26px !important; font-weight: 800 !important; }
+            .post-hero span { color: #4b5563 !important; background: none !important; border: 0 !important; font-weight: 600 !important; }
+            .post-rise { opacity: 1 !important; animation: none !important; }
+            body { background: white !important; }
+            main { margin-top: 0 !important; padding: 0 !important; }
+            article { border: none !important; box-shadow: none !important; padding: 0 !important; transform: none !important; }
+            .blog-text img { box-shadow: none !important; border: 1px solid #d1d5db !important; border-radius: 8px !important; }
+        }
 
-            header h1 {
-                color: #0f172a !important;
-                font-size: 26px !important;
-                font-weight: 800 !important;
-            }
-
-            header span {
-                color: #4b5563 !important;
-                font-weight: 600 !important;
-            }
-
-            header div.border-b {
-                border-color: #e5e7eb !important;
-            }
-
-            body {
-                background-color: white !important;
-            }
-
-            main {
-                margin-top: 0 !important;
-                padding: 0 !important;
-            }
-
-            article {
-                border: none !important;
-                box-shadow: none !important;
-                padding: 0 !important;
-            }
-
-            /* Bilder beim Drucken ohne Schatten */
-            .blog-text img {
-                box-shadow: none !important;
-                border: 1px solid #d1d5db !important;
-                border-radius: 8px !important;
-            }
+        @media (prefers-reduced-motion: reduce) {
+            .post-rise { opacity: 1; animation: none; }
+            .read-progress { animation: none; transform: scaleX(1); opacity: 0; }
         }
     </style>
 </head>
+<body class="text-slate-900 font-sans antialiased flex flex-col min-h-screen relative overflow-x-hidden">
 
-<body class="text-gray-900 font-sans antialiased flex flex-col min-h-screen relative">
+    <div class="read-progress no-print" aria-hidden="true"></div>
 
-    <div id="custom-banner"
-         class="fixed top-24 right-4 z-50 transform translate-x-full opacity-0 transition-all duration-300 ease-out max-w-sm w-full bg-white border shadow-xl rounded-2xl p-4 flex items-start gap-3">
-
-        <span id="banner-icon" class="text-xl"></span>
-
-        <div class="flex-grow">
-            <h4 id="banner-title" class="font-bold text-sm text-gray-900"></h4>
-            <p id="banner-message" class="text-xs text-gray-600 mt-0.5"></p>
-        </div>
-    </div>
+    {% include toast.html %}
 
     <div class="print-header max-w-4xl mx-auto w-full px-4">
         <span class="print-header-left">M-Fleger</span>
@@ -173,374 +194,91 @@ layout: null
 
     {% include navigation.html %}
 
-    <header class="bg-gradient-to-r from-blue-900 via-indigo-900 to-blue-950 text-white text-center py-16 px-4">
-        <div class="max-w-4xl mx-auto flex flex-col items-center">
+    {% assign words = content | strip_html | number_of_words %}
+    {% assign read_time = words | divided_by: 180 | plus: 1 %}
+    {% assign numeric_id = page.date | date: "%Y%m%d%H%M" %}
 
-            <h1 class="text-3xl md:text-5xl font-black tracking-tight drop-shadow-md mb-4">
+    <!-- Artikel-Kopf -->
+    <header class="post-hero relative mx-3 sm:mx-4 -mt-[5.75rem] pt-36 md:pt-44 pb-28 md:pb-36 px-5 rounded-b-[40px] md:rounded-b-[64px] overflow-hidden text-white text-center shadow-[0_40px_80px_-30px_rgba(30,58,138,0.55)]"
+            style="background: linear-gradient(135deg, #1e3a8a 0%, #312e81 55%, #172554 100%);">
+        <div class="hero-deco absolute -top-24 -left-20 w-96 h-96 rounded-full bg-cyan-400/30 blur-3xl pointer-events-none animate-float"></div>
+        <div class="hero-deco absolute -bottom-32 -right-24 w-[28rem] h-[28rem] rounded-full bg-indigo-400/30 blur-3xl pointer-events-none animate-float" style="animation-delay: -3s; animation-duration: 9s;"></div>
+        <div class="hero-deco absolute inset-x-0 top-0 h-px bg-gradient-to-r from-transparent via-white/40 to-transparent"></div>
+
+        <div class="relative z-10 max-w-3xl mx-auto flex flex-col items-center">
+            <a href="/blog.html" class="post-rise no-print group mb-7 inline-flex items-center gap-2 rounded-full px-4 py-1.5 text-xs font-bold text-cyan-100 no-underline bg-white/10 border border-white/20 backdrop-blur-md transition-colors hover:bg-white/20">
+                <span class="transition-transform duration-500 group-hover:-translate-x-1">←</span> Blog
+            </a>
+            <h1 class="post-rise post-rise-2 text-3xl sm:text-4xl md:text-6xl font-extrabold tracking-tight leading-[1.08] mb-8">
                 {{ page.title }}
             </h1>
-
-            <div class="flex flex-col items-center gap-1 text-xs md:text-sm text-gray-300/90 font-medium w-full max-w-xs">
-                <span>Datum: {{ page.date | date: "%d.%m.%Y" }}</span>
-                <span>Schnellleser: ca. 1 Min. Lesezeit</span>
-                <div class="w-full border-b border-white/20 mt-3"></div>
+            <div class="post-rise post-rise-3 flex flex-wrap justify-center gap-2.5 text-xs md:text-sm font-semibold">
+                <span class="rounded-full px-4 py-1.5 bg-white/10 border border-white/20 backdrop-blur-md text-blue-50">📅 {{ page.date | date: "%d.%m.%Y" }}</span>
+                <span class="rounded-full px-4 py-1.5 bg-white/10 border border-white/20 backdrop-blur-md text-blue-50">📖 ca. {{ read_time }} Min. Lesezeit</span>
+                <span class="rounded-full px-4 py-1.5 bg-white/10 border border-white/20 backdrop-blur-md text-blue-50">✍️ {{ page.author | default: "Julian Maximilian Fleger" }}</span>
             </div>
-
         </div>
     </header>
 
-    {% assign numeric_id = page.date | date: "%Y%m%d%H%M" %}
-
-    <main class="max-w-4xl mx-auto px-4 py-12 flex-grow w-full -mt-10">
-
-        <article class="p-8 md:p-12 liquid-glass" data-post-id="{{ numeric_id }}">
-
-            <div class="blog-text prose max-w-none leading-relaxed space-y-6 text-base md:text-lg">
+    <main class="max-w-4xl mx-auto px-4 pb-12 flex-grow w-full -mt-20 relative z-20">
+        <article class="liquid-glass p-7 sm:p-10 md:p-14" data-post-id="{{ numeric_id }}">
+            <div class="blog-text max-w-[70ch] mx-auto">
                 {{ content }}
             </div>
 
             <!-- Autorenhinweis & Feedback-Box -->
-
-            <div class="author-note mt-8 pt-6 border-t border-gray-200/50 space-y-3 text-sm text-gray-600 font-medium">
-
+            <div class="author-note max-w-[70ch] mx-auto mt-12 pt-8 border-t border-slate-900/10 space-y-4 text-sm font-medium">
                 <p>
-                    <strong class="text-gray-900 font-bold">Text von</strong>
-                    Julian Maximilian Fleger
+                    <strong class="!text-slate-900 font-bold">Text von</strong>
+                    {{ page.author | default: "Julian Maximilian Fleger" }}
                 </p>
-
-                <p class="leading-relaxed bg-white/60 p-4 rounded-2xl border border-gray-200/60 shadow-xs">
+                <p class="leading-relaxed p-5 rounded-2xl bg-white/60 border border-white shadow-[inset_0_1px_0_#fff,0_8px_20px_-12px_rgba(30,58,138,0.25)]">
                     Hast du Anmerkungen zum Artikel, möchtest uns auf einen Fehler hinweisen oder hast Fragen zu den verwendeten Quellen?
                     Schreibe unserer Redaktion gerne direkt an
-                    <a href="mailto:redaktion@m-fleger.de"
-                       class="text-blue-600 font-bold hover:underline">
-                        redaktion@m-fleger.de
-                    </a>
+                    <a href="mailto:redaktion@m-fleger.de" class="!text-blue-600 font-bold hover:underline">redaktion@m-fleger.de</a>
                     oder wende dich bei Presseanfragen an
-                    <a href="mailto:presse@m-fleger.de"
-                       class="text-blue-600 font-bold hover:underline">
-                        presse@m-fleger.de
-                    </a>.
+                    <a href="mailto:presse@m-fleger.de" class="!text-blue-600 font-bold hover:underline">presse@m-fleger.de</a>.
                 </p>
-
             </div>
 
-            <div class="mt-6 pt-6 border-t border-gray-200/30 flex flex-wrap gap-3 justify-start no-print">
-
-                <button onclick="window.print()"
-                        class="bg-gray-100 hover:bg-gray-200 text-gray-700 font-bold text-sm px-5 py-2.5 rounded-xl transition-all cursor-pointer border border-gray-200 shadow-xs active:scale-95">
-                    Artikel ausdrucken / als PDF speichern
+            <div class="max-w-[70ch] mx-auto mt-8 flex flex-wrap gap-3 no-print">
+                <button type="button" onclick="window.print()" class="btn-glass !text-slate-700 text-sm px-5 py-3">
+                    🖨️ Artikel ausdrucken / als PDF speichern
                 </button>
-
-                <button onclick="favoritUmschalten('{{ numeric_id }}', this)"
-                        class="fav-btn bg-white hover:bg-gray-50 text-gray-900 font-bold text-sm px-5 py-2.5 rounded-xl transition-all cursor-pointer border border-gray-200 shadow-xs active:scale-95">
+                <button type="button" onclick="favoritUmschalten('{{ numeric_id }}', this)" class="fav-btn glass-pill !text-sm !px-5 !py-3" aria-label="Als Favorit speichern">
                     ⭐ Favorit
                 </button>
-
             </div>
 
-            <div class="mt-8 pt-6 border-t border-gray-200/30 flex justify-center no-print">
-
-                <a href="/blog.html"
-                   class="inline-flex items-center gap-2 text-sm font-bold text-blue-600 hover:text-blue-800 transition-colors no-underline">
-                    &larr; Zurück zur Blog-Übersicht
+            <div class="mt-10 pt-8 border-t border-slate-900/10 flex justify-center no-print">
+                <a href="/blog.html" class="group inline-flex items-center gap-2 text-sm font-bold !text-blue-600 hover:!text-blue-800 no-underline">
+                    <span class="!text-blue-600 transition-transform duration-500 group-hover:-translate-x-1">←</span> Zurück zur Blog-Übersicht
                 </a>
-
             </div>
-
         </article>
-
     </main>
 
-    <footer class="bg-white border-t border-gray-100 py-8 px-4 text-center text-gray-500 font-medium no-print">
-
-        <div class="max-w-6xl mx-auto flex flex-col md:flex-row justify-between items-center gap-4">
-
-            <p>&copy; 2026 M-Fleger. Alle Rechte vorbehalten.</p>
-
-            <div class="flex flex-wrap justify-center gap-4">
-
-                <a href="/index.html" class="hover:text-blue-600 transition-colors no-underline">
-                    Startseite
-                </a>
-
-                <a href="/ueber-mich.html" class="hover:text-blue-600 transition-colors no-underline">
-                    Über mich
-                </a>
-
-                <a href="/blog.html" class="hover:text-blue-600 transition-colors no-underline">
-                    Blog
-                </a>
-
-                <a href="/kontakt.html" class="hover:text-blue-600 transition-colors no-underline">
-                    Kontakt
-                </a>
-
-                <a href="/impressum.html" class="hover:text-blue-600 transition-colors no-underline">
-                    Impressum
-                </a>
-
-                <a href="/datenschutz.html" class="hover:text-blue-600 transition-colors no-underline">
-                    Datenschutz
-                </a>
-
-            </div>
-
-        </div>
-
-    </footer>
-
+    {% include footer.html %}
     {% include cookie-banner.html %}
 
+    <!-- Favoriten & Toast (gemeinsam mit Startseite und Blog) -->
+    <script src="/assets/js/reactions.js"></script>
+
     <script>
-        const SUPABASE_URL = "https://xxuanzhrrpwurkyjfjky.supabase.co";
-
-        const SUPABASE_ANON_KEY = "sb_publishable_WdzN1r5HkdnqrfIN2phV1g_-GdLlknq";
-
-        const supabaseClient = supabase.createClient(
-            SUPABASE_URL,
-            SUPABASE_ANON_KEY
-        );
-
-        function zeigeBanner(type, title, message) {
-
-            const banner = document.getElementById('custom-banner');
-            const icon = document.getElementById('banner-icon');
-            const titleEl = document.getElementById('banner-title');
-            const msgEl = document.getElementById('banner-message');
-
-            if (type === 'success') {
-
-                banner.className =
-                    "fixed top-24 right-4 z-50 transform transition-all duration-300 ease-out max-w-sm w-full bg-white border border-green-200 shadow-xl rounded-2xl p-4 flex items-start gap-3 text-green-800";
-
-                icon.innerText = "❤️";
-
-            } else if (type === 'info') {
-
-                banner.className =
-                    "fixed top-24 right-4 z-50 transform transition-all duration-300 ease-out max-w-sm w-full bg-white border border-blue-200 shadow-xl rounded-2xl p-4 flex items-start gap-3 text-blue-800";
-
-                icon.innerText = "ℹ️";
-
-            } else {
-
-                banner.className =
-                    "fixed top-24 right-4 z-50 transform transition-all duration-300 ease-out max-w-sm w-full bg-white border border-red-200 shadow-xl rounded-2xl p-4 flex items-start gap-3 text-red-800";
-
-                icon.innerText = "❌";
-            }
-
-            titleEl.innerText = title;
-            msgEl.innerText = message;
-
-            banner.classList.remove(
-                'translate-x-full',
-                'opacity-0'
-            );
-
-            setTimeout(() => {
-
-                banner.classList.add(
-                    'translate-x-full',
-                    'opacity-0'
-                );
-
-            }, 4000);
-        }
-
-        async function checkFavoritesOnLoad() {
-
-            try {
-
-                const { data: { user } } =
-                    await supabaseClient.auth.getUser();
-
-                if (user) {
-
-                    const { data: favoriten, error } =
-                        await supabaseClient
-                            .from('favoriten')
-                            .select('blog_id')
-                            .eq('user_id', user.id);
-
-                    if (!error && favoriten) {
-
-                        const favIds =
-                            new Set(
-                                favoriten.map(
-                                    f => f.blog_id.toString()
-                                )
-                            );
-
-                        const article =
-                            document.querySelector(
-                                'article[data-post-id]'
-                            );
-
-                        if (article) {
-
-                            const postId =
-                                article.getAttribute(
-                                    'data-post-id'
-                                );
-
-                            if (favIds.has(postId)) {
-
-                                const btn =
-                                    article.querySelector(
-                                        '.fav-btn'
-                                    );
-
-                                if (btn) {
-
-                                    btn.innerHTML =
-                                        "❤️ Favorisiert";
-
-                                    btn.classList.remove(
-                                        'bg-white',
-                                        'text-gray-900',
-                                        'border-gray-200'
-                                    );
-
-                                    btn.classList.add(
-                                        'bg-red-500',
-                                        'text-white',
-                                        'border-red-500'
-                                    );
-                                }
-                            }
-                        }
-                    }
-                }
-
-            } catch (err) {
-
-                console.error(err);
-            }
-        }
-
-        async function favoritUmschalten(blogId, button) {
-
-            try {
-
-                const { data: { user } } =
-                    await supabaseClient.auth.getUser();
-
-                if (!user) {
-
-                    window.location.href =
-                        "/anmeldung-erforderlich.html";
-
-                    return;
-                }
-
-                const { data: existiert } =
-                    await supabaseClient
-                        .from('favoriten')
-                        .select('*')
-                        .eq('user_id', user.id)
-                        .eq('blog_id', blogId);
-
-                if (existiert && existiert.length > 0) {
-
-                    const { error } =
-                        await supabaseClient
-                            .from('favoriten')
-                            .delete()
-                            .eq('user_id', user.id)
-                            .eq('blog_id', blogId);
-
-                    if (!error) {
-
-                        button.innerHTML = "⭐ Favorit";
-
-                        button.classList.remove(
-                            'bg-red-500',
-                            'text-white',
-                            'border-red-500'
-                        );
-
-                        button.classList.add(
-                            'bg-white',
-                            'text-gray-900',
-                            'border-gray-200'
-                        );
-
-                        zeigeBanner(
-                            'info',
-                            'Entfernt',
-                            'Der Artikel wurde aus deinen Favoriten gelöscht.'
-                        );
-
-                    } else {
-
-                        zeigeBanner(
-                            'error',
-                            'Fehler',
-                            error.message
-                        );
-                    }
-
-                } else {
-
-                    const { error } =
-                        await supabaseClient
-                            .from('favoriten')
-                            .insert([
-                                {
-                                    user_id: user.id,
-                                    blog_id: blogId
-                                }
-                            ]);
-
-                    if (!error) {
-
-                        button.innerHTML =
-                            "❤️ Favorisiert";
-
-                        button.classList.remove(
-                            'bg-white',
-                            'text-gray-900',
-                            'border-gray-200'
-                        );
-
-                        button.classList.add(
-                            'bg-red-500',
-                            'text-white',
-                            'border-red-500'
-                        );
-
-                        zeigeBanner(
-                            'success',
-                            'Favorisiert!',
-                            'Gespeichert. Du findest den Artikel in deinem Profil.'
-                        );
-
-                    } else {
-
-                        zeigeBanner(
-                            'error',
-                            'Fehler beim Speichern',
-                            error.message
-                        );
-                    }
-                }
-
-            } catch (err) {
-
-                zeigeBanner(
-                    'error',
-                    'Fehler',
-                    err.message
-                );
-            }
-        }
-
-        document.addEventListener(
-            "DOMContentLoaded",
-            checkFavoritesOnLoad
-        );
+        // Lesefortschritt für Browser ohne CSS-Scroll-Timeline (Firefox, ältere Safari)
+        (function () {
+            if (window.CSS && CSS.supports('animation-timeline: scroll()')) return;
+            const bar = document.querySelector('.read-progress');
+            if (!bar) return;
+            let ticking = false;
+            const update = () => {
+                const max = document.documentElement.scrollHeight - window.innerHeight;
+                bar.style.transform = 'scaleX(' + (max > 0 ? Math.min(window.scrollY / max, 1) : 0) + ')';
+                ticking = false;
+            };
+            window.addEventListener('scroll', () => { if (!ticking) { ticking = true; requestAnimationFrame(update); } }, { passive: true });
+            update();
+        })();
     </script>
-
 </body>
 </html>

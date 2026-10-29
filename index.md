@@ -95,11 +95,6 @@ robots: index, follow
             filter: drop-shadow(0 0 8px rgba(255, 255, 255, 0.12));
         }
 
-        /* Toast */
-        #custom-banner {
-            transition: transform 0.6s cubic-bezier(0.34, 1.4, 0.64, 1), opacity 0.35s ease;
-        }
-
         @media (prefers-reduced-motion: reduce) {
             .rise, .animate-hero { opacity: 1; animation: none; }
             .animate-draw { stroke-dashoffset: 0; animation: none; }
@@ -109,15 +104,7 @@ robots: index, follow
 </head>
 <body class="text-slate-900 font-sans antialiased flex flex-col min-h-screen relative overflow-x-hidden">
 
-    <!-- Toast Banner -->
-    <div id="custom-banner" role="status" aria-live="polite"
-         class="glass-panel fixed top-24 right-4 z-50 translate-x-[120%] opacity-0 max-w-sm w-[calc(100%-2rem)] !rounded-2xl p-4 flex items-start gap-3">
-        <span id="banner-icon" class="text-xl leading-none mt-0.5"></span>
-        <div class="flex-grow">
-            <h4 id="banner-title" class="font-bold text-sm text-slate-900"></h4>
-            <p id="banner-message" class="text-xs text-slate-600 mt-0.5"></p>
-        </div>
-    </div>
+    {% include toast.html %}
 
     <!-- Navigation -->
     {% include navigation.html %}
@@ -407,153 +394,10 @@ robots: index, follow
     {% include footer.html %}
     {% include cookie-banner.html %}
 
+    <!-- Likes, Favoriten & Toast (gemeinsam mit Blog und Artikeln) -->
+    <script src="/assets/js/reactions.js"></script>
+
     <script>
-        const SUPABASE_URL = "https://xxuanzhrrpwurkyjfjky.supabase.co";
-        const SUPABASE_ANON_KEY = "sb_publishable_WdzN1r5HkdnqrfIN2phV1g_-GdLlknq";
-        // Falls das Supabase-CDN einmal nicht lädt, laufen Ringe & Slideshow trotzdem weiter
-        const supabaseClient = window.supabase ? supabase.createClient(SUPABASE_URL, SUPABASE_ANON_KEY) : null;
-
-        /* ---------- Darstellung der Like-/Favoriten-Knöpfe ---------- */
-        function setLikeState(btn, liked, count) {
-            btn.classList.toggle('is-on', liked);
-            btn.innerHTML = `${liked ? '💖' : '🤍'} <span class="like-counter">${count}</span> Likes`;
-        }
-        function setFavState(btn, fav) {
-            btn.classList.toggle('is-on', fav);
-            btn.innerHTML = fav ? '❤️ Favorisiert' : '⭐ Favorit';
-        }
-        function pop(btn) { if (window.MFMotion) window.MFMotion.pop(btn); }
-
-        /* ---------- Toast ---------- */
-        let bannerTimer;
-        function zeigeBanner(type, title, message) {
-            const banner = document.getElementById('custom-banner');
-            const icons = { success: '❤️', info: 'ℹ️', error: '❌' };
-            const tints = {
-                success: 'rgba(74, 222, 128, 0.55)',
-                info: 'rgba(96, 165, 250, 0.55)',
-                error: 'rgba(248, 113, 113, 0.6)'
-            };
-            document.getElementById('banner-icon').innerText = icons[type] || icons.error;
-            document.getElementById('banner-title').innerText = title;
-            document.getElementById('banner-message').innerText = message;
-            banner.style.borderColor = tints[type] || tints.error;
-
-            banner.classList.remove('translate-x-[120%]', 'opacity-0');
-            clearTimeout(bannerTimer);
-            bannerTimer = setTimeout(() => {
-                banner.classList.add('translate-x-[120%]', 'opacity-0');
-            }, 4000);
-        }
-
-        /* ---------- Daten laden ---------- */
-        async function datenLaden() {
-            if (!supabaseClient) return;
-            try {
-                const cards = document.getElementsByClassName('blog-card');
-
-                const { data: alleLikes, error: likeError } = await supabaseClient
-                    .from('likes')
-                    .select('blog_id');
-
-                if (!likeError && alleLikes) {
-                    const likeCounts = {};
-                    alleLikes.forEach(l => {
-                        likeCounts[l.blog_id] = (likeCounts[l.blog_id] || 0) + 1;
-                    });
-                    for (let card of cards) {
-                        const counter = card.querySelector('.like-counter');
-                        if (counter) counter.innerText = likeCounts[card.getAttribute('data-post-id')] || 0;
-                    }
-                }
-
-                const { data: { user } } = await supabaseClient.auth.getUser();
-                if (!user) return;
-
-                const { data: favoriten } = await supabaseClient
-                    .from('favoriten')
-                    .select('blog_id')
-                    .eq('user_id', user.id);
-
-                if (favoriten) {
-                    const favIds = new Set(favoriten.map(f => f.blog_id.toString()));
-                    for (let card of cards) {
-                        const btn = card.querySelector('.fav-btn');
-                        if (btn && favIds.has(card.getAttribute('data-post-id'))) setFavState(btn, true);
-                    }
-                }
-
-                const { data: meineLikes } = await supabaseClient
-                    .from('likes')
-                    .select('blog_id')
-                    .eq('user_id', user.id);
-
-                if (meineLikes) {
-                    const likedIds = new Set(meineLikes.map(l => l.blog_id.toString()));
-                    for (let card of cards) {
-                        const btn = card.querySelector('.like-btn');
-                        if (btn && likedIds.has(card.getAttribute('data-post-id'))) {
-                            const counter = btn.querySelector('.like-counter');
-                            setLikeState(btn, true, counter ? counter.innerText : '0');
-                        }
-                    }
-                }
-            } catch (err) { console.error(err); }
-        }
-
-        async function favoritUmschalten(blogId, button) {
-            if (!supabaseClient) { zeigeBanner('error', 'Fehler', 'Verbindung zum Server fehlgeschlagen.'); return; }
-            try {
-                const { data: { user } } = await supabaseClient.auth.getUser();
-                if (!user) { window.location.href = "/anmeldung-erforderlich.html"; return; }
-
-                const { data: existiert } = await supabaseClient.from('favoriten').select('*').eq('user_id', user.id).eq('blog_id', blogId);
-
-                if (existiert && existiert.length > 0) {
-                    const { error } = await supabaseClient.from('favoriten').delete().eq('user_id', user.id).eq('blog_id', blogId);
-                    if (!error) {
-                        setFavState(button, false);
-                        zeigeBanner('info', 'Entfernt', 'Der Artikel wurde aus deinen Favoriten gelöscht.');
-                    }
-                } else {
-                    const { error } = await supabaseClient.from('favoriten').insert([{ user_id: user.id, blog_id: blogId }]);
-                    if (!error) {
-                        setFavState(button, true);
-                        pop(button);
-                        zeigeBanner('success', 'Favorisiert!', 'Gespeichert in deinem Profil unter Favoriten.');
-                    }
-                }
-            } catch (err) { zeigeBanner('error', 'Fehler', err.message); }
-        }
-
-        async function likeUmschalten(blogId, button) {
-            if (!supabaseClient) { zeigeBanner('error', 'Fehler', 'Verbindung zum Server fehlgeschlagen.'); return; }
-            try {
-                const { data: { user } } = await supabaseClient.auth.getUser();
-                if (!user) { window.location.href = "/anmeldung-erforderlich.html"; return; }
-
-                const counterEl = button.querySelector('.like-counter');
-                let aktuellerStand = parseInt(counterEl.innerText) || 0;
-
-                const { data: existiert } = await supabaseClient.from('likes').select('*').eq('user_id', user.id).eq('blog_id', blogId);
-
-                if (existiert && existiert.length > 0) {
-                    const { error } = await supabaseClient.from('likes').delete().eq('user_id', user.id).eq('blog_id', blogId);
-                    if (!error) {
-                        setLikeState(button, false, Math.max(0, aktuellerStand - 1));
-                        zeigeBanner('info', 'Like entfernt', 'Schade, dir gefällt dieser Beitrag nicht mehr.');
-                    }
-                } else {
-                    const { error } = await supabaseClient.from('likes').insert([{ user_id: user.id, blog_id: blogId }]);
-                    if (!error) {
-                        setLikeState(button, true, aktuellerStand + 1);
-                        pop(button);
-                        zeigeBanner('success', 'Geliked!', 'Danke für dein Feedback zu diesem Beitrag!');
-                    }
-                }
-            } catch (err) { zeigeBanner('error', 'Fehler', err.message); }
-        }
-
         /* ---------- Aktivitätsringe ---------- */
         function animiereAktivitaetsRinge() {
             const words = parseInt("{{ total_words }}") || 0;
@@ -575,8 +419,6 @@ robots: index, follow
         }
 
         document.addEventListener("DOMContentLoaded", function () {
-            datenLaden();
-
             // Ringe füllen sich, sobald der Bereich sichtbar ist
             const targetSection = document.getElementById('activity-section');
             if (targetSection && 'IntersectionObserver' in window) {

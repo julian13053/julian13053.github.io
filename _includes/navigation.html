@@ -90,7 +90,7 @@
         var here = normalize(window.location.pathname);
         document.querySelectorAll('[data-nav]').forEach(function (link) {
             var target = normalize(link.getAttribute('href'));
-            var isBlogPost = target === '/blog' && /^\/\d{4}\/\d{2}\/\d{2}\//.test(window.location.pathname);
+            var isBlogPost = target === '/blog' && /\/\d{4}\/\d{2}\/\d{2}\//.test(window.location.pathname);
             var isRightsPage = target === '/unsere-rechte' && /^\/(kinder|menschen|digital|umwelt|erwachsenen)rechte/.test(here);
             if (target === here || isBlogPost || isRightsPage) link.setAttribute('aria-current', 'page');
         });
