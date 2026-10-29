@@ -66,6 +66,7 @@
     --radius-xl: 40px;
     --ease-out: cubic-bezier(0.16, 1, 0.3, 1);
     --ease-soft: cubic-bezier(0.215, 0.61, 0.355, 1);
+    --ease-spring: cubic-bezier(0.34, 1.4, 0.64, 1);   /* leichtes Nachfedern */
 
     /* Typografie – überschreibt Tailwinds Standard-Sans seitenweit */
     --font-display: "Bricolage Grotesque", "Manrope", ui-sans-serif, system-ui, sans-serif;
@@ -97,38 +98,77 @@ body {
     text-rendering: optimizeLegibility;
 }
 
-/* Zwei langsam treibende "Flüssig-Blobs" hinter allem Inhalt.
-   Sie geben dem Glas etwas, das es brechen kann. */
-body::before,
-body::after {
-    content: "";
+/* Drei langsam treibende "Flüssig-Blobs" hinter allem Inhalt.
+   motion.js fügt dafür <div class="liquid-bg"> ein: ein fixierter Rahmen,
+   der seine Kinder abschneidet → kein seitliches Scrollen auf dem Handy.
+   Elliptische Verläufe + Rotation wirken organisch; animiert werden nur
+   transform/opacity, das läuft auf der GPU. */
+.liquid-bg {
     position: fixed;
+    inset: 0;
     z-index: -1;
-    width: 42vmax;
-    height: 42vmax;
-    border-radius: 50%;
-    filter: blur(80px);
-    opacity: 0.38;
+    overflow: hidden;
     pointer-events: none;
-    will-change: transform;
 }
-body::before {
-    top: -14vmax;
-    left: -10vmax;
-    background: radial-gradient(circle at 30% 30%, var(--brand-500), transparent 65%);
-    animation: liquidDrift 28s var(--ease-soft) infinite alternate;
+.liquid-bg > span {
+    position: absolute;
+    border-radius: 50%;
+    will-change: transform, opacity;
 }
-body::after {
-    right: -12vmax;
-    bottom: -16vmax;
-    background: radial-gradient(circle at 60% 60%, var(--accent-400), transparent 65%);
-    animation: liquidDrift 34s var(--ease-soft) infinite alternate-reverse;
+.liquid-bg > span:nth-child(1) {
+    --blob-o: 0.42;
+    top: -16vmax;
+    left: -12vmax;
+    width: 48vmax;
+    height: 40vmax;
+    background: radial-gradient(ellipse at 35% 40%, rgba(59, 130, 246, 0.85), rgba(37, 99, 235, 0.35) 45%, transparent 70%);
+    filter: blur(70px);
+    opacity: var(--blob-o);
+    animation: liquidDriftA 38s var(--ease-soft) infinite alternate, liquidPulse 14s ease-in-out infinite;
+}
+.liquid-bg > span:nth-child(2) {
+    --blob-o: 0.36;
+    right: -14vmax;
+    bottom: -18vmax;
+    width: 46vmax;
+    height: 52vmax;
+    background: radial-gradient(ellipse at 60% 55%, rgba(34, 211, 238, 0.85), rgba(6, 182, 212, 0.3) 45%, transparent 70%);
+    filter: blur(80px);
+    opacity: var(--blob-o);
+    animation: liquidDriftB 46s var(--ease-soft) infinite alternate, liquidPulse 18s ease-in-out -6s infinite;
+}
+.liquid-bg > span:nth-child(3) {
+    --blob-o: 0.22;
+    top: 38vh;
+    left: 42vw;
+    width: 30vmax;
+    height: 24vmax;
+    background: radial-gradient(ellipse at 50% 50%, rgba(129, 140, 248, 0.75), rgba(49, 46, 129, 0.25) 50%, transparent 72%);
+    filter: blur(90px);
+    opacity: var(--blob-o);
+    animation: liquidDriftC 52s var(--ease-soft) infinite alternate, liquidPulse 22s ease-in-out -11s infinite;
 }
 
-@keyframes liquidDrift {
-    0%   { transform: translate3d(0, 0, 0) scale(1); }
-    50%  { transform: translate3d(6vmax, 4vmax, 0) scale(1.08); }
-    100% { transform: translate3d(-3vmax, 8vmax, 0) scale(0.96); }
+@keyframes liquidDriftA {
+    0%   { transform: translate3d(0, 0, 0) rotate(0deg) scale(1); }
+    33%  { transform: translate3d(7vmax, 3vmax, 0) rotate(18deg) scale(1.08); }
+    66%  { transform: translate3d(2vmax, 9vmax, 0) rotate(-10deg) scale(0.95); }
+    100% { transform: translate3d(10vmax, 5vmax, 0) rotate(24deg) scale(1.05); }
+}
+@keyframes liquidDriftB {
+    0%   { transform: translate3d(0, 0, 0) rotate(0deg) scale(1); }
+    40%  { transform: translate3d(-8vmax, -5vmax, 0) rotate(-22deg) scale(1.1); }
+    100% { transform: translate3d(-3vmax, -11vmax, 0) rotate(12deg) scale(0.94); }
+}
+@keyframes liquidDriftC {
+    0%   { transform: translate3d(0, 0, 0) rotate(0deg) scale(1); }
+    50%  { transform: translate3d(-14vmax, 6vmax, 0) rotate(40deg) scale(1.15); }
+    100% { transform: translate3d(8vmax, -8vmax, 0) rotate(-20deg) scale(0.9); }
+}
+/* Sanftes "Atmen": die Deckkraft schwankt minimal */
+@keyframes liquidPulse {
+    0%, 100% { opacity: var(--blob-o, 0.38); }
+    50%      { opacity: calc(var(--blob-o, 0.38) * 0.6); }
 }
 
 /* Überschriften bekommen die Display-Schrift (Gewicht kommt weiter von Tailwind) */
@@ -165,17 +205,20 @@ p {
     border-radius: var(--radius-lg) !important;
     box-shadow: var(--glass-shadow) !important;
     /* transform erzeugt einen eigenen Stacking-Context + Containing Block,
-       damit der Lichtreflex (::before) sauber im Element bleibt.
-       Bewusst KEIN position-Override mehr – fixed/absolute aus Tailwind bleiben wirksam. */
+       damit Lichtreflex (::before) und Shimmer (::after) im Element bleiben.
+       Bewusst KEIN position-Override – fixed/absolute aus Tailwind bleiben wirksam. */
     transform: translateZ(0);
     transition:
-        transform 0.45s var(--ease-out),
-        box-shadow 0.45s var(--ease-out),
+        transform 0.55s var(--ease-spring),
+        box-shadow 0.55s var(--ease-out),
         border-color 0.45s var(--ease-out),
-        background 0.45s var(--ease-out) !important;
+        background 0.45s var(--ease-out),
+        opacity 0.9s var(--ease-out),
+        translate 0.9s var(--ease-out),
+        scale 0.9s var(--ease-out) !important;
 }
 
-/* Spiegelnder Lichtreflex oben links – die "Liquid"-Kante */
+/* Spiegelnder Lichtreflex – folgt beim Hovern dem Mauszeiger (--mx/--my aus motion.js) */
 .liquid-glass::before {
     content: "";
     position: absolute;
@@ -184,20 +227,48 @@ p {
     border-radius: inherit;
     pointer-events: none;
     background:
-        radial-gradient(120% 60% at 0% 0%, rgba(255, 255, 255, 0.55), transparent 55%),
-        linear-gradient(180deg, rgba(255, 255, 255, 0.18), transparent 40%);
-    opacity: 0.9;
+        radial-gradient(28rem circle at var(--mx, 0%) var(--my, 0%), rgba(255, 255, 255, 0.6), transparent 45%),
+        linear-gradient(180deg, rgba(255, 255, 255, 0.2), transparent 40%);
+    opacity: 0.85;
     transition: opacity 0.45s var(--ease-out);
 }
 
+/* Shimmer: ein diagonaler Glanzstreifen gleitet beim Hovern über das Glas */
+.liquid-glass::after {
+    content: "";
+    position: absolute;
+    inset: 0;
+    z-index: -1;
+    border-radius: inherit;
+    pointer-events: none;
+    background: linear-gradient(115deg, transparent 38%, rgba(255, 255, 255, 0.5) 50%, transparent 62%) no-repeat;
+    background-size: 250% 100%;
+    background-position: 160% 0;
+    transition: background-position 1.1s var(--ease-out);
+}
+
 .liquid-glass:hover {
-    transform: translate3d(0, -4px, 0) !important;
-    border-color: rgba(255, 255, 255, 0.85) !important;
+    transform: translate3d(0, -5px, 0) !important;
+    border-color: rgba(255, 255, 255, 0.88) !important;
     box-shadow: var(--glass-shadow-hover) !important;
 }
-.liquid-glass:hover::before {
-    opacity: 1;
+.liquid-glass:hover::before { opacity: 1; }
+.liquid-glass:hover::after  { background-position: -60% 0; }
+
+/* Klick-Feedback für klickbare Glas-Karten */
+a.liquid-glass:active,
+button.liquid-glass:active,
+.liquid-glass[onclick]:active {
+    transform: translate3d(0, -2px, 0) scale(0.985) !important;
+    transition-duration: 0.12s !important;
 }
+
+/* Große Glas-Container (Seiteninhalte, lange Artikel) heben nicht ab –
+   motion.js markiert alles über ~560px Höhe mit data-glass="static". */
+.liquid-glass[data-glass="static"]:hover {
+    transform: translateZ(0) !important;
+}
+.liquid-glass[data-glass="static"]::after { display: none; }
 
 /* Typografie innerhalb von Glas (wie bisher, für Lesbarkeit) */
 .liquid-glass h1, .liquid-glass h2, .liquid-glass h3,
@@ -242,7 +313,6 @@ p {
 
 /* Kräftigeres, fast weißes Glas – gut lesbar über dunklen Flächen */
 .glass-panel {
-    position: relative;
     background: linear-gradient(150deg, rgba(255, 255, 255, 0.96), rgba(255, 255, 255, 0.88));
     backdrop-filter: blur(24px) saturate(180%);
     -webkit-backdrop-filter: blur(24px) saturate(180%);
@@ -253,7 +323,6 @@ p {
 
 /* Dunkles Rauchglas */
 .glass-smoke {
-    position: relative;
     background:
         linear-gradient(180deg, rgba(255, 255, 255, 0.07), rgba(255, 255, 255, 0) 60%),
         var(--smoke-bg);
@@ -266,6 +335,20 @@ p {
         0 40px 80px -40px rgba(30, 58, 138, 0.45);
 }
 
+/* Dunkle, deckende Glaskarte (z. B. Statistik) – sieht auch über hellem Grund dunkel aus */
+.glass-dark-card {
+    color: #fff;
+    background:
+        radial-gradient(70% 60% at 0% 0%, rgba(59, 130, 246, 0.28), transparent 60%),
+        radial-gradient(60% 60% at 100% 100%, rgba(6, 182, 212, 0.22), transparent 60%),
+        linear-gradient(160deg, #111c3a 0%, #0f172a 55%, #0b1226 100%);
+    border: 1px solid rgba(255, 255, 255, 0.1);
+    box-shadow:
+        inset 0 1px 0 rgba(255, 255, 255, 0.14),
+        0 30px 60px -25px rgba(15, 23, 42, 0.55),
+        0 50px 100px -40px rgba(30, 58, 138, 0.45);
+}
+
 /* Haarfeine Verlaufslinie (z. B. Trenner im Footer) */
 .glass-hairline {
     height: 1px;
@@ -275,7 +358,6 @@ p {
 
 /* Primär-Button: Marken-Verlauf mit Lichtkante und Glanz beim Hover */
 .btn-brand {
-    position: relative;
     display: inline-flex;
     align-items: center;
     justify-content: center;
@@ -474,7 +556,222 @@ p {
 }
 
 /* ----------------------------------------------------------
-   7. FALLBACKS & PRÄFERENZEN
+   7. MOTION – Einblenden, Micro-Interactions, Seitenwechsel
+   ---------------------------------------------------------- */
+
+/* Navigation: Leiste zieht sich beim Scrollen zusammen */
+.nav-shell {
+    max-width: 72rem;
+    transition: max-width 0.6s var(--ease-out), top 0.6s var(--ease-out);
+}
+.nav-shell.is-scrolled {
+    max-width: 62rem;
+}
+.nav-shell.is-scrolled .nav-bar {
+    border-radius: 26px;
+}
+.nav-bar {
+    transition: border-radius 0.6s var(--ease-out), box-shadow 0.6s var(--ease-out), background 0.5s ease, transform 0.5s var(--ease-out);
+}
+/* Mobilmenü: Links fallen nacheinander herein */
+.mobile-panel .mobile-link,
+.mobile-panel .btn-brand {
+    opacity: 0;
+    translate: 0 -8px;
+    transition: opacity 0.35s ease, translate 0.5s var(--ease-out), background 0.2s ease, color 0.2s ease;
+}
+.mobile-panel[data-open="true"] .mobile-link,
+.mobile-panel[data-open="true"] .btn-brand {
+    opacity: 1;
+    translate: 0 0;
+}
+.mobile-panel[data-open="true"] .mobile-link:nth-of-type(1) { transition-delay: 0.05s; }
+.mobile-panel[data-open="true"] .mobile-link:nth-of-type(2) { transition-delay: 0.09s; }
+.mobile-panel[data-open="true"] .mobile-link:nth-of-type(3) { transition-delay: 0.13s; }
+.mobile-panel[data-open="true"] .mobile-link:nth-of-type(4) { transition-delay: 0.17s; }
+.mobile-panel[data-open="true"] .mobile-link:nth-of-type(5) { transition-delay: 0.21s; }
+.mobile-panel[data-open="true"] .mobile-link:nth-of-type(6) { transition-delay: 0.25s; }
+.mobile-panel[data-open="true"] .btn-brand                  { transition-delay: 0.3s; }
+
+/* Scroll-Reveal: Nur aktiv, wenn motion.js läuft (.motion-ready auf <html>).
+   Ohne JavaScript bleibt alles sofort sichtbar. Nutzt die eigenständigen
+   Properties translate/scale, damit Hover-transforms nicht kollidieren. */
+.motion-ready [data-reveal] {
+    transition-property: opacity, translate, scale, transform, box-shadow, background-color, border-color, color;
+    transition-duration: 0.9s, 0.9s, 0.9s, 0.45s, 0.45s, 0.3s, 0.3s, 0.3s;
+    transition-timing-function: var(--ease-out);
+}
+.motion-ready [data-reveal]:not(.is-visible) {
+    opacity: 0;
+    translate: 0 28px;
+    scale: 0.985;
+}
+.motion-ready [data-reveal="fade"]:not(.is-visible)  { translate: 0 0; scale: 1; }
+.motion-ready [data-reveal="left"]:not(.is-visible)  { translate: -28px 0; }
+.motion-ready [data-reveal="right"]:not(.is-visible) { translate: 28px 0; }
+.motion-ready [data-reveal="zoom"]:not(.is-visible)  { translate: 0 0; scale: 0.94; }
+
+/* Weiche Seitenwechsel zwischen allen Unterseiten (Chrome/Edge/Safari 18+) */
+@view-transition {
+    navigation: auto;
+}
+::view-transition-old(root) {
+    animation: vtOut 0.28s var(--ease-out) both;
+}
+::view-transition-new(root) {
+    animation: vtIn 0.45s var(--ease-out) both;
+}
+@keyframes vtOut { to   { opacity: 0; transform: translateY(-6px); } }
+@keyframes vtIn  { from { opacity: 0; transform: translateY(10px); } }
+
+/* Pointer-Tilt (z. B. Hero-Foto) – Werte setzt motion.js */
+[data-tilt] {
+    transform: perspective(900px) rotateX(var(--rx, 0deg)) rotateY(var(--ry, 0deg));
+    transition: transform 0.6s var(--ease-out);
+    transform-style: preserve-3d;
+}
+
+/* Sanftes Schweben für dekorative Elemente */
+@keyframes floatY {
+    0%, 100% { translate: 0 0; }
+    50%      { translate: 0 -10px; }
+}
+.animate-float { animation: floatY 7s ease-in-out infinite; }
+
+/* Endlos-Shimmer für Badges / Hervorhebungen */
+@keyframes shimmerSweep {
+    0%   { background-position: 180% 0; }
+    60%, 100% { background-position: -80% 0; }
+}
+.shimmer {
+    overflow: hidden;
+}
+.shimmer::after {
+    content: "";
+    position: absolute;
+    inset: 0;
+    pointer-events: none;
+    background: linear-gradient(110deg, transparent 35%, rgba(255, 255, 255, 0.55) 50%, transparent 65%) no-repeat;
+    background-size: 250% 100%;
+    animation: shimmerSweep 4.5s var(--ease-soft) infinite;
+}
+
+/* Glas-Pillen-Buttons (Like, Favorit, Filter) */
+.glass-pill {
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    gap: 0.4rem;
+    padding: 0.45rem 0.9rem;
+    border-radius: 999px;
+    font-size: 0.75rem;
+    font-weight: 700;
+    color: var(--ink);
+    background: rgba(255, 255, 255, 0.55);
+    border: 1px solid rgba(255, 255, 255, 0.85);
+    box-shadow: inset 0 1px 0 rgba(255, 255, 255, 0.9), 0 2px 8px -4px rgba(15, 23, 42, 0.18);
+    backdrop-filter: blur(10px);
+    -webkit-backdrop-filter: blur(10px);
+    cursor: pointer;
+    transition: transform 0.4s var(--ease-spring), background 0.25s ease, box-shadow 0.3s ease, color 0.2s ease, border-color 0.2s ease;
+}
+.glass-pill:hover {
+    transform: translateY(-2px) scale(1.04);
+    background: rgba(255, 255, 255, 0.85);
+    box-shadow: inset 0 1px 0 #fff, 0 8px 18px -8px rgba(37, 99, 235, 0.35);
+}
+.glass-pill:active {
+    transform: scale(0.94);
+    transition-duration: 0.1s;
+}
+/* Pillen in Glas-Karten behalten ihre Form (überschreibt die generische Glas-Button-Regel) */
+.liquid-glass .glass-pill {
+    border-radius: 999px !important;
+    padding: 0.45rem 0.9rem;
+    font-size: 0.75rem;
+    font-weight: 700 !important;
+}
+/* Aktiver Zustand: Like = Pink, Favorit = Rot-Orange */
+.glass-pill.is-on,
+.liquid-glass .glass-pill.is-on {
+    color: #fff !important;
+    background: linear-gradient(135deg, #ec4899, #f43f5e) !important;
+    border-color: transparent !important;
+    box-shadow: inset 0 1px 0 rgba(255, 255, 255, 0.35), 0 8px 18px -8px rgba(236, 72, 153, 0.7) !important;
+}
+.glass-pill.fav-btn.is-on,
+.liquid-glass .glass-pill.fav-btn.is-on {
+    background: linear-gradient(135deg, #ef4444, #f97316) !important;
+    box-shadow: inset 0 1px 0 rgba(255, 255, 255, 0.35), 0 8px 18px -8px rgba(239, 68, 68, 0.7) !important;
+}
+.glass-pill.is-on span,
+.liquid-glass .glass-pill span {
+    color: inherit !important;
+}
+/* kleiner "Pop", wenn Like/Favorit gesetzt wird (Klasse kommt aus dem Seiten-Skript) */
+@keyframes popHeart {
+    0%   { transform: scale(1); }
+    35%  { transform: scale(1.22); }
+    65%  { transform: scale(0.94); }
+    100% { transform: scale(1); }
+}
+.is-popping { animation: popHeart 0.5s var(--ease-spring); }
+
+/* Sekundärer Glas-Button (heller) */
+.btn-glass {
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    gap: 0.5rem;
+    font-weight: 700;
+    text-decoration: none;
+    color: var(--ink);
+    border-radius: 14px;
+    background: rgba(255, 255, 255, 0.6);
+    border: 1px solid rgba(255, 255, 255, 0.9);
+    box-shadow: inset 0 1px 0 #fff, 0 6px 18px -10px rgba(15, 23, 42, 0.3);
+    backdrop-filter: blur(12px);
+    -webkit-backdrop-filter: blur(12px);
+    transition: transform 0.45s var(--ease-spring), background 0.25s ease, box-shadow 0.35s ease;
+}
+.btn-glass:hover {
+    transform: translateY(-2px);
+    background: rgba(255, 255, 255, 0.85);
+    box-shadow: inset 0 1px 0 #fff, 0 14px 28px -12px rgba(37, 99, 235, 0.35);
+}
+.btn-glass:active { transform: scale(0.97); transition-duration: 0.1s; }
+
+/* Pfeil, der beim Hovern des Elternelements nach rechts rutscht */
+.arrow-nudge {
+    display: inline-block;
+    transition: transform 0.45s var(--ease-spring);
+}
+:hover > .arrow-nudge,
+.group:hover .arrow-nudge {
+    transform: translateX(5px);
+}
+
+/* Globales, dezentes Klick-Feedback für alle Buttons.
+   Liegt bewusst in einem Layer: Tailwind-Utilities (z. B. hover:scale-110)
+   haben Vorrang, nichts Bestehendes wird überschrieben. */
+@layer components {
+    /* Positions-Defaults im Layer, damit Tailwind-Klassen wie fixed/absolute gewinnen */
+    .glass-panel, .glass-smoke, .glass-dark-card, .btn-brand, .shimmer {
+        position: relative;
+    }
+
+    button:not(:disabled),
+    [role="button"] {
+        transition: scale 0.2s var(--ease-out), background-color 0.2s ease, color 0.2s ease, border-color 0.2s ease, box-shadow 0.2s ease;
+    }
+    button:not(:disabled):active,
+    [role="button"]:active {
+        scale: 0.96;
+    }
+}
+
+/* ----------------------------------------------------------
+   8. FALLBACKS & PRÄFERENZEN
    ---------------------------------------------------------- */
 
 /* Browser ohne backdrop-filter: deckender, damit Text lesbar bleibt */
@@ -488,22 +785,29 @@ p {
 @media (prefers-reduced-transparency: reduce) {
     .liquid-glass { background: rgba(255, 255, 255, 0.95) !important; backdrop-filter: none !important; -webkit-backdrop-filter: none !important; }
     .glass-smoke  { background: rgba(15, 23, 42, 0.96); backdrop-filter: none; -webkit-backdrop-filter: none; }
-    body::before, body::after { display: none; }
+    .liquid-bg { display: none; }
 }
 
-/* Nutzer, die Bewegung reduziert haben möchten */
+/* Nutzer, die Bewegung reduziert haben möchten: alles still, alles sofort sichtbar */
 @media (prefers-reduced-motion: reduce) {
-    body::before, body::after { animation: none; }
-    .liquid-glass, .btn-brand, .glass-icon-btn, .nav-link, .mobile-panel, .footer-link {
+    .liquid-bg > span { animation: none; }
+    *, *::before, *::after {
+        animation-duration: 0.01ms !important;
+        animation-iteration-count: 1 !important;
         transition-duration: 0.01ms !important;
+        transition-delay: 0s !important;
     }
-    .liquid-glass:hover, .btn-brand:hover, .glass-icon-btn:hover { transform: none !important; }
+    .liquid-glass:hover, .btn-brand:hover, .btn-glass:hover, .glass-pill:hover, .glass-icon-btn:hover { transform: none !important; }
+    .motion-ready [data-reveal]:not(.is-visible) { opacity: 1; translate: 0 0; scale: 1; }
+    [data-tilt] { transform: none; }
+    @view-transition { navigation: none; }
 }
 
 /* Schwächere Geräte: weniger Blur kostet weniger Leistung */
 @media (max-width: 640px) {
     :root { --glass-blur: 16px; }
-    body::before, body::after { filter: blur(60px); opacity: 0.3; }
+    .liquid-bg > span { filter: blur(56px) !important; }
+    .liquid-bg > span:nth-child(3) { display: none; }
 }
 
 /* ==========================================================
@@ -512,8 +816,7 @@ p {
 body.no-glass {
     background: #f8fafc !important;
 }
-body.no-glass::before,
-body.no-glass::after {
+body.no-glass .liquid-bg {
     display: none;
 }
 body.no-glass .liquid-glass,
@@ -525,7 +828,8 @@ body.no-glass .glass-panel {
     box-shadow: 0 4px 6px -1px rgba(0, 0, 0, 0.05) !important;
     transform: none !important;
 }
-body.no-glass .liquid-glass::before {
+body.no-glass .liquid-glass::before,
+body.no-glass .liquid-glass::after {
     display: none;
 }
 body.no-glass .liquid-glass:hover {

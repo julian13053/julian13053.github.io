@@ -68,12 +68,17 @@
         // Mobiles Menü öffnen/schließen (mit ARIA-Status für Screenreader)
         var btn = document.getElementById('mobile-menu-btn');
         var menu = document.getElementById('mobile-menu');
+        function setMenu(open) {
+            menu.setAttribute('data-open', String(open));
+            btn.setAttribute('aria-expanded', String(open));
+            btn.setAttribute('aria-label', open ? 'Menü schließen' : 'Menü öffnen');
+        }
         if (btn && menu) {
-            btn.addEventListener('click', function () {
-                var open = menu.getAttribute('data-open') !== 'true';
-                menu.setAttribute('data-open', String(open));
-                btn.setAttribute('aria-expanded', String(open));
-                btn.setAttribute('aria-label', open ? 'Menü schließen' : 'Menü öffnen');
+            btn.addEventListener('click', function () { setMenu(menu.getAttribute('data-open') !== 'true'); });
+            // Escape oder Klick außerhalb schließt das Menü
+            document.addEventListener('keydown', function (e) { if (e.key === 'Escape') setMenu(false); });
+            document.addEventListener('click', function (e) {
+                if (menu.getAttribute('data-open') === 'true' && !e.target.closest('#nav-shell')) setMenu(false);
             });
         }
 
@@ -86,18 +91,31 @@
         document.querySelectorAll('[data-nav]').forEach(function (link) {
             var target = normalize(link.getAttribute('href'));
             var isBlogPost = target === '/blog' && /^\/\d{4}\/\d{2}\/\d{2}\//.test(window.location.pathname);
-            if (target === here || isBlogPost) link.setAttribute('aria-current', 'page');
+            var isRightsPage = target === '/unsere-rechte' && /^\/(kinder|menschen|digital|umwelt|erwachsenen)rechte/.test(here);
+            if (target === here || isBlogPost || isRightsPage) link.setAttribute('aria-current', 'page');
         });
 
-        // Leiste wird beim Scrollen etwas kompakter und dunkler
+        // Leiste wird beim Scrollen schmaler, kompakter und dunkler.
+        // Hysterese (an ab 24px, aus unter 8px) verhindert Flackern; rAF hält es flüssig.
         var shell = document.getElementById('nav-shell');
         if (shell) {
-            var onScroll = function () { shell.classList.toggle('is-scrolled', window.scrollY > 12); };
-            window.addEventListener('scroll', onScroll, { passive: true });
-            onScroll();
+            var ticking = false;
+            var update = function () {
+                var y = window.scrollY;
+                if (y > 24) shell.classList.add('is-scrolled');
+                else if (y < 8) shell.classList.remove('is-scrolled');
+                ticking = false;
+            };
+            window.addEventListener('scroll', function () {
+                if (!ticking) { ticking = true; requestAnimationFrame(update); }
+            }, { passive: true });
+            update();
         }
     })();
 </script>
+
+<!-- Gemeinsame Animationen (Scroll-Reveal, Lichtreflex, Tilt, Zähler) -->
+<script src="/assets/js/motion.js" defer></script>
 
 <!-- Firebase Auth Status für Navigation (unverändert) -->
 <script type="module">
