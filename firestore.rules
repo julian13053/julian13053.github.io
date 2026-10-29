@@ -1,0 +1,108 @@
+rules_version = '2';
+
+// ==========================================================
+// M-FLEGER · Firestore-Sicherheitsregeln
+// ----------------------------------------------------------
+// Einfügen in: Firebase Console → Firestore Database → Regeln
+// (oder per CLI: firebase deploy --only firestore:rules)
+//
+// Grundsatz: Alles ist verboten, was hier nicht erlaubt wird.
+//
+//   users/{uid}/favoriten/{postId}  → nur der Besitzer
+//   likes/{postId}_{uid}            → nur der Besitzer, nur zusammen mit dem Zähler
+//   likeCounts/{postId}             → jeder darf lesen, ändern nur um ±1
+//                                      und nur passend zu einem eigenen Like
+// ==========================================================
+
+service cloud.firestore {
+  match /databases/{database}/documents {
+
+    function signedIn() {
+      return request.auth != null;
+    }
+
+    // Schreiben nur mit bestätigter E-Mail (Google-Konten gelten als bestätigt)
+    function verified() {
+      return signedIn() && request.auth.token.email_verified == true;
+    }
+
+    // Artikel-IDs sind das Datum als JJJJMMTTHHMM, z. B. 202610281430
+    function validPostId(id) {
+      return id is string && id.matches('^[0-9]{12}$');
+    }
+
+    function likePath(postId) {
+      return /databases/$(database)/documents/likes/$(postId + '_' + request.auth.uid);
+    }
+
+    function countPath(postId) {
+      return /databases/$(database)/documents/likeCounts/$(postId);
+    }
+
+    // ---------- Favoriten ----------
+    match /users/{uid}/favoriten/{postId} {
+      allow read, delete: if signedIn() && request.auth.uid == uid;
+      allow create: if verified()
+        && request.auth.uid == uid
+        && validPostId(postId)
+        && request.resource.data.keys().hasOnly(['postId', 'createdAt'])
+        && request.resource.data.postId == postId
+        && request.resource.data.createdAt == request.time;
+    }
+
+    // ---------- Einzelne Likes ----------
+    match /likes/{likeId} {
+      allow read: if signedIn() && resource.data.uid == request.auth.uid;
+
+      // Nur mit gleichzeitiger Erhöhung des Zählers um genau 1
+      allow create: if verified()
+        && validPostId(request.resource.data.postId)
+        && likeId == request.resource.data.postId + '_' + request.auth.uid
+        && request.resource.data.uid == request.auth.uid
+        && request.resource.data.keys().hasOnly(['postId', 'uid', 'createdAt'])
+        && request.resource.data.createdAt == request.time
+        && (
+          (!exists(countPath(request.resource.data.postId))
+            && getAfter(countPath(request.resource.data.postId)).data.count == 1)
+          ||
+          (exists(countPath(request.resource.data.postId))
+            && getAfter(countPath(request.resource.data.postId)).data.count
+               == get(countPath(request.resource.data.postId)).data.count + 1)
+        );
+
+      // Nur mit gleichzeitiger Verringerung des Zählers um genau 1
+      allow delete: if signedIn()
+        && resource.data.uid == request.auth.uid
+        && getAfter(countPath(resource.data.postId)).data.count
+           == get(countPath(resource.data.postId)).data.count - 1;
+    }
+
+    // ---------- Like-Zähler ----------
+    match /likeCounts/{postId} {
+      allow read: if true;
+
+      // Erstes Like eines Artikels
+      allow create: if verified()
+        && validPostId(postId)
+        && request.resource.data.keys().hasOnly(['count'])
+        && request.resource.data.count == 1
+        && !exists(likePath(postId))
+        && existsAfter(likePath(postId));
+
+      // +1 nur mit neuem eigenem Like, −1 nur mit gelöschtem eigenem Like
+      allow update: if signedIn()
+        && request.resource.data.keys().hasOnly(['count'])
+        && (
+          (verified()
+            && request.resource.data.count == resource.data.count + 1
+            && !exists(likePath(postId))
+            && existsAfter(likePath(postId)))
+          ||
+          (request.resource.data.count == resource.data.count - 1
+            && request.resource.data.count >= 0
+            && exists(likePath(postId))
+            && !existsAfter(likePath(postId)))
+        );
+    }
+  }
+}

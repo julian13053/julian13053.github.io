@@ -11,7 +11,6 @@ layout: null
     {% if page.excerpt %}<meta name="description" content="{{ page.excerpt | strip_html | strip_newlines | truncate: 160 }}">{% endif %}
     <link rel="stylesheet" href="/style.css">
     <script src="https://cdn.jsdelivr.net/npm/@tailwindcss/browser@4"></script>
-    <script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script>
     <style>
         /* ================================
            LESEFORTSCHRITT
@@ -262,7 +261,7 @@ layout: null
     {% include cookie-banner.html %}
 
     <!-- Favoriten & Toast (gemeinsam mit Startseite und Blog) -->
-    <script src="/assets/js/reactions.js"></script>
+    <script type="module" src="/assets/js/reactions.js"></script>
 
     <script>
         // Lesefortschritt für Browser ohne CSS-Scroll-Timeline (Firefox, ältere Safari)

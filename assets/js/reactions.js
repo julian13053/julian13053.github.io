@@ -1,172 +1,168 @@
 /* ==========================================================
-   M-FLEGER · reactions.js
+   M-FLEGER · reactions.js  (ES-Modul, Firebase)
    Likes, Favoriten und Toast-Meldungen – gemeinsam für
    Startseite, Blog-Übersicht und Artikelseiten.
 
-   Voraussetzungen auf der Seite:
-   - Supabase-CDN vor dieser Datei geladen
-   - Toast-Markup über {% include toast.html %}
-   - Elemente mit data-post-id, darin .like-btn / .fav-btn
-     mit onclick="likeUmschalten(id, this)" bzw. favoritUmschalten(...)
+   Einbinden mit:
+     {% include toast.html %}
+     <script type="module" src="/assets/js/reactions.js"></script>
+
+   Markup: Elemente mit data-post-id, darin .like-btn / .fav-btn
+   mit onclick="likeUmschalten(id, this)" bzw. favoritUmschalten(...)
    ========================================================== */
-(function () {
-    'use strict';
+import {
+    authReady, currentUser, isVerified,
+    getLikeCounts, getMyLikeIds, setLike, hasLiked,
+    getFavoriteIds, setFavorite, isFavorite,
+    fehlertext
+} from "./firebase.js";
 
-    var SUPABASE_URL = "https://xxuanzhrrpwurkyjfjky.supabase.co";
-    var SUPABASE_ANON_KEY = "sb_publishable_WdzN1r5HkdnqrfIN2phV1g_-GdLlknq";
+/* ---------- Darstellung ---------- */
+function setLikeState(btn, liked, count) {
+    btn.classList.toggle('is-on', liked);
+    btn.setAttribute('aria-pressed', String(liked));
+    btn.innerHTML = (liked ? '💖' : '🤍') + ' <span class="like-counter">' + count + '</span> Likes';
+}
 
-    // Falls das Supabase-CDN einmal nicht lädt, bleibt der Rest der Seite funktionsfähig
-    var client = window.supabase ? window.supabase.createClient(SUPABASE_URL, SUPABASE_ANON_KEY) : null;
-    window.supabaseClient = window.supabaseClient || client;
+function setFavState(btn, fav) {
+    btn.classList.toggle('is-on', fav);
+    btn.setAttribute('aria-pressed', String(fav));
+    btn.innerHTML = fav ? '❤️ Favorisiert' : '⭐ Favorit';
+}
 
-    /* ---------- Darstellung ---------- */
-    function setLikeState(btn, liked, count) {
-        btn.classList.toggle('is-on', liked);
-        btn.setAttribute('aria-pressed', String(liked));
-        btn.innerHTML = (liked ? '💖' : '🤍') + ' <span class="like-counter">' + count + '</span> Likes';
+function pop(btn) {
+    if (window.MFMotion) window.MFMotion.pop(btn);
+}
+
+/* ---------- Toast ---------- */
+let bannerTimer;
+function zeigeBanner(type, title, message) {
+    const banner = document.getElementById('custom-banner');
+    if (!banner) return;
+    const icons = { success: '❤️', info: 'ℹ️', error: '❌' };
+    const tints = {
+        success: 'rgba(74, 222, 128, 0.6)',
+        info: 'rgba(96, 165, 250, 0.6)',
+        error: 'rgba(248, 113, 113, 0.65)'
+    };
+    document.getElementById('banner-icon').innerText = icons[type] || icons.error;
+    document.getElementById('banner-title').innerText = title;
+    document.getElementById('banner-message').innerText = message;
+    banner.style.borderColor = tints[type] || tints.error;
+    banner.classList.add('is-shown');
+    clearTimeout(bannerTimer);
+    bannerTimer = setTimeout(() => banner.classList.remove('is-shown'), 4000);
+}
+
+/* ---------- Anmeldung prüfen ---------- */
+// Gibt den Nutzer zurück oder leitet zur Hinweisseite weiter
+async function requireUser() {
+    const user = await currentUser();
+    if (!user) {
+        window.location.href = "/anmeldung-erforderlich.html";
+        return null;
     }
-
-    function setFavState(btn, fav) {
-        btn.classList.toggle('is-on', fav);
-        btn.setAttribute('aria-pressed', String(fav));
-        btn.innerHTML = fav ? '❤️ Favorisiert' : '⭐ Favorit';
+    if (!isVerified(user)) {
+        zeigeBanner('error', 'E-Mail nicht bestätigt', 'Bitte bestätige zuerst deine E-Mail-Adresse über den Link in deinem Postfach.');
+        return null;
     }
+    return user;
+}
 
-    function pop(btn) {
-        if (window.MFMotion) window.MFMotion.pop(btn);
-    }
+/* ---------- Daten beim Laden ---------- */
+async function datenLaden() {
+    const holders = document.querySelectorAll('[data-post-id]');
+    if (!holders.length) return;
+    const hasLikes = !!document.querySelector('.like-btn');
 
-    /* ---------- Toast ---------- */
-    var bannerTimer;
-    function zeigeBanner(type, title, message) {
-        var banner = document.getElementById('custom-banner');
-        if (!banner) return;
-        var icons = { success: '❤️', info: 'ℹ️', error: '❌' };
-        var tints = {
-            success: 'rgba(74, 222, 128, 0.6)',
-            info: 'rgba(96, 165, 250, 0.6)',
-            error: 'rgba(248, 113, 113, 0.65)'
-        };
-        document.getElementById('banner-icon').innerText = icons[type] || icons.error;
-        document.getElementById('banner-title').innerText = title;
-        document.getElementById('banner-message').innerText = message;
-        banner.style.borderColor = tints[type] || tints.error;
-        banner.classList.add('is-shown');
-        clearTimeout(bannerTimer);
-        bannerTimer = setTimeout(function () { banner.classList.remove('is-shown'); }, 4000);
-    }
-
-    function offline() {
-        zeigeBanner('error', 'Fehler', 'Verbindung zum Server fehlgeschlagen.');
-    }
-
-    /* ---------- Daten beim Laden ---------- */
-    async function datenLaden() {
-        if (!client) return;
-        var holders = document.querySelectorAll('[data-post-id]');
-        if (!holders.length) return;
-        var hasLikes = document.querySelector('.like-btn');
-
+    // Like-Zahlen sind öffentlich – auch ohne Login
+    if (hasLikes) {
         try {
-            if (hasLikes) {
-                var res = await client.from('likes').select('blog_id');
-                if (!res.error && res.data) {
-                    var counts = {};
-                    res.data.forEach(function (l) { counts[l.blog_id] = (counts[l.blog_id] || 0) + 1; });
-                    holders.forEach(function (h) {
-                        var c = h.querySelector('.like-counter');
-                        if (c) c.innerText = counts[h.getAttribute('data-post-id')] || 0;
-                    });
+            const counts = await getLikeCounts();
+            holders.forEach((h) => {
+                const c = h.querySelector('.like-counter');
+                if (c) c.innerText = counts.get(h.getAttribute('data-post-id')) || 0;
+            });
+        } catch (err) { console.error('Like-Zahlen:', err); }
+    }
+
+    const user = await authReady;
+    if (!user) return;
+
+    try {
+        const favIds = await getFavoriteIds(user.uid);
+        holders.forEach((h) => {
+            const btn = h.querySelector('.fav-btn');
+            if (btn && favIds.has(h.getAttribute('data-post-id'))) setFavState(btn, true);
+        });
+
+        if (hasLikes) {
+            const likedIds = await getMyLikeIds(user.uid);
+            holders.forEach((h) => {
+                const btn = h.querySelector('.like-btn');
+                if (btn && likedIds.has(h.getAttribute('data-post-id'))) {
+                    const c = btn.querySelector('.like-counter');
+                    setLikeState(btn, true, c ? c.innerText : '0');
                 }
-            }
+            });
+        }
+    } catch (err) { console.error('Nutzerdaten:', err); }
+}
 
-            var auth = await client.auth.getUser();
-            var user = auth.data && auth.data.user;
-            if (!user) return;
+/* ---------- Umschalten ---------- */
+const busy = new WeakSet(); // verhindert Doppelklicks während der Speicherung
 
-            var fav = await client.from('favoriten').select('blog_id').eq('user_id', user.id);
-            if (fav.data) {
-                var favIds = new Set(fav.data.map(function (f) { return f.blog_id.toString(); }));
-                holders.forEach(function (h) {
-                    var btn = h.querySelector('.fav-btn');
-                    if (btn && favIds.has(h.getAttribute('data-post-id'))) setFavState(btn, true);
-                });
-            }
-
-            if (hasLikes) {
-                var mine = await client.from('likes').select('blog_id').eq('user_id', user.id);
-                if (mine.data) {
-                    var likedIds = new Set(mine.data.map(function (l) { return l.blog_id.toString(); }));
-                    holders.forEach(function (h) {
-                        var btn = h.querySelector('.like-btn');
-                        if (btn && likedIds.has(h.getAttribute('data-post-id'))) {
-                            var c = btn.querySelector('.like-counter');
-                            setLikeState(btn, true, c ? c.innerText : '0');
-                        }
-                    });
-                }
-            }
-        } catch (err) { console.error(err); }
+async function favoritUmschalten(blogId, button) {
+    if (busy.has(button)) return;
+    const user = await requireUser();
+    if (!user) return;
+    busy.add(button);
+    try {
+        const war = await isFavorite(user.uid, blogId);
+        await setFavorite(user.uid, blogId, !war);
+        setFavState(button, !war);
+        if (war) {
+            zeigeBanner('info', 'Entfernt', 'Der Artikel wurde aus deinen Favoriten gelöscht.');
+        } else {
+            pop(button);
+            zeigeBanner('success', 'Favorisiert!', 'Gespeichert in deinem Profil unter Favoriten.');
+        }
+    } catch (err) {
+        zeigeBanner('error', 'Fehler', fehlertext(err));
+    } finally {
+        busy.delete(button);
     }
+}
 
-    /* ---------- Umschalten ---------- */
-    async function favoritUmschalten(blogId, button) {
-        if (!client) return offline();
-        try {
-            var auth = await client.auth.getUser();
-            var user = auth.data && auth.data.user;
-            if (!user) { window.location.href = "/anmeldung-erforderlich.html"; return; }
-
-            var existiert = (await client.from('favoriten').select('*').eq('user_id', user.id).eq('blog_id', blogId)).data;
-
-            if (existiert && existiert.length > 0) {
-                var del = await client.from('favoriten').delete().eq('user_id', user.id).eq('blog_id', blogId);
-                if (del.error) return zeigeBanner('error', 'Fehler', del.error.message);
-                setFavState(button, false);
-                zeigeBanner('info', 'Entfernt', 'Der Artikel wurde aus deinen Favoriten gelöscht.');
-            } else {
-                var ins = await client.from('favoriten').insert([{ user_id: user.id, blog_id: blogId }]);
-                if (ins.error) return zeigeBanner('error', 'Fehler beim Speichern', ins.error.message);
-                setFavState(button, true);
-                pop(button);
-                zeigeBanner('success', 'Favorisiert!', 'Gespeichert in deinem Profil unter Favoriten.');
-            }
-        } catch (err) { zeigeBanner('error', 'Fehler', err.message); }
+async function likeUmschalten(blogId, button) {
+    if (busy.has(button)) return;
+    const user = await requireUser();
+    if (!user) return;
+    busy.add(button);
+    try {
+        const counterEl = button.querySelector('.like-counter');
+        const stand = parseInt(counterEl && counterEl.innerText, 10) || 0;
+        const war = await hasLiked(user.uid, blogId);
+        await setLike(user.uid, blogId, !war);
+        if (war) {
+            setLikeState(button, false, Math.max(0, stand - 1));
+            zeigeBanner('info', 'Like entfernt', 'Schade, dir gefällt dieser Beitrag nicht mehr.');
+        } else {
+            setLikeState(button, true, stand + 1);
+            pop(button);
+            zeigeBanner('success', 'Geliked!', 'Danke für dein Feedback zu diesem Beitrag!');
+        }
+    } catch (err) {
+        zeigeBanner('error', 'Fehler', fehlertext(err));
+    } finally {
+        busy.delete(button);
     }
+}
 
-    async function likeUmschalten(blogId, button) {
-        if (!client) return offline();
-        try {
-            var auth = await client.auth.getUser();
-            var user = auth.data && auth.data.user;
-            if (!user) { window.location.href = "/anmeldung-erforderlich.html"; return; }
+// Global verfügbar für die onclick-Attribute im Markup
+window.zeigeBanner = zeigeBanner;
+window.likeUmschalten = likeUmschalten;
+window.favoritUmschalten = favoritUmschalten;
+window.datenLaden = datenLaden;
 
-            var counterEl = button.querySelector('.like-counter');
-            var stand = parseInt(counterEl && counterEl.innerText, 10) || 0;
-
-            var existiert = (await client.from('likes').select('*').eq('user_id', user.id).eq('blog_id', blogId)).data;
-
-            if (existiert && existiert.length > 0) {
-                var del = await client.from('likes').delete().eq('user_id', user.id).eq('blog_id', blogId);
-                if (del.error) return zeigeBanner('error', 'Fehler', del.error.message);
-                setLikeState(button, false, Math.max(0, stand - 1));
-                zeigeBanner('info', 'Like entfernt', 'Schade, dir gefällt dieser Beitrag nicht mehr.');
-            } else {
-                var ins = await client.from('likes').insert([{ user_id: user.id, blog_id: blogId }]);
-                if (ins.error) return zeigeBanner('error', 'Fehler', ins.error.message);
-                setLikeState(button, true, stand + 1);
-                pop(button);
-                zeigeBanner('success', 'Geliked!', 'Danke für dein Feedback zu diesem Beitrag!');
-            }
-        } catch (err) { zeigeBanner('error', 'Fehler', err.message); }
-    }
-
-    // Global verfügbar für die onclick-Attribute im Markup
-    window.zeigeBanner = zeigeBanner;
-    window.likeUmschalten = likeUmschalten;
-    window.favoritUmschalten = favoritUmschalten;
-    window.datenLaden = datenLaden;
-
-    if (document.readyState === 'loading') document.addEventListener('DOMContentLoaded', datenLaden);
-    else datenLaden();
-})();
+datenLaden();

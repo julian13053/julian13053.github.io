@@ -36,11 +36,11 @@ title: Login | M-Fleger
             <form id="auth-form" class="space-y-4">
                 <div>
                     <label class="block text-xs font-bold text-slate-500 uppercase tracking-wider mb-1.5">E-Mail-Adresse</label>
-                    <input type="email" id="email" placeholder="deine@email.de" required class="glass-input font-medium text-sm">
+                    <input type="email" id="email" placeholder="deine@email.de" autocomplete="email" required class="glass-input font-medium text-sm">
                 </div>
                 <div>
                     <label class="block text-xs font-bold text-slate-500 uppercase tracking-wider mb-1.5">Passwort</label>
-                    <input type="password" id="password" placeholder="••••••••" required class="glass-input font-medium text-sm">
+                    <input type="password" id="password" placeholder="••••••••" autocomplete="current-password" minlength="6" required class="glass-input font-medium text-sm">
                 </div>
 
                 <div class="text-right">
@@ -87,131 +87,122 @@ title: Login | M-Fleger
     {% include footer.html %}
 
     <script type="module">
-        import { initializeApp } from "https://www.gstatic.com/firebasejs/10.8.0/firebase-app.js";
-        import { 
-            getAuth, 
-            signInWithEmailAndPassword, 
-            createUserWithEmailAndPassword, 
-            sendEmailVerification, 
+        import { auth, fehlertext } from "/assets/js/firebase.js";
+        import {
+            signInWithEmailAndPassword,
+            createUserWithEmailAndPassword,
+            sendEmailVerification,
             sendPasswordResetEmail,
             GoogleAuthProvider,
             signInWithPopup,
             signOut
         } from "https://www.gstatic.com/firebasejs/10.8.0/firebase-auth.js";
 
-        const firebaseConfig = {
-            apiKey: "AIzaSyBccpK7f0yed4wCOvvDrzZaSIRuIz7DaIE",
-            authDomain: "m-fleger-web.firebaseapp.com",
-            projectId: "m-fleger-web",
-            storageBucket: "m-fleger-web.firebasestorage.app",
-            messagingSenderId: "714771931411",
-            appId: "1:714771931411:web:b9ffa44c25e3af0e2c3ae6",
-            measurementId: "G-2CXLWPY5L9"
-        };
-
-        const app = initializeApp(firebaseConfig);
-        const auth = getAuth(app);
         let isSignUpMode = false;
 
         const form = document.getElementById('auth-form');
         const toggleBtn = document.getElementById('toggle-link');
         const forgotBtn = document.getElementById('btn-forgot');
         const googleBtn = document.getElementById('btn-google');
+        const submitBtn = document.getElementById('submit-btn');
         const errorMsg = document.getElementById('error-msg');
         const successMsg = document.getElementById('success-msg');
 
-        toggleBtn.addEventListener('click', () => {
-            isSignUpMode = !isSignUpMode;
-            const title = document.getElementById('auth-title');
-            const subtitle = document.getElementById('auth-subtitle');
-            const btn = document.getElementById('submit-btn');
-            
+        function zeigeFehler(text) {
+            successMsg.classList.add('hidden');
+            errorMsg.innerText = text;
+            errorMsg.classList.remove('hidden');
+        }
+        function zeigeErfolg(text) {
+            errorMsg.classList.add('hidden');
+            successMsg.innerText = text;
+            successMsg.classList.remove('hidden');
+        }
+        function leereMeldungen() {
             errorMsg.classList.add('hidden');
             successMsg.classList.add('hidden');
-            
-            if (isSignUpMode) {
-                title.innerText = "Konto erstellen";
-                subtitle.innerText = "Gib eine E-Mail und ein Passwort ein, um dich zu registrieren.";
-                btn.innerText = "Registrieren";
-                toggleBtn.innerText = "Bereits ein Konto? Hier anmelden";
-            } else {
-                title.innerText = "Willkommen zurück";
-                subtitle.innerText = "Melde dich an, um Artikel zu favorisieren.";
-                btn.innerText = "Einloggen";
-                toggleBtn.innerText = "Noch kein Konto? Jetzt registrieren";
-            }
+        }
+        // Knopf während der Anfrage sperren, damit nichts doppelt abgeschickt wird
+        function beschaeftigt(btn, an) {
+            btn.disabled = an;
+            btn.style.opacity = an ? '0.7' : '';
+            btn.style.cursor = an ? 'wait' : '';
+        }
+        function zielNachLogin() {
+            // Optional: /login.html?weiter=/profil.html
+            const ziel = new URLSearchParams(location.search).get('weiter');
+            return ziel && ziel.startsWith('/') && !ziel.startsWith('//') ? ziel : '/profil.html';
+        }
+
+        toggleBtn.addEventListener('click', () => {
+            isSignUpMode = !isSignUpMode;
+            leereMeldungen();
+            document.getElementById('auth-title').innerText = isSignUpMode ? "Konto erstellen" : "Willkommen zurück";
+            document.getElementById('auth-subtitle').innerText = isSignUpMode
+                ? "Gib eine E-Mail und ein Passwort ein, um dich zu registrieren."
+                : "Melde dich an, um Artikel zu favorisieren.";
+            submitBtn.innerText = isSignUpMode ? "Registrieren" : "Einloggen";
+            toggleBtn.innerText = isSignUpMode ? "Bereits ein Konto? Hier anmelden" : "Noch kein Konto? Jetzt registrieren";
+            document.getElementById('password').autocomplete = isSignUpMode ? 'new-password' : 'current-password';
         });
 
         form.addEventListener('submit', async (e) => {
             e.preventDefault();
             const email = document.getElementById('email').value.trim();
             const password = document.getElementById('password').value;
+            leereMeldungen();
 
-            errorMsg.classList.add('hidden');
-            successMsg.classList.add('hidden');
+            if (!email || !password) return zeigeFehler("Bitte fülle alle Felder aus.");
 
-            if (!email || !password) {
-                errorMsg.innerText = "Bitte fülle alle Felder aus.";
-                errorMsg.classList.remove('hidden');
-                return;
-            }
-
+            beschaeftigt(submitBtn, true);
             try {
                 if (isSignUpMode) {
-                    const userCredential = await createUserWithEmailAndPassword(auth, email, password);
-                    await sendEmailVerification(userCredential.user);
+                    const cred = await createUserWithEmailAndPassword(auth, email, password);
+                    await sendEmailVerification(cred.user);
                     await signOut(auth);
-                    
-                    successMsg.innerText = "Registrierung erfolgreich! Bitte bestätige deine E-Mail-Adresse über den Link in deiner Postbox.";
-                    successMsg.classList.remove('hidden');
                     toggleBtn.click();
+                    zeigeErfolg("Registrierung erfolgreich! Bitte bestätige deine E-Mail-Adresse über den Link in deinem Postfach und melde dich danach hier an.");
                 } else {
-                    const userCredential = await signInWithEmailAndPassword(auth, email, password);
-                    
-                    if (!userCredential.user.emailVerified) {
+                    const cred = await signInWithEmailAndPassword(auth, email, password);
+                    if (!cred.user.emailVerified) {
+                        // Bestätigungs-Mail erneut senden, falls die erste untergegangen ist
+                        try { await sendEmailVerification(cred.user); } catch (_) {}
                         await signOut(auth);
-                        errorMsg.innerText = "Bitte bestätige zuerst deine E-Mail-Adresse über den zugesandten Link.";
-                        errorMsg.classList.remove('hidden');
-                        return;
+                        return zeigeFehler("Bitte bestätige zuerst deine E-Mail-Adresse. Wir haben dir den Link gerade noch einmal geschickt (auch im Spam-Ordner nachsehen).");
                     }
-
-                    window.location.href = "/profil.html";
+                    window.location.href = zielNachLogin();
                 }
             } catch (error) {
-                errorMsg.innerText = "Fehler: " + error.message;
-                errorMsg.classList.remove('hidden');
+                zeigeFehler(fehlertext(error));
+            } finally {
+                beschaeftigt(submitBtn, false);
             }
         });
 
         forgotBtn.addEventListener('click', async () => {
             const email = document.getElementById('email').value.trim();
-            errorMsg.classList.add('hidden');
-            successMsg.classList.add('hidden');
-
-            if (!email) {
-                errorMsg.innerText = "Bitte gib deine E-Mail-Adresse ein, um das Passwort zurückzusetzen.";
-                errorMsg.classList.remove('hidden');
-                return;
-            }
-
+            leereMeldungen();
+            if (!email) return zeigeFehler("Bitte gib deine E-Mail-Adresse ein, um das Passwort zurückzusetzen.");
             try {
                 await sendPasswordResetEmail(auth, email);
-                successMsg.innerText = "E-Mail zum Zurücksetzen wurde gesendet!";
-                successMsg.classList.remove('hidden');
+                zeigeErfolg("Falls ein Konto mit dieser Adresse existiert, ist die E-Mail zum Zurücksetzen jetzt unterwegs.");
             } catch (error) {
-                errorMsg.innerText = "Fehler beim Zurücksetzen: " + error.message;
-                errorMsg.classList.remove('hidden');
+                zeigeFehler(fehlertext(error));
             }
         });
 
         googleBtn.addEventListener('click', async () => {
-            const provider = new GoogleAuthProvider();
+            leereMeldungen();
+            beschaeftigt(googleBtn, true);
             try {
+                const provider = new GoogleAuthProvider();
+                provider.setCustomParameters({ prompt: 'select_account' });
                 await signInWithPopup(auth, provider);
-                window.location.href = "/profil.html";
+                window.location.href = zielNachLogin();
             } catch (error) {
-                errorMsg.innerText = "Google-Login fehlgeschlagen: " + error.message;
-                errorMsg.classList.remove('hidden');
+                zeigeFehler(fehlertext(error));
+            } finally {
+                beschaeftigt(googleBtn, false);
             }
         });
     </script>

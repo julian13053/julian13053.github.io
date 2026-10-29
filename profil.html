@@ -15,7 +15,6 @@ title: Mein Profil
     <link rel="icon" type="image/jpeg" href="/auge-logo.jpg">
 
     <script src="https://cdn.jsdelivr.net/npm/@tailwindcss/browser@4"></script>
-    <script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script>
 </head>
 <body class="text-slate-900 font-sans antialiased flex flex-col min-h-screen relative overflow-x-hidden">
 
@@ -119,72 +118,49 @@ title: Mein Profil
         ];
     </script>
 
-    <script>
-        const CONFIG_SUPABASE_URL = "https://xxuanzhrrpwurkyjfjky.supabase.co";
-        const CONFIG_SUPABASE_ANON_KEY = "sb_publishable_WdzN1r5HkdnqrfIN2phV1g_-GdLlknq"; 
-        const supabaseClient = supabase.createClient(CONFIG_SUPABASE_URL, CONFIG_SUPABASE_ANON_KEY);
+    <script type="module">
+        import {
+            authReady, isVerified, logout,
+            getFavoriteIds, setFavorite,
+            needsFreshLogin, deleteAccountAndData,
+            fehlertext
+        } from "/assets/js/firebase.js";
 
         // Banner-Steuerung
+        let bannerTimer;
         function zeigeBanner(type, title, message) {
             const banner = document.getElementById('custom-banner');
-            const icon = document.getElementById('banner-icon');
-            const titleEl = document.getElementById('banner-title');
-            const msgEl = document.getElementById('banner-message');
-
-            if (type === 'success') {
-                banner.style.borderColor = "rgba(74, 222, 128, 0.6)";
-                icon.innerText = "✅";
-            } else if (type === 'info') {
-                banner.style.borderColor = "rgba(96, 165, 250, 0.6)";
-                icon.innerText = "ℹ️";
-            } else {
-                banner.style.borderColor = "rgba(248, 113, 113, 0.65)";
-                icon.innerText = "❌";
-            }
-
-            titleEl.innerText = title;
-            msgEl.innerText = message;
-
+            const tints = { success: "rgba(74, 222, 128, 0.6)", info: "rgba(96, 165, 250, 0.6)", error: "rgba(248, 113, 113, 0.65)" };
+            const icons = { success: "✅", info: "ℹ️", error: "❌" };
+            banner.style.borderColor = tints[type] || tints.error;
+            document.getElementById('banner-icon').innerText = icons[type] || icons.error;
+            document.getElementById('banner-title').innerText = title;
+            document.getElementById('banner-message').innerText = message;
             banner.classList.add('is-shown');
-            
-            setTimeout(() => {
-                banner.classList.remove('is-shown');
-            }, 4000);
+            clearTimeout(bannerTimer);
+            bannerTimer = setTimeout(() => banner.classList.remove('is-shown'), 4000);
+        }
+
+        function zeigeNichtAngemeldet(text) {
+            document.getElementById('user-email-display').innerText = text;
+            document.getElementById('login-required-card').classList.remove('hidden');
+            document.getElementById('profile-content').classList.add('hidden');
         }
 
         async function loadProfilePage() {
+            const user = await authReady;
+            if (!user) return zeigeNichtAngemeldet("Nicht angemeldet");
+            if (!isVerified(user)) return zeigeNichtAngemeldet("E-Mail-Adresse noch nicht bestätigt");
+
+            document.getElementById('login-required-card').classList.add('hidden');
+            document.getElementById('profile-content').classList.remove('hidden');
+            document.getElementById('user-email-display').innerText = `Eingeloggt als: ${user.email}`;
+
             try {
-                const { data: { user }, error: userError } = await supabaseClient.auth.getUser();
-
-                if (userError || !user) {
-                    document.getElementById('user-email-display').innerText = "Nicht angemeldet";
-                    document.getElementById('login-required-card').classList.remove('hidden');
-                    document.getElementById('profile-content').classList.add('hidden');
-                    return;
-                }
-
-                document.getElementById('login-required-card').classList.add('hidden');
-                document.getElementById('profile-content').classList.remove('hidden');
-                document.getElementById('user-email-display').innerText = `Eingeloggt als: ${user.email}`;
-
-                const { data: favoriten, error } = await supabaseClient
-                    .from('favoriten')
-                    .select('blog_id')
-                    .eq('user_id', user.id);
-
-                if (error) throw error;
-
+                const favIds = await getFavoriteIds(user.uid);
                 const grid = document.getElementById('favorites-grid');
                 grid.innerHTML = "";
                 const noFavsMessage = document.getElementById('no-favorites-message');
-
-                if (!favoriten || favoriten.length === 0) {
-                    noFavsMessage.classList.remove('hidden');
-                    return;
-                }
-
-                noFavsMessage.classList.add('hidden');
-                const favIds = new Set(favoriten.map(f => f.blog_id.toString()));
                 let counter = 0;
 
                 ALL_JEKYLL_POSTS.forEach(post => {
@@ -193,7 +169,6 @@ title: Mein Profil
                         const card = document.createElement('div');
                         card.className = "liquid-glass group p-7 flex flex-col justify-between";
                         card.setAttribute('data-post-id', post.id);
-                        
                         card.innerHTML = `
                             <div>
                                 <div class="flex justify-between items-center mb-3">
@@ -217,52 +192,38 @@ title: Mein Profil
 
                 // neue Karten weich einblenden
                 if (window.MFMotion) window.MFMotion.refresh(grid);
-
-                if (counter === 0) {
-                    noFavsMessage.classList.remove('hidden');
-                }
-
+                noFavsMessage.classList.toggle('hidden', counter > 0);
             } catch (err) {
-                zeigeBanner('error', 'Fehler beim Laden', err.message);
+                zeigeBanner('error', 'Fehler beim Laden', fehlertext(err));
             }
         }
 
         async function entferneFavorit(blogId, button) {
+            const user = await authReady;
+            if (!user) return;
             try {
-                const { data: { user } } = await supabaseClient.auth.getUser();
-                if (!user) return;
+                await setFavorite(user.uid, blogId, false);
+                zeigeBanner('info', 'Entfernt', 'Der Artikel wurde aus deinen Favoriten gelöscht.');
 
-                const { error } = await supabaseClient
-                    .from('favoriten')
-                    .delete()
-                    .eq('user_id', user.id)
-                    .eq('blog_id', blogId);
-
-                if (!error) {
-                    zeigeBanner('info', 'Entfernt', 'Der Artikel wurde aus deinen Favoriten gelöscht.');
-
-                    // Karte schrumpft und blendet aus, bevor sie entfernt wird
-                    const card = button.closest('[data-post-id]');
-                    const grid = document.getElementById('favorites-grid');
-                    const afterRemove = () => {
-                        if (card) card.remove();
-                        if (grid && grid.children.length === 0) {
-                            document.getElementById('no-favorites-message').classList.remove('hidden');
-                        }
-                    };
-                    if (card && !window.matchMedia('(prefers-reduced-motion: reduce)').matches) {
-                        card.style.transition = 'opacity 0.35s ease, scale 0.45s cubic-bezier(0.16, 1, 0.3, 1)';
-                        card.style.opacity = '0';
-                        card.style.scale = '0.92';
-                        setTimeout(afterRemove, 380);
-                    } else {
-                        afterRemove();
+                // Karte schrumpft und blendet aus, bevor sie entfernt wird
+                const card = button.closest('[data-post-id]');
+                const grid = document.getElementById('favorites-grid');
+                const afterRemove = () => {
+                    if (card) card.remove();
+                    if (grid && grid.children.length === 0) {
+                        document.getElementById('no-favorites-message').classList.remove('hidden');
                     }
+                };
+                if (card && !window.matchMedia('(prefers-reduced-motion: reduce)').matches) {
+                    card.style.transition = 'opacity 0.35s ease, scale 0.45s cubic-bezier(0.16, 1, 0.3, 1)';
+                    card.style.opacity = '0';
+                    card.style.scale = '0.92';
+                    setTimeout(afterRemove, 380);
                 } else {
-                    zeigeBanner('error', 'Fehler', error.message);
+                    afterRemove();
                 }
             } catch (err) {
-                zeigeBanner('error', 'Fehler', err.message);
+                zeigeBanner('error', 'Fehler', fehlertext(err));
             }
         }
 
@@ -279,39 +240,45 @@ title: Mein Profil
             setTimeout(() => modal.classList.add('hidden'), 250);
         }
 
+        // Löscht Favoriten, Likes und das Firebase-Konto selbst
         async function kontoDefinitivLoeschen() {
-            try {
-                const { data: { user } } = await supabaseClient.auth.getUser();
-                if (!user) return;
+            const user = await authReady;
+            if (!user) return;
 
-                // Schritt 1: Favoriten bereinigen
-                await supabaseClient.from('favoriten').delete().eq('user_id', user.id);
-
-                // Schritt 2: User ausloggen & Session vernichten
-                await supabaseClient.auth.signOut();
-
+            // Firebase erlaubt das Löschen nur kurz nach einer Anmeldung
+            if (needsFreshLogin(user)) {
                 schließeDeleteModal();
-                
-                alert("Dein Konto wurde erfolgreich gelöscht. Auf Wiedersehen!"); 
-                window.location.href = "/index.html";
+                zeigeBanner('info', 'Bitte neu anmelden', 'Aus Sicherheitsgründen musst du dich zum Löschen kurz neu anmelden. Du wirst gleich weitergeleitet.');
+                await logout();
+                setTimeout(() => { window.location.href = "/login.html?weiter=/profil.html"; }, 2500);
+                return;
+            }
 
+            try {
+                await deleteAccountAndData(user);
+                schließeDeleteModal();
+                alert("Dein Konto und alle gespeicherten Daten wurden gelöscht. Auf Wiedersehen!");
+                window.location.href = "/index.html";
             } catch (err) {
-                zeigeBanner('error', 'Löschen fehlgeschlagen', err.message);
+                schließeDeleteModal();
+                zeigeBanner('error', 'Löschen fehlgeschlagen', fehlertext(err));
             }
         }
 
         // Abmelde-Logik
         async function handleLogout() {
             try {
-                const { error } = await supabaseClient.auth.signOut();
-                if (error) throw error;
+                await logout();
                 window.location.href = "/index.html";
             } catch (err) {
-                zeigeBanner('error', 'Abmeldung fehlgeschlagen', err.message);
+                zeigeBanner('error', 'Abmeldung fehlgeschlagen', fehlertext(err));
             }
         }
 
-        document.addEventListener("DOMContentLoaded", loadProfilePage);
+        // Für die onclick-Attribute im Markup
+        Object.assign(window, { zeigeBanner, entferneFavorit, zeigeDeleteModal, schließeDeleteModal, kontoDefinitivLoeschen, handleLogout });
+
+        loadProfilePage();
     </script>
 </body>
 </html>
