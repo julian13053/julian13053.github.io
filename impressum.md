@@ -3,6 +3,7 @@ layout: null
 title: "Impressum"
 permalink: /impressum
 ---
+<!DOCTYPE html>
 <html lang="de">
 <head>
     <meta charset="UTF-8">
@@ -12,28 +13,27 @@ permalink: /impressum
     <link rel="stylesheet" href="/style.css">
     
     <script src="https://cdn.jsdelivr.net/npm/@tailwindcss/browser@4"></script>
-    <style>
-        .liquid-glass {
-            background: rgba(255, 255, 255, 0.75);
-            backdrop-filter: blur(12px);
-            -webkit-backdrop-filter: blur(12px);
-            border: 1px solid rgba(255, 255, 255, 0.5);
-        }
-    </style>
 </head>
-<body class="bg-gradient-to-br from-slate-50 to-blue-100 min-h-screen text-gray-900 font-sans antialiased flex flex-col justify-between relative">
+<body class="text-slate-900 font-sans antialiased flex flex-col min-h-screen relative overflow-x-hidden">
 
     <!-- Navigationsleiste aus _includes/navigation.html -->
     {% include navigation.html %}
 
+    <!-- Seitenkopf -->
+    <header class="page-hero page-hero--slate text-center">
+        <div class="max-w-3xl mx-auto animate-fade-in">
+            <span class="hero-badge">Rechtliches</span>
+            <h1 class="text-5xl md:text-7xl font-extrabold tracking-tight mt-6">Impressum</h1>
+        </div>
+    </header>
+
     <!-- Hauptinhalt -->
-    <main class="max-w-3xl mx-auto px-4 py-12 flex-grow w-full">
-        
-        <div class="p-8 md:p-12 rounded-3xl liquid-glass shadow-xs space-y-6">
-            <h1 class="text-3xl md:text-4xl font-black tracking-tight text-slate-900">Impressum</h1>
+    <main class="max-w-3xl mx-auto px-5 pb-16 md:pb-24 flex-grow w-full page-overlap">
+
+        <div class="liquid-glass legal-text p-8 md:p-12 space-y-8">
             
             <section>
-                <h2 class="text-xl font-bold mb-2 text-slate-900">Angaben gemäß § 5 DDG</h2>
+                <h2 class="text-xl md:text-2xl font-extrabold mb-3">Angaben gemäß § 5 DDG</h2>
                 <p class="leading-relaxed text-slate-600">
                     Julian Maximilian Fleger<br>
                     Rüdickenstr. 30<br>
@@ -42,7 +42,7 @@ permalink: /impressum
             </section>
 
             <section>
-                <h2 class="text-xl font-bold mb-3 text-slate-900">Kontakt & E-Mail-Postfächer</h2>
+                <h2 class="text-xl md:text-2xl font-extrabold mb-3">Kontakt & E-Mail-Postfächer</h2>
                 <ul class="space-y-2 leading-relaxed text-slate-600 font-medium">
                     <li><strong class="text-slate-900">Allgemeiner Kontakt:</strong> <a href="mailto:kontakt@m-fleger.de" class="text-blue-600 hover:underline">kontakt@m-fleger.de</a></li>
                     <li><strong class="text-slate-900">Allgemeine Fragen:</strong> <a href="mailto:info@m-fleger.de" class="text-blue-600 hover:underline">info@m-fleger.de</a></li>
@@ -52,7 +52,7 @@ permalink: /impressum
             </section>
 
             <section>
-                <h2 class="text-xl font-bold mb-2 text-slate-900">Redaktionell verantwortlich</h2>
+                <h2 class="text-xl md:text-2xl font-extrabold mb-3">Redaktionell verantwortlich</h2>
                 <p class="leading-relaxed text-slate-600">
                     Julian Maximilian Fleger<br>
                     Rüdickenstr. 30<br>
@@ -61,8 +61,8 @@ permalink: /impressum
                 </p>
             </section>
 
-            <section class="pt-4 border-t border-slate-200/60">
-                <h2 class="text-xl font-bold mb-2 text-slate-900">Verbraucherstreitbeilegung / Universalschlichtungsstelle</h2>
+            <section class="pt-6 border-t border-slate-900/10">
+                <h2 class="text-xl md:text-2xl font-extrabold mb-3">Verbraucherstreitbeilegung / Universalschlichtungsstelle</h2>
                 <p class="text-sm leading-relaxed text-slate-500 font-medium">
                     Wir sind nicht bereit oder verpflichtet, an Streitbeilegungsverfahren vor einer Verbraucherschlichtungsstelle teilzunehmen.
                 </p>

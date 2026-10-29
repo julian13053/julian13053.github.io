@@ -2,6 +2,7 @@
 layout: null
 title: Umweltrechte
 ---
+<!DOCTYPE html>
 <html lang="de">
 <head>
     <meta charset="UTF-8">
@@ -13,63 +14,56 @@ title: Umweltrechte
     <link rel="stylesheet" href="/style.css">
     <link rel="icon" type="image/jpeg" href="/auge-logo.jpg">
     <script src="https://cdn.jsdelivr.net/npm/@tailwindcss/browser@4"></script>
-    <style>
-        @keyframes fadeInUp {
-            from { opacity: 0; transform: translateY(20px); }
-            to { opacity: 1; transform: translateY(0); }
-        }
-        .animate-fade-in { animation: fadeInUp 0.8s ease-out forwards; }
-    </style>
 </head>
-<body class="bg-gray-50 text-gray-900 font-sans antialiased flex flex-col min-h-screen relative">
+<body class="text-slate-900 font-sans antialiased flex flex-col min-h-screen relative overflow-x-hidden">
 
     <!-- Navigationsleiste -->
     {% include navigation.html %}
 
-    <header class="bg-gradient-to-br from-[#14532d] via-[#16a34a] to-[#15803d] text-white py-16 px-4 md:px-6 overflow-hidden">
+    <header class="page-hero page-hero--emerald">
         <div class="max-w-4xl mx-auto text-center animate-fade-in">
-            <span class="bg-green-200/20 text-green-200 border border-green-300/30 font-extrabold px-4 py-1.5 rounded-full text-xs uppercase tracking-wider">Aarhus-Übereinkommen</span>
-            <h1 class="text-4xl md:text-5xl font-black tracking-tight mt-5 mb-6 leading-tight">
-                🌱 Umweltrechte.<br><span class="text-green-200">Schutz unserer Lebensgrundlagen.</span>
+            <span class="hero-badge shimmer">Aarhus-Übereinkommen</span>
+            <h1 class="text-[2.4rem] sm:text-5xl md:text-6xl font-extrabold tracking-tight mt-6 mb-7 leading-[1.06]">
+                🌱 Umweltrechte.<br><span class="block mt-2 text-white/80">Schutz unserer Lebensgrundlagen.</span>
             </h1>
-            <p class="text-base md:text-lg text-green-50 max-w-2xl mx-auto leading-relaxed">
+            <p class="text-base md:text-xl text-white/85 max-w-2xl mx-auto leading-relaxed">
                 Eine saubere und gesunde Umwelt ist die Grundvoraussetzung für das menschliche Leben. Umweltrechte geben dir das Gesetz in die Hand, um Natur, Luft und Wasser aktiv zu schützen.
             </p>
         </div>
     </header>
 
-    <main class="max-w-4xl mx-auto px-4 md:px-6 py-12 md:py-16 flex-grow w-full">
+    <main class="max-w-4xl mx-auto px-5 md:px-6 pt-16 md:pt-24 pb-16 md:pb-24 flex-grow w-full" style="--tile-a: #16a34a; --tile-b: #0d9488; --tile-shadow: rgba(22,163,74,0.6);">
         
         <div class="text-center mb-12">
-            <h2 class="text-3xl font-black text-gray-950 tracking-tight">Die wichtigsten Rechte im Überblick</h2>
+            <h2 class="text-3xl md:text-4xl font-extrabold tracking-tight text-slate-900">Die wichtigsten Rechte im Überblick</h2>
         </div>
 
         <div class="space-y-6 mb-16">
             
-            <div class="bg-white border border-gray-100 rounded-3xl p-6 shadow-xs flex flex-col sm:flex-row items-start gap-4 transition-all hover:border-green-200">
-                <div class="bg-green-50 text-green-600 font-black text-xl w-12 h-12 rounded-2xl flex items-center justify-center shrink-0">01</div>
+            <div class="liquid-glass p-6 md:p-8 flex flex-col sm:flex-row items-start gap-5">
+                <div class="num-tile">01</div>
                 <div>
-                    <h3 class="text-xl font-bold text-gray-950 mb-2">Recht auf Umweltinformationen</h3>
+                    <h3 class="text-xl md:text-2xl font-extrabold mb-2">Recht auf Umweltinformationen</h3>
                     <p class="text-gray-600 text-sm leading-relaxed">
                         Behörden müssen Daten über Luftqualität, Wasserwerte oder geplante Bauprojekte offenlegen. Du hast das Recht zu erfahren, was in deiner direkten Umgebung passiert.
                     </p>
                 </div>
             </div>
 
-            <div class="bg-white border border-gray-100 rounded-3xl p-6 shadow-xs flex flex-col sm:flex-row items-start gap-4 transition-all hover:border-green-200">
-                <div class="bg-green-50 text-green-600 font-black text-xl w-12 h-12 rounded-2xl flex items-center justify-center shrink-0">02</div>
+            <div class="liquid-glass p-6 md:p-8 flex flex-col sm:flex-row items-start gap-5">
+                <div class="num-tile">02</div>
                 <div>
-                    <h3 class="text-xl font-bold text-gray-950 mb-2">Recht auf Mitsprache und Beteiligung</h3>
+                    <h3 class="text-xl md:text-2xl font-extrabold mb-2">Recht auf Mitsprache und Beteiligung</h3>
                     <p class="text-gray-600 text-sm leading-relaxed">
                         Bevor Fabriken, Autobahnen oder Großprojekte genehmigt werden, muss die Bevölkerung angehört werden. Deine Einwände müssen im Verfahren geprüft werden.
                     </p>
                 </div>
             </div>
 
-            <div class="bg-white border border-gray-100 rounded-3xl p-6 shadow-xs flex flex-col sm:flex-row items-start gap-4 transition-all hover:border-green-200">
-                <div class="bg-green-50 text-green-600 font-black text-xl w-12 h-12 rounded-2xl flex items-center justify-center shrink-0">03</div>
+            <div class="liquid-glass p-6 md:p-8 flex flex-col sm:flex-row items-start gap-5">
+                <div class="num-tile">03</div>
                 <div>
-                    <h3 class="text-xl font-bold text-gray-950 mb-2">Recht auf Klage bei Umweltverstößen</h3>
+                    <h3 class="text-xl md:text-2xl font-extrabold mb-2">Recht auf Klage bei Umweltverstößen</h3>
                     <p class="text-gray-600 text-sm leading-relaxed">
                         Wenn Gesetze zum Schutz von Tieren, Wäldern oder Gewässern von Firmen oder Städten verletzt werden, dürfen Bürger und Verbände dagegen direkt vor Gericht klagen.
                     </p>
@@ -78,62 +72,62 @@ title: Umweltrechte
 
         </div>
 
-        <div class="pt-8 border-t border-gray-200 mt-16">
-            <h2 class="text-3xl font-black text-gray-950 tracking-tight mb-2">Umweltrechte Gesetzestext (Aarhus-Übereinkommen)</h2>
+        <div class="pt-8 mt-20 border-t border-slate-900/10">
+            <h2 class="text-3xl md:text-4xl font-extrabold tracking-tight text-slate-900 mb-3">Umweltrechte Gesetzestext (Aarhus-Übereinkommen)</h2>
             <p class="text-gray-500 text-base mb-8">Übereinkommen über den Zugang zu Informationen, die Öffentlichkeitsbeteiligung an Entscheidungsverfahren und den Zugang zu Gerichten in Umweltangelegenheiten.</p>
             
             <div class="space-y-4">
 
-                <div class="bg-white border border-gray-200 rounded-2xl p-6 shadow-xs">
-                    <h4 class="font-bold text-green-900 text-base">Artikel 1 - Ziel</h4>
+                <div class="law-card">
+                    <h4 class="font-extrabold text-slate-900 text-base md:text-lg" style="font-family: var(--font-display);">Artikel 1 - Ziel</h4>
                     <p class="text-gray-700 text-sm mt-2 leading-relaxed">Um zum Schutz des Rechts eines jeden Menschen gegenwärtiger und künftiger Generationen auf ein Leben in einer seiner Gesundheit und seinem Wohlbefinden angemessenen Umwelt beizutragen, gewährleistet jede Vertragspartei die Rechte auf Zugang zu Informationen, auf Öffentlichkeitsbeteiligung an Entscheidungsverfahren und auf Zugang zu Gerichten in Umweltangelegenheiten in Übereinstimmung mit den Bestimmungen dieses Übereinkommens.</p>
                 </div>
 
-                <div class="bg-white border border-gray-200 rounded-2xl p-6 shadow-xs">
-                    <h4 class="font-bold text-green-900 text-base">Artikel 2 - Begriffsbestimmungen</h4>
+                <div class="law-card">
+                    <h4 class="font-extrabold text-slate-900 text-base md:text-lg" style="font-family: var(--font-display);">Artikel 2 - Begriffsbestimmungen</h4>
                     <p class="text-gray-700 text-sm mt-2 leading-relaxed">Im Sinne dieses Übereinkommens bedeutet:<br><br>1. „Behörde“ die Verwaltung auf nationaler, regionaler oder anderer Ebene, einschließlich natürlicher oder juristischer Personen, die öffentliche Aufgaben der Umweltverwaltung wahrnehmen.<br><br>2. „Umweltinformationen“ alle Informationen in schriftlicher, visueller, akustischer, elektronischer oder sonstiger gegenständlicher Form über den Zustand von Umweltbestandteilen wie Luft, Atmosphäre, Wasser, Boden, Landschaft und natürliche Lebensräume, biologische Vielfalt sowie Faktoren wie Stoffe, Energie, Lärm und Strahlung, die sich auf die Umwelt auswirken oder auswirken können.<br><br>3. „Öffentlichkeit“ eine oder mehrere natürliche oder juristische Personen und, in Übereinstimmung mit den innerstaatlichen Rechtsvorschriften oder der innerstaatlichen Praxis, deren Vereinigungen, Organisationen oder Gruppen.</p>
                 </div>
 
-                <div class="bg-white border border-gray-200 rounded-2xl p-6 shadow-xs">
-                    <h4 class="font-bold text-green-900 text-base">Artikel 3 - Allgemeine Bestimmungen</h4>
+                <div class="law-card">
+                    <h4 class="font-extrabold text-slate-900 text-base md:text-lg" style="font-family: var(--font-display);">Artikel 3 - Allgemeine Bestimmungen</h4>
                     <p class="text-gray-700 text-sm mt-2 leading-relaxed">(1) Jede Vertragspartei trifft die erforderlichen überzeugenden gesetzgeberischen, behördlichen und sonstigen Maßnahmen zur Erstellung und Aufrechterhaltung eines klaren, transparenten und einheitlichen Rahmens zur Durchführung der Bestimmungen dieses Übereinkommens.<br><br>(2) Die Bediensteten der Behörden unterstützen die Öffentlichkeit und weisen sie an, wenn sie Zugang zu Informationen sucht, sich an Entscheidungsverfahren beteiligen oder Zugang zu Gerichten erlangen will.<br><br>(3) Jede Vertragspartei fördert die Umwelterziehung und das Umweltbewusstsein der Öffentlichkeit, insbesondere im Hinblick darauf, wie Zugang zu Informationen, Mitsprache und der Weg zu Gerichten genutzt werden können.</p>
                 </div>
 
-                <div class="bg-white border border-gray-200 rounded-2xl p-6 shadow-xs">
-                    <h4 class="font-bold text-green-900 text-base">Artikel 4 - Zugang zu Umweltinformationen auf Antrag</h4>
+                <div class="law-card">
+                    <h4 class="font-extrabold text-slate-900 text-base md:text-lg" style="font-family: var(--font-display);">Artikel 4 - Zugang zu Umweltinformationen auf Antrag</h4>
                     <p class="text-gray-700 text-sm mt-2 leading-relaxed">(1) Jede Vertragspartei stellt sicher, dass die Behörden der Öffentlichkeit im Rahmen der innerstaatlichen Rechtsvorschriften Umweltinformationen auf Antrag zur Verfügung stellen, ohne dass ein Interesse begründet werden muss.<br><br>(2) Die Umweltinformationen werden so schnell wie möglich, spätestens jedoch innerhalb eines Monats nach Antragstellung, bereitgestellt, es sei denn, der Umfang und die Komplexität der Informationen rechtfertigen eine Verlängerung dieser Frist auf bis zu zwei Monate.<br><br>(3) Ein Antrag auf Umweltinformationen kann abgelehnt werden, wenn die Behörde die Informationen nicht innehat, der Antrag offensichtlich missbräuchlich ist oder sich auf noch unfertige Schriftstücke oder interne Mitteilungen bezieht.<br><br>(4) Eine Ablehnung kann erfolgen, wenn die Offenlegung die Vertraulichkeit der Beratung von Behörden, die internationalen Beziehungen, die Landesverteidigung, das Geschäfts- oder Betriebsgeheimnis oder personenbezogene Daten beeinträchtigen würde. Die Ablehnungsgründe sind eng auszulegen unter Abwägung des öffentlichen Interesses an der Offenlegung.</p>
                 </div>
 
-                <div class="bg-white border border-gray-200 rounded-2xl p-6 shadow-xs">
-                    <h4 class="font-bold text-green-900 text-base">Artikel 5 - Sammlung und Verbreitung von Umweltinformationen</h4>
+                <div class="law-card">
+                    <h4 class="font-extrabold text-slate-900 text-base md:text-lg" style="font-family: var(--font-display);">Artikel 5 - Sammlung und Verbreitung von Umweltinformationen</h4>
                     <p class="text-gray-700 text-sm mt-2 leading-relaxed">(1) Jede Vertragspartei stellt sicher, dass die Behörden über Umweltinformationen, die für ihre Aufgaben von Bedeutung sind, verfügen und diese regelmäßig aktualisieren. Bei einer drohenden Gefahr für die menschliche Gesundheit oder die Umwelt werden alle Informationen, welche die Öffentlichkeit in die Lage versetzen, Maßnahmen zur Abwendung oder Milderung von Schäden zu ergreifen, unverzüglich verbreitet.<br><br>(2) Die Vertragsparteien stellen sicher, dass die Umweltinformationen für die Öffentlichkeit transparent und leicht zugänglich sind, insbesondere durch die Nutzung öffentlicher elektronischer Datenbanken und Netze.<br><br>(3) Jede Vertragspartei verpflichtet sich, in regelmäßigen Abständen von höchstens drei bis vier Jahren einen nationalen Bericht über den Zustand der Umwelt zu veröffentlichen.</p>
                 </div>
 
-                <div class="bg-white border border-gray-200 rounded-2xl p-6 shadow-xs">
-                    <h4 class="font-bold text-green-900 text-base">Artikel 6 - Öffentlichkeitsbeteiligung bei bestimmten Vorhaben</h4>
+                <div class="law-card">
+                    <h4 class="font-extrabold text-slate-900 text-base md:text-lg" style="font-family: var(--font-display);">Artikel 6 - Öffentlichkeitsbeteiligung bei bestimmten Vorhaben</h4>
                     <p class="text-gray-700 text-sm mt-2 leading-relaxed">(1) Jede Vertragspartei wendet die Bestimmungen dieses Artikels bei Entscheidungen darüber an, ob beabsichtigte Tätigkeiten, die erhebliche Auswirkungen auf die Umwelt haben können (wie Industrieanlagen, Großbauprojekte oder Infrastrukturmaßnahmen), zugelassen werden.<br><br>(2) Die betroffene Öffentlichkeit wird rechtzeitig, transparent und effektiv zu Beginn des umweltbezogenen Entscheidungsverfahrens über das geplante Vorhaben, die Art der möglichen Entscheidung und die zuständige Behörde unterrichtet.<br><br>(3) Die Fristen der einzelnen Phasen der Beteiligung müssen ausreichen, um der Öffentlichkeit Zeit für eine effektive Vorbereitung und während des Entscheidungsverfahrens für eine wirksame Beteiligung zu geben.<br><br>(4) Jede Vertragspartei stellt sicher, dass die Beteiligung der Öffentlichkeit einsetzt, wenn noch alle Optionen offen sind und eine effektive Mitwirkung stattfinden kann.<br><br>(5) Die Ergebnisse der Öffentlichkeitsbeteiligung werden bei der Entscheidung von der Behörde gebührend berücksichtigt. Nach der Entscheidung unterrichtet die Behörde die Öffentlichkeit über den Ausgang und legt den Text der Entscheidung sowie die Gründe dar.</p>
                 </div>
 
-                <div class="bg-white border border-gray-200 rounded-2xl p-6 shadow-xs">
-                    <h4 class="font-bold text-green-900 text-base">Artikel 7 - Öffentlichkeitsbeteiligung bei Plänen, Programmen und Politiken</h4>
+                <div class="law-card">
+                    <h4 class="font-extrabold text-slate-900 text-base md:text-lg" style="font-family: var(--font-display);">Artikel 7 - Öffentlichkeitsbeteiligung bei Plänen, Programmen und Politiken</h4>
                     <p class="text-gray-700 text-sm mt-2 leading-relaxed">Jede Vertragspartei trifft geeignete praktische und/oder gesetzliche Bestimmungen, damit sich die Öffentlichkeit im Rahmen eines transparenten und fairen Verfahrens an der Ausarbeitung von Plänen und Programmen mit Bezug zur Umwelt beteiligt. Hierbei sind die Fristen und Fristsetzungen gemäß Artikel 6 einzuhalten, um ein effektives Mitspracherecht zu garantieren.</p>
                 </div>
 
-                <div class="bg-white border border-gray-200 rounded-2xl p-6 shadow-xs">
-                    <h4 class="font-bold text-green-900 text-base">Artikel 8 - Öffentlichkeitsbeteiligung bei Gesetzen und Verordnungen</h4>
+                <div class="law-card">
+                    <h4 class="font-extrabold text-slate-900 text-base md:text-lg" style="font-family: var(--font-display);">Artikel 8 - Öffentlichkeitsbeteiligung bei Gesetzen und Verordnungen</h4>
                     <p class="text-gray-700 text-sm mt-2 leading-relaxed">Jede Vertragspartei bemüht sich, eine effektive Beteiligung der Öffentlichkeit in einer geeigneten Phase zu fördern, solange die Optionen für Durchführungsvorschriften und allgemein anwendbare rechtsverbindliche normative Instrumente, die erhebliche Auswirkungen auf die Umwelt haben können, noch offen sind. Entwürfe sollten öffentlich zugänglich gemacht werden, und der Öffentlichkeit ist Gelegenheit zur Stellungnahme zu geben.</p>
                 </div>
 
-                <div class="bg-white border border-gray-200 rounded-2xl p-6 shadow-xs">
-                    <h4 class="font-bold text-green-900 text-base">Artikel 9 - Zugang zu Gerichten</h4>
+                <div class="law-card">
+                    <h4 class="font-extrabold text-slate-900 text-base md:text-lg" style="font-family: var(--font-display);">Artikel 9 - Zugang zu Gerichten</h4>
                     <p class="text-gray-700 text-sm mt-2 leading-relaxed">(1) Jede Vertragspartei stellt sicher, dass jede Person, die der Ansicht ist, dass ihr Antrag auf Informationen nach Artikel 4 nicht ordnungsgemäß behandelt, rechtswidrig abgelehnt oder unzureichend beantwortet wurde, Zugang zu einem vor einem Gericht oder einer anderen unabhängigen Stelle stattfindenden Überprüfungsverfahren hat.<br><br>(2) Mitglieder der betroffenen Öffentlichkeit, die ein ausreichendes Interesse haben oder eine Rechtsverletzung geltend machen, müssen Zugang zu einem gerichtlichen Überprüfungsverfahren haben, um die formelle und materielle Rechtmäßigkeit von Entscheidungen, Handlungen oder Unterlassungen nach Artikel 6 anzufechten. Was als ausreichendes Interesse gilt, bestimmt sich nach den innerstaatlichen Gesetzen, wobei das Ziel verfolgt wird, der Öffentlichkeit einen weiten Zugang zu Gerichten zu gewähren. Nichtregierungsorganisationen, die sich für den Umweltschutz einsetzen, gelten als Organisationen mit ausreichendem Interesse.<br><br>(3) Zusätzlich müssen Mitglieder der Öffentlichkeit Zugang zu verwaltungsbehördlichen oder gerichtlichen Verfahren haben, um von Privatpersonen oder Behörden begangene Verstöße gegen umweltbezogene Rechtsvorschriften des innerstaatlichen Rechts anzufechten.<br><br>(4) Die Verfahren nach den Absätzen 1, 2 und 3 müssen einen angemessenen und effektiven Rechtsschutz gewährleisten, einschließlich vorläufigen Rechtsschutzes, sofern dies angemessen ist, und müssen fair, gerecht und rechtzeitig sein sowie nicht unerschwinglich teuer.</p>
                 </div>
 
             </div>
         </div>
 
-        <div class="text-center mt-16 pt-8 border-t border-gray-200">
-            <a href="/unsere-rechte.html" class="inline-block bg-gray-900 hover:bg-gray-800 text-white font-bold px-6 py-3 rounded-xl transition-all no-underline shadow-xs">
+        <div class="text-center mt-20 pt-10 border-t border-slate-900/10">
+            <a href="/unsere-rechte.html" class="btn-brand group px-7 py-3.5">
                 &larr; Zurück zur Rechte-Übersicht
             </a>
         </div>
