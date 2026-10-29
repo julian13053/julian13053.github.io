@@ -2,6 +2,7 @@
 layout: null
 title: Über mich
 ---
+<!DOCTYPE html>
 <html lang="de">
 <head>
     <meta charset="UTF-8">

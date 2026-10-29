@@ -2,6 +2,7 @@
 layout: null
 title: Kontakt
 ---
+<!DOCTYPE html>
 <html lang="de">
 <head>
     <meta charset="UTF-8">

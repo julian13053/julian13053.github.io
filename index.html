@@ -5,6 +5,7 @@ description: Entdecke das kreative Portfolio und den Blog von Julian Fleger. Mod
 keywords: Julian Fleger, Julian Fleger Portfolio, M-Fleger, Webentwickler Berlin, Blog, Branding
 robots: index, follow
 ---
+<!DOCTYPE html>
 <html lang="de" class="scroll-smooth">
 <head>
     <meta charset="UTF-8">
@@ -27,7 +28,6 @@ robots: index, follow
     <link rel="stylesheet" href="/style.css">
 
     <script src="https://cdn.jsdelivr.net/npm/@tailwindcss/browser@4"></script>
-    <script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script>
     <style>
         /* ---------- Hero-Auftritt ---------- */
         @keyframes heroIn {
@@ -394,7 +394,7 @@ robots: index, follow
     {% include cookie-banner.html %}
 
     <!-- Likes, Favoriten & Toast (gemeinsam mit Blog und Artikeln) -->
-    <script src="/assets/js/reactions.js"></script>
+    <script type="module" src="/assets/js/reactions.js"></script>
 
     <script>
         /* ---------- Aktivitätsringe ---------- */

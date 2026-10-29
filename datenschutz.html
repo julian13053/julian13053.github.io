@@ -2,7 +2,7 @@
 layout: null
 title: Datenschutz
 ---
-
+<!DOCTYPE html>
 <html lang="de">
 <head>
     <meta charset="UTF-8">
@@ -62,12 +62,12 @@ title: Datenschutz
             <hr class="border-0 h-px bg-gradient-to-r from-transparent via-slate-300 to-transparent">
 
             <section>
-                <h2 class="text-2xl md:text-[1.7rem] font-extrabold mb-4">3. Registrierung und Anmeldung (Supabase Auth)</h2>
+                <h2 class="text-2xl md:text-[1.7rem] font-extrabold mb-4">3. Registrierung und Anmeldung (Firebase Authentication)</h2>
                 <p class="leading-relaxed mb-4 text-slate-600">
-                    Auf meiner Website kannst du dich registrieren, um zusätzliche Funktionen wie das Favorisieren von Blogartikeln zu nutzen. Die von dir eingegebenen Daten (E-Mail-Adresse und Passwort) werden ausschließlich für die Bereitstellung dieses Nutzerkontos verwendet.
+                    Auf meiner Website kannst du dich registrieren, um zusätzliche Funktionen wie das Favorisieren von Blogartikeln zu nutzen. Die von dir eingegebenen Daten (E-Mail-Adresse und Passwort) werden ausschließlich für die Bereitstellung dieses Nutzerkontos verwendet. Alternativ kannst du dich mit deinem Google-Konto anmelden; dabei erhalten wir von Google deine E-Mail-Adresse und deinen Namen.
                 </p>
                 <div class="callout !p-5 !rounded-2xl text-sm space-y-2 text-blue-950">
-                    <p><strong>Dienstleister:</strong> Wir nutzen für die Authentifizierung und Datenbankverwaltung den Dienst <strong>Supabase</strong> (Supabase Inc., 970 Summer St, Stamford, CT 06905, USA).</p>
+                    <p><strong>Dienstleister:</strong> Wir nutzen für die Authentifizierung und Datenbankverwaltung die Dienste <strong>Firebase Authentication</strong> und <strong>Cloud Firestore</strong> von Google (für Nutzer im EWR: Google Ireland Limited, Gordon House, Barrow Street, Dublin 4, Irland).</p>
                     <p><strong>Datenverschlüsselung:</strong> Dein Passwort wird niemals im Klartext gespeichert, sondern vor der Übertragung und Speicherung nach aktuellen Sicherheitsstandards kryptografisch verschlüsselt (gehasht).</p>
                     <p><strong>Rechtsgrundlage:</strong> Die Verarbeitung erfolgt auf Grundlage deiner Einwilligung (Art. 6 Abs. 1 lit. a DSGVO) sowie zur Erfüllung des Nutzungsvertrags (Art. 6 Abs. 1 lit. b DSGVO).</p>
                 </div>
@@ -76,9 +76,9 @@ title: Datenschutz
             <hr class="border-0 h-px bg-gradient-to-r from-transparent via-slate-300 to-transparent">
 
             <section>
-                <h2 class="text-2xl md:text-[1.7rem] font-extrabold mb-4">4. Speicherung von Favoriten</h2>
+                <h2 class="text-2xl md:text-[1.7rem] font-extrabold mb-4">4. Speicherung von Favoriten und Likes</h2>
                 <p class="leading-relaxed text-slate-600">
-                    Wenn du eingeloggt bist und einen Beitrag favorisierst, wird diese Information (welcher User welche Blog-ID markiert hat) in unserer Supabase-Datenbank gespeichert. Dies dient einzig und allein dem Zweck, dir deine persönliche Merkliste bei deinem nächsten Besuch wieder anzuzeigen.
+                    Wenn du eingeloggt bist und einen Beitrag favorisierst oder likest, wird diese Information (welcher User welche Blog-ID markiert hat) in unserer Firebase-Datenbank (Cloud Firestore) gespeichert. Favoriten dienen einzig dazu, dir deine persönliche Merkliste bei deinem nächsten Besuch wieder anzuzeigen. Bei Likes wird zusätzlich nur die Gesamtzahl der Likes pro Beitrag öffentlich angezeigt, nicht wer geliked hat. Wenn du dein Konto im Profil löschst, werden deine Favoriten, deine Likes und dein Konto vollständig entfernt.
                 </p>
             </section>
 
@@ -105,7 +105,7 @@ title: Datenschutz
                 </p>
                 <ul class="list-disc pl-5 space-y-2 text-sm text-slate-600">
                     <li><strong>Cookie-Banner-Auswahl:</strong> Deine Entscheidung im Cookie-Banner (akzeptiert oder abgelehnt) wird im LocalStorage unter dem Schlüssel <code>cookie-consent</code> gespeichert. Dies ist technisch notwendig, damit das Banner nach deiner Entscheidung ausgeblendet bleibt und nicht bei jedem Seitenaufruf neu erscheint.</li>
-                    <li><strong>Anmelde-Sitzung (Session):</strong> Supabase nutzt den LocalStorage deines Browsers, um ein sicheres Zugriffs-Token (Session-Token) zu speichern. Dadurch bleibst du eingeloggt, während du durch die verschiedenen Seiten navigierst. Ohne diesen Speicher wäre eine Anmeldung technisch nicht möglich.</li>
+                    <li><strong>Anmelde-Sitzung (Session):</strong> Firebase nutzt den Speicher deines Browsers (IndexedDB), um ein sicheres Zugriffs-Token (Session-Token) zu speichern. Dadurch bleibst du eingeloggt, während du durch die verschiedenen Seiten navigierst. Ohne diesen Speicher wäre eine Anmeldung technisch nicht möglich.</li>
                 </ul>
                 <p class="text-sm mt-4 text-slate-500 font-medium">
                     Da es sich hierbei um <strong>technisch absolut notwendige Funktionen</strong> zur Ausführung der von dir gewünschten Dienste (Einloggen & Cookie-Präferenz merken) handelt, ist hierfür keine gesonderte Einwilligung erforderlich (gemäß TDDDG / DSGVO).

@@ -5,3 +5,8 @@ timezone: Europe/Berlin
 future: false
 plugins:
   - jekyll-sitemap
+# Nur für die Einrichtung, nicht veröffentlichen
+exclude:
+  - FIREBASE-SETUP.md
+  - firestore.rules
+  - firebase.json

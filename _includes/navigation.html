@@ -117,35 +117,20 @@
 <!-- Gemeinsame Animationen (Scroll-Reveal, Lichtreflex, Tilt, Zähler) -->
 <script src="/assets/js/motion.js" defer></script>
 
-<!-- Firebase Auth Status für Navigation (unverändert) -->
+<!-- Login-Status für die Navigation (gemeinsamer Firebase-Kern) -->
 <script type="module">
-    import { getAuth, onAuthStateChanged } from "https://www.gstatic.com/firebasejs/10.8.0/firebase-auth.js";
+    import { onUser } from "/assets/js/firebase.js";
 
-    const auth = getAuth();
     const navBtn = document.getElementById("nav-auth-btn");
     const mobileBtn = document.getElementById("mobile-auth-btn");
 
-    onAuthStateChanged(auth, (user) => {
-        if (user) {
-            // Nutzer eingeloggt -> Zeige Profil
-            if (navBtn) {
-                navBtn.textContent = "Profil";
-                navBtn.href = "/profil";
-            }
-            if (mobileBtn) {
-                mobileBtn.textContent = "Profil";
-                mobileBtn.href = "/profil";
-            }
-        } else {
-            // Nutzer nicht eingeloggt -> Zeige Login
-            if (navBtn) {
-                navBtn.textContent = "Login";
-                navBtn.href = "/login";
-            }
-            if (mobileBtn) {
-                mobileBtn.textContent = "Login";
-                mobileBtn.href = "/login";
-            }
+    onUser((user) => {
+        // Profil nur für bestätigte Konten, sonst Login
+        const loggedIn = !!(user && user.emailVerified);
+        for (const btn of [navBtn, mobileBtn]) {
+            if (!btn) continue;
+            btn.textContent = loggedIn ? "Profil" : "Login";
+            btn.href = loggedIn ? "/profil.html" : "/login.html";
         }
     });
 </script>
