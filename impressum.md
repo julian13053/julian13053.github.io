@@ -3,6 +3,7 @@ layout: null
 title: "Impressum"
 permalink: /impressum
 ---
+<!DOCTYPE html>
 <html lang="de">
 <head>
     <meta charset="UTF-8">

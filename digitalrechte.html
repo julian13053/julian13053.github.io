@@ -3,6 +3,7 @@ layout: null
 title: Digitalrechte
 ---
 
+<!DOCTYPE html>
 <html lang="de">
 <head>
     <meta charset="UTF-8">
@@ -15,74 +16,59 @@ title: Digitalrechte
     
     <link rel="icon" type="image/jpeg" href="/auge-logo.jpg">
     <script src="https://cdn.jsdelivr.net/npm/@tailwindcss/browser@4"></script>
-    <style>
-        @keyframes fadeInUp {
-            from { opacity: 0; transform: translateY(20px); }
-            to { opacity: 1; transform: translateY(0); }
-        }
-        .animate-fade-in { animation: fadeInUp 0.8s ease-out forwards; }
-        .liquid-glass {
-            background: rgba(255, 255, 255, 0.75);
-            backdrop-filter: blur(12px);
-            -webkit-backdrop-filter: blur(12px);
-            border: 1px solid rgba(255, 255, 255, 0.5);
-        }
-    </style>
 </head>
-<body class="bg-gradient-to-br from-slate-50 to-blue-100 min-h-screen text-gray-900 font-sans antialiased flex flex-col justify-between relative">
+<body class="text-slate-900 font-sans antialiased flex flex-col min-h-screen relative overflow-x-hidden">
 
     <!-- Navigationsleiste aus _includes/navigation.html -->
     {% include navigation.html %}
 
     <!-- Header Section -->
-    <header class="py-12 md:py-16 px-4 md:px-6 overflow-hidden text-center">
-        <div class="max-w-4xl mx-auto animate-fade-in space-y-4">
-            <span class="bg-blue-100 text-blue-700 border border-blue-200 font-extrabold px-4 py-1.5 rounded-full text-xs uppercase tracking-wider shadow-xs inline-block">
-                Digitale Grundrechte
-            </span>
-            <h1 class="text-4xl md:text-5xl font-black tracking-tight text-slate-900 leading-tight">
-                🌐 Digitalrechte.<br><span class="text-blue-600">Selbstbestimmung in der digitalen Welt.</span>
+    <header class="page-hero page-hero--violet">
+        <div class="max-w-4xl mx-auto text-center animate-fade-in">
+            <span class="hero-badge shimmer">Digitale Grundrechte</span>
+            <h1 class="text-[2.4rem] sm:text-5xl md:text-6xl font-extrabold tracking-tight mt-6 mb-7 leading-[1.06]">
+                🌐 Digitalrechte.<br><span class="block mt-2 text-white/80">Selbstbestimmung in der digitalen Welt.</span>
             </h1>
-            <p class="text-base md:text-lg text-slate-600 max-w-2xl mx-auto leading-relaxed font-medium">
+            <p class="text-base md:text-xl text-white/85 max-w-2xl mx-auto leading-relaxed">
                 Das Internet ist kein rechtsfreier Raum. Die digitalen Grundrechte schützen deine Daten, deine Privatsphäre und deine Meinungsfreiheit im Netz gegenüber Konzernen und Staaten.
             </p>
         </div>
     </header>
 
     <!-- Hauptinhalt -->
-    <main class="max-w-4xl mx-auto px-4 md:px-6 pb-12 md:pb-16 flex-grow w-full">
+    <main class="max-w-4xl mx-auto px-5 md:px-6 pt-16 md:pt-24 pb-16 md:pb-24 flex-grow w-full" style="--tile-a: #7c3aed; --tile-b: #2563eb; --tile-shadow: rgba(124,58,237,0.6);">
         
         <div class="text-center mb-10">
-            <h2 class="text-3xl font-black tracking-tight text-slate-900">Die wichtigsten Rechte im Überblick</h2>
+            <h2 class="text-3xl md:text-4xl font-extrabold tracking-tight text-slate-900">Die wichtigsten Rechte im Überblick</h2>
         </div>
 
         <!-- Highlight Karten -->
         <div class="space-y-6 mb-16">
             
-            <div class="rounded-3xl p-6 flex flex-col sm:flex-row items-start gap-4 transition-all duration-300 hover:-translate-y-0.5 liquid-glass shadow-xs">
-                <div class="font-black text-xl w-12 h-12 rounded-2xl flex items-center justify-center shrink-0 bg-blue-100 text-blue-600">01</div>
+            <div class="liquid-glass p-6 md:p-8 flex flex-col sm:flex-row items-start gap-5">
+                <div class="num-tile">01</div>
                 <div>
-                    <h3 class="text-xl font-bold mb-2 text-slate-900">Informationelle Selbstbestimmung</h3>
+                    <h3 class="text-xl md:text-2xl font-extrabold mb-2">Informationelle Selbstbestimmung</h3>
                     <p class="text-sm leading-relaxed text-slate-600">
                         Du allein entscheidest, wer welche Daten über dich im Internet sammeln, speichern und verarbeiten darf. Deine privaten Daten gehören dir und niemand anderem.
                     </p>
                 </div>
             </div>
 
-            <div class="rounded-3xl p-6 flex flex-col sm:flex-row items-start gap-4 transition-all duration-300 hover:-translate-y-0.5 liquid-glass shadow-xs">
-                <div class="font-black text-xl w-12 h-12 rounded-2xl flex items-center justify-center shrink-0 bg-blue-100 text-blue-600">02</div>
+            <div class="liquid-glass p-6 md:p-8 flex flex-col sm:flex-row items-start gap-5">
+                <div class="num-tile">02</div>
                 <div>
-                    <h3 class="text-xl font-bold mb-2 text-slate-900">Recht auf Vergessenwerden</h3>
+                    <h3 class="text-xl md:text-2xl font-extrabold mb-2">Recht auf Vergessenwerden</h3>
                     <p class="text-sm leading-relaxed text-slate-600">
                         Wenn Daten über dich veraltet, falsch oder nicht mehr notwendig sind, hast du ein einklagbares Recht darauf, dass Suchmaschinen und Webseiten diese Einträge dauerhaft löschen.
                     </p>
                 </div>
             </div>
 
-            <div class="rounded-3xl p-6 flex flex-col sm:flex-row items-start gap-4 transition-all duration-300 hover:-translate-y-0.5 liquid-glass shadow-xs">
-                <div class="font-black text-xl w-12 h-12 rounded-2xl flex items-center justify-center shrink-0 bg-blue-100 text-blue-600">03</div>
+            <div class="liquid-glass p-6 md:p-8 flex flex-col sm:flex-row items-start gap-5">
+                <div class="num-tile">03</div>
                 <div>
-                    <h3 class="text-xl font-bold mb-2 text-slate-900">Netzneutralität und freier Zugang</h3>
+                    <h3 class="text-xl md:text-2xl font-extrabold mb-2">Netzneutralität und freier Zugang</h3>
                     <p class="text-sm leading-relaxed text-slate-600">
                         Alle Daten im Netz müssen gleich behandelt werden. Internetanbieter dürfen keine Webseiten absichtlich verlangsamen oder blockieren, um sich finanzielle Vorteile zu verschaffen.
                     </p>
@@ -92,77 +78,77 @@ title: Digitalrechte
         </div>
 
         <!-- Gesetzestext Section -->
-        <div class="pt-8 border-t border-slate-200/60">
-            <h2 class="text-3xl font-black tracking-tight mb-2 text-slate-900">Digitalrechte Gesetzestext</h2>
+        <div class="pt-8 mt-20 border-t border-slate-900/10">
+            <h2 class="text-3xl md:text-4xl font-extrabold tracking-tight text-slate-900 mb-3">Digitalrechte Gesetzestext</h2>
             <p class="text-base mb-8 text-slate-600">Charta der Digitalen Grundrechte und Datenschutz-Bestimmungen (nach den Standards der EU-Grundrechtecharta und DSGVO).</p>
             
             <div class="space-y-4">
 
-                <div class="rounded-2xl p-6 liquid-glass shadow-xs">
-                    <h4 class="font-bold text-base text-blue-900">Artikel 1 - Digitale Würde des Menschen</h4>
+                <div class="law-card">
+                    <h4 class="font-extrabold text-slate-900 text-base md:text-lg" style="font-family: var(--font-display);">Artikel 1 - Digitale Würde des Menschen</h4>
                     <p class="text-sm mt-2 leading-relaxed text-slate-600">Die Würde des Menschen ist auch im digitalen Raum unantastbar. Sie ist in allen digitalen Umgebungen, Plattformen und Netzwerken zu achten und zu schützen. Algorithmen und automatisierte Systeme dürfen den Menschen niemals als reines Objekt behandeln.</p>
                 </div>
 
-                <div class="rounded-2xl p-6 liquid-glass shadow-xs">
-                    <h4 class="font-bold text-base text-blue-900">Artikel 2 - Freie Entfaltung der Persönlichkeit im Netz</h4>
+                <div class="law-card">
+                    <h4 class="font-extrabold text-slate-900 text-base md:text-lg" style="font-family: var(--font-display);">Artikel 2 - Freie Entfaltung der Persönlichkeit im Netz</h4>
                     <p class="text-sm mt-2 leading-relaxed text-slate-600">Jeder Mensch hat das Recht auf die freie Entfaltung seiner Persönlichkeit in der digitalen Welt. Dies umfasst die Freiheit der Selbstdarstellung, die Nutzung digitaler Identitäten, Pseudonyme und Avatare, sofern dadurch nicht die Rechte anderer verletzt werden.</p>
                 </div>
 
-                <div class="rounded-2xl p-6 liquid-glass shadow-xs">
-                    <h4 class="font-bold text-base text-blue-900">Artikel 3 - Recht auf Schutz der personenbezogenen Daten</h4>
+                <div class="law-card">
+                    <h4 class="font-extrabold text-slate-900 text-base md:text-lg" style="font-family: var(--font-display);">Artikel 3 - Recht auf Schutz der personenbezogenen Daten</h4>
                     <p class="text-sm mt-2 leading-relaxed text-slate-600">(1) Jede Person hat das Recht auf Schutz der sie betreffenden personenbezogenen Daten.<br><br>(2) Diese Daten dürfen nur nach Treu und Glauben für festgelegte Zwecke und mit Einwilligung der betroffenen Person oder auf einer sonstigen gesetzlichen Grundlage verarbeitet werden. Jede Person hat das Recht, Auskunft über die sie betreffenden erhobenen Daten zu erhalten und deren Berichtigung zu erwirken.<br><br>(3) Die Einhaltung dieser Bestimmungen wird von unabhängigen Behörden überwacht.</p>
                 </div>
 
-                <div class="rounded-2xl p-6 liquid-glass shadow-xs">
-                    <h4 class="font-bold text-base text-blue-900">Artikel 4 - Vertraulichkeit und Integrität technischer Systeme</h4>
+                <div class="law-card">
+                    <h4 class="font-extrabold text-slate-900 text-base md:text-lg" style="font-family: var(--font-display);">Artikel 4 - Vertraulichkeit und Integrität technischer Systeme</h4>
                     <p class="text-sm mt-2 leading-relaxed text-slate-600">Das Grundrecht auf Gewährleistung der Vertraulichkeit und Integrität informationstechnischer Systeme schützt das Vertrauen der Nutzer in die Sicherheit ihrer Geräte. Staatliche Eingriffe oder heimliche Infiltrationen von Computern, Smartphones und Netzwerken sind unzulässig, es sei denn, sie dienen der Abwehr schwerster Gefahren und sind richterlich angeordnet.</p>
                 </div>
 
-                <div class="rounded-2xl p-6 liquid-glass shadow-xs">
-                    <h4 class="font-bold text-base text-blue-900">Artikel 5 - Recht auf Verschlüsselung</h4>
+                <div class="law-card">
+                    <h4 class="font-extrabold text-slate-900 text-base md:text-lg" style="font-family: var(--font-display);">Artikel 5 - Recht auf Verschlüsselung</h4>
                     <p class="text-sm mt-2 leading-relaxed text-slate-600">Jeder Mensch hat das Recht, zur Absicherung seiner digitalen Kommunikation Verschlüsselungsverfahren nach dem aktuellen Stand der Technik zu nutzen. Staatliche Stellen dürfen Anbieter digitaler Dienste nicht dazu verpflichten, Hintertüren oder Generalschlüssel einzurichten, welche die globale IT-Sicherheit schwächen.</p>
                 </div>
 
-                <div class="rounded-2xl p-6 liquid-glass shadow-xs">
-                    <h4 class="font-bold text-base text-blue-900">Artikel 6 - Freiheit der Meinung und Information im Internet</h4>
+                <div class="law-card">
+                    <h4 class="font-extrabold text-slate-900 text-base md:text-lg" style="font-family: var(--font-display);">Artikel 6 - Freiheit der Meinung und Information im Internet</h4>
                     <p class="text-sm mt-2 leading-relaxed text-slate-600">(1) Jede Person hat das Recht auf freie Meinungsäußerung im Netz. Dieses Recht schließt die Meinungsfreiheit und die Freiheit ein, Informationen und Gedankengut ohne staatliche Zensur und ohne geografische Grenzen zu suchen, zu empfangen und zu verbreiten.<br><br>(2) Maßnahmen von Plattformbetreibern zur Sperrung oder Löschung von Inhalten müssen transparent, verhältnismäßig und gerichtlich überprüfbar sein.</p>
                 </div>
 
-                <div class="rounded-2xl p-6 liquid-glass shadow-xs">
-                    <h4 class="font-bold text-base text-blue-900">Artikel 7 - Recht auf Löschung ("Recht auf Vergessenwerden")</h4>
+                <div class="law-card">
+                    <h4 class="font-extrabold text-slate-900 text-base md:text-lg" style="font-family: var(--font-display);">Artikel 7 - Recht auf Löschung ("Recht auf Vergessenwerden")</h4>
                     <p class="text-sm mt-2 leading-relaxed text-slate-600">Die betroffene Person hat das Recht, von dem Verantwortlichen zu verlangen, dass sie betreffende personenbezogene Daten unverzüglich gelöscht werden, sofern die Daten für die Zwecke, für die sie erhoben wurden, nicht mehr notwendig sind, die Einwilligung widerrufen wurde oder die Datenverarbeitung unrechtmäßig erfolgte.</p>
                 </div>
 
-                <div class="rounded-2xl p-6 liquid-glass shadow-xs">
-                    <h4 class="font-bold text-base text-blue-900">Artikel 8 - Recht auf digitale Abwesenheit und Nichterreichbarkeit</h4>
+                <div class="law-card">
+                    <h4 class="font-extrabold text-slate-900 text-base md:text-lg" style="font-family: var(--font-display);">Artikel 8 - Recht auf digitale Abwesenheit und Nichterreichbarkeit</h4>
                     <p class="text-sm mt-2 leading-relaxed text-slate-600">Jeder Mensch hat das Recht, sich zeitweise oder dauerhaft der digitalen Erfassung zu entziehen. Arbeitnehmer haben außerhalb ihrer vertraglich vereinbarten Arbeitszeiten das ausdrückliche Recht auf digitale Nichterreichbarkeit, um ihre Erholung und Freizeit zu schützen.</p>
                 </div>
 
-                <div class="rounded-2xl p-6 liquid-glass shadow-xs">
-                    <h4 class="font-bold text-base text-blue-900">Artikel 9 - Verbot algorithmischer Diskriminierung</h4>
+                <div class="law-card">
+                    <h4 class="font-extrabold text-slate-900 text-base md:text-lg" style="font-family: var(--font-display);">Artikel 9 - Verbot algorithmischer Diskriminierung</h4>
                     <p class="text-sm mt-2 leading-relaxed text-slate-600">Der Einsatz von Künstlicher Intelligenz und automatisierten Entscheidungssystemen darf nicht zu einer direkten oder indirekten Diskriminierung von Personen aufgrund ihres Geschlechts, ihrer ethnischen Herkunft, ihrer Religion, einer Behinderung, ihres Alters oder ihrer sexuellen Orientierung führen.</p>
                 </div>
 
-                <div class="rounded-2xl p-6 liquid-glass shadow-xs">
-                    <h4 class="font-bold text-base text-blue-900">Artikel 10 - Transparenz von KI und Profiling</h4>
+                <div class="law-card">
+                    <h4 class="font-extrabold text-slate-900 text-base md:text-lg" style="font-family: var(--font-display);">Artikel 10 - Transparenz von KI und Profiling</h4>
                     <p class="text-sm mt-2 leading-relaxed text-slate-600">Wird ein Mensch Gegenstand einer automatisierten Entscheidung, die ihm gegenüber rechtliche Wirkung entfaltet, hat er das Recht auf umfassende Aufklärung über die Logik des verwendeten Algorithmus. Reine automatisierte Urteile über die Kreditwürdigkeit, Strafmaß oder Arbeitsfähigkeit ohne menschliche Letztentscheidung sind unzulässig.</p>
                 </div>
 
-                <div class="rounded-2xl p-6 liquid-glass shadow-xs">
-                    <h4 class="font-bold text-base text-blue-900">Artikel 11 - Gewährleistung der Netzneutralität</h4>
+                <div class="law-card">
+                    <h4 class="font-extrabold text-slate-900 text-base md:text-lg" style="font-family: var(--font-display);">Artikel 11 - Gewährleistung der Netzneutralität</h4>
                     <p class="text-sm mt-2 leading-relaxed text-slate-600">Anbieter von Internetzugangsdiensten müssen den gesamten Datenverkehr bei der Erbringung von Internetzugangsdiensten gleichmäßig und ohne Diskriminierung, Einschränkung oder Beeinträchtigung behandeln, unabhängig von Sender, Empfänger, Inhalt, Anwendung oder Dienst.</p>
                 </div>
 
-                <div class="rounded-2xl p-6 liquid-glass shadow-xs">
-                    <h4 class="font-bold text-base text-blue-900">Artikel 12 - Digitaler Zugang und Teilhabe</h4>
+                <div class="law-card">
+                    <h4 class="font-extrabold text-slate-900 text-base md:text-lg" style="font-family: var(--font-display);">Artikel 12 - Digitaler Zugang und Teilhabe</h4>
                     <p class="text-sm mt-2 leading-relaxed text-slate-600">Der Zugang zum Internet ist eine grundlegende Voraussetzung für die Ausübung demokratischer Rechte. Der Staat stellt sicher, dass alle Bürger unbesehen ihres Wohnorts oder Einkommens Zugang zu einer leistungsfähigen, barrierefreien digitalen Infrastruktur erhalten, um soziale Spaltung zu verhindern.</p>
                 </div>
 
             </div>
         </div>
 
-        <div class="text-center mt-16 pt-8 border-t border-slate-200/60">
-            <a href="/unsere-rechte.html" class="inline-block bg-gradient-to-r from-blue-600 to-cyan-500 hover:from-blue-500 hover:to-cyan-400 text-white font-bold px-6 py-3.5 rounded-xl transition-all no-underline shadow-lg border-0">
+        <div class="text-center mt-20 pt-10 border-t border-slate-900/10">
+            <a href="/unsere-rechte.html" class="btn-brand group px-7 py-3.5">
                 ← Zurück zur Rechte-Übersicht
             </a>
         </div>
