@@ -2,7 +2,6 @@
 layout: null
 title: Mein Profil
 ---
-<!DOCTYPE html>
 <html lang="de">
 <head>
     <meta charset="UTF-8">
