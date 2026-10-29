@@ -51,8 +51,26 @@
 
     /* ---------- Scroll-Reveal ---------- */
     var observer = null;
+    var pending = new Set();   // noch nicht eingeblendete Elemente
+    var sweepQueued = false;
+
+    // Sicherheitsnetz: Wird schnell an einem Element vorbeigescrollt (Taste "Ende",
+    // Sprunglink), meldet der IntersectionObserver es nie – dann hier einblenden.
+    function sweepPassed() {
+        sweepQueued = false;
+        pending.forEach(function (el) {
+            if (el.getBoundingClientRect().top < window.innerHeight) {
+                reveal(el);
+                if (observer) observer.unobserve(el);
+            }
+        });
+    }
+    function queueSweep() {
+        if (!sweepQueued && pending.size) { sweepQueued = true; requestAnimationFrame(sweepPassed); }
+    }
 
     function reveal(el) {
+        pending.delete(el);
         el.classList.add('is-visible');
         // Verzögerung nach dem Einblenden entfernen, damit Hover sofort reagiert
         var delay = parseFloat(el.style.transitionDelay) || 0;
@@ -92,7 +110,7 @@
             }, { threshold: 0.12, rootMargin: '0px 0px -6% 0px' });
         }
         fresh.forEach(function (el) {
-            if (!el.classList.contains('is-visible')) observer.observe(el);
+            if (!el.classList.contains('is-visible')) { pending.add(el); observer.observe(el); }
         });
     }
 
@@ -187,6 +205,7 @@
         setupCounters();
         // Inhalte, die per JS nachgeladen werden, später noch einmal prüfen
         window.addEventListener('load', function () { markStaticGlass(); setupReveal(document); });
+        window.addEventListener('scroll', queueSweep, { passive: true });
         var t;
         window.addEventListener('resize', function () { clearTimeout(t); t = setTimeout(markStaticGlass, 200); });
     }
