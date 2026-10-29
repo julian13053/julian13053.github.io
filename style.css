@@ -1,110 +1,523 @@
-/* ==========================================
-   🌊 ULTRA LIQUID GLASS SYSTEM — PERFORMANCE OPTIMIZED
-   ========================================== */
+/* ==========================================================
+   🌊 M-FLEGER · LIQUID GLASS DESIGN SYSTEM  (v2)
+   ----------------------------------------------------------
+   Wird von fast allen Seiten geladen. Tailwind v4 (Browser-CDN)
+   legt seine Utilities in Cascade-Layers ab – alles hier ist
+   bewusst "unlayered" und gewinnt daher ohne Spezifitäts-Tricks.
+   Globale Element-Regeln werden deshalb sparsam eingesetzt.
+   ========================================================== */
 
+@import url("https://fonts.googleapis.com/css2?family=Bricolage+Grotesque:opsz,wght@12..96,500..800&family=Manrope:wght@400..800&display=swap");
+
+/* ----------------------------------------------------------
+   1. DESIGN TOKENS  (Markenfarben aus dem bestehenden Code)
+   ---------------------------------------------------------- */
 :root {
-    --glass-bg: rgba(255, 255, 255, 0.42);
-    --glass-border: rgba(255, 255, 255, 0.65);
-    --glass-shadow: rgba(15, 23, 42, 0.05);
-    --text-primary: #0f172a;
-    --text-secondary: #334155;
+    /* Marke – Blau-Familie (blue-600 ist die meistgenutzte Farbe der Seite) */
+    --brand-500: #3b82f6;
+    --brand-600: #2563eb;
+    --brand-700: #1d4ed8;
+    --brand-900: #1e3a8a;
+    --brand-indigo: #312e81;
+
+    /* Akzent – Cyan aus Hero, Logo-Hover & Login-Button */
+    --accent-300: #67e8f9;
+    --accent-400: #22d3ee;
+    --accent-500: #06b6d4;
+
+    /* Neutrale Töne */
+    --ink: #0f172a;          /* slate-900 – Primärtext  */
+    --ink-soft: #334155;     /* slate-700 – Fließtext   */
+    --muted: #64748b;        /* slate-500 – Metatexte   */
+    --paper: #f8fafc;        /* slate-50  – Grundfläche */
+
+    /* Kompatibilität mit der alten Version */
+    --text-primary: var(--ink);
+    --text-secondary: var(--ink-soft);
+
+    /* Glas-Material */
+    --glass-tint-top: rgba(255, 255, 255, 0.66);
+    --glass-tint-bottom: rgba(255, 255, 255, 0.34);
+    --glass-bg: rgba(255, 255, 255, 0.48);
+    --glass-border: rgba(255, 255, 255, 0.62);
+    --glass-highlight: rgba(255, 255, 255, 0.95);
+    --glass-blur: 22px;
+    --glass-shadow:
+        inset 0 1px 0 var(--glass-highlight),
+        inset 0 -1px 0 rgba(255, 255, 255, 0.22),
+        0 1px 2px rgba(15, 23, 42, 0.04),
+        0 14px 34px -14px rgba(30, 58, 138, 0.20),
+        0 34px 70px -28px rgba(37, 99, 235, 0.18);
+    --glass-shadow-hover:
+        inset 0 1px 0 var(--glass-highlight),
+        inset 0 -1px 0 rgba(255, 255, 255, 0.30),
+        0 2px 4px rgba(15, 23, 42, 0.04),
+        0 22px 44px -16px rgba(30, 58, 138, 0.26),
+        0 46px 90px -30px rgba(37, 99, 235, 0.24);
+
+    /* Dunkles "Rauchglas" für Navigation & Footer */
+    --smoke-bg: rgba(15, 23, 42, 0.58);
+    --smoke-border: rgba(255, 255, 255, 0.12);
+
+    /* Form & Bewegung */
+    --radius-sm: 12px;
+    --radius-md: 18px;
+    --radius-lg: 28px;
+    --radius-xl: 40px;
+    --ease-out: cubic-bezier(0.16, 1, 0.3, 1);
+    --ease-soft: cubic-bezier(0.215, 0.61, 0.355, 1);
+
+    /* Typografie – überschreibt Tailwinds Standard-Sans seitenweit */
+    --font-display: "Bricolage Grotesque", "Manrope", ui-sans-serif, system-ui, sans-serif;
+    --font-sans: "Manrope", ui-sans-serif, system-ui, -apple-system, "Segoe UI", sans-serif;
 }
 
-/* Globaler, flüssiger Hintergrund (Hardware-beschleunigt) */
+/* ----------------------------------------------------------
+   2. GRUNDLAGE: Hintergrund, Schrift, Fokus
+   ---------------------------------------------------------- */
+html {
+    -webkit-text-size-adjust: 100%;
+}
+
 body {
     margin: 0 !important;
     padding: 0 !important;
     min-height: 100vh !important;
+    font-family: var(--font-sans);
+    color: var(--ink);
+    /* Flüssiger Marken-Verlauf statt flachem Grau */
     background:
-        radial-gradient(circle at 20% 20%, rgba(99, 102, 241, 0.12), transparent 40%),
-        radial-gradient(circle at 80% 25%, rgba(59, 130, 246, 0.10), transparent 40%),
-        radial-gradient(circle at 50% 80%, rgba(14, 165, 233, 0.08), transparent 50%),
-        linear-gradient(135deg, #f8fafc 0%, #eef2ff 35%, #dbeafe 70%, #f8fafc 100%) !important;
+        radial-gradient(60rem 40rem at 8% -10%, rgba(37, 99, 235, 0.16), transparent 60%),
+        radial-gradient(50rem 36rem at 100% 10%, rgba(34, 211, 238, 0.14), transparent 60%),
+        radial-gradient(56rem 40rem at 50% 110%, rgba(49, 46, 129, 0.12), transparent 60%),
+        linear-gradient(180deg, #f8fafc 0%, #eef4ff 45%, #f1f7fb 100%) !important;
     background-attachment: fixed !important;
     -webkit-font-smoothing: antialiased;
     -moz-osx-font-smoothing: grayscale;
+    text-rendering: optimizeLegibility;
 }
 
-/* Optimierte Hauptglas-Komponente */
+/* Zwei langsam treibende "Flüssig-Blobs" hinter allem Inhalt.
+   Sie geben dem Glas etwas, das es brechen kann. */
+body::before,
+body::after {
+    content: "";
+    position: fixed;
+    z-index: -1;
+    width: 42vmax;
+    height: 42vmax;
+    border-radius: 50%;
+    filter: blur(80px);
+    opacity: 0.38;
+    pointer-events: none;
+    will-change: transform;
+}
+body::before {
+    top: -14vmax;
+    left: -10vmax;
+    background: radial-gradient(circle at 30% 30%, var(--brand-500), transparent 65%);
+    animation: liquidDrift 28s var(--ease-soft) infinite alternate;
+}
+body::after {
+    right: -12vmax;
+    bottom: -16vmax;
+    background: radial-gradient(circle at 60% 60%, var(--accent-400), transparent 65%);
+    animation: liquidDrift 34s var(--ease-soft) infinite alternate-reverse;
+}
+
+@keyframes liquidDrift {
+    0%   { transform: translate3d(0, 0, 0) scale(1); }
+    50%  { transform: translate3d(6vmax, 4vmax, 0) scale(1.08); }
+    100% { transform: translate3d(-3vmax, 8vmax, 0) scale(0.96); }
+}
+
+/* Überschriften bekommen die Display-Schrift (Gewicht kommt weiter von Tailwind) */
+h1, h2, h3 {
+    font-family: var(--font-display);
+    letter-spacing: -0.025em;
+    text-wrap: balance;
+}
+p {
+    text-wrap: pretty;
+}
+
+::selection {
+    background: rgba(34, 211, 238, 0.35);
+    color: var(--ink);
+}
+
+/* Sichtbarer, markenfarbener Tastatur-Fokus auf allen Seiten */
+:focus-visible {
+    outline: 2px solid var(--accent-500);
+    outline-offset: 3px;
+    border-radius: 10px;
+}
+
+/* ----------------------------------------------------------
+   3. LIQUID GLASS – Hauptmaterial (bestehende Klasse, aufgewertet)
+   ---------------------------------------------------------- */
 .liquid-glass {
-    position: relative !important;
-    background: var(--glass-bg) !important;
-    
-    /* Matte, hochauflösende Tiefenunschärfe ohne Performance-Verlust */
-    backdrop-filter: blur(20px) saturate(190%) brightness(1.02) !important;
-    -webkit-backdrop-filter: blur(20px) saturate(190%) brightness(1.02) !important;
-    
+    background:
+        linear-gradient(150deg, var(--glass-tint-top) 0%, var(--glass-tint-bottom) 100%) !important;
+    backdrop-filter: blur(var(--glass-blur)) saturate(180%) !important;
+    -webkit-backdrop-filter: blur(var(--glass-blur)) saturate(180%) !important;
     border: 1px solid var(--glass-border) !important;
-    border-radius: 24px !important; /* Etwas nativerer, cleanerer Radius */
-    
-    /* Tiefenwirkung durch perfekt ausbalancierten 3-Schichten-Schatten */
-    box-shadow:
-        0 1px 0 0 rgba(255, 255, 255, 0.6) inset,
-        0 10px 25px -5px var(--glass-shadow),
-        0 20px 40px -10px rgba(59, 130, 246, 0.03) !important;
-    
-    /* Butterweicher Übergang dank Ease-Out-Cubic-Kurve */
-    transition: transform 0.35s cubic-bezier(0.215, 0.610, 0.355, 1), 
-                box-shadow 0.35s cubic-bezier(0.215, 0.610, 0.355, 1), 
-                background-color 0.35s cubic-bezier(0.215, 0.610, 0.355, 1) !important;
-    
-    /* Aktiviert die GPU-Beschleunigung gegen Rendering-Fehler */
+    border-radius: var(--radius-lg) !important;
+    box-shadow: var(--glass-shadow) !important;
+    /* transform erzeugt einen eigenen Stacking-Context + Containing Block,
+       damit der Lichtreflex (::before) sauber im Element bleibt.
+       Bewusst KEIN position-Override mehr – fixed/absolute aus Tailwind bleiben wirksam. */
     transform: translateZ(0);
-    will-change: transform, box-shadow;
+    transition:
+        transform 0.45s var(--ease-out),
+        box-shadow 0.45s var(--ease-out),
+        border-color 0.45s var(--ease-out),
+        background 0.45s var(--ease-out) !important;
 }
 
-/* Organischer, sanfter Hover (Karten schweben elegant) */
+/* Spiegelnder Lichtreflex oben links – die "Liquid"-Kante */
+.liquid-glass::before {
+    content: "";
+    position: absolute;
+    inset: 0;
+    z-index: -1;
+    border-radius: inherit;
+    pointer-events: none;
+    background:
+        radial-gradient(120% 60% at 0% 0%, rgba(255, 255, 255, 0.55), transparent 55%),
+        linear-gradient(180deg, rgba(255, 255, 255, 0.18), transparent 40%);
+    opacity: 0.9;
+    transition: opacity 0.45s var(--ease-out);
+}
+
 .liquid-glass:hover {
-    transform: translateY(-4px) !important;
-    background-color: rgba(255, 255, 255, 0.52) !important;
-    border-color: rgba(255, 255, 255, 0.8) !important;
-    box-shadow:
-        0 1px 0 0 rgba(255, 255, 255, 0.8) inset,
-        0 20px 35px -5px rgba(15, 23, 42, 0.08),
-        0 30px 60px -10px rgba(59, 130, 246, 0.06) !important;
+    transform: translate3d(0, -4px, 0) !important;
+    border-color: rgba(255, 255, 255, 0.85) !important;
+    box-shadow: var(--glass-shadow-hover) !important;
+}
+.liquid-glass:hover::before {
+    opacity: 1;
 }
 
-/* Typografie-Fixes */
-.liquid-glass h1, .liquid-glass h2, .liquid-glass h3, 
+/* Typografie innerhalb von Glas (wie bisher, für Lesbarkeit) */
+.liquid-glass h1, .liquid-glass h2, .liquid-glass h3,
 .liquid-glass h4, .liquid-glass h5, .liquid-glass h6 {
     color: var(--text-primary) !important;
     font-weight: 800 !important;
-    letter-spacing: -0.02em !important;
+    letter-spacing: -0.025em !important;
 }
 
 .liquid-glass p, .liquid-glass span, .liquid-glass li {
     color: var(--text-secondary) !important;
-    line-height: 1.6 !important;
+    line-height: 1.7 !important;
 }
 
-/* Gläserne Formular-Elemente & Knöpfe (z.B. Newsletter-Input) */
-.liquid-glass input, .liquid-glass button, .liquid-glass .btn {
-    background: rgba(255, 255, 255, 0.5) !important;
-    border: 1px solid rgba(255, 255, 255, 0.7) !important;
-    border-radius: 12px !important;
+/* Gläserne Formular-Elemente & Knöpfe */
+.liquid-glass input, .liquid-glass textarea, .liquid-glass select,
+.liquid-glass button, .liquid-glass .btn {
+    background: rgba(255, 255, 255, 0.55) !important;
+    border: 1px solid rgba(255, 255, 255, 0.8) !important;
+    border-radius: var(--radius-sm) !important;
     color: var(--text-primary) !important;
     font-weight: 600 !important;
-    transition: all 0.2s ease !important;
+    box-shadow: inset 0 1px 0 rgba(255, 255, 255, 0.9), 0 1px 2px rgba(15, 23, 42, 0.05) !important;
+    transition: background 0.2s ease, border-color 0.2s ease, box-shadow 0.2s ease, transform 0.2s ease !important;
 }
 
-.liquid-glass input::placeholder {
-    color: #64748b !important;
+.liquid-glass input::placeholder,
+.liquid-glass textarea::placeholder {
+    color: var(--muted) !important;
 }
 
-.liquid-glass input:focus {
+.liquid-glass input:focus, .liquid-glass textarea:focus, .liquid-glass select:focus {
     outline: none !important;
-    background: rgba(255, 255, 255, 0.8) !important;
-    border-color: #3b82f6 !important;
-    box-shadow: 0 0 0 3px rgba(59, 130, 246, 0.15) !important;
+    background: rgba(255, 255, 255, 0.88) !important;
+    border-color: var(--brand-500) !important;
+    box-shadow: 0 0 0 4px rgba(59, 130, 246, 0.16) !important;
 }
 
-/* ==========================================
-   ♿ SYSTEM-INTEGRIERTER BARRIEREFREI-MODUS
-   ========================================== */
+/* ----------------------------------------------------------
+   4. NEUE BAUSTEINE (für Navigation, Footer & folgende Seiten)
+   ---------------------------------------------------------- */
+
+/* Kräftigeres, fast weißes Glas – gut lesbar über dunklen Flächen */
+.glass-panel {
+    position: relative;
+    background: linear-gradient(150deg, rgba(255, 255, 255, 0.96), rgba(255, 255, 255, 0.88));
+    backdrop-filter: blur(24px) saturate(180%);
+    -webkit-backdrop-filter: blur(24px) saturate(180%);
+    border: 1px solid rgba(255, 255, 255, 0.9);
+    border-radius: var(--radius-lg);
+    box-shadow: var(--glass-shadow);
+}
+
+/* Dunkles Rauchglas */
+.glass-smoke {
+    position: relative;
+    background:
+        linear-gradient(180deg, rgba(255, 255, 255, 0.07), rgba(255, 255, 255, 0) 60%),
+        var(--smoke-bg);
+    backdrop-filter: blur(24px) saturate(170%);
+    -webkit-backdrop-filter: blur(24px) saturate(170%);
+    border: 1px solid var(--smoke-border);
+    box-shadow:
+        inset 0 1px 0 rgba(255, 255, 255, 0.14),
+        0 18px 40px -18px rgba(15, 23, 42, 0.55),
+        0 40px 80px -40px rgba(30, 58, 138, 0.45);
+}
+
+/* Haarfeine Verlaufslinie (z. B. Trenner im Footer) */
+.glass-hairline {
+    height: 1px;
+    border: 0;
+    background: linear-gradient(90deg, transparent, rgba(255, 255, 255, 0.18) 20%, rgba(255, 255, 255, 0.18) 80%, transparent);
+}
+
+/* Primär-Button: Marken-Verlauf mit Lichtkante und Glanz beim Hover */
+.btn-brand {
+    position: relative;
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    gap: 0.5rem;
+    overflow: hidden;
+    color: #fff;
+    font-weight: 700;
+    text-decoration: none;
+    border-radius: 14px;
+    background: linear-gradient(135deg, var(--brand-600) 0%, var(--brand-500) 45%, var(--accent-500) 100%);
+    box-shadow:
+        inset 0 1px 0 rgba(255, 255, 255, 0.35),
+        0 8px 22px -8px rgba(37, 99, 235, 0.65),
+        0 2px 6px -2px rgba(6, 182, 212, 0.45);
+    transition: transform 0.3s var(--ease-out), box-shadow 0.3s var(--ease-out), filter 0.3s ease;
+}
+.btn-brand::after {
+    content: "";
+    position: absolute;
+    inset: 0;
+    background: linear-gradient(110deg, transparent 30%, rgba(255, 255, 255, 0.45) 50%, transparent 70%);
+    transform: translateX(-120%);
+    transition: transform 0.7s var(--ease-out);
+    pointer-events: none;
+}
+.btn-brand:hover {
+    color: #fff;
+    transform: translateY(-2px);
+    filter: saturate(115%);
+    box-shadow:
+        inset 0 1px 0 rgba(255, 255, 255, 0.4),
+        0 14px 30px -10px rgba(37, 99, 235, 0.7),
+        0 4px 12px -2px rgba(6, 182, 212, 0.5);
+}
+.btn-brand:hover::after {
+    transform: translateX(120%);
+}
+.btn-brand:active {
+    transform: translateY(0) scale(0.98);
+}
+
+/* Runde Glas-Icon-Buttons (Social Media u. ä.) */
+.glass-icon-btn {
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    width: 2.75rem;
+    height: 2.75rem;
+    border-radius: 999px;
+    color: #cbd5e1;
+    background: rgba(255, 255, 255, 0.06);
+    border: 1px solid rgba(255, 255, 255, 0.12);
+    box-shadow: inset 0 1px 0 rgba(255, 255, 255, 0.12);
+    transition: transform 0.3s var(--ease-out), background 0.3s ease, color 0.3s ease, border-color 0.3s ease;
+}
+.glass-icon-btn:hover {
+    transform: translateY(-3px);
+    color: #fff;
+    background: rgba(255, 255, 255, 0.14);
+    border-color: rgba(255, 255, 255, 0.28);
+}
+
+/* Verlaufstext in Markenfarben */
+.text-gradient-brand {
+    background: linear-gradient(120deg, var(--accent-300), var(--accent-400) 40%, #a5b4fc);
+    -webkit-background-clip: text;
+    background-clip: text;
+    color: transparent;
+}
+
+/* ----------------------------------------------------------
+   5. NAVIGATION
+   ---------------------------------------------------------- */
+.nav-bar {
+    border-radius: 22px;
+    transition: border-radius 0.4s var(--ease-out), box-shadow 0.4s var(--ease-out), background 0.4s ease;
+}
+.nav-row {
+    height: 4.5rem;
+    transition: height 0.4s var(--ease-out);
+}
+.nav-shell.is-scrolled .nav-row {
+    height: 4rem;
+}
+.nav-shell.is-scrolled .nav-bar {
+    --smoke-bg: rgba(15, 23, 42, 0.8);
+}
+/* Offenes Mobilmenü liegt oft über hellem Inhalt → dichteres Glas für Lesbarkeit */
+.nav-bar:has(.mobile-panel[data-open="true"]) {
+    --smoke-bg: rgba(15, 23, 42, 0.9);
+}
+
+/* Segmentierte Link-Gruppe */
+.nav-links {
+    padding: 0.3rem;
+    border-radius: 16px;
+    background: rgba(255, 255, 255, 0.05);
+    border: 1px solid rgba(255, 255, 255, 0.07);
+}
+.nav-link {
+    position: relative;
+    display: inline-flex;
+    align-items: center;
+    padding: 0.5rem 0.95rem;
+    border-radius: 12px;
+    font-size: 0.875rem;
+    font-weight: 600;
+    color: #cbd5e1;
+    text-decoration: none;
+    transition: color 0.25s ease, background 0.25s ease;
+}
+.nav-link:hover {
+    color: #fff;
+    background: rgba(255, 255, 255, 0.08);
+}
+.nav-link[aria-current="page"] {
+    color: #fff;
+    background: rgba(255, 255, 255, 0.12);
+    box-shadow: inset 0 1px 0 rgba(255, 255, 255, 0.16);
+}
+.nav-link[aria-current="page"]::after {
+    content: "";
+    position: absolute;
+    left: 50%;
+    bottom: 3px;
+    width: 4px;
+    height: 4px;
+    margin-left: -2px;
+    border-radius: 50%;
+    background: var(--accent-400);
+    box-shadow: 0 0 8px var(--accent-400);
+}
+
+/* Mobiles Menü: weich aufklappen statt hart einblenden */
+.mobile-panel {
+    display: grid;
+    grid-template-rows: 0fr;
+    opacity: 0;
+    transition: grid-template-rows 0.45s var(--ease-out), opacity 0.3s ease;
+}
+.mobile-panel > div {
+    overflow: hidden;
+}
+.mobile-panel[data-open="true"] {
+    grid-template-rows: 1fr;
+    opacity: 1;
+}
+.mobile-link {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    padding: 0.8rem 1rem;
+    border-radius: 14px;
+    font-weight: 600;
+    color: #e2e8f0;
+    text-decoration: none;
+    transition: background 0.2s ease, color 0.2s ease;
+}
+.mobile-link:hover,
+.mobile-link[aria-current="page"] {
+    background: rgba(255, 255, 255, 0.09);
+    color: #fff;
+}
+
+/* Burger → X */
+.burger-line {
+    transform-origin: center;
+    transition: transform 0.35s var(--ease-out), opacity 0.2s ease;
+}
+[aria-expanded="true"] .burger-line:nth-child(1) { transform: translateY(6px) rotate(45deg); }
+[aria-expanded="true"] .burger-line:nth-child(2) { opacity: 0; }
+[aria-expanded="true"] .burger-line:nth-child(3) { transform: translateY(-6px) rotate(-45deg); }
+
+/* ----------------------------------------------------------
+   6. FOOTER
+   ---------------------------------------------------------- */
+.site-footer {
+    position: relative;
+    isolation: isolate;
+    color: #94a3b8;
+    background:
+        radial-gradient(40rem 20rem at 15% 0%, rgba(37, 99, 235, 0.35), transparent 70%),
+        radial-gradient(36rem 18rem at 90% 10%, rgba(6, 182, 212, 0.22), transparent 70%),
+        linear-gradient(180deg, #0f172a 0%, #0b1226 100%);
+    border-radius: var(--radius-xl) var(--radius-xl) 0 0;
+    box-shadow: inset 0 1px 0 rgba(255, 255, 255, 0.08);
+}
+.footer-link {
+    color: #94a3b8;
+    text-decoration: none;
+    transition: color 0.2s ease, padding-left 0.3s var(--ease-out);
+}
+.footer-link:hover {
+    color: #fff;
+    padding-left: 4px;
+}
+
+/* ----------------------------------------------------------
+   7. FALLBACKS & PRÄFERENZEN
+   ---------------------------------------------------------- */
+
+/* Browser ohne backdrop-filter: deckender, damit Text lesbar bleibt */
+@supports not ((backdrop-filter: blur(1px)) or (-webkit-backdrop-filter: blur(1px))) {
+    .liquid-glass { background: rgba(255, 255, 255, 0.92) !important; }
+    .glass-panel  { background: rgba(255, 255, 255, 0.96); }
+    .glass-smoke  { background: rgba(15, 23, 42, 0.94); }
+}
+
+/* Nutzer, die Transparenz reduziert haben möchten */
+@media (prefers-reduced-transparency: reduce) {
+    .liquid-glass { background: rgba(255, 255, 255, 0.95) !important; backdrop-filter: none !important; -webkit-backdrop-filter: none !important; }
+    .glass-smoke  { background: rgba(15, 23, 42, 0.96); backdrop-filter: none; -webkit-backdrop-filter: none; }
+    body::before, body::after { display: none; }
+}
+
+/* Nutzer, die Bewegung reduziert haben möchten */
+@media (prefers-reduced-motion: reduce) {
+    body::before, body::after { animation: none; }
+    .liquid-glass, .btn-brand, .glass-icon-btn, .nav-link, .mobile-panel, .footer-link {
+        transition-duration: 0.01ms !important;
+    }
+    .liquid-glass:hover, .btn-brand:hover, .glass-icon-btn:hover { transform: none !important; }
+}
+
+/* Schwächere Geräte: weniger Blur kostet weniger Leistung */
+@media (max-width: 640px) {
+    :root { --glass-blur: 16px; }
+    body::before, body::after { filter: blur(60px); opacity: 0.3; }
+}
+
+/* ==========================================================
+   ♿ SYSTEM-INTEGRIERTER BARRIEREFREI-MODUS (unverändert erweitert)
+   ========================================================== */
 body.no-glass {
     background: #f8fafc !important;
 }
-body.no-glass .liquid-glass {
+body.no-glass::before,
+body.no-glass::after {
+    display: none;
+}
+body.no-glass .liquid-glass,
+body.no-glass .glass-panel {
     background: #ffffff !important;
     backdrop-filter: none !important;
     -webkit-backdrop-filter: none !important;
@@ -112,7 +525,15 @@ body.no-glass .liquid-glass {
     box-shadow: 0 4px 6px -1px rgba(0, 0, 0, 0.05) !important;
     transform: none !important;
 }
+body.no-glass .liquid-glass::before {
+    display: none;
+}
 body.no-glass .liquid-glass:hover {
     transform: none !important;
     background: #f1f5f9 !important;
+}
+body.no-glass .glass-smoke {
+    background: #0f172a;
+    backdrop-filter: none;
+    -webkit-backdrop-filter: none;
 }

@@ -1,64 +1,105 @@
-<!-- Schwebende Glassmorphism Navigation -->
-<div class="w-full max-w-5xl mx-auto px-4 sticky top-6 z-50">
-    <nav class="backdrop-blur-xl bg-slate-900/85 text-white shadow-2xl rounded-2xl border border-white/10 transition-all duration-300 hover:bg-slate-900/90">
-        <div class="px-6 sm:px-8 h-20 flex items-center justify-between">
-            
+<!-- ==========================================================
+     Schwebende Liquid-Glass Navigation
+     Styles: /style.css → Abschnitt "5. NAVIGATION"
+     ========================================================== -->
+<div id="nav-shell" class="nav-shell w-full max-w-6xl mx-auto px-3 sm:px-4 sticky top-3 sm:top-5 z-50">
+    <nav class="nav-bar glass-smoke text-white" aria-label="Hauptnavigation">
+        <div class="nav-row px-4 sm:px-6 flex items-center justify-between gap-4">
+
             <!-- Logo & Branding -->
-            <div class="flex-shrink-0">
-                <a href="/" class="flex items-center gap-3.5 no-underline group">
-                    <img src="/auge-logo.jpg" alt="M-Fleger Logo" class="h-11 w-11 object-cover rounded-full shadow-lg border border-white/20 group-hover:scale-105 transition-transform duration-300">
-                    <span class="text-xl font-black tracking-tight text-white group-hover:text-cyan-400 transition-colors">M-Fleger</span>
-                </a>
-            </div>
+            <a href="/" class="flex items-center gap-3 no-underline group shrink-0" aria-label="M-Fleger – zur Startseite">
+                <span class="relative">
+                    <span class="absolute -inset-1 rounded-full bg-gradient-to-br from-cyan-400/60 to-blue-600/60 blur-md opacity-0 group-hover:opacity-100 transition-opacity duration-500"></span>
+                    <img src="/auge-logo.jpg" alt="" class="relative h-10 w-10 object-cover rounded-full ring-1 ring-white/25 shadow-lg transition-transform duration-500 group-hover:scale-105">
+                </span>
+                <span class="text-lg sm:text-xl font-extrabold tracking-tight text-white" style="font-family: var(--font-display);">
+                    M-Fleger
+                </span>
+            </a>
 
             <!-- Desktop Links -->
-            <div class="hidden md:flex items-center space-x-1 lg:space-x-2">
-                <a href="/" class="px-4 py-2 text-sm font-medium text-slate-200 hover:text-white hover:bg-white/10 rounded-xl no-underline transition-all duration-200">Startseite</a>
-                <a href="/ueber-mich" class="px-4 py-2 text-sm font-medium text-slate-200 hover:text-white hover:bg-white/10 rounded-xl no-underline transition-all duration-200">Über mich</a>
-                <a href="/unsere-rechte" class="px-4 py-2 text-sm font-medium text-slate-200 hover:text-white hover:bg-white/10 rounded-xl no-underline transition-all duration-200">Rechte-Hub</a>
-                <a href="/spenden" class="px-4 py-2 text-sm font-medium text-slate-200 hover:text-white hover:bg-white/10 rounded-xl no-underline transition-all duration-200">Spenden</a>
-                <a href="/blog" class="px-4 py-2 text-sm font-medium text-slate-200 hover:text-white hover:bg-white/10 rounded-xl no-underline transition-all duration-200">Blog</a>
-                <a href="/kontakt" class="px-4 py-2 text-sm font-medium text-slate-200 hover:text-white hover:bg-white/10 rounded-xl no-underline transition-all duration-200">Kontakt</a>
+            <div class="nav-links hidden md:flex items-center gap-0.5">
+                <a href="/" class="nav-link" data-nav>Startseite</a>
+                <a href="/ueber-mich" class="nav-link" data-nav>Über mich</a>
+                <a href="/unsere-rechte" class="nav-link" data-nav>Rechte-Hub</a>
+                <a href="/spenden" class="nav-link" data-nav>Spenden</a>
+                <a href="/blog" class="nav-link" data-nav>Blog</a>
+                <a href="/kontakt" class="nav-link" data-nav>Kontakt</a>
             </div>
 
             <!-- Login / Profil Button Desktop -->
-            <div class="hidden md:flex items-center pl-2">
-                <a id="nav-auth-btn" href="/login" class="text-sm font-bold text-white bg-gradient-to-r from-blue-600 to-cyan-500 hover:from-blue-500 hover:to-cyan-400 px-6 py-2.5 rounded-xl no-underline shadow-lg shadow-cyan-500/20 hover:shadow-cyan-500/35 transform hover:-translate-y-0.5 transition-all duration-200">Login</a>
+            <div class="hidden md:flex items-center shrink-0">
+                <a id="nav-auth-btn" href="/login" class="btn-brand text-sm px-5 py-2.5">Login</a>
             </div>
 
             <!-- Mobile Burger-Button -->
-            <div class="md:hidden flex items-center">
-                <button id="mobile-menu-btn" aria-label="Menü öffnen" class="p-2.5 text-slate-200 hover:text-white hover:bg-white/10 rounded-xl focus:outline-none transition-colors">
-                    <svg class="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 6h16M4 12h16M4 18h16"></path>
-                    </svg>
-                </button>
-            </div>
+            <button id="mobile-menu-btn" type="button" aria-label="Menü öffnen" aria-expanded="false" aria-controls="mobile-menu"
+                    class="md:hidden grid place-items-center w-11 h-11 rounded-xl text-slate-100 bg-white/5 border border-white/10 hover:bg-white/10 transition-colors">
+                <svg class="w-5 h-5" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" viewBox="0 0 24 24" aria-hidden="true">
+                    <path class="burger-line" d="M4 6h16"></path>
+                    <path class="burger-line" d="M4 12h16"></path>
+                    <path class="burger-line" d="M4 18h16"></path>
+                </svg>
+            </button>
         </div>
 
-        <!-- Mobile Ausklapp-Menü -->
-        <div id="mobile-menu" class="hidden md:hidden px-6 pb-6 space-y-2 border-t border-white/10 pt-4">
-            <a href="/" class="block px-4 py-2.5 text-base font-medium text-slate-200 hover:text-white hover:bg-white/10 rounded-xl no-underline">Startseite</a>
-            <a href="/ueber-mich" class="block px-4 py-2.5 text-base font-medium text-slate-200 hover:text-white hover:bg-white/10 rounded-xl no-underline">Über mich</a>
-            <a href="/unsere-rechte" class="block px-4 py-2.5 text-base font-medium text-slate-200 hover:text-white hover:bg-white/10 rounded-xl no-underline">Rechte-Hub</a>
-            <a href="/spenden" class="block px-4 py-2.5 text-base font-medium text-slate-200 hover:text-white hover:bg-white/10 rounded-xl no-underline">Spenden</a>
-            <a href="/blog" class="block px-4 py-2.5 text-base font-medium text-slate-200 hover:text-white hover:bg-white/10 rounded-xl no-underline">Blog</a>
-            <a href="/kontakt" class="block px-4 py-2.5 text-base font-medium text-slate-200 hover:text-white hover:bg-white/10 rounded-xl no-underline">Kontakt</a>
-            <div class="pt-2">
-                <a id="mobile-auth-btn" href="/login" class="block text-center text-sm font-bold text-white bg-gradient-to-r from-blue-600 to-cyan-500 px-5 py-3 rounded-xl no-underline shadow-md">Login</a>
+        <!-- Mobile Ausklapp-Menü (klappt weich auf, siehe .mobile-panel) -->
+        <div id="mobile-menu" class="mobile-panel md:hidden" data-open="false">
+            <div>
+                <div class="px-3 pb-4 pt-1">
+                    <hr class="glass-hairline mb-3">
+                    <a href="/" class="mobile-link" data-nav>Startseite <span aria-hidden="true" class="text-slate-400/70">→</span></a>
+                    <a href="/ueber-mich" class="mobile-link" data-nav>Über mich <span aria-hidden="true" class="text-slate-400/70">→</span></a>
+                    <a href="/unsere-rechte" class="mobile-link" data-nav>Rechte-Hub <span aria-hidden="true" class="text-slate-400/70">→</span></a>
+                    <a href="/spenden" class="mobile-link" data-nav>Spenden <span aria-hidden="true" class="text-slate-400/70">→</span></a>
+                    <a href="/blog" class="mobile-link" data-nav>Blog <span aria-hidden="true" class="text-slate-400/70">→</span></a>
+                    <a href="/kontakt" class="mobile-link" data-nav>Kontakt <span aria-hidden="true" class="text-slate-400/70">→</span></a>
+                    <div class="pt-3 px-1">
+                        <a id="mobile-auth-btn" href="/login" class="btn-brand w-full text-sm px-5 py-3">Login</a>
+                    </div>
+                </div>
             </div>
         </div>
     </nav>
 </div>
 
 <script>
-    // Toggle für Mobile Menü
-    document.getElementById('mobile-menu-btn')?.addEventListener('click', function() {
-        document.getElementById('mobile-menu')?.classList.toggle('hidden');
-    });
+    (function () {
+        // Mobiles Menü öffnen/schließen (mit ARIA-Status für Screenreader)
+        var btn = document.getElementById('mobile-menu-btn');
+        var menu = document.getElementById('mobile-menu');
+        if (btn && menu) {
+            btn.addEventListener('click', function () {
+                var open = menu.getAttribute('data-open') !== 'true';
+                menu.setAttribute('data-open', String(open));
+                btn.setAttribute('aria-expanded', String(open));
+                btn.setAttribute('aria-label', open ? 'Menü schließen' : 'Menü öffnen');
+            });
+        }
+
+        // Aktuelle Seite markieren ("/blog", "/blog.html" und "/blog/" gelten als gleich)
+        function normalize(path) {
+            path = path.replace(/index\.html$/, '').replace(/\.html$/, '').replace(/\/+$/, '');
+            return path === '' ? '/' : path;
+        }
+        var here = normalize(window.location.pathname);
+        document.querySelectorAll('[data-nav]').forEach(function (link) {
+            var target = normalize(link.getAttribute('href'));
+            var isBlogPost = target === '/blog' && /^\/\d{4}\/\d{2}\/\d{2}\//.test(window.location.pathname);
+            if (target === here || isBlogPost) link.setAttribute('aria-current', 'page');
+        });
+
+        // Leiste wird beim Scrollen etwas kompakter und dunkler
+        var shell = document.getElementById('nav-shell');
+        if (shell) {
+            var onScroll = function () { shell.classList.toggle('is-scrolled', window.scrollY > 12); };
+            window.addEventListener('scroll', onScroll, { passive: true });
+            onScroll();
+        }
+    })();
 </script>
 
-<!-- Firebase Auth Status für Navigation -->
+<!-- Firebase Auth Status für Navigation (unverändert) -->
 <script type="module">
     import { getAuth, onAuthStateChanged } from "https://www.gstatic.com/firebasejs/10.8.0/firebase-auth.js";
 
