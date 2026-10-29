@@ -3,7 +3,6 @@ layout: null
 title: Blog
 ---
 
-<!DOCTYPE html>
 <html lang="de">
 <head>
     <meta charset="UTF-8">
