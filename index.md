@@ -5,7 +5,6 @@ description: Entdecke das kreative Portfolio und den Blog von Julian Fleger. Mod
 keywords: Julian Fleger, Julian Fleger Portfolio, M-Fleger, Webentwickler Berlin, Blog, Branding
 robots: index, follow
 ---
-<!DOCTYPE html>
 <html lang="de" class="scroll-smooth">
 <head>
     <meta charset="UTF-8">
