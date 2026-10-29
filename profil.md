@@ -16,25 +16,11 @@ title: Mein Profil
 
     <script src="https://cdn.jsdelivr.net/npm/@tailwindcss/browser@4"></script>
     <script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script>
-    
-    <style>
-        @keyframes fadeInUp {
-            from { opacity: 0; transform: translateY(15px); }
-            to { opacity: 1; transform: translateY(0); }
-        }
-        .animate-fade-in { animation: fadeInUp 0.5s ease-out forwards; }
-        .liquid-glass {
-            background: rgba(255, 255, 255, 0.75);
-            backdrop-filter: blur(12px);
-            -webkit-backdrop-filter: blur(12px);
-            border: 1px solid rgba(255, 255, 255, 0.5);
-        }
-    </style>
 </head>
-<body class="bg-gradient-to-br from-slate-50 to-blue-100 text-gray-900 font-sans antialiased flex flex-col min-h-screen relative">
+<body class="text-slate-900 font-sans antialiased flex flex-col min-h-screen relative overflow-x-hidden">
 
     <!-- Benachrichtigungs-Banner -->
-    <div id="custom-banner" class="fixed top-24 right-4 z-50 transform translate-x-full opacity-0 transition-all duration-300 ease-out max-w-sm w-full bg-white/90 backdrop-blur-md border shadow-xl rounded-2xl p-4 flex items-start gap-3">
+    <div id="custom-banner" class="toast glass-panel" role="status" aria-live="polite">
         <span id="banner-icon" class="text-xl"></span>
         <div class="flex-grow">
             <h4 id="banner-title" class="font-bold text-sm text-slate-900"></h4>
@@ -43,18 +29,18 @@ title: Mein Profil
     </div>
 
     <!-- Modal: Konto löschen -->
-    <div id="delete-modal" class="fixed inset-0 bg-slate-900/40 backdrop-blur-xs z-50 flex items-center justify-center p-4 hidden">
-        <div class="bg-white border border-slate-100 max-w-md w-full rounded-3xl p-6 md:p-8 shadow-2xl transform scale-95 transition-all duration-300">
+    <div id="delete-modal" class="fixed inset-0 bg-slate-900/45 backdrop-blur-md z-[80] flex items-center justify-center p-4 hidden">
+        <div class="glass-panel max-w-md w-full p-7 md:p-9 shadow-2xl scale-95 opacity-0 transition-all duration-500 ease-[cubic-bezier(0.34,1.4,0.64,1)]">
             <span class="text-4xl block mb-3">⚠️</span>
-            <h3 class="text-xl font-black text-slate-950 tracking-tight">Konto unwiderruflich löschen?</h3>
+            <h3 class="text-2xl font-extrabold text-slate-950 tracking-tight">Konto unwiderruflich löschen?</h3>
             <p class="text-sm text-slate-600 mt-2 leading-relaxed">
                 Bist du dir absolut sicher? Dadurch werden all deine gespeicherten Favoriten und dein Zugang dauerhaft gelöscht. Dies kann nicht rückgängig gemacht werden.
             </p>
             <div class="mt-6 flex justify-end gap-3">
-                <button onclick="schließeDeleteModal()" class="px-5 py-2.5 text-sm font-semibold text-slate-600 hover:bg-slate-100 rounded-xl transition-all cursor-pointer">
+                <button onclick="schließeDeleteModal()" class="btn-glass !text-slate-600 px-5 py-2.5 text-sm cursor-pointer">
                     Abbrechen
                 </button>
-                <button onclick="kontoDefinitivLoeschen()" class="px-5 py-2.5 text-sm font-bold bg-red-600 hover:bg-red-700 text-white rounded-xl shadow-md transition-all cursor-pointer">
+                <button onclick="kontoDefinitivLoeschen()" class="btn-shine px-5 py-2.5 text-sm font-bold bg-red-600 hover:bg-red-700 text-white rounded-[14px] shadow-[0_8px_20px_-8px_rgba(220,38,38,0.7)] cursor-pointer">
                     Ja, löschen
                 </button>
             </div>
@@ -65,44 +51,42 @@ title: Mein Profil
     {% include navigation.html %}
 
     <!-- Header-Bereich -->
-    <header class="bg-gradient-to-br from-slate-900 via-slate-800 to-slate-900 text-white py-14 px-4 md:px-6 overflow-hidden relative shadow-md">
+    <header class="page-hero page-hero--slate">
         <div class="max-w-4xl mx-auto text-center animate-fade-in">
-            <span class="bg-white/10 text-slate-200 border border-white/20 font-extrabold px-4 py-1.5 rounded-full text-xs uppercase tracking-wider inline-block mb-3">
-                Benutzerkonto
-            </span>
-            <h1 class="text-4xl md:text-5xl font-black tracking-tight mb-3 leading-tight">
+            <span class="hero-badge shimmer">Benutzerkonto</span>
+            <h1 class="text-[2.6rem] sm:text-5xl md:text-6xl font-extrabold tracking-tight mt-6 mb-4 leading-[1.06]">
                 👤 Mein Profil
             </h1>
-            <p id="user-email-display" class="text-base md:text-lg text-slate-300 max-w-xl mx-auto leading-relaxed font-medium">
+            <p id="user-email-display" class="text-base md:text-xl text-slate-300 max-w-xl mx-auto leading-relaxed font-medium">
                 Lade Profil...
             </p>
         </div>
     </header>
 
     <!-- Hauptinhalt -->
-    <main class="max-w-6xl mx-auto px-4 md:px-6 py-12 flex-grow w-full">
+    <main class="max-w-6xl mx-auto px-5 md:px-6 pb-16 md:pb-24 flex-grow w-full page-overlap">
         
         <!-- Falls nicht eingeloggt -->
-        <div id="login-required-card" class="max-w-md mx-auto liquid-glass p-8 rounded-3xl shadow-sm text-center hidden animate-fade-in">
+        <div id="login-required-card" class="max-w-md mx-auto liquid-glass p-10 text-center hidden animate-fade-in">
             <span class="text-4xl block mb-4">🔒</span>
             <h2 class="text-xl font-bold mb-2 text-slate-900">Anmeldung erforderlich</h2>
             <p class="text-slate-600 text-sm mb-6">Du musst eingeloggt sein, um deine Merkliste und dein Profil zu sehen.</p>
-            <a href="/login.html" class="bg-blue-600 hover:bg-blue-700 text-white font-bold px-6 py-3 rounded-xl text-sm transition-all shadow-md inline-block no-underline">
+            <a href="/login.html" class="btn-brand group px-6 py-3 text-sm">
                 Jetzt anmelden
             </a>
         </div>
 
         <!-- Profil-Content -->
         <div id="profile-content" class="hidden animate-fade-in">
-            <div class="flex flex-col md:flex-row justify-between items-start md:items-center gap-4 mb-8 border-b border-slate-200/60 pb-6">
-                <h2 class="text-2xl font-black text-slate-900 tracking-tight flex items-center gap-2">
+            <div class="glass-panel flex flex-col md:flex-row justify-between items-start md:items-center gap-4 mb-10 p-6 md:p-7">
+                <h2 class="text-2xl md:text-3xl font-extrabold tracking-tight flex items-center gap-2">
                     ❤️ Meine gespeicherten Favoriten
                 </h2>
                 <div class="flex gap-3">
-                    <button onclick="handleLogout()" class="text-xs font-bold px-4 py-2.5 rounded-xl bg-white/80 hover:bg-white text-slate-700 border border-slate-200 shadow-xs transition-all cursor-pointer">
+                    <button onclick="handleLogout()" class="btn-glass !text-slate-700 text-xs px-4 py-2.5 cursor-pointer">
                         🚪 Abmelden
                     </button>
-                    <button onclick="zeigeDeleteModal()" class="text-xs font-bold px-4 py-2.5 rounded-xl bg-red-50 hover:bg-red-100 text-red-600 border border-red-100 transition-all cursor-pointer">
+                    <button onclick="zeigeDeleteModal()" class="btn-shine text-xs font-bold px-4 py-2.5 rounded-[14px] bg-red-50 hover:bg-red-100 text-red-600 border border-red-200 cursor-pointer">
                         ⚙️ Konto löschen
                     </button>
                 </div>
@@ -110,7 +94,7 @@ title: Mein Profil
             
             <div class="grid grid-cols-1 md:grid-cols-3 gap-6 md:gap-8" id="favorites-grid"></div>
 
-            <p id="no-favorites-message" class="text-slate-500 text-center py-12 text-lg font-medium hidden">
+            <p id="no-favorites-message" class="glass-panel max-w-lg mx-auto text-slate-500 text-center py-12 px-6 text-lg font-medium hidden">
                 Du hast bisher noch keine Artikel als Favorit markiert. ⭐
             </p>
         </div>
@@ -148,23 +132,23 @@ title: Mein Profil
             const msgEl = document.getElementById('banner-message');
 
             if (type === 'success') {
-                banner.className = "fixed top-24 right-4 z-50 transform transition-all duration-300 ease-out max-w-sm w-full bg-emerald-50/90 backdrop-blur-md border border-emerald-200 shadow-xl rounded-2xl p-4 flex items-start gap-3 text-emerald-900";
+                banner.style.borderColor = "rgba(74, 222, 128, 0.6)";
                 icon.innerText = "✅";
             } else if (type === 'info') {
-                banner.className = "fixed top-24 right-4 z-50 transform transition-all duration-300 ease-out max-w-sm w-full bg-blue-50/90 backdrop-blur-md border border-blue-200 shadow-xl rounded-2xl p-4 flex items-start gap-3 text-blue-900";
+                banner.style.borderColor = "rgba(96, 165, 250, 0.6)";
                 icon.innerText = "ℹ️";
             } else {
-                banner.className = "fixed top-24 right-4 z-50 transform transition-all duration-300 ease-out max-w-sm w-full bg-red-50/90 backdrop-blur-md border border-red-200 shadow-xl rounded-2xl p-4 flex items-start gap-3 text-red-900";
+                banner.style.borderColor = "rgba(248, 113, 113, 0.65)";
                 icon.innerText = "❌";
             }
 
             titleEl.innerText = title;
             msgEl.innerText = message;
 
-            banner.classList.remove('translate-x-full', 'opacity-0');
+            banner.classList.add('is-shown');
             
             setTimeout(() => {
-                banner.classList.add('translate-x-full', 'opacity-0');
+                banner.classList.remove('is-shown');
             }, 4000);
         }
 
@@ -207,22 +191,22 @@ title: Mein Profil
                     if (favIds.has(post.id)) {
                         counter++;
                         const card = document.createElement('div');
-                        card.className = "liquid-glass p-6 rounded-3xl shadow-xs flex flex-col justify-between hover:shadow-md transition-all duration-300";
+                        card.className = "liquid-glass group p-7 flex flex-col justify-between";
                         card.setAttribute('data-post-id', post.id);
                         
                         card.innerHTML = `
                             <div>
                                 <div class="flex justify-between items-center mb-3">
-                                    <span class="text-xs bg-blue-600 text-white px-2.5 py-1 rounded-md font-bold uppercase tracking-wider">${post.date}</span>
+                                    <span class="inline-flex items-center rounded-full px-3 py-1 text-[11px] font-bold tracking-wide !text-white bg-gradient-to-r from-blue-600 to-cyan-500 shadow-[0_4px_12px_-4px_rgba(37,99,235,0.6)]">${post.date}</span>
                                 </div>
-                                <h3 class="text-xl font-bold text-slate-900 mt-1 mb-3 line-clamp-2">${post.title}</h3>
-                                <p class="text-slate-600 text-sm mb-4 line-clamp-3">${post.excerpt}</p>
+                                <h3 class="text-xl leading-snug mt-1 mb-3 line-clamp-2 transition-colors group-hover:!text-blue-700">${post.title}</h3>
+                                <p class="text-[15px] mb-5 line-clamp-3">${post.excerpt}</p>
                             </div>
-                            <div class="flex justify-between items-center mt-2 pt-3 border-t border-slate-200/50">
+                            <div class="flex justify-between items-center mt-2 pt-4 border-t border-white/70">
                                 <a href="${post.url}" class="text-blue-600 font-bold text-sm hover:text-blue-800 no-underline">
                                     Artikel lesen →
                                 </a>
-                                <button onclick="entferneFavorit('${post.id}', this)" class="text-xs font-bold px-3 py-1.5 rounded-full border border-red-200 bg-red-50 hover:bg-red-100 text-red-600 transition-all cursor-pointer">
+                                <button onclick="entferneFavorit('${post.id}', this)" class="glass-pill !text-red-600 cursor-pointer">
                                     ❌ Entfernen
                                 </button>
                             </div>
@@ -230,6 +214,9 @@ title: Mein Profil
                         grid.appendChild(card);
                     }
                 });
+
+                // neue Karten weich einblenden
+                if (window.MFMotion) window.MFMotion.refresh(grid);
 
                 if (counter === 0) {
                     noFavsMessage.classList.remove('hidden');
@@ -252,14 +239,24 @@ title: Mein Profil
                     .eq('blog_id', blogId);
 
                 if (!error) {
-                    const card = button.closest('[data-post-id]');
-                    if (card) card.remove();
-                    
                     zeigeBanner('info', 'Entfernt', 'Der Artikel wurde aus deinen Favoriten gelöscht.');
 
+                    // Karte schrumpft und blendet aus, bevor sie entfernt wird
+                    const card = button.closest('[data-post-id]');
                     const grid = document.getElementById('favorites-grid');
-                    if (grid && grid.children.length === 0) {
-                        document.getElementById('no-favorites-message').classList.remove('hidden');
+                    const afterRemove = () => {
+                        if (card) card.remove();
+                        if (grid && grid.children.length === 0) {
+                            document.getElementById('no-favorites-message').classList.remove('hidden');
+                        }
+                    };
+                    if (card && !window.matchMedia('(prefers-reduced-motion: reduce)').matches) {
+                        card.style.transition = 'opacity 0.35s ease, scale 0.45s cubic-bezier(0.16, 1, 0.3, 1)';
+                        card.style.opacity = '0';
+                        card.style.scale = '0.92';
+                        setTimeout(afterRemove, 380);
+                    } else {
+                        afterRemove();
                     }
                 } else {
                     zeigeBanner('error', 'Fehler', error.message);
@@ -273,13 +270,13 @@ title: Mein Profil
         function zeigeDeleteModal() {
             const modal = document.getElementById('delete-modal');
             modal.classList.remove('hidden');
-            setTimeout(() => modal.firstElementChild.classList.remove('scale-95'), 10);
+            setTimeout(() => modal.firstElementChild.classList.remove('scale-95', 'opacity-0'), 10);
         }
 
         function schließeDeleteModal() {
             const modal = document.getElementById('delete-modal');
-            modal.firstElementChild.classList.add('scale-95');
-            setTimeout(() => modal.classList.add('hidden'), 150);
+            modal.firstElementChild.classList.add('scale-95', 'opacity-0');
+            setTimeout(() => modal.classList.add('hidden'), 250);
         }
 
         async function kontoDefinitivLoeschen() {

@@ -14,36 +14,35 @@ title: Über mich
     <link rel="icon" type="image/jpeg" href="/auge-logo.jpg">
 
     <script src="https://cdn.jsdelivr.net/npm/@tailwindcss/browser@4"></script>
-    <style>
-        .liquid-glass {
-            background: rgba(255, 255, 255, 0.75);
-            backdrop-filter: blur(12px);
-            -webkit-backdrop-filter: blur(12px);
-            border: 1px solid rgba(255, 255, 255, 0.5);
-        }
-    </style>
 </head>
-<body class="bg-gradient-to-br from-slate-50 to-blue-100 min-h-screen text-gray-900 font-sans antialiased flex flex-col justify-between">
+<body class="text-slate-900 font-sans antialiased flex flex-col min-h-screen relative overflow-x-hidden">
 
     <!-- Navigationsleiste -->
     {% include navigation.html %}
 
-    <!-- Hauptinhalt -->
-    <main class="max-w-4xl mx-auto px-4 py-12 space-y-8 flex-grow">
-        
-        <!-- Profil-Kopf -->
-        <div class="liquid-glass p-8 rounded-3xl text-center space-y-4 shadow-md">
-            <div class="w-28 h-28 bg-gradient-to-tr from-blue-600 to-indigo-700 rounded-full mx-auto flex items-center justify-center text-white text-4xl font-black shadow-inner">
-                JM
+    <!-- Profil-Kopf -->
+    <header class="page-hero text-center">
+        <div class="max-w-3xl mx-auto animate-fade-in">
+            <div class="relative w-32 h-32 mx-auto mb-8 animate-float" data-tilt="10">
+                <div class="absolute -inset-3 rounded-full bg-gradient-to-tr from-cyan-300/60 via-blue-400/30 to-indigo-400/60 blur-xl"></div>
+                <div class="relative w-full h-full rounded-full p-1.5 bg-white/15 border border-white/30 backdrop-blur-xl shadow-[inset_0_1px_0_rgba(255,255,255,0.4),0_20px_40px_-16px_rgba(15,23,42,0.7)]">
+                    <div class="w-full h-full rounded-full bg-gradient-to-tr from-blue-600 to-indigo-700 flex items-center justify-center text-white text-4xl font-extrabold shadow-inner" style="font-family: var(--font-display);">
+                        JM
+                    </div>
+                </div>
             </div>
-            <h1 class="text-3xl md:text-4xl font-black tracking-tight text-gray-900">Hallo, ich bin Julian Maximilian! 👋</h1>
-            <p class="text-blue-600 font-extrabold text-xs uppercase tracking-widest bg-blue-50/80 border border-blue-100 px-3 py-1 rounded-full inline-block">Gründer & Entwickler von M-Fleger</p>
+            <h1 class="text-[2.3rem] sm:text-5xl md:text-6xl font-extrabold tracking-tight leading-[1.08]">Hallo, ich bin Julian Maximilian! 👋</h1>
+            <p class="mt-7"><span class="hero-badge shimmer">Gründer &amp; Entwickler von M-Fleger</span></p>
         </div>
+    </header>
+
+    <!-- Hauptinhalt -->
+    <main class="max-w-3xl mx-auto px-5 pb-16 md:pb-24 flex-grow w-full page-overlap">
 
         <!-- Text-Inhalt -->
-        <div class="liquid-glass p-8 md:p-10 rounded-3xl shadow-md space-y-6 text-gray-700 leading-relaxed text-base">
-            
-            <p class="text-lg font-semibold text-gray-900">
+        <div class="liquid-glass p-8 md:p-12 space-y-6 text-base md:text-lg">
+
+            <p class="text-xl md:text-2xl font-bold !text-slate-900" style="font-family: var(--font-display);">
                 Schön, dass du auf meiner Website vorbeischaust!
             </p>
 
@@ -52,16 +51,21 @@ title: Über mich
             </p>
 
             <p>
-                Außerdem bin ich Teil der <strong>Jugendpresse Berlin-Brandenburg</strong> und interessiere mich für Journalismus und aktuelle Themen.
+                Außerdem bin ich Teil der <strong class="text-slate-900">Jugendpresse Berlin-Brandenburg</strong> und interessiere mich für Journalismus und aktuelle Themen.
             </p>
 
             <p>
                 Auf meiner Website findest du neben meinem persönlichen Blog, auf dem ich regelmäßig neue Beiträge veröffentliche, auch eine Übersicht über meine bisherigen Projekte.
             </p>
 
-            <div class="border-l-4 border-blue-600 pl-4 my-6 italic text-gray-800 bg-blue-50/60 py-3 rounded-r-xl font-medium">
+            <div class="callout !p-6 !rounded-2xl mt-8 italic font-medium text-blue-950">
                 Schau dich gerne um und entdecke, woran ich gerade arbeite! ⚡️
             </div>
+        </div>
+
+        <div class="mt-10 flex flex-wrap justify-center gap-3">
+            <a href="/blog.html" class="btn-brand group px-6 py-3.5">Zum Blog <span class="arrow-nudge">→</span></a>
+            <a href="/kontakt.html" class="btn-glass group px-6 py-3.5">Kontakt aufnehmen <span class="arrow-nudge">→</span></a>
         </div>
     </main>
 

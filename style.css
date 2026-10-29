@@ -282,10 +282,20 @@ button.liquid-glass:active,
     color: var(--text-secondary) !important;
     line-height: 1.7 !important;
 }
+/* …außer auf farbigen Flächen (Verlaufs-Buttons, Badges): dort erbt der Text seine Farbe */
+.liquid-glass [class*="bg-gradient"] span,
+.liquid-glass [class*="bg-gradient"] p,
+.liquid-glass .btn-brand span,
+.liquid-glass .btn-shine span,
+.liquid-glass .num-tile {
+    color: inherit !important;
+}
 
 /* Gläserne Formular-Elemente & Knöpfe */
-.liquid-glass input, .liquid-glass textarea, .liquid-glass select,
-.liquid-glass button, .liquid-glass .btn {
+/* Nur "nackte" Buttons werden zu Glas – Buttons mit eigener Farbe (bg-…) oder
+   eigenen Bausteinen behalten ihr Aussehen. */
+.liquid-glass input:not([type="checkbox"]):not([type="radio"]), .liquid-glass textarea, .liquid-glass select,
+.liquid-glass button:not([class*="bg-"]):not(.btn-brand):not(.btn-shine):not(.glass-pill):not(.btn-glass), .liquid-glass .btn {
     background: rgba(255, 255, 255, 0.55) !important;
     border: 1px solid rgba(255, 255, 255, 0.8) !important;
     border-radius: var(--radius-sm) !important;

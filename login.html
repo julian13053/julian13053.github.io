@@ -13,43 +13,34 @@ title: Login | M-Fleger
     <link rel="icon" type="image/jpeg" href="/auge-logo.jpg">
 
     <script src="https://cdn.jsdelivr.net/npm/@tailwindcss/browser@4"></script>
-    <style>
-        @keyframes fadeInUp {
-            from { opacity: 0; transform: translateY(15px); }
-            to { opacity: 1; transform: translateY(0); }
-        }
-        .animate-fade-in { animation: fadeInUp 0.5s ease-out forwards; }
-        .liquid-glass {
-            background: rgba(255, 255, 255, 0.75);
-            backdrop-filter: blur(12px);
-            -webkit-backdrop-filter: blur(12px);
-            border: 1px solid rgba(255, 255, 255, 0.5);
-        }
-    </style>
 </head>
-<body class="bg-gradient-to-br from-slate-50 to-blue-100 min-h-screen text-gray-900 font-sans antialiased flex flex-col justify-between relative">
+<body class="text-slate-900 font-sans antialiased flex flex-col min-h-screen relative overflow-x-hidden">
 
     {% include navigation.html %}
 
-    <main class="flex-grow flex items-center justify-center px-4 py-12 md:py-20">
-        <div class="liquid-glass p-8 md:p-10 rounded-3xl shadow-xl max-w-md w-full animate-fade-in">
+    <main class="flex-grow flex items-center justify-center px-5 py-16 md:py-24 relative">
+        <!-- leuchtende Farbflächen hinter der Glaskarte -->
+        <div class="absolute top-1/2 left-1/2 -translate-x-[70%] -translate-y-[60%] w-80 h-80 rounded-full bg-blue-500/30 blur-3xl pointer-events-none animate-float"></div>
+        <div class="absolute top-1/2 left-1/2 -translate-x-[20%] -translate-y-[20%] w-72 h-72 rounded-full bg-cyan-400/30 blur-3xl pointer-events-none animate-float" style="animation-delay: -3.5s;"></div>
+
+        <div class="liquid-glass relative p-8 md:p-11 max-w-md w-full animate-fade-in" data-glass="static" data-reveal="zoom">
             
             <div class="text-center mb-8">
-                <div class="inline-flex items-center justify-center w-14 h-14 rounded-2xl bg-blue-100 text-blue-600 font-black text-2xl mb-4 shadow-xs">
+                <div class="icon-tile mx-auto mb-5 animate-float">
                     🔐
                 </div>
-                <h1 id="auth-title" class="text-3xl font-black text-slate-900 tracking-tight">Willkommen zurück</h1>
-                <p id="auth-subtitle" class="text-slate-600 text-sm mt-2 leading-relaxed font-medium">Melde dich an, um Artikel zu favorisieren.</p>
+                <h1 id="auth-title" class="text-3xl md:text-4xl font-extrabold tracking-tight">Willkommen zurück</h1>
+                <p id="auth-subtitle" class="text-[15px] mt-2 leading-relaxed font-medium">Melde dich an, um Artikel zu favorisieren.</p>
             </div>
 
             <form id="auth-form" class="space-y-4">
                 <div>
                     <label class="block text-xs font-bold text-slate-500 uppercase tracking-wider mb-1.5">E-Mail-Adresse</label>
-                    <input type="email" id="email" placeholder="deine@email.de" required class="w-full bg-white/60 border border-slate-200/80 p-3.5 rounded-xl focus:outline-none focus:ring-2 focus:ring-blue-500/50 focus:bg-white font-medium text-sm transition-all">
+                    <input type="email" id="email" placeholder="deine@email.de" required class="glass-input font-medium text-sm">
                 </div>
                 <div>
                     <label class="block text-xs font-bold text-slate-500 uppercase tracking-wider mb-1.5">Passwort</label>
-                    <input type="password" id="password" placeholder="••••••••" required class="w-full bg-white/60 border border-slate-200/80 p-3.5 rounded-xl focus:outline-none focus:ring-2 focus:ring-blue-500/50 focus:bg-white font-medium text-sm transition-all">
+                    <input type="password" id="password" placeholder="••••••••" required class="glass-input font-medium text-sm">
                 </div>
 
                 <div class="text-right">
@@ -61,19 +52,19 @@ title: Login | M-Fleger
                 <div id="error-msg" class="text-red-700 text-xs font-semibold bg-red-50/90 p-3.5 rounded-xl border border-red-200 hidden"></div>
                 <div id="success-msg" class="text-emerald-800 text-xs font-semibold bg-emerald-50/90 p-3.5 rounded-xl border border-emerald-200 hidden"></div>
 
-                <button type="submit" id="submit-btn" class="w-full bg-gradient-to-r from-blue-600 to-cyan-500 hover:from-blue-500 hover:to-cyan-400 text-white font-bold py-3.5 px-4 rounded-xl shadow-lg transition-all cursor-pointer text-sm tracking-wide mt-2 border-0">
+                <button type="submit" id="submit-btn" class="btn-brand w-full py-3.5 px-4 text-sm tracking-wide mt-3 cursor-pointer">
                     Einloggen
                 </button>
             </form>
 
             <div id="social-divider" class="relative flex py-3 items-center my-2">
-                <div class="flex-grow border-t border-slate-200"></div>
+                <div class="flex-grow h-px bg-gradient-to-r from-transparent via-slate-300 to-transparent"></div>
                 <span class="flex-shrink mx-4 text-slate-400 text-xs font-bold uppercase tracking-wider">oder</span>
-                <div class="flex-grow border-t border-slate-200"></div>
+                <div class="flex-grow h-px bg-gradient-to-r from-transparent via-slate-300 to-transparent"></div>
             </div>
 
             <div id="google-auth-container">
-                <button type="button" id="btn-google" class="w-full flex items-center justify-center gap-3 bg-white border border-slate-200/80 text-slate-700 font-bold py-3.5 px-4 rounded-xl shadow-xs hover:bg-slate-50 transition-all cursor-pointer text-sm">
+                <button type="button" id="btn-google" class="btn-glass w-full gap-3 !text-slate-700 py-3.5 px-4 text-sm cursor-pointer">
                     <svg class="w-5 h-5" viewBox="0 0 24 24">
                         <path fill="#4285F4" d="M22.56 12.25c0-.78-.07-1.53-.2-2.25H12v4.26h5.92c-.26 1.37-1.04 2.53-2.21 3.31v2.77h3.57c2.08-1.92 3.28-4.74 3.28-8.09z"/>
                         <path fill="#34A853" d="M12 23c2.97 0 5.46-.98 7.28-2.66l-3.57-2.77c-.98.66-2.23 1.06-3.71 1.06-2.86 0-5.29-1.93-6.16-4.53H2.18v2.84C3.99 20.53 7.7 23 12 23z"/>
@@ -84,7 +75,7 @@ title: Login | M-Fleger
                 </button>
             </div>
 
-            <div class="text-center mt-8 pt-4 border-t border-slate-200/60">
+            <div class="text-center mt-8 pt-5 border-t border-slate-900/10">
                 <button type="button" id="toggle-link" class="text-xs font-bold text-blue-600 hover:text-blue-700 cursor-pointer transition-all bg-transparent border-0">
                     Noch kein Konto? Jetzt registrieren
                 </button>
